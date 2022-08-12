@@ -12,13 +12,13 @@ import java.util.Properties;
 
 public class databaseConn {
     public static Connection getConn() throws Exception {
-        //1׼��4���ַ���
+        //1.定义了4个字符串用来保存连接信息
         String driverClass ;
         String dbUrl ;
         String user ;
         String password ;
 
-        //2.����properties�����ļ���ȡ����
+        //2.从jdbc配置文件里加载信息
         InputStream in= new BufferedInputStream(new FileInputStream(
                 new File("jdbc.properties")
         ));
@@ -29,7 +29,7 @@ public class databaseConn {
         dbUrl = prop.getProperty("jdbcUrl");
         user = prop.getProperty("user");
         password = prop.getProperty("password");
-        //3.���ػ�ȡ��������
+        //3.返回连接
         try {
             Class.forName(driverClass);
             Connection conn = DriverManager.getConnection(dbUrl,user,password);
