@@ -1,4 +1,4 @@
-package vo;
+package com.vcampus.pojo;
 
 public class library {
     private String bookID;

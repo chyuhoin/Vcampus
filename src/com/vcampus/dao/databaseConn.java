@@ -1,8 +1,8 @@
-package dao;
+package com.vcampus.dao;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.sql.*;
+
 import org.junit.Test;
 
 import java.io.InputStream;
@@ -12,13 +12,13 @@ import java.util.Properties;
 
 public class databaseConn {
     public static Connection getConn() throws Exception {
-        //1×¼±¸4¸ö×Ö·û´®
+        //1×¼ï¿½ï¿½4ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½
         String driverClass ;
         String dbUrl ;
         String user ;
         String password ;
 
-        //2.¼ÓÔØpropertiesÅäÖÃÎÄ¼þ»ñÈ¡Á¬½Ó
+        //2.ï¿½ï¿½ï¿½ï¿½propertiesï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½
         InputStream in= new BufferedInputStream(new FileInputStream(
                 new File("jdbc.properties")
         ));
@@ -29,7 +29,7 @@ public class databaseConn {
         dbUrl = prop.getProperty("jdbcUrl");
         user = prop.getProperty("user");
         password = prop.getProperty("password");
-        //3.·µ»Ø»ñÈ¡µ½µÄÁ¬½Ó
+        //3.ï¿½ï¿½ï¿½Ø»ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         try {
             Class.forName(driverClass);
             Connection conn = DriverManager.getConnection(dbUrl,user,password);
@@ -37,7 +37,7 @@ public class databaseConn {
         }
         catch (Exception e)
         {
-            System.out.println("»ñÈ¡Á¬½ÓÊ§°Ü");
+            System.out.println("ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½");
             return null;
         }
     }

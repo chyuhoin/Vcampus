@@ -1,12 +1,10 @@
-package dao;
+package com.vcampus.dao;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
+
 /*
-¹«ÓÃµÄÔöÉ¾¸Ä²é½Ó¿Ú£¬Ê¹ÓÃÊ±ÏÈ´´½¨ÊµÌåÀà
+ï¿½ï¿½ï¿½Ãµï¿½ï¿½ï¿½É¾ï¿½Ä²ï¿½Ó¿Ú£ï¿½Ê¹ï¿½ï¿½Ê±ï¿½È´ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½
  */
 public class CRUD<T> {
 
