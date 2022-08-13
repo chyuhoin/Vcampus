@@ -1,23 +1,29 @@
-package com.vcampus.server.user;
-
-import com.vcampus.dao.CRUD;
+package com.vcampus.dao;
 
 import java.util.List;
 import java.util.Map;
 
-public class Register {
+public class UserDao {
     public String register(String username,String password) throws Exception {
         String sql   = "select * from tb_USR where studentID = '"+username+"'";
         List<Map<String,Object>> list = CRUD.Query(sql);
         if (!list.isEmpty()){
-            return "¸ÃÕË»§ÒÑ±»×¢²á";
+            return "è¯¥è´¦æˆ·å·²è¢«æ³¨å†Œ";
         }else {
             String sql2 = "insert into tb_USR (studentID,password,type) values ('"+username+"','"+password+"',0)";
             //System.out.println(sql2);
             CRUD.update(sql2);
-            return "×¢²á³É¹¦";
+            return "æ³¨å†ŒæˆåŠŸ";
         }
     }
-    //µÇÂ¼ÎÒÓĞ¸öÎÊÌâ£¬¾ÍÊÇµÇÂ½³É¹¦ºóËüĞèÒª×ªµ½´¦Àí³ÌĞò£¬µ«ÕâµãÎÒ²»ÊÇºÜÃ÷°×...°´ÀíÀ´ËµÓ¦¸Ã×ªµ½ÓÃ»§¶ÔÓ¦µÄÏß³Ì
+    public boolean loginCheck(String username,String password) throws Exception {
+        String sql   = "select * from tb_USR where studentID = '"+username+"' and password = '"+password+"'";
+        List<Map<String,Object>> list = CRUD.Query(sql);
+        if(!list.isEmpty()){
+            return true;
+        }else {
+            return false;
+        }
+    }
 
 }

@@ -37,7 +37,7 @@ public class databaseConn {
         }
         catch (Exception e)
         {
-            System.out.println("��ȡ����ʧ��");
+            System.out.println("??????????");
             return null;
         }
     }

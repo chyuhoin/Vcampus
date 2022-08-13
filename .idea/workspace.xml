@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="初步写了登录注册" />
+    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="初步写了登录注册">
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vcampus/dao/UserDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vcampus/dao/utils/test.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vcampus/dao/utils/transform.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vcampus/pojo/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/databaseConn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/databaseConn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/pojo/library.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/pojo/Library.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/server/library/Library.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/server/user/Login.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/server/user/Register.java" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -28,14 +40,17 @@
     <option name="foldersAlwaysOnTop" value="false" />
     <option name="showModules" value="false" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/Code/JavaWebCode/Vcampus",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
-  <component name="RunManager" selected="JUnit.Library.test">
+}]]></component>
+  <component name="RunManager" selected="JUnit.test.test">
     <configuration name="Library.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Vcampus" />
       <extension name="coverage">
@@ -68,8 +83,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="test.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Vcampus" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.vcampus.dao.utils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.vcampus.dao.utils" />
+      <option name="MAIN_CLASS_NAME" value="com.vcampus.dao.utils.test" />
+      <option name="METHOD_NAME" value="test" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.test.test" />
         <item itemvalue="JUnit.Library.test" />
       </list>
     </recent_temporary>
@@ -83,6 +115,12 @@
       <option name="presentableId" value="Default" />
       <updated>1660290718338</updated>
       <workItem from="1660290720744" duration="7006000" />
+      <workItem from="1660394444650" duration="60000" />
+      <workItem from="1660394516873" duration="56000" />
+      <workItem from="1660394584644" duration="9000" />
+      <workItem from="1660395297646" duration="18000" />
+      <workItem from="1660397164596" duration="38000" />
+      <workItem from="1660397307971" duration="4164000" />
     </task>
     <task id="LOCAL-00001" summary="初步写了登录注册">
       <created>1660298515554</created>
@@ -111,5 +149,9 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="初步写了登录注册" />
     <option name="LAST_COMMIT_MESSAGE" value="初步写了登录注册" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
