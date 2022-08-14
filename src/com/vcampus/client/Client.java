@@ -11,12 +11,11 @@ import java.util.Scanner;
 public class Client {
     public static void main(String[] args) throws IOException {
         Socket socket = new Socket("localhost", 6666); // 连接指定服务器和端口
-        InputStream input = socket.getInputStream();
-        OutputStream output = socket.getOutputStream();
+        ClientMessagePasser.build(socket.getInputStream(), socket.getOutputStream());
         Scanner scanner = new Scanner(System.in);
         for(;;) {
             String s = scanner.nextLine();
-            MessagePasser passer = new MessagePasser(input, output);
+            MessagePasser passer = ClientMessagePasser.getInstance();
             passer.send(new Message("200", s));
             Message message = (passer.receive());
             System.out.println(message);

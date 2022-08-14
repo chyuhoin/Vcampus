@@ -30,7 +30,7 @@ public class MessagePasser {
             ObjectInputStream reader = new ObjectInputStream(input);
             message = (Message) reader.readObject();
         } catch (IOException exception) {
-            exception.printStackTrace();
+            message = new Message("disconnected", "{}");
         } catch (ClassNotFoundException exception) {
             exception.printStackTrace();
         }

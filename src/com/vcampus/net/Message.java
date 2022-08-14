@@ -3,19 +3,19 @@ package com.vcampus.net;
 import java.io.Serializable;
 
 public class Message implements Serializable {
-    private String statusCode;
-    private String data;
-    private String module;
-    private String operation;
+    private String status; // 请求发起者的身份
+    private String data; // 使用JSON格式打包的数据
+    private String module; // 请求所属的模块
+    private String operation; // 请求进行的操作（增删改查）
 
-    public Message(String statusCode, String data) {
-        this.statusCode = statusCode;
+    public Message(String status, String data) {
+        this.status = status;
         this.data = data;
         this.module = "test";
     }
 
-    public Message(String statusCode, String data, String module, String operation) {
-        this.statusCode = statusCode;
+    public Message(String status, String data, String module, String operation) {
+        this.status = status;
         this.data = data;
         this.module = module;
         this.operation = operation;
@@ -37,12 +37,12 @@ public class Message implements Serializable {
         this.operation = operation;
     }
 
-    public String getStatusCode() {
-        return statusCode;
+    public String getStatus() {
+        return status;
     }
 
-    public void setStatusCode(String statusCode) {
-        this.statusCode = statusCode;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getData() {
@@ -56,7 +56,7 @@ public class Message implements Serializable {
     @Override
     public String toString() {
         return "Message{" +
-                "statusCode='" + statusCode + '\'' +
+                "statusCode='" + status + '\'' +
                 ", data='" + data + '\'' +
                 '}';
     }

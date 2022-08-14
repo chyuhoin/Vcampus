@@ -26,7 +26,7 @@ public class ServerRunner implements Runnable{
         //passer.send(new Message("200", "hello"));
         for(;;) {
             Message message = passer.receive();
-            if(message.getStatusCode().equals("300")) break;
+            if(message.getStatus().equals("disconnected")) break;
             switch (message.getModule()) {
                 case "login":
                     passer.send(new Message("200", "登录"));
