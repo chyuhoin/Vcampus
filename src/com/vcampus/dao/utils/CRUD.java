@@ -1,6 +1,5 @@
-package com.vcampus.dao;
+package com.vcampus.dao.utils;
 
-import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,14 +28,10 @@ public class CRUD {
         conn.close();
         return result;
     }
-    public static boolean update(String sql){
-        try {
+    public static void update(String sql) throws Exception {
+
             Connection conn = databaseConn.getConn();
             Statement stm = conn.createStatement();
             stm.executeUpdate(sql);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
     }
 }

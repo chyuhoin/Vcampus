@@ -1,4 +1,4 @@
-package com.vcampus.dao;
+package com.vcampus.dao.utils;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -9,6 +9,8 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Properties;
+
+import static java.sql.Connection.TRANSACTION_REPEATABLE_READ;
 
 public class databaseConn {
     public static Connection getConn() throws Exception {
@@ -33,6 +35,7 @@ public class databaseConn {
         try {
             Class.forName(driverClass);
             Connection conn = DriverManager.getConnection(dbUrl,user,password);
+            conn.setTransactionIsolation(TRANSACTION_REPEATABLE_READ);//设置隔离级别为3级
             return conn;
         }
         catch (Exception e)

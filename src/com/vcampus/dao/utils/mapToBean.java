@@ -8,7 +8,7 @@ import java.util.Map;
 /*
 此类的作用是将map转为JavaBean类型的数据
  */
-public class maoToBean {
+public class mapToBean {
 public static  <T>T map2Bean(Map<String,Object> map , Class<T> clz) throws Exception{
     //new 出一个对象
     T obj=clz.newInstance();

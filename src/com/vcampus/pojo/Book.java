@@ -1,13 +1,13 @@
 package com.vcampus.pojo;
 
-public class Library {
+public class Book {
     private String bookID;
     private String bookName;
     private String author;
     private String type;
     private int leftSize;
 
-    public Library(String bookID, String bookName, String author, String type, int leftSize) {
+    public Book(String bookID, String bookName, String author, String type, int leftSize) {
         this.bookID = bookID;
         this.bookName = bookName;
         this.author = author;
