@@ -1,6 +1,8 @@
 package com.vcampus.pojo;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     String studentID;
     String password;
     Integer type;

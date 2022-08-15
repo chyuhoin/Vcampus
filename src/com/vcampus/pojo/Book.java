@@ -1,8 +1,9 @@
 package com.vcampus.pojo;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
-public class Book {
+public class Book implements Serializable {
     private String bookID;
     private String bookName;
     private String author;

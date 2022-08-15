@@ -2,10 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="写了一个方法把map转为bean对象">
+      <change afterPath="$PROJECT_DIR$/数据库说明.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/数据库说明.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/server/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/server/controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/server/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/server/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/com/vcampus/test/LoginTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/com/vcampus/test/LoginTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/StudentDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/StudentDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/pojo/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/pojo/Book.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/pojo/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/pojo/Student.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/pojo/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/pojo/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +45,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
@@ -56,7 +60,20 @@
     ]
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.LibraryDao.test">
+  <component name="RunManager" selected="Application.Server">
+    <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.vcampus.server.Server" />
+      <module name="Vcampus" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.vcampus.server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="LibraryDao.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Vcampus" />
       <extension name="coverage">
@@ -123,6 +140,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Server" />
         <item itemvalue="JUnit.LibraryDao.test" />
         <item itemvalue="JUnit.test.test" />
         <item itemvalue="JUnit.Library.test" />
@@ -148,6 +166,7 @@
       <workItem from="1660454140324" duration="96000" />
       <workItem from="1660455383694" duration="9368000" />
       <workItem from="1660546281143" duration="210000" />
+      <workItem from="1660553294493" duration="1539000" />
     </task>
     <task id="LOCAL-00001" summary="初步写了登录注册">
       <created>1660298515554</created>
@@ -181,6 +200,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="初步写了登录注册" />
     <MESSAGE value="写了一个方法把map转为bean对象" />
     <option name="LAST_COMMIT_MESSAGE" value="写了一个方法把map转为bean对象" />

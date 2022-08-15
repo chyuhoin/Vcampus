@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+/*
+涉及学籍的与数据库的操作
+ */
 public class StudentDao {
     //search空参时查询所有学生，仅管理员可用
     public static List<Student> search() throws Exception {
