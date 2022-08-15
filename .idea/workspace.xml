@@ -19,10 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="写了一个方法把map转为bean对象">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-    </list>
+    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="加名字" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -58,7 +55,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Code-Java/Swing/LoginWindow" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RunManager" selected="JUnit.LibraryDao.test">
@@ -155,7 +152,7 @@
       <workItem from="1660403234776" duration="303000" />
       <workItem from="1660454140324" duration="96000" />
       <workItem from="1660455383694" duration="9368000" />
-      <workItem from="1660549510346" duration="591000" />
+      <workItem from="1660549510346" duration="961000" />
     </task>
     <task id="LOCAL-00001" summary="初步写了登录注册">
       <created>1660298515554</created>
@@ -171,7 +168,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660401643513</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="加名字">
+      <created>1660550159424</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1660550159424</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -192,13 +196,14 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="初步写了登录注册" />
     <MESSAGE value="写了一个方法把map转为bean对象" />
-    <option name="LAST_COMMIT_MESSAGE" value="写了一个方法把map转为bean对象" />
+    <MESSAGE value="加名字" />
+    <option name="LAST_COMMIT_MESSAGE" value="加名字" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="528" y="202" key="FileChooserDialogImpl" timestamp="1660549532025">
+    <state x="528" y="202" key="FileChooserDialogImpl" timestamp="1660550387648">
       <screen x="0" y="0" width="1493" height="893" />
     </state>
-    <state x="528" y="202" key="FileChooserDialogImpl/0.0.1493.893@0.0.1493.893" timestamp="1660549532025" />
+    <state x="528" y="202" key="FileChooserDialogImpl/0.0.1493.893@0.0.1493.893" timestamp="1660550387648" />
     <state x="621" y="345" key="Github.ShareDialog" timestamp="1660549699263">
       <screen x="0" y="0" width="1493" height="893" />
     </state>
@@ -207,14 +212,18 @@
       <screen x="0" y="0" width="1493" height="893" />
     </state>
     <state x="249" y="92" key="SettingsEditor/0.0.1493.893@0.0.1493.893" timestamp="1660549449780" />
-    <state x="340" y="180" key="Vcs.Push.Dialog.v2" timestamp="1660549911220">
+    <state x="340" y="180" key="Vcs.Push.Dialog.v2" timestamp="1660550349202">
       <screen x="0" y="0" width="1493" height="893" />
     </state>
-    <state x="340" y="180" key="Vcs.Push.Dialog.v2/0.0.1493.893@0.0.1493.893" timestamp="1660549911220" />
+    <state x="340" y="180" key="Vcs.Push.Dialog.v2/0.0.1493.893@0.0.1493.893" timestamp="1660550349202" />
     <state x="545" y="360" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1660550003918">
       <screen x="0" y="0" width="1493" height="893" />
     </state>
     <state x="545" y="360" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1493.893@0.0.1493.893" timestamp="1660550003918" />
+    <state x="522" y="336" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1660550329396">
+      <screen x="0" y="0" width="1493" height="893" />
+    </state>
+    <state x="522" y="336" key="git4idea.remote.GitConfigureRemotesDialog/0.0.1493.893@0.0.1493.893" timestamp="1660550329396" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
