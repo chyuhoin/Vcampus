@@ -2,6 +2,8 @@ package com.vcampus.server;
 
 import com.vcampus.net.Message;
 import com.vcampus.net.MessagePasser;
+import com.vcampus.server.controller.Controller;
+import com.vcampus.server.controller.LoginController;
 
 import java.io.*;
 import java.net.Socket;
@@ -9,6 +11,7 @@ import java.net.Socket;
 public class ServerRunner implements Runnable{
     private InputStream input;
     private OutputStream output;
+    private Controller loginController;
 
     public ServerRunner(Socket sock) {
         try {
@@ -17,6 +20,7 @@ public class ServerRunner implements Runnable{
         } catch (IOException e) {
             e.printStackTrace();
         }
+        loginController = new LoginController();
     }
 
     @Override
@@ -29,7 +33,7 @@ public class ServerRunner implements Runnable{
             if(message.getStatus().equals("disconnected")) break;
             switch (message.getModule()) {
                 case "login":
-                    passer.send(new Message("200", "登录"));
+                    passer.send(loginController.check(message));
                     break;
                 case "student":
                     passer.send(new Message("200", "学籍管理"));
