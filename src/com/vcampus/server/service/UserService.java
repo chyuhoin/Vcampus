@@ -17,7 +17,7 @@ public class UserService {
     public boolean register(User user) {
         String res;
         try {
-            res = UserDao.register(user.getStudentID(), user.getPassword());
+            res = UserDao.register(user.getStudentID(), user.getPassword(), user.getType());
         } catch (Exception e) {
             e.printStackTrace();
             return false;

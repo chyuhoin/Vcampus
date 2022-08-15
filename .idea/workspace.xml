@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="写了一个方法把map转为bean对象">
-      <change afterPath="$PROJECT_DIR$/数据库说明.docx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/数据库说明.md" afterDir="false" />
+    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/StudentDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/StudentDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/pojo/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/pojo/Book.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/pojo/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/pojo/Student.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/pojo/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/pojo/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/UserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/UserDao.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,7 +55,7 @@
     ]
   }
 }]]></component>
-  <component name="RunManager" selected="Application.Server">
+  <component name="RunManager" selected="JUnit.UserDao.test">
     <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.vcampus.server.Server" />
       <module name="Vcampus" />
@@ -106,16 +101,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Register.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="UserDao.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Vcampus" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.vcampus.server.user.*" />
+          <option name="PATTERN" value="com.vcampus.dao.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.vcampus.server.user" />
-      <option name="MAIN_CLASS_NAME" value="com.vcampus.server.user.Register" />
+      <option name="PACKAGE_NAME" value="com.vcampus.dao" />
+      <option name="MAIN_CLASS_NAME" value="com.vcampus.dao.UserDao" />
       <option name="METHOD_NAME" value="test" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
@@ -140,6 +135,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.UserDao.test" />
         <item itemvalue="Application.Server" />
         <item itemvalue="JUnit.LibraryDao.test" />
         <item itemvalue="JUnit.test.test" />
@@ -166,7 +162,7 @@
       <workItem from="1660454140324" duration="96000" />
       <workItem from="1660455383694" duration="9368000" />
       <workItem from="1660546281143" duration="210000" />
-      <workItem from="1660553294493" duration="1539000" />
+      <workItem from="1660553294493" duration="2324000" />
     </task>
     <task id="LOCAL-00001" summary="初步写了登录注册">
       <created>1660298515554</created>
@@ -182,7 +178,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660401643513</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="实现可序列化接口">
+      <created>1660554878384</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1660554878384</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -203,7 +206,8 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="初步写了登录注册" />
     <MESSAGE value="写了一个方法把map转为bean对象" />
-    <option name="LAST_COMMIT_MESSAGE" value="写了一个方法把map转为bean对象" />
+    <MESSAGE value="实现可序列化接口" />
+    <option name="LAST_COMMIT_MESSAGE" value="实现可序列化接口" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
