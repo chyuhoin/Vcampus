@@ -18,6 +18,7 @@ public class LoginTest {
         ClientMessagePasser.build(socket.getInputStream(), socket.getOutputStream());
         Gson gson = new Gson();
         String s = gson.toJson(new User("213203450", "123456", 0));
+        System.out.println(s);
         MessagePasser passer = ClientMessagePasser.getInstance();
         passer.send(new Message("no", s, "login", "get"));
         Message message = (passer.receive());
