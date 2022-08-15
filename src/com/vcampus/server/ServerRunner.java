@@ -3,6 +3,7 @@ package com.vcampus.server;
 import com.vcampus.net.Message;
 import com.vcampus.net.MessagePasser;
 import com.vcampus.server.controller.Controller;
+import com.vcampus.server.controller.LibraryController;
 import com.vcampus.server.controller.LoginController;
 
 import java.io.*;
@@ -11,7 +12,7 @@ import java.net.Socket;
 public class ServerRunner implements Runnable{
     private InputStream input;
     private OutputStream output;
-    private Controller loginController;
+    private final Controller loginController, libraryController;
 
     public ServerRunner(Socket sock) {
         try {
@@ -21,6 +22,7 @@ public class ServerRunner implements Runnable{
             e.printStackTrace();
         }
         loginController = new LoginController();
+        libraryController = new LibraryController();
     }
 
     @Override
@@ -40,6 +42,9 @@ public class ServerRunner implements Runnable{
                     break;
                 case "class":
                     passer.send(new Message("200", "教务"));
+                    break;
+                case "library":
+                    passer.send(libraryController.check(message));
                     break;
                 default:
                     passer.send(new Message("200", message.getData()));

@@ -14,11 +14,23 @@
 
 package com.vcampus.client.login;
 
+import com.vcampus.net.ClientMessagePasser;
+
 import javax.swing.*;
+import java.io.IOException;
+import java.net.Socket;
 
 public class myLoginTest {
     public static void main(String[] args)
     {
+        Socket socket = null; // 连接指定服务器和端口
+        try {
+            socket = new Socket("localhost", 6666);
+            ClientMessagePasser.build(socket.getInputStream(), socket.getOutputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         //创建登录自己的窗口对象
         JFrame frame = new myLoginFrame("登录");
         // 当关闭窗口时，退出整个程序 (在Swing高级篇教程中会介绍)

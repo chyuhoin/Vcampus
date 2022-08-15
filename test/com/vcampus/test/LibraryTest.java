@@ -6,18 +6,20 @@ import com.vcampus.net.ClientMessagePasser;
 import com.vcampus.net.Message;
 import com.vcampus.net.MessagePasser;
 import com.vcampus.pojo.User;
+import org.junit.Test;
 
-import java.io.IOException;
 import java.net.Socket;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LoginTest {
-    public static void main(String[] args) throws IOException {
+public class LibraryTest {
+
+    @Test
+    public void testViewAll() throws Exception {
         Socket socket = new Socket("localhost", 6666); // 连接指定服务器和端口
         ClientMessagePasser.build(socket.getInputStream(), socket.getOutputStream());
         Gson gson = new Gson();
-        String s = gson.toJson(new User("13224234245345546", "123456", 0));
+        String s = gson.toJson(new User("22", "123456", 0));
         System.out.println(s);
         MessagePasser passer = ClientMessagePasser.getInstance();
         passer.send(new Message("no", s, "login", "get"));
