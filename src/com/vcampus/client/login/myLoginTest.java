@@ -15,6 +15,7 @@
 package com.vcampus.client.login;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class myLoginTest {
     public static void main(String[] args)
@@ -26,6 +27,12 @@ public class myLoginTest {
         // 设置窗口的其他参数，如窗口大小
         frame.setSize(350, 270);
         frame.setResizable(false);//窗口大小不可改
+
+        // 窗口居中
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        frame.setLocation((screenSize.width - frame.getWidth()) / 2, (screenSize.height - frame.getHeight()) / 2);
+        //frame.setUndecorated(true); // 窗口去边框
+
         // 显示窗口
         frame.setVisible(true);
     }
