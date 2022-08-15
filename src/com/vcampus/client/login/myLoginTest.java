@@ -14,12 +14,23 @@
 
 package com.vcampus.client.login;
 
+import com.vcampus.net.ClientMessagePasser;
+
 import javax.swing.*;
-import java.awt.*;
+import java.io.IOException;
+import java.net.Socket;
 
 public class myLoginTest {
     public static void main(String[] args)
     {
+        Socket socket = null; // 连接指定服务器和端口
+        try {
+            socket = new Socket("localhost", 6666);
+            ClientMessagePasser.build(socket.getInputStream(), socket.getOutputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         //创建登录自己的窗口对象
         JFrame frame = new myLoginFrame("登录");
         // 当关闭窗口时，退出整个程序 (在Swing高级篇教程中会介绍)
@@ -27,12 +38,6 @@ public class myLoginTest {
         // 设置窗口的其他参数，如窗口大小
         frame.setSize(350, 270);
         frame.setResizable(false);//窗口大小不可改
-
-        // 窗口居中
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        frame.setLocation((screenSize.width - frame.getWidth()) / 2, (screenSize.height - frame.getHeight()) / 2);
-        //frame.setUndecorated(true); // 窗口去边框
-
         // 显示窗口
         frame.setVisible(true);
     }

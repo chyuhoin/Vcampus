@@ -22,7 +22,7 @@ public class databaseConn {
 
         //2.从jdbc配置文件里加载信息
         InputStream in= new BufferedInputStream(new FileInputStream(
-                new File("jdbc.properties")
+                new File("D:\\_CodeFactory\\javaCODE\\Vcampus\\Vcampus\\jdbc.properties")
         ));
         Properties prop = new Properties();
         prop.load(in);

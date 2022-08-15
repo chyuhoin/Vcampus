@@ -15,10 +15,19 @@
 
 package com.vcampus.client.login;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.vcampus.net.ClientMessagePasser;
+import com.vcampus.net.Message;
+import com.vcampus.net.MessagePasser;
+import com.vcampus.pojo.User;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Map;
 
 public class myLoginFrame extends JFrame  {
 
@@ -125,13 +134,21 @@ public class myLoginFrame extends JFrame  {
         String userName = txtUserName.getText();
         String passWord = new String(txtPassWord.getPassword());
 
-        if(userName.length()!=0 && passWord.length()!=0)//如果用户名和密码已输入
-        {
-            System.out.println(userName+'\n'+passWord);//输出登录名和密码
-            return true;
-        }
-        else
-            return false;
+        MessagePasser passer = ClientMessagePasser.getInstance();
+        User user = new User(userName, passWord, flag);
+        Gson gson = new Gson();
+        passer.send(new Message("no", gson.toJson(user), "login", "get"));
+        Message msg = passer.receive();
+        Map<String,Object> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String,Object>>(){}.getType());
+        return map.get("res").equals("OK");
+
+//        if(userName.length()!=0 && passWord.length()!=0)//如果用户名和密码已输入
+//        {
+//            System.out.println(userName+'\n'+passWord);//输出登录名和密码
+//            return true;
+//        }
+//        else
+//            return false;
     }
 
     //选中学生/教师/管理员后的响应
