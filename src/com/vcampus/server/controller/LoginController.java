@@ -16,6 +16,15 @@ public class LoginController implements Controller {
             if(service.login(user)) return new Message("200", "{res: 'OK'}");
             else return new Message("200", "{res: 'NO'}");
         }
-        else return new Message("404", "{res: 'Wrong Request!'}");
+        else {
+            if(msg.getOperation().equals("register")) {
+            UserService service = new UserService();
+            Gson gson = new Gson();
+            User user = gson.fromJson(msg.getData(), User.class);
+            if(service.register(user)) return new Message("200", "{res: 'OK'}");
+            else return new Message("200", "{res: 'NO'}");
+            }
+            else return new Message("404", "{res: 'Wrong Request!'}");
+    }
     }
 }

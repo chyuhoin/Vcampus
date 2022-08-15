@@ -14,4 +14,14 @@ public class UserService {
         }
         return "登陆成功".equals(res);
     }
+    public boolean register(User user) {
+        String res;
+        try {
+            res = UserDao.register(user.getStudentID(), user.getPassword());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return "注册成功".equals(res);
+    }
 }
