@@ -1,6 +1,7 @@
 package com.vcampus.dao;
 
 import com.vcampus.dao.utils.CRUD;
+import org.junit.Test;
 
 import java.util.List;
 import java.util.Map;
@@ -10,23 +11,22 @@ public class UserDao {
         String sql = "select * from tb_USR where studentID = '" + username + "'";
         List<Map<String, Object>> list = CRUD.Query(sql);
         if (!list.isEmpty()) {
-            return "è¯¥è´¦æˆ·å·²è¢«æ³¨å†Œ";
+            return "¸ÃÕË»§ÒÑ±»×¢²á";
         } else {
             String sql2 = "insert into tb_USR (studentID,password,type) values ('" + username + "','" + password + "',0)";
-            //System.out.println(sql2);
             CRUD.update(sql2);
-            return "æ³¨å†ŒæˆåŠŸ";
+            return "×¢²á³É¹¦";
         }
     }
 
-    public static String loginCheck(String username, String password) throws Exception {
+    public static String loginCheck(String username, String password,Integer type) throws Exception {
         String sql = "select * from tb_USR where studentID = '" + username + "' and password = '" + password + "'";
         List<Map<String, Object>> list = CRUD.Query(sql);
         if (list.isEmpty()) {
-            return "ç”¨æˆ·åæˆ–å¯†ç é”™è¯¯";
-        } else {
-            return "ç™»é™†æˆåŠŸ";
-        }
-
+            return "ÓÃ»§Ãû»òÃÜÂë´íÎó";
+        } else if (type !=(Integer)list.get(0).get("type")) {
+            return "ÀàĞÍ´íÎó";
+        }else
+            return "µÇÂ½³É¹¦";
     }
 }

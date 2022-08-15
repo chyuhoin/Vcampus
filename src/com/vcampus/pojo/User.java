@@ -3,9 +3,9 @@ package com.vcampus.pojo;
 public class User {
     String studentID;
     String password;
-    int type;
+    Integer type;
 
-    public User(String studentID, String password, int type) {
+    public User(String studentID, String password, Integer type) {
         this.studentID = studentID;
         this.password = password;
         this.type = type;
@@ -30,11 +30,11 @@ public class User {
         this.password = password;
     }
 
-    public int getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 

@@ -21,14 +21,11 @@ public class myLoginTest {
     {
         //创建登录自己的窗口对象
         JFrame frame = new myLoginFrame("登录");
-
         // 当关闭窗口时，退出整个程序 (在Swing高级篇教程中会介绍)
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
         // 设置窗口的其他参数，如窗口大小
         frame.setSize(350, 270);
         frame.setResizable(false);//窗口大小不可改
-
         // 显示窗口
         frame.setVisible(true);
     }
