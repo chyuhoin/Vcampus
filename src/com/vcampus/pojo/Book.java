@@ -1,18 +1,25 @@
 package com.vcampus.pojo;
 
+import java.util.Arrays;
+
 public class Book {
     private String bookID;
     private String bookName;
     private String author;
     private String type;
-    private int leftSize;
+    private Long leftSize;
+    private byte[] image;
 
-    public Book(String bookID, String bookName, String author, String type, int leftSize) {
+    public Book(String bookID, String bookName, String author, String type, Long leftSize, byte[] image) {
         this.bookID = bookID;
         this.bookName = bookName;
         this.author = author;
         this.type = type;
         this.leftSize = leftSize;
+        this.image = image;
+    }
+
+    public Book() {
     }
 
     public String getBookID() {
@@ -47,11 +54,30 @@ public class Book {
         this.type = type;
     }
 
-    public int getLeftSize() {
+    public Long getLeftSize() {
         return leftSize;
     }
 
-    public void setLeftSize(int leftSize) {
+    public void setLeftSize(Long leftSize) {
         this.leftSize = leftSize;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "bookID='" + bookID + '\'' +
+                ", bookName='" + bookName + '\'' +
+                ", author='" + author + '\'' +
+                ", type='" + type + '\'' +
+                ", leftSize=" + leftSize +
+                '}';
     }
 }

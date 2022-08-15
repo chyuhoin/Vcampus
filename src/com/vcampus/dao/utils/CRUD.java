@@ -19,7 +19,7 @@ public class CRUD {
         int columnCount = md.getColumnCount();//获取列的数量
         while(rs.next()){
             Map<String,Object> rowData = new HashMap<>();//声明Map
-            for (int i = 1; i <= columnCount; i++) {
+            for (int i = columnCount; i >= 1; i--) {
                 rowData.put(md.getColumnName(i), rs.getObject(i));//获取键名及值
             }
             result.add(rowData);

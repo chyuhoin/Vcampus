@@ -25,12 +25,25 @@ public class LibraryDao {
         }
         return result;
     }
-
     //重载的查询函数，按条件查询
     public static List<Book> search(String field, String values) throws Exception {
         String sql = "select * from tb_BOOK" + " where " + field + " = " + "'" + values + "'";
         List<Map<String, Object>> resultList = CRUD.Query(sql);
         List<Book> result = new ArrayList<>();
+        for (Map<String, Object> map : resultList) {
+            Book book = mapToBean.map2Bean(map, Book.class);
+            result.add(book);
+        }
+        return result;
+    }
+    //查看自己借了哪些书
+    public static List<Book> searchMine(String studentID) throws Exception {
+        String sql = "SELECT tb_BOOK.* from tb_BOOK ,tb_BOOKWITHSTUDENT "+
+        "WHERE tb_BOOK.bookID = tb_BOOKWITHSTUDENT.bookID "+
+        "and tb_BOOKWITHSTUDENT.studentID = '"+studentID+"'";
+        List<Map<String, Object>> resultList = CRUD.Query(sql);
+        List<Book> result = new ArrayList<>();
+        System.out.println(resultList);
         for (Map<String, Object> map : resultList) {
             Book book = mapToBean.map2Bean(map, Book.class);
             result.add(book);
@@ -62,7 +75,7 @@ public class LibraryDao {
             return false;
         }
     }
-    //借一本书，用于管理员
+    //借一本书，用于管理员处理借书的情况
     public static Boolean borrowBook(String bookID,String studentID)  {
         try {
 
@@ -86,6 +99,7 @@ public class LibraryDao {
             return false;
         }
     }
+    //还书，用于管理员处理还书的情况
     public static Boolean returnBook(String bookID,String studentID) throws Exception {
         try {
             String sql1 = "update tb_BOOK set leftSize = leftSize+1 where bookID = " + "'" + bookID + "'";
@@ -107,9 +121,5 @@ public class LibraryDao {
         }catch (Exception e){
             return false;
         }
-    }
-    @Test
-    public void test() throws Exception {
-        returnBook("00000001","00000001");
     }
 }

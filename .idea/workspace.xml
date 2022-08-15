@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="写了一个方法把map转为bean对象">
-      <change afterPath="$PROJECT_DIR$/src/com/vcampus/dao/LibraryDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="添加了libraryDao类，做了数据库事务等方面的修改">
+      <change afterPath="$PROJECT_DIR$/src/com/vcampus/dao/StudentDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vcampus/pojo/Student.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/CRUD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/utils/CRUD.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/UserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/UserDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/databaseConn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/utils/databaseConn.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/utils/maoToBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/utils/mapToBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/pojo/Library.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/pojo/Book.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/LibraryDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/LibraryDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/utils/CRUD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/utils/CRUD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/pojo/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/pojo/Book.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/图书馆设计说明.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/图书馆设计说明.pdf" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +44,9 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "last_opened_file_path": "D:/Code/JavaWebCode/Vcampus",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
     "settings.editor.selected.configurable": "editor.preferences.fonts.default"
   }
 }]]></component>
@@ -137,7 +140,9 @@
       <workItem from="1660397307971" duration="4358000" />
       <workItem from="1660403234776" duration="303000" />
       <workItem from="1660454140324" duration="96000" />
-      <workItem from="1660455383694" duration="9368000" />
+      <workItem from="1660455383694" duration="9677000" />
+      <workItem from="1660533620986" duration="2929000" />
+      <workItem from="1660544003789" duration="5334000" />
     </task>
     <task id="LOCAL-00001" summary="初步写了登录注册">
       <created>1660298515554</created>
@@ -153,7 +158,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660401643513</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="添加了libraryDao类，做了数据库事务等方面的修改">
+      <created>1660486140431</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1660486140431</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -173,7 +185,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="初步写了登录注册" />
     <MESSAGE value="写了一个方法把map转为bean对象" />
-    <option name="LAST_COMMIT_MESSAGE" value="写了一个方法把map转为bean对象" />
+    <MESSAGE value="添加了libraryDao类，做了数据库事务等方面的修改" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加了libraryDao类，做了数据库事务等方面的修改" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
