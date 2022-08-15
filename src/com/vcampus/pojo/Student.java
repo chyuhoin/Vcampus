@@ -15,10 +15,10 @@ public class Student implements Serializable {
     String politics;
     Long grade;
     String phoneNumber;
-    byte[] image;
+    //byte[] image;
     Integer status;
 
-    public Student(String studentID, String name, String studentNumber, String IDcard, String school, String major, Integer sex, String classs, Long educationalSystem, String politics, Long grade, String phoneNumber, byte[] image, Integer status) {
+    public Student(String studentID, String name, String studentNumber, String IDcard, String school, String major, Integer sex, String classs, Long educationalSystem, String politics, Long grade, String phoneNumber, Integer status) {
         this.studentID = studentID;
         this.name = name;
         this.studentNumber = studentNumber;
@@ -31,7 +31,7 @@ public class Student implements Serializable {
         this.politics = politics;
         this.grade = grade;
         this.phoneNumber = phoneNumber;
-        this.image = image;
+       // this.image = image;
         this.status = status;
     }
 
@@ -131,13 +131,13 @@ public class Student implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
-    public byte[] getImage() {
-        return image;
-    }
+//    public byte[] getImage() {
+//        return image;
+//    }
 
-    public void setImage(byte[] image) {
-        this.image = image;
-    }
+//    public void setImage(byte[] image) {
+//        this.image = image;
+//    }
 
     public Integer getStatus() {
         return status;

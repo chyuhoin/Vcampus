@@ -17,7 +17,7 @@ public class LoginTest {
         Socket socket = new Socket("localhost", 6666); // 连接指定服务器和端口
         ClientMessagePasser.build(socket.getInputStream(), socket.getOutputStream());
         Gson gson = new Gson();
-        String s = gson.toJson(new User("13224234245345546", "123456", 0));
+        String s = gson.toJson(new User("213203450", "123456", 0));
         System.out.println(s);
         MessagePasser passer = ClientMessagePasser.getInstance();
         passer.send(new Message("no", s, "login", "get"));

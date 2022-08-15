@@ -11,11 +11,11 @@ public class UserDao {
         String sql = "select * from tb_USR where studentID = '" + username + "'";
         List<Map<String, Object>> list = CRUD.Query(sql);
         if (!list.isEmpty()) {
-            return "¸ÃÕË»§ÒÑ±»×¢²á";
+            return "è¯¥è´¦æˆ·å·²è¢«æ³¨å†Œ";
         } else {
             String sql2 = "insert into tb_USR (studentID,password,type) values ('" + username + "','" + password + "',"+String.valueOf(type)+")";
             CRUD.update(sql2);
-            return "×¢²á³É¹¦";
+            return "æ³¨å†ŒæˆåŠŸ";
         }
     }
 
@@ -23,10 +23,19 @@ public class UserDao {
         String sql = "select * from tb_USR where studentID = '" + username + "' and password = '" + password + "'";
         List<Map<String, Object>> list = CRUD.Query(sql);
         if (list.isEmpty()) {
-            return "ÓÃ»§Ãû»òÃÜÂë´íÎó";
+            return "ç”¨æˆ·åæˆ–å¯†ç é”™è¯¯";
         } else if (type !=(Integer)list.get(0).get("type")) {
-            return "ÀàĞÍ´íÎó";
+            return "ç±»å‹é”™è¯¯";
         }else
-            return "µÇÂ½³É¹¦";
+            return "ç™»é™†æˆåŠŸ";
     }
+//public static String loginCheck(String username, String password) throws Exception {
+//    String sql = "select * from tb_USR where studentID = '" + username + "' and password = '" + password + "'";
+//    List<Map<String, Object>> list = CRUD.Query(sql);
+//    if (list.isEmpty()) {
+//        return "ç”¨æˆ·åæˆ–å¯†ç é”™è¯¯";
+//    } else
+//        return "ç™»é™†æˆåŠŸ";
+
 }
+
