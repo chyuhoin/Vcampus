@@ -10,8 +10,8 @@ import java.util.Map;
 提供统一的增删改查接口
  */
 public class CRUD {
-    public static List<Map<String,Object>> Query(String sql) throws Exception {
-        Connection conn = databaseConn.getConn();
+    public static List<Map<String,Object>> Query(String sql,Connection conn) throws Exception {
+       // Connection conn = databaseConn.getConn();
         Statement stm   = conn.createStatement();
         ResultSet rs    =  stm.executeQuery(sql);
         List<Map<String,Object>> result = new ArrayList<>();
@@ -25,12 +25,12 @@ public class CRUD {
             result.add(rowData);
         }
         stm.close();
-        conn.close();
+       // conn.close();
         return result;
     }
-    public static void update(String sql) throws Exception {
+    public static void update(String sql,Connection conn) throws Exception {
 
-            Connection conn = databaseConn.getConn();
+         //   Connection conn = databaseConn.getConn();
             Statement stm = conn.createStatement();
             stm.executeUpdate(sql);
     }

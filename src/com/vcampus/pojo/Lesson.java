@@ -1,6 +1,8 @@
 package com.vcampus.pojo;
 
-public class Lesson {
+import java.io.Serializable;
+
+public class Lesson implements Serializable {
     String innerID;
     String lessonID;
     String name;
