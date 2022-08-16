@@ -13,11 +13,11 @@ import java.util.Map;
 import com.vcampus.dao.utils.mapToBean;
 import org.junit.Test;
 
-public class LibraryDao {
+public class LibraryDao extends BaseDao{
     //查询函数，无参的情况下查看所有值
     public static List<Book> search() throws Exception {
         String sql = "select * from tb_BOOK";
-        List<Map<String, Object>> resultList = CRUD.Query(sql);
+        List<Map<String, Object>> resultList = CRUD.Query(sql,conn);
         List<Book> result = new ArrayList<>();
         for (Map<String, Object> map : resultList) {
             Book book = mapToBean.map2Bean(map, Book.class);
@@ -28,7 +28,7 @@ public class LibraryDao {
     //重载的查询函数，按条件查询
     public static List<Book> search(String field, String values) throws Exception {
         String sql = "select * from tb_BOOK" + " where " + field + " = " + "'" + values + "'";
-        List<Map<String, Object>> resultList = CRUD.Query(sql);
+        List<Map<String, Object>> resultList = CRUD.Query(sql,conn);
         List<Book> result = new ArrayList<>();
         for (Map<String, Object> map : resultList) {
             Book book = mapToBean.map2Bean(map, Book.class);
@@ -41,7 +41,7 @@ public class LibraryDao {
         String sql = "SELECT tb_BOOK.* from tb_BOOK ,tb_BOOKWITHSTUDENT "+
         "WHERE tb_BOOK.bookID = tb_BOOKWITHSTUDENT.bookID "+
         "and tb_BOOKWITHSTUDENT.studentID = '"+studentID+"'";
-        List<Map<String, Object>> resultList = CRUD.Query(sql);
+        List<Map<String, Object>> resultList = CRUD.Query(sql,conn);
         List<Book> result = new ArrayList<>();
         System.out.println(resultList);
         for (Map<String, Object> map : resultList) {
@@ -59,7 +59,7 @@ public class LibraryDao {
                     book.getAuthor() + "','" +
                     book.getType() + "','" +
                     book.getLeftSize() + "')";
-            CRUD.update(sql);
+            CRUD.update(sql,conn);
             return true;
         } catch (Exception e) {
             return false;
@@ -69,7 +69,7 @@ public class LibraryDao {
     public static Boolean deleteBook(String bookID) {
         try {
             String sql = "delete from tb_BOOK where bookID = " + "'" + bookID + "'";
-            CRUD.update(sql);
+            CRUD.update(sql,conn);
             return true;
         }catch (Exception e){
             return false;

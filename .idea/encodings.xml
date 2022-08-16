@@ -4,8 +4,6 @@
     <file url="file://$PROJECT_DIR$/src/com/vcampus/client/login/myLoginTest.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/vcampus/dao/UserDao.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/vcampus/dao/utils/databaseConn.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/com/vcampus/server/service/UserService.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/com/vcampus/server/user/Login.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/com/vcampus/server/user/Register.java" charset="GBK" />
+    <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

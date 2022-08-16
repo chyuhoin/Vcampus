@@ -8,10 +8,10 @@ public class Book implements Serializable {
     private String bookName;
     private String author;
     private String type;
-    private Long leftSize;
+    private Integer leftSize;
     private byte[] image;
 
-    public Book(String bookID, String bookName, String author, String type, Long leftSize, byte[] image) {
+    public Book(String bookID, String bookName, String author, String type, Integer leftSize, byte[] image) {
         this.bookID = bookID;
         this.bookName = bookName;
         this.author = author;
@@ -55,11 +55,11 @@ public class Book implements Serializable {
         this.type = type;
     }
 
-    public Long getLeftSize() {
+    public Integer getLeftSize() {
         return leftSize;
     }
 
-    public void setLeftSize(Long leftSize) {
+    public void setLeftSize(Integer leftSize) {
         this.leftSize = leftSize;
     }
 

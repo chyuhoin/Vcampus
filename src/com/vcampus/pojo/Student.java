@@ -11,14 +11,14 @@ public class Student implements Serializable {
     String major;
     Integer sex;
     String classs;
-    Long educationalSystem;
+    Integer educationalSystem;
     String politics;
-    Long grade;
+    Integer grade;
     String phoneNumber;
-    byte[] image;
+    //byte[] image;
     Integer status;
 
-    public Student(String studentID, String name, String studentNumber, String IDcard, String school, String major, Integer sex, String classs, Long educationalSystem, String politics, Long grade, String phoneNumber, byte[] image, Integer status) {
+    public Student(String studentID, String name, String studentNumber, String IDcard, String school, String major, Integer sex, String classs, Integer educationalSystem, String politics, Integer grade, String phoneNumber, Integer status) {
         this.studentID = studentID;
         this.name = name;
         this.studentNumber = studentNumber;
@@ -31,8 +31,11 @@ public class Student implements Serializable {
         this.politics = politics;
         this.grade = grade;
         this.phoneNumber = phoneNumber;
-        this.image = image;
+       // this.image = image;
         this.status = status;
+    }
+
+    public Student() {
     }
 
     public String getStudentID() {
@@ -99,11 +102,11 @@ public class Student implements Serializable {
         this.classs = classs;
     }
 
-    public Long getEducationalSystem() {
+    public Integer getEducationalSystem() {
         return educationalSystem;
     }
 
-    public void setEducationalSystem(Long educationalSystem) {
+    public void setEducationalSystem(Integer educationalSystem) {
         this.educationalSystem = educationalSystem;
     }
 
@@ -115,11 +118,11 @@ public class Student implements Serializable {
         this.politics = politics;
     }
 
-    public Long getGrade() {
+    public Integer getGrade() {
         return grade;
     }
 
-    public void setGrade(Long grade) {
+    public void setGrade(Integer grade) {
         this.grade = grade;
     }
 
@@ -131,13 +134,13 @@ public class Student implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
-    public byte[] getImage() {
-        return image;
-    }
+//    public byte[] getImage() {
+//        return image;
+//    }
 
-    public void setImage(byte[] image) {
-        this.image = image;
-    }
+//    public void setImage(byte[] image) {
+//        this.image = image;
+//    }
 
     public Integer getStatus() {
         return status;
