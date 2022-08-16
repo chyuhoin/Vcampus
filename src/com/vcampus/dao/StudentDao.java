@@ -68,8 +68,4 @@ public class StudentDao {
             return false;
         }
     }
-    @Test
-    public void test() throws Exception {
-        deleteStudent("1");
-    }
 }
