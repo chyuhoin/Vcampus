@@ -12,7 +12,7 @@ public class UserService {
             e.printStackTrace();
             return false;
         }
-        return "登陆成功".equals(res);
+        return "succeeded".equals(res);
     }
     public boolean register(User user) {
         String res;
@@ -22,6 +22,6 @@ public class UserService {
             e.printStackTrace();
             return false;
         }
-        return "注册成功".equals(res);
+        return "succeeded".equals(res);
     }
 }
