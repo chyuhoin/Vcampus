@@ -13,10 +13,16 @@ public class LoginController implements Controller {
         Gson gson = new Gson();
         User user = gson.fromJson(msg.getData(), User.class);
         switch (msg.getOperation()){
-            case "get"://登录
-                return service.login(user);
-            case "register"://注册
-                return service.register(user);
+            case "get": {//登录
+                boolean res = service.login(user);
+                String data = res ? "{res: 'OK'}" : "{res: 'Error'}";
+                return new Message("200", data);
+            }
+            case "register": {//注册
+                boolean res = service.register(user);
+                String data = res ? "{res: 'OK'}" : "{res: 'Error'}";
+                return new Message("200", data);
+            }
             case "delete"://删除用户，输入ID
             case "Change Password"://修改密码
             case "Change Permissions"://输入ID，修改其权限 如：“123:1” “ID”+“:”+“1/2/3” 1--学生 2--老师 3--管理员
