@@ -69,6 +69,7 @@ public class LibraryDao extends BaseDao{
             CRUD.update(sql,conn);
             return true;
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
     }
