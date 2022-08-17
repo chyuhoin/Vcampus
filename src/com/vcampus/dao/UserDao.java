@@ -1,5 +1,6 @@
 package com.vcampus.dao;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.vcampus.dao.utils.CRUD;
 import org.junit.Test;
 
@@ -30,13 +31,34 @@ public class UserDao extends BaseDao{
         }else
             return "succeeded";
     }
-//public static String loginCheck(String username, String password) throws Exception {
-//    String sql = "select * from tb_USR where studentID = '" + username + "' and password = '" + password + "'";
-//    List<Map<String, Object>> list = CRUD.Query(sql);
-//    if (list.isEmpty()) {
-//        return "用户名或密码错误";
-//    } else
-//        return "登陆成功";
-
+    //删除一个用户，管理员可操作
+    public static Boolean deleteUser(String studentID){
+        try{
+            String sql = "delete from tb_USR where studentID = '"+studentID+"'";
+            CRUD.update(sql,conn);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+    public static Boolean reviseType(String studentID,Integer type){
+        try{
+            String sql = "update tb_USR set type = "+type+" where studentID = '"+studentID+"'";
+            CRUD.update(sql,conn);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+    //修改密码
+    public static Boolean revisePassword(String studentID,String password){
+        try{
+            String sql = "update tb_USR set password = '"+password+"' where studentID = '"+studentID+"'";
+            CRUD.update(sql,conn);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
 }
 
