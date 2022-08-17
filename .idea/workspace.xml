@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="加了学生管理部分">
+    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="重写了下CRUD类中的方法，加入了一个connection参数。写了一个BaseDao，内部定义了一个连接，各个Dao类都继承了BaseDao。现在使用同一个connection进行操作了">
+      <change afterPath="$PROJECT_DIR$/src/com/vcampus/dao/utils/StringAndImage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/os.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/server/controller/StudentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/server/controller/StudentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/server/service/StudentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/server/service/StudentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/LibraryDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/LibraryDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/pojo/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/pojo/Book.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,24 +41,33 @@
     <option name="foldersAlwaysOnTop" value="false" />
     <option name="showModules" value="false" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Study/Git/Vcampus/Vcampus&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/Code/JavaWebCode/Vcampus/src",
+    "settings.editor.selected.configurable": "File.Encoding"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;ChangesTree.GroupingKeys&quot;: [
-      &quot;directory&quot;,
-      &quot;module&quot;
+  "keyToStringList": {
+    "ChangesTree.GroupingKeys": [
+      "directory",
+      "module"
     ]
   }
-}</component>
-  <component name="RunManager" selected="应用程序.LoginTest">
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Code\JavaWebCode\Vcampus\src" />
+      <recent name="D:\Code\JavaWebCode\Vcampus" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.vcampus.client.login" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.LibraryDao.test">
     <configuration name="LoginTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.vcampus.test.LoginTest" />
       <module name="Vcampus" />
@@ -70,12 +81,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.vcampus.server.Server" />
+    <configuration name="myLoginTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.vcampus.client.login.myLoginTest" />
       <module name="Vcampus" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.vcampus.server.*" />
+          <option name="PATTERN" value="com.vcampus.client.login.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="myLoginTest2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.vcampus.client.login.myLoginTest2" />
+      <module name="Vcampus" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.vcampus.client.login.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -99,23 +123,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Library.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Vcampus" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.vcampus.server.user.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.vcampus.server.library" />
-      <option name="MAIN_CLASS_NAME" value="com.vcampus.server.library.Library" />
-      <option name="METHOD_NAME" value="test" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="test.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="StringAndImage.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Vcampus" />
       <extension name="coverage">
         <pattern>
@@ -124,7 +132,7 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.vcampus.dao.utils" />
-      <option name="MAIN_CLASS_NAME" value="com.vcampus.dao.utils.test" />
+      <option name="MAIN_CLASS_NAME" value="com.vcampus.dao.utils.StringAndImage" />
       <option name="METHOD_NAME" value="test" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
@@ -133,11 +141,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="应用程序.LoginTest" />
-        <item itemvalue="应用程序.Server" />
-        <item itemvalue="JUnit.Library.test" />
         <item itemvalue="JUnit.LibraryDao.test" />
-        <item itemvalue="JUnit.test.test" />
+        <item itemvalue="JUnit.StringAndImage.test" />
+        <item itemvalue="Application.myLoginTest" />
+        <item itemvalue="Application.myLoginTest2" />
+        <item itemvalue="Application.LoginTest" />
       </list>
     </recent_temporary>
   </component>
@@ -160,10 +168,13 @@
       <workItem from="1660454140324" duration="96000" />
       <workItem from="1660455383694" duration="9368000" />
       <workItem from="1660546281143" duration="210000" />
-      <workItem from="1660553294493" duration="1539000" />
-      <workItem from="1660557685463" duration="1952000" />
-      <workItem from="1660562984006" duration="4781000" />
-      <workItem from="1660694419677" duration="2591000" />
+      <workItem from="1660553294493" duration="5398000" />
+      <workItem from="1660563636857" duration="2164000" />
+      <workItem from="1660619044349" duration="4132000" />
+      <workItem from="1660637701493" duration="2215000" />
+      <workItem from="1660639997270" duration="5427000" />
+      <workItem from="1660648925845" duration="884000" />
+      <workItem from="1660694384311" duration="5422000" />
     </task>
     <task id="LOCAL-00001" summary="初步写了登录注册">
       <created>1660298515554</created>
@@ -179,7 +190,42 @@
       <option name="project" value="LOCAL" />
       <updated>1660401643513</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="实现可序列化接口">
+      <created>1660554878384</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1660554878384</updated>
+    </task>
+    <task id="LOCAL-00004" summary="对注册添加了类型验证">
+      <created>1660555737524</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1660555737524</updated>
+    </task>
+    <task id="LOCAL-00005" summary="完成了studentDao层，暂时没有把照片添加进去，主要是照片的读取之类的需要特殊方法，我要再学习一下">
+      <created>1660567403654</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1660567403654</updated>
+    </task>
+    <task id="LOCAL-00006" summary="这次初步写了libraryDao层，但引发了我一个关于数据库隔离的思考，这部分知识我还要好好学一下。目前为止我的Dao层都是静态方法，当查询的时候都是现获取的，这样的方法的弊端一个是效率问题，需要频繁开关，另一个问题则是数据库隔离的隐患。我正在考虑重写某些方法。">
+      <created>1660648795402</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1660648795402</updated>
+    </task>
+    <task id="LOCAL-00007" summary="重写了下CRUD类中的方法，加入了一个connection参数。写了一个BaseDao，内部定义了一个连接，各个Dao类都继承了BaseDao。现在使用同一个connection进行操作了">
+      <created>1660649808298</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1660649808298</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -200,7 +246,12 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="初步写了登录注册" />
     <MESSAGE value="写了一个方法把map转为bean对象" />
-    <option name="LAST_COMMIT_MESSAGE" value="写了一个方法把map转为bean对象" />
+    <MESSAGE value="实现可序列化接口" />
+    <MESSAGE value="对注册添加了类型验证" />
+    <MESSAGE value="完成了studentDao层，暂时没有把照片添加进去，主要是照片的读取之类的需要特殊方法，我要再学习一下" />
+    <MESSAGE value="这次初步写了libraryDao层，但引发了我一个关于数据库隔离的思考，这部分知识我还要好好学一下。目前为止我的Dao层都是静态方法，当查询的时候都是现获取的，这样的方法的弊端一个是效率问题，需要频繁开关，另一个问题则是数据库隔离的隐患。我正在考虑重写某些方法。" />
+    <MESSAGE value="重写了下CRUD类中的方法，加入了一个connection参数。写了一个BaseDao，内部定义了一个连接，各个Dao类都继承了BaseDao。现在使用同一个connection进行操作了" />
+    <option name="LAST_COMMIT_MESSAGE" value="重写了下CRUD类中的方法，加入了一个connection参数。写了一个BaseDao，内部定义了一个连接，各个Dao类都继承了BaseDao。现在使用同一个connection进行操作了" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
