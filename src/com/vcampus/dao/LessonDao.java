@@ -8,6 +8,7 @@ import com.vcampus.pojo.Lesson;
 import org.junit.Test;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -78,7 +79,27 @@ public class LessonDao extends BaseDao{
             return false;
         }
     }
-
+    //添加课程
+    public static Boolean addLesson(Lesson lesson){
+        try {
+            String sql = "insert into tb_LESSON (innerID,lessonID,name,teacherID,maxSize,leftSize,time,school,major,isExam) values(?,?,?,?,?,?,?,?,?,?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1,lesson.getInnerID());
+            ps.setString(2,lesson.getLessonID());
+            ps.setString(3,lesson.getName());
+            ps.setString(4,lesson.getTeacherID());
+            ps.setInt(5,lesson.getMaxSize());
+            ps.setInt(6,lesson.getLeftSize());
+            ps.setString(7,lesson.getTime());
+            ps.setString(8,lesson.getSchool());
+            ps.setString(9, lesson.getMajor());
+            ps.setInt(10,lesson.getIsExam());
+            CRUD.update(sql,conn);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
     //管理员给学生添加成绩
     public static Boolean addGrade(String studentID, String innerID, Integer grade) throws Exception {
         String sql = "update tb_STUDENTWITHLESSON set grade = " + String.valueOf(grade) + " where studentID = '" + studentID + "' and innerID = '" + innerID + "'";
