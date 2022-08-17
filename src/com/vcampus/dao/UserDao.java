@@ -7,29 +7,28 @@ import org.junit.Test;
 import java.util.List;
 import java.util.Map;
 
-public class UserDao extends BaseDao{
-
-    public static String register(String username, String password, Integer type) throws Exception {
+public class UserDao {
+    public static String register(String username, String password,Integer type) throws Exception {
         String sql = "select * from tb_USR where studentID = '" + username + "'";
-        List<Map<String, Object>> list = CRUD.Query(sql,conn);
+        List<Map<String, Object>> list = CRUD.Query(sql);
         if (!list.isEmpty()) {
-            return "registered";
+            return "���˻��ѱ�ע��";
         } else {
             String sql2 = "insert into tb_USR (studentID,password,type) values ('" + username + "','" + password + "',"+String.valueOf(type)+")";
-            CRUD.update(sql2,conn);
-            return "succeeded";
+            CRUD.update(sql2);
+            return "ע��ɹ�";
         }
     }
 
     public static String loginCheck(String username, String password,Integer type) throws Exception {
         String sql = "select * from tb_USR where studentID = '" + username + "' and password = '" + password + "'";
-        List<Map<String, Object>> list = CRUD.Query(sql,conn);
+        List<Map<String, Object>> list = CRUD.Query(sql);
         if (list.isEmpty()) {
-            return "wrong password or username";
+            return "�û������������";
         } else if (type !=(Integer)list.get(0).get("type")) {
-            return "wrong type";
+            return "���ʹ���";
         }else
-            return "succeeded";
+            return "��½�ɹ�";
     }
     //删除一个用户，管理员可操作
     public static Boolean deleteUser(String studentID){
@@ -61,4 +60,3 @@ public class UserDao extends BaseDao{
         }
     }
 }
-

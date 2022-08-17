@@ -13,7 +13,7 @@ import java.util.Properties;
 import static java.sql.Connection.TRANSACTION_REPEATABLE_READ;
 
 public class databaseConn {
-    public static Connection getConn()  {
+    public static Connection getConn() throws Exception {
         //1.定义了4个字符串用来保存连接信息
         String driverClass ;
         String dbUrl ;
@@ -21,27 +21,28 @@ public class databaseConn {
         String password ;
 
         //2.从jdbc配置文件里加载信息
-        try{
         InputStream in= new BufferedInputStream(new FileInputStream(
-                new File("jdbc.properties")
+                new File("D:\\_CodeFactory\\javaCODE\\Vcampus\\Vcampus\\jdbc.properties")
         ));
         Properties prop = new Properties();
-
         prop.load(in);
+
         driverClass = prop.getProperty("driver");
         dbUrl = prop.getProperty("jdbcUrl");
         user = prop.getProperty("user");
         password = prop.getProperty("password");
-        Class.forName(driverClass);
-        Connection conn = DriverManager.getConnection(dbUrl,user,password);
-        conn.setTransactionIsolation(TRANSACTION_REPEATABLE_READ);//设置隔离级别为3级
+        //3.返回连接
+        try {
+            Class.forName(driverClass);
+            Connection conn = DriverManager.getConnection(dbUrl,user,password);
+            conn.setTransactionIsolation(TRANSACTION_REPEATABLE_READ);//设置隔离级别为3级
             return conn;
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             System.out.println("??????????");
             return null;
         }
-
     }
 }
 

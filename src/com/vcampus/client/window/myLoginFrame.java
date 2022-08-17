@@ -13,14 +13,7 @@
  */
 
 
-package com.vcampus.client.login;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.vcampus.net.ClientMessagePasser;
-import com.vcampus.net.Message;
-import com.vcampus.net.MessagePasser;
-import com.vcampus.pojo.User;
+package com.vcampus.client.window;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,22 +22,44 @@ import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.vcampus.net.ClientMessagePasser;
+import com.vcampus.net.Message;
+import com.vcampus.net.MessagePasser;
+import com.vcampus.pojo.User;
+
 public class myLoginFrame extends JFrame  {
 
     JTextField txtUserName = new JTextField(20);
     JPasswordField txtPassWord = new JPasswordField(20);
     JButton btnLogin = new JButton("登录");
+    //JFrame loginFrame;
     int flag=0;
 
     public myLoginFrame(String title)
     {
+        //loginFrame = new JFrame(title);
         //调用父类构造函数，设置窗口名称
-        super(title);
+        //super(title);
         //添加面板
         JPanel panel = new JPanel();
         this.add(panel);
         //设置布局
         panel.setLayout(null);
+
+        // 当关闭窗口时，退出整个程序
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // 设置窗口的其他参数，如窗口大小
+        this.setSize(350, 270);
+        this.setResizable(false);//窗口大小不可改
+
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation((screenSize.width - this.getWidth()) / 2, (screenSize.height - this.getHeight()) / 2);
+
+        // 显示窗口
+        this.setVisible(true);
 
         //设置标题
         JLabel lblTitleLabel=new JLabel("用户登录");
@@ -96,6 +111,7 @@ public class myLoginFrame extends JFrame  {
         responseSelected(radioBtn02,2);
         responseSelected(radioBtn03,3);
 
+       // JFrame tempjf=this;
         //设置登录按钮的监听事件
         btnLogin.addActionListener(new ActionListener() {
             @Override
@@ -112,17 +128,17 @@ public class myLoginFrame extends JFrame  {
                             break;
                         case(3):
                             System.out.println("管理员申请登录");
-
+                            break;
                     }
+                    //loginFrame.setVisible(false);
+                    dispose();
+                    myMainFrame tempMF=new myMainFrame("VCampus虚拟校园系统",flag);
+
                 }
                 else//未输入用户名或密码，无法登陆，弹出窗口提示
                 {
-                    JOptionPane.showMessageDialog(
-                            panel,
-                            "用户名或密码错误！",
-                            "警告",
-                            JOptionPane.ERROR_MESSAGE
-                    );
+                    JOptionPane.showMessageDialog(panel, "用户名或密码错误！", "警告", JOptionPane.ERROR_MESSAGE);
+                    clearText();
                 }
             }
         });
@@ -130,6 +146,20 @@ public class myLoginFrame extends JFrame  {
 
     public Boolean readTextContent()
     {
+        //读取输入的用户名和密码
+        /*String userName = txtUserName.getText();
+        String passWord = new String(txtPassWord.getPassword());
+
+        if(userName.length()!=0 && passWord.length()!=0)//如果用户名和密码已输入
+        {
+            System.out.println(userName+'\n'+passWord);//输出登录名和密码
+            return true;
+        }
+        else
+            return false;
+
+         */
+
         //读取输入的用户名和密码
         String userName = txtUserName.getText();
         String passWord = new String(txtPassWord.getPassword());
@@ -164,5 +194,11 @@ public class myLoginFrame extends JFrame  {
                 }
             }
         });
+    }
+
+    public void clearText()
+    {
+        txtUserName.setText("");
+        txtPassWord.setText("");
     }
 }
