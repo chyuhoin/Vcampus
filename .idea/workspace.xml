@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="重写了下CRUD类中的方法，加入了一个connection参数。写了一个BaseDao，内部定义了一个连接，各个Dao类都继承了BaseDao。现在使用同一个connection进行操作了">
-      <change afterPath="$PROJECT_DIR$/src/com/vcampus/dao/utils/StringAndImage.java" afterDir="false" />
+    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="为Book增加了字符串形式表示的图片，写了图片和字符串相互转化的类。&#10;修改了LibraryDao层，可以多个条件查询">
       <change afterPath="$PROJECT_DIR$/src/os.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/LibraryDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/LibraryDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/pojo/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/pojo/Book.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,23 +39,23 @@
     <option name="foldersAlwaysOnTop" value="false" />
     <option name="showModules" value="false" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/Code/JavaWebCode/Vcampus/src",
-    "settings.editor.selected.configurable": "File.Encoding"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Code/JavaWebCode/Vcampus/src&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;File.Encoding&quot;
   },
-  "keyToStringList": {
-    "ChangesTree.GroupingKeys": [
-      "directory",
-      "module"
+  &quot;keyToStringList&quot;: {
+    &quot;ChangesTree.GroupingKeys&quot;: [
+      &quot;directory&quot;,
+      &quot;module&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Code\JavaWebCode\Vcampus\src" />
@@ -225,7 +223,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660649808298</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="为Book增加了字符串形式表示的图片，写了图片和字符串相互转化的类。&#10;修改了LibraryDao层，可以多个条件查询">
+      <created>1660700337585</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1660700337585</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -251,7 +256,8 @@
     <MESSAGE value="完成了studentDao层，暂时没有把照片添加进去，主要是照片的读取之类的需要特殊方法，我要再学习一下" />
     <MESSAGE value="这次初步写了libraryDao层，但引发了我一个关于数据库隔离的思考，这部分知识我还要好好学一下。目前为止我的Dao层都是静态方法，当查询的时候都是现获取的，这样的方法的弊端一个是效率问题，需要频繁开关，另一个问题则是数据库隔离的隐患。我正在考虑重写某些方法。" />
     <MESSAGE value="重写了下CRUD类中的方法，加入了一个connection参数。写了一个BaseDao，内部定义了一个连接，各个Dao类都继承了BaseDao。现在使用同一个connection进行操作了" />
-    <option name="LAST_COMMIT_MESSAGE" value="重写了下CRUD类中的方法，加入了一个connection参数。写了一个BaseDao，内部定义了一个连接，各个Dao类都继承了BaseDao。现在使用同一个connection进行操作了" />
+    <MESSAGE value="为Book增加了字符串形式表示的图片，写了图片和字符串相互转化的类。&#10;修改了LibraryDao层，可以多个条件查询" />
+    <option name="LAST_COMMIT_MESSAGE" value="为Book增加了字符串形式表示的图片，写了图片和字符串相互转化的类。&#10;修改了LibraryDao层，可以多个条件查询" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

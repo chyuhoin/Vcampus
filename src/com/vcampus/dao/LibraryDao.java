@@ -1,20 +1,15 @@
 package com.vcampus.dao;
 
 import com.vcampus.dao.utils.CRUD;
-import com.vcampus.dao.utils.StringAndImage;
 import com.vcampus.dao.utils.databaseConn;
 import com.vcampus.pojo.Book;
 
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import com.vcampus.dao.utils.mapToBean;
 import org.junit.Test;
-
-import javax.sql.rowset.serial.SQLInputImpl;
 
 public class LibraryDao extends BaseDao{
     //查询函数，无参的情况下查看所有值
@@ -133,9 +128,17 @@ public class LibraryDao extends BaseDao{
             return false;
         }
     }
-    @Test
-    public void test() throws Exception {
-        List<Book>result = search("bookID","00000001");
-        System.out.println(result);
-    }
+    //修改图书的信息，由管理员操作
+   public static Boolean revise(String bookID, String field, Object value) throws SQLException {
+        try {
+            String sql = "update tb_BOOK set "+field+"  = ? where bookID = '"+bookID+"'";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setObject(1,value);
+            ps.executeUpdate();
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+   }
+
 }
