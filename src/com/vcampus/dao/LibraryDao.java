@@ -1,17 +1,20 @@
 package com.vcampus.dao;
 
 import com.vcampus.dao.utils.CRUD;
+import com.vcampus.dao.utils.StringAndImage;
 import com.vcampus.dao.utils.databaseConn;
 import com.vcampus.pojo.Book;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import com.vcampus.dao.utils.mapToBean;
 import org.junit.Test;
+
+import javax.sql.rowset.serial.SQLInputImpl;
 
 public class LibraryDao extends BaseDao{
     //查询函数，无参的情况下查看所有值
@@ -25,9 +28,17 @@ public class LibraryDao extends BaseDao{
         }
         return result;
     }
-    //重载的查询函数，按条件查询
-    public static List<Book> search(String field, String values) throws Exception {
-        String sql = "select * from tb_BOOK" + " where " + field + " = " + "'" + values + "'";
+    //重载的查询函数，按条件查询,str的顺序为 字段+值，两个一组重复
+    public static List<Book> search(String...str) throws Exception {
+        String sql = "select * from tb_BOOK  where {0} = {1} and {2}={3} and {4}={5}" ;
+        for(int i=0;i<str.length;i+=2){
+           sql =  sql.replace("{"+String.valueOf(i)+"}",str[i]);
+           sql =  sql.replace("{"+String.valueOf(i+1)+"}",str[i+1]);
+        }
+        for(int i=str.length;i<6;i+=2){
+            sql =  sql.replace("{"+String.valueOf(i)+"}","''");
+            sql =  sql.replace("{"+String.valueOf(i+1)+"}","''");
+        }
         List<Map<String, Object>> resultList = CRUD.Query(sql,conn);
         List<Book> result = new ArrayList<>();
         for (Map<String, Object> map : resultList) {
@@ -53,12 +64,13 @@ public class LibraryDao extends BaseDao{
     //添加一本图书，仅管理员可操作
     public static Boolean addBook(Book book) {
         try {
-            String sql = "insert into tb_BOOK (bookID,bookName,author,type,leftSize) values" + "('" +
+            String sql = "insert into tb_BOOK (bookID,bookName,author,type,leftSize,image) values" + "('" +
                     book.getBookID() + "','" +
                     book.getBookName() + "','" +
                     book.getAuthor() + "','" +
-                    book.getType() + "','" +
-                    book.getLeftSize() + "')";
+                    book.getType() + "'," +
+                    String.valueOf(book.getLeftSize()) +",'"+
+                    book.getImage()+"')";
             CRUD.update(sql,conn);
             return true;
         } catch (Exception e) {
@@ -78,7 +90,6 @@ public class LibraryDao extends BaseDao{
     //借一本书，用于管理员处理借书的情况
     public static Boolean borrowBook(String bookID,String studentID)  {
         try {
-
             String sql1 = "update tb_BOOK set leftSize = leftSize-1 where bookID = " + "'" + bookID + "'";
             String sql2 = "insert into tb_BOOKWITHSTUDENT (studentID,bookID) values " + "('" + studentID + "','" + bookID + "')";
             Connection conn = databaseConn.getConn();//此处使用数据库事务来处理同时执行的语句
@@ -121,5 +132,10 @@ public class LibraryDao extends BaseDao{
         }catch (Exception e){
             return false;
         }
+    }
+    @Test
+    public void test() throws Exception {
+        List<Book>result = search("bookID","00000001");
+        System.out.println(result);
     }
 }

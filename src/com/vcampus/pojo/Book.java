@@ -1,7 +1,9 @@
 package com.vcampus.pojo;
 
+import com.vcampus.dao.utils.StringAndImage;
+
+import java.io.IOException;
 import java.io.Serializable;
-import java.util.Arrays;
 
 public class Book implements Serializable {
     private String bookID;
@@ -9,15 +11,20 @@ public class Book implements Serializable {
     private String author;
     private String type;
     private Integer leftSize;
-    private byte[] image;
+    private String image;
 
-    public Book(String bookID, String bookName, String author, String type, Integer leftSize, byte[] image) {
+    public Book(String bookID, String bookName, String author, String type, Integer leftSize, String path){
+        //最后一个path是本地图片的路径
         this.bookID = bookID;
         this.bookName = bookName;
         this.author = author;
         this.type = type;
         this.leftSize = leftSize;
-        this.image = image;
+        try {
+            this.image = StringAndImage.ImageToString(path);
+        }catch (Exception e){
+
+        }
     }
 
     public Book() {
@@ -63,11 +70,11 @@ public class Book implements Serializable {
         this.leftSize = leftSize;
     }
 
-    public byte[] getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(byte[] image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
