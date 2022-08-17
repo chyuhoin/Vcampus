@@ -5,6 +5,7 @@ import com.vcampus.net.MessagePasser;
 import com.vcampus.server.controller.Controller;
 import com.vcampus.server.controller.LibraryController;
 import com.vcampus.server.controller.LoginController;
+import com.vcampus.server.controller.StudentController;
 
 import java.io.*;
 import java.net.Socket;
@@ -12,7 +13,7 @@ import java.net.Socket;
 public class ServerRunner implements Runnable{
     private InputStream input;
     private OutputStream output;
-    private final Controller loginController, libraryController;
+    private final Controller loginController, libraryController, studentController;
 
     public ServerRunner(Socket sock) {
         try {
@@ -23,6 +24,7 @@ public class ServerRunner implements Runnable{
         }
         loginController = new LoginController();
         libraryController = new LibraryController();
+        studentController = new StudentController();
     }
 
     @Override
@@ -38,7 +40,7 @@ public class ServerRunner implements Runnable{
                     passer.send(loginController.check(message));
                     break;
                 case "student":
-                    passer.send(new Message("200", "学籍管理"));
+                    passer.send(studentController.check(message));
                     break;
                 case "class":
                     passer.send(new Message("200", "教务"));
