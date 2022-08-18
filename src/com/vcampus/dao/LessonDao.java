@@ -4,6 +4,7 @@ import com.vcampus.dao.utils.CRUD;
 import com.vcampus.dao.utils.databaseConn;
 import com.vcampus.dao.utils.mapToBean;
 import com.vcampus.pojo.Book;
+import com.vcampus.pojo.Exam;
 import com.vcampus.pojo.Lesson;
 import org.junit.Test;
 
@@ -47,7 +48,6 @@ public class LessonDao extends BaseDao{
                 "and tb_STUDENTWITHLESSON.studentID = '" + studentID + "'";
         List<Map<String, Object>> resultList = CRUD.Query(sql,conn);
         List<Lesson> result = new ArrayList<>();
-        System.out.println(resultList);
         for (Map<String, Object> map : resultList) {
             Lesson lesson = mapToBean.map2Bean(map, Lesson.class);
             result.add(lesson);
