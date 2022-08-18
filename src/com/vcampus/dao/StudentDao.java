@@ -36,7 +36,7 @@ public class StudentDao extends BaseDao{
     //添加一条学生信息,由管理员操作
     public static Boolean addStudent(Student stu) throws Exception {
         try {
-            String sql = "insert into tb_STUDENT (studentID,name,studentNumber,IDcard,school,major,sex,classs,educationalSystem,politics,grade,phoneNumber,status) values (" +
+            String sql = "insert into tb_STUDENT (studentID,name,studentNumber,IDcard,school,major,sex,classs,educationalSystem,politics,grade,phoneNumber,status,image) values (" +
                     "'" + stu.getStudentID() + "'," +
                     "'" + stu.getName() + "'," +
                     "'" + stu.getStudentNumber() + "'," +
@@ -49,9 +49,8 @@ public class StudentDao extends BaseDao{
                     "'" + stu.getPolitics() + "'," +
                     "" + stu.getGrade().toString() + "," +
                     "'" + stu.getPhoneNumber() + "'," +
-                    // Arrays.toString(stu.getImage()) +","+
-                    "" + stu.getStatus() + ")";
-            System.out.println(sql);
+                    "" + stu.getStatus() + ","+
+                    "'"+stu.getImage()+"')";
             CRUD.update(sql,conn);
             return true;
         }catch (Exception e){

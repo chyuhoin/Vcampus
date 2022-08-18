@@ -29,7 +29,7 @@ public class StringAndImage {
     public static void StringToImage(String str,String path) throws IOException {
         BASE64Decoder decoder = new BASE64Decoder();
         byte[] imgbyte = decoder.decodeBuffer(str);
-        OutputStream os = new FileOutputStream("test.png");
+        OutputStream os = new FileOutputStream(path);
         os.write(imgbyte, 0, imgbyte.length);
         os.flush();
         os.close();

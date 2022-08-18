@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="在lessonDao层添加了增加课程的类">
+    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="修改了UserDao层的错误，但service和controller仍存在错误">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/UserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/UserDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/StudentDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/StudentDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/utils/StringAndImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/utils/StringAndImage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/pojo/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/pojo/Student.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,7 +172,8 @@
       <workItem from="1660648925845" duration="884000" />
       <workItem from="1660694384311" duration="5422000" />
       <workItem from="1660745486230" duration="183000" />
-      <workItem from="1660745889106" duration="407000" />
+      <workItem from="1660745889106" duration="473000" />
+      <workItem from="1660815934556" duration="2442000" />
     </task>
     <task id="LOCAL-00001" summary="初步写了登录注册">
       <created>1660298515554</created>
@@ -235,7 +238,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660745584712</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="修改了UserDao层的错误，但service和controller仍存在错误">
+      <created>1660746328997</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1660746328997</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -263,7 +273,8 @@
     <MESSAGE value="重写了下CRUD类中的方法，加入了一个connection参数。写了一个BaseDao，内部定义了一个连接，各个Dao类都继承了BaseDao。现在使用同一个connection进行操作了" />
     <MESSAGE value="为Book增加了字符串形式表示的图片，写了图片和字符串相互转化的类。&#10;修改了LibraryDao层，可以多个条件查询" />
     <MESSAGE value="在lessonDao层添加了增加课程的类" />
-    <option name="LAST_COMMIT_MESSAGE" value="在lessonDao层添加了增加课程的类" />
+    <MESSAGE value="修改了UserDao层的错误，但service和controller仍存在错误" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改了UserDao层的错误，但service和controller仍存在错误" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

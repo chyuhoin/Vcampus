@@ -1,5 +1,7 @@
 package com.vcampus.pojo;
 
+import com.vcampus.dao.utils.StringAndImage;
+
 import java.io.Serializable;
 
 public class Student implements Serializable {
@@ -17,8 +19,10 @@ public class Student implements Serializable {
     String phoneNumber;
     //byte[] image;
     Integer status;
+    String image;
 
-    public Student(String studentID, String name, String studentNumber, String IDcard, String school, String major, Integer sex, String classs, Integer educationalSystem, String politics, Integer grade, String phoneNumber, Integer status) {
+
+    public Student(String studentID, String name, String studentNumber, String IDcard, String school, String major, Integer sex, String classs, Integer educationalSystem, String politics, Integer grade, String phoneNumber, Integer status, String path) {
         this.studentID = studentID;
         this.name = name;
         this.studentNumber = studentNumber;
@@ -31,8 +35,12 @@ public class Student implements Serializable {
         this.politics = politics;
         this.grade = grade;
         this.phoneNumber = phoneNumber;
-       // this.image = image;
         this.status = status;
+        try{
+            this.image = StringAndImage.ImageToString(path);
+        }catch (Exception e){
+
+        }
     }
 
     public Student() {
@@ -148,6 +156,14 @@ public class Student implements Serializable {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     @Override
