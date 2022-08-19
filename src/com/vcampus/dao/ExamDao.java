@@ -33,7 +33,35 @@ public class ExamDao extends BaseDao{
             result.add(exam);
         }
         return result;
-
     }
-
+    //管理员添加考试信息
+    public static Boolean addExam(Exam exam){
+        try{
+            String sql = "insert into tb_EXAM (innerID,teacherID,time) values('"+
+                    exam.getinnerID()+"','"+
+                    exam.getTeacherID()+"','"+
+                    exam.getTime()+"')";
+            CRUD.update(sql,conn);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+    //管理员删除考试信息
+    //public static Boolean
+    //用于管理员修改某个字段的信息
+    public static Boolean revise(String innerID,String field,String value){
+        try {
+            String sql = "update tb_EXAM set "+field+" ='"+value+"' where innerID ='"+innerID+"'";
+            CRUD.update(sql,conn);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+//    @Test
+//    public void test(){
+//        Exam exam = new Exam("1","1","1");
+//        addExam(exam);
+//    }
 }

@@ -20,9 +20,10 @@ public class Student implements Serializable {
     //byte[] image;
     Integer status;
     String image;
+    String nation;
 
-
-    public Student(String studentID, String name, String studentNumber, String IDcard, String school, String major, Integer sex, String classs, Integer educationalSystem, String politics, Integer grade, String phoneNumber, Integer status, String path) {
+    //path为图片所在路径
+    public Student(String studentID, String name, String studentNumber, String IDcard, String school, String major, Integer sex, String classs, Integer educationalSystem, String politics, Integer grade, String phoneNumber, Integer status, String path,String nation) {
         this.studentID = studentID;
         this.name = name;
         this.studentNumber = studentNumber;
@@ -166,6 +167,14 @@ public class Student implements Serializable {
         this.image = image;
     }
 
+    public String getNation() {
+        return nation;
+    }
+
+    public void setNation(String nation) {
+        this.nation = nation;
+    }
+
     @Override
     public String toString() {
         return "Student{" +
@@ -182,6 +191,7 @@ public class Student implements Serializable {
                 ", grade=" + grade +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", status=" + status +
+                ", nation='" + nation + '\'' +
                 '}';
     }
 }

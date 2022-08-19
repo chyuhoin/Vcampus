@@ -35,7 +35,7 @@ public class StudentDao extends BaseDao{
     }
     //添加一条学生信息,由管理员操作
     public static Boolean addStudent(Student stu) throws Exception {
-        try {
+       // try {
             String sql = "insert into tb_STUDENT (studentID,name,studentNumber,IDcard,school,major,sex,classs,educationalSystem,politics,grade,phoneNumber,status,image) values (" +
                     "'" + stu.getStudentID() + "'," +
                     "'" + stu.getName() + "'," +
@@ -50,7 +50,19 @@ public class StudentDao extends BaseDao{
                     "" + stu.getGrade().toString() + "," +
                     "'" + stu.getPhoneNumber() + "'," +
                     "" + stu.getStatus() + ","+
-                    "'"+stu.getImage()+"')";
+                    "'"+stu.getImage()+"',"+
+                    "'"+stu.getNation()+"')";
+            System.out.println(sql);
+            CRUD.update(sql,conn);
+            return true;
+//        }catch (Exception e){
+//            return false;
+//        }
+    }
+    //只添加一个studentID，以后慢慢的补充
+    public static Boolean addStudent(String studentID){
+        try {
+            String sql = "insert into tb_STUDENT (studentID) values ('" + studentID + "')";
             CRUD.update(sql,conn);
             return true;
         }catch (Exception e){
@@ -67,4 +79,25 @@ public class StudentDao extends BaseDao{
             return false;
         }
     }
+    //修改学生的信息（String类型）
+    public static Boolean reviseStudent(String studentID,String field,String value){
+        try{
+            String sql = "update tb_STUDENT set "+field+" ='"+value+"' where studentID ='"+studentID+"'";
+            CRUD.update(sql,conn);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+    //修改学生信息（int类型）
+    public static Boolean reviseStudent(String studentID,String field,int value){
+        try{
+            String sql = "update tb_STUDENT set "+field+" ="+value+" where studentID ='"+studentID+"'";
+            CRUD.update(sql,conn);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+
 }
