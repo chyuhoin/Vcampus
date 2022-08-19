@@ -56,12 +56,28 @@ public class LessonDao extends BaseDao{
         }
         return result;
     }
-
+    //判断函数
+    public static int judgeLesson(String studentID,String innerID) throws Exception {
+        String judgeSql1 = "select * from tb_STUDENTWITHLESSON where studentID = '" + studentID + "' and innerID = '" + innerID + "'";
+        String judgeSql2 = "select * from tb_LESSON where  innerID = '" + innerID + "'";
+        List<Map<String, Object>> judge1 = CRUD.Query(judgeSql1,conn);
+        List<Map<String, Object>> judge2 = CRUD.Query(judgeSql2,conn);
+        int leftSize = (int) judge2.get(0).get("leftSize");
+        if(!judge1.isEmpty())
+            return 0;//已选不可选
+        else if(judge1.isEmpty()&&leftSize!=0)
+            return 1;//未选可选
+        else if(judge1.isEmpty()&&leftSize==0)
+            return 2;//已满不可选
+        else
+            return 2;
+    }
     //学生选课
+
     public static Boolean selectLesson(String studentID, String innerID) throws Exception {
-        String judgeSql = "select * from tb_STUDENTWITHLESSON where studentID = '" + studentID + "' and innerID = '" + innerID + "'";
-        List<Map<String, Object>> judge = CRUD.Query(judgeSql,conn);
-        if (judge.isEmpty()) {
+//        String judgeSql = "select * from tb_STUDENTWITHLESSON where studentID = '" + studentID + "' and innerID = '" + innerID + "'";
+//        List<Map<String, Object>> judge = CRUD.Query(judgeSql,conn);
+//        if (judge.isEmpty()) {
             try {
                 String sql1 = "update tb_LESSON set leftSize=leftSize-1 where innerID = '" + innerID + "'";
                 String sql2 = "insert into tb_STUDENTWITHLESSON (studentID,innerID) values ('" + studentID + "','" + innerID + "')";
@@ -77,9 +93,9 @@ public class LessonDao extends BaseDao{
             } catch (Exception e) {
                 return false;
             }
-        } else {
-            return false;
-        }
+//        } else {
+//            return false;
+//        }
     }
     //学生退课
     public static Boolean returnLesson(String studentID,String innerID){
