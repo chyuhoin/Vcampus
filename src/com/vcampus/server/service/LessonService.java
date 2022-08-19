@@ -9,7 +9,7 @@ import com.vcampus.pojo.Student;
 import java.util.List;
 public class LessonService implements Service{
     public boolean addLesson(Lesson user) {
-        boolean res;
+        boolean res = false;
         try {
 //            if(!UserDao.search(user.getStudentID()))//用户管理没有这个ID
 //                res=false;

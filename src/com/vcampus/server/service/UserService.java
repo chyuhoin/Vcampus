@@ -4,7 +4,7 @@ import com.vcampus.dao.UserDao;
 import com.vcampus.pojo.User;
 import com.vcampus.dao.StudentDao;
 
-public class UserService {
+public class UserService implements Service {
 
     public boolean login(User user) {
         String res;
