@@ -64,7 +64,7 @@ public class UserDao extends BaseDao {
     }
 
     //查询某个学生
-    public Boolean search(String studentID) {
+    public static Boolean search(String studentID) {
         try {
             String sql = "select * from tb_USR where studentID = '" + studentID + "'";
             List<Map<String, Object>> result = CRUD.Query(sql, conn);

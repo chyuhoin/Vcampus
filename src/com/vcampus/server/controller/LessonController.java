@@ -16,7 +16,12 @@ public class LessonController implements Controller{
         LessonService service = new LessonService();
         Gson gson = new Gson();
         switch (msg.getOperation()) {
-            case "post"://添加课程信息
+            case "post":
+                //添加课程信息
+                Lesson lesson = gson.fromJson(msg.getData(), Lesson.class);
+                if(service.addLesson(lesson)) return new Message("200", "{res: 'OK'}");
+                else return new Message("200", "{res: 'NO'}");
+
             case "postone"://添加对应课程的老师
             case "delete"://删除课程，输入课程ID
             case "deleteone"://删除对应老师教授的特定课程

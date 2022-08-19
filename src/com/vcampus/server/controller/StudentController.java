@@ -15,10 +15,12 @@ public class StudentController implements Controller {
         StudentService service = new StudentService();
         Gson gson = new Gson();
         switch (msg.getOperation()) {
-            case "post"://添加学生信息 先删除对应studentID的学生，再添加新的信息
-                Student user = gson.fromJson(msg.getData(), Student.class);
-                if(!service.deleteStudent(user.getStudentID())) return new Message("200", "{res: 'NO'}");
-                if(service.addStudent(user)) return new Message("200", "{res: 'OK'}");
+            case "post":
+                //添加学生信息
+                //只有在用户管理中存在对应ID在可以添加
+                //如果学籍信息中已存在对应ID，则视为修改
+                Student student = gson.fromJson(msg.getData(), Student.class);
+                if(service.addStudent(student)) return new Message("200", "{res: 'OK'}");
                 else return new Message("200", "{res: 'NO'}");
             case "get"://显示所有学生信息
                 HashMap<String, Object> map2 = new HashMap<>();

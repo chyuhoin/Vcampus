@@ -2,6 +2,7 @@ package com.vcampus.server.service;
 
 import com.vcampus.dao.UserDao;
 import com.vcampus.pojo.User;
+import com.vcampus.dao.StudentDao;
 
 public class UserService {
 
@@ -17,14 +18,19 @@ public class UserService {
     }
 
     public boolean register(User user) {
-        String res;
+        boolean res;
+        //String res;
         try {
-            res = UserDao.register(user.getStudentID(), user.getPassword(), user.getType());
+            if(!StudentDao.search("studentID", user.getStudentID()).isEmpty())//学籍管理里已存在对应ID
+                res=false;
+            else if(!StudentDao.addStudent(user.getStudentID()))//在学籍管理表里添加ID失败
+                res=false;
+            else res=UserDao.register(user.getStudentID(), user.getPassword(), user.getType()).equals("succeeded");
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
-        return "succeeded".equals(res);
+        return res;
     }
 
     public boolean delete(User user) {
