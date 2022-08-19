@@ -29,6 +29,11 @@ public class LibraryController implements Controller {
                     map.put("res", service.addNewBook(book) ? "OK" : "Error");
                     break;
                 }
+                case "put": { //管理员修改书籍
+                    Book book = gson.fromJson(msg.getData(), Book.class);
+                    map.put("res", service.changeBook(book) ? "OK" : "Error");
+                    break;
+                }
                 case "delete": { //管理员删除书籍
                     Book book = gson.fromJson(msg.getData(), Book.class);
                     map.put("res", service.deleteBook(book) ? "OK" : "Error");
