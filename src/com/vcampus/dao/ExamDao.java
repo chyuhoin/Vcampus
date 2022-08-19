@@ -48,7 +48,15 @@ public class ExamDao extends BaseDao{
         }
     }
     //管理员删除考试信息
-    //public static Boolean
+    public static Boolean deleteExam(String innerID) {
+        try {
+            String sql = "delete from tb_EXAM where innerID = '" + innerID + "'";
+            CRUD.update(sql, conn);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
     //用于管理员修改某个字段的信息
     public static Boolean revise(String innerID,String field,String value){
         try {
