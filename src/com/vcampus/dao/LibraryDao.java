@@ -27,7 +27,7 @@ public class LibraryDao extends BaseDao{
     public static List<Book> search(String...str) throws Exception {
         String sql = "select * from tb_BOOK  where {0} = {1} and {2}={3} and {4}={5}" ;
         for(int i=0;i<str.length;i+=2){
-           sql =  sql.replace("{"+String.valueOf(i)+"}","'"+str[i]+"'");
+           sql =  sql.replace("{"+String.valueOf(i)+"}",str[i]);
            sql =  sql.replace("{"+String.valueOf(i+1)+"}","'"+str[i+1]+"'");
         }
         for(int i=str.length;i<6;i+=2){
