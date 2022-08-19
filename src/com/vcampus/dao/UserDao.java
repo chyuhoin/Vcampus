@@ -33,13 +33,7 @@ public class UserDao extends BaseDao {
 
     //删除一个用户，管理员可操作
     public static Boolean deleteUser(String studentID) {
-        try {
-            String sql = "delete from tb_USR where studentID = '" + studentID + "'";
-            CRUD.update(sql, conn);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+        return delete("studentID",studentID,"tb_USR");
     }
 
     public static Boolean reviseType(String studentID, Integer type) {

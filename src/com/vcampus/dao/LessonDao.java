@@ -81,56 +81,50 @@ public class LessonDao extends BaseDao{
             return false;
         }
     }
-    //添加课程
+    //学生退课
+    public static Boolean returnLesson(String studentID,String innerID){
+            try {
+                String sql1 = "update tb_LESSON set leftSize=leftSize+1 where innerID = '" + innerID + "'";
+                String sql2 = "delete from tb_STUDENTWITHLESSON where studentID ='"+studentID+"' and innerID = '"+innerID+"'";
+                Connection conn = databaseConn.getConn();
+                conn.setAutoCommit(false);
+                Statement stm = conn.createStatement();
+                stm.executeUpdate(sql1);
+                stm.executeUpdate(sql2);
+                conn.commit();
+                stm.close();
+                conn.close();
+                return true;
+            } catch (Exception e) {
+                return false;
+            }
+
+        }
+
+    //管理员添加课程
     public static Boolean addLesson(Lesson lesson) throws Exception {
-       // try {
+        try {
             String sql = "insert into tb_LESSON (innerID,lessonID,name,teacherID,maxSize,leftSize,time,school,major,isExam) values(?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement ps = conn.prepareStatement(sql);
-           // if(lesson.getInnerID()!=null)
                 ps.setString(1,lesson.getInnerID());
-//            else
-//                ps.setNull(1, Types.VARCHAR);
-//            if(lesson.getLessonID()!=null)
                 ps.setString(2,lesson.getLessonID());
-//            else
-//                ps.setNull(2, Types.VARCHAR);
-//            if(lesson.getName()!=null)
                 ps.setString(3,lesson.getName());
-//            else
-//                ps.setNull(3,Types.VARCHAR);
-//            if(lesson.getTeacherID()!=null)
                 ps.setString(4,lesson.getTeacherID());
-//            else
-//                ps.setNull(4,Types.VARCHAR);
-//            if(lesson.getMaxSize()!=null)
                 ps.setInt(5,lesson.getMaxSize());
-//            else
-//                ps.setNull(5,Types.INTEGER);
-//            if(lesson.getLeftSize()!=null)
                 ps.setInt(6,lesson.getLeftSize());
-//            else
-//                ps.setNull(6,Types.INTEGER);
-//            if(lesson.getTime()!=null)
                 ps.setString(7,lesson.getTime());
-//            else
-//                ps.setNull(7,Types.VARCHAR);
-//            if(lesson.getSchool()!=null)
                 ps.setString(8,lesson.getSchool());
-//            else
-//                ps.setNull(8,Types.VARCHAR);
-//            if(lesson.getMajor()!=null)
                 ps.setString(9, lesson.getMajor());
-//            else
-//                ps.setNull(9, Types.VARCHAR);
-            //if(lesson.getIsExam()!=null)
                 ps.setInt(10,lesson.getIsExam());
-//            else
-//                ps.setNull(10,Types.INTEGER);
             ps.executeUpdate();
             return true;
-//        }catch (Exception e){
-//            return false;
-//        }
+        }catch (Exception e){
+            return false;
+        }
+    }
+    //管理员删除一个课程
+    public static Boolean deleteLesson(String innerID){
+        return delete("innerID",innerID,"tb_LESSON");
     }
     //管理员给学生添加成绩
     public static Boolean addGrade(String studentID, String innerID, Integer grade) throws Exception {
@@ -142,6 +136,5 @@ public class LessonDao extends BaseDao{
             return false;
         }
     }
-
 }
 

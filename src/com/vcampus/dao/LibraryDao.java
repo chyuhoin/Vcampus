@@ -75,13 +75,7 @@ public class LibraryDao extends BaseDao{
     }
     //删除一本图书，仅管理员可操作
     public static Boolean deleteBook(String bookID) {
-        try {
-            String sql = "delete from tb_BOOK where bookID = " + "'" + bookID + "'";
-            CRUD.update(sql,conn);
-            return true;
-        }catch (Exception e){
-            return false;
-        }
+        return delete("bookID",bookID,"tb_BOOK");
     }
     //借一本书，用于管理员处理借书的情况
     public static Boolean borrowBook(String bookID,String studentID)  {

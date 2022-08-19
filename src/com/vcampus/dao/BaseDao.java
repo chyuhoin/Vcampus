@@ -50,15 +50,17 @@ public class BaseDao {
         }
         return result;
     }
-    @Test
-    public void test() throws Exception {
-        String sql = "select * from tb_STUDENT where sex = '1'";
-        List<Map<String,Object>> resultList =CRUD.Query(sql,conn);
-        List<Student>result =new ArrayList<>();
-        for(Map<String ,Object>map:resultList){
-            Student temp = mapToBean.map2Bean(map,Student.class);
-            result.add(temp);
+    public static Boolean delete(String field,Object value,String table){
+        try{
+            String sql = "delete from "+table+" where "+field+" = ";
+            if(value.getClass()==String.class)
+                sql +="'"+value+"'";
+            else if(value.getClass()==Integer.class)
+                sql +=String.valueOf(value);
+            CRUD.update(sql,conn);
+            return true;
+        }catch (Exception e){
+            return false;
         }
-        System.out.println(resultList);
     }
 }
