@@ -27,7 +27,7 @@ public class LibraryTest {
         MessagePasser passer = ClientMessagePasser.getInstance();
 
         Book book = new Book();
-        //book.setAuthor("you");
+        book.setType("cs");
         String s = gson.toJson(book);
         System.out.println(s);
         passer.send(new Message("student", s, "library", "get"));
