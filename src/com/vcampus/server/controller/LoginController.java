@@ -23,9 +23,21 @@ public class LoginController implements Controller {
                 String data = res ? "{res: 'OK'}" : "{res: 'Error'}";
                 return new Message("200", data);
             }
-            case "delete"://删除用户，输入ID
-            case "Change Password"://修改密码
-            case "Change Permissions"://输入ID，修改其权限 如：“123:1” “ID”+“:”+“1/2/3” 1--学生 2--老师 3--管理员
+            case "delete": {//删除用户，输入ID
+                boolean res = service.delete(user);
+                String data = res ? "{res: 'OK'}" : "{res: 'Error'}";
+                return new Message("200", data);
+            }
+            case "Change Password": {//修改密码
+                boolean res = service.changePassword(user);
+                String data = res ? "{res: 'OK'}" : "{res: 'Error'}";
+                return new Message("200", data);
+            }
+            case "Change Permissions": {//输入ID，修改其权限 如：“123:1” “ID”+“:”+“1/2/3” 1--学生 2--老师 3--管理员
+                boolean res = service.changePermission(user);
+                String data = res ? "{res: 'OK'}" : "{res: 'Error'}";
+                return new Message("200", data);
+            }
 
             default:
                 return new Message("404", "{res: 'Wrong Request!'}");
