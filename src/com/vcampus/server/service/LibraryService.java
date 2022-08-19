@@ -4,23 +4,13 @@ import com.vcampus.dao.LibraryDao;
 import com.vcampus.pojo.Book;
 import com.vcampus.pojo.User;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LibraryService implements Service {
+import static com.vcampus.dao.LibraryDao.revise;
 
-    private boolean checkBook(Book std, Book book) {
-        if(std.getBookID() != null) {
-            if(!book.getBookID().equals(std.getBookID())) return false;
-        }
-        if(std.getType() != null) {
-            if(!book.getType().equals(std.getType())) return false;
-        }
-        if(std.getAuthor() != null) {
-            return book.getAuthor().equals(std.getAuthor());
-        }
-        return true;
-    }
+public class LibraryService implements Service {
 
     public List<Book> viewAllBooks() {
         List<Book> res = null;
@@ -33,12 +23,23 @@ public class LibraryService implements Service {
     }
 
     public List<Book> searchBooks(Book book) {
-        List<Book> res = new ArrayList<>();
+        List<Book> res = null;
+        List<String> strings = new ArrayList<>();
         try {
-            List<Book> tmp = LibraryDao.search();
-            for(Book item: tmp) {
-                if(checkBook(book, item)) res.add(item);
+            if(book.getBookName() != null) {
+                strings.add("bookName");
+                strings.add(book.getBookName());
             }
+            if(book.getAuthor() != null) {
+                strings.add("author");
+                strings.add(book.getAuthor());
+            }
+            if(book.getType() != null) {
+                strings.add("type");
+                strings.add(book.getType());
+            }
+            if(strings.size() == 0) res = LibraryDao.search();
+            else res = LibraryDao.search(strings.toArray(new String[0]));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -57,6 +58,20 @@ public class LibraryService implements Service {
 
     public boolean addNewBook(Book book) {
         return LibraryDao.addBook(book);
+    }
+
+    public boolean changeBook(Book book) {
+        boolean result = true;
+        try {
+            result = LibraryDao.revise(book.getBookID(), "bookName", book.getBookName());
+            result = result & LibraryDao.revise(book.getBookID(), "author", book.getAuthor());
+            result = result & LibraryDao.revise(book.getBookID(), "type", book.getType());
+            result = result & LibraryDao.revise(book.getBookID(), "leftSize", book.getLeftSize());
+            result = result & LibraryDao.revise(book.getBookID(), "image", book.getImage());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
     public boolean deleteBook(Book book) {

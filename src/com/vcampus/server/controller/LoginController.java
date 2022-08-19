@@ -18,7 +18,10 @@ public class LoginController implements Controller {
                 String data = res ? "{res: 'OK'}" : "{res: 'Error'}";
                 return new Message("200", data);
             }
-            case "register": {//注册
+            case "register": {
+                //注册
+                //注册时会同时创建一个只有ID的学籍信息
+                //如果注册时ID已存在(学籍管理或用户管理系统)，则注册失败
                 boolean res = service.register(user);
                 String data = res ? "{res: 'OK'}" : "{res: 'Error'}";
                 return new Message("200", data);
