@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.Map;
 
 import static com.sun.org.apache.bcel.internal.generic.Type.STRING;
+import static com.vcampus.dao.utils.ClassTable.addToTable;
+import static com.vcampus.dao.utils.ClassTable.compare;
 
 public class LessonDao extends BaseDao{
     //无参时查询所有课程
@@ -59,18 +61,32 @@ public class LessonDao extends BaseDao{
     //判断函数
     public static int judgeLesson(String studentID,String innerID) throws Exception {
         String judgeSql1 = "select * from tb_STUDENTWITHLESSON where studentID = '" + studentID + "' and innerID = '" + innerID + "'";
-        String judgeSql2 = "select * from tb_LESSON where  innerID = '" + innerID + "'";
+
         List<Map<String, Object>> judge1 = CRUD.Query(judgeSql1,conn);
-        List<Map<String, Object>> judge2 = CRUD.Query(judgeSql2,conn);
-        int leftSize = (int) judge2.get(0).get("leftSize");
+
+
         if(!judge1.isEmpty())
             return 0;//已选不可选
-        else if(judge1.isEmpty()&&leftSize!=0)
-            return 1;//未选可选
-        else if(judge1.isEmpty()&&leftSize==0)
-            return 2;//已满不可选
-        else
-            return 2;
+        else{
+            String judgeSql2 = "select * from tb_LESSON where  innerID = '" + innerID + "'";
+            List<Map<String, Object>> judge2 = CRUD.Query(judgeSql2,conn);
+            int leftSize = (int) judge2.get(0).get("leftSize");
+            if(leftSize==0)
+                return 1;//已满不可选
+            else {
+                String sql1 = "select timeTable from tb_LESSONTABLE where studentID = '"+studentID+"'";
+                String sql2 = "select time from tb_LESSON where innerID ='"+innerID+"'";
+                List<Map<String ,Object>> list1 = CRUD.Query(sql1,conn);
+                List<Map<String ,Object>> list2 =CRUD.Query(sql2,conn);
+                String time = (String) list1.get(0).get("time");
+                String timeTable = (String) list2.get(0).get("timeTable");
+                 if(compare(time,timeTable)==false)
+                     return 2;//冲突不可选
+                else
+                    return 3;//可选
+            }
+        }
+
     }
     //学生选课
 
@@ -86,6 +102,7 @@ public class LessonDao extends BaseDao{
                 Statement stm = conn.createStatement();
                 stm.executeUpdate(sql1);
                 stm.executeUpdate(sql2);
+                addToTable(studentID,innerID,conn);
                 conn.commit();
                 stm.close();
                 conn.close();
