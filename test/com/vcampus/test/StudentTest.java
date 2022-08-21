@@ -23,16 +23,18 @@ public class StudentTest {
         MessagePasser passer = ClientMessagePasser.getInstance();
 
         Student student = new Student();
-        student.setStudentID("test");
+        student.setStudentID("213203450");
         String s = gson.toJson(student);
         System.out.println(s);
         passer.send(new Message("student", s, "student", "getone"));
+
         Message message = (passer.receive());
         System.out.println(message);
-        Map<String, List<Student>> map = gson.fromJson(message.getData(), new TypeToken<HashMap<String,List<Student>>>(){}.getType());
+        Map<String, List<Student>> map = gson.fromJson(message.getData(),
+                new TypeToken<HashMap<String,List<Student>>>(){}.getType());
+        List<Student> res = map.get("res");
 
-        List<?> res = (List<?>) map.get("res");
-        for(Object item: res) {
+        for(Student item: res) {
             System.out.println(item);
         }
     }
