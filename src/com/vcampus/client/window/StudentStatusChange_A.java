@@ -197,7 +197,8 @@ public class StudentStatusChange_A extends JPanel{
         Thread.sleep(100);
 
         Message msg = passer.receive();
-        Map<String,Object> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String,List<Student>>>(){}.getType());
+        Map<String,Object> map =
+                new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String,List<Student>>>(){}.getType());
         //List<Student> res = map.get("res");
         //传输信息
         //接收bool结果

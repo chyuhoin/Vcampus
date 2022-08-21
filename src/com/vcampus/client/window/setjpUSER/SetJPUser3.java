@@ -32,7 +32,6 @@ public class SetJPUser3 {
         ID=id;
         setjp1(jp,layout_Spring,layout_Card);
         setjp2(jp,layout_Spring,layout_Card);
-
     }
 
     public void setjp1(JPanel jp,SpringLayout layout_Spring,CardLayout layout_Card){
@@ -45,8 +44,8 @@ public class SetJPUser3 {
         //文本
         JLabel textlbl = new JLabel("查询要变更权限的用户：");
         jp1.add(textlbl);
-        lbl.setFont(new Font("黑体", Font.BOLD, 20));
-        layout_Spring.putConstraint(layout_Spring.NORTH, textlbl, 20, layout_Spring.NORTH, lbl);  //标签1北侧——>容器北侧
+        textlbl.setFont(new Font("黑体", Font.BOLD, 20));
+        layout_Spring.putConstraint(layout_Spring.NORTH, textlbl, 20, layout_Spring.SOUTH, lbl);  //标签1北侧——>容器北侧
         layout_Spring.putConstraint(layout_Spring.WEST, textlbl, 60, layout_Spring.WEST, jp1);
     }
 

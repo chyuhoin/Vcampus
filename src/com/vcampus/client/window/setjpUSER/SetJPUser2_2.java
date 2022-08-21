@@ -14,17 +14,29 @@
 
 package com.vcampus.client.window.setjpUSER;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.vcampus.net.ClientMessagePasser;
+import com.vcampus.net.Message;
+import com.vcampus.net.MessagePasser;
+import com.vcampus.pojo.Student;
+import com.vcampus.pojo.User;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 用于老师/学生 修改密码
  */
 public class SetJPUser2_2 {
     public  String ID;
-    public SetJPUser2_2(String id,JPanel jp, CardLayout layout_Card){
+    MessagePasser passer = ClientMessagePasser.getInstance();
+    public SetJPUser2_2(int type,String id,JPanel jp, CardLayout layout_Card){
         ID=id;
         SpringLayout layout_Spring=new SpringLayout();
         jp.setLayout(layout_Spring);
@@ -95,18 +107,44 @@ public class SetJPUser2_2 {
                     }
                     else{
                         String newPass=textList[1].getText();
-                        //密码传回数据库
+                        SendTnfo_S_T(jp,newPass,type);
                         System.out.println("新密码："+newPass);
-                        JOptionPane.showMessageDialog(
-                                jp,
-                                "密码修改成功",
-                                " ",
-                                JOptionPane.INFORMATION_MESSAGE
-                        );
                     }
                 }
                 System.out.println("用户管理系统-密码-修改");
             }
         });
+    }
+    public boolean SendTnfo_S_T(JPanel jp,String newPass,int type){
+        User user=new User();
+        user.setStudentID(ID);
+        user.setPassword(newPass);
+        user.setType(type);
+
+        Gson gson = new Gson();
+        String s = gson.toJson(user);
+        passer.send(new Message("login", s, "user", "Change Password"));
+
+        //接收信息是否传递成功
+        Message msg = passer.receive();
+        Map<String, List<Student>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, List<Student>>>(){}.getType());
+        if(map.get("res").equals("OK")) {
+            JOptionPane.showMessageDialog(
+                    jp,
+                    "密码修改成功",
+                    " ",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+            return true;
+        }
+        else{
+            JOptionPane.showMessageDialog(
+                    jp,
+                    "密码修改失败",
+                    "ERROR",
+                    JOptionPane.WARNING_MESSAGE
+            );
+            return false;
+        }
     }
 }

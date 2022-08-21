@@ -32,9 +32,9 @@ public class TabbedPanelUser_A extends JTabbedPane{
         JPanel jp12 = new JPanel(layout_Card);
         JPanel jp13 = new JPanel(layout_Card);
         //选项卡1的内容
-        SetJPUser1 setjp1=new SetJPUser1(id,jp11,layout_Card);
+        SetJPUser1 setjp1=new SetJPUser1(3,id,jp11,layout_Card);
         //选项卡2的内容
-        SetJPUser2 setjp2=new SetJPUser2(id,jp12,layout_Card);
+        SetJPUser2 setjp2=new SetJPUser2(3,id,jp12,layout_Card);
         //选项卡3的内容
         SetJPUser3 setjp3=new SetJPUser3(id,jp13,layout_Card);
 

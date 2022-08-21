@@ -16,14 +16,8 @@ package com.vcampus.client.window;
 
 import java.io.IOException;
 import java.net.Socket;
-import java.util.HashMap;
-import java.util.Map;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.vcampus.net.ClientMessagePasser;
-import com.vcampus.net.*;
-import com.vcampus.server.service.StudentService;
 
 public class myLoginTest {
     public static void main(String[] args)
@@ -49,12 +43,5 @@ public class myLoginTest {
         frame.setVisible(true);
 
         */
-
-        MessagePasser passer = ClientMessagePasser.getInstance();
-        Message mes = passer.receive();
-        Gson gson=new Gson();
-        String data= mes.getData();
-        Map<String, String> map = gson.fromJson(data, new TypeToken<HashMap<String, String>>() {}.getType());
-
     }
 }

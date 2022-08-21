@@ -14,21 +14,34 @@
 
 package com.vcampus.client.window.setjpUSER;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.vcampus.net.ClientMessagePasser;
+import com.vcampus.net.Message;
+import com.vcampus.net.MessagePasser;
+import com.vcampus.pojo.Student;
+import com.vcampus.pojo.User;
+
 import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class SetJPUser2 {
-    public String[][] STRList=new String[20][5];
+    public String[][] STRList;
     public String[] strList=new String[5];
     public JPanel jp1=new JPanel();//信息展示页面
     public JPanel jp2=new JPanel();//个人信息
     public JPanel jp3=new JPanel();//个人信息编辑
     public JPanel jp4=new JPanel();//注册
     public String ID;//身份
-    public SetJPUser2(String id,JPanel jp, CardLayout layout_Card){
+    public int type;
+    MessagePasser passer = ClientMessagePasser.getInstance();
+    public SetJPUser2(int t,String id,JPanel jp, CardLayout layout_Card){
         SpringLayout layout_Spring = new SpringLayout();
         jp.add("jp1",jp1);
         jp.add("jp2",jp2);
@@ -41,20 +54,69 @@ public class SetJPUser2 {
         layout_Card.show(jp, "jp1");//先显示jp1
 
         ID=id;//身份
-        setSTRList();
+        type=t;
+        setSTRList();//获取所有用户信息
         setjp1(jp,layout_Spring,layout_Card);//加载jp1
     }
     /**
      * 设置文本框的内容
      */
-    public void setSTRList(){
-        for(int i=0;i<STRList.length;i++)
-            for(int j=0;j<STRList[i].length;j++)
-                STRList[i][j]="12345";
+    public boolean setSTRList(){
+        String s = "{}";
+        passer.send(new Message("admin", s, "login", "getAll"));
+
+        Message msg = passer.receive();
+        Map<String, java.util.List<User>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, java.util.List<User>>>(){}.getType());
+        List<User> res = map.get("res");
+        if(res.size()!=0){
+            for(int i=0;i< res.size();i++) {
+                STRList[i][0] = res.get(i).getStudentID();
+                STRList[i][1] = res.get(i).getPassword();
+                switch (res.get(i).getType()) {
+                    case (1):
+                        STRList[i][2] = "学生";
+                        break;
+                    case (2):
+                        STRList[i][2] = "教师";
+                        break;
+                    case (3):
+                        STRList[i][2] = "管理员";
+                        break;
+                }
+            }
+            return true;
+        }
+        else{
+            return false;
+        }
     }
-    public void setstrList(){
-        for(int i=0;i<strList.length;i++)
-            strList[i]="11111";
+    public boolean setstrList(String tempID){
+        User user = new User();
+        user.setStudentID(tempID);
+        Gson gson = new Gson();
+        String s = gson.toJson(user);
+        passer.send(new Message("admin", s, "login", "getone"));
+
+        Message msg = passer.receive();
+        Map<String, java.util.List<User>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, java.util.List<User>>>(){}.getType());
+        List<User> res = map.get("res");
+        User tempU=res.get(0);
+        if(res.size()!=0){
+            strList[0]=tempU.getStudentID();
+            strList[1]=tempU.getPassword();
+            switch (tempU.getType()){
+                case(1):
+                    strList[2]="学生";break;
+                case(2):
+                    strList[2]="教师";break;
+                case(3):
+                    strList[2]="管理员";break;
+            }
+            return true;
+        }
+        else{
+            return false;
+        }
     }
     public void setjp1(JPanel jp,SpringLayout layout_Spring,CardLayout layout_Card){
         //jp1内容
@@ -86,9 +148,9 @@ public class SetJPUser2 {
         layout_Spring.putConstraint(layout_Spring.EAST, text, -10, layout_Spring.WEST, btn2);
 
         //创建信息表格
-        String[] columnNames = {"一卡通号", "姓名","性别","联系电话","操作"}; // 定义表格列名数组
+        String[] columnNames = {"一卡通号", "密码","权限","操作"}; // 定义表格列名数组
         // 定义表格数据数组
-        String[][] tableValues = new String[STRList.length][5];
+        String[][] tableValues = new String[STRList.length][4];
         for(int i=0;i<STRList.length;i++){
             for(int j=0;j<STRList[i].length-1;j++)
                 tableValues[i][j] = STRList[i][j];
@@ -119,9 +181,15 @@ public class SetJPUser2 {
             public void actionPerformed(ActionEvent e) {
                 layout_Card.next(jp);
                 String info=text.getText();
-                //信息查找
-                setstrList();//设置srtList
-                setjp2(jp,layout_Spring,layout_Card);//重新加载jp2
+                if(setstrList(info))//设置srtList
+                    setjp2(jp,layout_Spring,layout_Card);//重新加载jp2
+                else
+                    JOptionPane.showMessageDialog(
+                            jp1,
+                            "查无此人！",
+                            "警告",
+                            JOptionPane.ERROR_MESSAGE
+                    );
                 System.out.println("用户管理系统-用户管理-个人信息搜索");
             }
         });
@@ -157,11 +225,9 @@ public class SetJPUser2 {
         //信息列表：
         //标签
         JLabel[] lblList={
-                new JLabel("姓名"),
                 new JLabel("一卡通号"),
-                new JLabel("性别"),
-                new JLabel("年龄"),
-                new JLabel("联系电话")
+                new JLabel("密码"),
+                new JLabel("权限")
         };
         for(int i=0;i<lblList.length;i++){
             JLabel lbli=lblList[i];
@@ -188,14 +254,13 @@ public class SetJPUser2 {
             layout_Spring.putConstraint(layout_Spring.WEST, texti, 20, layout_Spring.EAST, lblList[i]);
             texti.setColumns(60);
         }
-        //textList[4].setEditable(true);
 
         //编辑按钮监听
         btn1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 layout_Card.next(jp);
-                setjp3(jp,layout_Spring,layout_Card);
+                setjp3(jp,layout_Spring,layout_Card);//转入jp3
                 System.out.println("用户管理系统-个人信息-修改编辑确认");
             }
         });
@@ -235,11 +300,9 @@ public class SetJPUser2 {
         //信息列表：
         //标签
         JLabel[] lblList={
-                new JLabel("姓名"),
                 new JLabel("一卡通号"),
-                new JLabel("性别"),
-                new JLabel("年龄"),
-                new JLabel("联系电话")
+                new JLabel("密码"),
+                new JLabel("权限")
         };
         for(int i=0;i<lblList.length;i++){
             JLabel lbli=lblList[i];
@@ -259,22 +322,27 @@ public class SetJPUser2 {
         for(int i=0;i<textList.length;i++){
             JTextField texti=textList[i];
             jp3.add(texti);
-            texti.setEditable(true);
+            texti.setEditable(false);
             texti.setFont(new Font("黑体", Font.BOLD, 20));
             layout_Spring.putConstraint(layout_Spring.NORTH, texti, 0, layout_Spring.NORTH, lblList[i]);
             layout_Spring.putConstraint(layout_Spring.WEST, texti, 20, layout_Spring.EAST, lblList[i]);
             texti.setColumns(60);
             strList[i]=texti.getText();//获取文本框内信息
         }
-        textList[1].setEditable(false);
+        textList[1].setEditable(true);
 
         //确认按钮监听
         btn3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 layout_Card.previous(jp);
-                //更新数据库信息-信息更新
-                setstrList();//设置strList
+                int t=0;
+                switch (textList[2].getText()){
+                    case("学生"):t=1;break;
+                    case("教师"):t=2;break;
+                    case("管理员"):t=3;break;
+                }
+                SendTnfo_Pass(textList[0].getText(),textList[1].getText(),t,"Change Password");//修改密码
                 setjp2(jp,layout_Spring,layout_Card);//重新加载jp2
                 System.out.println("用户管理系统-用户管理-修改编辑确认");
             }
@@ -300,15 +368,20 @@ public class SetJPUser2 {
                 System.out.println("选择结果: " + result);
                 if(result==JOptionPane.YES_OPTION){
                     layout_Card.first(jp);
-                    //更新数据库-信息注销
-                    //判断是否注销成功，并弹出对话框。。。。。。。
+                    int t=0;
+                    switch (textList[2].getText()){
+                        case("学生"):t=1;break;
+                        case("教师"):t=2;break;
+                        case("管理员"):t=3;break;
+                    }
+                    SendTnfo_Pass(textList[0].getText(),textList[1].getText(),t,"delete");//注销用户
                     System.out.println("用户管理系统-用户管理-注销用户");
                 }
             }
         });
     }
     public void setjp4(JPanel jp,SpringLayout layout_Spring,CardLayout layout_Card){
-        //jp4内容
+        //jp4内容-注册
         String[] newUser=new String[5];//新用户内容
         //标题
         JLabel lbl4 = new JLabel("注册新用户");
@@ -335,11 +408,9 @@ public class SetJPUser2 {
         //信息列表：
         //标签
         JLabel[] lblList={
-                new JLabel("姓名"),
                 new JLabel("一卡通号"),
-                new JLabel("性别"),
-                new JLabel("年龄"),
-                new JLabel("联系电话")
+                new JLabel("密码"),/*默认密码123456*/
+                new JLabel("身份")
         };
         for(int i=0;i<lblList.length;i++){
             JLabel lbli=lblList[i];
@@ -351,7 +422,6 @@ public class SetJPUser2 {
         //文本框
         //JTextField[] textList=new JTextField[5];
         JTextField[] textList={
-                new JTextField(),new JTextField(),
                 new JTextField(),new JTextField(),
                 new JTextField()
         };
@@ -365,6 +435,13 @@ public class SetJPUser2 {
             texti.setColumns(60);
             newUser[i]=texti.getText();//获取文本框内容
         }
+        textList[1].setText("123456");//默认密码
+        textList[1].setEditable(false);
+        JLabel lbl_pass=new JLabel("*默认密码");//默认密码标签
+        jp4.add(lbl_pass);
+        lbl_pass.setFont(new Font("黑体", Font.BOLD, 20));
+        layout_Spring.putConstraint(layout_Spring.NORTH, lbl_pass, 0, layout_Spring.NORTH, textList[1]);  //标签1北侧——>容器北侧
+        layout_Spring.putConstraint(layout_Spring.WEST, lbl_pass, 20, layout_Spring.EAST, textList[1]);
 
         //确认按钮监听
         btn1.addActionListener(new ActionListener() {
@@ -379,8 +456,13 @@ public class SetJPUser2 {
                 System.out.println("选择结果: " + result);
                 if(result==JOptionPane.YES_OPTION){
                     layout_Card.first(jp);
-                    //更新数据库-信息添加 newUser[5]
-                    //判断是否注册成功，并弹出对话框。。。。。。。
+                    int t=0;
+                    switch (textList[2].getText()){
+                        case("学生"):t=1;break;
+                        case("教师"):t=2;break;
+                        case("管理员"):t=3;break;
+                    }
+                    SendInfo_register(textList[0].getText(),textList[1].getText(),t);
                     System.out.println("用户管理系统-用户管理-注册确认");
                 }
             }
@@ -396,6 +478,71 @@ public class SetJPUser2 {
         });
     }
 
+    public boolean SendTnfo_Pass(String id,String pass,int t,String operation){
+        User user=new User();
+        user.setStudentID(id);
+        user.setPassword(pass);
+        user.setType(t);
+        Gson gson = new Gson();
+        String s = gson.toJson(user);
+        passer.send(new Message("admin", s, "login", operation));
+
+        //接收信息是否传递成功
+        Message msg = passer.receive();
+        Map<String, java.util.List<Student>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, java.util.List<Student>>>(){}.getType());
+        JPanel temjp=(operation=="delete")?jp2:jp3;
+        if(map.get("res").equals("OK")) {
+            String strText=(operation=="delete")?"编辑成功":"注销成功";
+            JOptionPane.showMessageDialog(
+                    temjp,
+                    strText,
+                    " ",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+            return true;
+        }
+        else{
+            String strText=operation=="delete"?"编辑失败":"注销失败";
+            JOptionPane.showMessageDialog(
+                    temjp,
+                    strText,
+                    "ERROR",
+                    JOptionPane.WARNING_MESSAGE
+            );
+            return false;
+        }
+    }
+    public boolean SendInfo_register(String id,String pass,int t){
+        User user=new User();
+        user.setStudentID(id);
+        user.setPassword(pass);
+        user.setType(t);
+        Gson gson = new Gson();
+        String s = gson.toJson(user);
+        passer.send(new Message("admin", s, "login", "register"));
+
+        //接收信息是否传递成功
+        Message msg = passer.receive();
+        Map<String, java.util.List<Student>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, java.util.List<Student>>>(){}.getType());
+        if(map.get("res").equals("OK")) {
+            JOptionPane.showMessageDialog(
+                    jp4,
+                    "注册成功",
+                    " ",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+            return true;
+        }
+        else{
+            JOptionPane.showMessageDialog(
+                    jp4,
+                    "注册失败：该用户已存在",
+                    "ERROR",
+                    JOptionPane.WARNING_MESSAGE
+            );
+            return false;
+        }
+    }
     public class MyButtonRender implements TableCellRenderer {
         public JPanel jp;
         public JTable table;
