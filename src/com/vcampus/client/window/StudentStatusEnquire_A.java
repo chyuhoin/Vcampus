@@ -99,11 +99,11 @@ public class StudentStatusEnquire_A extends JPanel {
                 System.out.println(str);//传送，接收结果bool型 和学生对象
                 //enquireInform(true);\
                 //MessagePasser passer = ClientMessagePasser.getInstance();
-                //Student student = new Student();
-                //student.setStudentID(str);
+                Student student = new Student();
+                student.setStudentID(str);
                 Gson gson = new Gson();
-                //String s = gson.toJson(student);
-                passer.send(new Message("student", "studentID:"+str, "student", "getone"));
+                String s = gson.toJson(student);
+                passer.send(new Message("student", s, "student", "getone"));
                 enquireInform();
 
 

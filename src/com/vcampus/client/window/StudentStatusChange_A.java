@@ -28,6 +28,7 @@ import com.vcampus.net.ClientMessagePasser;
 import com.vcampus.net.Message;
 import com.vcampus.net.MessagePasser;
 import com.vcampus.pojo.Student;
+import java.lang.InterruptedException;
 
 public class StudentStatusChange_A extends JPanel{
     JTextField txtIdNumEnquire = new JTextField();
@@ -98,9 +99,22 @@ public class StudentStatusChange_A extends JPanel{
                // enquireInform(true);
                 //Student student = new Student();
                 //student.setStudentID(str);
-                Gson gson = new Gson();
+                /*Gson gson = new Gson();
                 //String s = gson.toJson(student);
                 passer.send(new Message("student", "studentID:"+str, "student", "getone"));
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException interruptedException) {
+                    interruptedException.printStackTrace();
+                }
+
+                 */
+                Student student = new Student();
+                student.setStudentID(str);
+                Gson gson = new Gson();
+                String s = gson.toJson(student);
+                passer.send(new Message("student", s, "student", "getone"));
+                //enquireInform();
                 enquireInform();
             }
         });
@@ -108,7 +122,11 @@ public class StudentStatusChange_A extends JPanel{
         btnOk.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                changeInform(t);//设置参数为学生的对象，修改所有信息
+                try {
+                    changeInform(t);//设置参数为学生的对象，修改所有信息
+                } catch (InterruptedException interruptedException) {
+                    interruptedException.printStackTrace();
+                }
             }
         });
 
@@ -137,8 +155,7 @@ public class StudentStatusChange_A extends JPanel{
         }
     }
 
-    public void changeInform(Student student)
-    {
+    public void changeInform(Student student) throws InterruptedException {
         String str1,str2,str3,str4,str5,str6,str7,str8,str9,str10,str11,str12,str13;
         str1=txtName.getText();
         str2=txtStudentNum.getText();
@@ -176,6 +193,8 @@ public class StudentStatusChange_A extends JPanel{
         Gson gson = new Gson();
         String s = gson.toJson(student);
         passer.send(new Message("student", s, "student", "post"));
+
+        Thread.sleep(100);
 
         Message msg = passer.receive();
         Map<String,Object> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String,List<Student>>>(){}.getType());
