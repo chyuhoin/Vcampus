@@ -32,7 +32,7 @@ import java.util.List;
 import java.util.Map;
 
 public class SetJPUser1 extends JPanel {
-    public String[] strList=new String[3];
+    public String[] strList=new String[3];//暂存当前User的信息
     public JPanel jp1=new JPanel();
     public JPanel jp2=new JPanel();
     public String ID;
@@ -51,12 +51,10 @@ public class SetJPUser1 extends JPanel {
         setjp1(jp,layout_Spring,layout_Card);
     }
 
-    /**
-     * 设置文本框的内容
-     */
     public void setStrList(String tempID){
         User user = new User();
         user.setStudentID(tempID);
+        //user.setType(type);
         Gson gson = new Gson();
         String s = gson.toJson(user);
         passer.send(new Message("admin", s, "login", "getone"));
@@ -86,6 +84,13 @@ public class SetJPUser1 extends JPanel {
             );
         }
     }
+
+    /**
+     * 设置第一张卡片的内容-个人信息展示
+     * @param jp
+     * @param layout_Spring
+     * @param layout_Card
+     */
     public void setjp1(JPanel jp,SpringLayout layout_Spring,CardLayout layout_Card){
         //设置具体内容
         setStrList(ID);//个人信息
@@ -145,6 +150,12 @@ public class SetJPUser1 extends JPanel {
         });
     }
 
+    /**
+     * 设置第二张卡片：（管理员）修改密码
+     * @param jp
+     * @param layout_Spring
+     * @param layout_Card
+     */
     public void setjp2(JPanel jp,SpringLayout layout_Spring,CardLayout layout_Card){
         //标题
         JLabel lbl = new JLabel("密码修改");
@@ -223,6 +234,11 @@ public class SetJPUser1 extends JPanel {
             }
         });
     }
+
+    /**
+     * 传送，修改密码
+     * @return
+     */
     public boolean SendTnfo_A(){
         User user=new User();
         user.setStudentID(strList[0]);

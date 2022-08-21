@@ -32,8 +32,8 @@ import java.util.List;
 import java.util.Map;
 
 public class SetJPUser2 {
-    public String[][] STRList;
-    public String[] strList=new String[5];
+    public String[][] STRList;//保存所有用户信息
+    public String[] strList=new String[3];//暂存当前某个用户信息（User）
     public JPanel jp1=new JPanel();//信息展示页面
     public JPanel jp2=new JPanel();//个人信息
     public JPanel jp3=new JPanel();//个人信息编辑
@@ -59,7 +59,7 @@ public class SetJPUser2 {
         setjp1(jp,layout_Spring,layout_Card);//加载jp1
     }
     /**
-     * 设置文本框的内容
+     * 获取所有用户的信息
      */
     public boolean setSTRList(){
         String s = "{}";
@@ -90,6 +90,12 @@ public class SetJPUser2 {
             return false;
         }
     }
+
+    /**
+     * 根据 一卡通号，得到特定人的User
+     * @param tempID
+     * @return
+     */
     public boolean setstrList(String tempID){
         User user = new User();
         user.setStudentID(tempID);
@@ -118,6 +124,13 @@ public class SetJPUser2 {
             return false;
         }
     }
+
+    /**
+     * 用户管理-包括表格
+     * @param jp
+     * @param layout_Spring
+     * @param layout_Card
+     */
     public void setjp1(JPanel jp,SpringLayout layout_Spring,CardLayout layout_Card){
         //jp1内容
         //标题
