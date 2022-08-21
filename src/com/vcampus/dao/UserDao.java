@@ -2,6 +2,8 @@ package com.vcampus.dao;
 
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.vcampus.dao.utils.CRUD;
+import com.vcampus.dao.utils.mapToBean;
+import com.vcampus.pojo.User;
 import org.junit.Test;
 
 import java.util.List;
@@ -66,6 +68,17 @@ public class UserDao extends BaseDao {
             else return true;
         } catch (Exception e) {
             return false;
+        }
+    }
+
+    public static User getUser(String studentID) { //通过id获得学生全部信息
+        try {
+            String sql = "select * from tb_USR where studentID = '" + studentID + "'";
+            List<Map<String, Object>> result = CRUD.Query(sql, conn);
+            if (result.isEmpty()) return null;
+            else return mapToBean.map2Bean(result.get(0), User.class);
+        } catch (Exception e) {
+            return null;
         }
     }
 }

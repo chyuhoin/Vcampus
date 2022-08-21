@@ -18,6 +18,11 @@ public class LoginController implements Controller {
                 String data = res ? "{res: 'OK'}" : "{res: 'Error'}";
                 return new Message("200", data);
             }
+            case "getone": {//通过id获取全部信息
+                User res = service.getUserById(user);
+                String data = gson.toJson(res);
+                return new Message("200", data);
+            }
             case "register": {
                 //注册
                 //注册时会同时创建一个只有ID的学籍信息
