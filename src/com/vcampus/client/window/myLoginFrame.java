@@ -36,7 +36,7 @@ public class myLoginFrame extends JFrame  {
     JButton btnLogin = new JButton("登录");
     //JFrame loginFrame;
     int flag=0;
-    String userName = "";
+    String userName="";
 
     public myLoginFrame(String title)
     {
@@ -162,7 +162,7 @@ public class myLoginFrame extends JFrame  {
          */
 
         //读取输入的用户名和密码
-        userName = txtUserName.getText();
+        String userName = txtUserName.getText();
         String passWord = new String(txtPassWord.getPassword());
 
         MessagePasser passer = ClientMessagePasser.getInstance();
