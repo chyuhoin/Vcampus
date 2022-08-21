@@ -69,4 +69,92 @@ public class LessonService implements Service{
         }
         return res;
     }
+    public boolean deleteone(String deleteoneID) {
+        boolean res;
+        try {
+            res=LessonDao.deleteLesson(deleteoneID);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return res;
+    }
+    public boolean setLesson(Lesson user) {
+        boolean res;
+        try {
+            if(LessonDao.search("innerID",user.getLessonID()).isEmpty())//没有这个内部ID
+                res=false;
+            else if(LessonDao.deleteLesson(user.getInnerID()))//删除成功
+                res=LessonDao.addLesson(user);//添加课程
+            else res=false;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return res;
+    }
+    public List<Lesson> searchMine(String studentID) {
+        List<Lesson> res = null;
+        try {
+            res = LessonDao.searchMine(studentID);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+    public List<Student> searchStudent(String studentID) {
+        List<Student> res = null;
+        try {
+            res=StudentDao.search("studentID", studentID);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+    public String judgeLesson(String studentID,String innerID) {
+        String res;
+        try {
+            switch(LessonDao.judgeLesson(studentID,innerID)){
+                case 0:
+                    res= "Selected";//已选
+                    break;
+                case 1:
+                    res="full";//已满
+                    break;
+                case 2:
+                    res="conflict";//冲突
+                    break;
+                case 3:
+                    res="Optional";//可选
+                    break;
+                default:
+                    res="NO";//错误
+                    break;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "NO";
+        }
+        return res;
+    }
+    public boolean returnLesson(String studentID,String innerID) {
+        boolean res;
+        try {
+            res=LessonDao.returnLesson(studentID, innerID);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return res;
+    }
+    public boolean selectLesson(String studentID,String innerID) {
+        boolean res;
+        try {
+            res=LessonDao.selectLesson(studentID, innerID);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return res;
+    }
 }

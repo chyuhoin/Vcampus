@@ -51,6 +51,11 @@ public class LessonController implements Controller{
             case "deleteone":
                 //删除对应老师教授的特定课程
                 //删除对应老师的考试信息
+                //输入内部编号
+                String deleteoneID = msg.getData();//内部编号
+                if (service.deleteone(deleteoneID)) return new Message("200", "{res: 'OK'}");
+                else return new Message("200", "{res: 'NO'}");
+
             case "get":
                 //显示所有课程
                 HashMap<String, Object> map1 = new HashMap<>();
@@ -69,13 +74,34 @@ public class LessonController implements Controller{
                 return new Message("200", gson.toJson(map2));
             case "set":
                 //修改课程信息
+                //传入一个lesson的类
+                //具体操作为删除对应内部ID的数据，再把此数据添加
+                //如果没有对应内部ID的数据则操作失败
+                Lesson lessonset = gson.fromJson(msg.getData(), Lesson.class);
+                if(service.setLesson(lessonset)) return new Message("200", "{res: 'OK'}");
+                else return new Message("200", "{res: 'NO'}");
             case"getstudent":
                 //显示对应学生选的课 输入学生ID
+                String studentID = msg.getData();
+
+                HashMap<String, Object> map3 = new HashMap<>();
+                map3.put("res", service.searchMine(studentID));
+                return new Message("200", gson.toJson(map3));
             case "getteacher":
                 //显示选择对应课程的学生 输入课程ID
-            case "show":
-                //输入ID，显示内容：学生：姓名、身份（1--学生 2--老师）、ID、专业
+            case "showstatusstudent":
+                //输入ID，显示内容：*学生：姓名、身份（1--学生 2--老师）、ID、专业
                 //               老师：姓名、身份、ID、可选专业、偏好时间
+                //返回一个学生的类的list
+                String studentID1 = msg.getData();
+                HashMap<String, Object> map4 = new HashMap<>();
+                map4.put("res", service.searchStudent(studentID1));
+                return new Message("200", gson.toJson(map4));
+
+            case "showstatussteacher":
+                //输入ID，显示内容：学生：姓名、身份（1--学生 2--老师）、ID、专业
+                //               *老师：姓名、身份、ID、可选专业、偏好时间
+                //返回一个老师的类的list
             case "setteacher":
                 //修改老师的可选专业与偏好时间
             case "arrange":
@@ -83,14 +109,36 @@ public class LessonController implements Controller{
             case "addgrade":
                 //添加成绩
                 //输入学生ID，内部ID，成绩，用“,”隔开
-                String oldStr = msg.getData();
-                String[] strs = oldStr.split(",");//根据，切分字符串
-                if(service.addGrade(strs[0],strs[1],Integer.parseInt(strs[2])))
+                String oldStr1 = msg.getData();
+                String[] strs1 = oldStr1.split(",");//根据，切分字符串
+                if(service.addGrade(strs1[0],strs1[1],Integer.parseInt(strs1[2])))
                     return new Message("200", "{res: 'OK'}");
                 else return new Message("200", "{res: 'NO'}");
 
             case "showlesson":
                 //显示课程的状态：可选、已选、已满、时间冲突
+                //输入学生ID与课程号 用","隔开
+                String oldStr2 = msg.getData();
+                String[] strs2 = oldStr2.split(",");//根据，切分字符串
+                String data1=service.judgeLesson(strs2[0],strs2[1]);
+                return new Message("200", "{res: "+"'"+data1+"'}");
+            case "selectlesson":
+                //学生选课
+                //输入学生ID与课程号 用","隔开
+                String oldStr3 = msg.getData();
+                String[] strs3 = oldStr3.split(",");//根据，切分字符串
+                if(service.selectLesson(strs3[0],strs3[1]))
+                    return new Message("200", "{res: 'OK'}");
+                else return new Message("200", "{res: 'NO'}");
+            case "returnlesson":
+                //学生退课
+                //输入学生ID与课程号 用","隔开
+                String oldStr4 = msg.getData();
+                String[] strs4 = oldStr4.split(",");//根据，切分字符串
+                if(service.returnLesson(strs4[0],strs4[1]))
+                    return new Message("200", "{res: 'OK'}");
+                else return new Message("200", "{res: 'NO'}");
+
             default:
                 return new Message("404", "{res: 'Wrong Request!'}");
         }
