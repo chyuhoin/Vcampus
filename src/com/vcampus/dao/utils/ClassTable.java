@@ -42,8 +42,4 @@ public class ClassTable {
         String sql3 = "update tb_LESSONTABLE set timeTable ='"+newTable+"'";
         CRUD.update(sql3,conn);
     }
-    @Test
-    public void test(){
-      //  compare("1/02/03","0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0");
-    }
 }
