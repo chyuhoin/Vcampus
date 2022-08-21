@@ -103,7 +103,7 @@ public class StudentStatusEnquire_A extends JPanel {
                 //student.setStudentID(str);
                 Gson gson = new Gson();
                 //String s = gson.toJson(student);
-                passer.send(new Message("student", "ID:"+str, "student", "getone"));
+                passer.send(new Message("student", "studentID:"+str, "student", "getone"));
                 enquireInform();
 
 
