@@ -26,12 +26,14 @@ public class StudentController implements Controller {
                 if (service.addStudent(student)) return new Message("200", "{res: 'OK'}");
                 else return new Message("200", "{res: 'NO'}");
             }
-            case "get": {//显示所有学生信息
+            case "get": {
+                //显示所有学生信息
                 HashMap<String, Object> map2 = new HashMap<>();
                 map2.put("res", service.viewAllStudents());
                 return new Message("200", gson.toJson(map2));
             }
-            case "getone": {//显示某符合某些指标的学生，用或来连接 如：“name:于济源” “属性”+“:”+“数据”
+            case "getone": {
+                //显示某符合某些指标的学生，用或来连接 如：“name:于济源” “属性”+“:”+“数据”
                 String data = msg.getData();
                 Map<String, String> map = gson.fromJson(data, new TypeToken<HashMap<String, String>>() {}.getType());
                 HashMap<String, Object> map3 = new HashMap<>();

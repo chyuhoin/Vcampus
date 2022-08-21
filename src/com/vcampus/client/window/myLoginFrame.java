@@ -169,6 +169,7 @@ public class myLoginFrame extends JFrame  {
         User user = new User(userName, passWord, flag);
         Gson gson = new Gson();
         passer.send(new Message("no", gson.toJson(user), "login", "get"));
+
         Message msg = passer.receive();
         Map<String,Object> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String,Object>>(){}.getType());
         return map.get("res").equals("OK");
