@@ -40,6 +40,7 @@ public class ServerRunner implements Runnable{
         for(;;) {
             Message message = passer.receive();
             if(message.getStatus().equals("disconnected")) break;
+            System.out.println(message);
             switch (message.getModule()) {
                 case "login":
                     passer.send(loginController.check(message));

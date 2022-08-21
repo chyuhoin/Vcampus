@@ -4,6 +4,8 @@ import com.vcampus.dao.UserDao;
 import com.vcampus.pojo.User;
 import com.vcampus.dao.StudentDao;
 
+import java.util.List;
+
 public class UserService implements Service {
 
     public boolean login(User user) {
@@ -31,6 +33,26 @@ public class UserService implements Service {
             return false;
         }
         return res;
+    }
+
+    public User getUserById(User user) {
+        User res = null;
+        try {
+            res = UserDao.getUser(user.getStudentID());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+
+    public List<User> getAllUsers() {
+        List<User> users = null;
+        try {
+            users = UserDao.getAllUsers();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return users;
     }
 
     public boolean delete(User user) {

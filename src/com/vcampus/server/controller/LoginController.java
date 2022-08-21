@@ -5,6 +5,8 @@ import com.vcampus.pojo.User;
 import com.vcampus.server.service.UserService;
 import com.google.gson.*;
 
+import java.util.List;
+
 public class LoginController implements Controller {
 
     @Override
@@ -16,6 +18,16 @@ public class LoginController implements Controller {
             case "get": {//登录
                 boolean res = service.login(user);
                 String data = res ? "{res: 'OK'}" : "{res: 'Error'}";
+                return new Message("200", data);
+            }
+            case "getone": {//通过id获取全部信息
+                User res = service.getUserById(user);
+                String data = gson.toJson(res);
+                return new Message("200", data);
+            }
+            case "getAll": { //获取全部用户
+                List<User> res = service.getAllUsers();
+                String data = gson.toJson(res);
                 return new Message("200", data);
             }
             case "register": {

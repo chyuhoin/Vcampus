@@ -23,9 +23,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import com.vcampus.dao.utils.StringAndImage;
 
 public class StudentStatusEnquire_S extends JPanel {
     JLabel lblHint = new JLabel("个人学籍信息");
@@ -63,7 +65,7 @@ public class StudentStatusEnquire_S extends JPanel {
     JButton btnOk = new JButton("确认修改");
     JButton btnCancel = new JButton("取消修改");
     MessagePasser passer = ClientMessagePasser.getInstance();
-    Student student = new Student();
+    Student t = new Student();//接收结果
 
     public StudentStatusEnquire_S(String ID)
     {
@@ -73,10 +75,10 @@ public class StudentStatusEnquire_S extends JPanel {
         lblHint.setBounds(550,15,200,40);
 
         btnOk.setFont(new Font("宋体",Font.BOLD, 16));
-        btnOk.setBounds(450,500,120,30);
+        btnOk.setBounds(450,520,120,30);
 
         btnCancel.setFont(new Font("宋体",Font.BOLD, 16));
-        btnCancel.setBounds(600,500,120,30);
+        btnCancel.setBounds(600,520,120,30);
 
         this.add(lblHint);
         this.add(btnOk); this.add(btnCancel);
@@ -86,12 +88,25 @@ public class StudentStatusEnquire_S extends JPanel {
         System.out.println(str);//传送，接收结果bool型以及学生对象
         //set();
 
-        Student t = new Student();
-        t.setStudentID(ID);
+        Student temp = new Student();
+        temp.setStudentID(ID);
         Gson gson = new Gson();
-        String s = gson.toJson(t);
+        String s = gson.toJson(temp);
         passer.send(new Message("student", s, "student", "getone"));
-        set();
+
+        ///Thread.sleep(100);
+
+        Message msg = passer.receive();
+        Map<String, java.util.List<Student>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, java.util.List<Student>>>() {
+        }.getType());
+        List<Student> res = map.get("res");
+        if(res.size()!=0) {
+            set(res.get(0));//如果查到这个人，set设置学生对象，传参数
+            t= res.get(0);
+        }
+        else {
+            //JOptionPane.showMessageDialog(this, "查无此人！", "警告", JOptionPane.ERROR_MESSAGE);
+        }
 
 
         btnOk.addActionListener(new ActionListener() {
@@ -104,7 +119,7 @@ public class StudentStatusEnquire_S extends JPanel {
         btnCancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                set();
+                set(t);
             }
         });
 
@@ -115,14 +130,14 @@ public class StudentStatusEnquire_S extends JPanel {
         String str13;
         str13=txtPhoneNum.getText();
         System.out.println(str13+'\n');
-        student.setPhoneNumber(txtPhoneNum.getText());
+        t.setPhoneNumber(txtPhoneNum.getText());
 
         Gson gson = new Gson();
-        String s = gson.toJson(student);
+        String s = gson.toJson(t);
         passer.send(new Message("student", s, "student", "post"));
 
         Message msg = passer.receive();
-        Map<String,Object> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String,List<Student>>>(){}.getType());
+        Map<String,Object> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String,Object>>(){}.getType());
         //传输信息
         //接收bool结果
         if(map.get("res").equals("OK"))//成功写入
@@ -136,16 +151,12 @@ public class StudentStatusEnquire_S extends JPanel {
         }
     }
 
-    public void set() {
-        Message msg = passer.receive();
+    public void set(Student student) {
+        /*Message msg = passer.receive();
         Map<String, java.util.List<Student>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, java.util.List<Student>>>() {
         }.getType());
         List<Student> res = map.get("res");
-        if (!res.isEmpty()) {
-
-
-        student = res.get(0);
-
+         */
         updateUI();
         repaint();
         int x = 200, y = 90;//起始坐标
@@ -154,8 +165,18 @@ public class StudentStatusEnquire_S extends JPanel {
         int ltDiffer1 = 100, ltDiffer2 = 40;//1-左起两列标签文本框间隔 2-第三列标签文本框间隔
         int llDiffer = 270;//两个标签之间的差距
 
-        lblImg.setIcon(new ImageIcon(student.getImage()));
-        lblImg.setBounds(0, 0, 70, 100);
+        //照片
+        ImageIcon img = null;// 这是背景图片 .png .jpg .gif 等格式的图片都可以
+        try {
+            img = new ImageIcon(StringAndImage.StringToImage(student.getImage()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //ImageIcon img = new ImageIcon(student.getImage());
+        img.setImage(img.getImage().getScaledInstance(120,150,Image.SCALE_DEFAULT));//这里设置图片大小，目前是20*20
+        lblImg.setIcon(img);
+        lblImg.setBounds(30,30,120,150);
+
         //第一行信息，姓名 学号 一卡通号
         lblName.setBounds(x, y, lblWidth, lblHeight);
         txtName.setBounds(x + ltDiffer1, y, txtWidth, txtHeight);
@@ -219,12 +240,12 @@ public class StudentStatusEnquire_S extends JPanel {
         //第5行信息 班级 预计毕业时间
         lblClass.setBounds(x, y + heightDiffer * 4, lblWidth, lblHeight);
         txtClass.setBounds(x + ltDiffer1, y + heightDiffer * 4, txtWidth, txtHeight);
-        txtClass.setText(student.getClass().toString());
+        txtClass.setText(student.getClasss());
         setLabelFont(lblClass, txtClass);
 
         lblGraduation.setBounds(x + llDiffer, y + heightDiffer * 4, lblWidth, lblHeight);
         txtGraduation.setBounds(x + ltDiffer1 * 2 + llDiffer, y + heightDiffer * 4, txtWidth, txtHeight);
-        txtGraduation.setText(student.getClasss());///????
+        txtGraduation.setText(student.getGraduateTime());///????
         setLabelFont(lblGraduation, txtGraduation);
 
         //第6行信息，身份证号
@@ -238,6 +259,7 @@ public class StudentStatusEnquire_S extends JPanel {
         txtPhoneNum.setBounds(x + ltDiffer1 * 2 - 60, y + heightDiffer * 6, txtWidth * 2, txtHeight);
         txtPhoneNum.setText(student.getPhoneNumber());
         setLabelFont(lblPhoneNum, txtPhoneNum);
+        txtPhoneNum.setEditable(true);
 
         add(lblName);
         add(txtName);
@@ -270,7 +292,11 @@ public class StudentStatusEnquire_S extends JPanel {
         add(lblIdNumber);
         add(txtIdNumber);
         add(lblImg);
-    }
+
+
+
+
+
     }
 
     public void setLabelFont(JLabel label,JTextField text)

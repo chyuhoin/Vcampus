@@ -18,12 +18,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.vcampus.dao.utils.StringAndImage;
 import com.vcampus.net.ClientMessagePasser;
 import com.vcampus.net.Message;
 import com.vcampus.net.MessagePasser;
@@ -169,7 +171,7 @@ public class StudentStatusChange_A extends JPanel{
         str10=txtDep.getText();
         str11=txtMajor.getText();
         str12= txtGraduation.getText();
-        str13=txtPhoneNum.getName();
+        str13=txtPhoneNum.getText();
 
         student.setName(txtName.getText());
         student.setStudentNumber(txtStudentNum.getText());
@@ -184,8 +186,9 @@ public class StudentStatusChange_A extends JPanel{
         student.setPhoneNumber(txtPhoneNum.getText());
         student.setPolitics(txtPolitic.getText());
         student.setSchool(txtDep.getText());
-        student.setSex(Integer.valueOf(txtGender.getText()));
-        student.setStatus(Integer.valueOf(txtStatus.getText()));
+        String tmpStr=txtGender.getText();
+        student.setSex(tmpStr=="男"?0:1);//
+        student.setStatus(Integer.valueOf(txtStatus.getText()));//数字
 
 
         System.out.println(str1+'\n'+str2+'\n'+str3+'\n'+str4+'\n'+str5+'\n'+str6+'\n'+str7+'\n'+str8+'\n'+str9+'\n'+str10+'\n'+str11+'\n'+str12+'\n'+str13+'\n');
@@ -197,8 +200,8 @@ public class StudentStatusChange_A extends JPanel{
         Thread.sleep(100);
 
         Message msg = passer.receive();
-        Map<String,Object> map =
-                new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String,List<Student>>>(){}.getType());
+        System.out.println(msg);
+        Map<String,Object> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String,Object>>(){}.getType());
         //List<Student> res = map.get("res");
         //传输信息
         //接收bool结果
@@ -227,8 +230,16 @@ public class StudentStatusChange_A extends JPanel{
         int ltDiffer1=100,ltDiffer2=40;//1-左起两列标签文本框间隔 2-第三列标签文本框间隔
         int llDiffer=270;//两个标签之间的差距
 
-        lblImg.setIcon(new ImageIcon(student.getImage()));
-        lblImg.setBounds(0,0,70,100);
+        ImageIcon img = null;// 这是背景图片 .png .jpg .gif 等格式的图片都可以
+        try {
+            img = new ImageIcon(StringAndImage.StringToImage(student.getImage()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //ImageIcon img = new ImageIcon(student.getImage());
+        img.setImage(img.getImage().getScaledInstance(120,150,Image.SCALE_DEFAULT));//这里设置图片大小，目前是20*20
+        lblImg.setIcon(img);
+        lblImg.setBounds(30,30,120,150);
 
         //第一行信息，姓名 学号 一卡通号
         lblName.setBounds(x,y,lblWidth,lblHeight);
@@ -243,7 +254,7 @@ public class StudentStatusChange_A extends JPanel{
 
         lblIdNum.setBounds(x+llDiffer*2,y,lblWidth,lblHeight);
         txtIdNum.setBounds(x+llDiffer*2+ltDiffer1+ltDiffer2 ,y,txtWidth,txtHeight);
-        txtIdNum.setText(student.getIDcard());
+        txtIdNum.setText(student.getStudentID());
         setLabelFont(lblIdNum,txtIdNum);
 
         //第二行信息 民族 性别 政治面貌
@@ -293,12 +304,12 @@ public class StudentStatusChange_A extends JPanel{
         //第5行信息 班级 预计毕业时间
         lblClass.setBounds(x,y+heightDiffer*4,lblWidth,lblHeight);
         txtClass.setBounds(x+ltDiffer1,y+heightDiffer*4,txtWidth,txtHeight);
-        txtClass.setText(student.getClass().toString());
+        txtClass.setText(student.getClasss());
         setLabelFont(lblClass,txtClass);
 
         lblGraduation.setBounds(x+llDiffer,y+heightDiffer*4,lblWidth,lblHeight);
         txtGraduation.setBounds(x+ltDiffer1*2+llDiffer,y+heightDiffer*4,txtWidth,txtHeight);
-        txtGraduation.setText(student.getClasss());///????
+        txtGraduation.setText(student.getGraduateTime());///????
         setLabelFont(lblGraduation, txtGraduation);
 
         //第6行信息，身份证号
@@ -312,8 +323,6 @@ public class StudentStatusChange_A extends JPanel{
         txtPhoneNum.setBounds(x+ltDiffer1*2-60,y+heightDiffer*6,txtWidth*2,txtHeight);
         txtPhoneNum.setText(student.getPhoneNumber());
         setLabelFont(lblPhoneNum,txtPhoneNum);
-
-
 
         add(lblName); add(txtName); add(lblStudentNum); add(txtStudentNum); add(lblIdNum); add(txtIdNum);
         add(lblNation); add(txtNation); add(lblGender); add(txtGender); add(lblPolitic); add(txtPolitic);

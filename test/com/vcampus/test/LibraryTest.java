@@ -119,4 +119,8 @@ public class LibraryTest {
             System.out.println(item);
         }
     }
+
+    @Test
+    public void test() {
+    }
 }
