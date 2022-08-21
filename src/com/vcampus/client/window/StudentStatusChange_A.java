@@ -18,12 +18,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.vcampus.dao.utils.StringAndImage;
 import com.vcampus.net.ClientMessagePasser;
 import com.vcampus.net.Message;
 import com.vcampus.net.MessagePasser;
@@ -185,11 +187,7 @@ public class StudentStatusChange_A extends JPanel{
         student.setPolitics(txtPolitic.getText());
         student.setSchool(txtDep.getText());
         String tmpStr=txtGender.getText();
-        if(tmpStr=="男")
-            student.setSex(0);
-        else
-            student.setSex(1);
-        //student.setSex(Integer.valueOf(txtGender.getText()));//
+        student.setSex(tmpStr=="男"?0:1);//
         student.setStatus(Integer.valueOf(txtStatus.getText()));//数字
 
 
@@ -232,8 +230,16 @@ public class StudentStatusChange_A extends JPanel{
         int ltDiffer1=100,ltDiffer2=40;//1-左起两列标签文本框间隔 2-第三列标签文本框间隔
         int llDiffer=270;//两个标签之间的差距
 
-        lblImg.setIcon(new ImageIcon(student.getImage()));
-        lblImg.setBounds(0,0,70,100);
+        ImageIcon img = null;// 这是背景图片 .png .jpg .gif 等格式的图片都可以
+        try {
+            img = new ImageIcon(StringAndImage.StringToImage(student.getImage()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //ImageIcon img = new ImageIcon(student.getImage());
+        img.setImage(img.getImage().getScaledInstance(120,150,Image.SCALE_DEFAULT));//这里设置图片大小，目前是20*20
+        lblImg.setIcon(img);
+        lblImg.setBounds(30,30,120,150);
 
         //第一行信息，姓名 学号 一卡通号
         lblName.setBounds(x,y,lblWidth,lblHeight);
