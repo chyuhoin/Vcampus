@@ -14,6 +14,7 @@
  */
 package com.vcampus.client.window;
 
+import com.vcampus.dao.utils.StringAndImage;
 import com.vcampus.pojo.Student;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -139,8 +140,16 @@ public class StudentStatusEnquire_A extends JPanel {
         int llDiffer=270;//两个标签之间的差距
 
         //照片
-        lblImg.setIcon(new ImageIcon(student.getImage()));
-        lblImg.setBounds(0,0,70,100);
+        ImageIcon img = null;// 这是背景图片 .png .jpg .gif 等格式的图片都可以
+        try {
+            img = new ImageIcon(StringAndImage.StringToImage(student.getImage()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //ImageIcon img = new ImageIcon(student.getImage());
+        img.setImage(img.getImage().getScaledInstance(120,150,Image.SCALE_DEFAULT));//这里设置图片大小，目前是20*20
+        lblImg.setIcon(img);
+        lblImg.setBounds(30,30,120,150);
 
         //第一行信息，姓名 学号 一卡通号
         lblName.setBounds(x,y,lblWidth,lblHeight);
