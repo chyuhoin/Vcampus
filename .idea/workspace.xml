@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="修改了student类">
+    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="在lessonDao里添加了几个函数">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/LessonDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/LessonDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/utils/ClassTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/utils/ClassTable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/TeacherDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/TeacherDao.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -198,7 +197,7 @@
       <workItem from="1661001183994" duration="134000" />
       <workItem from="1661001398741" duration="2035000" />
       <workItem from="1661047449565" duration="70000" />
-      <workItem from="1661048117757" duration="2876000" />
+      <workItem from="1661048117757" duration="4529000" />
     </task>
     <task id="LOCAL-00001" summary="初步写了登录注册">
       <created>1660298515554</created>
@@ -333,7 +332,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661048787851</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="在lessonDao里添加了几个函数">
+      <created>1661051089899</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1661051089899</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -401,7 +407,8 @@
     <MESSAGE value="出bug了，测试下" />
     <MESSAGE value="初步建立了课表，好难啊" />
     <MESSAGE value="修改了student类" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改了student类" />
+    <MESSAGE value="在lessonDao里添加了几个函数" />
+    <option name="LAST_COMMIT_MESSAGE" value="在lessonDao里添加了几个函数" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
