@@ -60,9 +60,11 @@ public class SetJPUser1 extends JPanel {
         passer.send(new Message("admin", s, "login", "getone"));
 
         Message msg = passer.receive();
-        Map<String, java.util.List<User>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, java.util.List<User>>>(){}.getType());
+        System.out.println(msg);
+        Map<String, List<User>> map = new Gson().fromJson(msg.getData(),
+                new TypeToken<HashMap<String, List<User>>>(){}.getType());
         List<User> res = map.get("res");
-        User tempU=res.get(0);
+        User tempU= res.get(0);
         if(res.size()!=0){
             strList[0]=tempU.getStudentID();
             strList[1]=tempU.getPassword();

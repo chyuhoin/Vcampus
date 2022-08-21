@@ -5,6 +5,8 @@ import com.vcampus.pojo.User;
 import com.vcampus.server.service.UserService;
 import com.google.gson.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class LoginController implements Controller {
@@ -22,13 +24,17 @@ public class LoginController implements Controller {
             }
             case "getone": {//通过id获取全部信息
                 User res = service.getUserById(user);
-                String data = gson.toJson(res);
-                return new Message("200", data);
+                List<User> users = new ArrayList<>();
+                users.add(res);
+                HashMap<String, List<User>> map = new HashMap<>();
+                map.put("res", users);
+                return new Message("200", gson.toJson(map));
             }
             case "getAll": { //获取全部用户
                 List<User> res = service.getAllUsers();
-                String data = gson.toJson(res);
-                return new Message("200", data);
+                HashMap<String, List<User>> map = new HashMap<>();
+                map.put("res", res);
+                return new Message("200", gson.toJson(map));
             }
             case "register": {
                 //注册
