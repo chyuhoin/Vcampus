@@ -100,7 +100,7 @@ public class StudentStatusChange_A extends JPanel{
                 //student.setStudentID(str);
                 Gson gson = new Gson();
                 //String s = gson.toJson(student);
-                passer.send(new Message("student", "ID:"+str, "student", "getone"));
+                passer.send(new Message("student", "studentID:"+str, "student", "getone"));
                 enquireInform();
             }
         });
@@ -284,13 +284,13 @@ public class StudentStatusChange_A extends JPanel{
         //第6行信息，身份证号
         lblIdNumber.setBounds(x,y+heightDiffer*5,lblWidth,lblHeight);
         txtIdNumber.setBounds(x+ltDiffer1*2-60,y+heightDiffer*5,txtWidth*2,txtHeight);
-        txtIdNumber.setText("152524200102020029");
+        txtIdNumber.setText(student.getIDcard());
         setLabelFont(lblIdNumber,txtIdNumber);
 
         //第7行信息 联系电话
         lblPhoneNum.setBounds(x,y+heightDiffer*6,lblWidth,lblHeight);
         txtPhoneNum.setBounds(x+ltDiffer1*2-60,y+heightDiffer*6,txtWidth*2,txtHeight);
-        txtPhoneNum.setText("15850665223");
+        txtPhoneNum.setText(student.getPhoneNumber());
         setLabelFont(lblPhoneNum,txtPhoneNum);
 
 

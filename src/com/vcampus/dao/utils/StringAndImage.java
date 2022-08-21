@@ -26,13 +26,14 @@ public class StringAndImage {
         String str = encoder.encode(result).trim();
         return str;
     }
-    public static void StringToImage(String str,String path) throws IOException {
+    public static byte[] StringToImage(String str) throws IOException {
         BASE64Decoder decoder = new BASE64Decoder();
         byte[] imgbyte = decoder.decodeBuffer(str);
-        OutputStream os = new FileOutputStream(path);
-        os.write(imgbyte, 0, imgbyte.length);
-        os.flush();
-        os.close();
+        return  imgbyte;
+//        OutputStream os = new FileOutputStream(path);
+//        os.write(imgbyte, 0, imgbyte.length);
+//        os.flush();
+//        os.close();
     }
 //    @Test
 //    public void test() throws IOException {
