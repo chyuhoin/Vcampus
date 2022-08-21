@@ -19,7 +19,7 @@ public class myMainTest {
     public static void main(String[] args)
     {
         //创建登录自己的主窗口对象
-        JFrame frame = new myMainFrame("VCampus校园管理系统",2);
+        JFrame frame = new myMainFrame("VCampus校园管理系统",3);
         //functions p = new functions(frame);
        /* // 当关闭窗口时，退出整个程序 (在Swing高级篇教程中会介绍)
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

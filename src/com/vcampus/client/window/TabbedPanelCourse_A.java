@@ -40,13 +40,6 @@ public class TabbedPanelCourse_A extends JTabbedPane {
         jp11.add(lblTitleLabel);
         jp12.add(btnRegister);
 
-        /*
-        this.add("选项一",jp11);	//创建三个面板
-        this.add("选项二",jp12);
-        this.add("选项三",jp13);
-
-         */
-
 
         this.addTab("选项一", null, jp11,"点击查看选项一");
         this.addTab("选项二", null, jp12,"点击查看选项二");

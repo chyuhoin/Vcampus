@@ -8,7 +8,7 @@
  *=====================================================
  *Revised Hisytory:
  *1. 2022-8-17,创建此文件
- *2.
+ *2. 2022-8-18,修改选项卡设置，增加学籍信息显示 修改人：韩宇
  *3.
  *    修改的内容描述，修改的原因
  */
@@ -20,28 +20,18 @@ import java.awt.*;
 
 public class TabbedPanelSchool_A extends JTabbedPane {
 
-    public TabbedPanelSchool_A()
+    public TabbedPanelSchool_A(String ID)
     {
         this.setTabPlacement(2);
-        this.setBounds(0,0,1400,650);//注意！！！！！！！！！！！！！！！！！！！！！！！
+        this.setBounds(0,0,1400,650);
 
-        JPanel jp11 = new JPanel();
-        JPanel jp12 = new JPanel();
-        JPanel jp13 = new JPanel();
-        //选项卡1的内容
-        //设置标题
-        JLabel lblTitleLabel = new JLabel("学籍123");
-        lblTitleLabel.setFont(new Font("宋体",Font.BOLD, 50));
-        //按钮
-        JButton btnRegister = new JButton("学籍123");
-        btnRegister.setFont(new Font("宋体", Font.BOLD, 24));
+        JPanel panelEnquire = new StudentStatusEnquire_A(ID);
+        JPanel panelChange = new StudentStatusChange_A(ID);
 
-        jp11.add(lblTitleLabel);
-        jp11.add(btnRegister);
-
-        this.add("选项一",jp11);	//创建三个面板
-        this.add("选项二",jp12);
-        this.add("选项三",jp13);
+        this.addTab("查看学籍信息", null, panelEnquire,"查看学籍信息");
+        this.addTab("修改学籍信息", null, panelChange,"修改学籍信息");
+        //this.addTab("选项三", null, jp13,"点击查看选项三");
+        this.setFont(new Font("宋体", Font.BOLD, 24));
 
     }
 

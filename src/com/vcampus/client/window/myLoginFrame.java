@@ -36,6 +36,7 @@ public class myLoginFrame extends JFrame  {
     JButton btnLogin = new JButton("登录");
     //JFrame loginFrame;
     int flag=0;
+    String userName = "";
 
     public myLoginFrame(String title)
     {
@@ -132,7 +133,7 @@ public class myLoginFrame extends JFrame  {
                     }
                     //loginFrame.setVisible(false);
                     dispose();
-                    myMainFrame tempMF=new myMainFrame("VCampus虚拟校园系统",flag);
+                    myMainFrame tempMF=new myMainFrame("VCampus虚拟校园系统",flag,userName);
 
                 }
                 else//未输入用户名或密码，无法登陆，弹出窗口提示
@@ -161,7 +162,7 @@ public class myLoginFrame extends JFrame  {
          */
 
         //读取输入的用户名和密码
-        String userName = txtUserName.getText();
+        userName = txtUserName.getText();
         String passWord = new String(txtPassWord.getPassword());
 
         MessagePasser passer = ClientMessagePasser.getInstance();
