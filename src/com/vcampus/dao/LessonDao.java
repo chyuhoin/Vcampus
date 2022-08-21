@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.Map;
 
 import static com.sun.org.apache.bcel.internal.generic.Type.STRING;
+import static com.vcampus.dao.utils.ClassTable.addToTable;
+import static com.vcampus.dao.utils.ClassTable.compare;
 
 public class LessonDao extends BaseDao{
     //无参时查询所有课程
@@ -56,12 +58,42 @@ public class LessonDao extends BaseDao{
         }
         return result;
     }
+    //判断函数
+    public static int judgeLesson(String studentID,String innerID) throws Exception {
+        String judgeSql1 = "select * from tb_STUDENTWITHLESSON where studentID = '" + studentID + "' and innerID = '" + innerID + "'";
 
+        List<Map<String, Object>> judge1 = CRUD.Query(judgeSql1,conn);
+
+
+        if(!judge1.isEmpty())
+            return 0;//已选不可选
+        else{
+            String judgeSql2 = "select * from tb_LESSON where  innerID = '" + innerID + "'";
+            List<Map<String, Object>> judge2 = CRUD.Query(judgeSql2,conn);
+            int leftSize = (int) judge2.get(0).get("leftSize");
+            if(leftSize==0)
+                return 1;//已满不可选
+            else {
+                String sql1 = "select timeTable from tb_LESSONTABLE where studentID = '"+studentID+"'";
+                String sql2 = "select time from tb_LESSON where innerID ='"+innerID+"'";
+                List<Map<String ,Object>> list1 = CRUD.Query(sql1,conn);
+                List<Map<String ,Object>> list2 =CRUD.Query(sql2,conn);
+                String time = (String) list1.get(0).get("time");
+                String timeTable = (String) list2.get(0).get("timeTable");
+                 if(compare(time,timeTable)==false)
+                     return 2;//冲突不可选
+                else
+                    return 3;//可选
+            }
+        }
+
+    }
     //学生选课
+
     public static Boolean selectLesson(String studentID, String innerID) throws Exception {
-        String judgeSql = "select * from tb_STUDENTWITHLESSON where studentID = '" + studentID + "' and innerID = '" + innerID + "'";
-        List<Map<String, Object>> judge = CRUD.Query(judgeSql,conn);
-        if (judge.isEmpty()) {
+//        String judgeSql = "select * from tb_STUDENTWITHLESSON where studentID = '" + studentID + "' and innerID = '" + innerID + "'";
+//        List<Map<String, Object>> judge = CRUD.Query(judgeSql,conn);
+//        if (judge.isEmpty()) {
             try {
                 String sql1 = "update tb_LESSON set leftSize=leftSize-1 where innerID = '" + innerID + "'";
                 String sql2 = "insert into tb_STUDENTWITHLESSON (studentID,innerID) values ('" + studentID + "','" + innerID + "')";
@@ -70,6 +102,7 @@ public class LessonDao extends BaseDao{
                 Statement stm = conn.createStatement();
                 stm.executeUpdate(sql1);
                 stm.executeUpdate(sql2);
+                addToTable(studentID,innerID,conn);
                 conn.commit();
                 stm.close();
                 conn.close();
@@ -77,9 +110,9 @@ public class LessonDao extends BaseDao{
             } catch (Exception e) {
                 return false;
             }
-        } else {
-            return false;
-        }
+//        } else {
+//            return false;
+//        }
     }
     //学生退课
     public static Boolean returnLesson(String studentID,String innerID){
