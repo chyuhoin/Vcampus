@@ -219,12 +219,12 @@ public class StudentStatusEnquire_S extends JPanel {
         //第5行信息 班级 预计毕业时间
         lblClass.setBounds(x, y + heightDiffer * 4, lblWidth, lblHeight);
         txtClass.setBounds(x + ltDiffer1, y + heightDiffer * 4, txtWidth, txtHeight);
-        txtClass.setText(student.getClass().toString());
+        txtClass.setText(student.getClasss());
         setLabelFont(lblClass, txtClass);
 
         lblGraduation.setBounds(x + llDiffer, y + heightDiffer * 4, lblWidth, lblHeight);
         txtGraduation.setBounds(x + ltDiffer1 * 2 + llDiffer, y + heightDiffer * 4, txtWidth, txtHeight);
-        txtGraduation.setText(student.getClasss());///????
+        txtGraduation.setText(student.getGraduateTime());///????
         setLabelFont(lblGraduation, txtGraduation);
 
         //第6行信息，身份证号

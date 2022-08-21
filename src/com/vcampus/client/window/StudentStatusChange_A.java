@@ -169,7 +169,7 @@ public class StudentStatusChange_A extends JPanel{
         str10=txtDep.getText();
         str11=txtMajor.getText();
         str12= txtGraduation.getText();
-        str13=txtPhoneNum.getName();
+        str13=txtPhoneNum.getText();
 
         student.setName(txtName.getText());
         student.setStudentNumber(txtStudentNum.getText());
@@ -184,8 +184,13 @@ public class StudentStatusChange_A extends JPanel{
         student.setPhoneNumber(txtPhoneNum.getText());
         student.setPolitics(txtPolitic.getText());
         student.setSchool(txtDep.getText());
-        student.setSex(Integer.valueOf(txtGender.getText()));
-        student.setStatus(Integer.valueOf(txtStatus.getText()));
+        String tmpStr=txtGender.getText();
+        if(tmpStr=="男")
+            student.setSex(0);
+        else
+            student.setSex(1);
+        //student.setSex(Integer.valueOf(txtGender.getText()));//
+        student.setStatus(Integer.valueOf(txtStatus.getText()));//数字
 
 
         System.out.println(str1+'\n'+str2+'\n'+str3+'\n'+str4+'\n'+str5+'\n'+str6+'\n'+str7+'\n'+str8+'\n'+str9+'\n'+str10+'\n'+str11+'\n'+str12+'\n'+str13+'\n');
@@ -197,7 +202,8 @@ public class StudentStatusChange_A extends JPanel{
         Thread.sleep(100);
 
         Message msg = passer.receive();
-        Map<String,Object> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String,List<Student>>>(){}.getType());
+        System.out.println(msg);
+        Map<String,Object> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String,Object>>(){}.getType());
         //List<Student> res = map.get("res");
         //传输信息
         //接收bool结果
@@ -242,7 +248,7 @@ public class StudentStatusChange_A extends JPanel{
 
         lblIdNum.setBounds(x+llDiffer*2,y,lblWidth,lblHeight);
         txtIdNum.setBounds(x+llDiffer*2+ltDiffer1+ltDiffer2 ,y,txtWidth,txtHeight);
-        txtIdNum.setText(student.getIDcard());
+        txtIdNum.setText(student.getStudentID());
         setLabelFont(lblIdNum,txtIdNum);
 
         //第二行信息 民族 性别 政治面貌
@@ -292,12 +298,12 @@ public class StudentStatusChange_A extends JPanel{
         //第5行信息 班级 预计毕业时间
         lblClass.setBounds(x,y+heightDiffer*4,lblWidth,lblHeight);
         txtClass.setBounds(x+ltDiffer1,y+heightDiffer*4,txtWidth,txtHeight);
-        txtClass.setText(student.getClass().toString());
+        txtClass.setText(student.getClasss());
         setLabelFont(lblClass,txtClass);
 
         lblGraduation.setBounds(x+llDiffer,y+heightDiffer*4,lblWidth,lblHeight);
         txtGraduation.setBounds(x+ltDiffer1*2+llDiffer,y+heightDiffer*4,txtWidth,txtHeight);
-        txtGraduation.setText(student.getClasss());///????
+        txtGraduation.setText(student.getGraduateTime());///????
         setLabelFont(lblGraduation, txtGraduation);
 
         //第6行信息，身份证号
@@ -311,8 +317,6 @@ public class StudentStatusChange_A extends JPanel{
         txtPhoneNum.setBounds(x+ltDiffer1*2-60,y+heightDiffer*6,txtWidth*2,txtHeight);
         txtPhoneNum.setText(student.getPhoneNumber());
         setLabelFont(lblPhoneNum,txtPhoneNum);
-
-
 
         add(lblName); add(txtName); add(lblStudentNum); add(txtStudentNum); add(lblIdNum); add(txtIdNum);
         add(lblNation); add(txtNation); add(lblGender); add(txtGender); add(lblPolitic); add(txtPolitic);

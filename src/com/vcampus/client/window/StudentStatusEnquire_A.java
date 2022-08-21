@@ -155,7 +155,7 @@ public class StudentStatusEnquire_A extends JPanel {
 
         lblIdNum.setBounds(x+llDiffer*2,y,lblWidth,lblHeight);
         txtIdNum.setBounds(x+llDiffer*2+ltDiffer1+ltDiffer2 ,y,txtWidth,txtHeight);
-        txtIdNum.setText(student.getIDcard());
+        txtIdNum.setText(student.getStudentID());
         setLabelFont(lblIdNum,txtIdNum);
 
         //第二行信息 民族 性别 政治面貌
@@ -205,12 +205,12 @@ public class StudentStatusEnquire_A extends JPanel {
         //第5行信息 班级 预计毕业时间
         lblClass.setBounds(x,y+heightDiffer*4,lblWidth,lblHeight);
         txtClass.setBounds(x+ltDiffer1,y+heightDiffer*4,txtWidth,txtHeight);
-        txtClass.setText(student.getClass().toString());
+        txtClass.setText(student.getClasss());
         setLabelFont(lblClass,txtClass);
 
         lblGraduation.setBounds(x+llDiffer,y+heightDiffer*4,lblWidth,lblHeight);
         txtGraduation.setBounds(x+ltDiffer1*2+llDiffer,y+heightDiffer*4,txtWidth,txtHeight);
-        txtGraduation.setText(student.getClasss());///????
+        txtGraduation.setText(student.getGraduateTime());///????
         setLabelFont(lblGraduation, txtGraduation);
 
         //第6行信息，身份证号
