@@ -45,6 +45,16 @@ public class UserService implements Service {
         return res;
     }
 
+    public List<User> getAllUsers() {
+        List<User> users = null;
+        try {
+            users = UserDao.getAllUsers();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
+
     public boolean delete(User user) {
         return UserDao.deleteUser(user.getStudentID());
     }

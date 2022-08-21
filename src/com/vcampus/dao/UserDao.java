@@ -6,6 +6,7 @@ import com.vcampus.dao.utils.mapToBean;
 import com.vcampus.pojo.User;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -78,6 +79,23 @@ public class UserDao extends BaseDao {
             if (result.isEmpty()) return null;
             else return mapToBean.map2Bean(result.get(0), User.class);
         } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static List<User> getAllUsers() {
+        try {
+            String sql = "select * from tb_USR";
+            List<Map<String, Object>> result = CRUD.Query(sql, conn);
+            ArrayList<User> users = new ArrayList<>();
+            for(Map<String, Object> map: result) {
+                User user = mapToBean.map2Bean(map, User.class);
+                users.add(user);
+            }
+            return users;
+        } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }
