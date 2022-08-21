@@ -112,7 +112,7 @@ public class myLoginFrame extends JFrame  {
         responseSelected(radioBtn02,2);
         responseSelected(radioBtn03,3);
 
-       // JFrame tempjf=this;
+        // JFrame tempjf=this;
         //设置登录按钮的监听事件
         btnLogin.addActionListener(new ActionListener() {
             @Override
