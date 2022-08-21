@@ -24,6 +24,11 @@ public class LibraryController implements Controller {
                     map.put("res", service.searchBooks(book));
                     break;
                 }
+                case "getB": { //查看已经借了的书
+                    User user = gson.fromJson(msg.getData(), User.class);
+                    map.put("res", service.searchBorrowedBooks(user));
+                    break;
+                }
                 case "post": { //管理员新增书籍
                     Book book = gson.fromJson(msg.getData(), Book.class);
                     map.put("res", service.addNewBook(book) ? "OK" : "Error");
@@ -58,11 +63,11 @@ public class LibraryController implements Controller {
             }
             return new Message("200", gson.toJson(map));
         } else {
-            if(msg.getOperation().equals("get")) {
+            if(msg.getOperation().equals("get")) { //指定条件搜索书籍
                 Book book = gson.fromJson(msg.getData(), Book.class);
                 map.put("res", service.searchBooks(book));
                 return new Message("200", gson.toJson(map));
-            } else if(msg.getOperation().equals("getB")) {
+            } else if(msg.getOperation().equals("getB")) { //查看已经借了的书
                 User user = gson.fromJson(msg.getData(), User.class);
                 map.put("res", service.searchBorrowedBooks(user));
                 return new Message("200", gson.toJson(map));
