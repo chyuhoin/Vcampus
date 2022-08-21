@@ -37,8 +37,8 @@ public class StudentDao extends BaseDao{
                     "'" + stu.getPhoneNumber() + "'," +
                     "" + stu.getStatus() + ","+
                     "'"+stu.getImage()+"',"+
-                    "'"+stu.getNation()+"')";
-            System.out.println(sql);
+                    "'"+stu.getNation()+"',"+
+                    "'"+stu.getGraduateTime()+"')";
             CRUD.update(sql,conn);
             return true;
         }catch (Exception e){

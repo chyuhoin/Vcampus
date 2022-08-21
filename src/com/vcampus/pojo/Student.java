@@ -12,7 +12,7 @@ public class Student implements Serializable {
     String school;
     String major;
     Integer sex;
-    String classs;
+    String classs;//班级
     Integer educationalSystem;
     String politics;
     Integer grade;
@@ -22,8 +22,9 @@ public class Student implements Serializable {
     String image;
     String nation;
 
+    String graduateTime;//毕业时间
     //path为图片所在路径
-    public Student(String studentID, String name, String studentNumber, String IDcard, String school, String major, Integer sex, String classs, Integer educationalSystem, String politics, Integer grade, String phoneNumber, Integer status, String path,String nation) {
+    public Student(String studentID, String name, String studentNumber, String IDcard, String school, String major, Integer sex, String classs, Integer educationalSystem, String politics, Integer grade, String phoneNumber, Integer status, String path,String nation,String graduateTime) {
         this.studentID = studentID;
         this.name = name;
         this.studentNumber = studentNumber;
@@ -42,6 +43,7 @@ public class Student implements Serializable {
         }catch (Exception e){
 
         }
+        this.graduateTime = graduateTime;
     }
 
     public Student() {
@@ -173,6 +175,14 @@ public class Student implements Serializable {
 
     public void setNation(String nation) {
         this.nation = nation;
+    }
+
+    public String getGraduateTime() {
+        return graduateTime;
+    }
+
+    public void setGraduateTime(String graduateTime) {
+        this.graduateTime = graduateTime;
     }
 
     @Override

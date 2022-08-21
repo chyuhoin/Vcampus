@@ -45,7 +45,7 @@ public class LessonDao extends BaseDao{
         return searchBy(Lesson.class,"tb_LESSON",field,value);
     }
 
-    //查询自己选的课信息
+    //学生查询自己选的课信息
     public static List<Lesson> searchMine(String studentID) throws Exception {
         String sql = "SELECT tb_STUDENTWITHLESSON.* from tb_LESSON ,tb_STUDENTWITHLESSON " +
                 "WHERE tb_LESSON.innerID = tb_STUDENTWITHLESSON.innerID " +
@@ -55,6 +55,28 @@ public class LessonDao extends BaseDao{
         for (Map<String, Object> map : resultList) {
             Lesson lesson = mapToBean.map2Bean(map, Lesson.class);
             result.add(lesson);
+        }
+        return result;
+    }
+    //老师查看自己教的课
+    public static List<Lesson> searchMyLesson(String teacherID) throws Exception {
+        String sql = "select * from tb_LESSON where teacherID = '"+teacherID+"'";
+        List<Map<String, Object>> resultList = CRUD.Query(sql,conn);
+        List<Lesson> result = new ArrayList<>();
+        for (Map<String, Object> map : resultList) {
+            Lesson lesson = mapToBean.map2Bean(map, Lesson.class);
+            result.add(lesson);
+        }
+        return result;
+    }
+    //查看选一门课的所有学生
+    public static List<Student> searchStudent(String field,String value) throws Exception {
+        String sql = "select * from tb_LESSON where"+ field+" = '"+value+"'";
+        List<Map<String, Object>> resultList = CRUD.Query(sql,conn);
+        List<Student> result = new ArrayList<>();
+        for (Map<String, Object> map : resultList) {
+            Student stu = mapToBean.map2Bean(map, Student.class);
+            result.add(stu);
         }
         return result;
     }
@@ -159,6 +181,10 @@ public class LessonDao extends BaseDao{
     public static Boolean deleteLesson(String innerID){
         return delete("innerID",innerID,"tb_LESSON");
     }
+    //管理员删除同一个编号的课程
+    public static Boolean deleteSpecificLesson(String lessonID){
+        return delete("lessonID",lessonID,"tb_LESSON");
+    }
     //管理员给学生添加成绩
     public static Boolean addGrade(String studentID, String innerID, Integer grade) throws Exception {
         String sql = "update tb_STUDENTWITHLESSON set grade = " + String.valueOf(grade) + " where studentID = '" + studentID + "' and innerID = '" + innerID + "'";
@@ -168,6 +194,17 @@ public class LessonDao extends BaseDao{
         } catch (Exception e) {
             return false;
         }
+    }
+    //学生获取自己的课表
+    public static String getLessonTable(String studentID) throws Exception {
+        String sql = "select timeTable from tb_LESSONTABLE where studentID = '"+studentID+"'";
+        String result = (String) CRUD.Query(sql,conn).get(0).get("timeTable");
+        return result;
+    }
+    @Test
+    public void test() throws Exception {
+        String str = getLessonTable("00000001");
+        System.out.println(str);
     }
 }
 

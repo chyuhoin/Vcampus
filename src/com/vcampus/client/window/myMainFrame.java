@@ -25,7 +25,7 @@ public class myMainFrame extends JFrame {
     public JPanel panelTop = new JPanel();
     public  JPanel panelBottom = new JPanel();
 
-    public myMainFrame(String title, int flag)
+    public myMainFrame(String title, int flag, String ID)
     {
         super(title);//调用父类构造函数，设置窗口名称
         // FlatDarkLaf.setup();
@@ -111,7 +111,7 @@ public class myMainFrame extends JFrame {
 
         //创建各模块各权限对应面板
         JTabbedPane[] userModule = {new JTabbedPane(),new TabbedPanelUser_S(),new TabbedPanelUser_T(),new TabbedPanelUser_A()};
-        JTabbedPane[] schoolModule = {new JTabbedPane(),new TabbedPanelSchool_S(),new TabbedPanelSchool_T(),new TabbedPanelSchool_A()};
+        JTabbedPane[] schoolModule = {new JTabbedPane(),new TabbedPanelSchool_S(ID),new TabbedPanelSchool_T(ID),new TabbedPanelSchool_A(ID)};
         JTabbedPane[] courseModule = {new JTabbedPane(),new TabbedPanelCourse_S(),new TabbedPanelCourse_T(),new TabbedPanelCourse_A()};
         JTabbedPane[] LibraryModule = {new JTabbedPane(),new TabbedPanelLibrary_S(),new TabbedPanelLibrary_T(),new TabbedPanelLibrary_A()};
         JTabbedPane[] storeModule = {new JTabbedPane(),new TabbedPanelStore_S(),new TabbedPanelStore_T(),new TabbedPanelStore_A()};

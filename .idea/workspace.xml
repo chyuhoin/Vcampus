@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="baseDao增加了一些公共函数">
+    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="出bug了，测试下">
+      <change afterPath="$PROJECT_DIR$/src/com/vcampus/dao/utils/ClassTable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/BaseDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/BaseDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/ExamDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/ExamDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/LessonDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/LessonDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/LibraryDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/LibraryDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/StudentDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/StudentDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/TeacherDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/TeacherDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/UserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/UserDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/pojo/Teacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/pojo/Teacher.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,6 +26,7 @@
       </GitPushTagMode>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="MIXED" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -71,12 +66,12 @@
       <recent name="com.vcampus.client.login" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.BaseDao.test">
+  <component name="RunManager">
     <configuration name="BaseDao.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Vcampus" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.vcampus.dao.*" />
+          <option name="PATTERN" value="com.vcampus.dao.utils.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -88,32 +83,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ExamDao.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ClassTable.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Vcampus" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.vcampus.dao.*" />
+          <option name="PATTERN" value="com.vcampus.dao.utils.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.vcampus.dao" />
-      <option name="MAIN_CLASS_NAME" value="com.vcampus.dao.ExamDao" />
-      <option name="METHOD_NAME" value="test" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="LibraryDao.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Vcampus" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.vcampus.dao.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.vcampus.dao" />
-      <option name="MAIN_CLASS_NAME" value="com.vcampus.dao.LibraryDao" />
+      <option name="PACKAGE_NAME" value="com.vcampus.dao.utils" />
+      <option name="MAIN_CLASS_NAME" value="com.vcampus.dao.utils.ClassTable" />
       <option name="METHOD_NAME" value="test" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
@@ -124,7 +103,7 @@
       <module name="Vcampus" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.vcampus.dao.*" />
+          <option name="PATTERN" value="com.vcampus.dao.utils.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -140,7 +119,7 @@
       <module name="Vcampus" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.vcampus.dao.*" />
+          <option name="PATTERN" value="com.vcampus.dao.utils.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -152,13 +131,29 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TimeTest.TimeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Vcampus" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.vcampus.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.vcampus.test" />
+      <option name="MAIN_CLASS_NAME" value="com.vcampus.test.TimeTest" />
+      <option name="METHOD_NAME" value="TimeTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ClassTable.test" />
+        <item itemvalue="JUnit.TimeTest.TimeTest" />
         <item itemvalue="JUnit.BaseDao.test" />
         <item itemvalue="JUnit.TeacherDao.test" />
         <item itemvalue="JUnit.StudentDao.test" />
-        <item itemvalue="JUnit.ExamDao.test" />
-        <item itemvalue="JUnit.LibraryDao.test" />
       </list>
     </recent_temporary>
   </component>
@@ -193,6 +188,15 @@
       <workItem from="1660815934556" duration="2473000" />
       <workItem from="1660831786373" duration="1983000" />
       <workItem from="1660888580099" duration="3413000" />
+      <workItem from="1660918724497" duration="1503000" />
+      <workItem from="1660922180929" duration="80000" />
+      <workItem from="1660969405563" duration="1904000" />
+      <workItem from="1660975764803" duration="1456000" />
+      <workItem from="1660977503920" duration="596000" />
+      <workItem from="1660991092243" duration="1569000" />
+      <workItem from="1660993852382" duration="3050000" />
+      <workItem from="1661001183994" duration="134000" />
+      <workItem from="1661001398741" duration="1945000" />
     </task>
     <task id="LOCAL-00001" summary="初步写了登录注册">
       <created>1660298515554</created>
@@ -292,7 +296,28 @@
       <option name="project" value="LOCAL" />
       <updated>1660898810557</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="继续完善了一些类">
+      <created>1660902650513</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1660902650513</updated>
+    </task>
+    <task id="LOCAL-00016" summary="增加了选课判断函数">
+      <created>1660903186114</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1660903186114</updated>
+    </task>
+    <task id="LOCAL-00017" summary="出bug了，测试下">
+      <created>1660919678034</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1660919678034</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -306,6 +331,36 @@
             <State />
           </value>
         </entry>
+        <entry key="c229b710-18e0-4633-9ddc-e3541ee754eb">
+          <value>
+            <State>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="roots">
+                    <value>
+                      <list>
+                        <option value="$PROJECT_DIR$" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="c229b710-18e0-4633-9ddc-e3541ee754eb" value="TOOL_WINDOW" />
       </map>
     </option>
   </component>
@@ -325,7 +380,10 @@
     <MESSAGE value="添加了exam类，初步写了examDao层" />
     <MESSAGE value="增强了student，加入了民族信息；同时推进了部分examDao层" />
     <MESSAGE value="baseDao增加了一些公共函数" />
-    <option name="LAST_COMMIT_MESSAGE" value="baseDao增加了一些公共函数" />
+    <MESSAGE value="继续完善了一些类" />
+    <MESSAGE value="增加了选课判断函数" />
+    <MESSAGE value="出bug了，测试下" />
+    <option name="LAST_COMMIT_MESSAGE" value="出bug了，测试下" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
