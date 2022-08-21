@@ -9,18 +9,23 @@ import java.util.List;
 public class StudentService implements Service{
     public boolean addStudent(Student user) {
         boolean res;
+        List<Student> students = null;
         try {
+            students = StudentDao.search("studentID", user.getStudentID());
             if(!UserDao.search(user.getStudentID())) {
                 //用户管理没有这个ID
                 res = false;
             }
-            else if(StudentDao.search("studentID", user.getStudentID()).isEmpty()) {//学籍管理没有对应数据
+            else if(students.isEmpty()) {//学籍管理没有对应数据
                 res = StudentDao.addStudent(user);
             }
             else if(!StudentDao.deleteStudent(user.getStudentID())) { //删除信息失败
                 res = false;
             }
-            else res=StudentDao.addStudent(user);
+            else {
+                res = StudentDao.addStudent(user);
+                if(!res) StudentDao.addStudent(students.get(0));
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return false;
