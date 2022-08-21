@@ -19,7 +19,7 @@ public class LibraryController implements Controller {
 
         if(msg.getStatus().equals("admin")) {
             switch (msg.getOperation()) {
-                case "get": { //管理员查询全部书籍
+                case "get": { //指定条件搜索书籍
                     Book book = gson.fromJson(msg.getData(), Book.class);
                     map.put("res", service.searchBooks(book));
                     break;
