@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="出bug了，测试下">
-      <change afterPath="$PROJECT_DIR$/src/com/vcampus/dao/utils/ClassTable.java" afterDir="false" />
+    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="初步建立了课表，好难啊">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/LessonDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/LessonDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/StudentDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/StudentDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/pojo/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/pojo/Student.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +66,7 @@
       <recent name="com.vcampus.client.login" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.BaseDao.test">
     <configuration name="BaseDao.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Vcampus" />
       <extension name="coverage">
@@ -196,7 +196,9 @@
       <workItem from="1660991092243" duration="1569000" />
       <workItem from="1660993852382" duration="3050000" />
       <workItem from="1661001183994" duration="134000" />
-      <workItem from="1661001398741" duration="1945000" />
+      <workItem from="1661001398741" duration="2035000" />
+      <workItem from="1661047449565" duration="70000" />
+      <workItem from="1661048117757" duration="648000" />
     </task>
     <task id="LOCAL-00001" summary="初步写了登录注册">
       <created>1660298515554</created>
@@ -317,7 +319,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660919678034</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="初步建立了课表，好难啊">
+      <created>1661003442415</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1661003442415</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -383,7 +392,8 @@
     <MESSAGE value="继续完善了一些类" />
     <MESSAGE value="增加了选课判断函数" />
     <MESSAGE value="出bug了，测试下" />
-    <option name="LAST_COMMIT_MESSAGE" value="出bug了，测试下" />
+    <MESSAGE value="初步建立了课表，好难啊" />
+    <option name="LAST_COMMIT_MESSAGE" value="初步建立了课表，好难啊" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
