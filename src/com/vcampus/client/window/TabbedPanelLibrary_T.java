@@ -25,6 +25,7 @@ public class TabbedPanelLibrary_T extends JTabbedPane {
         this.setTabPlacement(2);
         this.setBounds(0,0,1400,650);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
+
         JPanel jp11 = new JPanel();
         JPanel jp12 = new JPanel();
         JPanel jp13 = new JPanel();
@@ -42,9 +43,9 @@ public class TabbedPanelLibrary_T extends JTabbedPane {
 
 
 
-        this.addTab("选项一", null, jp11,"点击查看选项一");
-        this.addTab("选项二", null, jp12,"点击查看选项二");
-        this.addTab("选项三", null, jp13,"点击查看选项三");
+        this.addTab("书籍信息总览", null, jp11,"书籍信息总览");
+        this.addTab("查询书籍信息", null, jp12,"查询书籍信息");
+        this.addTab("查询借阅情况", null, jp13,"查询借阅情况");
         this.setFont(new Font("宋体", Font.BOLD, 24));
 
 
