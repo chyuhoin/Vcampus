@@ -34,6 +34,7 @@ public class TabbedPanelUser_S extends JTabbedPane {
         //选项卡2的内容
         SetJPUser2_2 setjp2_2=new SetJPUser2_2(1,id,jp12,layout_Card);
 
+
         this.addTab("个人信息",null,jp11,"查看个人信息");
         this.addTab("密码修改",null,jp12,"修改密码");
         this.setFont(new Font("宋体",Font.BOLD,24));

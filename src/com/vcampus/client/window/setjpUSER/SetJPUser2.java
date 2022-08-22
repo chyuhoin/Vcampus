@@ -291,9 +291,9 @@ public class SetJPUser2 {
             @Override
             public void actionPerformed(ActionEvent e) {
                 layout_Card.first(jp);//转到jp1
-                //jp1.removeAll();
-                //setjp1(jp,layout_Spring,layout_Card);//重新加载jp1
-                //jp1.repaint();
+                jp1.removeAll();
+                setjp1(jp,layout_Spring,layout_Card);//重新加载jp1
+                jp1.repaint();
                 System.out.println("用户管理系统-个人信息-修改编辑取消");
             }
         });
@@ -370,10 +370,11 @@ public class SetJPUser2 {
                         case ("管理员"): t = 3;break;
                     }
                     SendTnfo_Pass(textList[0].getText().trim(),textList[1].getText().trim(),t,"Change Password");//修改密码
-                    layout_Card.previous(jp);//返回前一页，jp2
                     jp2.removeAll();
+                    setstrList(textList[0].getText().trim());//刷新数组
                     setjp2(jp,layout_Spring,layout_Card);//重新加载jp2
                     jp2.repaint();//重新绘制jp2
+                    layout_Card.previous(jp);//返回前一页，jp2
                     System.out.println("用户管理系统-用户管理-修改编辑确认");
                 }
                 else {

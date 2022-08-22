@@ -37,13 +37,17 @@ public class SetJPUser2_2 {
     public String[] strList=new String[3];//暂存当前User的信息
     public String ID;
     public int type;
+    public boolean changeJudge;
     MessagePasser passer = ClientMessagePasser.getInstance();
 
     public SetJPUser2_2(int t,String id,JPanel jp, CardLayout layout_Card){
         ID=id;
         type=t;
+        changeJudge=false;
         setjp(jp,layout_Card);
     }
+    public void setChangeJudge(boolean b){changeJudge=b;}
+    public boolean getChangeJudge(){return changeJudge;}
     public void setjp(JPanel jp,CardLayout layout_Card){
         setStrList(ID);
 
@@ -119,6 +123,7 @@ public class SetJPUser2_2 {
                         SendTnfo_S_T(jp,newPass,type);
                         for (JTextField jTextField : textList) jTextField.setText("");//设置文本框为空
                         //SetJPUser1 setjp1=new SetJPUser1(1,ID,jp11,layout_Card);
+                        changeJudge=true;
                         System.out.println("新密码："+newPass);
                     }
                 }
@@ -161,12 +166,11 @@ public class SetJPUser2_2 {
 
         Gson gson = new Gson();
         String s = gson.toJson(user);
-        passer.send(new Message("login", s, "user", "Change Password"));
+        passer.send(new Message("admin", s, "login", "Change Password"));
 
         //接收信息是否传递成功
         Message msg = passer.receive();
-        Map<String, Object> map = new Gson().fromJson(msg.getData(),
-                new TypeToken<HashMap<String, Object>>(){}.getType());
+        Map<String, Object> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, Object>>(){}.getType());
         //传输信息
         //接收bool结果
         if(map.get("res").equals("OK")) {//成功写入
