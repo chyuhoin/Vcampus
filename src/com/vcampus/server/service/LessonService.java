@@ -1,10 +1,9 @@
 package com.vcampus.server.service;
 
-import com.vcampus.dao.LessonDao;
-import com.vcampus.dao.StudentDao;
-import com.vcampus.dao.UserDao;
+import com.vcampus.dao.*;
 import com.vcampus.pojo.Lesson;
 import com.vcampus.pojo.Student;
+import com.vcampus.pojo.Teacher;
 
 import java.util.List;
 public class LessonService implements Service{
@@ -22,22 +21,48 @@ public class LessonService implements Service{
     }
     public boolean addOneLesson(Lesson user) {
         boolean res;
+        List<Lesson> lessons = null;
         try {
-            if(LessonDao.search("lessonID",user.getLessonID()).isEmpty())//没有对应课程ID
-                res=false;
-            else if(!LessonDao.search("innerID",null).isEmpty())//此时为空课程
-                //if(删除课程（课程ID）)
-                res=LessonDao.addLesson(user);
-                //else res=false;
-            else //此时已经没有空课程
-            if(LessonDao.search("innerID",user.getInnerID()).isEmpty())//此时为添加课程
-                res=LessonDao.addLesson(user);
-            else //if(删除课程（内部ID）)
-                res=LessonDao.addLesson(user);
-                //else res=false;
+            lessons = LessonDao.search("lessonID", user.getLessonID());
+            if (lessons.isEmpty())//没有对应课程ID
+                res = false;
+            else if (lessons.get(0).getInnerID() == null)//此时为空课程
+                if (LessonDao.deleteSpecificLesson(user.getLessonID()))
+                {//删除成功
+                    res = LessonDao.addLesson(user);
+                    if(!res)//添加失败，恢复
+                        LessonDao.addLesson(lessons.get(0));
+                }
+                else {//删除失败
+                    res = false;
+                }
+            else{//此时已经没有空课程
+                lessons=LessonDao.search("innerID", user.getInnerID());
+                if (lessons.isEmpty())//此时为添加课程
+                    res = LessonDao.addLesson(user);
+                else//此时为修改课程
+                    if (LessonDao.deleteLesson(user.getInnerID()))
+                    {//删除成功
+                        res = LessonDao.addLesson(user);
+                        if(!res)//添加失败，恢复
+                            LessonDao.addLesson(lessons.get(0));
+                    }
+                    else {//删除失败
+                        res = false;
+                    }
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return false;
+        }
+        return res;
+    }
+    public List<Teacher> viewTeachers(String abledMajor) {
+        List<Teacher> res = null;
+        try {
+            res = TeacherDao.searchTeacher("abledMajor",abledMajor);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return res;
     }
@@ -69,24 +94,48 @@ public class LessonService implements Service{
         }
         return res;
     }
-    public boolean deleteone(String deleteoneID) {
-        boolean res;
+    public boolean delete(String deleteID) {
+        boolean res=false;
+        List<Lesson> lessons=null;
         try {
-            res=LessonDao.deleteLesson(deleteoneID);
+            lessons=LessonDao.search("lessonID",deleteID);
+            if(lessons.isEmpty())//没有这门课
+                res=false;
+            else for(Lesson lesson:lessons){
+                res= deleteone(lesson.getInnerID());
+                if(!res)return res;
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
         return res;
     }
-    public boolean setLesson(Lesson user) {
+    public boolean deleteone(String deleteoneID) {
         boolean res;
+        List<Lesson> lessons=null;
         try {
-            if(LessonDao.search("innerID",user.getLessonID()).isEmpty())//没有这个内部ID
+            lessons=LessonDao.search("innerID",deleteoneID);
+            if(lessons.isEmpty())//没有这门课
                 res=false;
-            else if(LessonDao.deleteLesson(user.getInnerID()))//删除成功
-                res=LessonDao.addLesson(user);//添加课程
-            else res=false;
+            else{
+                //先执行老师退课函数
+                //res=老师退课函数(lessons.get(0).getTeacherID());
+                //if(!res)return res;
+                //再执行学生退课函数
+                List<String> data = null;
+                data=LessonDao.searchStudent(deleteoneID);
+                for(String student:data){
+                    res= LessonDao.returnLesson(student,deleteoneID);
+                    if(!res)return res;
+                }
+                //再执行删除考试函数
+                res=ExamDao.deleteExam(deleteoneID);
+                if(!res)return res;
+                //再执行删除课程函数
+                res=LessonDao.deleteLesson(deleteoneID);
+                if(!res)return res;
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -102,10 +151,43 @@ public class LessonService implements Service{
         }
         return res;
     }
+    public List<Student> getTeacher(String lessonID) {
+        List<Student> res = null;
+        List<String>data=null;
+        List<Student> tmp = null;
+        try {
+            data=LessonDao.searchStudent(lessonID);
+            for(String student:data){
+                tmp=StudentDao.search("studentID",student);
+                if(!tmp.isEmpty())res.add(tmp.get(0));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+    public List<Student> getSpecificTeacher(String innerID) {
+        List<Student> res = null;
+        try {
+            res=LessonDao.searchStudent("innerID", innerID);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
     public List<Student> searchStudent(String studentID) {
         List<Student> res = null;
         try {
             res=StudentDao.search("studentID", studentID);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+    public List<Teacher> searchTeacher(String teacherID) {
+        List<Teacher> res = null;
+        try {
+            res=TeacherDao.searchTeacher("teacherID", teacherID);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -151,6 +233,35 @@ public class LessonService implements Service{
         boolean res;
         try {
             res=LessonDao.selectLesson(studentID, innerID);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return res;
+    }
+    public boolean addTeacher(Teacher user) {
+        boolean res;
+        List<Teacher> teachers = null;
+        try {
+            teachers = TeacherDao.searchTeacher("teacherID", user.getTeacherID());
+            if(!UserDao.search(user.getTeacherID())) {
+                //用户管理没有这个ID
+                res = false;
+            }
+            else if(teachers.isEmpty()) {
+                //没有对应数据
+                //视为添加
+                res = TeacherDao.addTeacher(user);
+            }
+            else if(!TeacherDao.deleteTeacher(user.getTeacherID())) {//视为修改
+                //删除信息失败
+                res = false;
+            }
+            else {
+                //删除信息成功
+                res = TeacherDao.addTeacher(user);
+                if(!res) TeacherDao.addTeacher(teachers.get(0));//添加失败，恢复
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return false;
