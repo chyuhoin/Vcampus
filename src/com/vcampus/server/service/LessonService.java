@@ -153,13 +153,15 @@ public class LessonService implements Service{
     }
     public List<Student> getTeacher(String lessonID) {
         List<Student> res = null;
-        List<String>data=null;
+        List<Lesson>data=null;
         List<Student> tmp = null;
         try {
-            data=LessonDao.searchStudent(lessonID);
-            for(String student:data){
-                tmp=StudentDao.search("studentID",student);
-                if(!tmp.isEmpty())res.add(tmp.get(0));
+            data=LessonDao.search("lessonID",lessonID);
+            for(Lesson lesson:data){
+                tmp=getSpecificTeacher(lesson.getInnerID());
+                for(Student student:tmp){
+                    res.add(student);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -168,8 +170,14 @@ public class LessonService implements Service{
     }
     public List<Student> getSpecificTeacher(String innerID) {
         List<Student> res = null;
+        List<String>data=null;
+        List<Student> tmp = null;
         try {
-            res=LessonDao.searchStudent("innerID", innerID);
+            data=LessonDao.searchStudent(innerID);
+            for(String student:data){
+                tmp=StudentDao.search("studentID",student);
+                if(!tmp.isEmpty())res.add(tmp.get(0));
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
