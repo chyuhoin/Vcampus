@@ -78,16 +78,25 @@ public class LibraryService implements Service {
         return LibraryDao.deleteBook(book.getBookID());
     }
 
-    public boolean borrowBook(String bookID, String studentID) {
-        return LibraryDao.borrowBook(bookID, studentID);
-    }
-
-    public boolean returnBook(String bookID, String studentID) {
+    public Book borrowBook(String bookID, String studentID) {
+        boolean res = LibraryDao.borrowBook(bookID, studentID);
+        if(!res) return null;
         try {
-            return LibraryDao.returnBook(bookID, studentID);
+            return LibraryDao.search("bookID", bookID).get(0);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return false;
+        return null;
+    }
+
+    public Book returnBook(String bookID, String studentID) {
+        try {
+            boolean res = LibraryDao.returnBook(bookID, studentID);
+            if(!res) return null;
+            return LibraryDao.search("bookID", bookID).get(0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

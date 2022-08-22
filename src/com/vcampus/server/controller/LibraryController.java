@@ -49,7 +49,7 @@ public class LibraryController implements Controller {
                             new TypeToken<HashMap<String,Object>>(){}.getType());
                     String bookId = (String) arguments.get("bookId");
                     String studentId = (String) arguments.get("studentId");
-                    map.put("res", service.borrowBook(bookId, studentId) ? "OK" : "Error");
+                    map.put("res", service.borrowBook(bookId, studentId));
                     break;
                 }
                 case "return": { //只有管理员手操才能实现还书
@@ -57,7 +57,7 @@ public class LibraryController implements Controller {
                             new TypeToken<HashMap<String,Object>>(){}.getType());
                     String bookId = (String) arguments.get("bookId");
                     String studentId = (String) arguments.get("studentId");
-                    map.put("res", service.returnBook(bookId, studentId) ? "OK" : "Error");
+                    map.put("res", service.returnBook(bookId, studentId));
                     break;
                 }
             }
