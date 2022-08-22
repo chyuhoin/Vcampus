@@ -1,0 +1,289 @@
+Index: src/com/vcampus/server/service/UserService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.vcampus.server.service;\r\n\r\nimport com.vcampus.dao.UserDao;\r\nimport com.vcampus.pojo.User;\r\n\r\npublic class UserService {\r\n    public boolean login(User user) {\r\n        String res;\r\n        try {\r\n            res = UserDao.loginCheck(user.getStudentID(), user.getPassword(), user.getType());\r\n        } catch (Exception e) {\r\n            e.printStackTrace();\r\n            return false;\r\n        }\r\n        return \"鐧婚檰鎴愬姛\".equals(res);\r\n    }\r\n    public boolean register(User user) {\r\n        String res;\r\n        try {\r\n            res = UserDao.register(user.getStudentID(), user.getPassword(), user.getType());\r\n        } catch (Exception e) {\r\n            e.printStackTrace();\r\n            return false;\r\n        }\r\n        return \"娉ㄥ唽鎴愬姛\".equals(res);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>GBK
+===================================================================
+diff --git a/src/com/vcampus/server/service/UserService.java b/src/com/vcampus/server/service/UserService.java
+--- a/src/com/vcampus/server/service/UserService.java	(revision d43068402c6955678ac7845b6daf0cdaecc9cd16)
++++ b/src/com/vcampus/server/service/UserService.java	(date 1660557157000)
+@@ -1,5 +1,6 @@
+ package com.vcampus.server.service;
+ 
++import com.mysql.jdbc.StringUtils;
+ import com.vcampus.dao.UserDao;
+ import com.vcampus.pojo.User;
+ 
+@@ -12,7 +13,10 @@
+             e.printStackTrace();
+             return false;
+         }
+-        return "鐧婚檰鎴愬姛".equals(res);
++        System.out.println(res);
++        System.out.println("登陆成功");
++        System.out.println(res.equals("登陆成功"));
++        return "登陆成功".equals(res);
+     }
+     public boolean register(User user) {
+         String res;
+@@ -22,6 +26,6 @@
+             e.printStackTrace();
+             return false;
+         }
+-        return "娉ㄥ唽鎴愬姛".equals(res);
++        return "注册成功".equals(res);
+     }
+ }
+Index: test/com/vcampus/test/LoginTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.vcampus.test;\r\n\r\nimport com.google.gson.Gson;\r\nimport com.google.gson.reflect.TypeToken;\r\nimport com.vcampus.net.ClientMessagePasser;\r\nimport com.vcampus.net.Message;\r\nimport com.vcampus.net.MessagePasser;\r\nimport com.vcampus.pojo.User;\r\n\r\nimport java.io.IOException;\r\nimport java.net.Socket;\r\nimport java.util.HashMap;\r\nimport java.util.Map;\r\n\r\npublic class LoginTest {\r\n    public static void main(String[] args) throws IOException {\r\n        Socket socket = new Socket(\"localhost\", 6666); // 连接指定服务器和端口\r\n        ClientMessagePasser.build(socket.getInputStream(), socket.getOutputStream());\r\n        Gson gson = new Gson();\r\n        String s = gson.toJson(new User(\"213203450\", \"123456\", 0));\r\n        System.out.println(s);\r\n        MessagePasser passer = ClientMessagePasser.getInstance();\r\n        passer.send(new Message(\"no\", s, \"login\", \"get\"));\r\n        Message message = (passer.receive());\r\n        Map<String,Object> map = new Gson().fromJson(message.getData(), new TypeToken<HashMap<String,Object>>(){}.getType());\r\n        System.out.println(map.get(\"res\"));\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/test/com/vcampus/test/LoginTest.java b/test/com/vcampus/test/LoginTest.java
+--- a/test/com/vcampus/test/LoginTest.java	(revision d43068402c6955678ac7845b6daf0cdaecc9cd16)
++++ b/test/com/vcampus/test/LoginTest.java	(date 1660556509729)
+@@ -17,7 +17,7 @@
+         Socket socket = new Socket("localhost", 6666); // 连接指定服务器和端口
+         ClientMessagePasser.build(socket.getInputStream(), socket.getOutputStream());
+         Gson gson = new Gson();
+-        String s = gson.toJson(new User("213203450", "123456", 0));
++        String s = gson.toJson(new User("22", "123456", 0));
+         System.out.println(s);
+         MessagePasser passer = ClientMessagePasser.getInstance();
+         passer.send(new Message("no", s, "login", "get"));
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"15435ea3-daf0-45be-876d-97d3668b8c59\" name=\"Changes\" comment=\"\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/com/vcampus/dao/UserDao.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/com/vcampus/dao/UserDao.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"PUSH_TAGS\">\r\n      <GitPushTagMode>\r\n        <option name=\"argument\" value=\"--tags\" />\r\n        <option name=\"title\" value=\"All\" />\r\n      </GitPushTagMode>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2DFN8UqGaWdtufeJ3QLOdvtrWZL\" />\r\n  <component name=\"ProjectLevelVcsManager\">\r\n    <OptionsSetting value=\"false\" id=\"Update\" />\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"foldersAlwaysOnTop\" value=\"false\" />\r\n    <option name=\"showModules\" value=\"false\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"ASKED_ADD_EXTERNAL_FILES\": \"true\",\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"SHARE_PROJECT_CONFIGURATION_FILES\": \"true\",\r\n    \"WebServerToolWindowFactoryState\": \"false\",\r\n    \"last_opened_file_path\": \"D:/Study/Git/Vcampus/Vcampus\",\r\n    \"settings.editor.selected.configurable\": \"org.jetbrains.plugins.github.ui.GithubSettingsConfigurable\"\r\n  },\r\n  \"keyToStringList\": {\r\n    \"ChangesTree.GroupingKeys\": [\r\n      \"directory\",\r\n      \"module\"\r\n    ]\r\n  }\r\n}]]></component>\r\n  <component name=\"RunManager\" selected=\"JUnit.UserDao.test\">\r\n    <configuration name=\"Server\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.vcampus.server.Server\" />\r\n      <module name=\"Vcampus\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"com.vcampus.server.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"LibraryDao.test\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"Vcampus\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"com.vcampus.dao.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <option name=\"PACKAGE_NAME\" value=\"com.vcampus.dao\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.vcampus.dao.LibraryDao\" />\r\n      <option name=\"METHOD_NAME\" value=\"test\" />\r\n      <option name=\"TEST_OBJECT\" value=\"method\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"Library.test\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"Vcampus\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"com.vcampus.server.user.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <option name=\"PACKAGE_NAME\" value=\"com.vcampus.server.library\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.vcampus.server.library.Library\" />\r\n      <option name=\"METHOD_NAME\" value=\"test\" />\r\n      <option name=\"TEST_OBJECT\" value=\"method\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"UserDao.test\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"Vcampus\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"com.vcampus.dao.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <option name=\"PACKAGE_NAME\" value=\"com.vcampus.dao\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.vcampus.dao.UserDao\" />\r\n      <option name=\"METHOD_NAME\" value=\"test\" />\r\n      <option name=\"TEST_OBJECT\" value=\"method\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"test.test\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"Vcampus\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"com.vcampus.dao.utils.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <option name=\"PACKAGE_NAME\" value=\"com.vcampus.dao.utils\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.vcampus.dao.utils.test\" />\r\n      <option name=\"METHOD_NAME\" value=\"test\" />\r\n      <option name=\"TEST_OBJECT\" value=\"method\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"JUnit.UserDao.test\" />\r\n        <item itemvalue=\"Application.Server\" />\r\n        <item itemvalue=\"JUnit.LibraryDao.test\" />\r\n        <item itemvalue=\"JUnit.test.test\" />\r\n        <item itemvalue=\"JUnit.Library.test\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"15435ea3-daf0-45be-876d-97d3668b8c59\" name=\"Changes\" comment=\"\" />\r\n      <created>1660290718338</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1660290718338</updated>\r\n      <workItem from=\"1660290720744\" duration=\"7006000\" />\r\n      <workItem from=\"1660394444650\" duration=\"60000\" />\r\n      <workItem from=\"1660394516873\" duration=\"56000\" />\r\n      <workItem from=\"1660394584644\" duration=\"9000\" />\r\n      <workItem from=\"1660395297646\" duration=\"18000\" />\r\n      <workItem from=\"1660397164596\" duration=\"38000\" />\r\n      <workItem from=\"1660397307971\" duration=\"4358000\" />\r\n      <workItem from=\"1660403234776\" duration=\"303000\" />\r\n      <workItem from=\"1660454140324\" duration=\"96000\" />\r\n      <workItem from=\"1660455383694\" duration=\"9368000\" />\r\n      <workItem from=\"1660546281143\" duration=\"210000\" />\r\n      <workItem from=\"1660553294493\" duration=\"2324000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"初步写了登录注册\">\r\n      <created>1660298515554</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1660298515554</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"写了一个方法把map转为bean对象\">\r\n      <created>1660401643513</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1660401643513</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"实现可序列化接口\">\r\n      <created>1660554878384</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1660554878384</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"4\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <option name=\"ADD_EXTERNAL_FILES_SILENTLY\" value=\"true\" />\r\n    <MESSAGE value=\"初步写了登录注册\" />\r\n    <MESSAGE value=\"写了一个方法把map转为bean对象\" />\r\n    <MESSAGE value=\"实现可序列化接口\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"实现可序列化接口\" />\r\n  </component>\r\n  <component name=\"XSLT-Support.FileAssociations.UIState\">\r\n    <expand />\r\n    <select />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision d43068402c6955678ac7845b6daf0cdaecc9cd16)
++++ b/.idea/workspace.xml	(date 1660558446993)
+@@ -1,9 +1,13 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ChangeListManager">
+-    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="">
++    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="加了注册">
++      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/test/com/vcampus/test/RegisterTest.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/UserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/UserDao.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/com/vcampus/server/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/server/service/UserService.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/test/com/vcampus/test/LoginTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/com/vcampus/test/LoginTest.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -38,24 +42,37 @@
+     <option name="foldersAlwaysOnTop" value="false" />
+     <option name="showModules" value="false" />
+   </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "ASKED_ADD_EXTERNAL_FILES": "true",
+-    "RunOnceActivity.OpenProjectViewOnStart": "true",
+-    "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+-    "WebServerToolWindowFactoryState": "false",
+-    "last_opened_file_path": "D:/Study/Git/Vcampus/Vcampus",
+-    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable"
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
++    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
++    &quot;last_opened_file_path&quot;: &quot;D:/Study/Git/Vcampus/Vcampus&quot;,
++    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;
+   },
+-  "keyToStringList": {
+-    "ChangesTree.GroupingKeys": [
+-      "directory",
+-      "module"
++  &quot;keyToStringList&quot;: {
++    &quot;ChangesTree.GroupingKeys&quot;: [
++      &quot;directory&quot;,
++      &quot;module&quot;
+     ]
+   }
+-}]]></component>
+-  <component name="RunManager" selected="JUnit.UserDao.test">
++}</component>
++  <component name="RunManager" selected="应用程序.LoginTest">
++    <configuration name="LoginTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
++      <option name="MAIN_CLASS_NAME" value="com.vcampus.test.LoginTest" />
++      <module name="Vcampus" />
++      <extension name="coverage">
++        <pattern>
++          <option name="PATTERN" value="com.vcampus.test.*" />
++          <option name="ENABLED" value="true" />
++        </pattern>
++      </extension>
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
+     <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+       <option name="MAIN_CLASS_NAME" value="com.vcampus.server.Server" />
+       <module name="Vcampus" />
+@@ -95,22 +112,6 @@
+       </extension>
+       <option name="PACKAGE_NAME" value="com.vcampus.server.library" />
+       <option name="MAIN_CLASS_NAME" value="com.vcampus.server.library.Library" />
+-      <option name="METHOD_NAME" value="test" />
+-      <option name="TEST_OBJECT" value="method" />
+-      <method v="2">
+-        <option name="Make" enabled="true" />
+-      </method>
+-    </configuration>
+-    <configuration name="UserDao.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+-      <module name="Vcampus" />
+-      <extension name="coverage">
+-        <pattern>
+-          <option name="PATTERN" value="com.vcampus.dao.*" />
+-          <option name="ENABLED" value="true" />
+-        </pattern>
+-      </extension>
+-      <option name="PACKAGE_NAME" value="com.vcampus.dao" />
+-      <option name="MAIN_CLASS_NAME" value="com.vcampus.dao.UserDao" />
+       <option name="METHOD_NAME" value="test" />
+       <option name="TEST_OBJECT" value="method" />
+       <method v="2">
+@@ -135,11 +136,11 @@
+     </configuration>
+     <recent_temporary>
+       <list>
+-        <item itemvalue="JUnit.UserDao.test" />
+-        <item itemvalue="Application.Server" />
++        <item itemvalue="应用程序.LoginTest" />
++        <item itemvalue="应用程序.Server" />
++        <item itemvalue="JUnit.Library.test" />
+         <item itemvalue="JUnit.LibraryDao.test" />
+         <item itemvalue="JUnit.test.test" />
+-        <item itemvalue="JUnit.Library.test" />
+       </list>
+     </recent_temporary>
+   </component>
+@@ -162,7 +163,8 @@
+       <workItem from="1660454140324" duration="96000" />
+       <workItem from="1660455383694" duration="9368000" />
+       <workItem from="1660546281143" duration="210000" />
+-      <workItem from="1660553294493" duration="2324000" />
++      <workItem from="1660553294493" duration="1539000" />
++      <workItem from="1660557685463" duration="756000" />
+     </task>
+     <task id="LOCAL-00001" summary="初步写了登录注册">
+       <created>1660298515554</created>
+@@ -178,14 +180,7 @@
+       <option name="project" value="LOCAL" />
+       <updated>1660401643513</updated>
+     </task>
+-    <task id="LOCAL-00003" summary="实现可序列化接口">
+-      <created>1660554878384</created>
+-      <option name="number" value="00003" />
+-      <option name="presentableId" value="LOCAL-00003" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1660554878384</updated>
+-    </task>
+-    <option name="localTasksCounter" value="4" />
++    <option name="localTasksCounter" value="3" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -206,8 +201,7 @@
+     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+     <MESSAGE value="初步写了登录注册" />
+     <MESSAGE value="写了一个方法把map转为bean对象" />
+-    <MESSAGE value="实现可序列化接口" />
+-    <option name="LAST_COMMIT_MESSAGE" value="实现可序列化接口" />
++    <option name="LAST_COMMIT_MESSAGE" value="写了一个方法把map转为bean对象" />
+   </component>
+   <component name="XSLT-Support.FileAssociations.UIState">
+     <expand />
+Index: .idea/encodings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"Encoding\">\r\n    <file url=\"file://$PROJECT_DIR$/src/com/vcampus/client/login/myLoginTest.java\" charset=\"UTF-8\" />\r\n    <file url=\"file://$PROJECT_DIR$/src/com/vcampus/dao/UserDao.java\" charset=\"GBK\" />\r\n    <file url=\"file://$PROJECT_DIR$/src/com/vcampus/dao/utils/databaseConn.java\" charset=\"UTF-8\" />\r\n    <file url=\"file://$PROJECT_DIR$/src/com/vcampus/server/user/Login.java\" charset=\"GBK\" />\r\n    <file url=\"file://$PROJECT_DIR$/src/com/vcampus/server/user/Register.java\" charset=\"GBK\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/encodings.xml b/.idea/encodings.xml
+--- a/.idea/encodings.xml	(revision d43068402c6955678ac7845b6daf0cdaecc9cd16)
++++ b/.idea/encodings.xml	(date 1660557162060)
+@@ -4,6 +4,7 @@
+     <file url="file://$PROJECT_DIR$/src/com/vcampus/client/login/myLoginTest.java" charset="UTF-8" />
+     <file url="file://$PROJECT_DIR$/src/com/vcampus/dao/UserDao.java" charset="GBK" />
+     <file url="file://$PROJECT_DIR$/src/com/vcampus/dao/utils/databaseConn.java" charset="UTF-8" />
++    <file url="file://$PROJECT_DIR$/src/com/vcampus/server/service/UserService.java" charset="GBK" />
+     <file url="file://$PROJECT_DIR$/src/com/vcampus/server/user/Login.java" charset="GBK" />
+     <file url="file://$PROJECT_DIR$/src/com/vcampus/server/user/Register.java" charset="GBK" />
+   </component>
+Index: test/com/vcampus/test/RegisterTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/test/com/vcampus/test/RegisterTest.java b/test/com/vcampus/test/RegisterTest.java
+new file mode 100644
+--- /dev/null	(date 1660556062444)
++++ b/test/com/vcampus/test/RegisterTest.java	(date 1660556062444)
+@@ -0,0 +1,28 @@
++package com.vcampus.test;
++
++import com.google.gson.Gson;
++import com.google.gson.reflect.TypeToken;
++import com.vcampus.net.ClientMessagePasser;
++import com.vcampus.net.Message;
++import com.vcampus.net.MessagePasser;
++import com.vcampus.pojo.User;
++
++import java.io.IOException;
++import java.net.Socket;
++import java.util.HashMap;
++import java.util.Map;
++
++public class RegisterTest {
++    public static void main(String[] args) throws IOException {
++        Socket socket = new Socket("localhost", 6666); // 连接指定服务器和端口
++        ClientMessagePasser.build(socket.getInputStream(), socket.getOutputStream());
++        Gson gson = new Gson();
++        String s = gson.toJson(new User("33", "111222", 1));
++        System.out.println(s);
++        MessagePasser passer = ClientMessagePasser.getInstance();
++        passer.send(new Message("no", s, "login", "register"));
++        Message message = (passer.receive());
++        Map<String,Object> map = new Gson().fromJson(message.getData(), new TypeToken<HashMap<String,Object>>(){}.getType());
++        System.out.println(map.get("res"));
++    }
++}
+\ No newline at end of file
+Index: .idea/dataSources.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/dataSources.xml b/.idea/dataSources.xml
+new file mode 100644
+--- /dev/null	(date 1660555886414)
++++ b/.idea/dataSources.xml	(date 1660555886414)
+@@ -0,0 +1,12 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
++    <data-source source="LOCAL" name="vcampus" uuid="16ab1209-50a4-4f5c-abc4-19d56b62a9e5">
++      <driver-ref>mysql.8</driver-ref>
++      <synchronize>true</synchronize>
++      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
++      <jdbc-url>jdbc:mysql://180.76.235.163:3306/summer</jdbc-url>
++      <working-dir>$ProjectFileDir$</working-dir>
++    </data-source>
++  </component>
++</project>
+\ No newline at end of file
