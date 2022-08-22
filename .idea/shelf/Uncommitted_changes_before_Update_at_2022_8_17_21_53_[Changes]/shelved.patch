@@ -1,0 +1,207 @@
+Index: src/com/vcampus/dao/LessonDao.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.vcampus.dao;\r\n\r\nimport com.vcampus.dao.utils.CRUD;\r\nimport com.vcampus.dao.utils.databaseConn;\r\nimport com.vcampus.dao.utils.mapToBean;\r\nimport com.vcampus.pojo.Book;\r\nimport com.vcampus.pojo.Lesson;\r\nimport org.junit.Test;\r\n\r\nimport java.sql.Connection;\r\nimport java.sql.Statement;\r\nimport java.util.ArrayList;\r\nimport java.util.Collections;\r\nimport java.util.List;\r\nimport java.util.Map;\r\n\r\npublic class LessonDao extends BaseDao{\r\n    //无参时查询所有课程\r\n    public static List<Lesson> search() throws Exception {\r\n        String sql = \"select * from tb_LESSON\";\r\n        List<Map<String, Object>> resultList = CRUD.Query(sql,conn);\r\n        List<Lesson> result = new ArrayList<>();\r\n        for (Map<String, Object> map : resultList) {\r\n            Lesson lesson = mapToBean.map2Bean(map, Lesson.class);\r\n            result.add(lesson);\r\n        }\r\n        return result;\r\n    }\r\n\r\n    //有参按条件查询\r\n    public static List<Lesson> search(String field, String value) throws Exception {\r\n        String sql = \"select * from tb_LESSON where \" + field + \" = '\" + value + \"'\";\r\n        List<Map<String, Object>> resultList = CRUD.Query(sql,conn);\r\n        List<Lesson> result = new ArrayList<>();\r\n        for (Map<String, Object> map : resultList) {\r\n            Lesson lesson = mapToBean.map2Bean(map, Lesson.class);\r\n            result.add(lesson);\r\n        }\r\n        return result;\r\n    }\r\n\r\n    //查询自己选的课信息\r\n    public static List<Lesson> searchMine(String studentID) throws Exception {\r\n        String sql = \"SELECT tb_STUDENTWITHLESSON.* from tb_LESSON ,tb_STUDENTWITHLESSON \" +\r\n                \"WHERE tb_LESSON.innerID = tb_STUDENTWITHLESSON.innerID \" +\r\n                \"and tb_STUDENTWITHLESSON.studentID = '\" + studentID + \"'\";\r\n        List<Map<String, Object>> resultList = CRUD.Query(sql,conn);\r\n        List<Lesson> result = new ArrayList<>();\r\n        System.out.println(resultList);\r\n        for (Map<String, Object> map : resultList) {\r\n            Lesson lesson = mapToBean.map2Bean(map, Lesson.class);\r\n            result.add(lesson);\r\n        }\r\n        return result;\r\n    }\r\n\r\n    //学生选课\r\n    public static Boolean selectLesson(String studentID, String innerID) throws Exception {\r\n        String judgeSql = \"select * from tb_STUDENTWITHLESSON where studentID = '\" + studentID + \"' and innerID = '\" + innerID + \"'\";\r\n        List<Map<String, Object>> judge = CRUD.Query(judgeSql,conn);\r\n        if (judge.isEmpty()) {\r\n            try {\r\n                String sql1 = \"update tb_LESSON set leftSize=leftSize-1 where innerID = '\" + innerID + \"'\";\r\n                String sql2 = \"insert into tb_STUDENTWITHLESSON (studentID,innerID) values ('\" + studentID + \"','\" + innerID + \"')\";\r\n                Connection conn = databaseConn.getConn();\r\n                conn.setAutoCommit(false);\r\n                Statement stm = conn.createStatement();\r\n                stm.executeUpdate(sql1);\r\n                stm.executeUpdate(sql2);\r\n                conn.commit();\r\n                stm.close();\r\n                conn.close();\r\n                return true;\r\n            } catch (Exception e) {\r\n                return false;\r\n            }\r\n        } else {\r\n            return false;\r\n        }\r\n    }\r\n\r\n    //管理员给学生添加成绩\r\n    public static Boolean addGrade(String studentID, String innerID, Integer grade) throws Exception {\r\n        String sql = \"update tb_STUDENTWITHLESSON set grade = \" + String.valueOf(grade) + \" where studentID = '\" + studentID + \"' and innerID = '\" + innerID + \"'\";\r\n        try {\r\n            CRUD.update(sql,conn);\r\n            return true;\r\n        } catch (Exception e) {\r\n            return false;\r\n        }\r\n    }\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/com/vcampus/dao/LessonDao.java b/src/com/vcampus/dao/LessonDao.java
+--- a/src/com/vcampus/dao/LessonDao.java	(revision 58d3ff911d95e040268ca7d4a857bc298bdfbaf8)
++++ b/src/com/vcampus/dao/LessonDao.java	(date 1660737566814)
+@@ -8,6 +8,7 @@
+ import org.junit.Test;
+ 
+ import java.sql.Connection;
++import java.sql.PreparedStatement;
+ import java.sql.Statement;
+ import java.util.ArrayList;
+ import java.util.Collections;
+@@ -78,7 +79,27 @@
+             return false;
+         }
+     }
+-
++    //给课程添加老师
++    public static Boolean addLesson(Lesson lesson){
++        try {
++            String sql = "insert into tb_LESSON (innerID,lessonID,name,teacherID,maxSize,leftSize,time,school,major,isExam) values(?,?,?,?,?,?,?,?,?,?)";
++            PreparedStatement ps = conn.prepareStatement(sql);
++            ps.setString(1,lesson.getInnerID());
++            ps.setString(2,lesson.getLessonID());
++            ps.setString(3,lesson.getName());
++            ps.setString(4,lesson.getTeacherID());
++            ps.setInt(5,lesson.getMaxSize());
++            ps.setInt(6,lesson.getLeftSize());
++            ps.setString(7,lesson.getTime());
++            ps.setString(8,lesson.getSchool());
++            ps.setString(9, lesson.getMajor());
++            ps.setInt(10,lesson.getIsExam());
++            CRUD.update(sql,conn);
++            return true;
++        }catch (Exception e){
++            return false;
++        }
++    }
+     //管理员给学生添加成绩
+     public static Boolean addGrade(String studentID, String innerID, Integer grade) throws Exception {
+         String sql = "update tb_STUDENTWITHLESSON set grade = " + String.valueOf(grade) + " where studentID = '" + studentID + "' and innerID = '" + innerID + "'";
+Index: src/com/vcampus/pojo/Lesson.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.vcampus.pojo;\r\n\r\nimport java.io.Serializable;\r\n\r\npublic class Lesson implements Serializable {\r\n    String innerID;\r\n    String lessonID;\r\n    String name;\r\n    String teacherID;\r\n    Integer maxSize;\r\n    Integer leftSize;\r\n    String time;\r\n    String school;\r\n    String major;\r\n    Integer isExam;\r\n\r\n    public Lesson(String innerID, String lessonID, String name, String teacherID, Integer maxSize, Integer leftSize, String time, String school, String major, Integer isExam) {\r\n        this.innerID = innerID;\r\n        this.lessonID = lessonID;\r\n        this.name = name;\r\n        this.teacherID = teacherID;\r\n        this.maxSize = maxSize;\r\n        this.leftSize = leftSize;\r\n        this.time = time;\r\n        this.school = school;\r\n        this.major = major;\r\n        this.isExam = isExam;\r\n    }\r\n\r\n    public Lesson() {\r\n    }\r\n\r\n    public String getInnerID() {\r\n        return innerID;\r\n    }\r\n\r\n    public void setInnerID(String innerID) {\r\n        this.innerID = innerID;\r\n    }\r\n\r\n    public String getLessonID() {\r\n        return lessonID;\r\n    }\r\n\r\n    public void setLessonID(String lessonID) {\r\n        this.lessonID = lessonID;\r\n    }\r\n\r\n    public String getName() {\r\n        return name;\r\n    }\r\n\r\n    public void setName(String name) {\r\n        this.name = name;\r\n    }\r\n\r\n    public String getTeacherID() {\r\n        return teacherID;\r\n    }\r\n\r\n    public void setTeacherID(String teacherID) {\r\n        this.teacherID = teacherID;\r\n    }\r\n\r\n    public Integer getMaxSize() {\r\n        return maxSize;\r\n    }\r\n\r\n    public void setMaxSize(Integer maxSize) {\r\n        this.maxSize = maxSize;\r\n    }\r\n\r\n    public Integer getLeftSize() {\r\n        return leftSize;\r\n    }\r\n\r\n    public void setLeftSize(Integer leftSize) {\r\n        this.leftSize = leftSize;\r\n    }\r\n\r\n    public String getTime() {\r\n        return time;\r\n    }\r\n\r\n    public void setTime(String time) {\r\n        this.time = time;\r\n    }\r\n\r\n    public String getSchool() {\r\n        return school;\r\n    }\r\n\r\n    public void setSchool(String school) {\r\n        this.school = school;\r\n    }\r\n\r\n    public String getMajor() {\r\n        return major;\r\n    }\r\n\r\n    public void setMajor(String major) {\r\n        this.major = major;\r\n    }\r\n\r\n    public Integer getIsExam() {\r\n        return isExam;\r\n    }\r\n\r\n    public void setIsExam(Integer isExam) {\r\n        this.isExam = isExam;\r\n    }\r\n\r\n    @Override\r\n    public String toString() {\r\n        return \"Lesson{\" +\r\n                \"innerID='\" + innerID + '\\'' +\r\n                \", lessonID='\" + lessonID + '\\'' +\r\n                \", name='\" + name + '\\'' +\r\n                \", teacherID='\" + teacherID + '\\'' +\r\n                \", maxSize=\" + maxSize +\r\n                \", leftSize=\" + leftSize +\r\n                \", time='\" + time + '\\'' +\r\n                \", school='\" + school + '\\'' +\r\n                \", major='\" + major + '\\'' +\r\n                \", isExam=\" + isExam +\r\n                '}';\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/com/vcampus/pojo/Lesson.java b/src/com/vcampus/pojo/Lesson.java
+--- a/src/com/vcampus/pojo/Lesson.java	(revision 58d3ff911d95e040268ca7d4a857bc298bdfbaf8)
++++ b/src/com/vcampus/pojo/Lesson.java	(date 1660737232508)
+@@ -14,8 +14,9 @@
+     String major;
+     Integer isExam;
+ 
+-    public Lesson(String innerID, String lessonID, String name, String teacherID, Integer maxSize, Integer leftSize, String time, String school, String major, Integer isExam) {
+-        this.innerID = innerID;
++    //lesson的innerID为lessonID+teacherID，不需要手动输入
++    public Lesson(String lessonID, String name, String teacherID, Integer maxSize, Integer leftSize, String time, String school, String major, Integer isExam) {
++        this.innerID = lessonID+teacherID;
+         this.lessonID = lessonID;
+         this.name = name;
+         this.teacherID = teacherID;
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"15435ea3-daf0-45be-876d-97d3668b8c59\" name=\"Changes\" comment=\"为Book增加了字符串形式表示的图片，写了图片和字符串相互转化的类。&#10;修改了LibraryDao层，可以多个条件查询\">\r\n      <change afterPath=\"$PROJECT_DIR$/src/com/vcampus/server/controller/LessonController.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src/com/vcampus/server/controller/TestController.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src/com/vcampus/server/service/LessonService.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src/com/vcampus/server/service/TestService.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/com/vcampus/server/ServerRunner.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/com/vcampus/server/ServerRunner.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/com/vcampus/server/controller/LoginController.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/com/vcampus/server/controller/LoginController.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/com/vcampus/server/service/UserService.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/com/vcampus/server/service/UserService.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"PUSH_TAGS\">\r\n      <GitPushTagMode>\r\n        <option name=\"argument\" value=\"--tags\" />\r\n        <option name=\"title\" value=\"All\" />\r\n      </GitPushTagMode>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2DFN8UqGaWdtufeJ3QLOdvtrWZL\" />\r\n  <component name=\"ProjectLevelVcsManager\">\r\n    <OptionsSetting value=\"false\" id=\"Update\" />\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"foldersAlwaysOnTop\" value=\"false\" />\r\n    <option name=\"showModules\" value=\"false\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\r\n    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;D:/Code/JavaWebCode/Vcampus/src&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;File.Encoding&quot;\r\n  },\r\n  &quot;keyToStringList&quot;: {\r\n    &quot;ChangesTree.GroupingKeys&quot;: [\r\n      &quot;directory&quot;,\r\n      &quot;module&quot;\r\n    ]\r\n  }\r\n}</component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"D:\\Code\\JavaWebCode\\Vcampus\\src\" />\r\n      <recent name=\"D:\\Code\\JavaWebCode\\Vcampus\" />\r\n    </key>\r\n    <key name=\"CopyClassDialog.RECENTS_KEY\">\r\n      <recent name=\"com.vcampus.client.login\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"JUnit.LibraryDao.test\">\r\n    <configuration name=\"LoginTest\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.vcampus.test.LoginTest\" />\r\n      <module name=\"Vcampus\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"com.vcampus.test.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"myLoginTest\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.vcampus.client.login.myLoginTest\" />\r\n      <module name=\"Vcampus\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"com.vcampus.client.login.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"myLoginTest2\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.vcampus.client.login.myLoginTest2\" />\r\n      <module name=\"Vcampus\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"com.vcampus.client.login.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"LibraryDao.test\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"Vcampus\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"com.vcampus.dao.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <option name=\"PACKAGE_NAME\" value=\"com.vcampus.dao\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.vcampus.dao.LibraryDao\" />\r\n      <option name=\"METHOD_NAME\" value=\"test\" />\r\n      <option name=\"TEST_OBJECT\" value=\"method\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"StringAndImage.test\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"Vcampus\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"com.vcampus.dao.utils.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <option name=\"PACKAGE_NAME\" value=\"com.vcampus.dao.utils\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.vcampus.dao.utils.StringAndImage\" />\r\n      <option name=\"METHOD_NAME\" value=\"test\" />\r\n      <option name=\"TEST_OBJECT\" value=\"method\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"JUnit.LibraryDao.test\" />\r\n        <item itemvalue=\"JUnit.StringAndImage.test\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"15435ea3-daf0-45be-876d-97d3668b8c59\" name=\"Changes\" comment=\"\" />\r\n      <created>1660290718338</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1660290718338</updated>\r\n      <workItem from=\"1660290720744\" duration=\"7006000\" />\r\n      <workItem from=\"1660394444650\" duration=\"60000\" />\r\n      <workItem from=\"1660394516873\" duration=\"56000\" />\r\n      <workItem from=\"1660394584644\" duration=\"9000\" />\r\n      <workItem from=\"1660395297646\" duration=\"18000\" />\r\n      <workItem from=\"1660397164596\" duration=\"38000\" />\r\n      <workItem from=\"1660397307971\" duration=\"4358000\" />\r\n      <workItem from=\"1660403234776\" duration=\"303000\" />\r\n      <workItem from=\"1660454140324\" duration=\"96000\" />\r\n      <workItem from=\"1660455383694\" duration=\"9368000\" />\r\n      <workItem from=\"1660546281143\" duration=\"210000\" />\r\n      <workItem from=\"1660553294493\" duration=\"5398000\" />\r\n      <workItem from=\"1660563636857\" duration=\"2164000\" />\r\n      <workItem from=\"1660619044349\" duration=\"4132000\" />\r\n      <workItem from=\"1660637701493\" duration=\"2215000\" />\r\n      <workItem from=\"1660639997270\" duration=\"5427000\" />\r\n      <workItem from=\"1660648925845\" duration=\"884000\" />\r\n      <workItem from=\"1660694384311\" duration=\"5422000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"初步写了登录注册\">\r\n      <created>1660298515554</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1660298515554</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"写了一个方法把map转为bean对象\">\r\n      <created>1660401643513</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1660401643513</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"实现可序列化接口\">\r\n      <created>1660554878384</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1660554878384</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"对注册添加了类型验证\">\r\n      <created>1660555737524</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1660555737524</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"完成了studentDao层，暂时没有把照片添加进去，主要是照片的读取之类的需要特殊方法，我要再学习一下\">\r\n      <created>1660567403654</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1660567403654</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"这次初步写了libraryDao层，但引发了我一个关于数据库隔离的思考，这部分知识我还要好好学一下。目前为止我的Dao层都是静态方法，当查询的时候都是现获取的，这样的方法的弊端一个是效率问题，需要频繁开关，另一个问题则是数据库隔离的隐患。我正在考虑重写某些方法。\">\r\n      <created>1660648795402</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1660648795402</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"重写了下CRUD类中的方法，加入了一个connection参数。写了一个BaseDao，内部定义了一个连接，各个Dao类都继承了BaseDao。现在使用同一个connection进行操作了\">\r\n      <created>1660649808298</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1660649808298</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00008\" summary=\"为Book增加了字符串形式表示的图片，写了图片和字符串相互转化的类。&#10;修改了LibraryDao层，可以多个条件查询\">\r\n      <created>1660700337585</created>\r\n      <option name=\"number\" value=\"00008\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1660700337585</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"9\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <option name=\"ADD_EXTERNAL_FILES_SILENTLY\" value=\"true\" />\r\n    <MESSAGE value=\"初步写了登录注册\" />\r\n    <MESSAGE value=\"写了一个方法把map转为bean对象\" />\r\n    <MESSAGE value=\"实现可序列化接口\" />\r\n    <MESSAGE value=\"对注册添加了类型验证\" />\r\n    <MESSAGE value=\"完成了studentDao层，暂时没有把照片添加进去，主要是照片的读取之类的需要特殊方法，我要再学习一下\" />\r\n    <MESSAGE value=\"这次初步写了libraryDao层，但引发了我一个关于数据库隔离的思考，这部分知识我还要好好学一下。目前为止我的Dao层都是静态方法，当查询的时候都是现获取的，这样的方法的弊端一个是效率问题，需要频繁开关，另一个问题则是数据库隔离的隐患。我正在考虑重写某些方法。\" />\r\n    <MESSAGE value=\"重写了下CRUD类中的方法，加入了一个connection参数。写了一个BaseDao，内部定义了一个连接，各个Dao类都继承了BaseDao。现在使用同一个connection进行操作了\" />\r\n    <MESSAGE value=\"为Book增加了字符串形式表示的图片，写了图片和字符串相互转化的类。&#10;修改了LibraryDao层，可以多个条件查询\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"为Book增加了字符串形式表示的图片，写了图片和字符串相互转化的类。&#10;修改了LibraryDao层，可以多个条件查询\" />\r\n  </component>\r\n  <component name=\"XSLT-Support.FileAssociations.UIState\">\r\n    <expand />\r\n    <select />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 58d3ff911d95e040268ca7d4a857bc298bdfbaf8)
++++ b/.idea/workspace.xml	(date 1660737567797)
+@@ -1,15 +1,10 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ChangeListManager">
+-    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="为Book增加了字符串形式表示的图片，写了图片和字符串相互转化的类。&#10;修改了LibraryDao层，可以多个条件查询">
+-      <change afterPath="$PROJECT_DIR$/src/com/vcampus/server/controller/LessonController.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/com/vcampus/server/controller/TestController.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/com/vcampus/server/service/LessonService.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/com/vcampus/server/service/TestService.java" afterDir="false" />
++    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="在userDao层添加了由管理员修改用户类型以及用户自己修改密码">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/server/ServerRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/server/ServerRunner.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/server/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/server/controller/LoginController.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/server/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/server/service/UserService.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/LessonDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/LessonDao.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/com/vcampus/pojo/Lesson.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/pojo/Lesson.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -70,20 +65,7 @@
+       <recent name="com.vcampus.client.login" />
+     </key>
+   </component>
+-  <component name="RunManager" selected="JUnit.LibraryDao.test">
+-    <configuration name="LoginTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+-      <option name="MAIN_CLASS_NAME" value="com.vcampus.test.LoginTest" />
+-      <module name="Vcampus" />
+-      <extension name="coverage">
+-        <pattern>
+-          <option name="PATTERN" value="com.vcampus.test.*" />
+-          <option name="ENABLED" value="true" />
+-        </pattern>
+-      </extension>
+-      <method v="2">
+-        <option name="Make" enabled="true" />
+-      </method>
+-    </configuration>
++  <component name="RunManager" selected="JUnit.LessonDao.test">
+     <configuration name="myLoginTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+       <option name="MAIN_CLASS_NAME" value="com.vcampus.client.login.myLoginTest" />
+       <module name="Vcampus" />
+@@ -97,15 +79,18 @@
+         <option name="Make" enabled="true" />
+       </method>
+     </configuration>
+-    <configuration name="myLoginTest2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+-      <option name="MAIN_CLASS_NAME" value="com.vcampus.client.login.myLoginTest2" />
++    <configuration name="LessonDao.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+       <module name="Vcampus" />
+       <extension name="coverage">
+         <pattern>
+-          <option name="PATTERN" value="com.vcampus.client.login.*" />
++          <option name="PATTERN" value="com.vcampus.dao.*" />
+           <option name="ENABLED" value="true" />
+         </pattern>
+       </extension>
++      <option name="PACKAGE_NAME" value="com.vcampus.dao" />
++      <option name="MAIN_CLASS_NAME" value="com.vcampus.dao.LessonDao" />
++      <option name="METHOD_NAME" value="test" />
++      <option name="TEST_OBJECT" value="method" />
+       <method v="2">
+         <option name="Make" enabled="true" />
+       </method>
+@@ -142,10 +127,29 @@
+         <option name="Make" enabled="true" />
+       </method>
+     </configuration>
++    <configuration name="UserDao.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
++      <module name="Vcampus" />
++      <extension name="coverage">
++        <pattern>
++          <option name="PATTERN" value="com.vcampus.dao.*" />
++          <option name="ENABLED" value="true" />
++        </pattern>
++      </extension>
++      <option name="PACKAGE_NAME" value="com.vcampus.dao" />
++      <option name="MAIN_CLASS_NAME" value="com.vcampus.dao.UserDao" />
++      <option name="METHOD_NAME" value="test" />
++      <option name="TEST_OBJECT" value="method" />
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
+     <recent_temporary>
+       <list>
++        <item itemvalue="JUnit.LessonDao.test" />
++        <item itemvalue="JUnit.UserDao.test" />
+         <item itemvalue="JUnit.LibraryDao.test" />
+         <item itemvalue="JUnit.StringAndImage.test" />
++        <item itemvalue="Application.myLoginTest" />
+       </list>
+     </recent_temporary>
+   </component>
+@@ -175,6 +179,8 @@
+       <workItem from="1660639997270" duration="5427000" />
+       <workItem from="1660648925845" duration="884000" />
+       <workItem from="1660694384311" duration="5422000" />
++      <workItem from="1660735675887" duration="1263000" />
++      <workItem from="1660737097858" duration="467000" />
+     </task>
+     <task id="LOCAL-00001" summary="初步写了登录注册">
+       <created>1660298515554</created>
+@@ -232,7 +238,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1660700337585</updated>
+     </task>
+-    <option name="localTasksCounter" value="9" />
++    <task id="LOCAL-00009" summary="在library层里添加了修改的功能">
++      <created>1660701704162</created>
++      <option name="number" value="00009" />
++      <option name="presentableId" value="LOCAL-00009" />
++      <option name="project" value="LOCAL" />
++      <updated>1660701704162</updated>
++    </task>
++    <option name="localTasksCounter" value="10" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -259,7 +272,8 @@
+     <MESSAGE value="这次初步写了libraryDao层，但引发了我一个关于数据库隔离的思考，这部分知识我还要好好学一下。目前为止我的Dao层都是静态方法，当查询的时候都是现获取的，这样的方法的弊端一个是效率问题，需要频繁开关，另一个问题则是数据库隔离的隐患。我正在考虑重写某些方法。" />
+     <MESSAGE value="重写了下CRUD类中的方法，加入了一个connection参数。写了一个BaseDao，内部定义了一个连接，各个Dao类都继承了BaseDao。现在使用同一个connection进行操作了" />
+     <MESSAGE value="为Book增加了字符串形式表示的图片，写了图片和字符串相互转化的类。&#10;修改了LibraryDao层，可以多个条件查询" />
+-    <option name="LAST_COMMIT_MESSAGE" value="为Book增加了字符串形式表示的图片，写了图片和字符串相互转化的类。&#10;修改了LibraryDao层，可以多个条件查询" />
++    <MESSAGE value="在library层里添加了修改的功能" />
++    <option name="LAST_COMMIT_MESSAGE" value="在library层里添加了修改的功能" />
+   </component>
+   <component name="XSLT-Support.FileAssociations.UIState">
+     <expand />

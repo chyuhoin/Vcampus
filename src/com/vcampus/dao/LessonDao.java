@@ -110,12 +110,12 @@ public class LessonDao extends BaseDao{
                 Statement stm = conn.createStatement();
                 stm.executeUpdate(sql1);
                 stm.executeUpdate(sql2);
-                addToTable(studentID,innerID,conn);
                 conn.commit();
-                stm.close();
-                conn.close();
+                conn.setAutoCommit(true);
+                addToTable(innerID,studentID,conn);
                 return true;
             } catch (Exception e) {
+                System.out.println("wrong");
                 return false;
             }
 //        } else {
@@ -123,23 +123,24 @@ public class LessonDao extends BaseDao{
 //        }
     }
     //学生退课
-    public static Boolean returnLesson(String studentID,String innerID){
-            try {
+    public static Boolean returnLesson(String studentID,String innerID) throws Exception {
+            //try {
                 String sql1 = "update tb_LESSON set leftSize=leftSize+1 where innerID = '" + innerID + "'";
                 String sql2 = "delete from tb_STUDENTWITHLESSON where studentID ='"+studentID+"' and innerID = '"+innerID+"'";
+                String sql3 = "update tb_LESSONTABLE set timeTable = REPLACE(timeTable,'"+innerID+"','0') where studentID = '"+studentID+"'";
                 Connection conn = databaseConn.getConn();
                 conn.setAutoCommit(false);
                 Statement stm = conn.createStatement();
                 stm.executeUpdate(sql1);
                 stm.executeUpdate(sql2);
+                stm.executeUpdate(sql3);
                 conn.commit();
                 stm.close();
                 conn.close();
                 return true;
-            } catch (Exception e) {
-                return false;
-            }
-
+//            } catch (Exception e) {
+//                return false;
+//            }
         }
 
     //管理员添加课程

@@ -68,4 +68,15 @@ public class ExamDao extends BaseDao{
             return false;
         }
     }
+    //根据id查找exam
+    public static List<Exam> searchExam(String innerID) throws Exception {
+        String sql = "select * from tb_EXAM where innerID ='"+innerID+"'";
+        List<Map<String,Object>>resultList = CRUD.Query(sql,conn);
+        List<Exam>result = new ArrayList<>();
+        for(Map<String,Object>map:resultList){
+            Exam e = mapToBean.map2Bean(map,Exam.class);
+            result.add(e);
+        }
+        return result;
+    }
 }
