@@ -40,7 +40,6 @@ public class TestController implements Controller{
                 if(service.deleteAllExam(lessonID)) return new Message("200", "{res: 'OK'}");
                 else return new Message("200", "{res: 'NO'}");
 
-            case"set"://修改考试信息
             case"addGrade"://添加成绩
             default:
                 return new Message("404", "{res: 'Wrong Request!'}");

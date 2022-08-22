@@ -10,8 +10,25 @@ import java.util.List;
 public class TestService implements Service{
     public boolean addExam(Exam user) {
         boolean res;
+        List<Exam>exam=null;
         try {
-            res= ExamDao.addExam(user);
+            exam=ExamDao.searchExam(user.getinnerID());
+            if(exam.isEmpty()){
+                //此时为添加考试
+                res= ExamDao.addExam(user);
+            }
+            else{
+                //此时为修改考试
+                if(ExamDao.deleteExam(user.getinnerID())){
+                    //删除之前考试成功
+                    res=ExamDao.addExam(user);
+                    if(!res){
+                        //添加失败，恢复
+                        ExamDao.addExam(exam.get(0));
+                    }
+                }
+                else res=false;
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -29,7 +46,7 @@ public class TestService implements Service{
             data= LessonDao.search("lessonID",user.getinnerID());
             for(Lesson lesson:data){
                 Exam exam = new Exam(lesson.getInnerID(), user.getTeacherID(),user.getTime());
-                res= ExamDao.addExam(exam);
+                res= addExam(exam);
                 if(!res)return res;
             }
         } catch (Exception e) {
