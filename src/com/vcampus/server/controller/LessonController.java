@@ -37,6 +37,7 @@ public class LessonController implements Controller{
                 //如果有对应课程ID且为“空课程”,视为修改空课程
                 //如果有对应课程ID且无空课程，则创建课程
                 //如果有对应内部ID，则视为修改
+                //在老师的课表里添加信息
                 Lesson lessonone = gson.fromJson(msg.getData(), Lesson.class);
                 if(service.addOneLesson(lessonone)) return new Message("200", "{res: 'OK'}");
                 else return new Message("200", "{res: 'NO'}");

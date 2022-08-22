@@ -32,6 +32,12 @@ public class LessonService implements Service{
                     res = LessonDao.addLesson(user);
                     if(!res)//添加失败，恢复
                         LessonDao.addLesson(lessons.get(0));
+                    else{//添加课程成功，现在添加老师的课表
+                        res=TeacherDao.selectLesson(user.getTeacherID(),user.getInnerID());
+                        if(!res){//添加老师课表失败，现在恢复
+                            LessonDao.addLesson(lessons.get(0));
+                        }
+                    }
                 }
                 else {//删除失败
                     res = false;
@@ -39,17 +45,31 @@ public class LessonService implements Service{
             else{//此时已经没有空课程
                 lessons=LessonDao.search("innerID", user.getInnerID());
                 if (lessons.isEmpty())//此时为添加课程
-                    res = LessonDao.addLesson(user);
-                else//此时为修改课程
+                    if(LessonDao.addLesson(user))//添加成功
+                        res=TeacherDao.selectLesson(user.getTeacherID(),user.getInnerID());
+                    else res=false;
+                else{//此时为修改课程
                     if (LessonDao.deleteLesson(user.getInnerID()))
                     {//删除成功
                         res = LessonDao.addLesson(user);
                         if(!res)//添加失败，恢复
                             LessonDao.addLesson(lessons.get(0));
+                        else{//添加成功，现在开始添加老师课表
+                            if(TeacherDao.returnLesson(lessons.get(0).getTeacherID(),lessons.get(0).getInnerID())) {
+                                //先退选之前的课,且成功
+                                res = TeacherDao.selectLesson(user.getTeacherID(), user.getInnerID());
+                                if(!res){//老师选课失败，恢复
+                                    LessonDao.addLesson(lessons.get(0));
+                                    TeacherDao.selectLesson(lessons.get(0).getTeacherID(),lessons.get(0).getInnerID());
+                                }
+                            }
+                            else res=false;
+                        }
                     }
                     else {//删除失败
                         res = false;
                     }
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
