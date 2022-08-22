@@ -23,29 +23,15 @@ import static com.vcampus.dao.utils.ClassTable.compare;
 public class LessonDao extends BaseDao{
     //无参时查询所有课程
     public static List<Lesson> search() throws Exception {
-//        String sql = "select * from tb_LESSON";
-//        List<Map<String, Object>> resultList = CRUD.Query(sql,conn);
-//        List<Lesson> result = new ArrayList<>();
-//        for (Map<String, Object> map : resultList) {
-//            Lesson lesson = mapToBean.map2Bean(map, Lesson.class);
-//            result.add(lesson);
-//        }
         return searchAll(Lesson.class,"tb_LESSON");
     }
 
     //有参按条件查询
     public static List<Lesson> search(String field, Object value) throws Exception {
-//        String sql = "select * from tb_LESSON where " + field + " = '" + value + "'";
-//        List<Map<String, Object>> resultList = CRUD.Query(sql,conn);
-//        List<Lesson> result = new ArrayList<>();
-//        for (Map<String, Object> map : resultList) {
-//            Lesson lesson = mapToBean.map2Bean(map, Lesson.class);
-//            result.add(lesson);
-//        }
         return searchBy(Lesson.class,"tb_LESSON",field,value);
     }
 
-    //学生查询自己选的课信息
+    //学生查询自己选的课信息,这是个联表查询，父类方法可能没法用
     public static List<Lesson> searchMine(String studentID) throws Exception {
         String sql = "SELECT tb_STUDENTWITHLESSON.* from tb_LESSON ,tb_STUDENTWITHLESSON " +
                 "WHERE tb_LESSON.innerID = tb_STUDENTWITHLESSON.innerID " +
@@ -69,14 +55,14 @@ public class LessonDao extends BaseDao{
         }
         return result;
     }
-    //查看选一门课的所有学生
-    public static List<Student> searchStudent(String field,String value) throws Exception {
-        String sql = "select * from tb_LESSON where"+ field+" = '"+value+"'";
+    //查看选一门课的所有学生,返回一卡通号
+    public static List<String> searchStudent(String innerID) throws Exception {
+        String sql = "select studentID from tb_STUDENTWITHLESSON where innerID = '"+innerID+"'";
         List<Map<String, Object>> resultList = CRUD.Query(sql,conn);
-        List<Student> result = new ArrayList<>();
+        List<String> result = new ArrayList<>();
         for (Map<String, Object> map : resultList) {
-            Student stu = mapToBean.map2Bean(map, Student.class);
-            result.add(stu);
+            String stu = (String)map.get("studentID");
+           result.add(stu);
         }
         return result;
     }
@@ -158,24 +144,25 @@ public class LessonDao extends BaseDao{
 
     //管理员添加课程
     public static Boolean addLesson(Lesson lesson) throws Exception {
-        try {
-            String sql = "insert into tb_LESSON (innerID,lessonID,name,teacherID,maxSize,leftSize,time,school,major,isExam) values(?,?,?,?,?,?,?,?,?,?)";
-            PreparedStatement ps = conn.prepareStatement(sql);
-                ps.setString(1,lesson.getInnerID());
-                ps.setString(2,lesson.getLessonID());
-                ps.setString(3,lesson.getName());
-                ps.setString(4,lesson.getTeacherID());
-                ps.setInt(5,lesson.getMaxSize());
-                ps.setInt(6,lesson.getLeftSize());
-                ps.setString(7,lesson.getTime());
-                ps.setString(8,lesson.getSchool());
-                ps.setString(9, lesson.getMajor());
-                ps.setInt(10,lesson.getIsExam());
-            ps.executeUpdate();
-            return true;
-        }catch (Exception e){
-            return false;
-        }
+//        try {
+//            String sql = "insert into tb_LESSON (innerID,lessonID,name,teacherID,maxSize,leftSize,time,school,major,isExam) values(?,?,?,?,?,?,?,?,?,?)";
+//            PreparedStatement ps = conn.prepareStatement(sql);
+//                ps.setString(1,lesson.getInnerID());
+//                ps.setString(2,lesson.getLessonID());
+//                ps.setString(3,lesson.getName());
+//                ps.setString(4,lesson.getTeacherID());
+//                ps.setInt(5,lesson.getMaxSize());
+//                ps.setInt(6,lesson.getLeftSize());
+//                ps.setString(7,lesson.getTime());
+//                ps.setString(8,lesson.getSchool());
+//                ps.setString(9, lesson.getMajor());
+//                ps.setInt(10,lesson.getIsExam());
+//            ps.executeUpdate();
+//            return true;
+//        }catch (Exception e){
+//            return false;
+//        }
+        return addClass(lesson,"tb_LESSON");
     }
     //管理员删除一个课程
     public static Boolean deleteLesson(String innerID){
@@ -200,11 +187,6 @@ public class LessonDao extends BaseDao{
         String sql = "select timeTable from tb_LESSONTABLE where studentID = '"+studentID+"'";
         String result = (String) CRUD.Query(sql,conn).get(0).get("timeTable");
         return result;
-    }
-    @Test
-    public void test() throws Exception {
-        String str = getLessonTable("00000001");
-        System.out.println(str);
     }
 }
 

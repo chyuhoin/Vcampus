@@ -68,7 +68,7 @@ public class LibraryService implements Service {
             result = result & LibraryDao.revise(book.getBookID(), "type", book.getType());
             result = result & LibraryDao.revise(book.getBookID(), "leftSize", book.getLeftSize());
             result = result & LibraryDao.revise(book.getBookID(), "image", book.getImage());
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return result;
