@@ -27,12 +27,11 @@ public class myMainFrame extends JFrame {
 
     public myMainFrame(String title, int flag, String ID)
     {
-
         super(title);//调用父类构造函数，设置窗口名称
         // FlatDarkLaf.setup();
         this.setSize(1400, 850);// 设置窗口的其他参数，如窗口大小
         this.setResizable(false);//窗口大小不可改
-        System.out.println(title);
+
         // 当关闭窗口时，退出整个程序 (在Swing高级篇教程中会介绍)
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -41,7 +40,7 @@ public class myMainFrame extends JFrame {
         this.setLocation((screenSize.width - this.getWidth()) / 2, (screenSize.height - this.getHeight()) / 2);
 
         // 显示窗口
-
+        this.setVisible(true);
 
         setContentPane(panelMain);//设置panelMain作为窗口容器
         ((JComponent) this.getContentPane()).setOpaque(false);
@@ -74,7 +73,7 @@ public class myMainFrame extends JFrame {
         JButton btnModule4 = new JButton("图书馆管理");
         JButton btnModule5 = new JButton("校园商店管理");
         JButton btnModule6 = new JButton("站内消息管理");
-        System.out.println("显示按钮");
+
         //退出按钮
         JButton btnExit = new JButton("退出");
         btnExit.setFont(new Font("宋体",Font.BOLD, 16));
@@ -109,16 +108,44 @@ public class myMainFrame extends JFrame {
         panelTop.add(btnModule6);
 
         panelTop.add(btnExit);
-        this.setVisible(true);
 
         //创建各模块各权限对应面板
-        JTabbedPane[] userModule = {new JTabbedPane(),new TabbedPanelUser_S(),new TabbedPanelUser_T(),new TabbedPanelUser_A()};
-        JTabbedPane[] schoolModule = {new JTabbedPane(),new TabbedPanelSchool_S(ID),new TabbedPanelSchool_T(ID),new TabbedPanelSchool_A(ID)};
-        JTabbedPane[] courseModule = {new JTabbedPane(),new TabbedPanelCourse_S(),new TabbedPanelCourse_T(),new TabbedPanelCourse_A()};
-        JTabbedPane[] LibraryModule = {new JTabbedPane(),new TabbedPanelLibrary_S(),new TabbedPanelLibrary_T(),new TabbedPanelLibrary_A()};
-        JTabbedPane[] storeModule = {new JTabbedPane(),new TabbedPanelStore_S(),new TabbedPanelStore_T(),new TabbedPanelStore_A()};
-        JTabbedPane[] messageModule = {new JTabbedPane(),new TabbedPanelMessage_S(),new TabbedPanelMessage_T(),new TabbedPanelMessage_A()};
-        System.out.println("限时完成");
+        //用户管理模块
+        JTabbedPane[] userModule = {
+                new JTabbedPane(),
+                new TabbedPanelUser_S(ID),
+                new TabbedPanelUser_T(ID),
+                new TabbedPanelUser_A(ID)};
+        //学籍管理模块
+        JTabbedPane[] schoolModule = {
+                new JTabbedPane(),
+                new TabbedPanelSchool_S(ID),
+                new TabbedPanelSchool_T(ID),
+                new TabbedPanelSchool_A(ID)};
+        //教务系统
+        JTabbedPane[] courseModule = {
+                new JTabbedPane(),
+                new TabbedPanelCourse_S(),
+                new TabbedPanelCourse_T(),
+                new TabbedPanelCourse_A()};
+        //图书馆
+        JTabbedPane[] LibraryModule = {
+                new JTabbedPane(),
+                new TabbedPanelLibrary_S(),
+                new TabbedPanelLibrary_T(),
+                new TabbedPanelLibrary_A()};
+        //商店
+        JTabbedPane[] storeModule = {
+                new JTabbedPane(),
+                new TabbedPanelStore_S(),
+                new TabbedPanelStore_T(),
+                new TabbedPanelStore_A()};
+        //站内消息
+        JTabbedPane[] messageModule = {
+                new JTabbedPane(),
+                new TabbedPanelMessage_S(),
+                new TabbedPanelMessage_T(),
+                new TabbedPanelMessage_A()};
 
         //菜单按钮响应函数
         btnModule1.addActionListener(new ActionListener() {

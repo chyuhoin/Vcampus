@@ -56,8 +56,10 @@ public class Message implements Serializable {
     @Override
     public String toString() {
         return "Message{" +
-                "statusCode='" + status + '\'' +
+                "status='" + status + '\'' +
                 ", data='" + data + '\'' +
+                ", module='" + module + '\'' +
+                ", operation='" + operation + '\'' +
                 '}';
     }
 }

