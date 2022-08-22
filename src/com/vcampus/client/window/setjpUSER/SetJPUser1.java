@@ -65,16 +65,13 @@ public class SetJPUser1 extends JPanel {
                 new TypeToken<HashMap<String, List<User>>>(){}.getType());
         List<User> res = map.get("res");
         User tempU= res.get(0);
-        if(res.size()!=0){
+        if(!res.isEmpty()){
             strList[0]=tempU.getStudentID();
             strList[1]=tempU.getPassword();
-            switch (tempU.getType()){
-                case(1):
-                strList[2]="学生";break;
-                case(2):
-                strList[2]="教师";break;
-                case(3):
-                strList[2]="管理员";break;
+            switch (tempU.getType()) {
+                case (1): strList[2] = "学生";break;
+                case (2): strList[2] = "教师";break;
+                case (3): strList[2] = "管理员";break;
             }
         }
         else{
@@ -90,7 +87,6 @@ public class SetJPUser1 extends JPanel {
     /**
      * 设置第一张卡片的内容-个人信息展示
      * @param jp
-     * @param layout_Spring
      * @param layout_Card
      */
     public void setjp1(JPanel jp,SpringLayout layout_Spring,CardLayout layout_Card){
@@ -104,8 +100,8 @@ public class SetJPUser1 extends JPanel {
         layout_Spring.putConstraint(layout_Spring.NORTH, lbl, 20, layout_Spring.NORTH, jp1);  //标签1北侧——>容器北侧
         layout_Spring.putConstraint(layout_Spring.WEST, lbl, 20, layout_Spring.WEST, jp1);    //标签1西侧——>容器西侧
         // 创建修改按钮
-        JButton btn=new JButton("编辑");
-        if(!strList[2].equals("管理员"))
+        JButton btn=new JButton("修改密码");
+        if(strList[2].equals("管理员"))
             jp1.add(btn);
         btn.setFont(new Font("黑体", Font.BOLD, 20));
         layout_Spring.putConstraint(layout_Spring.NORTH, btn, 20, layout_Spring.NORTH, jp1);
@@ -177,7 +173,7 @@ public class SetJPUser1 extends JPanel {
             jp2.add(lbli);
             lbli.setFont(new Font("黑体", Font.BOLD, 20));
             layout_Spring.putConstraint(layout_Spring.NORTH, lbli, 60+50*i, layout_Spring.SOUTH, lbl);
-            layout_Spring.putConstraint(layout_Spring.EAST, lbli, 50, layout_Spring.EAST, lbl);
+            layout_Spring.putConstraint(layout_Spring.EAST, lbli, 10, layout_Spring.EAST, lbl);
         }
         //文本框
         JTextField[] textList={new JTextField(),new JTextField(), new JTextField()};
@@ -191,13 +187,19 @@ public class SetJPUser1 extends JPanel {
             texti.setColumns(50);
         }
 
-        // 创建确认按钮
-        JButton btn=new JButton("确认");
+        JButton btn=new JButton("确认");// 创建确认按钮
         jp2.add(btn);
+        JButton btn2=new JButton("取消");//创建取消按钮
+        jp2.add(btn2);
         btn.setFont(new Font("黑体", Font.BOLD, 20));
-        btn.setPreferredSize(new Dimension(150, 40));
+        btn.setPreferredSize(new Dimension(100, 40));
         layout_Spring.putConstraint(layout_Spring.NORTH, btn, 50, layout_Spring.NORTH, textList[2]);
-        layout_Spring.putConstraint(layout_Spring.EAST, btn, -500, layout_Spring.EAST, jp2);
+        layout_Spring.putConstraint(layout_Spring.EAST, btn, -20, layout_Spring.WEST, btn2);
+
+        btn2.setFont(new Font("黑体", Font.BOLD, 20));
+        btn2.setPreferredSize(new Dimension(100, 40));
+        layout_Spring.putConstraint(layout_Spring.NORTH, btn2, 0, layout_Spring.NORTH,btn);
+        layout_Spring.putConstraint(layout_Spring.EAST, btn2, 0, layout_Spring.EAST, textList[2]);
 
         //确定按钮监听
         btn.addActionListener(new ActionListener() {
@@ -215,36 +217,46 @@ public class SetJPUser1 extends JPanel {
                     );
                 }
                 else{
-                    String truePass="truePass";
+                    String truePass=strList[1];
                     if(!textList[0].getText().equals(truePass)){
                         JOptionPane.showMessageDialog(
                                 jp2,
-                                "输入密码错误",
+                                "输入原密码错误",
                                 " ",
                                 JOptionPane.WARNING_MESSAGE
                         );
                     }
                     else{
-                        String newPass=textList[1].getText();
-                        //密码传回数据库
-                        System.out.println("新密码："+newPass);
-                        if(SendTnfo_A())//修改密码成功
-                            setjp1(jp,layout_Spring,layout_Card);
+                        if(SendTnfo_A(newP1)) {//修改密码成功 newP1==newP2
+                            layout_Card.first(jp);
+                            jp1.removeAll();
+                            setjp1(jp, layout_Spring, layout_Card);//设置jp1
+                            jp1.repaint();//重新绘制jp1
+                            for (JTextField jTextField : textList) jTextField.setText(""); //清空密码框
+                        System.out.println("新密码："+newP1);
+                        }
                     }
                 }
                 System.out.println("用户管理系统-密码-修改");
             }
         });
+        btn2.addActionListener(new ActionListener() {//取消按钮
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                layout_Card.first(jp);
+            }
+        });
+
     }
 
     /**
      * 传送，修改密码
      * @return
      */
-    public boolean SendTnfo_A(){
+    public boolean SendTnfo_A(String newPass){
         User user=new User();
         user.setStudentID(strList[0]);
-        user.setPassword(strList[1]);
+        user.setPassword(newPass);
         user.setType(3);
         Gson gson = new Gson();
         String s = gson.toJson(user);
@@ -252,7 +264,7 @@ public class SetJPUser1 extends JPanel {
 
         //接收信息是否传递成功
         Message msg = passer.receive();
-        Map<String, java.util.List<Student>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, java.util.List<Student>>>(){}.getType());
+        Map<String, Object> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, Object>>(){}.getType());
         if(map.get("res").equals("OK")) {
             JOptionPane.showMessageDialog(
                 jp2,

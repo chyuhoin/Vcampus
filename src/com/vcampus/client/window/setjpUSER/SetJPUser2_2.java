@@ -34,18 +34,27 @@ import java.util.Map;
  * 用于老师/学生 修改密码
  */
 public class SetJPUser2_2 {
-    public  String ID;
+    public String[] strList=new String[3];//暂存当前User的信息
+    public String ID;
+    public int type;
     MessagePasser passer = ClientMessagePasser.getInstance();
-    public SetJPUser2_2(int type,String id,JPanel jp, CardLayout layout_Card){
+
+    public SetJPUser2_2(int t,String id,JPanel jp, CardLayout layout_Card){
         ID=id;
+        type=t;
+        setjp(jp,layout_Card);
+    }
+    public void setjp(JPanel jp,CardLayout layout_Card){
+        setStrList(ID);
+
         SpringLayout layout_Spring=new SpringLayout();
         jp.setLayout(layout_Spring);
         //标题
         JLabel lbl = new JLabel("密码修改");
         jp.add(lbl);
         lbl.setFont(new Font("黑体", Font.BOLD, 50));
-        layout_Spring.putConstraint(layout_Spring.NORTH, lbl, 20, layout_Spring.NORTH, jp);  //标签1北侧——>容器北侧
-        layout_Spring.putConstraint(layout_Spring.WEST, lbl, 20, layout_Spring.WEST, jp);    //标签1西侧——>容器西侧
+        layout_Spring.putConstraint(layout_Spring.NORTH, lbl, 20, layout_Spring.NORTH, jp);
+        layout_Spring.putConstraint(layout_Spring.WEST, lbl, 20, layout_Spring.WEST, jp);
         //信息列表：
         //标签
         JLabel[] lblList={
@@ -84,8 +93,8 @@ public class SetJPUser2_2 {
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String newP1=textList[1].getText();
-                String newP2=textList[2].getText();
+                String newP1=textList[1].getText().trim();
+                String newP2=textList[2].getText().trim();
                 System.out.println("新密码："+newP1+" & "+newP2+" 是否相等："+(newP1.equals(newP2)));
                 if(!newP1.equals(newP2)){
                     JOptionPane.showMessageDialog(
@@ -96,24 +105,53 @@ public class SetJPUser2_2 {
                     );
                 }
                 else{
-                    String truePass="truePass";
-                    if(!textList[0].getText().equals(truePass)){
+                    String truePass=strList[1];
+                    if(!textList[0].getText().trim().equals(truePass)){
                         JOptionPane.showMessageDialog(
                                 jp,
                                 "输入密码错误",
-                                " ",
+                                "提示",
                                 JOptionPane.WARNING_MESSAGE
                         );
                     }
                     else{
-                        String newPass=textList[1].getText();
+                        String newPass=textList[1].getText().trim();
                         SendTnfo_S_T(jp,newPass,type);
+                        for (JTextField jTextField : textList) jTextField.setText("");//设置文本框为空
+                        //SetJPUser1 setjp1=new SetJPUser1(1,ID,jp11,layout_Card);
                         System.out.println("新密码："+newPass);
                     }
                 }
                 System.out.println("用户管理系统-密码-修改");
             }
         });
+    }
+    public void setStrList(String tempID){
+        User user = new User();
+        user.setStudentID(tempID);
+        //user.setType(type);
+        Gson gson = new Gson();
+        String s = gson.toJson(user);
+        passer.send(new Message("admin", s, "login", "getone"));
+
+        Message msg = passer.receive();
+        System.out.println(msg);
+        Map<String, List<User>> map = new Gson().fromJson(msg.getData(),
+                new TypeToken<HashMap<String, List<User>>>(){}.getType());
+        List<User> res = map.get("res");
+        User tempU= res.get(0);
+        if(res.size()!=0){
+            strList[0]=tempU.getStudentID();
+            strList[1]=tempU.getPassword();
+            switch (tempU.getType()) {
+                case (1): strList[2] = "学生";break;
+                case (2): strList[2] = "教师";break;
+                case (3): strList[2] = "管理员";break;
+            }
+        }
+        else{
+            //null
+        }
     }
     public boolean SendTnfo_S_T(JPanel jp,String newPass,int type){
         User user=new User();
@@ -127,8 +165,11 @@ public class SetJPUser2_2 {
 
         //接收信息是否传递成功
         Message msg = passer.receive();
-        Map<String, List<Student>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, List<Student>>>(){}.getType());
-        if(map.get("res").equals("OK")) {
+        Map<String, Object> map = new Gson().fromJson(msg.getData(),
+                new TypeToken<HashMap<String, Object>>(){}.getType());
+        //传输信息
+        //接收bool结果
+        if(map.get("res").equals("OK")) {//成功写入
             JOptionPane.showMessageDialog(
                     jp,
                     "密码修改成功",
