@@ -40,7 +40,7 @@ public class TabbedPanelUser_A extends JTabbedPane{
 
         this.addTab("个人信息",null,jp11,"查看个人信息");
         this.addTab("用户信息管理",null,jp12,"查询和修改用户基本信息");
-        //this.addTab("权限设置",null,jp13,"修改权限");
+       //this.addTab("权限设置",null,jp13,"修改权限");
         this.setFont(new Font("宋体",Font.BOLD,24));
     }
 }
