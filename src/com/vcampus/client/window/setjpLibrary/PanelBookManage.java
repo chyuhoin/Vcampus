@@ -16,9 +16,15 @@
 package com.vcampus.client.window.setjpLibrary;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.io.*;
+import java.util.HashSet;
+
 import com.vcampus.pojo.Book;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -172,8 +178,30 @@ public class PanelBookManage extends JPanel {
         repaint();
         add(btnOk);  add(btnCancel);
         ////////???/不确定
-        panelInform = new PanelBookInform(new Book("","","","",0,""),true);
+        //ImageIcon img2 = new ImageIcon("src/fig/addFig.jpg");// 这是背景图片 .png .jpg .gif 等格式的图片都可以
+        panelInform = new PanelBookInform(new Book("","","","",0,"src/com.vcampus/client/window/Pictures/addFig.jpg"),true);
         add(panelInform);
+        panelInform.lblImg.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // TODO Auto-generated method stub
+                if (e.getClickCount() == 1) {
+                    addPicture(panelInform.lblImg);
+                }
+            }
+            @Override
+            public void mousePressed(MouseEvent e) {}
+            @Override
+            public void mouseReleased(MouseEvent e) {}
+            @Override
+            public void mouseEntered(MouseEvent e) {}
+            @Override
+            public void mouseExited(MouseEvent e) {}
+        });
+
+
+        //img2.setImage(img2.getImage().getScaledInstance(180,220,Image.SCALE_DEFAULT));//这里设置图片大小，目前是20*20
+        //panelInform.lblImg.setIcon(img2);
         //setPanel();//测试
     }
 
@@ -191,6 +219,24 @@ public class PanelBookManage extends JPanel {
         updateUI();
         repaint();
         add(btnOk); add(btnCancel);
+
+        panelInform.lblImg.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // TODO Auto-generated method stub
+                if (e.getClickCount() == 1) {
+                    addPicture(panelInform.lblImg);
+                }
+            }
+            @Override
+            public void mousePressed(MouseEvent e) {}
+            @Override
+            public void mouseReleased(MouseEvent e) {}
+            @Override
+            public void mouseEntered(MouseEvent e) {}
+            @Override
+            public void mouseExited(MouseEvent e) {}
+        });
 
         //接收消息，如果为空，警告，否则显示可编辑详情页面
         if(true)
@@ -228,4 +274,60 @@ public class PanelBookManage extends JPanel {
         else
         { JOptionPane.showMessageDialog(this, title, "提示", JOptionPane.INFORMATION_MESSAGE); }
     }
+
+    public void addPicture(JLabel lbl) {
+        JFileChooser chooser = new JFileChooser();
+        chooser.setMultiSelectionEnabled(true);
+        /** 过滤文件类型 * */
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("jpg","png","JPG","PNG","gif","GIF");
+        chooser.setFileFilter(filter);
+        int returnVal = chooser.showOpenDialog(lbl);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File[] arrFiles = chooser.getSelectedFiles();//得到选择的文件
+            if (arrFiles == null || arrFiles.length == 0)//判断是否有文件为jpg或者png
+                 { return; }
+            File  ff = chooser.getSelectedFile();//创建一个fileName得到选择文件的名字
+            String fileName =ff.getName();
+            String prefix=fileName.substring(fileName.lastIndexOf(".")+1);
+            if(!(prefix.equals("jpg") || prefix.equals("png")))//判断选择的文件是否是图片文件
+            {
+                JOptionPane.showMessageDialog(new JDialog(),":请选择.jpg 或 .png格式的图片");
+                return;
+            }
+            FileInputStream input = null;
+            FileOutputStream out = null;
+            String path =  "./";//要上传到的路径
+            try {
+                for (File f : arrFiles) {
+                    File dir = new File(path);//目标文件夹
+                    File[] fs = dir.listFiles();
+                    HashSet<String> set = new HashSet<String>();
+                    for (File file : fs)
+                    { set.add(file.getName()); }
+
+                    String absolutePath = chooser.getSelectedFile().getAbsolutePath();//通过文件选择器对象拿到选择的文件.拿到该文件的绝对路径
+                    ImageIcon imageIcon = new ImageIcon(absolutePath);//创建一个ImageIcon对象 传入图片文件的绝对路径
+                    imageIcon.setImage(imageIcon.getImage().getScaledInstance(180,220,Image.SCALE_DEFAULT));//这里设置图片大小，目前是20*20
+                    lbl.setIcon(imageIcon);
+                    input = new FileInputStream(f);
+                    byte[] buffer = new byte[1024];
+                    File des = new File(path, f.getName());
+                    out = new FileOutputStream(des);
+                    int len = 0;
+                    while (-1 != (len = input.read(buffer)))
+                    { out.write(buffer, 0, len); }
+                    out.close();
+                    input.close();
+                }
+                JOptionPane.showMessageDialog(null, "上传成功！", "提示", JOptionPane.INFORMATION_MESSAGE);
+            } catch (FileNotFoundException e1) {
+                JOptionPane.showMessageDialog(null, "上传失败！", "提示", JOptionPane.ERROR_MESSAGE);
+                e1.printStackTrace();
+            } catch (IOException e1) {
+                JOptionPane.showMessageDialog(null, "上传失败！", "提示", JOptionPane.ERROR_MESSAGE);
+                e1.printStackTrace();
+            }
+        }
+    }
+
 }
