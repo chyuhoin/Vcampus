@@ -1,0 +1,134 @@
+Index: src/com/vcampus/dao/StudentDao.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.vcampus.dao;\r\n\r\nimport com.vcampus.dao.utils.CRUD;\r\nimport com.vcampus.dao.utils.mapToBean;\r\nimport com.vcampus.pojo.Student;\r\nimport org.junit.Test;\r\n\r\nimport java.util.*;\r\n\r\n/*\r\n涉及学籍的与数据库的操作\r\n */\r\npublic class StudentDao {\r\n    //search空参时查询所有学生，仅管理员可用\r\n    public static List<Student> search() throws Exception {\r\n        String sql = \"select * from tb_STUDENT\";\r\n        List<Map<String,Object>> resultList = CRUD.Query(sql);\r\n        List<Student> result = new ArrayList<>();\r\n        for(Map<String,Object> map:resultList){\r\n            Student stu = mapToBean.map2Bean(map,Student.class);\r\n            result.add(stu);\r\n        }\r\n        return result;\r\n    }\r\n    //search有参时查询对应的内容\r\n    public static List<Student> search(String field,Object value) throws Exception {\r\n          String sql = \"select * from tb_STUDENT where \"+field+\" = '\"+String.valueOf(value)+\"'\";\r\n        List<Map<String,Object>> resultList = CRUD.Query(sql);\r\n        List<Student> result = new ArrayList<>();\r\n        for(Map<String,Object> map:resultList){\r\n            Student stu = mapToBean.map2Bean(map,Student.class);\r\n            result.add(stu);\r\n        }\r\n        return result;\r\n    }\r\n    //添加一条学生信息,由管理员操作\r\n    public static Boolean addStudent(Student stu) throws Exception {\r\n        try {\r\n            String sql = \"insert into tb_STUDENT (studentID,name,studentNumber,IDcard,school,major,sex,classs,educationalSystem,politics,grade,phoneNumber,status) values (\" +\r\n                    \"'\" + stu.getStudentID() + \"',\" +\r\n                    \"'\" + stu.getName() + \"',\" +\r\n                    \"'\" + stu.getStudentNumber() + \"',\" +\r\n                    \"'\" + stu.getIDcard() + \"',\" +\r\n                    \"'\" + stu.getSchool() + \"',\" +\r\n                    \"'\" + stu.getMajor() + \"',\" +\r\n                    \"\" + stu.getSex().toString() + \",\" +\r\n                    \"'\" + stu.getClasss() + \"',\" +\r\n                    \"\" + stu.getEducationalSystem().toString() + \",\" +\r\n                    \"'\" + stu.getPolitics() + \"',\" +\r\n                    \"\" + stu.getGrade().toString() + \",\" +\r\n                    \"'\" + stu.getPhoneNumber() + \"',\" +\r\n                    // Arrays.toString(stu.getImage()) +\",\"+\r\n                    \"\" + stu.getStatus() + \")\";\r\n            System.out.println(sql);\r\n            CRUD.update(sql);\r\n            return true;\r\n        }catch (Exception e){\r\n            return false;\r\n        }\r\n    }\r\n    //删除一个学生的信息（仅管理员\r\n    public static Boolean deleteStudent(String studentID){\r\n        try {\r\n            String sql = \"delete from tb_STUDENT where studentID = \" + \"'\" + studentID + \"'\";\r\n            CRUD.update(sql);\r\n            return true;\r\n        }catch (Exception e){\r\n            return false;\r\n        }\r\n    }\r\n    @Test\r\n    public void test() throws Exception {\r\n        deleteStudent(\"1\");\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/com/vcampus/dao/StudentDao.java b/src/com/vcampus/dao/StudentDao.java
+--- a/src/com/vcampus/dao/StudentDao.java	(revision 361b7de527c6f5c525c51d8095113848be89e633)
++++ b/src/com/vcampus/dao/StudentDao.java	(date 1660638844153)
+@@ -68,8 +68,4 @@
+             return false;
+         }
+     }
+-    @Test
+-    public void test() throws Exception {
+-        deleteStudent("1");
+-    }
+ }
+Index: src/com/vcampus/dao/LessonDao.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/com/vcampus/dao/LessonDao.java b/src/com/vcampus/dao/LessonDao.java
+new file mode 100644
+--- /dev/null	(date 1660638844160)
++++ b/src/com/vcampus/dao/LessonDao.java	(date 1660638844160)
+@@ -0,0 +1,4 @@
++package com.vcampus.dao;
++
++public class LessonDao {
++}
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"15435ea3-daf0-45be-876d-97d3668b8c59\" name=\"Changes\" comment=\"对注册添加了类型验证\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/encodings.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/encodings.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/com/vcampus/dao/StudentDao.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/com/vcampus/dao/StudentDao.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/com/vcampus/dao/UserDao.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/com/vcampus/dao/UserDao.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/com/vcampus/dao/utils/databaseConn.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/com/vcampus/dao/utils/databaseConn.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/com/vcampus/pojo/Student.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/com/vcampus/pojo/Student.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/test/com/vcampus/test/LoginTest.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/test/com/vcampus/test/LoginTest.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"PUSH_TAGS\">\r\n      <GitPushTagMode>\r\n        <option name=\"argument\" value=\"--tags\" />\r\n        <option name=\"title\" value=\"All\" />\r\n      </GitPushTagMode>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2DFN8UqGaWdtufeJ3QLOdvtrWZL\" />\r\n  <component name=\"ProjectLevelVcsManager\">\r\n    <OptionsSetting value=\"false\" id=\"Update\" />\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"foldersAlwaysOnTop\" value=\"false\" />\r\n    <option name=\"showModules\" value=\"false\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\r\n    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;D:/Study/Git/Vcampus/Vcampus&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;File.Encoding&quot;\r\n  },\r\n  &quot;keyToStringList&quot;: {\r\n    &quot;ChangesTree.GroupingKeys&quot;: [\r\n      &quot;directory&quot;,\r\n      &quot;module&quot;\r\n    ]\r\n  }\r\n}</component>\r\n  <component name=\"RunManager\" selected=\"JUnit.StudentDao.test\">\r\n    <configuration name=\"LoginTest\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.vcampus.test.LoginTest\" />\r\n      <module name=\"Vcampus\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"com.vcampus.test.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"Server\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.vcampus.server.Server\" />\r\n      <module name=\"Vcampus\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"com.vcampus.server.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"myLoginTest\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.vcampus.client.login.myLoginTest\" />\r\n      <module name=\"Vcampus\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"com.vcampus.client.login.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"StudentDao.test\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"Vcampus\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"com.vcampus.dao.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <option name=\"PACKAGE_NAME\" value=\"com.vcampus.dao\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.vcampus.dao.StudentDao\" />\r\n      <option name=\"METHOD_NAME\" value=\"test\" />\r\n      <option name=\"TEST_OBJECT\" value=\"method\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"UserDao.test\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"Vcampus\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"com.vcampus.dao.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <option name=\"PACKAGE_NAME\" value=\"com.vcampus.dao\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.vcampus.dao.UserDao\" />\r\n      <option name=\"METHOD_NAME\" value=\"test\" />\r\n      <option name=\"TEST_OBJECT\" value=\"method\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"JUnit.StudentDao.test\" />\r\n        <item itemvalue=\"Application.myLoginTest\" />\r\n        <item itemvalue=\"Application.LoginTest\" />\r\n        <item itemvalue=\"Application.Server\" />\r\n        <item itemvalue=\"JUnit.UserDao.test\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"15435ea3-daf0-45be-876d-97d3668b8c59\" name=\"Changes\" comment=\"\" />\r\n      <created>1660290718338</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1660290718338</updated>\r\n      <workItem from=\"1660290720744\" duration=\"7006000\" />\r\n      <workItem from=\"1660394444650\" duration=\"60000\" />\r\n      <workItem from=\"1660394516873\" duration=\"56000\" />\r\n      <workItem from=\"1660394584644\" duration=\"9000\" />\r\n      <workItem from=\"1660395297646\" duration=\"18000\" />\r\n      <workItem from=\"1660397164596\" duration=\"38000\" />\r\n      <workItem from=\"1660397307971\" duration=\"4358000\" />\r\n      <workItem from=\"1660403234776\" duration=\"303000\" />\r\n      <workItem from=\"1660454140324\" duration=\"96000\" />\r\n      <workItem from=\"1660455383694\" duration=\"9368000\" />\r\n      <workItem from=\"1660546281143\" duration=\"210000\" />\r\n      <workItem from=\"1660553294493\" duration=\"5398000\" />\r\n      <workItem from=\"1660563636857\" duration=\"2007000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"初步写了登录注册\">\r\n      <created>1660298515554</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1660298515554</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"写了一个方法把map转为bean对象\">\r\n      <created>1660401643513</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1660401643513</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"实现可序列化接口\">\r\n      <created>1660554878384</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1660554878384</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"对注册添加了类型验证\">\r\n      <created>1660555737524</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1660555737524</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"5\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <option name=\"ADD_EXTERNAL_FILES_SILENTLY\" value=\"true\" />\r\n    <MESSAGE value=\"初步写了登录注册\" />\r\n    <MESSAGE value=\"写了一个方法把map转为bean对象\" />\r\n    <MESSAGE value=\"实现可序列化接口\" />\r\n    <MESSAGE value=\"对注册添加了类型验证\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"对注册添加了类型验证\" />\r\n  </component>\r\n  <component name=\"XSLT-Support.FileAssociations.UIState\">\r\n    <expand />\r\n    <select />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 361b7de527c6f5c525c51d8095113848be89e633)
++++ b/.idea/workspace.xml	(date 1660638608782)
+@@ -1,14 +1,8 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ChangeListManager">
+-    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="对注册添加了类型验证">
+-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
++    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="完成了studentDao层，暂时没有把照片添加进去，主要是照片的读取之类的需要特殊方法，我要再学习一下">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/StudentDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/StudentDao.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/UserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/UserDao.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/utils/databaseConn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/utils/databaseConn.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/pojo/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/pojo/Student.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/test/com/vcampus/test/LoginTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/com/vcampus/test/LoginTest.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -60,7 +54,7 @@
+     ]
+   }
+ }</component>
+-  <component name="RunManager" selected="JUnit.StudentDao.test">
++  <component name="RunManager" selected="Application.LoginTest">
+     <configuration name="LoginTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+       <option name="MAIN_CLASS_NAME" value="com.vcampus.test.LoginTest" />
+       <module name="Vcampus" />
+@@ -134,10 +128,10 @@
+     </configuration>
+     <recent_temporary>
+       <list>
+-        <item itemvalue="JUnit.StudentDao.test" />
+-        <item itemvalue="Application.myLoginTest" />
+         <item itemvalue="Application.LoginTest" />
+         <item itemvalue="Application.Server" />
++        <item itemvalue="JUnit.StudentDao.test" />
++        <item itemvalue="Application.myLoginTest" />
+         <item itemvalue="JUnit.UserDao.test" />
+       </list>
+     </recent_temporary>
+@@ -162,7 +156,9 @@
+       <workItem from="1660455383694" duration="9368000" />
+       <workItem from="1660546281143" duration="210000" />
+       <workItem from="1660553294493" duration="5398000" />
+-      <workItem from="1660563636857" duration="2007000" />
++      <workItem from="1660563636857" duration="2164000" />
++      <workItem from="1660619044349" duration="4132000" />
++      <workItem from="1660637701493" duration="851000" />
+     </task>
+     <task id="LOCAL-00001" summary="初步写了登录注册">
+       <created>1660298515554</created>
+@@ -192,7 +188,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1660555737524</updated>
+     </task>
+-    <option name="localTasksCounter" value="5" />
++    <task id="LOCAL-00005" summary="完成了studentDao层，暂时没有把照片添加进去，主要是照片的读取之类的需要特殊方法，我要再学习一下">
++      <created>1660567403654</created>
++      <option name="number" value="00005" />
++      <option name="presentableId" value="LOCAL-00005" />
++      <option name="project" value="LOCAL" />
++      <updated>1660567403654</updated>
++    </task>
++    <option name="localTasksCounter" value="6" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -215,7 +218,24 @@
+     <MESSAGE value="写了一个方法把map转为bean对象" />
+     <MESSAGE value="实现可序列化接口" />
+     <MESSAGE value="对注册添加了类型验证" />
+-    <option name="LAST_COMMIT_MESSAGE" value="对注册添加了类型验证" />
++    <MESSAGE value="完成了studentDao层，暂时没有把照片添加进去，主要是照片的读取之类的需要特殊方法，我要再学习一下" />
++    <option name="LAST_COMMIT_MESSAGE" value="完成了studentDao层，暂时没有把照片添加进去，主要是照片的读取之类的需要特殊方法，我要再学习一下" />
++  </component>
++  <component name="XDebuggerManager">
++    <breakpoint-manager>
++      <breakpoints>
++        <line-breakpoint enabled="true" type="java-line">
++          <url>file://$PROJECT_DIR$/test/com/vcampus/test/LoginTest.java</url>
++          <line>22</line>
++          <option name="timeStamp" value="4" />
++        </line-breakpoint>
++        <line-breakpoint enabled="true" type="java-line">
++          <url>file://$PROJECT_DIR$/test/com/vcampus/test/LoginTest.java</url>
++          <line>23</line>
++          <option name="timeStamp" value="5" />
++        </line-breakpoint>
++      </breakpoints>
++    </breakpoint-manager>
+   </component>
+   <component name="XSLT-Support.FileAssociations.UIState">
+     <expand />

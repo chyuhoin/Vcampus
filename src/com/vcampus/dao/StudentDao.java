@@ -21,28 +21,7 @@ public class StudentDao extends BaseDao{
     }
     //添加一条学生信息,由管理员操作
     public static Boolean addStudent(Student stu)  {
-        try {
-            String sql = "insert into tb_STUDENT (studentID,name,studentNumber,IDcard,school,major,sex,classs,educationalSystem,politics,grade,phoneNumber,status,image,nation) values (" +
-                    "'" + stu.getStudentID() + "'," +
-                    "'" + stu.getName() + "'," +
-                    "'" + stu.getStudentNumber() + "'," +
-                    "'" + stu.getIDcard() + "'," +
-                    "'" + stu.getSchool() + "'," +
-                    "'" + stu.getMajor() + "'," +
-                    "" + stu.getSex().toString() + "," +
-                    "'" + stu.getClasss() + "'," +
-                    "" + stu.getEducationalSystem().toString() + "," +
-                    "'" + stu.getPolitics() + "'," +
-                    "" + stu.getGrade().toString() + "," +
-                    "'" + stu.getPhoneNumber() + "'," +
-                    "" + stu.getStatus() + ","+
-                    "'"+stu.getImage()+"',"+
-                    "'"+stu.getNation()+"')";
-            CRUD.update(sql,conn);
-            return true;
-        }catch (Exception e){
-            return false;
-        }
+        return addClass(stu,"tb_STUDENT");
     }
     //只添加一个studentID，以后慢慢的补充
     public static Boolean addStudent(String studentID){

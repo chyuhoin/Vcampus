@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class ClassTable {
@@ -32,14 +33,20 @@ public class ClassTable {
         String sql1 = "select time from tb_LESSON where innerID = '"+lessonID+"'";
         String lessonTime =(String) CRUD.Query(sql1,conn).get(0).get("time");
         String sql2 = "select timeTable from tb_LESSONTABLE where studentID = '"+studentID+"'";
-        String myTable = (String) CRUD.Query(sql2,conn).get(0).get("timeTable");
+        List<Map<String,Object>> resultList = CRUD.Query(sql2,conn);
+        if(resultList.isEmpty()) {
+            String sqlextra = "insert into tb_LESSONTABLE (studentID) values('" + studentID + "')";
+            CRUD.update(sqlextra,conn);
+            resultList = CRUD.Query(sql2,conn);
+        }
+        String myTable = (String)resultList.get(0).get("timeTable");
         List<Integer>tableIndex = getTimeIndex(lessonTime);
         String[] table=myTable.split(",");
         for(Integer temp:tableIndex){
             table[temp]=lessonID;
         }
         String newTable = String.join(",",table);
-        String sql3 = "update tb_LESSONTABLE set timeTable ='"+newTable+"'";
+        String sql3 = "update tb_LESSONTABLE set timeTable ='"+newTable+"'"+" where studentID = '"+studentID+"'";
         CRUD.update(sql3,conn);
     }
 }

@@ -14,16 +14,9 @@ import org.junit.Test;
 public class LibraryDao extends BaseDao{
     //查询函数，无参的情况下查看所有值
     public static List<Book> search() throws Exception {
-        String sql = "select * from tb_BOOK";
-        List<Map<String, Object>> resultList = CRUD.Query(sql,conn);
-        List<Book> result = new ArrayList<>();
-        for (Map<String, Object> map : resultList) {
-            Book book = mapToBean.map2Bean(map, Book.class);
-            result.add(book);
-        }
-        return result;
+        return searchAll(Book.class,"tb_BOOK");
     }
-    //重载的查询函数，按条件查询,str的顺序为 字段+值，两个一组重复
+    //重载的查询函数，按条件查询,str的顺序为 字段+值，两个一组重复,
     public static List<Book> search(String...str) throws Exception {
         String sql = "select * from tb_BOOK  where {0} = {1} and {2}={3} and {4}={5}" ;
         for(int i=0;i<str.length;i+=2){
@@ -58,20 +51,7 @@ public class LibraryDao extends BaseDao{
     }
     //添加一本图书，仅管理员可操作
     public static Boolean addBook(Book book) {
-        try {
-            String sql = "insert into tb_BOOK (bookID,bookName,author,type,leftSize,image) values" + "('" +
-                    book.getBookID() + "','" +
-                    book.getBookName() + "','" +
-                    book.getAuthor() + "','" +
-                    book.getType() + "'," +
-                    String.valueOf(book.getLeftSize()) +",'"+
-                    book.getImage()+"')";
-            CRUD.update(sql,conn);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+        return addClass(book,"tb_BOOK");
     }
     //删除一本图书，仅管理员可操作
     public static Boolean deleteBook(String bookID) {
@@ -124,7 +104,7 @@ public class LibraryDao extends BaseDao{
         }
     }
     //修改图书的信息，由管理员操作
-   public static Boolean revise(String bookID, String field, Object value) throws SQLException {
+   public static Boolean revise(String bookID, String field, Object value) {
         try {
             String sql = "update tb_BOOK set "+field+"  = ? where bookID = '"+bookID+"'";
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -135,5 +115,4 @@ public class LibraryDao extends BaseDao{
             return false;
         }
    }
-
 }

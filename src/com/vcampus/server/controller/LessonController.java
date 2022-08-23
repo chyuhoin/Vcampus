@@ -4,6 +4,7 @@ import com.google.gson.reflect.TypeToken;
 import com.vcampus.net.Message;
 import com.vcampus.pojo.Lesson;
 import com.vcampus.pojo.Student;
+import com.vcampus.pojo.Teacher;
 import com.vcampus.server.service.Service;
 import com.vcampus.server.service.LessonService;
 import com.google.gson.*;
@@ -36,74 +37,101 @@ public class LessonController implements Controller{
                 //如果有对应课程ID且为“空课程”,视为修改空课程
                 //如果有对应课程ID且无空课程，则创建课程
                 //如果有对应内部ID，则视为修改
+                //在老师的课表里添加信息
                 Lesson lessonone = gson.fromJson(msg.getData(), Lesson.class);
                 if(service.addOneLesson(lessonone)) return new Message("200", "{res: 'OK'}");
                 else return new Message("200", "{res: 'NO'}");
             case "showteacher":
                 //添加对应课程的老师时显示所有可选的老师
                 //只要专业满足即可选择
+                HashMap<String, Object> map1 = new HashMap<>();
+                map1.put("res", service.viewTeachers(msg.getData()));
+                return new Message("200", gson.toJson(map1));
             case"showtime":
                 //输入老师ID，返回所有不可选的时间
                 //不可选的时间有：非偏好时间、上课时间
             case "delete":
-                //删除课程，输入课程ID
-                //输入课程ID,删除对应课程ID的所有课程,删除对应的考试信息
+                //删除课程
+                //输入课程ID
+                //删除对应课程ID的所有课程,删除对应的考试信息,删除对应学生的课表信息，删除老师的课表信息
+                //具体实现：利用课程ID查到内部ID
+                //转到内部ID的处理
+                String deleteID = msg.getData();//课程ID
+                if (service.delete(deleteID)) return new Message("200", "{res: 'OK'}");
+                else return new Message("200", "{res: 'NO'}");
             case "deleteone":
                 //删除对应老师教授的特定课程
                 //删除对应老师的考试信息
-                //输入内部编号
+                //输入内部ID
+                //具体实现：利用内部ID查到老师ID与学生ID
+                //执行老师退课函数（输入老师ID与内部ID，在老师课表中删除对应课的信息）
+                //执行学生退课函数（输入学生ID与内部ID，在学生和课的表中删除信息，在学生课表中删除信息）
+                //执行删除考试函数（输入内部ID，删除对应考试信息）
+                //执行删除课程函数（输入内部ID，在课的表里删除信息）
                 String deleteoneID = msg.getData();//内部编号
                 if (service.deleteone(deleteoneID)) return new Message("200", "{res: 'OK'}");
                 else return new Message("200", "{res: 'NO'}");
 
             case "get":
                 //显示所有课程
-                HashMap<String, Object> map1 = new HashMap<>();
-                map1.put("res", service.viewAllLessons());
-                return new Message("200", gson.toJson(map1));
+                HashMap<String, Object> map2 = new HashMap<>();
+                map2.put("res", service.viewAllLessons());
+                return new Message("200", gson.toJson(map2));
             case "getone":
                 //显示某一指标的课程 如“专业:计算机” “指标”+“:”+“数据”
                 String data = msg.getData();
                 Map<String, String> map = gson.fromJson(data, new TypeToken<HashMap<String, String>>() {}.getType());
-                HashMap<String, Object> map2 = new HashMap<>();
+                HashMap<String, Object> map3 = new HashMap<>();
                 Set<Lesson> lessonSet = new HashSet<>();
                 for (Map.Entry<String, String> entry : map.entrySet()) {
                     lessonSet.addAll(service.viewSpecificLessons(entry.getKey(), entry.getValue()));
                 }
-                map2.put("res", lessonSet);
-                return new Message("200", gson.toJson(map2));
-            case "set":
-                //修改课程信息
-                //传入一个lesson的类
-                //具体操作为删除对应内部ID的数据，再把此数据添加
-                //如果没有对应内部ID的数据则操作失败
-                Lesson lessonset = gson.fromJson(msg.getData(), Lesson.class);
-                if(service.setLesson(lessonset)) return new Message("200", "{res: 'OK'}");
-                else return new Message("200", "{res: 'NO'}");
+                map3.put("res", lessonSet);
+                return new Message("200", gson.toJson(map3));
             case"getstudent":
                 //显示对应学生选的课 输入学生ID
                 String studentID = msg.getData();
 
-                HashMap<String, Object> map3 = new HashMap<>();
-                map3.put("res", service.searchMine(studentID));
-                return new Message("200", gson.toJson(map3));
+                HashMap<String, Object> map4 = new HashMap<>();
+                map4.put("res", service.searchMine(studentID));
+                return new Message("200", gson.toJson(map4));
             case "getteacher":
                 //显示选择对应课程的学生 输入课程ID
+                String lessonID = msg.getData();
+                HashMap<String, Object> map5 = new HashMap<>();
+                map5.put("res", service.getTeacher(lessonID));
+                return new Message("200", gson.toJson(map5));
+            case "getspecificteacher":
+                //显示选择对应课程的学生 输入内部ID
+                String innerID = msg.getData();
+                HashMap<String, Object> map6 = new HashMap<>();
+                map6.put("res", service.getSpecificTeacher(innerID));
+                return new Message("200", gson.toJson(map6));
             case "showstatusstudent":
                 //输入ID，显示内容：*学生：姓名、身份（1--学生 2--老师）、ID、专业
                 //               老师：姓名、身份、ID、可选专业、偏好时间
                 //返回一个学生的类的list
                 String studentID1 = msg.getData();
-                HashMap<String, Object> map4 = new HashMap<>();
-                map4.put("res", service.searchStudent(studentID1));
-                return new Message("200", gson.toJson(map4));
+                HashMap<String, Object> map7 = new HashMap<>();
+                map7.put("res", service.searchStudent(studentID1));
+                return new Message("200", gson.toJson(map7));
 
             case "showstatussteacher":
                 //输入ID，显示内容：学生：姓名、身份（1--学生 2--老师）、ID、专业
                 //               *老师：姓名、身份、ID、可选专业、偏好时间
                 //返回一个老师的类的list
+                String teacherID = msg.getData();
+                HashMap<String, Object> map8 = new HashMap<>();
+                map8.put("res", service.searchTeacher(teacherID));
+                return new Message("200", gson.toJson(map8));
             case "setteacher":
                 //修改老师的可选专业与偏好时间
+                //输入一个老师的类
+                //如果没有则视为添加
+                //如果有则视为修改
+                Teacher teacher = gson.fromJson(msg.getData(), Teacher.class);
+                if (service.addTeacher(teacher)) return new Message("200", "{res: 'OK'}");
+                else return new Message("200", "{res: 'NO'}");
             case "arrange":
                 //自动排课，输入课程ID
             case "addgrade":

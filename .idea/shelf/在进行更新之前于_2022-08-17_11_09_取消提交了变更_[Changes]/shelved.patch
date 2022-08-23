@@ -1,0 +1,394 @@
+Index: src/com/vcampus/server/ServerRunner.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.vcampus.server;\r\n\r\nimport com.vcampus.net.Message;\r\nimport com.vcampus.net.MessagePasser;\r\nimport com.vcampus.server.controller.Controller;\r\nimport com.vcampus.server.controller.LibraryController;\r\nimport com.vcampus.server.controller.LoginController;\r\nimport com.vcampus.server.controller.StudentController;\r\n\r\nimport java.io.*;\r\nimport java.net.Socket;\r\n\r\npublic class ServerRunner implements Runnable{\r\n    private InputStream input;\r\n    private OutputStream output;\r\n    private final Controller loginController, libraryController, studentController;\r\n\r\n    public ServerRunner(Socket sock) {\r\n        try {\r\n            input = sock.getInputStream();\r\n            output = sock.getOutputStream();\r\n        } catch (IOException e) {\r\n            e.printStackTrace();\r\n        }\r\n        loginController = new LoginController();\r\n        libraryController = new LibraryController();\r\n        studentController = new StudentController();\r\n    }\r\n\r\n    @Override\r\n    public void run() {\r\n        MessagePasser passer = null;\r\n        passer = new MessagePasser(input, output);\r\n        //passer.send(new Message(\"200\", \"hello\"));\r\n        for(;;) {\r\n            Message message = passer.receive();\r\n            if(message.getStatus().equals(\"disconnected\")) break;\r\n            switch (message.getModule()) {\r\n                case \"login\":\r\n                    passer.send(loginController.check(message));\r\n                    break;\r\n                case \"student\":\r\n                    passer.send(studentController.check(message));\r\n                    break;\r\n                case \"class\":\r\n                    passer.send(new Message(\"200\", \"教务\"));\r\n                    break;\r\n                case \"library\":\r\n                    passer.send(libraryController.check(message));\r\n                    break;\r\n                default:\r\n                    passer.send(new Message(\"200\", message.getData()));\r\n                    break;\r\n            }\r\n        }\r\n\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/com/vcampus/server/ServerRunner.java b/src/com/vcampus/server/ServerRunner.java
+--- a/src/com/vcampus/server/ServerRunner.java	(revision a11708890b0bee02775c1faf59efd0e4671bb1a4)
++++ b/src/com/vcampus/server/ServerRunner.java	(date 1660705417418)
+@@ -6,6 +6,8 @@
+ import com.vcampus.server.controller.LibraryController;
+ import com.vcampus.server.controller.LoginController;
+ import com.vcampus.server.controller.StudentController;
++import com.vcampus.server.controller.LessonController;
++import com.vcampus.server.controller.TestController;
+ 
+ import java.io.*;
+ import java.net.Socket;
+@@ -13,7 +15,7 @@
+ public class ServerRunner implements Runnable{
+     private InputStream input;
+     private OutputStream output;
+-    private final Controller loginController, libraryController, studentController;
++    private final Controller loginController, libraryController, studentController,lessonController,testController;
+ 
+     public ServerRunner(Socket sock) {
+         try {
+@@ -22,9 +24,12 @@
+         } catch (IOException e) {
+             e.printStackTrace();
+         }
+-        loginController = new LoginController();
++        loginController   = new LoginController();
+         libraryController = new LibraryController();
+         studentController = new StudentController();
++        lessonController  = new LessonController();
++        testController    = new TestController();
++
+     }
+ 
+     @Override
+@@ -42,8 +47,11 @@
+                 case "student":
+                     passer.send(studentController.check(message));
+                     break;
+-                case "class":
+-                    passer.send(new Message("200", "教务"));
++                case "lesson":
++                    passer.send(lessonController.check(message));
++                    break;
++                case "test":
++                    passer.send(testController.check(message));
+                     break;
+                 case "library":
+                     passer.send(libraryController.check(message));
+Index: src/com/vcampus/server/controller/StudentController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.vcampus.server.controller;\r\n\r\nimport com.vcampus.net.Message;\r\nimport com.vcampus.pojo.Student;\r\nimport com.vcampus.server.service.Service;\r\nimport com.vcampus.server.service.StudentService;\r\nimport com.google.gson.*;\r\n\r\nimport java.util.HashMap;\r\n\r\npublic class StudentController implements Controller {\r\n\r\n    @Override\r\n    public Message check(Message msg){\r\n        StudentService service = new StudentService();\r\n        Gson gson = new Gson();\r\n        switch (msg.getOperation()) {\r\n            case \"post\"://添加学生信息 先删除对应studentID的学生，再添加新的信息\r\n                Student user = gson.fromJson(msg.getData(), Student.class);\r\n                if(!service.deleteStudent(user.getStudentID())) return new Message(\"200\", \"{res: 'NO'}\");\r\n                if(service.addStudent(user)) return new Message(\"200\", \"{res: 'OK'}\");\r\n                else return new Message(\"200\", \"{res: 'NO'}\");\r\n            case \"get\"://显示所有学生信息\r\n                HashMap<String, Object> map2 = new HashMap<>();\r\n                map2.put(\"res\", service.viewAllStudents());\r\n                return new Message(\"200\", gson.toJson(map2));\r\n            case \"getone\"://显示某一指标的学生 如：“姓名:于济源” “指标”+“:”+“数据”\r\n                String data = msg.getData();\r\n                String[] datanew = data.split(\":\",2);//根据:切分字符串;切两份\r\n                HashMap<String, Object> map3 = new HashMap<>();\r\n                map3.put(\"res\", service.viewSpecificStudents(datanew[0],datanew[1]));\r\n                return new Message(\"200\", gson.toJson(map3));\r\n            case \"delete\"://输入学生ID，删除对应学生\r\n                if(service.deleteStudent(msg.getData())) return new Message(\"200\", \"{res: 'OK'}\");\r\n                else return new Message(\"200\", \"{res: 'NO'}\");\r\n            default:\r\n                return new Message(\"404\", \"{res: 'Wrong Request!'}\");\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/com/vcampus/server/controller/StudentController.java b/src/com/vcampus/server/controller/StudentController.java
+--- a/src/com/vcampus/server/controller/StudentController.java	(revision a11708890b0bee02775c1faf59efd0e4671bb1a4)
++++ b/src/com/vcampus/server/controller/StudentController.java	(date 1660703513370)
+@@ -33,6 +33,7 @@
+             case "delete"://输入学生ID，删除对应学生
+                 if(service.deleteStudent(msg.getData())) return new Message("200", "{res: 'OK'}");
+                 else return new Message("200", "{res: 'NO'}");
++            case "set"://输入ID，修改其权限 如：“123:1” “ID”+“:”+“1/2/3” 1--学生 2--老师 3--管理员
+             default:
+                 return new Message("404", "{res: 'Wrong Request!'}");
+         }
+Index: src/com/vcampus/server/service/UserService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.vcampus.server.service;\r\n\r\nimport com.vcampus.dao.UserDao;\r\nimport com.vcampus.pojo.User;\r\n\r\npublic class UserService {\r\n    public boolean login(User user) {\r\n        String res;\r\n        try {\r\n            res = UserDao.loginCheck(user.getStudentID(), user.getPassword(), user.getType());\r\n        } catch (Exception e) {\r\n            e.printStackTrace();\r\n            return false;\r\n        }\r\n        return \"succeeded\".equals(res);\r\n    }\r\n    public boolean register(User user) {\r\n        String res;\r\n        try {\r\n            res = UserDao.register(user.getStudentID(), user.getPassword(), user.getType());\r\n        } catch (Exception e) {\r\n            e.printStackTrace();\r\n            return false;\r\n        }\r\n        return \"succeeded\".equals(res);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/com/vcampus/server/service/UserService.java b/src/com/vcampus/server/service/UserService.java
+--- a/src/com/vcampus/server/service/UserService.java	(revision a11708890b0bee02775c1faf59efd0e4671bb1a4)
++++ b/src/com/vcampus/server/service/UserService.java	(date 1660703969507)
+@@ -1,27 +1,64 @@
+ package com.vcampus.server.service;
+ 
++import com.vcampus.net.Message;
+ import com.vcampus.dao.UserDao;
+ import com.vcampus.pojo.User;
+ 
+ public class UserService {
+-    public boolean login(User user) {
++//    public boolean login(User user) {
++//        String res;
++//        try {
++//            res = UserDao.loginCheck(user.getStudentID(), user.getPassword(), user.getType());
++//        } catch (Exception e) {
++//            e.printStackTrace();
++//            return false;
++//        }
++//        return "succeeded".equals(res);
++//    }
++    public Message login(User user) {
+         String res;
+         try {
+             res = UserDao.loginCheck(user.getStudentID(), user.getPassword(), user.getType());
+         } catch (Exception e) {
+             e.printStackTrace();
+-            return false;
++            return new Message("200", "{res: 'NO'}");
+         }
+-        return "succeeded".equals(res);
++        switch (res) {
++            case "succeeded":
++                return new Message("200", "{res: 'succeeded'}");//登录成功
++            case "wrong password or username":
++                return new Message("200", "{res: 'wrong password or username'}");//用户名或密码错误
++            case "wrong type":
++                return new Message("200", "{res: 'wrong type'}");//类型错误
++            default:
++                return new Message("200", "{res: 'NO'}");//登录失败
++        }
+     }
+-    public boolean register(User user) {
++//    public boolean register(User user) {
++//        String res;
++//        try {
++//            res = UserDao.register(user.getStudentID(), user.getPassword(), user.getType());
++//        } catch (Exception e) {
++//            e.printStackTrace();
++//            return false;
++//        }
++//        return "succeeded".equals(res);
++//    }
++    public Message register(User user) {
+         String res;
+         try {
+             res = UserDao.register(user.getStudentID(), user.getPassword(), user.getType());
+         } catch (Exception e) {
+             e.printStackTrace();
+-            return false;
++            return new Message("200", "{res: 'NO'}");
+         }
+-        return "succeeded".equals(res);
++        switch (res) {
++            case "succeeded":
++                return new Message("200", "{res: 'succeeded'}");//注册成功
++            case "registered":
++                return new Message("200", "{res: 'registered'}");//已经过注册了
++            default:
++                return new Message("200", "{res: 'NO'}");//注册失败
++        }
+     }
+ }
+Index: src/com/vcampus/server/service/LessonService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/com/vcampus/server/service/LessonService.java b/src/com/vcampus/server/service/LessonService.java
+new file mode 100644
+--- /dev/null	(date 1660703525184)
++++ b/src/com/vcampus/server/service/LessonService.java	(date 1660703525184)
+@@ -0,0 +1,8 @@
++package com.vcampus.server.service;
++
++import com.vcampus.dao.LessonDao;
++import com.vcampus.pojo.Lesson;
++
++import java.util.List;
++public class LessonService implements Service{
++}
+Index: src/com/vcampus/server/controller/LessonController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/com/vcampus/server/controller/LessonController.java b/src/com/vcampus/server/controller/LessonController.java
+new file mode 100644
+--- /dev/null	(date 1660705073329)
++++ b/src/com/vcampus/server/controller/LessonController.java	(date 1660705073329)
+@@ -0,0 +1,36 @@
++package com.vcampus.server.controller;
++
++import com.vcampus.net.Message;
++import com.vcampus.pojo.Lesson;
++import com.vcampus.pojo.Student;
++import com.vcampus.server.service.Service;
++import com.vcampus.server.service.LessonService;
++import com.google.gson.*;
++import com.vcampus.server.service.StudentService;
++
++import java.util.HashMap;
++
++public class LessonController implements Controller{
++    @Override
++    public Message check(Message msg){
++        LessonService service = new LessonService();
++        Gson gson = new Gson();
++        switch (msg.getOperation()) {
++            case "post"://添加课程信息
++            case "postone"://添加对应课程的老师
++            case "delete"://删除课程，输入课程ID
++            case "deleteone"://删除对应老师教授的特定课程
++            case "get"://显示所有课程
++            case "getone"://显示某一指标的课程 如“专业:计算机” “指标”+“:”+“数据”
++            case "set"://修改课程信息
++            case"getstudent"://显示对应学生选的课 输入学生ID
++            case "getteacher"://显示选择对应课程的学生 输入课程ID
++            case "show"://输入ID，显示内容：学生：姓名、身份（1--学生 2--老师）、ID、专业
++                        //               老师：姓名、身份、ID、可选专业、偏好时间
++            case "arrange"://自动排课，输入课程ID
++            default:
++                return new Message("404", "{res: 'Wrong Request!'}");
++        }
++    }
++}
++
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"15435ea3-daf0-45be-876d-97d3668b8c59\" name=\"Changes\" comment=\"为Book增加了字符串形式表示的图片，写了图片和字符串相互转化的类。&#10;修改了LibraryDao层，可以多个条件查询\">\r\n      <change afterPath=\"$PROJECT_DIR$/src/os.png\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/com/vcampus/dao/LibraryDao.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/com/vcampus/dao/LibraryDao.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"PUSH_TAGS\">\r\n      <GitPushTagMode>\r\n        <option name=\"argument\" value=\"--tags\" />\r\n        <option name=\"title\" value=\"All\" />\r\n      </GitPushTagMode>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2DFN8UqGaWdtufeJ3QLOdvtrWZL\" />\r\n  <component name=\"ProjectLevelVcsManager\">\r\n    <OptionsSetting value=\"false\" id=\"Update\" />\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"foldersAlwaysOnTop\" value=\"false\" />\r\n    <option name=\"showModules\" value=\"false\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\r\n    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;D:/Code/JavaWebCode/Vcampus/src&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;File.Encoding&quot;\r\n  },\r\n  &quot;keyToStringList&quot;: {\r\n    &quot;ChangesTree.GroupingKeys&quot;: [\r\n      &quot;directory&quot;,\r\n      &quot;module&quot;\r\n    ]\r\n  }\r\n}</component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"D:\\Code\\JavaWebCode\\Vcampus\\src\" />\r\n      <recent name=\"D:\\Code\\JavaWebCode\\Vcampus\" />\r\n    </key>\r\n    <key name=\"CopyClassDialog.RECENTS_KEY\">\r\n      <recent name=\"com.vcampus.client.login\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"JUnit.LibraryDao.test\">\r\n    <configuration name=\"LoginTest\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.vcampus.test.LoginTest\" />\r\n      <module name=\"Vcampus\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"com.vcampus.test.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"myLoginTest\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.vcampus.client.login.myLoginTest\" />\r\n      <module name=\"Vcampus\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"com.vcampus.client.login.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"myLoginTest2\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.vcampus.client.login.myLoginTest2\" />\r\n      <module name=\"Vcampus\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"com.vcampus.client.login.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"LibraryDao.test\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"Vcampus\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"com.vcampus.dao.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <option name=\"PACKAGE_NAME\" value=\"com.vcampus.dao\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.vcampus.dao.LibraryDao\" />\r\n      <option name=\"METHOD_NAME\" value=\"test\" />\r\n      <option name=\"TEST_OBJECT\" value=\"method\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"StringAndImage.test\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"Vcampus\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"com.vcampus.dao.utils.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <option name=\"PACKAGE_NAME\" value=\"com.vcampus.dao.utils\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.vcampus.dao.utils.StringAndImage\" />\r\n      <option name=\"METHOD_NAME\" value=\"test\" />\r\n      <option name=\"TEST_OBJECT\" value=\"method\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"JUnit.LibraryDao.test\" />\r\n        <item itemvalue=\"JUnit.StringAndImage.test\" />\r\n        <item itemvalue=\"Application.myLoginTest\" />\r\n        <item itemvalue=\"Application.myLoginTest2\" />\r\n        <item itemvalue=\"Application.LoginTest\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"15435ea3-daf0-45be-876d-97d3668b8c59\" name=\"Changes\" comment=\"\" />\r\n      <created>1660290718338</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1660290718338</updated>\r\n      <workItem from=\"1660290720744\" duration=\"7006000\" />\r\n      <workItem from=\"1660394444650\" duration=\"60000\" />\r\n      <workItem from=\"1660394516873\" duration=\"56000\" />\r\n      <workItem from=\"1660394584644\" duration=\"9000\" />\r\n      <workItem from=\"1660395297646\" duration=\"18000\" />\r\n      <workItem from=\"1660397164596\" duration=\"38000\" />\r\n      <workItem from=\"1660397307971\" duration=\"4358000\" />\r\n      <workItem from=\"1660403234776\" duration=\"303000\" />\r\n      <workItem from=\"1660454140324\" duration=\"96000\" />\r\n      <workItem from=\"1660455383694\" duration=\"9368000\" />\r\n      <workItem from=\"1660546281143\" duration=\"210000\" />\r\n      <workItem from=\"1660553294493\" duration=\"5398000\" />\r\n      <workItem from=\"1660563636857\" duration=\"2164000\" />\r\n      <workItem from=\"1660619044349\" duration=\"4132000\" />\r\n      <workItem from=\"1660637701493\" duration=\"2215000\" />\r\n      <workItem from=\"1660639997270\" duration=\"5427000\" />\r\n      <workItem from=\"1660648925845\" duration=\"884000\" />\r\n      <workItem from=\"1660694384311\" duration=\"5422000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"初步写了登录注册\">\r\n      <created>1660298515554</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1660298515554</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"写了一个方法把map转为bean对象\">\r\n      <created>1660401643513</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1660401643513</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"实现可序列化接口\">\r\n      <created>1660554878384</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1660554878384</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"对注册添加了类型验证\">\r\n      <created>1660555737524</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1660555737524</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"完成了studentDao层，暂时没有把照片添加进去，主要是照片的读取之类的需要特殊方法，我要再学习一下\">\r\n      <created>1660567403654</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1660567403654</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"这次初步写了libraryDao层，但引发了我一个关于数据库隔离的思考，这部分知识我还要好好学一下。目前为止我的Dao层都是静态方法，当查询的时候都是现获取的，这样的方法的弊端一个是效率问题，需要频繁开关，另一个问题则是数据库隔离的隐患。我正在考虑重写某些方法。\">\r\n      <created>1660648795402</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1660648795402</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"重写了下CRUD类中的方法，加入了一个connection参数。写了一个BaseDao，内部定义了一个连接，各个Dao类都继承了BaseDao。现在使用同一个connection进行操作了\">\r\n      <created>1660649808298</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1660649808298</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00008\" summary=\"为Book增加了字符串形式表示的图片，写了图片和字符串相互转化的类。&#10;修改了LibraryDao层，可以多个条件查询\">\r\n      <created>1660700337585</created>\r\n      <option name=\"number\" value=\"00008\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1660700337585</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"9\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <option name=\"ADD_EXTERNAL_FILES_SILENTLY\" value=\"true\" />\r\n    <MESSAGE value=\"初步写了登录注册\" />\r\n    <MESSAGE value=\"写了一个方法把map转为bean对象\" />\r\n    <MESSAGE value=\"实现可序列化接口\" />\r\n    <MESSAGE value=\"对注册添加了类型验证\" />\r\n    <MESSAGE value=\"完成了studentDao层，暂时没有把照片添加进去，主要是照片的读取之类的需要特殊方法，我要再学习一下\" />\r\n    <MESSAGE value=\"这次初步写了libraryDao层，但引发了我一个关于数据库隔离的思考，这部分知识我还要好好学一下。目前为止我的Dao层都是静态方法，当查询的时候都是现获取的，这样的方法的弊端一个是效率问题，需要频繁开关，另一个问题则是数据库隔离的隐患。我正在考虑重写某些方法。\" />\r\n    <MESSAGE value=\"重写了下CRUD类中的方法，加入了一个connection参数。写了一个BaseDao，内部定义了一个连接，各个Dao类都继承了BaseDao。现在使用同一个connection进行操作了\" />\r\n    <MESSAGE value=\"为Book增加了字符串形式表示的图片，写了图片和字符串相互转化的类。&#10;修改了LibraryDao层，可以多个条件查询\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"为Book增加了字符串形式表示的图片，写了图片和字符串相互转化的类。&#10;修改了LibraryDao层，可以多个条件查询\" />\r\n  </component>\r\n  <component name=\"XSLT-Support.FileAssociations.UIState\">\r\n    <expand />\r\n    <select />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision a11708890b0bee02775c1faf59efd0e4671bb1a4)
++++ b/.idea/workspace.xml	(date 1660705297338)
+@@ -1,10 +1,16 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ChangeListManager">
+-    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="为Book增加了字符串形式表示的图片，写了图片和字符串相互转化的类。&#10;修改了LibraryDao层，可以多个条件查询">
+-      <change afterPath="$PROJECT_DIR$/src/os.png" afterDir="false" />
++    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="重写了下CRUD类中的方法，加入了一个connection参数。写了一个BaseDao，内部定义了一个连接，各个Dao类都继承了BaseDao。现在使用同一个connection进行操作了">
++      <change afterPath="$PROJECT_DIR$/src/com/vcampus/server/controller/LessonController.java" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/src/com/vcampus/server/controller/TestController.java" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/src/com/vcampus/server/service/LessonService.java" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/src/com/vcampus/server/service/TestService.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/LibraryDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/LibraryDao.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/com/vcampus/server/ServerRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/server/ServerRunner.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/com/vcampus/server/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/server/controller/LoginController.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/com/vcampus/server/controller/StudentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/server/controller/StudentController.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/com/vcampus/server/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/server/service/UserService.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -141,9 +147,6 @@
+       <list>
+         <item itemvalue="JUnit.LibraryDao.test" />
+         <item itemvalue="JUnit.StringAndImage.test" />
+-        <item itemvalue="Application.myLoginTest" />
+-        <item itemvalue="Application.myLoginTest2" />
+-        <item itemvalue="Application.LoginTest" />
+       </list>
+     </recent_temporary>
+   </component>
+@@ -223,14 +226,7 @@
+       <option name="project" value="LOCAL" />
+       <updated>1660649808298</updated>
+     </task>
+-    <task id="LOCAL-00008" summary="为Book增加了字符串形式表示的图片，写了图片和字符串相互转化的类。&#10;修改了LibraryDao层，可以多个条件查询">
+-      <created>1660700337585</created>
+-      <option name="number" value="00008" />
+-      <option name="presentableId" value="LOCAL-00008" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1660700337585</updated>
+-    </task>
+-    <option name="localTasksCounter" value="9" />
++    <option name="localTasksCounter" value="8" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -256,8 +252,7 @@
+     <MESSAGE value="完成了studentDao层，暂时没有把照片添加进去，主要是照片的读取之类的需要特殊方法，我要再学习一下" />
+     <MESSAGE value="这次初步写了libraryDao层，但引发了我一个关于数据库隔离的思考，这部分知识我还要好好学一下。目前为止我的Dao层都是静态方法，当查询的时候都是现获取的，这样的方法的弊端一个是效率问题，需要频繁开关，另一个问题则是数据库隔离的隐患。我正在考虑重写某些方法。" />
+     <MESSAGE value="重写了下CRUD类中的方法，加入了一个connection参数。写了一个BaseDao，内部定义了一个连接，各个Dao类都继承了BaseDao。现在使用同一个connection进行操作了" />
+-    <MESSAGE value="为Book增加了字符串形式表示的图片，写了图片和字符串相互转化的类。&#10;修改了LibraryDao层，可以多个条件查询" />
+-    <option name="LAST_COMMIT_MESSAGE" value="为Book增加了字符串形式表示的图片，写了图片和字符串相互转化的类。&#10;修改了LibraryDao层，可以多个条件查询" />
++    <option name="LAST_COMMIT_MESSAGE" value="重写了下CRUD类中的方法，加入了一个connection参数。写了一个BaseDao，内部定义了一个连接，各个Dao类都继承了BaseDao。现在使用同一个connection进行操作了" />
+   </component>
+   <component name="XSLT-Support.FileAssociations.UIState">
+     <expand />
+Index: src/com/vcampus/server/controller/LoginController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.vcampus.server.controller;\r\n\r\nimport com.vcampus.net.Message;\r\nimport com.vcampus.pojo.User;\r\nimport com.vcampus.server.service.UserService;\r\nimport com.google.gson.*;\r\n\r\npublic class LoginController implements Controller {\r\n\r\n    @Override\r\n    public Message check(Message msg) {\r\n        if(msg.getOperation().equals(\"get\")) {\r\n            UserService service = new UserService();\r\n            Gson gson = new Gson();\r\n            User user = gson.fromJson(msg.getData(), User.class);\r\n            if(service.login(user)) return new Message(\"200\", \"{res: 'OK'}\");\r\n            else return new Message(\"200\", \"{res: 'NO'}\");\r\n        }\r\n        else if(msg.getOperation().equals(\"register\")) {\r\n            UserService service = new UserService();\r\n            Gson gson = new Gson();\r\n            User user = gson.fromJson(msg.getData(), User.class);\r\n            if(service.register(user)) return new Message(\"200\", \"{res: 'OK'}\");\r\n            else return new Message(\"200\", \"{res: 'NO'}\");\r\n        }\r\n        else return new Message(\"404\", \"{res: 'Wrong Request!'}\");\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/com/vcampus/server/controller/LoginController.java b/src/com/vcampus/server/controller/LoginController.java
+--- a/src/com/vcampus/server/controller/LoginController.java	(revision a11708890b0bee02775c1faf59efd0e4671bb1a4)
++++ b/src/com/vcampus/server/controller/LoginController.java	(date 1660704524620)
+@@ -9,20 +9,35 @@
+ 
+     @Override
+     public Message check(Message msg) {
+-        if(msg.getOperation().equals("get")) {
+-            UserService service = new UserService();
+-            Gson gson = new Gson();
+-            User user = gson.fromJson(msg.getData(), User.class);
+-            if(service.login(user)) return new Message("200", "{res: 'OK'}");
+-            else return new Message("200", "{res: 'NO'}");
++        UserService service = new UserService();
++        Gson gson = new Gson();
++        User user = gson.fromJson(msg.getData(), User.class);
++        switch (msg.getOperation()){
++            case "get"://登录
++                return service.login(user);
++            case "register"://注册
++                return service.register(user);
++            case "delete"://删除用户，输入ID
++            case "Change Password"://修改密码
++            case "Change Permissions"://修改权限
++
++            default:
++                return new Message("404", "{res: 'Wrong Request!'}");
+         }
+-        else if(msg.getOperation().equals("register")) {
+-            UserService service = new UserService();
+-            Gson gson = new Gson();
+-            User user = gson.fromJson(msg.getData(), User.class);
+-            if(service.register(user)) return new Message("200", "{res: 'OK'}");
+-            else return new Message("200", "{res: 'NO'}");
+-        }
+-        else return new Message("404", "{res: 'Wrong Request!'}");
++//        if(msg.getOperation().equals("get")) {
++//            UserService service = new UserService();
++//            Gson gson = new Gson();
++//            User user = gson.fromJson(msg.getData(), User.class);
++//            if(service.login(user)) return new Message("200", "{res: 'OK'}");
++//            else return new Message("200", "{res: 'NO'}");
++//        }
++//        else if(msg.getOperation().equals("register")) {
++//            UserService service = new UserService();
++//            Gson gson = new Gson();
++//            User user = gson.fromJson(msg.getData(), User.class);
++//            if(service.register(user)) return new Message("200", "{res: 'OK'}");
++//            else return new Message("200", "{res: 'NO'}");
++//        }
++//        else return new Message("404", "{res: 'Wrong Request!'}");
+     }
+ }
+Index: src/com/vcampus/server/service/TestService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/com/vcampus/server/service/TestService.java b/src/com/vcampus/server/service/TestService.java
+new file mode 100644
+--- /dev/null	(date 1660705324982)
++++ b/src/com/vcampus/server/service/TestService.java	(date 1660705324982)
+@@ -0,0 +1,5 @@
++package com.vcampus.server.service;
++
++public class TestService implements Service{
++
++}
+Index: src/com/vcampus/server/controller/TestController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/com/vcampus/server/controller/TestController.java b/src/com/vcampus/server/controller/TestController.java
+new file mode 100644
+--- /dev/null	(date 1660705758050)
++++ b/src/com/vcampus/server/controller/TestController.java	(date 1660705758050)
+@@ -0,0 +1,24 @@
++package com.vcampus.server.controller;
++
++import com.google.gson.Gson;
++import com.vcampus.net.Message;
++import com.vcampus.server.service.TestService;
++
++import java.util.HashMap;
++
++public class TestController implements Controller{
++
++    @Override
++    public Message check(Message msg){
++        TestService service = new TestService();
++        Gson gson = new Gson();
++        switch (msg.getOperation()) {
++            case "post"://添加考试信息,基于内部ID
++            case "delete"://删除考试，输入课程ID
++            case"set"://修改考试信息
++            case"addGrade"://添加成绩
++            default:
++                return new Message("404", "{res: 'Wrong Request!'}");
++        }
++    }
++}

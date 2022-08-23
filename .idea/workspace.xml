@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="添加选课">
+    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="添加选课,考试">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/vcampus/server/controller/LessonController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/server/controller/LessonController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/server/controller/StudentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/server/controller/StudentController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/vcampus/server/controller/TestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/server/controller/TestController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/vcampus/server/service/LessonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/server/service/LessonService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/vcampus/server/service/TestService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/server/service/TestService.java" afterDir="false" />
@@ -68,7 +67,7 @@
       <recent name="com.vcampus.client.login" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.BaseDao.test">
     <configuration name="BaseDao.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Vcampus" />
       <extension name="coverage">
@@ -190,6 +189,8 @@
       <workItem from="1660815934556" duration="2473000" />
       <workItem from="1660831786373" duration="1983000" />
       <workItem from="1660888580099" duration="3413000" />
+      <workItem from="1661161493819" duration="504000" />
+      <workItem from="1661168593059" duration="2882000" />
     </task>
     <task id="LOCAL-00001" summary="初步写了登录注册">
       <created>1660298515554</created>
@@ -289,7 +290,28 @@
       <option name="project" value="LOCAL" />
       <updated>1660898810557</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="添加选课,考试">
+      <created>1661161837162</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1661161837162</updated>
+    </task>
+    <task id="LOCAL-00016" summary="添加选课,考试">
+      <created>1661161926061</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1661161926061</updated>
+    </task>
+    <task id="LOCAL-00017" summary="添加选课,考试">
+      <created>1661169052353</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1661169052353</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -298,11 +320,41 @@
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
+        <entry key="7c4fcc8c-65db-406e-816b-f7faf35084f2">
+          <value>
+            <State>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="roots">
+                    <value>
+                      <list>
+                        <option value="$PROJECT_DIR$" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
         <entry key="MAIN">
           <value>
             <State />
           </value>
         </entry>
+      </map>
+    </option>
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="7c4fcc8c-65db-406e-816b-f7faf35084f2" value="TOOL_WINDOW" />
       </map>
     </option>
   </component>
@@ -322,7 +374,8 @@
     <MESSAGE value="添加了exam类，初步写了examDao层" />
     <MESSAGE value="增强了student，加入了民族信息；同时推进了部分examDao层" />
     <MESSAGE value="baseDao增加了一些公共函数" />
-    <option name="LAST_COMMIT_MESSAGE" value="baseDao增加了一些公共函数" />
+    <MESSAGE value="添加选课,考试" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加选课,考试" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
