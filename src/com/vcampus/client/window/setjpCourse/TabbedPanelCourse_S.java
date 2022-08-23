@@ -1,10 +1,10 @@
 /** ===================================================
- * Title: TabbedPanelCourse_T.java
- * Created: [2022-8-17 17:06:23] by  韩宇
+ * Title: TabbedPanelCourse_S.java
+ * Created: [2022-8-17 17:05:43] by  韩宇
  *=====================================================
  * Copyright:  Copyright (c)　东南大学计算机学院, 2021-2022
  * =====================================================
- * Description: 教务管理——教师界面
+ * Description: 教务管理——学生界面
  *=====================================================
  *Revised Hisytory:
  *1. 2022-8-17,创建此文件
@@ -13,13 +13,13 @@
  *    修改的内容描述，修改的原因
  */
 
-package com.vcampus.client.window;
+package com.vcampus.client.window.setjpCourse;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class TabbedPanelCourse_T extends JTabbedPane {
-    public TabbedPanelCourse_T()
+public class TabbedPanelCourse_S extends JTabbedPane{
+    public TabbedPanelCourse_S()
     {
         //JTabbedPane jtbp=new JTabbedPane();	//创建选项卡
         this.setTabPlacement(2);
@@ -30,7 +30,7 @@ public class TabbedPanelCourse_T extends JTabbedPane {
         JPanel jp13 = new JPanel();
         //选项卡1的内容
         //设置标题
-        JLabel lblTitleLabel = new JLabel("教师教务");
+        JLabel lblTitleLabel = new JLabel("学生教务");
         lblTitleLabel.setFont(new Font("宋体", Font.BOLD, 50));
         //按钮
         JButton btnRegister = new JButton("wwww");

@@ -1,10 +1,10 @@
 /** ===================================================
- * Title: TabbedPanelMessage_S.java
- * Created: [2022-8-17 17:12:30] by  韩宇
+ * Title: TabbedPanelCourse_T.java
+ * Created: [2022-8-17 17:06:23] by  韩宇
  *=====================================================
  * Copyright:  Copyright (c)　东南大学计算机学院, 2021-2022
  * =====================================================
- * Description: 站内消息管理——学生界面
+ * Description: 教务管理——教师界面
  *=====================================================
  *Revised Hisytory:
  *1. 2022-8-17,创建此文件
@@ -13,15 +13,15 @@
  *    修改的内容描述，修改的原因
  */
 
-
-package com.vcampus.client.window;
+package com.vcampus.client.window.setjpCourse;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class TabbedPanelMessage_S extends JTabbedPane {
-    public TabbedPanelMessage_S()
+public class TabbedPanelCourse_T extends JTabbedPane {
+    public TabbedPanelCourse_T()
     {
+        //JTabbedPane jtbp=new JTabbedPane();	//创建选项卡
         this.setTabPlacement(2);
         this.setBounds(0,0,1400,650);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
@@ -30,14 +30,21 @@ public class TabbedPanelMessage_S extends JTabbedPane {
         JPanel jp13 = new JPanel();
         //选项卡1的内容
         //设置标题
-        JLabel lblTitleLabel = new JLabel("学生站内消息");
+        JLabel lblTitleLabel = new JLabel("教师教务");
         lblTitleLabel.setFont(new Font("宋体", Font.BOLD, 50));
         //按钮
-        JButton btnRegister = new JButton("啦啦啦啦啦");
+        JButton btnRegister = new JButton("wwww");
         btnRegister.setFont(new Font("宋体", Font.BOLD, 50));
 
         jp11.add(lblTitleLabel);
         jp12.add(btnRegister);
+
+        /*
+        this.add("选项一",jp11);	//创建三个面板
+        this.add("选项二",jp12);
+        this.add("选项三",jp13);
+
+         */
 
 
         this.addTab("选项一", null, jp11,"点击查看选项一");

@@ -1,10 +1,10 @@
 /** ===================================================
- * Title: TabbedPanelStore_S.java
- * Created: [2022-8-17 17:20:31] by  韩宇
+ * Title: TabbedPanelStore_T.java
+ * Created: [2022-8-17 17:21:13] by  韩宇
  *=====================================================
  * Copyright:  Copyright (c)　东南大学计算机学院, 2021-2022
  * =====================================================
- * Description: 校园商城管理——学生界面
+ * Description: 校园商城管理——教师界面
  *=====================================================
  *Revised Hisytory:
  *1. 2022-8-17,创建此文件
@@ -13,14 +13,13 @@
  *    修改的内容描述，修改的原因
  */
 
-
-package com.vcampus.client.window;
+package com.vcampus.client.window.setjpStore;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class TabbedPanelStore_S extends JTabbedPane {
-    public TabbedPanelStore_S()
+public class TabbedPanelStore_T extends JTabbedPane {
+    public TabbedPanelStore_T()
     {
         this.setTabPlacement(2);
         this.setBounds(0,0,1400,650);//注意！！！！！！！！！！！！！！！！！！！！！！！
@@ -30,7 +29,7 @@ public class TabbedPanelStore_S extends JTabbedPane {
         JPanel jp13 = new JPanel();
         //选项卡1的内容
         //设置标题
-        JLabel lblTitleLabel = new JLabel("学生校园商城");
+        JLabel lblTitleLabel = new JLabel("教师校园商城");
         lblTitleLabel.setFont(new Font("宋体", Font.BOLD, 50));
         //按钮
         JButton btnRegister = new JButton("SSSSS");

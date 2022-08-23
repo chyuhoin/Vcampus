@@ -1,10 +1,10 @@
 /** ===================================================
- * Title: TabbedPanelLibrary_S.java
- * Created: [2022-8-17 17:08:30] by  韩宇
+ * Title: TabbedPanelMessage_A.java
+ * Created: [2022-8-17 17:11:20] by  韩宇
  *=====================================================
  * Copyright:  Copyright (c)　东南大学计算机学院, 2021-2022
  * =====================================================
- * Description: 图书馆管理——学生界面
+ * Description: 站内消息管理——管理员界面
  *=====================================================
  *Revised Hisytory:
  *1. 2022-8-17,创建此文件
@@ -13,15 +13,14 @@
  *    修改的内容描述，修改的原因
  */
 
-package com.vcampus.client.window;
+package com.vcampus.client.window.setjpMessage;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class TabbedPanelLibrary_S extends JTabbedPane {
-    public TabbedPanelLibrary_S()
+public class TabbedPanelMessage_A extends JTabbedPane{
+    public TabbedPanelMessage_A()
     {
-        //JTabbedPane jtbp=new JTabbedPane();	//创建选项卡
         this.setTabPlacement(2);
         this.setBounds(0,0,1400,650);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
@@ -30,21 +29,19 @@ public class TabbedPanelLibrary_S extends JTabbedPane {
         JPanel jp13 = new JPanel();
         //选项卡1的内容
         //设置标题
-        JLabel lblTitleLabel = new JLabel("学生图书馆");
+        JLabel lblTitleLabel = new JLabel("站内消息");
         lblTitleLabel.setFont(new Font("宋体", Font.BOLD, 50));
         //按钮
-        JButton btnRegister = new JButton("AAAAA");
+        JButton btnRegister = new JButton("啦啦啦啦啦");
         btnRegister.setFont(new Font("宋体", Font.BOLD, 50));
 
         jp11.add(lblTitleLabel);
         jp12.add(btnRegister);
 
 
-
-
-        this.addTab("书籍信息总览", null, jp11,"书籍信息总览");
-        this.addTab("查询书籍信息", null, jp12,"查询书籍信息");
-        this.addTab("查询借阅情况", null, jp13,"查询借阅情况");
+        this.addTab("选项一", null, jp11,"点击查看选项一");
+        this.addTab("选项二", null, jp12,"点击查看选项二");
+        this.addTab("选项三", null, jp13,"点击查看选项三");
         this.setFont(new Font("宋体", Font.BOLD, 24));
 
 

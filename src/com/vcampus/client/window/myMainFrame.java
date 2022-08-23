@@ -15,6 +15,25 @@
  */
 package com.vcampus.client.window;
 
+import com.vcampus.client.window.setjpStore.TabbedPanelStore_A;
+import com.vcampus.client.window.setjpStore.TabbedPanelStore_S;
+import com.vcampus.client.window.setjpStore.TabbedPanelStore_T;
+import com.vcampus.client.window.setjpCourse.TabbedPanelCourse_A;
+import com.vcampus.client.window.setjpCourse.TabbedPanelCourse_S;
+import com.vcampus.client.window.setjpCourse.TabbedPanelCourse_T;
+import com.vcampus.client.window.setjpLibrary.TabbedPanelLibrary_A;
+import com.vcampus.client.window.setjpLibrary.TabbedPanelLibrary_S;
+import com.vcampus.client.window.setjpLibrary.TabbedPanelLibrary_T;
+import com.vcampus.client.window.setjpMessage.TabbedPanelMessage_A;
+import com.vcampus.client.window.setjpMessage.TabbedPanelMessage_S;
+import com.vcampus.client.window.setjpMessage.TabbedPanelMessage_T;
+import com.vcampus.client.window.setjpSchool.TabbedPanelSchool_A;
+import com.vcampus.client.window.setjpSchool.TabbedPanelSchool_S;
+import com.vcampus.client.window.setjpSchool.TabbedPanelSchool_T;
+import com.vcampus.client.window.setjpUSER.TabbedPanelUser_A;
+import com.vcampus.client.window.setjpUSER.TabbedPanelUser_S;
+import com.vcampus.client.window.setjpUSER.TabbedPanelUser_T;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

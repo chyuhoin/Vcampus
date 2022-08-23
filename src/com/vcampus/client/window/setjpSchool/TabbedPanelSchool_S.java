@@ -13,7 +13,9 @@
  *    修改的内容描述，修改的原因
  */
 
-package com.vcampus.client.window;
+package com.vcampus.client.window.setjpSchool;
+
+import com.vcampus.client.window.setjpSchool.StudentStatusEnquire_S;
 
 import javax.swing.*;
 import java.awt.*;

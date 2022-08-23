@@ -12,7 +12,7 @@
  *3. 2022-8-21,完善前后端连接   修改人：韩宇
  *    修改的内容描述，修改的原因
  */
-package com.vcampus.client.window;
+package com.vcampus.client.window.setjpSchool;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.vcampus.net.ClientMessagePasser;
