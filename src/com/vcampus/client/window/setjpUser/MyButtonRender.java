@@ -1,4 +1,4 @@
-package com.vcampus.client.window.setjpUSER;
+package com.vcampus.client.window.setjpUser;
 
 import javax.swing.*;
 import javax.swing.table.TableCellRenderer;

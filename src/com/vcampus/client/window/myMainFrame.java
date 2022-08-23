@@ -30,9 +30,9 @@ import com.vcampus.client.window.setjpMessage.TabbedPanelMessage_T;
 import com.vcampus.client.window.setjpSchool.TabbedPanelSchool_A;
 import com.vcampus.client.window.setjpSchool.TabbedPanelSchool_S;
 import com.vcampus.client.window.setjpSchool.TabbedPanelSchool_T;
-import com.vcampus.client.window.setjpUSER.TabbedPanelUser_A;
-import com.vcampus.client.window.setjpUSER.TabbedPanelUser_S;
-import com.vcampus.client.window.setjpUSER.TabbedPanelUser_T;
+import com.vcampus.client.window.setjpUser.TabbedPanelUser_A;
+import com.vcampus.client.window.setjpUser.TabbedPanelUser_S;
+import com.vcampus.client.window.setjpUser.TabbedPanelUser_T;
 
 import javax.swing.*;
 import java.awt.*;

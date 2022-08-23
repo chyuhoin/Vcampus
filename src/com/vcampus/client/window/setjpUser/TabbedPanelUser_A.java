@@ -13,9 +13,7 @@
  *    修改的内容描述，修改的原因
  */
 
-package com.vcampus.client.window.setjpUSER;
-
-import com.vcampus.client.window.setjpUSER.*;
+package com.vcampus.client.window.setjpUser;
 
 import javax.swing.*;
 import java.awt.*;

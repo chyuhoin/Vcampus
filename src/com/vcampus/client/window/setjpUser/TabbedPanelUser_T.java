@@ -14,12 +14,21 @@
  */
 
 
-package com.vcampus.client.window.setjpUSER;
+package com.vcampus.client.window.setjpUser;
 
-import com.vcampus.client.window.setjpUSER.*;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.vcampus.client.window.setjpLibrary.mytablepanel.MyTablePanel;
+import com.vcampus.net.ClientMessagePasser;
+import com.vcampus.net.Message;
+import com.vcampus.net.MessagePasser;
+import com.vcampus.pojo.Book;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class TabbedPanelUser_T extends JTabbedPane{
 
@@ -35,6 +44,7 @@ public class TabbedPanelUser_T extends JTabbedPane{
         SetJPUser1 setjp1=new SetJPUser1(2,id,jp11,layout_Card);
         //选项卡2的内容
         SetJPUser2_2 setjp2_2=new SetJPUser2_2(2,id,jp12,layout_Card);
+
 
         this.addTab("个人信息",null,jp11,"查看个人信息");
         this.addTab("密码修改",null,jp12,"修改密码");

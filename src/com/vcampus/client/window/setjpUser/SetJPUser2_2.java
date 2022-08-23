@@ -12,14 +12,13 @@
  *    修改的内容描述，修改的原因
  */
 
-package com.vcampus.client.window.setjpUSER;
+package com.vcampus.client.window.setjpUser;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.vcampus.net.ClientMessagePasser;
 import com.vcampus.net.Message;
 import com.vcampus.net.MessagePasser;
-import com.vcampus.pojo.Student;
 import com.vcampus.pojo.User;
 
 import javax.swing.*;

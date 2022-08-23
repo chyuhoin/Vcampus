@@ -15,10 +15,22 @@
 
 package com.vcampus.client.window.setjpLibrary;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.vcampus.client.window.setjpLibrary.mytablepanel.MyTablePanel;
+import com.vcampus.net.ClientMessagePasser;
+import com.vcampus.net.Message;
+import com.vcampus.net.MessagePasser;
+import com.vcampus.pojo.Book;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class TabbedPanelLibrary_T extends JTabbedPane {
+    MessagePasser passer = ClientMessagePasser.getInstance();
     public TabbedPanelLibrary_T()
     {
         //JTabbedPane jtbp=new JTabbedPane();	//创建选项卡
@@ -30,17 +42,34 @@ public class TabbedPanelLibrary_T extends JTabbedPane {
         JPanel jp12 = new JPanel();
         JPanel jp13 = new JPanel();
         //选项卡1的内容
-        //设置标题
-        JLabel lblTitleLabel = new JLabel("教师图书馆");
-        lblTitleLabel.setFont(new Font("宋体", Font.BOLD, 50));
-        //按钮
-        JButton btnRegister = new JButton("AAAAA");
-        btnRegister.setFont(new Font("宋体", Font.BOLD, 50));
+        //查询数据库
+        Book book=new Book();
+        Gson gson = new Gson();
+        String s = gson.toJson(book);
+        passer.send(new Message("admin", s, "library", "get"));
 
-        jp11.add(lblTitleLabel);
-        jp12.add(btnRegister);
+        Message msg = passer.receive();
+        Map<String, java.util.List<Book>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, java.util.List<Book>>>(){}.getType());
+        List<Book> res = map.get("res");
+        try{
+            Object[] columnNames = new Object[]{"书籍号","书名","作者","类型","剩余册数"};
+            Object[][] rowData = new Object[res.size()][5];
+            for(int i=0;i<res.size();i++){
+                rowData[i][0]=res.get(i).getBookID();
+                rowData[i][1]=res.get(i).getBookName();
+                rowData[i][2]=res.get(i).getAuthor();
+                rowData[i][3]=res.get(i).getType();
+                rowData[i][4]=res.get(i).getLeftSize();
+            }
+            jp11.setLayout(new CardLayout(10,10));
+            jp11.add(new MyTablePanel(rowData,columnNames));
 
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        //选项卡2的内容
 
+        //选项卡3的内容
 
 
         this.addTab("书籍信息总览", null, jp11,"书籍信息总览");
