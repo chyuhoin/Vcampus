@@ -120,6 +120,8 @@ public class PanelEnquireBook extends JPanel{
         List<Book> res = map.get("res");
         //先接收消息//根据消息判断，如果大小为1，放详情panel//不为1，放表格//zxz//如果是空的，弹警告窗口
 
+        txtEnquire.setText("");
+
         if(res.size()==1)
         {
             JPanel panelInform = new PanelBookInform(res.get(0),false);//传入书本的对象作为参数，参数传接收的消息

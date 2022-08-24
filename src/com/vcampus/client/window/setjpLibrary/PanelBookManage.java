@@ -40,7 +40,7 @@ public class PanelBookManage extends JPanel {
     JButton btnAdd = new JButton("添加");
     JButton btnDelete = new JButton("删除");
     JButton btnChange = new JButton("修改");
-    JButton btnInquire1 = new JButton("查询");//查询后删除
+    JButton btnInquire1 = new JButton("删除书籍");//查询后删除
     JButton btnInquire2 = new JButton("查询");//查询后修改
     JButton btnOk = new JButton("确认");
     JButton btnCancel = new JButton("取消");
@@ -99,6 +99,7 @@ public class PanelBookManage extends JPanel {
                 repaint();
                 operation="post";
                 addBook();//空的，可查询
+
             }
         });
 
@@ -111,6 +112,8 @@ public class PanelBookManage extends JPanel {
                 updateUI();
                 repaint();
                 setEnquire(btnInquire1);//查询
+
+
             }
         });
 
@@ -120,8 +123,8 @@ public class PanelBookManage extends JPanel {
                 remove(panelInform); remove(btnInquire1);
                 remove(btnOk); remove(btnCancel);
                 repaint();
-                updateUI();
-                repaint();
+                //updateUI();
+                //repaint();
                 setEnquire(btnInquire2);//查询
                 operation="put";
             }
@@ -154,7 +157,7 @@ public class PanelBookManage extends JPanel {
                 b.setBookID(str);
                 Gson gson = new Gson();
                 String s = gson.toJson(b);
-                passer.send(new Message("admin", s, "library", operation));
+                passer.send(new Message("admin", s, "library", "get"));
 
                 changeBookInform();
             }
@@ -193,7 +196,7 @@ public class PanelBookManage extends JPanel {
                 if(map.get("res").equals("OK"))
                 {
                     informFrame("操作成功",false);
-                    panelInform=new PanelBookInform(book,true);
+                    //panelInform=new PanelBookInform(book,true);
                 }
                 else
                 { informFrame("操作失败",true); }
@@ -260,6 +263,7 @@ public class PanelBookManage extends JPanel {
     public void deleteBook()//删除书本，显示成功失败即可
     {
         //remove(panelInform);
+        txtEnquire.setText("");
         Message msg = passer.receive();
         System.out.println(msg);
         Map<String,Object> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String,Object>>(){}.getType());
@@ -300,10 +304,11 @@ public class PanelBookManage extends JPanel {
         List<Book> res = map.get("res");
         //先接收消息//根据消息判断，如果大小为1，放详情panel//不为1，放表格//zxz//如果是空的，弹警告窗口
 
+        txtEnquire.setText("");
         if(res.size()!=0)//接收消息，如果为空，警告，否则显示可编辑详情页面
         {
             book=res.get(0);
-            remove(panelInform);
+            //remove(panelInform);
             setPanel();
             panelInform.lblImg.addMouseListener(new MouseListener() {
                 @Override

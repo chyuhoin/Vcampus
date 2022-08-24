@@ -66,6 +66,7 @@ public class PanelBorrowAndReturn extends JPanel {
         btnInquire.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                remove(panelInform);
                 String str = txtBookIdEnquire.getText();
                 //System.out.println(str);
                 Book book = new Book();
@@ -101,6 +102,7 @@ public class PanelBorrowAndReturn extends JPanel {
         //先接收消息
         //根据消息判断，如果大小为1，放详情panel 借退按钮，否则弹窗警告
         //Book book = new Book();//临时用来盛放构建informpanel的结果
+        //txtBookIdEnquire.setText("");
 
         if(res.size()!=0)
         {
@@ -153,10 +155,11 @@ public class PanelBorrowAndReturn extends JPanel {
                //String str = txtID.getText();
                //System.out.println(str);
                ///////////////////////////////////////////////////////////////////////////?????/
-               HashMap<String,String> hMap = new HashMap<String,String>();
-               hMap.put(txtBookIdEnquire.getText(),txtID.getText());
+               HashMap<String,String> hashMap = new HashMap<>();
+               hashMap.put("studentId",txtID.getText());
+               hashMap.put("bookId",txtBookIdEnquire.getText());
                Gson gson = new Gson();
-               String s = gson.toJson(hMap);
+               String s = gson.toJson(hashMap);
                if(title=="借阅窗口")
                {
                    passer.send(new Message("admin", s, "library", "borrow"));
@@ -172,11 +175,15 @@ public class PanelBorrowAndReturn extends JPanel {
                    interruptedException.printStackTrace();
                }
 
-               Message msg = passer.receive();
+               Message msg = (passer.receive());
+               Map<String,java.util.List<Book>> map = gson.fromJson(msg.getData(), new TypeToken<HashMap<String,java.util.List<Book>>>(){}.getType());
+               List<Book> res = map.get("res");
+
+               //Message msg = passer.receive();
                System.out.println(msg);
-               Map<String,Object> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String,Object>>(){}.getType());
+               //Map<String,String> map = gson.fromJson(msg.getData(), new TypeToken<HashMap<String,String>>(){}.getType());
                frame.dispose();
-               if(map.get("res").equals("OK"))
+               if(res.size()!=0)//map.get("res").equals("OK")
                {
                    informFrame("操作成功！",false);
                    if(title=="借阅窗口")
