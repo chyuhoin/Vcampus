@@ -210,6 +210,11 @@ public class LessonDao extends BaseDao{
         try {
             String sql = "select timeTable from tb_CLASSROOM where roomID = '"+roomID+"'";
             List<Map<String,Object>> resultList = CRUD.Query(sql,conn);
+            if(resultList.isEmpty()){
+                String sql2 = "insert into tb_CLASSROOM (roomID) values ('"+roomID+"')";
+                CRUD.update(sql2,conn);
+                resultList = CRUD.Query(sql,conn);
+            }
             String myTable = (String) resultList.get(0).get("timeTable");
             String [] table = myTable.split(",");
             List<Integer>index = ClassTable.getTimeIndex(time);
@@ -229,6 +234,17 @@ public class LessonDao extends BaseDao{
     public static Boolean returnLessonForClassroom(String lessonID,String roomID){
         try {
             String sql = "update tb_CLASSROOM set timeTable = REPLACE(timeTable,'"+lessonID+"','0') where roomID ='"+roomID+"'";
+            CRUD.update(sql,conn);
+            return true;
+        }catch (Exception e){
+            System.out.println("wrong");
+            return false;
+        }
+    }
+    //所有教室都退课
+    public static Boolean deleteAllFromClassroom(String innerID){
+        try {
+            String sql = "update tb_CLASSROOM set timeTable = REPLACE(timeTable,'"+innerID+"','0')";
             CRUD.update(sql,conn);
             return true;
         }catch (Exception e){
