@@ -56,6 +56,8 @@ public class PanelBookInform extends JPanel {
         img.setImage(img.getImage().getScaledInstance(180,220,Image.SCALE_DEFAULT));//这里设置图片大小，目前是20*20
         lblImg.setIcon(img);
         lblImg.setBounds(150,60,180,220);
+        lblImg.setBorder(BorderFactory.createTitledBorder("分组框")); //设置面板边框，实现分组框的效果，此句代码为关键代码
+        lblImg.setBorder(BorderFactory.createLineBorder(Color.black));//设置面板边框颜色
 
         txtBookID.setText(book.getBookID());//书籍号
         txtBookName.setText(book.getBookName());//书名

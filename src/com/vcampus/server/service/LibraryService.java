@@ -23,7 +23,7 @@ public class LibraryService implements Service {
     }
 
     public List<Book> searchBooks(Book book) {
-        List<Book> res = null;
+        List<Book> res = null, ans = new ArrayList<>();
         List<String> strings = new ArrayList<>();
         try {
             if(book.getBookName() != null) {
@@ -40,10 +40,14 @@ public class LibraryService implements Service {
             }
             if(strings.size() == 0) res = LibraryDao.search();
             else res = LibraryDao.search(strings.toArray(new String[0]));
+            for(Book item: res) {
+                if(book.getBookID() == null || item.getBookID().equals(book.getBookID()))
+                    ans.add(item);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return res;
+        return ans;
     }
 
     public List<Book> searchBorrowedBooks(User user) {

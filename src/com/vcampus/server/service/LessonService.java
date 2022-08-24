@@ -1,6 +1,7 @@
 package com.vcampus.server.service;
 
 import com.vcampus.dao.*;
+import com.vcampus.dao.utils.ClassTable;
 import com.vcampus.pojo.Lesson;
 import com.vcampus.pojo.Student;
 import com.vcampus.pojo.Teacher;
@@ -77,6 +78,15 @@ public class LessonService implements Service{
         }
         return res;
     }
+    public List<String> showRoom(String time) {
+        List<String> room=null;
+        try {
+            room=LessonDao.abledRoom(time);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return room;
+    }
     public List<Teacher> viewTeachers(String abledMajor) {
         List<Teacher> res = null;
         try {
@@ -85,6 +95,24 @@ public class LessonService implements Service{
             e.printStackTrace();
         }
         return res;
+    }
+    public String showTecherTime(String teacherID) {
+        String time=null;
+        try {
+            String res = TeacherDao.getLessonTable(teacherID);
+            String[] tmp = res.split(",");//根据，切分字符串
+            List<Teacher>teacher=TeacherDao.searchTeacher("teacherID",teacherID);
+            if(teacher.isEmpty())return null;
+            List<Integer>Liketime= ClassTable.getTimeIndex(teacher.get(0).getTime());
+            for(Integer liketime:Liketime){
+                if(tmp[liketime].equals("0"))//如果非偏好时间没有选课，则将其变为1
+                    tmp[liketime]="1";
+            }
+            time = String.join(",",tmp);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return time;
     }
     public List<Lesson> viewAllLessons() {
         List<Lesson> res = null;
@@ -101,6 +129,18 @@ public class LessonService implements Service{
             res = LessonDao.search(field, value);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        return res;
+    }
+    public boolean addRoom(String roomID, String innerID) {
+        boolean res;
+        try {
+            List<Lesson>lesson=LessonDao.search("innerID",innerID);
+            if(lesson.isEmpty())return false;
+            res=LessonDao.selectLessonForClassroom(lesson.get(0).getTime(),innerID,roomID);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
         }
         return res;
     }

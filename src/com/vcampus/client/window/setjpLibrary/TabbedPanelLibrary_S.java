@@ -70,11 +70,11 @@ public class TabbedPanelLibrary_S extends JTabbedPane {
 
         //选项卡3的内容
 
-
+        JPanel enquireBook = new PanelEnquireBook("student");
 
 
         this.addTab("书籍信息总览", null, jp11,"书籍信息总览");
-        this.addTab("查询书籍信息", null, jp12,"查询书籍信息");
+        this.addTab("查询书籍信息", null, enquireBook,"查询书籍信息");
         this.addTab("查询借阅情况", null, jp13,"查询借阅情况");
         this.setFont(new Font("宋体", Font.BOLD, 24));
 

@@ -1,7 +1,9 @@
 package com.vcampus.dao;
 
 import com.sun.org.apache.bcel.internal.generic.Type;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.vcampus.dao.utils.CRUD;
+import com.vcampus.dao.utils.ClassTable;
 import com.vcampus.dao.utils.databaseConn;
 import com.vcampus.dao.utils.mapToBean;
 import com.vcampus.pojo.Book;
@@ -10,6 +12,7 @@ import com.vcampus.pojo.Lesson;
 import com.vcampus.pojo.Student;
 import org.junit.Test;
 
+import java.net.Inet4Address;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -124,7 +127,7 @@ public class LessonDao extends BaseDao{
     }
     //学生退课
     public static Boolean returnLesson(String studentID,String innerID) throws Exception {
-            //try {
+            try {
                 String sql1 = "update tb_LESSON set leftSize=leftSize+1 where innerID = '" + innerID + "'";
                 String sql2 = "delete from tb_STUDENTWITHLESSON where studentID ='"+studentID+"' and innerID = '"+innerID+"'";
                 String sql3 = "update tb_LESSONTABLE set timeTable = REPLACE(timeTable,'"+innerID+"','0') where studentID = '"+studentID+"'";
@@ -138,9 +141,9 @@ public class LessonDao extends BaseDao{
                 stm.close();
                 conn.close();
                 return true;
-//            } catch (Exception e) {
-//                return false;
-//            }
+            } catch (Exception e) {
+                return false;
+            }
         }
 
     //管理员添加课程
@@ -188,6 +191,50 @@ public class LessonDao extends BaseDao{
         String sql = "select timeTable from tb_LESSONTABLE where studentID = '"+studentID+"'";
         String result = (String) CRUD.Query(sql,conn).get(0).get("timeTable");
         return result;
+    }
+    //输入时间返回可用教室
+    public static List<String> abledRoom(String time) throws Exception {
+        List<String>result = new ArrayList<>();
+        List<Integer>index = ClassTable.getTimeIndex(time);
+        String sql = "select * from tb+CLASSROOM";
+        List<Map<String,Object>>resultList  =CRUD.Query(sql,conn);
+        for(Map<String,Object>map:resultList){
+            if(compare(time,(String) map.get("timeTable"))==true){
+                result.add((String) map.get("roomID"));
+            }
+        }
+        return result;
+    }
+    //教室选课
+    public static Boolean selectLessonForClassroom(String time,String lessonID,String roomID){
+        try {
+            String sql = "select timeTable from tb_CLASSROOM where roomID = '"+roomID+"'";
+            List<Map<String,Object>> resultList = CRUD.Query(sql,conn);
+            String myTable = (String) resultList.get(0).get("timeTable");
+            String [] table = myTable.split(",");
+            List<Integer>index = ClassTable.getTimeIndex(time);
+            for(Integer temp:index){
+                table[temp] = lessonID;
+            }
+            String timeTable = String.join(",",table);
+            String sql2 = "update tb_CLASSROOM set timeTable = '"+timeTable+"' where roomID ='"+roomID+"'";
+            CRUD.update(sql2,conn);
+            return true;
+        }catch (Exception e){
+            System.out.println("wrong");
+            return false;
+        }
+    }
+    //教室退课
+    public static Boolean returnLessonForClassroom(String lessonID,String roomID){
+        try {
+            String sql = "update tb_CLASSROOM set timeTable = REPLACE(timeTable,'"+lessonID+"','0') where roomID ='"+roomID+"'";
+            CRUD.update(sql,conn);
+            return true;
+        }catch (Exception e){
+            System.out.println("wrong");
+            return false;
+        }
     }
 }
 

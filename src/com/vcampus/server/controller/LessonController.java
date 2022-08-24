@@ -41,6 +41,21 @@ public class LessonController implements Controller{
                 Lesson lessonone = gson.fromJson(msg.getData(), Lesson.class);
                 if(service.addOneLesson(lessonone)) return new Message("200", "{res: 'OK'}");
                 else return new Message("200", "{res: 'NO'}");
+            case "showroom":
+                //输入时间，显示可用教室
+                String time = msg.getData();//课程ID
+                HashMap<String, Object> map9 = new HashMap<>();
+                map9.put("res", service.showRoom(time));
+                return new Message("200", gson.toJson(map9));
+            case "addroom":
+                //给课程添加教室
+                //输入教室ID，内部ID，给课程添加教室
+                //用","隔开
+                String oldStr5 = msg.getData();
+                String[] strs5 = oldStr5.split(",");//根据，切分字符串
+                if(service.addRoom(strs5[0],strs5[1]))
+                    return new Message("200", "{res: 'OK'}");
+                else return new Message("200", "{res: 'NO'}");
             case "showteacher":
                 //添加对应课程的老师时显示所有可选的老师
                 //只要专业满足即可选择
@@ -50,6 +65,9 @@ public class LessonController implements Controller{
             case"showtime":
                 //输入老师ID，返回所有不可选的时间
                 //不可选的时间有：非偏好时间、上课时间
+                String teacherID = msg.getData();//课程ID
+                String res=service.showTecherTime(teacherID);
+                return new Message("200", "{res: '"+res+"'}");
             case "delete":
                 //删除课程
                 //输入课程ID
@@ -120,9 +138,9 @@ public class LessonController implements Controller{
                 //输入ID，显示内容：学生：姓名、身份（1--学生 2--老师）、ID、专业
                 //               *老师：姓名、身份、ID、可选专业、偏好时间
                 //返回一个老师的类的list
-                String teacherID = msg.getData();
+                String teacherID1 = msg.getData();
                 HashMap<String, Object> map8 = new HashMap<>();
-                map8.put("res", service.searchTeacher(teacherID));
+                map8.put("res", service.searchTeacher(teacherID1));
                 return new Message("200", gson.toJson(map8));
             case "setteacher":
                 //修改老师的可选专业与偏好时间
