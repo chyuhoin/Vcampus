@@ -138,6 +138,7 @@ public class PanelEnquireBook extends JPanel{
             }
             else
             {
+
                 //构建表格
                 res.forEach(System.out::println);
                 try{
@@ -151,7 +152,7 @@ public class PanelEnquireBook extends JPanel{
                         rowData[i][4]=res.get(i).getLeftSize();
                     }
                     JPanel panelInform = new MyTablePanel(rowData,columnNames);
-                    panelInform.setBounds(0,150,1400,350);
+                    panelInform.setBounds(0,150,1200,350);
                     this.add(panelInform);
 
                 } catch (Exception e) {
