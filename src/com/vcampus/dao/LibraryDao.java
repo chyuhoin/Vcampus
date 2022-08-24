@@ -5,6 +5,7 @@ import com.vcampus.dao.utils.databaseConn;
 import com.vcampus.pojo.Book;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -60,8 +61,9 @@ public class LibraryDao extends BaseDao{
     //借一本书，用于管理员处理借书的情况
     public static Boolean borrowBook(String bookID,String studentID)  {
         try {
+            Date date = new Date(System.currentTimeMillis());
             String sql1 = "update tb_BOOK set leftSize = leftSize-1 where bookID = " + "'" + bookID + "'";
-            String sql2 = "insert into tb_BOOKWITHSTUDENT (studentID,bookID) values " + "('" + studentID + "','" + bookID + "')";
+            String sql2 = "insert into tb_BOOKWITHSTUDENT (studentID,bookID,date) values " + "('" + studentID + "','" + bookID + "','"+date+"')";
             Connection conn = databaseConn.getConn();//此处使用数据库事务来处理同时执行的语句
             conn.setAutoCommit(false);
             Statement stm = conn.createStatement();
