@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="增加了借书时间">
+    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="教室课表">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/LessonDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/LessonDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/pojo/Lesson.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/pojo/Lesson.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -198,7 +198,7 @@
       <workItem from="1661073362879" duration="595000" />
       <workItem from="1661147223714" duration="78000" />
       <workItem from="1661147390790" duration="5933000" />
-      <workItem from="1661299612812" duration="6394000" />
+      <workItem from="1661299612812" duration="7912000" />
     </task>
     <task id="LOCAL-00001" summary="初步写了登录注册">
       <created>1660298515554</created>
@@ -354,7 +354,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661302879739</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="教室课表">
+      <created>1661306591233</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1661306591233</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -425,7 +432,8 @@
     <MESSAGE value="在lessonDao里添加了几个函数" />
     <MESSAGE value="对teacherDao层，增加了返回老师课表的功能" />
     <MESSAGE value="增加了借书时间" />
-    <option name="LAST_COMMIT_MESSAGE" value="增加了借书时间" />
+    <MESSAGE value="教室课表" />
+    <option name="LAST_COMMIT_MESSAGE" value="教室课表" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
