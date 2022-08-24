@@ -124,7 +124,7 @@ public class LessonDao extends BaseDao{
     }
     //学生退课
     public static Boolean returnLesson(String studentID,String innerID) throws Exception {
-            //try {
+            try {
                 String sql1 = "update tb_LESSON set leftSize=leftSize+1 where innerID = '" + innerID + "'";
                 String sql2 = "delete from tb_STUDENTWITHLESSON where studentID ='"+studentID+"' and innerID = '"+innerID+"'";
                 String sql3 = "update tb_LESSONTABLE set timeTable = REPLACE(timeTable,'"+innerID+"','0') where studentID = '"+studentID+"'";
@@ -138,9 +138,9 @@ public class LessonDao extends BaseDao{
                 stm.close();
                 conn.close();
                 return true;
-//            } catch (Exception e) {
-//                return false;
-//            }
+            } catch (Exception e) {
+                return false;
+            }
         }
 
     //管理员添加课程

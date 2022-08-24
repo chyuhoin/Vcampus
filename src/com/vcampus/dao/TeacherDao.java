@@ -70,4 +70,10 @@ public class TeacherDao extends UserDao {
             return false;
         }
     }
+    //获得老师课表
+    public static String getLessonTable(String teacherID) throws Exception {
+        String sql = "select timeTable from tb_LESSONTABLEFORTEACHER where teacherID ='"+teacherID+"'";
+        List<Map<String,Object>> resultList = CRUD.Query(sql,conn);
+        return (String) resultList.get(0).get("timeTable");
+    }
 }
