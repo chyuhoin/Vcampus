@@ -99,7 +99,7 @@ public class MyTablePanel extends JPanel{
         add(JP2);
 
         setJP1(rowData, columnNames);
-        layS.putConstraint(layS.NORTH, lbl, 0, layS.NORTH, JP1);
+        layS.putConstraint(layS.SOUTH, lbl, -35, layS.SOUTH, JP1);
         layS.putConstraint(layS.WEST, lbl, 516, layS.WEST, JP1);
     }
 
@@ -113,7 +113,8 @@ public class MyTablePanel extends JPanel{
         lbl=new JLabel("当前是第"+getCurrentPage()+"页，共"+getLastPage()+"页");
         JP1.add(lbl);
         lbl.setFont(new Font("黑体",Font.PLAIN,15));
-        layS.putConstraint(layS.NORTH, lbl, 0, layS.NORTH, JP1);
+        //顶端标签位置
+        layS.putConstraint(layS.SOUTH, lbl, -35, layS.SOUTH, JP1);
         layS.putConstraint(layS.WEST, lbl, 516, layS.WEST, JP1);
 
         //按钮设置---
@@ -136,7 +137,7 @@ public class MyTablePanel extends JPanel{
         btn3.setFont(new Font("黑体",Font.PLAIN,18));
         btn4.setFont(new Font("黑体",Font.PLAIN,18));
 
-        layS.putConstraint(layS.SOUTH, btn4, -20, layS.SOUTH, JP1);
+        layS.putConstraint(layS.SOUTH, btn4, -30, layS.SOUTH, JP1);
         layS.putConstraint(layS.EAST, btn4, -10, layS.EAST, JP1);
         layS.putConstraint(layS.SOUTH, btn3, 0, layS.SOUTH, btn4);
         layS.putConstraint(layS.EAST, btn3, -10, layS.WEST, btn4);
@@ -156,12 +157,13 @@ public class MyTablePanel extends JPanel{
         JScrollPane jsp = new JScrollPane();
         jsp.setViewportView(table);
         JP1.add(jsp);
-        layS.putConstraint(layS.NORTH, jsp, 30, layS.NORTH, lbl);
+        layS.putConstraint(layS.NORTH, jsp, 0, layS.NORTH, JP1);
         layS.putConstraint(layS.WEST, jsp, 10, layS.WEST, JP1);
         layS.putConstraint(layS.EAST, jsp, -10, layS.EAST, JP1);
         layS.putConstraint(layS.SOUTH, jsp, -10, layS.NORTH, btn1);
 
         showTable(currentPage);//显示第一页
+
         //设置鼠标双击事件
         table.addMouseListener(new MouseListener() {
             @Override public void mouseClicked(MouseEvent e) {
