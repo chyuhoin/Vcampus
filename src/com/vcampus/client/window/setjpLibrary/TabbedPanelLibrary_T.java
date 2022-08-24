@@ -31,7 +31,7 @@ import java.util.Map;
 
 public class TabbedPanelLibrary_T extends JTabbedPane {
     MessagePasser passer = ClientMessagePasser.getInstance();
-    public TabbedPanelLibrary_T()
+    public TabbedPanelLibrary_T(String myID)
     {
         //JTabbedPane jtbp=new JTabbedPane();	//创建选项卡
         this.setTabPlacement(2);
@@ -68,13 +68,15 @@ public class TabbedPanelLibrary_T extends JTabbedPane {
             throw new RuntimeException(e);
         }
         //选项卡2的内容
+        JPanel enquireBook = new PanelEnquireBook("teacher");
 
         //选项卡3的内容
-        JPanel enquireBook = new PanelEnquireBook("teacher");
+        jp13.setLayout(new CardLayout(10,10));
+        jp13.add(new PanelMyBook(myID));
 
         this.addTab("书籍信息总览", null, jp11,"书籍信息总览");
         this.addTab("查询书籍信息", null, enquireBook,"查询书籍信息");
-        this.addTab("查询借阅情况", null, jp13,"查询借阅情况");
+        this.addTab("我的借阅", null, jp13,"查询借阅情况");
         this.setFont(new Font("宋体", Font.BOLD, 24));
 
 

@@ -34,6 +34,8 @@ import java.util.Map;
 public class TabbedPanelLibrary_A extends JTabbedPane {
     MessagePasser passer = ClientMessagePasser.getInstance();
 
+    Object[] columnNames = new Object[]{"书籍号", "书名", "作者", "类型", "剩余册数"};
+
     public TabbedPanelLibrary_A() {
         JTabbedPane JTP = this;
         //JTabbedPane jtbp=new JTabbedPane();	//创建选项卡
@@ -46,28 +48,8 @@ public class TabbedPanelLibrary_A extends JTabbedPane {
         JPanel jp14 = new JPanel();
         JPanel jp15 = new JPanel();
         //选项卡1的内容
-        //查询数据库
-        Book book = new Book();
-        Gson gson = new Gson();
-        String s = gson.toJson(book);
-        passer.send(new Message("admin", s, "library", "get"));
-
-        Message msg = passer.receive();
-        Map<String, java.util.List<Book>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, java.util.List<Book>>>() {
-        }.getType());
-        List<Book> res = map.get("res");
-
-        Object[] columnNames = new Object[]{"书籍号", "书名", "作者", "类型", "剩余册数"};
-        Object[][] rowData = new Object[res.size()][5];
-        for (int i = 0; i < res.size(); i++) {
-            rowData[i][0] = res.get(i).getBookID();
-            rowData[i][1] = res.get(i).getBookName();
-            rowData[i][2] = res.get(i).getAuthor();
-            rowData[i][3] = res.get(i).getType();
-            rowData[i][4] = res.get(i).getLeftSize();
-        }
         jp11.setLayout(new CardLayout(10, 10));
-        jp11.add(new MyTablePanel(rowData, columnNames));
+        jp11.add(new MyTablePanel(getAllOfBook(), columnNames));
 
         //选项卡2的内容
         JPanel enquireBook = new PanelEnquireBook("admin");
@@ -95,11 +77,8 @@ public class TabbedPanelLibrary_A extends JTabbedPane {
             public void mouseClicked(MouseEvent e) {
                 // TODO Auto-generated method stub
                 if (e.getClickCount() == 1) {
-                    if (JTP.getSelectedIndex() == 0) {
                         jp11.removeAll();
-                        jp11.add(new MyTablePanel(rowData, columnNames));
-                    }
-
+                        jp11.add(new MyTablePanel(getAllOfBook(), columnNames));
                 }
             }
 
@@ -132,5 +111,27 @@ public class TabbedPanelLibrary_A extends JTabbedPane {
         //jp.add(jtbp);
     }
 
+    public Object[][] getAllOfBook(){
+        //查询数据库
+        Book book = new Book();
+        Gson gson = new Gson();
+        String s = gson.toJson(book);
+        passer.send(new Message("admin", s, "library", "get"));
+
+        Message msg = passer.receive();
+        Map<String, java.util.List<Book>> map =
+                new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, java.util.List<Book>>>() {}.getType());
+        List<Book> res = map.get("res");
+        Object[][] rowData = new Object[res.size()][5];
+        for (int i = 0; i < res.size(); i++) {
+            rowData[i][0] = res.get(i).getBookID();
+            rowData[i][1] = res.get(i).getBookName();
+            rowData[i][2] = res.get(i).getAuthor();
+            rowData[i][3] = res.get(i).getType();
+            rowData[i][4] = res.get(i).getLeftSize();
+        }
+
+        return rowData;
+    }
 
 }

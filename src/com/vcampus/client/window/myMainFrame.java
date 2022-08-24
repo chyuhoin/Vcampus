@@ -151,8 +151,8 @@ public class myMainFrame extends JFrame {
         //图书馆
         JTabbedPane[] LibraryModule = {
                 new JTabbedPane(),
-                new TabbedPanelLibrary_S(),
-                new TabbedPanelLibrary_T(),
+                new TabbedPanelLibrary_S(ID),
+                new TabbedPanelLibrary_T(ID),
                 new TabbedPanelLibrary_A()};
         //商店
         JTabbedPane[] storeModule = {
