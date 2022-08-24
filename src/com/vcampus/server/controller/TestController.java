@@ -39,8 +39,27 @@ public class TestController implements Controller{
                 String lessonID=msg.getData();
                 if(service.deleteAllExam(lessonID)) return new Message("200", "{res: 'OK'}");
                 else return new Message("200", "{res: 'NO'}");
-
-            case"addGrade"://添加成绩
+            case "showstudent":
+                //学生查看自己安排的考试
+                //输入学生ID
+                String studentID = msg.getData();
+                HashMap<String, Object> map1 = new HashMap<>();
+                map1.put("res", service.searchMyExamForStudent(studentID));
+                return new Message("200", gson.toJson(map1));
+            case "showteacher":
+                //老师查看自己监考的考试
+                //输入老师ID
+                String teacherID = msg.getData();
+                HashMap<String, Object> map2= new HashMap<>();
+                map2.put("res", service.searchMyExamForTeacher(teacherID));
+                return new Message("200", gson.toJson(map2));
+            case"showmyteacher":
+                //显示老师上的课的考试
+                //输入老师ID
+                String myteacherID = msg.getData();
+                HashMap<String, Object> map3= new HashMap<>();
+                map3.put("res", service.searchMyTeacherExam(myteacherID));
+                return new Message("200", gson.toJson(map3));
             default:
                 return new Message("404", "{res: 'Wrong Request!'}");
         }
