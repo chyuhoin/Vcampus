@@ -18,9 +18,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.vcampus.dao.utils.StringAndImage;
 import com.vcampus.net.ClientMessagePasser;
 import com.vcampus.net.Message;
 import com.vcampus.net.MessagePasser;
@@ -52,7 +54,27 @@ public class PanelBookInform extends JPanel {
         int ltDiffer1=150;//1-左起两列标签文本框间隔 2-第三列标签文本框间隔
         removeAll();
         //设置照片
-        ImageIcon img = new ImageIcon(book.getImage());// 这是背景图片 .png .jpg .gif 等格式的图片都可以
+        //照片
+        ImageIcon img = null;// 这是背景图片 .png .jpg .gif 等格式的图片都可以
+        System.out.println("book.getImage()="+book.getImage());
+        if(book.getImage()==null)
+        {
+            System.out.println("没有图片");
+            img = new ImageIcon("noFig.png");
+            //img.setImage(img.getImage().getScaledInstance(180,220,Image.SCALE_DEFAULT));
+        }
+        else
+        {
+            try {
+                Image Img = Toolkit.getDefaultToolkit().createImage(StringAndImage.StringToImage(book.getImage()));
+                img = new ImageIcon(Img);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        //System.out.println("img==null:"+(img==null)+img);
+
         img.setImage(img.getImage().getScaledInstance(180,220,Image.SCALE_DEFAULT));//这里设置图片大小，目前是20*20
         lblImg.setIcon(img);
         lblImg.setBounds(150,60,180,220);

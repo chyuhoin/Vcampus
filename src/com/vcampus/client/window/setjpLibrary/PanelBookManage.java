@@ -28,6 +28,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
+import com.vcampus.dao.utils.StringAndImage;
 import com.vcampus.pojo.Book;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -51,6 +52,7 @@ public class PanelBookManage extends JPanel {
     int txtWidth=110, txtHeight=32;
 
     Book book = new Book();//承接结果
+    String ImgPath="addFig.jpg";
 
     String operation = "";
     //PanelBookInform panelInform = new PanelBookInform();//传入书本的对象作为参数   最初传个空的
@@ -166,11 +168,12 @@ public class PanelBookManage extends JPanel {
         btnOk.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String str1 = panelInform.txtBookID.getText();
-                String str2 = panelInform.txtBookName.getText();
-                String str3 = panelInform.txtAuthor.getText();
-                String str4 = panelInform.txtType.getText();
-                String str5 = panelInform.txtLeftSize.getText();
+                //String str1 = panelInform.txtBookID.getText();
+                //String str2 = panelInform.txtBookName.getText();
+                //String str3 = panelInform.txtAuthor.getText();
+                //String str4 = panelInform.txtType.getText();
+                //String str5 = panelInform.txtLeftSize.getText();
+
                 //以上直接book。。。。赋值，然后把book传回去
                 //传消息，打包book  差一个书的图片路径！！！
                 book.setBookID(panelInform.txtBookID.getText());
@@ -178,11 +181,16 @@ public class PanelBookManage extends JPanel {
                 book.setAuthor(panelInform.txtAuthor.getText());
                 book.setType(panelInform.txtType.getText());
                 book.setLeftSize(Integer.valueOf(panelInform.txtLeftSize.getText()));
+                try {
+                    book.setImage(StringAndImage.ImageToString(ImgPath));
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
 
                 Gson gson = new Gson();
                 String s = gson.toJson(book);
                 passer.send(new Message("admin", s, "library",operation));
-                System.out.println(str1+'\n'+str2+'\n'+str3+'\n'+str4+'\n'+str5);
+                //System.out.println(str1+'\n'+str2+'\n'+str3+'\n'+str4+'\n'+str5);
                 //接收消息
                 try {
                     Thread.sleep(100);
@@ -226,11 +234,13 @@ public class PanelBookManage extends JPanel {
         //ImageIcon img2 = new ImageIcon("src/fig/addFig.jpg");// 这是背景图片 .png .jpg .gif 等格式的图片都可以
        // book = new Book("","","","",0,"src/com.vcampus/client/window/Pictures/addFig.jpg");
         //remove(panelInform);
-        panelInform = new PanelBookInform(new Book("","","","",0,""),true);
-        add(panelInform);
-        panelInform.setBounds(0,120,1400,350);
+        //panelInform = new PanelBookInform(new Book("","","","",0,""),true);
+        //add(panelInform);
+        //panelInform.setBounds(0,120,1400,350);
 
-        ImageIcon img2 = new ImageIcon("src/com/vcampus/client/window/Pictures/addFig.jpg");// 这是背景图片 .png .jpg .gif 等格式的图片都可以
+        book=new Book("","","","",0,"");
+        setPanel();
+        ImageIcon img2 = new ImageIcon("addFig.jpg");// 这是背景图片 .png .jpg .gif 等格式的图片都可以
         img2.setImage(img2.getImage().getScaledInstance(180,220,Image.SCALE_DEFAULT));//这里设置图片大小，目前是20*20
         panelInform.lblImg.setIcon(img2);
         //panelInform.add(panelInform.lblImg);
@@ -391,8 +401,8 @@ public class PanelBookManage extends JPanel {
                     HashSet<String> set = new HashSet<String>();
                     for (File file : fs)
                     { set.add(file.getName()); }
-
                     String absolutePath = chooser.getSelectedFile().getAbsolutePath();//通过文件选择器对象拿到选择的文件.拿到该文件的绝对路径
+                    ImgPath=absolutePath;
                     ImageIcon imageIcon = new ImageIcon(absolutePath);//创建一个ImageIcon对象 传入图片文件的绝对路径
                     imageIcon.setImage(imageIcon.getImage().getScaledInstance(180,220,Image.SCALE_DEFAULT));//这里设置图片大小，目前是20*20
                     lbl.setIcon(imageIcon);

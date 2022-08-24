@@ -97,10 +97,14 @@ public class PanelEnquireBook extends JPanel{
                         break;
                 }
                 //传消息出去
-                Gson gson = new Gson();
-                String s = gson.toJson(book);
-                passer.send(new Message(status, s, "library", "get"));
-                setPanel();
+                if(temp!=0)
+                {
+                    Gson gson = new Gson();
+                    String s = gson.toJson(book);
+                    passer.send(new Message(status, s, "library", "get"));
+                    setPanel();
+                }
+
             }
         });
 
