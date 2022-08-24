@@ -68,7 +68,7 @@ public class PanelBookManage extends JPanel {
         setButtonFont(btnChange);
         btnChange.setBounds(x+differ*2,y,btnWidth,btnHeight);
         setButtonFont(btnInquire1);
-        btnInquire1.setBounds(970,y,btnWidth,btnHeight);
+        btnInquire1.setBounds(970,y,btnWidth*2-60,btnHeight);
         setButtonFont(btnInquire2);
         btnInquire2.setBounds(970,y,btnWidth,btnHeight);
         setButtonFont(btnOk);
