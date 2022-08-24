@@ -47,6 +47,7 @@ public class myMainFrame extends JFrame {
     public myMainFrame(String title, int flag, String ID)
     {
         super(title);//调用父类构造函数，设置窗口名称
+        //this.setDefaultLookAndFeelDecorated(true);
         // FlatDarkLaf.setup();
         this.setSize(1400, 850);// 设置窗口的其他参数，如窗口大小
         this.setResizable(false);//窗口大小不可改

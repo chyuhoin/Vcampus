@@ -42,6 +42,21 @@ public class TabbedPanelLibrary_A extends JTabbedPane{
         JPanel jp13 = new JPanel();
         JPanel jp14 = new JPanel();
         JPanel jp15 = new JPanel();
+        JPanel enquireBook = new PanelEnquireBook("admin");
+        JPanel borrowReturnBook = new PanelBorrowAndReturn();
+        JPanel manageBook = new PanelBookManage();
+        //jp.add(enquireBooK);
+        //jp12.add(enquireBooK);
+
+
+
+
+        this.addTab("书籍信息总览", null, jp11,"书籍信息总览");//
+        this.addTab("查询书籍信息", null, enquireBook,"查询书籍信息");//书籍号 书名 一个或多个
+        this.addTab("书籍信息管理", null, manageBook,"书籍信息管理");//增加 删除 修改
+        this.addTab("书籍借阅/退还", null, borrowReturnBook,"书籍借阅/退还");
+        this.addTab("查询借阅情况", null, jp15,"查询借阅情况");//某一个人的借阅
+        this.setFont(new Font("宋体", Font.BOLD, 24));
         //选项卡1的内容
         //查询数据库
         Book book=new Book();
@@ -71,13 +86,21 @@ public class TabbedPanelLibrary_A extends JTabbedPane{
         //选项卡2的内容
 
         //选项卡3的内容
-
         this.addTab("书籍信息总览", null, jp11,"书籍信息总览");//
+        this.addTab("查询书籍信息", null, enquireBook,"查询书籍信息");//书籍号 书名 一个或多个
+        this.addTab("书籍信息管理", null, manageBook,"书籍信息管理");//增加 删除 修改
+        this.addTab("书籍借阅/退还", null, borrowReturnBook,"书籍借阅/退还");
+        this.addTab("查询借阅情况", null, jp15,"查询借阅情况");//某一个人的借阅
+        this.setFont(new Font("宋体", Font.BOLD, 24));
+
+        /*this.addTab("书籍信息总览", null, jp11,"书籍信息总览");//
         this.addTab("查询书籍信息", null, jp12,"查询书籍信息");//书籍号 书名 一个或多个
         this.addTab("书籍信息管理", null, jp13,"书籍信息管理");//增加 删除 修改
         this.addTab("书籍借阅/退还", null, jp14,"书籍借阅/退还");
         this.addTab("查询借阅情况", null, jp15,"查询借阅情况");//某一个人的借阅
         this.setFont(new Font("宋体", Font.BOLD, 24));
+
+         */
 
 
 

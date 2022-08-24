@@ -20,6 +20,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.vcampus.pojo.Book;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -36,8 +40,7 @@ public class PanelBorrowAndReturn extends JPanel {
     int btnWidth = 90, btnHeight = 30;
 
     PanelBookInform panelInform = new PanelBookInform(new Book("","","","",0,""),false);
-    //传入书本的对象作为参数
-
+    MessagePasser passer = ClientMessagePasser.getInstance();
     public PanelBorrowAndReturn()
     {
         this.setLayout(null);
@@ -64,9 +67,12 @@ public class PanelBorrowAndReturn extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String str = txtBookIdEnquire.getText();
-                System.out.println(str);
-                //传送消息
-
+                //System.out.println(str);
+                Book book = new Book();
+                book.setBookID(str);
+                Gson gson = new Gson();
+                String s = gson.toJson(book);
+                passer.send(new Message("admin", s, "library", "get"));
                 setPanel();
             }
         });
@@ -89,16 +95,17 @@ public class PanelBorrowAndReturn extends JPanel {
 
     public void setPanel()//参数是返回的结果，list一个或多个书
     {
-        updateUI();
-        repaint();
+        Message msg = passer.receive();
+        Map<String, java.util.List<Book>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, java.util.List<Book>>>(){}.getType());
+        List<Book> res = map.get("res");
         //先接收消息
         //根据消息判断，如果大小为1，放详情panel 借退按钮，否则弹窗警告
-        Book book = new Book();//临时用来盛放构建informpanel的结果
-        int num=1;
-        if(num==1)
+        //Book book = new Book();//临时用来盛放构建informpanel的结果
+
+        if(res.size()!=0)
         {
             //JPanel panelInform = new PanelBookInform(book,false);//传入书本的对象作为参数
-            panelInform = new PanelBookInform(book,false);//传入书本的对象作为参数
+            panelInform = new PanelBookInform(res.get(0),false);//传入书本的对象作为参数
             panelInform.setBounds(0,110,1400,350);
             //panelInform.setBorder(BorderFactory.createTitledBorder("分组框")); //设置面板边框，实现分组框的效果，此句代码为关键代码
             //panelInform.setBorder(BorderFactory.createLineBorder(Color.red));//设置面板边框颜色
@@ -108,6 +115,9 @@ public class PanelBorrowAndReturn extends JPanel {
         }
         else
         { informFrame("未查询到相关书籍！",true); }
+
+        updateUI();
+        repaint();
     }
 
     public void setFrame(String title)
@@ -140,25 +150,46 @@ public class PanelBorrowAndReturn extends JPanel {
         btnOk.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               String str = txtID.getText();
-               System.out.println(str);
-               //传map
-                //接收消息//借或还成功
-               if(true)
+               //String str = txtID.getText();
+               //System.out.println(str);
+               ///////////////////////////////////////////////////////////////////////////?????/
+               HashMap<String,String> hMap = new HashMap<String,String>();
+               hMap.put(txtBookIdEnquire.getText(),txtID.getText());
+               Gson gson = new Gson();
+               String s = gson.toJson(hMap);
+               if(title=="借阅窗口")
                {
-                   frame.dispose();
+                   passer.send(new Message("admin", s, "library", "borrow"));
+               }
+               else{
+                   passer.send(new Message("admin", s, "library", "return"));
+               }
+
+
+               try {
+                   Thread.sleep(100);
+               } catch (InterruptedException interruptedException) {
+                   interruptedException.printStackTrace();
+               }
+
+               Message msg = passer.receive();
+               System.out.println(msg);
+               Map<String,Object> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String,Object>>(){}.getType());
+               frame.dispose();
+               if(map.get("res").equals("OK"))
+               {
                    informFrame("操作成功！",false);
                    if(title=="借阅窗口")
                    { changeLeftSize(false); }
                    else
                    { changeLeftSize(true); }
-                   //setPanel();
                }
                else
                {
-                   frame.dispose();
+                   //frame.dispose();
                    informFrame("操作失败!",true);
                }
+
             }
         });
         //取消 不操作
@@ -182,14 +213,9 @@ public class PanelBorrowAndReturn extends JPanel {
     {
         Integer tmp=Integer.valueOf(panelInform.txtLeftSize.getText());
         if(flag)//归还
-        {
-            tmp+=1;
-            panelInform.txtLeftSize.setText(tmp.toString());
-        }
+        { tmp+=1; }
         else//借阅
-        {
-            tmp-=1;
-            panelInform.txtLeftSize.setText(tmp.toString());
-        }
+        { tmp-=1; }
+        panelInform.txtLeftSize.setText(tmp.toString());
     }
 }

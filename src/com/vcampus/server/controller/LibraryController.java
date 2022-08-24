@@ -7,7 +7,9 @@ import com.vcampus.pojo.Book;
 import com.vcampus.pojo.User;
 import com.vcampus.server.service.LibraryService;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class LibraryController implements Controller {
@@ -49,7 +51,9 @@ public class LibraryController implements Controller {
                             new TypeToken<HashMap<String,Object>>(){}.getType());
                     String bookId = (String) arguments.get("bookId");
                     String studentId = (String) arguments.get("studentId");
-                    map.put("res", service.borrowBook(bookId, studentId));
+                    List<Book> res = new ArrayList<>();
+                    res.add(service.borrowBook(bookId, studentId));
+                    map.put("res", res);
                     break;
                 }
                 case "return": { //只有管理员手操才能实现还书
@@ -57,7 +61,9 @@ public class LibraryController implements Controller {
                             new TypeToken<HashMap<String,Object>>(){}.getType());
                     String bookId = (String) arguments.get("bookId");
                     String studentId = (String) arguments.get("studentId");
-                    map.put("res", service.returnBook(bookId, studentId));
+                    List<Book> res = new ArrayList<>();
+                    res.add(service.returnBook(bookId, studentId));
+                    map.put("res", res);
                     break;
                 }
             }

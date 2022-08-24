@@ -23,7 +23,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.*;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 
 import com.vcampus.pojo.Book;
 import com.google.gson.Gson;
@@ -49,8 +52,10 @@ public class PanelBookManage extends JPanel {
 
     Book book = new Book();//承接结果
 
+    String operation = "";
     //PanelBookInform panelInform = new PanelBookInform();//传入书本的对象作为参数   最初传个空的
     PanelBookInform panelInform = new PanelBookInform(new Book("","","","",0,""),true);
+    MessagePasser passer = ClientMessagePasser.getInstance();
     public PanelBookManage()
     {
         this.setLayout(null);
@@ -90,6 +95,9 @@ public class PanelBookManage extends JPanel {
                 remove(btnInquire1); remove(btnInquire2);
                 remove(btnOk); remove(btnCancel);
                 repaint();
+                updateUI();
+                repaint();
+                operation="post";
                 addBook();//空的，可查询
             }
         });
@@ -99,6 +107,8 @@ public class PanelBookManage extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 remove(panelInform); remove(btnInquire2);
                 remove(btnOk); remove(btnCancel);
+                repaint();
+                updateUI();
                 repaint();
                 setEnquire(btnInquire1);//查询
             }
@@ -110,7 +120,10 @@ public class PanelBookManage extends JPanel {
                 remove(panelInform); remove(btnInquire1);
                 remove(btnOk); remove(btnCancel);
                 repaint();
+                updateUI();
+                repaint();
                 setEnquire(btnInquire2);//查询
+                operation="put";
             }
         });
         //删除
@@ -119,6 +132,11 @@ public class PanelBookManage extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 String str = txtEnquire.getText();
                 System.out.println(str);
+                Book b = new Book();
+                b.setBookID(str);
+                Gson gson = new Gson();
+                String s = gson.toJson(b);
+                passer.send(new Message("admin", s, "library", "delete"));
                 //传消息出去  打包一本书
                 //传给详情界面
                 deleteBook();
@@ -131,6 +149,13 @@ public class PanelBookManage extends JPanel {
                 String str = txtEnquire.getText();
                 System.out.println(str);
                 //传消息出去  打包一本书//接收结果//传给详情界面
+
+                Book b = new Book();
+                b.setBookID(str);
+                Gson gson = new Gson();
+                String s = gson.toJson(b);
+                passer.send(new Message("admin", s, "library", operation));
+
                 changeBookInform();
             }
         });
@@ -145,10 +170,27 @@ public class PanelBookManage extends JPanel {
                 String str5 = panelInform.txtLeftSize.getText();
                 //以上直接book。。。。赋值，然后把book传回去
                 //传消息，打包book  差一个书的图片路径！！！
+                book.setBookID(panelInform.txtBookID.getText());
+                book.setBookName(panelInform.txtBookName.getText());
+                book.setAuthor(panelInform.txtAuthor.getText());
+                book.setType(panelInform.txtType.getText());
+                book.setLeftSize(Integer.valueOf(panelInform.txtLeftSize.getText()));
+
+                Gson gson = new Gson();
+                String s = gson.toJson(book);
+                passer.send(new Message("admin", s, "library",operation));
                 System.out.println(str1+'\n'+str2+'\n'+str3+'\n'+str4+'\n'+str5);
                 //接收消息
-                //成功
-                if(true)
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException interruptedException) {
+                    interruptedException.printStackTrace();
+                }
+                Message msg = passer.receive();
+                System.out.println(msg);
+                Map<String,Object> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String,Object>>(){}.getType());
+
+                if(map.get("res").equals("OK"))
                 {
                     informFrame("操作成功",false);
                     panelInform=new PanelBookInform(book,true);
@@ -179,8 +221,18 @@ public class PanelBookManage extends JPanel {
         add(btnOk);  add(btnCancel);
         ////////???/不确定
         //ImageIcon img2 = new ImageIcon("src/fig/addFig.jpg");// 这是背景图片 .png .jpg .gif 等格式的图片都可以
-        panelInform = new PanelBookInform(new Book("","","","",0,"src/com.vcampus/client/window/Pictures/addFig.jpg"),true);
+       // book = new Book("","","","",0,"src/com.vcampus/client/window/Pictures/addFig.jpg");
+        //remove(panelInform);
+        panelInform = new PanelBookInform(new Book("","","","",0,""),true);
         add(panelInform);
+        panelInform.setBounds(0,120,1400,350);
+
+        ImageIcon img2 = new ImageIcon("src/com/vcampus/client/window/Pictures/addFig.jpg");// 这是背景图片 .png .jpg .gif 等格式的图片都可以
+        img2.setImage(img2.getImage().getScaledInstance(180,220,Image.SCALE_DEFAULT));//这里设置图片大小，目前是20*20
+        panelInform.lblImg.setIcon(img2);
+        //panelInform.add(panelInform.lblImg);
+
+
         panelInform.lblImg.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -207,8 +259,12 @@ public class PanelBookManage extends JPanel {
 
     public void deleteBook()//删除书本，显示成功失败即可
     {
-        //接收消息，如果成功
-        if(true)
+        //remove(panelInform);
+        Message msg = passer.receive();
+        System.out.println(msg);
+        Map<String,Object> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String,Object>>(){}.getType());
+
+        if(map.get("res").equals("OK"))
         { informFrame("删除成功!",false); }
         else
         { informFrame("删除失败！",true); }
@@ -219,6 +275,7 @@ public class PanelBookManage extends JPanel {
         updateUI();
         repaint();
         add(btnOk); add(btnCancel);
+        //remove(panelInform);
 
         panelInform.lblImg.addMouseListener(new MouseListener() {
             @Override
@@ -238,10 +295,35 @@ public class PanelBookManage extends JPanel {
             public void mouseExited(MouseEvent e) {}
         });
 
-        //接收消息，如果为空，警告，否则显示可编辑详情页面
-        if(true)
+        Message msg = passer.receive();
+        Map<String, java.util.List<Book>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, java.util.List<Book>>>(){}.getType());
+        List<Book> res = map.get("res");
+        //先接收消息//根据消息判断，如果大小为1，放详情panel//不为1，放表格//zxz//如果是空的，弹警告窗口
+
+        if(res.size()!=0)//接收消息，如果为空，警告，否则显示可编辑详情页面
         {
+            book=res.get(0);
+            remove(panelInform);
             setPanel();
+            panelInform.lblImg.addMouseListener(new MouseListener() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    // TODO Auto-generated method stub
+                    if (e.getClickCount() == 1) {
+                        addPicture(panelInform.lblImg);
+                    }
+                }
+                @Override
+                public void mousePressed(MouseEvent e) {}
+                @Override
+                public void mouseReleased(MouseEvent e) {}
+                @Override
+                public void mouseEntered(MouseEvent e) {}
+                @Override
+                public void mouseExited(MouseEvent e) {}
+            });
+
+
         }
         else
         { informFrame("未查询到相关书籍！",true); }

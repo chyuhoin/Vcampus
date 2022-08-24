@@ -20,12 +20,17 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.vcampus.pojo.Book;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.vcampus.net.ClientMessagePasser;
 import com.vcampus.net.Message;
 import com.vcampus.net.MessagePasser;
+import com.vcampus.pojo.Student;
 
 public class PanelEnquireBook extends JPanel{
 
@@ -34,14 +39,15 @@ public class PanelEnquireBook extends JPanel{
     // 创建一个下拉列表框
     JComboBox<String> comboBox = new JComboBox<String>(listData);
     JTextField txtEnquire = new JTextField();
-    //Book book = new Book();
 
-    public PanelEnquireBook()
+    MessagePasser passer = ClientMessagePasser.getInstance();
+
+    public PanelEnquireBook(String status)
     {
         this.setLayout(null);
         int x=470,y=50;//起始坐标
         int txtWidth=110, txtHeight=42;
-        // 设置默认选中的条目
+
         comboBox.setBounds(x-110,y,220,40);
         comboBox.setFont(new Font("楷体", Font.BOLD, 24));
         comboBox.setOpaque(true);
@@ -62,20 +68,26 @@ public class PanelEnquireBook extends JPanel{
             public void actionPerformed(ActionEvent e) {
                 String str = txtEnquire.getText();
                 System.out.println(str);//传送，接收结果bool型
+
+                Book book = new Book();
                 int temp = comboBox.getSelectedIndex();
                 switch(temp)//发出消息
                 {
                     case 1:
+                        book.setBookID(str);
                         System.out.println("书籍号"+str);
                         break;
                     case 2:
-                        System.out.println("书名"+str);//book。set
+                        book.setBookName(str);
+                        System.out.println("书名"+str);//book.set
                         break;
                     case 3:
-                        System.out.println("作者"+str);//book。set
+                        book.setAuthor(str);
+                        System.out.println("作者"+str);
                         break;
                     case 4:
-                        System.out.println("类型"+str);//book。set
+                        book.setType(str);
+                        System.out.println("类型"+str);
                         break;
                     case 0:
                         warningFrame("请选择搜索条件类型！");
@@ -84,6 +96,9 @@ public class PanelEnquireBook extends JPanel{
                         break;
                 }
                 //传消息出去
+                Gson gson = new Gson();
+                String s = gson.toJson(book);
+                passer.send(new Message(status, s, "library", "get"));
                 setPanel();
             }
         });
@@ -95,16 +110,18 @@ public class PanelEnquireBook extends JPanel{
         JOptionPane.showMessageDialog(this, tips, "警告", JOptionPane.ERROR_MESSAGE);
     }
 
-    Book book = new Book();//临时
     public void setPanel()
     {
         updateUI();
         repaint();
+        Message msg = passer.receive();
+        Map<String, java.util.List<Book>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, java.util.List<Book>>>(){}.getType());
+        List<Book> res = map.get("res");
         //先接收消息//根据消息判断，如果大小为1，放详情panel//不为1，放表格//zxz//如果是空的，弹警告窗口
-        int num=1;
-        if(num==1)
+
+        if(res.size()==1)
         {
-            JPanel panelInform = new PanelBookInform(book,false);//传入书本的对象作为参数，参数传接收的消息
+            JPanel panelInform = new PanelBookInform(res.get(0),false);//传入书本的对象作为参数，参数传接收的消息
             panelInform.setBounds(0,150,1400,350);
             //panelInform.setBorder(BorderFactory.createTitledBorder("分组框")); //设置面板边框，实现分组框的效果，此句代码为关键代码
             //panelInform.setBorder(BorderFactory.createLineBorder(Color.red));//设置面板边框颜色
@@ -112,14 +129,16 @@ public class PanelEnquireBook extends JPanel{
         }
         else
         {
-            if(num==0)
+            if(res.size()==0)
             {
                 warningFrame("未查询到相关结果！");
             }
             else
             {
                 //构建表格
+                res.forEach(System.out::println);
             }
         }
+
     }
 }
