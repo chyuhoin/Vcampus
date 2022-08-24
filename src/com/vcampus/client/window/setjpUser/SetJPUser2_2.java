@@ -108,6 +108,7 @@ public class SetJPUser2_2 {
                     );
                 }
                 else{
+                    setStrList(ID);
                     String truePass=strList[1];
                     if(!textList[0].getText().trim().equals(truePass)){
                         JOptionPane.showMessageDialog(

@@ -133,7 +133,7 @@ public class myLoginFrame extends JFrame  {
                     }
                     //loginFrame.setVisible(false);
                     System.out.println("跳转完成");
-                    JFrame tempMF=new myMainFrame("VCampus虚拟校园系统",flag,userName);
+                    new myMainFrame("VCampus虚拟校园系统",flag,userName);
 
                     dispose();
                 }
@@ -163,7 +163,7 @@ public class myLoginFrame extends JFrame  {
          */
 
         //读取输入的用户名和密码
-        userName = txtUserName.getText();
+        userName = txtUserName.getText().trim();
         String passWord = new String(txtPassWord.getPassword());
 
         MessagePasser passer = ClientMessagePasser.getInstance();

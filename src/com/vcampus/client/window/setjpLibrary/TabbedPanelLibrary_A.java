@@ -17,6 +17,7 @@ package com.vcampus.client.window.setjpLibrary;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.vcampus.client.window.setjpLibrary.mytablepanel.*;
+import com.vcampus.client.window.setjpUser.SetJPUser1;
 import com.vcampus.net.ClientMessagePasser;
 import com.vcampus.net.Message;
 import com.vcampus.net.MessagePasser;
@@ -24,18 +25,20 @@ import com.vcampus.pojo.Book;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TabbedPanelLibrary_A extends JTabbedPane{
+public class TabbedPanelLibrary_A extends JTabbedPane {
     MessagePasser passer = ClientMessagePasser.getInstance();
 
-    public TabbedPanelLibrary_A()
-    {
+    public TabbedPanelLibrary_A() {
+        JTabbedPane JTP = this;
         //JTabbedPane jtbp=new JTabbedPane();	//创建选项卡
         this.setTabPlacement(2);
-        this.setBounds(0,0,1400,650);//注意！！！！！！！！！！！！！！！！！！！！！！！
+        this.setBounds(0, 0, 1400, 650);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
         JPanel jp11 = new JPanel();
         JPanel jp12 = new JPanel();
@@ -44,51 +47,78 @@ public class TabbedPanelLibrary_A extends JTabbedPane{
         JPanel jp15 = new JPanel();
         //选项卡1的内容
         //查询数据库
-        Book book=new Book();
+        Book book = new Book();
         Gson gson = new Gson();
         String s = gson.toJson(book);
         passer.send(new Message("admin", s, "library", "get"));
 
         Message msg = passer.receive();
-        Map<String, java.util.List<Book>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, java.util.List<Book>>>(){}.getType());
+        Map<String, java.util.List<Book>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, java.util.List<Book>>>() {
+        }.getType());
         List<Book> res = map.get("res");
-        try{
-            Object[] columnNames = new Object[]{"书籍号","书名","作者","类型","剩余册数"};
-            Object[][] rowData = new Object[res.size()][5];
-            for(int i=0;i<res.size();i++){
-                rowData[i][0]=res.get(i).getBookID();
-                rowData[i][1]=res.get(i).getBookName();
-                rowData[i][2]=res.get(i).getAuthor();
-                rowData[i][3]=res.get(i).getType();
-                rowData[i][4]=res.get(i).getLeftSize();
-            }
-            jp11.setLayout(new CardLayout(10,10));
-            jp11.add(new MyTablePanel(rowData,columnNames));
 
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        Object[] columnNames = new Object[]{"书籍号", "书名", "作者", "类型", "剩余册数"};
+        Object[][] rowData = new Object[res.size()][5];
+        for (int i = 0; i < res.size(); i++) {
+            rowData[i][0] = res.get(i).getBookID();
+            rowData[i][1] = res.get(i).getBookName();
+            rowData[i][2] = res.get(i).getAuthor();
+            rowData[i][3] = res.get(i).getType();
+            rowData[i][4] = res.get(i).getLeftSize();
         }
+        jp11.setLayout(new CardLayout(10, 10));
+        jp11.add(new MyTablePanel(rowData, columnNames));
+
         //选项卡2的内容
 
         //选项卡3的内容
 
         //选项卡5的内容
-        jp15.setLayout(new CardLayout(10,10));
+        jp15.setLayout(new CardLayout(10, 10));
         jp15.setBackground(Color.ORANGE);
         jp15.add(new PanelEnquireBandR());
 
-        this.addTab("书籍信息总览", null, jp11,"书籍信息总览");//
-        this.addTab("查询书籍信息", null, jp12,"查询书籍信息");//书籍号 书名 一个或多个
-        this.addTab("书籍信息管理", null, jp13,"书籍信息管理");//增加 删除 修改
-        this.addTab("书籍借阅/退还", null, jp14,"书籍借阅/退还");
-        this.addTab("查询借阅情况", null, jp15,"查询借阅情况");//某一个人的借阅
-        this.setFont(new Font("宋体", Font.BOLD, 24));
+        //选项卡刷新
+        this.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // TODO Auto-generated method stub
+                if (e.getClickCount() == 1) {
+                    if (JTP.getSelectedIndex() == 0) {
+                        jp11.removeAll();
+                        jp11.add(new MyTablePanel(rowData, columnNames));
+                    }
 
+                }
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+        });
+
+        this.addTab("书籍信息总览", null, jp11, "书籍信息总览");//
+        this.addTab("查询书籍信息", null, jp12, "查询书籍信息");//书籍号 书名 一个或多个
+        this.addTab("书籍信息管理", null, jp13, "书籍信息管理");//增加 删除 修改
+        this.addTab("书籍借阅/退还", null, jp14, "书籍借阅/退还");
+        this.addTab("查询借阅情况", null, jp15, "查询借阅情况");//某一个人的借阅
+        this.setFont(new Font("宋体", Font.BOLD, 24));
 
 
         //jp.add(jtbp);
     }
-
 
 
 }

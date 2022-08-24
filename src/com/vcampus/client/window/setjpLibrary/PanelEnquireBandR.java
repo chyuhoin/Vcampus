@@ -59,11 +59,11 @@ public class PanelEnquireBandR extends JPanel {
         jp1.add(btn);
         btn.setFont(new Font("黑体", Font.BOLD, 20));
         layS1.putConstraint(layS1.NORTH, btn, 10, layS1.NORTH, jp1);
-        layS1.putConstraint(layS1.EAST, btn, -10, layS1.EAST, jp1);
+        layS1.putConstraint(layS1.EAST, btn, -20, layS1.EAST, jp1);
 
         JTextField text = new JTextField();
         jp1.add(text);
-        text.setPreferredSize(new Dimension(180,36));
+        text.setPreferredSize(new Dimension(240,36));
         text.setFont(new Font("黑体", Font.BOLD, 20));
         layS1.putConstraint(layS1.NORTH, text, 0, layS1.NORTH, btn);
         layS1.putConstraint(layS1.EAST, text, -20, layS1.WEST, btn);
@@ -86,13 +86,12 @@ public class PanelEnquireBandR extends JPanel {
         btn2.setPreferredSize(new Dimension(120,36));
         btn2.setFont(new Font("黑体", Font.BOLD, 20));
         layS2.putConstraint(layS2.NORTH, btn2, 10, layS2.NORTH, jp2);
-        layS2.putConstraint(layS2.EAST, btn2, -10, layS2.EAST, jp2);
+        layS2.putConstraint(layS2.EAST, btn2, -20, layS2.EAST, jp2);
 
 
         /**
          * 下半张panel
          */
-
         //表格显示界面
         panel2 = new MyTablePanel(rowData, columnNames);
         PANEL.add(panel2);

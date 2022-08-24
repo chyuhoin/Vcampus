@@ -164,8 +164,7 @@ public class MyTablePanel extends JPanel{
         showTable(currentPage);//显示第一页
         //设置鼠标双击事件
         table.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
+            @Override public void mouseClicked(MouseEvent e) {
                 // TODO Auto-generated method stub
                 if (e.getClickCount() == 2) {
                     System.out.println("双击表格");
@@ -199,14 +198,10 @@ public class MyTablePanel extends JPanel{
                     }
                 }
             }
-            @Override
-            public void mousePressed(MouseEvent e) {}
-            @Override
-            public void mouseReleased(MouseEvent e) {}
-            @Override
-            public void mouseEntered(MouseEvent e) {}
-            @Override
-            public void mouseExited(MouseEvent e) {}
+            @Override public void mousePressed(MouseEvent e) {}
+            @Override public void mouseReleased(MouseEvent e) {}
+            @Override public void mouseEntered(MouseEvent e) {}
+            @Override public void mouseExited(MouseEvent e) {}
         });
 
         //跳转页面

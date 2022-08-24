@@ -24,6 +24,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.vcampus.client.window.setjpLibrary.mytablepanel.MyTablePanel;
 import com.vcampus.pojo.Book;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -137,6 +138,23 @@ public class PanelEnquireBook extends JPanel{
             {
                 //构建表格
                 res.forEach(System.out::println);
+                try{
+                    Object[] columnNames = new Object[]{"书籍号","书名","作者","类型","剩余册数"};
+                    Object[][] rowData = new Object[res.size()][5];
+                    for(int i=0;i<res.size();i++){
+                        rowData[i][0]=res.get(i).getBookID();
+                        rowData[i][1]=res.get(i).getBookName();
+                        rowData[i][2]=res.get(i).getAuthor();
+                        rowData[i][3]=res.get(i).getType();
+                        rowData[i][4]=res.get(i).getLeftSize();
+                    }
+                    JPanel panelInform = new MyTablePanel(rowData,columnNames);
+                    panelInform.setBounds(0,150,1400,350);
+                    this.add(panelInform);
+
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
 

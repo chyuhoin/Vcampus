@@ -17,9 +17,12 @@ package com.vcampus.client.window.setjpUser;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class TabbedPanelUser_S extends JTabbedPane {
     public TabbedPanelUser_S(String id) {
+        JTabbedPane JTP=this;
         this.setTabPlacement(2);
         this.setBounds(0,0,1400,650);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
@@ -28,10 +31,23 @@ public class TabbedPanelUser_S extends JTabbedPane {
         JPanel jp11 = new JPanel(layout_Card);
         JPanel jp12 = new JPanel(layout_Card);
         //选项卡1的内容
-        SetJPUser1 setjp1=new SetJPUser1(1,id,jp11,layout_Card);
+        new SetJPUser1(1,id,jp11,layout_Card);
         //选项卡2的内容
-        SetJPUser2_2 setjp2_2=new SetJPUser2_2(1,id,jp12,layout_Card);
+        new SetJPUser2_2(1,id,jp12,layout_Card);
 
+        this.addMouseListener(new MouseListener(){
+            @Override public void mouseClicked(MouseEvent e) {
+                // TODO Auto-generated method stub
+                if (e.getClickCount() == 1 && JTP.getSelectedIndex()==0) {
+                    jp11.removeAll();
+                    new SetJPUser1(1,id,jp11,layout_Card);
+                }
+            }
+            @Override public void mousePressed(MouseEvent e) {}
+            @Override public void mouseReleased(MouseEvent e) {}
+            @Override public void mouseEntered(MouseEvent e) {}
+            @Override public void mouseExited(MouseEvent e) {}
+        });
 
         this.addTab("个人信息",null,jp11,"查看个人信息");
         this.addTab("密码修改",null,jp12,"修改密码");
