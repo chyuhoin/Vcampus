@@ -72,6 +72,11 @@ public class TabbedPanelLibrary_A extends JTabbedPane{
 
         //选项卡3的内容
 
+        //选项卡5的内容
+        jp15.setLayout(new CardLayout(10,10));
+        jp15.setBackground(Color.ORANGE);
+        jp15.add(new PanelEnquireBandR());
+
         this.addTab("书籍信息总览", null, jp11,"书籍信息总览");//
         this.addTab("查询书籍信息", null, jp12,"查询书籍信息");//书籍号 书名 一个或多个
         this.addTab("书籍信息管理", null, jp13,"书籍信息管理");//增加 删除 修改

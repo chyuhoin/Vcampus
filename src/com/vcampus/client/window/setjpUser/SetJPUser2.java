@@ -26,10 +26,10 @@ import javax.swing.table.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 public class SetJPUser2 {
     public String[][] STRList;//保存所有用户信息
@@ -512,20 +512,19 @@ public class SetJPUser2 {
                         }
                     }
                     else {
-                        JOptionPane.showConfirmDialog(
-                                jp3,
-                                "权限只能为：“学生”or“教师”or“管理员”",
-                                "警告",
+                        if(textPower.equals("")||textPower.contains(" "))
+                            JOptionPane.showConfirmDialog(jp3, "权限不能为空", "警告",
+                                    JOptionPane.WARNING_MESSAGE);
+                        else JOptionPane.showConfirmDialog(jp3, "权限只能为：“学生”or“教师”or“管理员”", "警告",
                                 JOptionPane.WARNING_MESSAGE);
                     }
                 }
                 else {
-                    JOptionPane.showConfirmDialog(
-                            jp3,
-                            "一卡通号必须为纯数字",
-                            "警告",
-                            JOptionPane.WARNING_MESSAGE
-                    );
+                    if(Objects.equals(textID, ""))
+                        JOptionPane.showConfirmDialog(jp3, "一卡通号不能为空", "警告",
+                                JOptionPane.WARNING_MESSAGE);
+                    else JOptionPane.showConfirmDialog(jp3, "一卡通号必须为纯数字", "警告",
+                            JOptionPane.WARNING_MESSAGE);
                 }
             }
         });
@@ -589,8 +588,8 @@ public class SetJPUser2 {
 
         //接收信息是否传递成功
         Message msg = passer.receive();
-        Map<String, Objects> map = new Gson().fromJson(msg.getData(),
-                new TypeToken<HashMap<String, Objects>>(){}.getType());
+        Map<String, Object> map = new Gson().fromJson(msg.getData(),
+                new TypeToken<HashMap<String, Object>>(){}.getType());
         if(map.get("res").equals("OK")) {
             JOptionPane.showMessageDialog(
                     jp4,

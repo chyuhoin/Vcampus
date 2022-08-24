@@ -72,9 +72,13 @@ public class MyTablePanel extends JPanel{
         PANEL=this;
 
         //数据获取
-        dList=new Object[rowData.length][rowData[0].length];
-        for(int i=0;i<rowData.length;i++)
-            System.arraycopy(rowData[i], 0, dList[i], 0, rowData[i].length);
+        if(rowData.length>0) {
+            dList = new Object[rowData.length][rowData[0].length];
+            for (int i = 0; i < rowData.length; i++)
+                System.arraycopy(rowData[i], 0, dList[i], 0, rowData[i].length);
+        } else{
+            dList=new Object[0][];
+        }
 
         //计算总页数
         int tblLength=dList.length;
@@ -83,9 +87,9 @@ public class MyTablePanel extends JPanel{
         }else{
             setLastPage(tblLength/getPageSize()+1);
         }
-        System.out.println(tblLength);
-        System.out.println(getLastPage());
-
+        if(getLastPage()==0) setCurrentPage(0);
+        System.out.println("表格数据总长度为："+tblLength);
+        System.out.println("总页数为："+getLastPage());
 
         //布局设置---
         setLayout(layC);//卡片布局
@@ -95,7 +99,7 @@ public class MyTablePanel extends JPanel{
         add(JP2);
 
         setJP1(rowData, columnNames);
-        layS.putConstraint(layS.NORTH, lbl, 10, layS.NORTH, JP1);
+        layS.putConstraint(layS.NORTH, lbl, 0, layS.NORTH, JP1);
         layS.putConstraint(layS.WEST, lbl, 516, layS.WEST, JP1);
     }
 
@@ -109,8 +113,8 @@ public class MyTablePanel extends JPanel{
         lbl=new JLabel("当前是第"+getCurrentPage()+"页，共"+getLastPage()+"页");
         JP1.add(lbl);
         lbl.setFont(new Font("黑体",Font.PLAIN,15));
-        layS.putConstraint(layS.NORTH, lbl, 10, layS.NORTH, JP1);
-        layS.putConstraint(layS.WEST, lbl, 200, layS.WEST, JP1);
+        layS.putConstraint(layS.NORTH, lbl, 0, layS.NORTH, JP1);
+        layS.putConstraint(layS.WEST, lbl, 516, layS.WEST, JP1);
 
         //按钮设置---
         JButton btn1 = new JButton("首页");
@@ -239,9 +243,6 @@ public class MyTablePanel extends JPanel{
         layS.putConstraint(layS.WEST, btnBack, 10, layS.WEST, JP2);
         //详情面板
         JPanel subJP2=new PanelBookInform(book,false);
-        //JPanel subJP2=new JPanel();
-        //subJP2.setBackground(Color.GREEN);
-        //subJP2.setLayout(layS);
         JP2.add(subJP2);
         layS.putConstraint(layS.NORTH, subJP2, 30, layS.NORTH, btnBack);
         layS.putConstraint(layS.WEST, subJP2, 10, layS.WEST, JP2);
@@ -265,19 +266,24 @@ public class MyTablePanel extends JPanel{
         for(int i=1;i<=getLastPage();i++)
             data[i-1]=i;
 
-        comboBox=new JComboBox<Integer>(data);
-
-        comboBox.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                if (e.getStateChange() == ItemEvent.SELECTED) {
-                    showTable((Integer) comboBox.getSelectedIndex()+1);
-                    System.out.println("选中: " + comboBox.getSelectedIndex() + " = " + comboBox.getSelectedItem());
+        if(getLastPage()>0) {
+            comboBox = new JComboBox<Integer>(data);
+            comboBox.addItemListener(new ItemListener() {
+                @Override
+                public void itemStateChanged(ItemEvent e) {
+                    if (e.getStateChange() == ItemEvent.SELECTED) {
+                        showTable((Integer) comboBox.getSelectedIndex() + 1);
+                        System.out.println("选中: " + comboBox.getSelectedIndex() + " = " + comboBox.getSelectedItem());
+                    }
                 }
-            }
-        });
-        // 设置默认选中的条目
-        comboBox.setSelectedIndex(getCurrentPage()-1);
+            });
+            // 设置默认选中的条目
+            comboBox.setSelectedIndex(getCurrentPage() - 1);
+        }
+        else{
+            comboBox = new JComboBox<Integer>();
+            comboBox.setSelectedIndex(-1);
+        }
 
     }
 
@@ -288,8 +294,10 @@ public class MyTablePanel extends JPanel{
     public void showTable(int currentPage) {
         dtm.setRowCount(0);// 清除原有行
         setCurrentPage(currentPage);//设置当前页
+        System.out.println("showTable：当前页："+getCurrentPage());
 
         int tempSize= Math.min(pageSize, dList.length);
+        System.out.println("showTable：tempSize="+tempSize);
         for (int row = 0; row < tempSize; row++)    //获得数据
         {
             if(row+(currentPage-1)*tempSize>=dList.length) break;
@@ -299,13 +307,14 @@ public class MyTablePanel extends JPanel{
             dtm.addRow(rowV);
         }
 
-        //标签更新
+        //顶端标签更新
         lbl.setText("当前是第"+getCurrentPage()+"页，共"+getLastPage()+"页");
-        //默认选中的条目更新
-        if(comboBox!=null)
-            comboBox.setSelectedIndex(getCurrentPage()-1);
-        //顶端标签
         layS.putConstraint(layS.WEST, lbl, JP1.getWidth()/2-lbl.getWidth()/2, layS.WEST, JP1);
+        //默认选中的条目更新
+        System.out.println("showTable: 总页数为（if前）："+getLastPage());
+        if(getLastPage()>0&&comboBox!=null) {
+            comboBox.setSelectedIndex(getCurrentPage() - 1);
+        }
         //System.out.println(JP1.getWidth()/2-lbl.getWidth()/2);
     }
 
@@ -315,14 +324,20 @@ public class MyTablePanel extends JPanel{
     class MyTableListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             if(e.getActionCommand().equals("首页")){
-                showTable(1);
+                if(getLastPage()>0)
+                    showTable(1);
+                else showTable(0);
             }
 
             if(e.getActionCommand().equals("上一页")){
-                if(getCurrentPage()<=1){
-                    setCurrentPage(2);
+                if(getLastPage()>0) {
+                    if (getCurrentPage() == 1) {
+                        setCurrentPage(2);
+                    }
+                    showTable(getCurrentPage() - 1);
                 }
-                showTable(getCurrentPage()-1);
+                else showTable(0);
+
             }
 
             if(e.getActionCommand().equals("下一页")){
