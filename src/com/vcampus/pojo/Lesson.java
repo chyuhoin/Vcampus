@@ -13,11 +13,12 @@ public class Lesson implements Serializable {
     String school;
     String major;
     Integer isExam;
+    String classroom;
     Integer length;
     Integer status;
 
     //lesson的innerID为lessonID+teacherID，不需要手动输入
-    public Lesson(String lessonID, String name, String teacherID, Integer maxSize, Integer leftSize, String time, String school, String major, Integer isExam,Integer length,Integer status) {
+    public Lesson(String lessonID, String name, String teacherID, Integer maxSize, Integer leftSize, String time, String school, String major, Integer isExam,String classroom,Integer length,Integer status) {
         this.innerID = lessonID+teacherID;
         this.lessonID = lessonID;
         this.name = name;
@@ -28,11 +29,36 @@ public class Lesson implements Serializable {
         this.school = school;
         this.major = major;
         this.isExam = isExam;
+        this.classroom = classroom;
         this.length = length;
         this.status = status;
     }
 
     public Lesson() {
+    }
+
+    public String getClassroom() {
+        return classroom;
+    }
+
+    public void setClassroom(String classroom) {
+        this.classroom = classroom;
+    }
+
+    public Integer getLength() {
+        return length;
+    }
+
+    public void setLength(Integer length) {
+        this.length = length;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public String getInnerID() {
@@ -128,6 +154,9 @@ public class Lesson implements Serializable {
                 ", school='" + school + '\'' +
                 ", major='" + major + '\'' +
                 ", isExam=" + isExam +
+                ", classroom='" + classroom + '\'' +
+                ", length=" + length +
+                ", status=" + status +
                 '}';
     }
 }
