@@ -103,9 +103,11 @@ public class StudentStatusEnquire_S extends JPanel {
         if(res.size()!=0) {
             set(res.get(0));//如果查到这个人，set设置学生对象，传参数
             t= res.get(0);
+            System.out.println("找到学生");
         }
         else {
             //JOptionPane.showMessageDialog(this, "查无此人！", "警告", JOptionPane.ERROR_MESSAGE);
+            System.out.println("没有");
         }
 
 
@@ -167,11 +169,23 @@ public class StudentStatusEnquire_S extends JPanel {
 
         //照片
         ImageIcon img = null;// 这是背景图片 .png .jpg .gif 等格式的图片都可以
-        try {
+        /*try {
             img = new ImageIcon(StringAndImage.StringToImage(student.getImage()));
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+         */
+
+        try {
+            Image Img = Toolkit.getDefaultToolkit().createImage(StringAndImage.StringToImage(student.getImage()));
+            img = new ImageIcon(Img);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
         //ImageIcon img = new ImageIcon(student.getImage());
         img.setImage(img.getImage().getScaledInstance(120,150,Image.SCALE_DEFAULT));//这里设置图片大小，目前是20*20
         lblImg.setIcon(img);
