@@ -82,4 +82,36 @@ public class TestService implements Service{
         }
         return res;
     }
+    public List<Exam> searchMyExamForStudent(String studentID) {
+        List<Exam> res = null;
+        try {
+            res = ExamDao.searchMyExamForStudent(studentID);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+    public List<Exam> searchMyExamForTeacher(String teacherID) {
+        List<Exam> res = null;
+        try {
+            res = ExamDao.searchMyExamForStudent(teacherID);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+    public List<Exam> searchMyTeacherExam(String teacherID) {
+        List<Exam> res = null;
+        List<Lesson>tmp=null;
+        try {
+            tmp=LessonDao.search("teacherID",teacherID);
+            for(Lesson lesson:tmp){
+                List<Exam> temp=ExamDao.searchExam(lesson.getInnerID());
+                if(!temp.isEmpty())res.add(temp.get(0));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
 }
