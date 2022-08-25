@@ -100,6 +100,7 @@ public class StudentStatusEnquire_S extends JPanel {
         Map<String, java.util.List<Student>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, java.util.List<Student>>>() {
         }.getType());
         List<Student> res = map.get("res");
+        System.out.println("StudnentStatusEnquire:res.size()="+res.size());
         if(res.size()!=0) {
             set(res.get(0));//如果查到这个人，set设置学生对象，传参数
             t= res.get(0);

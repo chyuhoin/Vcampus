@@ -40,9 +40,9 @@ public class PanelEnquireBook extends JPanel{
     // 创建一个下拉列表框
     JComboBox<String> comboBox = new JComboBox<String>(listData);
     JTextField txtEnquire = new JTextField();
+    PanelBookInform panelInform = new PanelBookInform(new Book("","","","",0,""),true);
 
     MessagePasser passer = ClientMessagePasser.getInstance();
-    PanelBookInform panelInform = new PanelBookInform(new Book("","","","",0,""),true);
 
     public PanelEnquireBook(String status)
     {
@@ -129,8 +129,7 @@ public class PanelEnquireBook extends JPanel{
 
         if(res.size()==1)
         {
-            //JPanel panelInform = new PanelBookInform(res.get(0),false);//传入书本的对象作为参数，参数传接收的消息
-            panelInform = new PanelBookInform(res.get(0),false);
+            panelInform = new PanelBookInform(res.get(0),false);//传入书本的对象作为参数，参数传接收的消息
             panelInform.setBounds(0,150,1400,350);
             //panelInform.setBorder(BorderFactory.createTitledBorder("分组框")); //设置面板边框，实现分组框的效果，此句代码为关键代码
             //panelInform.setBorder(BorderFactory.createLineBorder(Color.red));//设置面板边框颜色
@@ -145,6 +144,7 @@ public class PanelEnquireBook extends JPanel{
             else
             {
                 remove(panelInform);
+
                 //构建表格
                 res.forEach(System.out::println);
                 try{
