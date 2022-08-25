@@ -6,10 +6,7 @@ import com.vcampus.dao.utils.CRUD;
 import com.vcampus.dao.utils.ClassTable;
 import com.vcampus.dao.utils.databaseConn;
 import com.vcampus.dao.utils.mapToBean;
-import com.vcampus.pojo.Book;
-import com.vcampus.pojo.Exam;
-import com.vcampus.pojo.Lesson;
-import com.vcampus.pojo.Student;
+import com.vcampus.pojo.*;
 import org.junit.Test;
 
 import java.net.Inet4Address;
@@ -185,6 +182,10 @@ public class LessonDao extends BaseDao{
         } catch (Exception e) {
             return false;
         }
+    }
+    //查询成绩
+    public static List<LessonGrade> getGrade(String studentID) throws Exception {
+        return searchBy(LessonGrade.class,"tb_STUDENTWITHLESSON","studentID",studentID);
     }
     //学生获取自己的课表
     public static String getLessonTable(String studentID) throws Exception {
