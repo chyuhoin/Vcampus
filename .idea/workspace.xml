@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="为lesson增加了room，添加了删除函数">
-      <change afterPath="$PROJECT_DIR$/src/com/vcampus/dao/ShopDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/vcampus/pojo/Goods.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_8_17_21_53_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_8_17_21_53__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="初步写了商店的dao层" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -198,7 +192,7 @@
       <workItem from="1661299612812" duration="7912000" />
       <workItem from="1661346871285" duration="462000" />
       <workItem from="1661349075908" duration="562000" />
-      <workItem from="1661393455217" duration="1844000" />
+      <workItem from="1661393455217" duration="1940000" />
     </task>
     <task id="LOCAL-00001" summary="初步写了登录注册">
       <created>1660298515554</created>
@@ -368,7 +362,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661347303508</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="初步写了商店的dao层">
+      <created>1661396068079</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1661396068079</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -441,7 +442,8 @@
     <MESSAGE value="增加了借书时间" />
     <MESSAGE value="教室课表" />
     <MESSAGE value="为lesson增加了room，添加了删除函数" />
-    <option name="LAST_COMMIT_MESSAGE" value="为lesson增加了room，添加了删除函数" />
+    <MESSAGE value="初步写了商店的dao层" />
+    <option name="LAST_COMMIT_MESSAGE" value="初步写了商店的dao层" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
