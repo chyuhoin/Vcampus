@@ -1,21 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="添加了课程的学时和状态">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_8_17_11_23_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_8_17_11_23__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_8_17_9_38_[Changes]/os.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_8_17_9_38_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_8_17_9_38__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-17_10_31___Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-17_11_09___Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-17_9_52___Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2022-08-17_10_31_取消提交了变更_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2022-08-17_11_09_取消提交了变更_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2022-08-17_9_52_取消提交了变更_[Changes]/shelved.patch" beforeDir="false" />
+    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="为lesson增加了room，添加了删除函数">
+      <change afterPath="$PROJECT_DIR$/src/com/vcampus/dao/ShopDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vcampus/pojo/Goods.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_8_17_21_53_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_8_17_21_53__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/LessonDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/LessonDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/pojo/Lesson.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/pojo/Lesson.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -205,7 +196,9 @@
       <workItem from="1661147223714" duration="78000" />
       <workItem from="1661147390790" duration="5933000" />
       <workItem from="1661299612812" duration="7912000" />
-      <workItem from="1661346871285" duration="395000" />
+      <workItem from="1661346871285" duration="462000" />
+      <workItem from="1661349075908" duration="562000" />
+      <workItem from="1661393455217" duration="1844000" />
     </task>
     <task id="LOCAL-00001" summary="初步写了登录注册">
       <created>1660298515554</created>
@@ -368,7 +361,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661306591233</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="为lesson增加了room，添加了删除函数">
+      <created>1661347303508</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1661347303508</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -440,7 +440,8 @@
     <MESSAGE value="对teacherDao层，增加了返回老师课表的功能" />
     <MESSAGE value="增加了借书时间" />
     <MESSAGE value="教室课表" />
-    <option name="LAST_COMMIT_MESSAGE" value="教室课表" />
+    <MESSAGE value="为lesson增加了room，添加了删除函数" />
+    <option name="LAST_COMMIT_MESSAGE" value="为lesson增加了room，添加了删除函数" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
