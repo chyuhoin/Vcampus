@@ -40,10 +40,16 @@ public class LessonService implements Service{
                     else{//添加课程成功，现在添加老师的课表
                         res=TeacherDao.selectLesson(user.getTeacherID(),user.getInnerID());
                         if(!res){//添加老师课表失败，现在恢复
+                            LessonDao.deleteLesson(user.getInnerID());
                             LessonDao.addLesson(lessons.get(0));
                         }
                         else{//添加老师课表成功，现在添加教室
                             res=LessonDao.selectLessonForClassroom(user.getTime(),user.getInnerID(),user.getClassroom());
+                            if(!res){//添加老师课表失败，现在恢复
+                                LessonDao.deleteLesson(user.getInnerID());
+                                TeacherDao.returnLesson(user.getTeacherID(),user.getInnerID());
+                                LessonDao.addLesson(lessons.get(0));
+                            }
                         }
                     }
                 }
@@ -53,33 +59,25 @@ public class LessonService implements Service{
             else{//此时已经没有空课程
                 lessons=LessonDao.search("innerID", user.getInnerID());
                 if (lessons.isEmpty())//此时为添加课程
-                    if(LessonDao.addLesson(user))//添加成功
+                    if(LessonDao.addLesson(user)){//添加成功
                         res=TeacherDao.selectLesson(user.getTeacherID(),user.getInnerID());
-                    else res=false;
-                else{//此时为修改课程
-                    if (LessonDao.deleteLesson(user.getInnerID()))
-                    {//删除成功
-                        res = LessonDao.addLesson(user);
-                        if(!res)//添加失败，恢复
-                            LessonDao.addLesson(lessons.get(0));
-                        else{//添加成功，现在开始添加老师课表
-                            if(TeacherDao.returnLesson(lessons.get(0).getTeacherID(),lessons.get(0).getInnerID())) {
-                                //先退选之前的课,且成功
-                                res = TeacherDao.selectLesson(user.getTeacherID(), user.getInnerID());
-                                if(!res){//老师选课失败，恢复
-                                    LessonDao.addLesson(lessons.get(0));
-                                    TeacherDao.selectLesson(lessons.get(0).getTeacherID(),lessons.get(0).getInnerID());
-                                }
-                                else{//添加老师课表成功，现在添加教室
-                                    res=LessonDao.selectLessonForClassroom(user.getTime(),user.getInnerID(),user.getClassroom());
-                                }
+                        if(!res){
+                            //添加老师课表失败，恢复
+                            LessonDao.deleteLesson(user.getInnerID());
+                        }
+                        else{
+                            //添加老师课表成功，现在开始添加教室课表
+                            res=LessonDao.selectLessonForClassroom(user.getTime(),user.getInnerID(),user.getClassroom());
+                            if(!res){
+                                //添加教室课表失败，恢复
+                                LessonDao.deleteLesson(user.getInnerID());
+                                TeacherDao.returnLesson(user.getTeacherID(),user.getInnerID());
                             }
-                            else res=false;
                         }
                     }
-                    else {//删除失败
-                        res = false;
-                    }
+                else res=false;
+                else{//此时为修改课程
+                    res=setLessonnew(user);
                 }
             }
         } catch (Exception e) {
@@ -100,11 +98,66 @@ public class LessonService implements Service{
                     //添加课程时也添加了老师且此时为有效课
                     //因此要添加老师的课表
                     res=TeacherDao.selectLesson(user.getTeacherID(),user.getInnerID());
+                    if(!res){
+                        //添加失败，恢复
+                        LessonDao.deleteLesson(user.getInnerID());
+                        return false;
+                    }
                 }
                 if(user.getClassroom()!= null&&user.getStatus()!=0){
                     //添加课程时也添加了教室且此时为有效课
-                    //因此要添加老师的课表
+                    //因此要添加教室的课表
                     res=LessonDao.selectLessonForClassroom(user.getTime(),user.getInnerID(),user.getClassroom());
+                    if(!res){
+                        //添加失败，恢复
+                        LessonDao.deleteLesson(user.getInnerID());
+                        TeacherDao.deleteTeacher(user.getTeacherID());
+                        return false;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return res;
+    }
+    public boolean deleteTest(String innerID) {
+        //删除课程
+        //如果为有效课且有老师信息，删除老师课表
+        //如果为有效课且有教室信息，删除教室信息
+        boolean res;
+        List<Lesson>lessons=null;
+        try {
+            lessons=(LessonDao.search("innerID",innerID));
+            Lesson user=lessons.get(0);
+            if(LessonDao.search("innerID",user.getInnerID()).isEmpty())//没有这个内部ID
+                res=false;
+            else {
+                res=LessonDao.deleteLesson(user.getInnerID());
+                if(!res)return false;
+                if(user.getTeacherID() != null&&user.getStatus()!=0){
+                    //课程有老师且此时为有效课
+                    //因此要删除老师的课表
+                    res=TeacherDao.returnLesson(user.getTeacherID(),user.getInnerID());
+                    if(!res){
+                        //删除失败，恢复
+                        LessonDao.addLesson(user);
+                        return false;
+                    }
+                }
+                if(user.getClassroom()!= null&&user.getStatus()!=0){
+                    //添加课程时也添加了教室且此时为有效课
+                    //因此要添加教室的课表
+                    res=LessonDao.returnLessonForClassroom(user.getInnerID(),user.getClassroom());
+                    if(!res){
+                        //删除失败，恢复
+                        if(user.getTeacherID() != null&&user.getStatus()!=0){
+                            TeacherDao.selectLesson(user.getTeacherID(),user.getInnerID());
+                        }
+                        LessonDao.addLesson(user);
+                        return false;
+                    }
                 }
             }
         } catch (Exception e) {
@@ -114,37 +167,13 @@ public class LessonService implements Service{
         return res;
     }
     public boolean setLessonnew(Lesson user) {
-        boolean res;
+        boolean res=false;
         try {
             if(LessonDao.search("innerID",user.getInnerID()).isEmpty())//没有这个内部ID
                 res=false;
             else {
-                List<Lesson>lessons=LessonDao.search("innerID", user.getInnerID());
-                if (LessonDao.deleteLesson(user.getInnerID()))
-                {//删除成功
-                    res = LessonDao.addLesson(user);
-                    if(!res)//添加失败，恢复
-                        LessonDao.addLesson(lessons.get(0));
-                    else{//添加成功，现在开始添加老师课表
-                        if(TeacherDao.returnLesson(lessons.get(0).getTeacherID(),lessons.get(0).getInnerID())) {
-                            //先退选之前的课,且成功
-                            if(user.getTeacherID() != null&&user.getStatus()!=0){
-                                //此时课程时也添加了老师且此时为有效课
-                                res = TeacherDao.selectLesson(user.getTeacherID(), user.getInnerID());
-                                if(!res){//老师选课失败，恢复
-                                    LessonDao.addLesson(lessons.get(0));
-                                    TeacherDao.selectLesson(lessons.get(0).getTeacherID(),lessons.get(0).getInnerID());
-                                }
-                                else{//添加老师课表成功，现在添加教室
-                                    res=LessonDao.selectLessonForClassroom(user.getTime(),user.getInnerID(),user.getClassroom());
-                                }
-                            }
-                        }
-                        else res=false;
-                    }
-                }
-                else {//删除失败
-                    res = false;
+                if(deleteTest(user.getInnerID())){
+                    res=addLessonnew(user);
                 }
             }
         } catch (Exception e) {
@@ -484,7 +513,67 @@ public class LessonService implements Service{
                     lessons.add(data);
                 }
             }
-            if(doArrange(lessons)>0)res=true;
+            if(doArrange(lessons)>0){
+                for(Lesson lesson:lessons){
+                    res=valueLesson(lesson.getInnerID());
+                    if(!res)return false;
+                }
+                res=true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return res;
+    }
+    public boolean ArrangeAll() {
+        boolean res=false;
+        try {
+            List<Lesson>tmp=LessonDao.search("status",1);
+            for(Lesson data:tmp){
+                res=unvalueLesson(data.getInnerID());
+                if(!res)return false;
+            }
+            tmp=LessonDao.search("status",0);
+            List<Lesson>lessons=null;
+            for(Lesson data:tmp){
+                if(!data.getInnerID().equals(data.getLessonID())){//此时不为空课程
+                    lessons.add(data);
+                }
+            }
+            if(doArrange(lessons)>0){
+                for(Lesson lesson:lessons){
+                    res=valueLesson(lesson.getInnerID());
+                    if(!res)return false;
+                }
+                res=true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return res;
+    }
+    public boolean valueLesson(String innerID) {
+        //把对应课程的状态从0变为1
+        boolean res=false;
+        try {
+            List<Lesson> lessons=LessonDao.search("innerID",innerID);
+            lessons.get(0).setStatus(1);
+            res=setLessonnew(lessons.get(0));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return res;
+    }
+    public boolean unvalueLesson(String innerID) {
+        //把对应课程的状态从1变为0
+        boolean res=false;
+        try {
+            List<Lesson> lessons=LessonDao.search("innerID",innerID);
+            lessons.get(0).setStatus(0);
+            res=setLessonnew(lessons.get(0));
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -492,7 +581,7 @@ public class LessonService implements Service{
         return res;
     }
     public Integer doArrange(List<Lesson>lessons) {
-        //实现逻辑：采用近似算法，利用动态规划
+        //实现逻辑：采用近似算法
         //lessons为要进行排课的课程集合，先从中取出一个进行处理，其余继续采用这个函数计算总分
         //先用findTime函数给出所有可能的时间排列，再利用scoreTime给出这个时间的分数
         //在此课程视为这个时间的基础上进行其他课程的计算，最后取最高分情况
@@ -507,7 +596,8 @@ public class LessonService implements Service{
             Integer i=-1;
             for(List<Integer>time:times){
                 i++;
-                Lesson user=new Lesson(lesson.getLessonID(),lesson.getName(),lesson.getTeacherID(),lesson.getMaxSize(),lesson.getLeftSize(),lesson.getTime(),lesson.getSchool(),lesson.getMajor(),lesson.getIsExam(),lesson.getClassroom(),lesson.getLength(),1);
+                String roomID=LessonDao.abledRoom(returnTime(time)).get(0);
+                Lesson user=new Lesson(lesson.getLessonID(),lesson.getName(),lesson.getTeacherID(),lesson.getMaxSize(),lesson.getLeftSize(),returnTime(time),lesson.getSchool(),lesson.getMajor(),lesson.getIsExam(),roomID,lesson.getLength(),1);
                 setLessonnew(user);
                 tmp=scoreTime(time,lesson.getInnerID())+doArrange(lessons);
                 if(tmp>max){
@@ -515,7 +605,8 @@ public class LessonService implements Service{
                     position=i;
                 }
             }
-            Lesson user=new Lesson(lesson.getLessonID(),lesson.getName(),lesson.getTeacherID(),lesson.getMaxSize(),lesson.getLeftSize(),lesson.getTime(),lesson.getSchool(),lesson.getMajor(),lesson.getIsExam(),lesson.getClassroom(),lesson.getLength(),0);
+            String roomID=LessonDao.abledRoom(returnTime(times.get(position))).get(0);
+            Lesson user=new Lesson(lesson.getLessonID(),lesson.getName(),lesson.getTeacherID(),lesson.getMaxSize(),lesson.getLeftSize(),returnTime(times.get(position)),lesson.getSchool(),lesson.getMajor(),lesson.getIsExam(),roomID,lesson.getLength(),0);
             setLessonnew(user);
         } catch (Exception e) {
             e.printStackTrace();
@@ -611,8 +702,8 @@ public class LessonService implements Service{
                     return false;
             }
             //判断对于教室资源来说，这个时间是否可以
-            //if(LessonDao.abledRoom(times).isEmpty())return false;
-            //写一个ableRoom的重载函数，输入List<Integer>，返回教室ID的list
+            if(LessonDao.abledRoom(returnTime(times)).isEmpty())
+                return false;
             //判断对于这个专业的课来说，这个时间是否可以
             //此时，这门一定要是有效课，status==1
             List<Lesson> lessons=LessonDao.search("major",lesson.get(0).getMajor());
@@ -688,6 +779,25 @@ public class LessonService implements Service{
             return 0;
         }
         return res;
+    }
+    public String returnTime(List<Integer>times) {
+        StringBuilder res= null;
+        try {
+            Integer day=null;//相对时间 1-13
+            Integer week=null;//星期 1-5
+            Integer i=0;
+            for(Integer time:times){
+                day=time%13+1;
+                week=time/13+1;
+                if(i!=0)res.append(",");
+                i++;
+                res.append(week.toString()).append("/").append(day.toString()).append("/").append(day.toString());
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res.toString();
     }
 
 }

@@ -192,6 +192,8 @@ public class LessonController implements Controller{
                 else return new Message("200", "{res: 'NO'}");
             case "arrangeall":
                 //自动排课所有课程
+                if (service.ArrangeAll()) return new Message("200", "{res: 'OK'}");
+                else return new Message("200", "{res: 'NO'}");
             case "addgrade":
                 //添加成绩
                 //输入学生ID，内部ID，成绩，用“,”隔开
