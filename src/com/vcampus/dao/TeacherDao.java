@@ -15,11 +15,23 @@ import static com.vcampus.dao.utils.ClassTable.getTimeIndex;
 
 public class TeacherDao extends UserDao {
     public static Boolean addTeacher(Teacher teacher){
-       return addClass(teacher,"tb_TEACHER");
+       try {
+           addClass(teacher,"tb_TEACHER");
+           return true;
+       }catch (Exception e){
+           System.out.println("wrong");
+           return false;
+       }
     }
     //删除一个老师
     public static Boolean deleteTeacher(String teacherID){
-        return delete("teacherID",teacherID,"tb_USR");
+        try {
+            delete("teacherID",teacherID,"tb_USR");
+            return true;
+        }catch (Exception e){
+            System.out.println("wrong");
+            return false;
+        }
     }
     //查找一个老师
     public static List<Teacher> searchTeacher(String field,String value) throws Exception {
