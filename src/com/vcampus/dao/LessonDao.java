@@ -163,15 +163,36 @@ public class LessonDao extends BaseDao{
 //        }catch (Exception e){
 //            return false;
 //        }
-        return addClass(lesson,"tb_LESSON");
+        try {
+            addClass(lesson,"tb_LESSON");
+            return true;
+        }catch (Exception e){
+            System.out.println("wrong");
+            return false;
+        }
+
     }
     //管理员删除一个课程
     public static Boolean deleteLesson(String innerID){
-        return delete("innerID",innerID,"tb_LESSON");
+        try {
+            delete("innerID",innerID,"tb_LESSON");
+            return true;
+        }catch (Exception e){
+            System.out.println("wrong");
+            return false;
+        }
+
     }
     //管理员删除同一个编号的课程
     public static Boolean deleteSpecificLesson(String lessonID){
-        return delete("lessonID",lessonID,"tb_LESSON");
+        try {
+            delete("lessonID",lessonID,"tb_LESSON");
+            return true;
+        }catch (Exception e){
+            System.out.println("wrong");
+            return false;
+        }
+
     }
     //管理员给学生添加成绩
     public static Boolean addGrade(String studentID, String innerID, Integer grade) throws Exception {

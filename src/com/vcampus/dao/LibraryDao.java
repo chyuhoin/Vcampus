@@ -52,11 +52,23 @@ public class LibraryDao extends BaseDao{
     }
     //添加一本图书，仅管理员可操作
     public static Boolean addBook(Book book) {
-        return addClass(book,"tb_BOOK");
+        try {
+            addClass(book, "tb_BOOK");
+            return true;
+        }catch (Exception e){
+            System.out.println("wrong");
+            return false;
+        }
     }
     //删除一本图书，仅管理员可操作
     public static Boolean deleteBook(String bookID) {
-        return delete("bookID",bookID,"tb_BOOK");
+        try {
+            delete("bookID", bookID, "tb_BOOK");
+            return true;
+        }catch (Exception e){
+            System.out.println("wrong");
+            return false;
+        }
     }
     //借一本书，用于管理员处理借书的情况
     public static Boolean borrowBook(String bookID,String studentID)  {
