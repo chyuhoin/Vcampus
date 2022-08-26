@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="进一步完善Dao层，写了站内消息的Dao层">
-      <change afterPath="$PROJECT_DIR$/src/com/vcampus/dao/MessageDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/vcampus/pojo/InnerMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-19_13_57___Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2022-08-19_13_57_取消提交了变更_[Changes]/shelved.patch" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/ShopDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/ShopDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/pojo/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/pojo/Student.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/vcampus/pojo/Teacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/pojo/Teacher.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -203,6 +203,7 @@
       <workItem from="1661349075908" duration="562000" />
       <workItem from="1661393455217" duration="1940000" />
       <workItem from="1661478189564" duration="7499000" />
+      <workItem from="1661493808008" duration="883000" />
     </task>
     <task id="LOCAL-00001" summary="初步写了登录注册">
       <created>1660298515554</created>

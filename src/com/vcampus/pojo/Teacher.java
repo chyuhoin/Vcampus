@@ -6,13 +6,14 @@ public class Teacher {
     String school;
     String abledMajor;
     String time;
-
-    public Teacher(String teacherID, String teacherName, String school, String abledMajor, String time) {
+    Integer status;
+    public Teacher(String teacherID, String teacherName, String school, String abledMajor, String time,Integer status) {
         this.teacherID = teacherID;
         this.teacherName = teacherName;
         this.school = school;
         this.abledMajor = abledMajor;
         this.time = time;
+        this.status = status;
     }
 
     public Teacher() {
@@ -34,14 +35,6 @@ public class Teacher {
         this.teacherName = teacherName;
     }
 
-    public String getschool() {
-        return school;
-    }
-
-    public void setschool(String school) {
-        this.school = school;
-    }
-
     public String getAbledMajor() {
         return abledMajor;
     }
@@ -56,6 +49,22 @@ public class Teacher {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getSchool() {
+        return school;
+    }
+
+    public void setSchool(String school) {
+        this.school = school;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     @Override
