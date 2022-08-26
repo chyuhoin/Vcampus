@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="进一步完善Dao层，写了站内消息的Dao层">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-19_13_57___Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2022-08-19_13_57_取消提交了变更_[Changes]/shelved.patch" beforeDir="false" />
+    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="修改学生和老师类，添加了status">
+      <change afterPath="$PROJECT_DIR$/src/com/vcampus/pojo/PublicMessage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/pojo/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/pojo/Student.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/pojo/Teacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/pojo/Teacher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/MessageDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/MessageDao.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -203,7 +201,7 @@
       <workItem from="1661349075908" duration="562000" />
       <workItem from="1661393455217" duration="1940000" />
       <workItem from="1661478189564" duration="7499000" />
-      <workItem from="1661493808008" duration="883000" />
+      <workItem from="1661493808008" duration="4491000" />
     </task>
     <task id="LOCAL-00001" summary="初步写了登录注册">
       <created>1660298515554</created>
@@ -387,7 +385,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661481659828</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="修改学生和老师类，添加了status">
+      <created>1661494827120</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1661494827120</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -436,7 +441,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="实现可序列化接口" />
     <MESSAGE value="对注册添加了类型验证" />
     <MESSAGE value="完成了studentDao层，暂时没有把照片添加进去，主要是照片的读取之类的需要特殊方法，我要再学习一下" />
     <MESSAGE value="这次初步写了libraryDao层，但引发了我一个关于数据库隔离的思考，这部分知识我还要好好学一下。目前为止我的Dao层都是静态方法，当查询的时候都是现获取的，这样的方法的弊端一个是效率问题，需要频繁开关，另一个问题则是数据库隔离的隐患。我正在考虑重写某些方法。" />
@@ -461,7 +465,8 @@
     <MESSAGE value="初步写了商店的dao层" />
     <MESSAGE value="完善商店Dao层，BaseDao中不再处理异常，会把异常抛给具体Dao层处理" />
     <MESSAGE value="进一步完善Dao层，写了站内消息的Dao层" />
-    <option name="LAST_COMMIT_MESSAGE" value="进一步完善Dao层，写了站内消息的Dao层" />
+    <MESSAGE value="修改学生和老师类，添加了status" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改学生和老师类，添加了status" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
