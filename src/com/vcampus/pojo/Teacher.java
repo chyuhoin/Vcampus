@@ -3,14 +3,14 @@ package com.vcampus.pojo;
 public class Teacher {
     String teacherID;//实际上就是教师的一卡通号
     String teacherName;
-    String major;
+    String school;
     String abledMajor;
     String time;
 
-    public Teacher(String teacherID, String teacherName, String major, String abledMajor, String time) {
+    public Teacher(String teacherID, String teacherName, String school, String abledMajor, String time) {
         this.teacherID = teacherID;
         this.teacherName = teacherName;
-        this.major = major;
+        this.school = school;
         this.abledMajor = abledMajor;
         this.time = time;
     }
@@ -34,12 +34,12 @@ public class Teacher {
         this.teacherName = teacherName;
     }
 
-    public String getMajor() {
-        return major;
+    public String getschool() {
+        return school;
     }
 
-    public void setMajor(String major) {
-        this.major = major;
+    public void setschool(String school) {
+        this.school = school;
     }
 
     public String getAbledMajor() {
@@ -63,7 +63,7 @@ public class Teacher {
         return "Teacher{" +
                 "teacherID='" + teacherID + '\'' +
                 ", teacherName='" + teacherName + '\'' +
-                ", major='" + major + '\'' +
+                ", school='" + school + '\'' +
                 ", abledMajor='" + abledMajor + '\'' +
                 ", time='" + time + '\'' +
                 '}';
