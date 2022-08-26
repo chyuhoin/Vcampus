@@ -42,6 +42,9 @@ public class LessonService implements Service{
                         if(!res){//添加老师课表失败，现在恢复
                             LessonDao.addLesson(lessons.get(0));
                         }
+                        else{//添加老师课表成功，现在添加教室
+                            res=LessonDao.selectLessonForClassroom(user.getTime(),user.getInnerID(),user.getClassroom());
+                        }
                     }
                 }
                 else {//删除失败
@@ -67,6 +70,9 @@ public class LessonService implements Service{
                                     LessonDao.addLesson(lessons.get(0));
                                     TeacherDao.selectLesson(lessons.get(0).getTeacherID(),lessons.get(0).getInnerID());
                                 }
+                                else{//添加老师课表成功，现在添加教室
+                                    res=LessonDao.selectLessonForClassroom(user.getTime(),user.getInnerID(),user.getClassroom());
+                                }
                             }
                             else res=false;
                         }
@@ -90,10 +96,15 @@ public class LessonService implements Service{
             else {
                 res=LessonDao.addLesson(user);
                 if(!res)return false;
-                if(user.getTeacherID() != null){
-                    //添加课程时也添加了老师
+                if(user.getTeacherID() != null&&user.getStatus()!=0){
+                    //添加课程时也添加了老师且此时为有效课
                     //因此要添加老师的课表
                     res=TeacherDao.selectLesson(user.getTeacherID(),user.getInnerID());
+                }
+                if(user.getClassroom()!= null&&user.getStatus()!=0){
+                    //添加课程时也添加了教室且此时为有效课
+                    //因此要添加老师的课表
+                    res=LessonDao.selectLessonForClassroom(user.getTime(),user.getInnerID(),user.getClassroom());
                 }
             }
         } catch (Exception e) {
@@ -117,10 +128,16 @@ public class LessonService implements Service{
                     else{//添加成功，现在开始添加老师课表
                         if(TeacherDao.returnLesson(lessons.get(0).getTeacherID(),lessons.get(0).getInnerID())) {
                             //先退选之前的课,且成功
-                            res = TeacherDao.selectLesson(user.getTeacherID(), user.getInnerID());
-                            if(!res){//老师选课失败，恢复
-                                LessonDao.addLesson(lessons.get(0));
-                                TeacherDao.selectLesson(lessons.get(0).getTeacherID(),lessons.get(0).getInnerID());
+                            if(user.getTeacherID() != null&&user.getStatus()!=0){
+                                //此时课程时也添加了老师且此时为有效课
+                                res = TeacherDao.selectLesson(user.getTeacherID(), user.getInnerID());
+                                if(!res){//老师选课失败，恢复
+                                    LessonDao.addLesson(lessons.get(0));
+                                    TeacherDao.selectLesson(lessons.get(0).getTeacherID(),lessons.get(0).getInnerID());
+                                }
+                                else{//添加老师课表成功，现在添加教室
+                                    res=LessonDao.selectLessonForClassroom(user.getTime(),user.getInnerID(),user.getClassroom());
+                                }
                             }
                         }
                         else res=false;
@@ -480,15 +497,31 @@ public class LessonService implements Service{
         //先用findTime函数给出所有可能的时间排列，再利用scoreTime给出这个时间的分数
         //在此课程视为这个时间的基础上进行其他课程的计算，最后取最高分情况
 
-        Integer res=0;
+        Integer max=0;
+        Integer position=0;
+        Integer tmp=0;
         try {
-
-
+            Lesson lesson=lessons.get(0);
+            lessons.remove(0);
+            List<List<Integer>>times=findTime(lesson.getInnerID());
+            Integer i=-1;
+            for(List<Integer>time:times){
+                i++;
+                Lesson user=new Lesson(lesson.getLessonID(),lesson.getName(),lesson.getTeacherID(),lesson.getMaxSize(),lesson.getLeftSize(),lesson.getTime(),lesson.getSchool(),lesson.getMajor(),lesson.getIsExam(),lesson.getClassroom(),lesson.getLength(),1);
+                setLessonnew(user);
+                tmp=scoreTime(time,lesson.getInnerID())+doArrange(lessons);
+                if(tmp>max){
+                    max=tmp;
+                    position=i;
+                }
+            }
+            Lesson user=new Lesson(lesson.getLessonID(),lesson.getName(),lesson.getTeacherID(),lesson.getMaxSize(),lesson.getLeftSize(),lesson.getTime(),lesson.getSchool(),lesson.getMajor(),lesson.getIsExam(),lesson.getClassroom(),lesson.getLength(),0);
+            setLessonnew(user);
         } catch (Exception e) {
             e.printStackTrace();
             return 0;
         }
-        return res;
+        return max;
     }
     public List<List<Integer>> findTime(String innerID) {
         //要求:选择一个合适的时间
@@ -508,12 +541,49 @@ public class LessonService implements Service{
                 }
                 case 2:{
                     for(int i=0;i<64;i++){
-                        tmp=null;
                         tmp.add(i);
                         for(int j=i+1;j<64;j++){
                         tmp.add(j);
                         if(isTimeOK(tmp,innerID))res.add(tmp);
+                        tmp.remove(tmp.size()-1);//删除最后一个元素
                         }
+                        tmp.remove(tmp.size()-1);//删除最后一个元素
+                    }
+                    break;
+                }
+                case 3:{
+                    for(int i=0;i<64;i++){
+                        tmp.add(i);
+                        for(int j=i+1;j<64;j++){
+                            tmp.add(j);
+                            for(int k=j+1;k<64;k++){
+                                tmp.add(k);
+                                if(isTimeOK(tmp,innerID))res.add(tmp);
+                                tmp.remove(tmp.size()-1);//删除最后一个元素
+                            }
+                            tmp.remove(tmp.size()-1);//删除最后一个元素
+                        }
+                        tmp.remove(tmp.size()-1);//删除最后一个元素
+                    }
+                    break;
+                }
+                case 4:{
+                    for(int i=0;i<64;i++){
+                        tmp.add(i);
+                        for(int j=i+1;j<64;j++){
+                            tmp.add(j);
+                            for(int k=j+1;k<64;k++){
+                                tmp.add(k);
+                                for(int l=k+1;l<64;l++){
+                                    tmp.add(l);
+                                    if(isTimeOK(tmp,innerID))res.add(tmp);
+                                    tmp.remove(tmp.size()-1);//删除最后一个元素
+                                }
+                                tmp.remove(tmp.size()-1);//删除最后一个元素
+                            }
+                            tmp.remove(tmp.size()-1);//删除最后一个元素
+                        }
+                        tmp.remove(tmp.size()-1);//删除最后一个元素
                     }
                     break;
                 }
@@ -547,19 +617,77 @@ public class LessonService implements Service{
             //此时，这门一定要是有效课，status==1
             List<Lesson> lessons=LessonDao.search("major",lesson.get(0).getMajor());
             for(Lesson tmplesson:lessons){
-                if(tmplesson.getStatus()==1){
-                    //该课为有效课
+                if(tmplesson.getStatus()==1&&tmplesson.getLessonID()!=lesson.get(0).getLessonID()){
+                    //该课为有效课且不为同一门课
                     List<Integer> intersection = ClassTable.getTimeIndex(tmplesson.getTime()).stream().filter(times::contains).collect(toList());
                     if(!intersection.isEmpty())//此时存在交集，即课程冲突
                         return false;
                 }
             }
 
+
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
         return true;
+    }
+    public Integer scoreTime(List<Integer> time,String innerID) {
+        //要求:给出一个时间，判断其可得几分
+        Integer res=0;//得分
+        try {
+            List<Integer>day=null;//相对时间 0-12
+            List<Integer>week=null;//星期 0-4
+            List<Integer>noon=null;//上午，下午，晚上 0-2
+            for(Integer tmp:time){
+                day.add(tmp%13);
+                week.add(tmp/13);
+                noon.add((tmp%13)/5);
+            }
+            //时间尽可能连续
+            //时长为2，3，则每节课都连着，为4则2，2相连
+            switch(time.size()){
+                case 2:{
+                    if(time.get(0)+1==time.get(1)&&noon.get(0)==noon.get(1))
+                        res+=1;
+                    break;
+                }
+                case 3:{
+                    if(time.get(0)+1==time.get(1)&&time.get(0)+2==time.get(2)&&noon.get(0)==noon.get(1)&&noon.get(0)==noon.get(2))
+                        res+=1;
+                    break;
+                }
+                case 4:{
+                    if(time.get(0)+1==time.get(1)&&time.get(2)+1==time.get(3)&&noon.get(0)==noon.get(1)&&noon.get(2)==noon.get(3))
+                        res+=1;
+                    break;
+                }
+            }
+            //时间尽可能分散
+            //时长为4则尽量离远一点
+            switch(time.size()){
+                case 4:{
+                    if(week.get(0)+2<=week.get(2))
+                        res+=1;
+                    break;
+                }
+            }
+            //尽可能不占用老师的非偏好时间
+            List<Lesson> lesson=LessonDao.search("innerID",innerID);
+            //判断对于这个老师来说，这个时间是否可以
+            String teacherID=lesson.get(0).getTeacherID();
+            String teachertable=TeacherDao.getLessonTable(teacherID);//取得老师课表
+            String[] temp = teachertable.split(",");//根据，切分字符串
+            for(Integer tmp:time ){
+                if(temp[tmp].equals("1"))
+                    //如果此时为老师非偏好时间
+                    res-=1;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+        return res;
     }
 
 }
