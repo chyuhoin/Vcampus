@@ -19,6 +19,8 @@ public class ShopDao extends BaseDao{
     public static List<Goods> search(String field,Object value) throws Exception {
         return searchBy(Goods.class,"tb_GOODS",field,value);
     }
+    //查看我在卖的商品
+
     //添加商品
     public static Boolean addGoods(Goods goods){
         try {
@@ -87,5 +89,9 @@ public class ShopDao extends BaseDao{
             System.out.println("wrong");
             return false;
         }
+    }
+    //查看我买的商品
+    public static List<Record> searchMine(String studentID) throws Exception {
+        return searchBy(Record.class,"tb_RECORD","studentID",studentID);
     }
 }
