@@ -61,6 +61,16 @@ public class ShopService implements Service {
     }
 
     public boolean changeOne(Goods goods) {
-        return false;
+        boolean res = ShopDao.revise(goods.getSeller(), goods.getGoodsID(),
+                "goodsName", goods.getGoodsName());
+        res = res & ShopDao.revise(goods.getSeller(), goods.getGoodsID(),
+                "price", goods.getPrice());
+        res = res & ShopDao.revise(goods.getSeller(), goods.getGoodsID(),
+                "dealDate", goods.getDealDate());
+        res = res & ShopDao.revise(goods.getSeller(), goods.getGoodsID(),
+                "num", goods.getNum());
+        res = res & ShopDao.revise(goods.getSeller(), goods.getGoodsID(),
+                "type", goods.getType());
+        return res;
     }
 }

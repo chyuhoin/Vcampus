@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.vcampus.net.Message;
 import com.vcampus.pojo.Goods;
+import com.vcampus.pojo.User;
 import com.vcampus.server.service.ShopService;
 
 import java.util.HashMap;
@@ -39,6 +40,13 @@ public class ShopController implements Controller{
         return service.buyOne(input.get("studentID"), input.get("goodsID")) ? "OK" : "Error";
     }
 
+    private List<Goods> getWhatImSelling(Message msg) {
+        User user = gson.fromJson(msg.getData(), User.class);
+        Goods goods = new Goods();
+        goods.setSeller(user.getStudentID());
+        return service.getGoodsBy(goods);
+    }
+
     private String adminAddGoods(Message msg) {
         Goods goods = gson.fromJson(msg.getData(), Goods.class);
         return service.addOneKind(goods) ? "OK" : "Error";
@@ -49,7 +57,7 @@ public class ShopController implements Controller{
         return service.deleteOneKind(goods) ? "OK" : "Error";
     }
 
-    private String adminChangeGoods(Message msg) {
+    private String changeSellingGoods(Message msg) {
         Goods goods = gson.fromJson(msg.getData(), Goods.class);
         return service.changeOne(goods) ? "OK" : "Error";
     }
@@ -57,11 +65,20 @@ public class ShopController implements Controller{
     @Override
     public Message check(Message msg) {
 
-        if (msg.getOperation().equals("get")) {
-            map.put("res", getGoods(msg));
-        } else if(msg.getOperation().equals("buy")) {
-            map.put("res", buyGoods(msg));
-        } else if(msg.getStatus().equals("admin")) {
+        switch (msg.getOperation()) {
+            case "get":
+                map.put("res", getGoods(msg));
+                break;
+            case "buy":
+                map.put("res", buyGoods(msg));
+                break;
+            case "getSell":
+                map.put("res", getWhatImSelling(msg));
+                break;
+            case "put":
+                map.put("res", changeSellingGoods(msg));
+        }
+        if(msg.getStatus().equals("admin")) {
             switch (msg.getOperation()) {
                 case "post": {
                     map.put("res", adminAddGoods(msg));
@@ -72,7 +89,7 @@ public class ShopController implements Controller{
                     break;
                 }
                 case "put": {
-                    map.put("res", adminChangeGoods(msg));
+                    map.put("res", changeSellingGoods(msg));
                     break;
                 }
             }
