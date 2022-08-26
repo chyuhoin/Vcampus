@@ -2,6 +2,8 @@ package com.vcampus.server.service;
 
 import com.vcampus.dao.ShopDao;
 import com.vcampus.pojo.Goods;
+import com.vcampus.pojo.Record;
+import com.vcampus.pojo.User;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -37,7 +39,7 @@ public class ShopService implements Service {
 
                 if(resultValue == null) continue;
                 for(Goods item: res) {
-                    if(field.get(item) != resultValue) res.remove(item);
+                    if(!field.get(item).equals(resultValue)) res.remove(item);
                 }
 
                 System.out.println(name + ": " + resultValue);
@@ -72,5 +74,22 @@ public class ShopService implements Service {
         res = res & ShopDao.revise(goods.getSeller(), goods.getGoodsID(),
                 "type", goods.getType());
         return res;
+    }
+
+    public List<Record> getBoughtGoods(User user) {
+        try {
+            return ShopDao.searchMine(user.getStudentID());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ArrayList<>();
+    }
+
+    public boolean confirm(String studentID, String goodsID) {
+        return ShopDao.confirm(studentID, goodsID);
+    }
+
+    public boolean returnGoods(String studentID, String goodsID) {
+        return ShopDao.returnGoods(studentID, goodsID);
     }
 }
