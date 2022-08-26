@@ -10,8 +10,16 @@ import java.util.List;
 
 import static com.vcampus.dao.LibraryDao.revise;
 
+/**
+ * The type Library service.
+ */
 public class LibraryService implements Service {
 
+    /**
+     * View all books list.
+     *
+     * @return the list
+     */
     public List<Book> viewAllBooks() {
         List<Book> res = null;
         try {
@@ -22,6 +30,12 @@ public class LibraryService implements Service {
         return res;
     }
 
+    /**
+     * Search books list.
+     *
+     * @param book the book
+     * @return the list
+     */
     public List<Book> searchBooks(Book book) {
         List<Book> res = null, ans = new ArrayList<>();
         List<String> strings = new ArrayList<>();
@@ -50,6 +64,12 @@ public class LibraryService implements Service {
         return ans;
     }
 
+    /**
+     * Search borrowed books list.
+     *
+     * @param user the user
+     * @return the list
+     */
     public List<Book> searchBorrowedBooks(User user) {
         List<Book> res = null;
         try {
@@ -60,10 +80,22 @@ public class LibraryService implements Service {
         return res;
     }
 
+    /**
+     * Add new book boolean.
+     *
+     * @param book the book
+     * @return the boolean
+     */
     public boolean addNewBook(Book book) {
         return LibraryDao.addBook(book);
     }
 
+    /**
+     * Change book boolean.
+     *
+     * @param book the book
+     * @return the boolean
+     */
     public boolean changeBook(Book book) {
         boolean result = true;
         try {
@@ -78,10 +110,23 @@ public class LibraryService implements Service {
         return result;
     }
 
+    /**
+     * Delete book boolean.
+     *
+     * @param book the book
+     * @return the boolean
+     */
     public boolean deleteBook(Book book) {
         return LibraryDao.deleteBook(book.getBookID());
     }
 
+    /**
+     * Borrow book book.
+     *
+     * @param bookID    the book id
+     * @param studentID the student id
+     * @return the book
+     */
     public Book borrowBook(String bookID, String studentID) {
         boolean res = LibraryDao.borrowBook(bookID, studentID);
         if(!res) return null;
@@ -93,6 +138,13 @@ public class LibraryService implements Service {
         return null;
     }
 
+    /**
+     * Return book book.
+     *
+     * @param bookID    the book id
+     * @param studentID the student id
+     * @return the book
+     */
     public Book returnBook(String bookID, String studentID) {
         try {
             boolean res = LibraryDao.returnBook(bookID, studentID);

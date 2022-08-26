@@ -21,7 +21,13 @@ public class StudentDao extends BaseDao{
     }
     //添加一条学生信息,由管理员操作
     public static Boolean addStudent(Student stu)  {
-        return addClass(stu,"tb_STUDENT");
+        try {
+            addClass(stu,"tb_STUDENT");
+            return true;
+        }catch (Exception e){
+            System.out.println("wrong");
+            return false;
+        }
     }
     //只添加一个studentID，以后慢慢的补充
     public static Boolean addStudent(String studentID){
@@ -35,7 +41,14 @@ public class StudentDao extends BaseDao{
     }
     //删除一个学生的信息（仅管理员
     public static Boolean deleteStudent(String studentID){
-        return delete("studentID",studentID,"tb_STUDENT");
+        try {
+            delete("studentID",studentID,"tb_STUDENT");
+            return true;
+        }catch (Exception e){
+            System.out.println("wrong");
+            return false;
+        }
+
     }
     //修改学生的信息（String类型）
     public static Boolean reviseStudent(String studentID,String field,String value){

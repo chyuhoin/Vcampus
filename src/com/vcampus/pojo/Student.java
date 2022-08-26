@@ -21,10 +21,11 @@ public class Student implements Serializable {
     Integer status;
     String image;
     String nation;
-
     String graduateTime;//毕业时间
+
+    Integer status2;
     //path为图片所在路径
-    public Student(String studentID, String name, String studentNumber, String IDcard, String school, String major, Integer sex, String classs, Integer educationalSystem, String politics, Integer grade, String phoneNumber, Integer status, String path,String nation,String graduateTime) {
+    public Student(String studentID, String name, String studentNumber, String IDcard, String school, String major, Integer sex, String classs, Integer educationalSystem, String politics, Integer grade, String phoneNumber, Integer status, String path,String nation,String graduateTime,Integer status2) {
         this.studentID = studentID;
         this.name = name;
         this.studentNumber = studentNumber;
@@ -44,6 +45,15 @@ public class Student implements Serializable {
 
         }
         this.graduateTime = graduateTime;
+        this.status2 = status2;
+    }
+
+    public Integer getStatus2() {
+        return status2;
+    }
+
+    public void setStatus2(Integer status2) {
+        this.status2 = status2;
     }
 
     public Student() {

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="考务差自动排课">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-19_13_57___Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2022-08-19_13_57_取消提交了变更_[Changes]/shelved.patch" beforeDir="false" />
+    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="添加了课程的学时和状态">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/vcampus/server/controller/LessonController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/server/controller/LessonController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/vcampus/server/service/LessonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/server/service/LessonService.java" afterDir="false" />
@@ -194,8 +193,6 @@
       <workItem from="1661147390790" duration="5933000" />
       <workItem from="1661299612812" duration="7912000" />
       <workItem from="1661346871285" duration="395000" />
-      <workItem from="1661477788932" duration="7588000" />
-      <workItem from="1661493719416" duration="5681000" />
     </task>
     <task id="LOCAL-00001" summary="初步写了登录注册">
       <created>1660298515554</created>
@@ -358,21 +355,7 @@
       <option name="project" value="LOCAL" />
       <updated>1661306591233</updated>
     </task>
-    <task id="LOCAL-00024" summary="考务差自动排课">
-      <created>1661405829781</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1661405829781</updated>
-    </task>
-    <task id="LOCAL-00025" summary="考务差自动排课">
-      <created>1661485395218</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1661485395218</updated>
-    </task>
-    <option name="localTasksCounter" value="26" />
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -444,8 +427,7 @@
     <MESSAGE value="对teacherDao层，增加了返回老师课表的功能" />
     <MESSAGE value="增加了借书时间" />
     <MESSAGE value="教室课表" />
-    <MESSAGE value="考务差自动排课" />
-    <option name="LAST_COMMIT_MESSAGE" value="考务差自动排课" />
+    <option name="LAST_COMMIT_MESSAGE" value="教室课表" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
