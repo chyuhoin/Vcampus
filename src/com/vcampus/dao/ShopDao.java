@@ -47,6 +47,7 @@ public class ShopDao extends BaseDao{
             conn.setAutoCommit(false);
             addClass(new Record(studentID,goodsID),"tb_RECORD");
             deleteGoods("goodsID",goodsID);
+            conn.commit();
             return true;
         }catch (Exception e){
             System.out.println("wrong");
