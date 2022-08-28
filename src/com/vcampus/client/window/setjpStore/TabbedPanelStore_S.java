@@ -30,15 +30,14 @@ public class TabbedPanelStore_S extends JTabbedPane {
         JPanel jp13 = new JPanel();
         //选项卡1的内容
         //设置标题
-        JLabel lblTitleLabel = new JLabel("学生校园商城");
-        lblTitleLabel.setFont(new Font("宋体", Font.BOLD, 50));
+
         //按钮
-        JButton btnRegister = new JButton("SSSSS");
-        btnRegister.setFont(new Font("宋体", Font.BOLD, 50));
+        JButton btnRegister = new JButton("卖出");
+    //    btnRegister.setFont(new Font("宋体", Font.BOLD, 25));
 
-        jp11.add(lblTitleLabel);
         jp12.add(btnRegister);
-
+        btnRegister.setLayout(null);
+        btnRegister.setBounds(0,0,50,5);
         /*
         this.add("选项一",jp11);	//创建三个面板
         this.add("选项二",jp12);
@@ -47,10 +46,11 @@ public class TabbedPanelStore_S extends JTabbedPane {
          */
 
 
-        this.addTab("选项一", null, jp11,"点击查看选项一");
-        this.addTab("选项二", null, jp12,"点击查看选项二");
-        this.addTab("选项三", null, jp13,"点击查看选项三");
+        this.addTab("学校商店", null, jp11,"点击查看学校商店");
+        this.addTab("二手商店", null, jp12,"点击查看二手商店");
+        this.addTab("我的购买记录", null, jp13,"点击查看我的记录");
         this.setFont(new Font("宋体", Font.BOLD, 24));
+
 
 
 

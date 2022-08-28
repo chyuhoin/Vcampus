@@ -360,6 +360,32 @@ public class LessonService implements Service{
         }
         return res;
     }
+    public List<String> getGradeStudent(String innerID) {
+        List<String> res = null;
+        try {
+            res = LessonDao.searchByInnerID(innerID);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+    public List<String> getGradeStudentAll(String lessonID) {
+        List<String> res = new ArrayList<>();
+        List<String>tmps=null;
+        List<Lesson>lessons=null;
+        try {
+            lessons=LessonDao.search("lessonID",lessonID);
+            for(Lesson lesson:lessons){
+                tmps=LessonDao.searchByInnerID(lesson.getInnerID());
+                for(String tmp:tmps){
+                    res.add(tmp);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
     public boolean delete(String deleteID) {
         boolean res=false;
         List<Lesson> lessons=null;
@@ -550,7 +576,7 @@ public class LessonService implements Service{
         boolean res=false;
         try {
             List<Lesson>tmp=LessonDao.search("status",0);
-            List<Lesson>lessons=null;
+            List<Lesson>lessons=new ArrayList<>();
             for(Lesson data:tmp){
                 if(!data.getInnerID().equals(data.getLessonID())){//此时不为空课程
                     lessons.add(data);
@@ -659,65 +685,182 @@ public class LessonService implements Service{
     }
     public List<List<Integer>> findTime(String innerID) {
         //要求:选择一个合适的时间
-        List<List<Integer>> res=null;
-        List<Integer>tmp=null;
+        List<List<Integer>> res=new ArrayList<>();
+        List<Integer>tmp=new ArrayList<>();
         try {
             List<Lesson> lesson=LessonDao.search("innerID",innerID);
             Integer length=lesson.get(0).getLength();
             switch(length){
-                case 1:{
-                    for(int i=0;i<64;i++){
-                        tmp=null;
-                        tmp.add(i);
-                        if(isTimeOK(tmp,innerID))res.add(tmp);
-                    }
-                    break;
-                }
                 case 2:{
-                    for(int i=0;i<64;i++){
-                        tmp.add(i);
-                        for(int j=i+1;j<64;j++){
-                        tmp.add(j);
-                        if(isTimeOK(tmp,innerID))res.add(tmp);
-                        tmp.remove(tmp.size()-1);//删除最后一个元素
+                    for(int i=0;i<4;i++){
+                        for(int j=0;j<5;j++){
+                            switch(i){
+                                case 0:{
+                                    tmp.add(0+13*j);
+                                    tmp.add(1+13*j);
+                                    if(isTimeOK(tmp,innerID))res.add(tmp);
+                                    tmp.remove(tmp.size()-1);//删除最后一个元素
+                                    tmp.remove(tmp.size()-1);//删除最后一个元素
+                                    break;
+                                }
+                                case 1:{
+                                    tmp.add(2+13*j);
+                                    tmp.add(3+13*j);
+                                    if(isTimeOK(tmp,innerID))res.add(tmp);
+                                    tmp.remove(tmp.size()-1);//删除最后一个元素
+                                    tmp.remove(tmp.size()-1);//删除最后一个元素
+                                    break;
+                                }
+                                case 2:{
+                                    tmp.add(5+13*j);
+                                    tmp.add(6+13*j);
+                                    if(isTimeOK(tmp,innerID))res.add(tmp);
+                                    tmp.remove(tmp.size()-1);//删除最后一个元素
+                                    tmp.remove(tmp.size()-1);//删除最后一个元素
+                                    break;
+                                }
+                                case 3:{
+                                    tmp.add(7+13*j);
+                                    tmp.add(8+13*j);
+                                    if(isTimeOK(tmp,innerID))res.add(tmp);
+                                    tmp.remove(tmp.size()-1);//删除最后一个元素
+                                    tmp.remove(tmp.size()-1);//删除最后一个元素
+                                    break;
+                                }
+                            }
                         }
-                        tmp.remove(tmp.size()-1);//删除最后一个元素
                     }
+                    tmp.add(23);
+                    tmp.add(24);
+                    if(isTimeOK(tmp,innerID))res.add(tmp);
+                    tmp.remove(tmp.size()-1);//删除最后一个元素
+                    tmp.remove(tmp.size()-1);//删除最后一个元素
+                    tmp.add(49);
+                    tmp.add(50);
+                    if(isTimeOK(tmp,innerID))res.add(tmp);
+                    tmp.remove(tmp.size()-1);//删除最后一个元素
+                    tmp.remove(tmp.size()-1);//删除最后一个元素
                     break;
                 }
                 case 3:{
-                    for(int i=0;i<64;i++){
-                        tmp.add(i);
-                        for(int j=i+1;j<64;j++){
-                            tmp.add(j);
-                            for(int k=j+1;k<64;k++){
-                                tmp.add(k);
-                                if(isTimeOK(tmp,innerID))res.add(tmp);
-                                tmp.remove(tmp.size()-1);//删除最后一个元素
+                    for(int i=0;i<2;i++){
+                        for(int j=0;j<5;j++){
+                            switch(i){
+                                case 0:{
+                                    tmp.add(2+13*j);
+                                    tmp.add(3+13*j);
+                                    tmp.add(4+13*j);
+                                    if(isTimeOK(tmp,innerID))res.add(tmp);
+                                    tmp.remove(tmp.size()-1);//删除最后一个元素
+                                    tmp.remove(tmp.size()-1);//删除最后一个元素
+                                    tmp.remove(tmp.size()-1);//删除最后一个元素
+                                    break;
+                                }
+                                case 1:{
+                                    tmp.add(7+13*j);
+                                    tmp.add(8+13*j);
+                                    tmp.add(9+13*j);
+                                    if(isTimeOK(tmp,innerID))res.add(tmp);
+                                    tmp.remove(tmp.size()-1);//删除最后一个元素
+                                    tmp.remove(tmp.size()-1);//删除最后一个元素
+                                    tmp.remove(tmp.size()-1);//删除最后一个元素
+                                    break;
+                                }
                             }
-                            tmp.remove(tmp.size()-1);//删除最后一个元素
                         }
-                        tmp.remove(tmp.size()-1);//删除最后一个元素
                     }
+                    tmp.add(23);
+                    tmp.add(24);
+                    tmp.add(25);
+                    if(isTimeOK(tmp,innerID))res.add(tmp);
+                    tmp.remove(tmp.size()-1);//删除最后一个元素
+                    tmp.remove(tmp.size()-1);//删除最后一个元素
+                    tmp.remove(tmp.size()-1);//删除最后一个元素
+                    tmp.add(49);
+                    tmp.add(50);
+                    tmp.add(51);
+                    if(isTimeOK(tmp,innerID))res.add(tmp);
+                    tmp.remove(tmp.size()-1);//删除最后一个元素
+                    tmp.remove(tmp.size()-1);//删除最后一个元素
+                    tmp.remove(tmp.size()-1);//删除最后一个元素
                     break;
                 }
                 case 4:{
-                    for(int i=0;i<64;i++){
-                        tmp.add(i);
-                        for(int j=i+1;j<64;j++){
-                            tmp.add(j);
-                            for(int k=j+1;k<64;k++){
-                                tmp.add(k);
-                                for(int l=k+1;l<64;l++){
-                                    tmp.add(l);
-                                    if(isTimeOK(tmp,innerID))res.add(tmp);
-                                    tmp.remove(tmp.size()-1);//删除最后一个元素
+                    for(int j=0;j<4;j++){//第一节课的星期
+                        for(int i=0;i<5;i++){//第一节课的位置
+                            switch(i){
+                                case 0:{
+                                    tmp.add(0+13*j);
+                                    tmp.add(1+13*j);
+                                    break;
                                 }
-                                tmp.remove(tmp.size()-1);//删除最后一个元素
+                                case 1:{
+                                    tmp.add(2+13*j);
+                                    tmp.add(3+13*j);
+                                    break;
+                                }
+                                case 2:{
+                                    tmp.add(5+13*j);
+                                    tmp.add(6+13*j);
+                                    break;
+                                }
+                                case 3:{
+                                    tmp.add(7+13*j);
+                                    tmp.add(8+13*j);
+                                    break;
+                                }
+                                case 4:{
+                                    if(j==0||j==2||j==4){
+                                        tmp.add(10+13*j);
+                                        tmp.add(11+13*j);
+                                    }
+                                }
                             }
+                            for(int k=j+1;k<5;k++){//第二课的星期
+                                for(int l=0;l<5;l++){//第二节课的位置
+                                    switch(l){
+                                        case 0:{
+                                            tmp.add(0+13*k);
+                                            tmp.add(1+13*k);
+                                            break;
+                                        }
+                                        case 1:{
+                                            tmp.add(2+13*k);
+                                            tmp.add(3+13*k);
+                                            break;
+                                        }
+                                        case 2:{
+                                            tmp.add(5+13*k);
+                                            tmp.add(6+13*k);
+                                            break;
+                                        }
+                                        case 3:{
+                                            tmp.add(7+13*k);
+                                            tmp.add(8+13*k);
+                                            break;
+                                        }
+                                        case 4:{
+                                            if(k==2||k==4){
+                                                tmp.add(10+13*k);
+                                                tmp.add(11+13*k);
+                                            }
+                                        }
+                                    }
+                                    if(tmp.size()==4){
+                                        if(isTimeOK(tmp,innerID))res.add(tmp);
+                                        if(!(l==4&&(k!=2||k!=4))){
+                                            tmp.remove(tmp.size()-1);//删除最后一个元素
+                                            tmp.remove(tmp.size()-1);//删除最后一个元素
+                                        }
+                                    }
+
+                                }
+                            }
+                            if(tmp.size()==2){
                             tmp.remove(tmp.size()-1);//删除最后一个元素
+                            tmp.remove(tmp.size()-1);//删除最后一个元素
+                            }
                         }
-                        tmp.remove(tmp.size()-1);//删除最后一个元素
                     }
                     break;
                 }
@@ -824,7 +967,7 @@ public class LessonService implements Service{
         return res;
     }
     public String returnTime(List<Integer>times) {
-        StringBuilder res= null;
+        StringBuilder res= new StringBuilder();
         try {
             Integer day=null;//相对时间 1-13
             Integer week=null;//星期 1-5

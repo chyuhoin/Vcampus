@@ -9,10 +9,18 @@
  *Revised Hisytory:
  *1. 2022-8-26,创建此文件
  *2. 2022-8-26,完善设置
- *3.
+ *3. 2022-8-28,前后端连接 修改人：韩宇
  *    修改的内容描述，修改的原因
  */
 package com.vcampus.client.window.setjpCourse;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.vcampus.net.ClientMessagePasser;
+import com.vcampus.net.Message;
+import com.vcampus.net.MessagePasser;
+import com.vcampus.pojo.Lesson;
+import com.vcampus.pojo.Teacher;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -37,30 +45,14 @@ public class PanelDeleteCourse extends JPanel{
     JScrollPane scrollPane = null;
     JPanel panel = new JPanel();
 
-    Object[] columnNames={"教师姓名", "一卡通号","学院","专业","操作"};
-    Object[][] tableData=new Object[][]{
-            {"张三","2233","计算机","计算机","删除"},
-            {"张三","2233","计算机","计算机","删除"},
-            {"张三","2233","计算机","计算机","删除"},
-            {"张三","2233","计算机","计算机","删除"},
-            {"张三","2233","计算机","计算机","删除"},
-            {"张三","2233","计算机","计算机","删除"},
-            {"张三","2233","计算机","计算机","删除"},
-            {"张三","2233","计算机","计算机","删除"},
-            {"张三","2233","计算机","计算机","删除"},
-            {"张三","2233","计算机","计算机","删除"},
-            {"张三","2233","计算机","计算机","删除"},
-            {"张三","2233","计算机","计算机","删除"},
-            {"张三","2233","计算机","计算机","删除"},
-            {"张三","2233","计算机","计算机","删除"},
-            {"张三","2233","计算机","计算机","删除"}};//保存所有用户信息
+    Object[] columnNames={"课程名称", "授课教师一卡通号","开课学院","所属专业","上课时间","授课教室","课容量","操作"};
+    Object[][] tableData=new Object[][]{};//保存所有用户信息
 
     JTextField txtEnquire = new JTextField();
     JLabel lblHint = new JLabel("输入课程编号 ：");
     int btnWidth = 120, btnHeight = 30;
     int txtWidth=110, txtHeight=32;
-
-
+    MessagePasser passer = ClientMessagePasser.getInstance();
 
     public PanelDeleteCourse()
     {
@@ -87,8 +79,6 @@ public class PanelDeleteCourse extends JPanel{
 
         panel.setLayout(null);
         panel.setBounds(10,120,1200,400);
-        //panel.setBorder(BorderFactory.createTitledBorder("分组框")); //设置面板边框，实现分组框的效果，此句代码为关键代码
-        //panel.setBorder(BorderFactory.createLineBorder(Color.red));//设置面板边框颜色
 
         this.add(btnInquire);
         this.add(lblHint);
@@ -98,31 +88,42 @@ public class PanelDeleteCourse extends JPanel{
         btnInquire.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String str = txtEnquire.getText();
-                System.out.println(str);
+                Lesson lesson=new Lesson();
+                lesson.setLessonID(txtEnquire.getText());
+                System.out.println(lesson);
 
-                //传消息出去 打包一个课程
+                Gson gson = new Gson();
+                String s = gson.toJson(lesson);
+                passer.send(new Message("admin", s, "lesson", "getone"));
 
-                //传给详情界面
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException interruptedException) {
+                    interruptedException.printStackTrace();
+                }
                 setTable();
+                updateUI();
+                repaint();
             }
         });
 
         btnDeleteAll.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String str = txtEnquire.getText();
-                System.out.println(str);
-                //发送消息，打包课程,删除所有
+
+                Lesson lesson=new Lesson();
+                lesson.setLessonID(txtEnquire.getText());
+                System.out.println(lesson);
+
+                Gson gson = new Gson();
+                String s = gson.toJson(lesson);
+                passer.send(new Message("admin", s, "lesson", "delete"));
+
                 tableData=null;
 
                 deleteAll();
             }
         });
-
-
-
-
     }
 
     public void setButtonFont(JButton button)
@@ -141,41 +142,37 @@ public class PanelDeleteCourse extends JPanel{
 
     public void setTable()
     {
+        panel.removeAll();
         //接收消息
-
+        Message msg = passer.receive();
+        Map<String, java.util.List<Lesson>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, List<Lesson>>>(){}.getType());
+        List<Lesson> res = map.get("res");
         //如果不空，构建表格
-
-        add(btnDeleteAll);
-        add(panel);
-        System.out.println("构件表格");
-        if(true)
+        if(res.size()!=0)
         {
+            add(btnDeleteAll);
+            add(panel);
             //设置表格内容
-            /*tableData = new Object[res.size()][4];
+            tableData = new Object[res.size()][8];
             for (int i = 0; i < res.size(); i++) {
                 tableData[i][0] = res.get(i).getName();
-                tableData[i][1] = res.get(i).getID();
-                tableData[i][2] = res.get(i).getMajor();
-                tableData[i][3] = res.get(i).getSchool();
+                tableData[i][1] = res.get(i).getTeacherID();
+                tableData[i][2] = res.get(i).getSchool();
+                tableData[i][3] = res.get(i).getMajor();
+                tableData[i][4] = res.get(i).getTime();
+                tableData[i][5] = res.get(i).getClassroom();
+                tableData[i][6] = res.get(i).getMaxSize();
             }
-
-             */
 
             tableModel =new DefaultTableModel(tableData,columnNames);
             table=new MyTable(tableModel);
             table.setRowSelectionAllowed(true);
-            // 行高
-            //table.setRowHeight(24);
+            table.getColumnModel().getColumn(1).setPreferredWidth(120);
+
             // 数据
             table.setRowHeight(30);// 设置行高
             table.setFont(new Font("黑体",Font.PLAIN,18));//表格字体
             table.getTableHeader().setFont(new Font("黑体",Font.BOLD,20));//表头字体
-
-            //添加渲染器
-            //table.getColumn("操作").setCellRenderer(new ButtonRenderer());
-            //添加编辑器
-            //table.getColumn("操作").setCellEditor( new ButtonEditor(new JCheckBox()));
-
 
             //添加渲染器
             ButtonRenderer btnR=new ButtonRenderer("删除");
@@ -183,85 +180,6 @@ public class PanelDeleteCourse extends JPanel{
             //添加编辑器
             ButtonEditor btnE=new ButtonEditor(new JCheckBox());
             table.getColumn("操作").setCellEditor(btnE);
-            btnE.getButton().setText("删除");
-            //GUI设置
-            //JScrollPane scroll = new JScrollPane(table);
-
-           /* btnE.getButton().addMouseListener(new MouseListener() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-
-                }
-
-                @Override
-                public void mousePressed(MouseEvent e) {
-                    int rowName=((JTable)e.getSource()).rowAtPoint(e.getPoint());
-                    String teacherID=(String)tableModel.getValueAt(rowName, 1);
-                    String courseID=txtEnquire.getText();
-                    //int rowName = rowAtPoint(e.getPoint());
-
-                    //收发请求，删掉对应课程老师
-                    //如果成功
-                    if(true) {
-                        informFrame("删除成功",false);
-                        tableModel.removeRow(rowName);
-                        updateUI();
-                        repaint();
-                    }else {
-                        informFrame("删除失败",true);
-                    }
-                }
-
-                @Override
-                public void mouseReleased(MouseEvent e) {
-
-                }
-
-                @Override
-                public void mouseEntered(MouseEvent e) {
-
-                }
-
-                @Override
-                public void mouseExited(MouseEvent e) {
-
-                }
-            });
-
-            */
-
-
-
-          /*  btnE.getButton().addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    //int rowName=((JTable)e.getSource()).rowAtPoint(e.getPoint());
-                    //String teacherID=(String)tableModel.getValueAt(rowName, 1);
-                    String courseID=txtEnquire.getText();
-                    System.out.println(btnE.getButton().getX());
-
-                    //收发请求，删掉对应课程老师
-                    //如果成功
-                    if(true) {
-                        informFrame("删除成功",false);
-                        //tableModel.removeRow(rowName);
-                        //updateUI();
-                        //repaint();
-                    }else {
-                        informFrame("删除失败",true);
-                    }
-
-
-
-                    //刷新渲染器
-                    btnE.fireEditingStopped_1();
-                }
-            });
-
-           */
-
-
-            //panel.add(scroll);
-
 
             scrollPane = new JScrollPane(table);
             scrollPane.setBounds(0,0,1200,400);
@@ -273,67 +191,37 @@ public class PanelDeleteCourse extends JPanel{
                     int rowName=btnE.getThisRow();
                     String teacherID=(String)tableModel.getValueAt(rowName, 1);
                     String courseID=txtEnquire.getText();
-                    System.out.println(teacherID+"  "+courseID);
+                    //System.out.println(teacherID+"  "+courseID);
 
-                    //收发请求，删掉对应课程老师
-                    //如果成功
-                    if(true) {
+                    Lesson lesson=new Lesson();
+                    lesson.setInnerID(courseID+teacherID);
+                    System.out.println(lesson);
+
+                    Gson gson = new Gson();
+                    String s = gson.toJson(lesson);
+                    passer.send(new Message("admin", s, "lesson", "deleteone"));
+
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException interruptedException) {
+                        interruptedException.printStackTrace();
+                    }
+
+                    Message msg = passer.receive();
+                    System.out.println(msg);
+                    Map<String,Object> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String,Object>>(){}.getType());
+
+                    if(map.get("res").equals("OK"))
+                    {
                         informFrame("删除成功",false);
                         btnE.fireEditingStopped_1();
-                        tableModel.removeRow(rowName);//不能删最后一行
-                        //setTable();//重新构建表格  拿回所有数据？
+                        tableModel.removeRow(rowName);
                         updateUI();
                         repaint();
-                    }else {
-                        informFrame("删除失败",true);
                     }
-
-
+                    else { informFrame("删除失败",true); }
                 }
             });
-
-            /*
-            table.addMouseListener(new MouseListener() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-
-                }
-                @Override
-                public void mousePressed(MouseEvent e) {
-
-                    int rowName=((JTable)e.getSource()).rowAtPoint(e.getPoint());
-                    int columnName=((JTable)e.getSource()).columnAtPoint(e.getPoint());
-                    int temp=tableModel.getRowCount();
-                    if(columnName==4)
-                    {
-                        String teacherID=(String)tableModel.getValueAt(rowName, 1);
-                        String courseID=txtEnquire.getText();
-                        System.out.println("当前列"+rowName+"00"+temp);
-
-                            //收发请求，删掉对应课程老师
-                            //如果成功
-                            if(true) {
-                                informFrame("删除成功",false);
-                                tableModel.removeRow(rowName);//不能删最后一行
-                                //setTable();//重新构建表格  拿回所有数据？
-                                updateUI();
-                                repaint();
-                            }else {
-                                informFrame("删除失败",true);
-                            }
-                    }
-                    btnE.fireEditingStopped_1();
-
-                }
-                @Override
-                public void mouseReleased(MouseEvent e) {}
-                @Override
-                public void mouseEntered(MouseEvent e) {}
-                @Override
-                public void mouseExited(MouseEvent e) {}
-            });
-
-             */
         }
         else
         {
@@ -341,13 +229,16 @@ public class PanelDeleteCourse extends JPanel{
         }
         updateUI();
         repaint();
+
     }
 
     public void deleteAll()
     {
-        //接收消息
-        //成功
-        if(true)
+        Message msg = passer.receive();
+        System.out.println(msg);
+        Map<String,Object> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String,Object>>(){}.getType());
+
+        if(map.get("res").equals("OK"))
         {
             informFrame("删除成功",false);
             remove(panel);

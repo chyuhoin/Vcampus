@@ -288,6 +288,16 @@ public class LessonDao extends BaseDao{
             return false;
         }
     }
+    public static List<String> searchByInnerID(String innerID) throws Exception {
+        String sql = "select studentID,grade from tb_STUDENTWITHLESSON where innerID = '"+innerID+"'";
+        List<Map<String,Object>> resultList = CRUD.Query(sql,conn);
+        List<String>result = new ArrayList<>();
+        for(Map<String,Object>map:resultList){
+            String res = map.get("studentID")+"/"+String.valueOf(map.get("grade"));
+            result.add(res);
+        }
+        return result;
+    }
     @Test
     public void test() throws Exception {
         List<Teacher> res = new ArrayList<>();
