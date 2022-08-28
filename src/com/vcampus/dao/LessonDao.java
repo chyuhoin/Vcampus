@@ -300,32 +300,21 @@ public class LessonDao extends BaseDao{
     }
     @Test
     public void test() throws Exception {
-        List<Teacher> res = new ArrayList<>();
-        List<Teacher> tmp = TeacherDao.searchTeacher("abledMajor","计算机");
-        System.out.println(TeacherDao.searchTeacher("abledMajor","计算机"));
-        for(Teacher teacher:tmp){
-            boolean isadd=true;
-            String teacherID=teacher.getTeacherID();
-            String teachertable=TeacherDao.getLessonTable(teacherID);//取得老师课表
-            String[] temp = teachertable.split(",");//根据，切分字符串
-            List<Integer>times=ClassTable.getTimeIndex("4/5/6");
-            List<Integer>teacherunlikes=ClassTable.getTimeIndex(teacher.getTime());
-            for(Integer tmptime:times ){
-                for(Integer teacherunlike:teacherunlikes){
-                    if(tmptime==teacherunlike){
-                        isadd=false;
-                        break;
-                    }
-                }
-                if(!temp[tmptime].equals("0")){
-                    //如果此时老师课表有课或为非偏好时间
-                    isadd=false;
-                    break;
-                }
-            }
-            if(isadd)res.add(teacher);
-        }
+        List<List<Integer>> res=new ArrayList<List<Integer>>();
+        List<Integer>tmp=new ArrayList<>();
+        tmp.add(3);
+        res.add(tmp);
+        tmp.remove(tmp.size() - 1);//删除最后一个元素
+        System.out.println(tmp);
+        tmp.add(1);
+        tmp.add(2);
+        res.add(tmp);
+        tmp.remove(tmp.size() - 1);//删除最后一个元素
+        tmp.remove(tmp.size() - 1);//删除最后一个元素
+        tmp.add(5);
+        tmp.add(6);
+        tmp.add(5);
+        tmp.add(6);
         System.out.println(res);
-    }
-}
+}}
 
