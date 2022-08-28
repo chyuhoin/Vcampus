@@ -108,7 +108,7 @@ public class PanelTeacherInform extends JPanel{
         }
 
         Message msg = passer.receive();
-        Map<String, java.util.List<Teacher>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, java.util.List<Teacher>>>(){}.getType());
+        Map<String,java.util.List<Teacher>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, java.util.List<Teacher>>>(){}.getType());
         List<Teacher> res = map.get("res");
         System.out.println(res);
 
