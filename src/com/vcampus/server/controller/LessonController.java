@@ -192,14 +192,20 @@ public class LessonController implements Controller{
 ////                map8.put("res", service.searchTeacher(teacherID1));
 //                map8.put("res", service.searchTeacher(teacher1.getTeacherID()));
 //                return new Message("200", gson.toJson(map8));
-                String data2 = msg.getData();
-                Map<String, String> map8 = gson.fromJson(data2, new TypeToken<HashMap<String, String>>() {}.getType());
+//                String data2 = msg.getData();
+//                Map<String, String> map8 = gson.fromJson(data2, new TypeToken<HashMap<String, String>>() {}.getType());
+//                HashMap<String, Object> map15 = new HashMap<>();
+//                Set<Teacher> teacherSet = new HashSet<>();
+//                for (Map.Entry<String, String> entry : map8.entrySet()) {
+//                    teacherSet.addAll(service.searchTeacher(entry.getValue()));
+//                }
+//                map15.put("res", teacherSet);
+//                return new Message("200", gson.toJson(map15));
+                Teacher teacherID1 = gson.fromJson(msg.getData(), Teacher.class);
+//                String lessonID = msg.getData();
                 HashMap<String, Object> map15 = new HashMap<>();
-                Set<Teacher> teacherSet = new HashSet<>();
-                for (Map.Entry<String, String> entry : map8.entrySet()) {
-                    teacherSet.addAll(service.searchTeacher(entry.getValue()));
-                }
-                map15.put("res", teacherSet);
+//                map5.put("res", service.getTeacher(lessonID));
+                map15.put("res", service.searchTeacher(teacherID1.getTeacherID()));
                 return new Message("200", gson.toJson(map15));
             case "setteacher":
                 //修改老师的可选专业与偏好时间
