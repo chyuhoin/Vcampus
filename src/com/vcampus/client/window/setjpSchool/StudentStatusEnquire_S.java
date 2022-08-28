@@ -84,8 +84,8 @@ public class StudentStatusEnquire_S extends JPanel {
         this.add(btnOk); this.add(btnCancel);
 
         //信息传递
-        String str = "123";//传用户一卡通号回去查询
-        System.out.println(str);//传送，接收结果bool型以及学生对象
+       // String str = "123";//传用户一卡通号回去查询
+        //System.out.println(str);//传送，接收结果bool型以及学生对象
         //set();
 
         Student temp = new Student();
