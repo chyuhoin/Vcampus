@@ -47,8 +47,8 @@ public class Teacher {
         return time;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setTime(String timeTable) {
+        this.time = timeTable;
     }
 
     public String getSchool() {

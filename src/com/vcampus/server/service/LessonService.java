@@ -35,8 +35,9 @@ public class LessonService implements Service{
                 if (LessonDao.deleteSpecificLesson(user.getLessonID()))
                 {//删除成功
                     res = LessonDao.addLesson(user);
-                    if(!res)//添加失败，恢复
+                    if(!res){//添加失败，恢复
                         LessonDao.addLesson(lessons.get(0));
+                    }
                     else{//添加课程成功，现在添加老师的课表
                         res=TeacherDao.selectLesson(user.getTeacherID(),user.getInnerID());
                         if(!res){//添加老师课表失败，现在恢复
@@ -169,11 +170,16 @@ public class LessonService implements Service{
     public boolean setLessonnew(Lesson user) {
         boolean res=false;
         try {
-            if(LessonDao.search("innerID",user.getInnerID()).isEmpty())//没有这个内部ID
+            List<Lesson>lessons=LessonDao.search("innerID",user.getInnerID());
+            if(lessons.isEmpty())//没有这个内部ID
                 res=false;
             else {
                 if(deleteTest(user.getInnerID())){
                     res=addLessonnew(user);
+                    if(!res){
+                        //添加失败，恢复
+                        addLessonnew(lessons.get(0));
+                    }
                 }
             }
         } catch (Exception e) {
@@ -190,6 +196,21 @@ public class LessonService implements Service{
             e.printStackTrace();
         }
         return room;
+    }
+    public List<Teacher> showAllTeacher(String lessonID) {
+        List<Teacher> teachers=null;
+        try {
+            List<Lesson>lessons=LessonDao.search("lessonID",lessonID);
+            for(Lesson lesson:lessons){
+                List<Teacher>tmp=TeacherDao.searchTeacher("teacherID",lesson.getTeacherID());
+                for(Teacher temp:tmp){
+                    teachers.add(temp);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return teachers;
     }
     public List<Teacher> viewTeachers(String abledMajor) {
         List<Teacher> res = null;
@@ -487,6 +508,7 @@ public class LessonService implements Service{
                 //没有对应数据
                 //视为添加
                 res = TeacherDao.addTeacher(user);
+                if(true)return true;
             }
             else if(!TeacherDao.deleteTeacher(user.getTeacherID())) {//视为修改
                 //删除信息失败

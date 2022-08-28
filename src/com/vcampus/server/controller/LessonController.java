@@ -73,6 +73,12 @@ public class LessonController implements Controller{
                 HashMap<String, Object> map9 = new HashMap<>();
                 map9.put("res", service.showRoom(time));
                 return new Message("200", gson.toJson(map9));
+            case "showallteacher":
+                //输入课程号，显示所有老师
+                String lessonID1 = msg.getData();//课程ID
+                HashMap<String, Object> map12 = new HashMap<>();
+                map12.put("res", service.showAllTeacher(lessonID1));
+                return new Message("200", gson.toJson(map12));
             case "addroom":
                 //给课程添加教室
                 //输入教室ID，内部ID，给课程添加教室
@@ -91,10 +97,11 @@ public class LessonController implements Controller{
             case "showteachertime":
                 //显示所有可选的老师
                 //输入时间，专业，用","隔开
+                Lesson lesson1 = gson.fromJson(msg.getData(), Lesson.class);
                 String oldStr6 = msg.getData();
                 String[] strs6 = oldStr6.split(",");//根据，切分字符串
                 HashMap<String, Object> map10 = new HashMap<>();
-                map10.put("res", service.viewTeachersTime(strs6[0],strs6[1]));
+                map10.put("res", service.viewTeachersTime(lesson1.getTime(),lesson1.getMajor()));
                 return new Message("200", gson.toJson(map10));
             case"showtime":
                 //输入老师ID，返回所有不可选的时间
