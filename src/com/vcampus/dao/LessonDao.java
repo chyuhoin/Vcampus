@@ -298,7 +298,7 @@ public class LessonDao extends BaseDao{
             String teacherID=teacher.getTeacherID();
             String teachertable=TeacherDao.getLessonTable(teacherID);//取得老师课表
             String[] temp = teachertable.split(",");//根据，切分字符串
-            List<Integer>times=ClassTable.getTimeIndex("1/1/2");
+            List<Integer>times=ClassTable.getTimeIndex("4/5/6");
             List<Integer>teacherunlikes=ClassTable.getTimeIndex(teacher.getTime());
             for(Integer tmptime:times ){
                 for(Integer teacherunlike:teacherunlikes){

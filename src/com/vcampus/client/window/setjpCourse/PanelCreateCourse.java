@@ -167,6 +167,7 @@ public class PanelCreateCourse extends JPanel{
                 Lesson lesson=new Lesson();
                 lesson.setMajor(txtMajor.getText());
                 lesson.setTime(txtTime.getText());
+                System.out.println(lesson);
 
                 Gson gson = new Gson();
                 String s = gson.toJson(lesson);
@@ -181,6 +182,7 @@ public class PanelCreateCourse extends JPanel{
                 Message msg = passer.receive();
                 Map<String, java.util.List<Teacher>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, java.util.List<Teacher>>>(){}.getType());
                 List<Teacher> res = map.get("res");
+                System.out.println(res);
                 //发消息，发送课程号和时间，返回老师的list
                 //如果有，跳转第二页并构建表格
                 //如果没有，提示
