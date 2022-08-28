@@ -14,10 +14,21 @@
  */
 package com.vcampus.client.window.setjpCourse;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.vcampus.net.ClientMessagePasser;
+import com.vcampus.net.Message;
+import com.vcampus.net.MessagePasser;
+import com.vcampus.pojo.Student;
+import com.vcampus.pojo.Teacher;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class PanelTeacherInform extends JPanel{
     int x=300,y=100;//起始坐标
@@ -55,13 +66,13 @@ public class PanelTeacherInform extends JPanel{
     JComboBox<String>[] comboBoxWeek;
 
     CardLayout cardLayout=new CardLayout();
+    MessagePasser passer = ClientMessagePasser.getInstance();
 
-    //Teacher teacher = new Teacher();//承接结果
+    Teacher teacher = new Teacher();//承接结果
 
-    public PanelTeacherInform()//以老师对象为参数
+    public PanelTeacherInform(String ID)//以老师对象为参数
     {
         this.setLayout(cardLayout);
-        //removeAll();
         JPanel P1 = new JPanel();
         JPanel P2 = new JPanel();
         P1.setLayout(null);
@@ -83,8 +94,40 @@ public class PanelTeacherInform extends JPanel{
 
         this.add(P1,"P1");
         this.add(P2,"P2");
-        setCard("P1");
-        setPanel(P1,false);
+
+        Teacher t = new Teacher();
+        t.setTeacherID(ID);
+        Gson gson = new Gson();
+        String s = gson.toJson(t);
+        passer.send(new Message("teacher", s, "lesson", "showstatusteacher"));
+
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException interruptedException) {
+            interruptedException.printStackTrace();
+        }
+
+        Message msg = passer.receive();
+        Map<String, java.util.List<Teacher>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, java.util.List<Teacher>>>() {
+        }.getType());
+        List<Teacher> res = map.get("res");
+
+        if(res.size()!=0) {
+            teacher= res.get(0);
+            setCard("P1");
+            setPanel(P1,false);
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "未查询到身份信息", "警告", JOptionPane.ERROR_MESSAGE);
+        }
+
+
+
+
+
+
+
+
 
         btnEdit.addActionListener(new ActionListener() {
             @Override
@@ -159,22 +202,16 @@ public class PanelTeacherInform extends JPanel{
 
     public void setPanel(JPanel p,Boolean flag)//传老师的对象
     {
-        //p.removeAll();
-
-        //lblHint.setBounds(x+280,40,lblWidth,lblHeight);
-        //lblHint.setFont(new Font("宋体",Font.BOLD, 28));
-        txtName.setText("xxx");//姓名
-        txtIdNum.setText("213201445");//一卡通
-        txtDep.setText("计算机科学与工程学院");//学院
-        txtMajor.setText("计算机科学与技术专业");//专业
-        txtTime.setText("周一6-7");//时间（可能要转格式）
+        txtName.setText(teacher.getTeacherName());//姓名
+        txtIdNum.setText(teacher.getTeacherID());//一卡通
+        txtDep.setText(teacher.getSchool());//学院
+        txtMajor.setText(teacher.getAbledMajor());//专业
+        txtTime.setText(teacher.getTime());//时间（可能要转格式）
 
         for(int i=0;i<5;i++)
         {
             texts[i].setEditable(flag);
         }
-
-        //设置其余坐标和字体
         for(int i=0;i<5;i++)
         {
             labels[i].setBounds(x,y+heightDiffer*i,lblWidth,lblHeight);
@@ -182,54 +219,13 @@ public class PanelTeacherInform extends JPanel{
             setLabelFont(labels[i],texts[i]);
             p.add(labels[i]); p.add(texts[i]);
         }
-
-
         p.add(lblHint);
         p.updateUI();
         p.repaint();
-
     }
     public void setButtonFont(JButton button)
     {
         button.setFont(new Font("宋体",Font.BOLD, 18));
-        //button.setOpaque(true);
         button.setContentAreaFilled(false);
     }
-
-    /*
-    public class PanelTeacherInform1 extends JPanel{
-
-        public PanelTeacherInform1()
-        {
-            this.setLayout(null);
-
-            setButtonFont(btnEdit);
-            btnEdit.setBounds(1000,y,btnWidth,btnHeight);
-            add(btnEdit);
-            //setPanel(this,false);
-        }
-
-    }
-    public class PanelTeacherInform2 extends JPanel{
-        public PanelTeacherInform2()
-        {
-            this.setLayout(null);
-
-            setButtonFont(btnAdd);
-            btnAdd.setBounds(1000,345,btnWidth,btnHeight);
-            setButtonFont(btnOk);
-            btnOk.setBounds(520,500,btnWidth,btnHeight);
-            setButtonFont(btnCancel);
-            btnCancel.setBounds(760,500,btnWidth,btnHeight);
-
-            add(btnAdd);add(btnOk);add(btnCancel);
-            //setPanel(this,true);
-
-        }
-
-    }
-
-     */
-
-
 }
