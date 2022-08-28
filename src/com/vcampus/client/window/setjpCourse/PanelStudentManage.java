@@ -28,9 +28,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -50,6 +49,7 @@ public class PanelStudentManage extends JPanel {
     Object[] columnNames={"学生姓名", "一卡通号","学号","学院","专业","成绩"};
     Object[][] tableData=new Object[][]{};//保存所有用户信息
     MessagePasser passer = ClientMessagePasser.getInstance();
+
 
     public PanelStudentManage()
     {
@@ -88,72 +88,93 @@ public class PanelStudentManage extends JPanel {
                     //String s = gson.toJson(lesson);
                     if(txtTeacherID.getText().equals(""))
                     {
-                        System.out.println("只有课程号");
                         lesson.setLessonID(txtLessonID.getText());
                         String s = gson.toJson(lesson);
                         passer.send(new Message("admin", s, "lesson", "getteacher"));
+                        receiveMessage(s);
+
                     }
                     else
                     {
-                        System.out.println("内部ID");
                         lesson.setInnerID(txtLessonID.getText()+txtTeacherID.getText());
                         String s = gson.toJson(lesson);
                         passer.send(new Message("admin", s, "lesson", "getspecificteacher"));
+                        receiveMessage(s);
                     }
                 }
                 else
                 {informFrame("请输入课程号！",true); }
-
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException interruptedException) {
-                    interruptedException.printStackTrace();
-                }
-
-                Message msg = passer.receive();
-                Map<String, java.util.List<Student>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, java.util.List<Student>>>(){}.getType());
-                List<Student> res = map.get("res");
-                System.out.println(res);
-
-                if(res.size()!=0)
-                {
-                    tableData = new Object[res.size()][6];//设置表格内容
-                    for (int i = 0; i < res.size(); i++) {
-                        tableData[i][0] = res.get(i).getName();
-                        tableData[i][1] = res.get(i).getStudentID();
-                        tableData[i][2] = res.get(i).getStudentNumber();
-                        tableData[i][3] = res.get(i).getSchool();
-                        tableData[i][4] = res.get(i).getMajor();
-                        //tableData[i][5] = res.get(i).get();
-                    }
-                    setTable();
-                }
-                else
-                { informFrame("未查询到学生名单！",true);}
             }
         });
 
         btnMark.addActionListener(new ActionListener() {//添加成绩
             @Override
             public void actionPerformed(ActionEvent e) {
-                /*tableData = new Object[res.size()][4];
-            for (int i = 0; i < res.size(); i++) {
+                //List<String> grades = new LinkedList<>();
+                String grades=null;
+                int rowNum=tableModel.getRowCount();
+                for(int i=0;i<rowNum;i++)
+                {
+                    if(i!=rowNum-1)
+                    {
+                        grades+=txtLessonID.getText()+"/"+(String)tableModel.getValueAt(rowNum, 1)+"/"+(String)tableModel.getValueAt(rowNum, 5)+",";
+                    }
+                    else
+                    {
+                        grades+=txtLessonID.getText()+"/"+(String)tableModel.getValueAt(rowNum, 1)+"/"+(String)tableModel.getValueAt(rowNum, 5);
+                    }
 
+                }
 
-                 String mark=(String)table.getValueAt(i, 5);
-                 res.get(i).setMark()=tableData[i][3];
-            }
+                MessagePasser passer = ClientMessagePasser.getInstance();
+                Gson gson = new Gson();
+                String s = gson.toJson(grades);
+                passer.send(new Message("admin", s, "lesson", "addgradeall"));
 
-             */
-                //传消息
-                //接收
-                if(true)
+                Message msg = passer.receive();
+                System.out.println(msg);
+                Map<String,Object> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String,Object>>(){}.getType());
+                if(map.get("res").equals("OK"))
                 { informFrame("成绩添加成功",false);}
                 else
                 { informFrame("成绩添加失败",true); }
             }
         });
 
+    }
+
+
+    public void receiveMessage(String s)
+    {
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException interruptedException) {
+            interruptedException.printStackTrace();
+        }
+        Message msg1 = passer.receive();
+        Map<String, java.util.List<Student>> map = new Gson().fromJson(msg1.getData(), new TypeToken<HashMap<String, java.util.List<Student>>>(){}.getType());
+        List<Student> res1 = map.get("res");
+        if(res1.size()!=0)
+        {
+            tableData = new Object[res1.size()][6];//设置表格内容
+            for (int i = 0; i < res1.size(); i++) {
+                tableData[i][0] = res1.get(i).getName();
+                tableData[i][1] = res1.get(i).getStudentID();
+                tableData[i][2] = res1.get(i).getStudentNumber();
+                tableData[i][3] = res1.get(i).getSchool();
+                tableData[i][4] = res1.get(i).getMajor();
+            }
+            passer.send(new Message("admin", s, "lesson", "getgradeall"));//获取成绩
+
+            Message msg2 = passer.receive();
+            Map<String, java.util.List<String>> map2 = new Gson().fromJson(msg2.getData(), new TypeToken<HashMap<String, java.util.List<String>>>(){}.getType());
+            List<String> res2 = map2.get("res");
+            for(int i=0;i<res1.size();i++)
+            { tableData[i][5] = res2.get(i).split("/")[1]; }
+            setTable();
+        }
+        else
+        { informFrame("未查询到学生名单！",true);}
     }
 
     public void setTable()
