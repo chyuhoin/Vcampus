@@ -623,7 +623,10 @@ public class LessonService implements Service{
                 }
             }
 //            System.out.println(lessons);
-            if(doArrange(lessons)>0){
+            int i=doArrange(lessons);
+            System.out.println(lessons);
+            if(i>0){
+                System.out.println(lessons);
                 for(Lesson lesson:lessons){
                     res=valueLesson(lesson.getInnerID());
                     if(!res)return false;
@@ -841,7 +844,8 @@ public class LessonService implements Service{
                     for(int j=0;j<4;j++){//第一节课的星期
                         for(int i=0;i<4;i++){//第一节课的位置
                             for(int k=j+1;k<5;k++){//第二课的星期
-                                for(int l=0;l<4;l++){//第二节课的位置
+                                if(i<=1){
+                                for(int l=2;l<4;l++){//第二节课的位置
                                     List<Integer>tmp=new ArrayList<>();
                                     switch(i){
                                         case 0:{
@@ -863,12 +867,6 @@ public class LessonService implements Service{
                                             tmp.add(7+13*j);
                                             tmp.add(8+13*j);
                                             break;
-                                        }
-                                        case 4:{
-                                            if(j==0||j==2||j==4){
-                                                tmp.add(10+13*j);
-                                                tmp.add(11+13*j);
-                                            }
                                         }
                                     }
                                     switch(l){
@@ -892,17 +890,44 @@ public class LessonService implements Service{
                                             tmp.add(8+13*k);
                                             break;
                                         }
-                                        case 4:{
-                                            if(k==2||k==4){
-                                                tmp.add(10+13*k);
-                                                tmp.add(11+13*k);
-                                            }
-                                        }
                                     }
                                         if(isTimeOK(tmp,innerID)){
                                             System.out.println(tmp);
                                             res.add(new ArrayList<>(tmp));
                                         }
+                                }}
+                                else{
+                                    for(int l=0;l<2;l++){//第二节课的位置
+                                        List<Integer>tmp=new ArrayList<>();
+                                        switch(i){
+                                            case 2:{
+                                                tmp.add(5+13*j);
+                                                tmp.add(6+13*j);
+                                                break;
+                                            }
+                                            case 3:{
+                                                tmp.add(7+13*j);
+                                                tmp.add(8+13*j);
+                                                break;
+                                            }
+                                        }
+                                        switch(l){
+                                            case 0:{
+                                                tmp.add(0+13*k);
+                                                tmp.add(1+13*k);
+                                                break;
+                                            }
+                                            case 1:{
+                                                tmp.add(2+13*k);
+                                                tmp.add(3+13*k);
+                                                break;
+                                            }
+                                        }
+                                        if(isTimeOK(tmp,innerID)){
+                                            System.out.println(tmp);
+                                            res.add(new ArrayList<>(tmp));
+                                        }
+                                    }
                                 }
                             }
                         }
