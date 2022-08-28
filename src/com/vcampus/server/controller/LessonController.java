@@ -186,12 +186,21 @@ public class LessonController implements Controller{
                 //输入ID，显示内容：学生：姓名、身份（1--学生 2--老师）、ID、专业
                 //               *老师：姓名、身份、ID、可选专业、偏好时间
                 //返回一个老师的类的list
-//                String teacherID1 = msg.getData();
-                Teacher teacher1 = gson.fromJson(msg.getData(), Teacher.class);
-                HashMap<String, Object> map8 = new HashMap<>();
-//                map8.put("res", service.searchTeacher(teacherID1));
-                map8.put("res", service.searchTeacher(teacher1.getTeacherID()));
-                return new Message("200", gson.toJson(map8));
+////                String teacherID1 = msg.getData();
+//                Teacher teacher1 = gson.fromJson(msg.getData(), Teacher.class);
+//                HashMap<String, Object> map8 = new HashMap<>();
+////                map8.put("res", service.searchTeacher(teacherID1));
+//                map8.put("res", service.searchTeacher(teacher1.getTeacherID()));
+//                return new Message("200", gson.toJson(map8));
+                String data2 = msg.getData();
+                Map<String, String> map8 = gson.fromJson(data2, new TypeToken<HashMap<String, String>>() {}.getType());
+                HashMap<String, Object> map15 = new HashMap<>();
+                Set<Teacher> teacherSet = new HashSet<>();
+                for (Map.Entry<String, String> entry : map8.entrySet()) {
+                    teacherSet.addAll(service.searchTeacher(entry.getValue()));
+                }
+                map15.put("res", teacherSet);
+                return new Message("200", gson.toJson(map15));
             case "setteacher":
                 //修改老师的可选专业与偏好时间
                 //输入一个老师的类
