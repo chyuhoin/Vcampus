@@ -47,7 +47,6 @@ public class PanelTeacherInform extends JPanel{
     JButton btnOk = new JButton("确定");
     JButton btnCancel = new JButton("取消");
 
-
     JLabel labels[] = {lblName,lblIdNum,lblDep,lblMajor,lblTime};
     JTextField texts[] = {txtName,txtIdNum,txtDep,txtMajor,txtTime};
 
