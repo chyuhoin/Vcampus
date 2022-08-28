@@ -124,10 +124,16 @@ public class PanelStudentManage_A extends JPanel {
 
                 System.out.println(grades);
 
-                MessagePasser passer = ClientMessagePasser.getInstance();
+                //MessagePasser passer = ClientMessagePasser.getInstance();
                 Gson gson = new Gson();
                 String s = gson.toJson(grades.toString());
                 passer.send(new Message("admin", s, "lesson", "addgradeall"));
+
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException interruptedException) {
+                    interruptedException.printStackTrace();
+                }
 
                 Message msg = passer.receive();
                 System.out.println(msg);
