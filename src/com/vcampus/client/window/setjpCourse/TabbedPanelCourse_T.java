@@ -45,7 +45,7 @@ public class TabbedPanelCourse_T extends JTabbedPane {
         this.add("选项三",jp13);
 
          */
-        JPanel teacherInform = new PanelTeacherInform();
+        JPanel teacherInform = new PanelTeacherInform(ID);
         JPanel manageStudent = new PanelStudentManage_T(ID);
 
         this.addTab("个人信息", null, teacherInform,"个人信息");
