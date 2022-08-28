@@ -2,12 +2,7 @@ package com.vcampus.server;
 
 import com.vcampus.net.Message;
 import com.vcampus.net.MessagePasser;
-import com.vcampus.server.controller.Controller;
-import com.vcampus.server.controller.LibraryController;
-import com.vcampus.server.controller.LoginController;
-import com.vcampus.server.controller.StudentController;
-import com.vcampus.server.controller.LessonController;
-import com.vcampus.server.controller.TestController;
+import com.vcampus.server.controller.*;
 
 import java.io.*;
 import java.net.Socket;
@@ -15,7 +10,8 @@ import java.net.Socket;
 public class ServerRunner implements Runnable{
     private InputStream input;
     private OutputStream output;
-    private final Controller loginController, libraryController, studentController,lessonController,testController;
+    private final Controller loginController, libraryController, studentController,
+            lessonController, testController, shopController;
 
     public ServerRunner(Socket sock) {
         try {
@@ -29,6 +25,7 @@ public class ServerRunner implements Runnable{
         studentController = new StudentController();
         lessonController  = new LessonController();
         testController    = new TestController();
+        shopController    = new ShopController();
 
     }
 
@@ -57,6 +54,8 @@ public class ServerRunner implements Runnable{
                 case "library":
                     passer.send(libraryController.check(message));
                     break;
+                case "shop":
+                    passer.send(shopController.check(message));
                 default:
                     passer.send(new Message("200", message.getData()));
                     break;

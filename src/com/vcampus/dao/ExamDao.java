@@ -56,7 +56,13 @@ public class ExamDao extends BaseDao{
 //        } catch (Exception e) {
 //            return false;
 //        }
-        return delete("innerID",innerID,"tb_EXAM");
+        try{
+         delete("innerID",innerID,"tb_EXAM");
+         return true;
+        }catch (Exception e){
+            System.out.println("wrong");
+            return false;
+        }
     }
     //用于管理员修改某个字段的信息
     public static Boolean revise(String innerID,String field,String value){

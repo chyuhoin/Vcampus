@@ -69,7 +69,7 @@ public class LibraryTest {
 
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("studentId", "213203450");
-        hashMap.put("bookId", "00000001");
+        hashMap.put("bookId", "00000002");
         String s = gson.toJson(hashMap);
         System.out.println(s);
         passer.send(new Message("admin", s, "library", "borrow"));
@@ -121,6 +121,18 @@ public class LibraryTest {
     }
 
     @Test
-    public void test() {
+    public void test() throws IOException {
+        Socket socket = new Socket("localhost", 6666); // 连接指定服务器和端口
+        ClientMessagePasser.build(socket.getInputStream(), socket.getOutputStream());
+        Gson gson = new Gson();
+        MessagePasser passer = ClientMessagePasser.getInstance();
+
+        Book book = new Book();
+        book.setBookID("00000001");
+        String s = gson.toJson(book);
+        System.out.println(s);
+        passer.send(new Message("admin", s, "library", "delete"));
+        Message message = (passer.receive());
+        System.out.println(message);
     }
 }

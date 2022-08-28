@@ -8,7 +8,7 @@ public class Goods {
     String seller;
     String price;
     String state;
-    String dealDate;
+    String dealDate;//上架时间
     String picture;
     Integer num;
     Integer type;

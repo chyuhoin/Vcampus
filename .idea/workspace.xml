@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="添加了课程的学时和状态">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="修改数据库名称">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_8_19_16_42_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_8_19_16_42__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-19_14_36___Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-19_14_54___Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-19_17_56___Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2022-08-19_14_36_取消提交了变更_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2022-08-19_14_54_取消提交了变更_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2022-08-19_17_56_取消提交了变更_[Changes]/shelved.patch" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/server/controller/LessonController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/server/controller/LessonController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/server/service/LessonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/server/service/LessonService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jdbc.properties" beforeDir="false" afterPath="$PROJECT_DIR$/jdbc.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/ShopDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/ShopDao.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,26 +74,13 @@
       <recent name="com.vcampus.client.login" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.LibraryDao.test">
+  <component name="RunManager" selected="JUnit.MessageDao.test">
     <configuration name="Client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.vcampus.client.Client" />
       <module name="Vcampus" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.vcampus.client.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.vcampus.server.Server" />
-      <module name="Vcampus" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.vcampus.server.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -107,22 +101,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LessonDao.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Vcampus" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.vcampus.dao.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.vcampus.dao" />
-      <option name="MAIN_CLASS_NAME" value="com.vcampus.dao.LessonDao" />
-      <option name="METHOD_NAME" value="test" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="LibraryDao.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Vcampus" />
       <extension name="coverage">
@@ -139,10 +117,45 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="MessageDao.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Vcampus" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.vcampus.dao.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.vcampus.dao" />
+      <option name="MAIN_CLASS_NAME" value="com.vcampus.dao.MessageDao" />
+      <option name="METHOD_NAME" value="test" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ShopDao.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Vcampus" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.vcampus.dao.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.vcampus.dao" />
+      <option name="MAIN_CLASS_NAME" value="com.vcampus.dao.ShopDao" />
+      <option name="METHOD_NAME" value="test" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.MessageDao.test" />
+        <item itemvalue="JUnit.ShopDao.test" />
         <item itemvalue="JUnit.LibraryDao.test" />
-        <item itemvalue="JUnit.LessonDao.test" />
+        <item itemvalue="Application.myLoginTest" />
+        <item itemvalue="Application.Client" />
       </list>
     </recent_temporary>
   </component>
@@ -192,7 +205,13 @@
       <workItem from="1661147223714" duration="78000" />
       <workItem from="1661147390790" duration="5933000" />
       <workItem from="1661299612812" duration="7912000" />
-      <workItem from="1661346871285" duration="395000" />
+      <workItem from="1661346871285" duration="462000" />
+      <workItem from="1661349075908" duration="562000" />
+      <workItem from="1661393455217" duration="1940000" />
+      <workItem from="1661478189564" duration="7499000" />
+      <workItem from="1661493808008" duration="4491000" />
+      <workItem from="1661517869568" duration="64000" />
+      <workItem from="1661574179229" duration="55000" />
     </task>
     <task id="LOCAL-00001" summary="初步写了登录注册">
       <created>1660298515554</created>
@@ -355,7 +374,35 @@
       <option name="project" value="LOCAL" />
       <updated>1661306591233</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="为lesson增加了room，添加了删除函数">
+      <created>1661347303508</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1661347303508</updated>
+    </task>
+    <task id="LOCAL-00025" summary="初步写了商店的dao层">
+      <created>1661396068079</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1661396068079</updated>
+    </task>
+    <task id="LOCAL-00026" summary="完善商店Dao层，BaseDao中不再处理异常，会把异常抛给具体Dao层处理">
+      <created>1661481659828</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1661481659828</updated>
+    </task>
+    <task id="LOCAL-00027" summary="修改学生和老师类，添加了status">
+      <created>1661494827120</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1661494827120</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -404,10 +451,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="初步写了登录注册" />
-    <MESSAGE value="写了一个方法把map转为bean对象" />
-    <MESSAGE value="实现可序列化接口" />
-    <MESSAGE value="对注册添加了类型验证" />
     <MESSAGE value="完成了studentDao层，暂时没有把照片添加进去，主要是照片的读取之类的需要特殊方法，我要再学习一下" />
     <MESSAGE value="这次初步写了libraryDao层，但引发了我一个关于数据库隔离的思考，这部分知识我还要好好学一下。目前为止我的Dao层都是静态方法，当查询的时候都是现获取的，这样的方法的弊端一个是效率问题，需要频繁开关，另一个问题则是数据库隔离的隐患。我正在考虑重写某些方法。" />
     <MESSAGE value="重写了下CRUD类中的方法，加入了一个connection参数。写了一个BaseDao，内部定义了一个连接，各个Dao类都继承了BaseDao。现在使用同一个connection进行操作了" />
@@ -427,7 +470,13 @@
     <MESSAGE value="对teacherDao层，增加了返回老师课表的功能" />
     <MESSAGE value="增加了借书时间" />
     <MESSAGE value="教室课表" />
-    <option name="LAST_COMMIT_MESSAGE" value="教室课表" />
+    <MESSAGE value="为lesson增加了room，添加了删除函数" />
+    <MESSAGE value="初步写了商店的dao层" />
+    <MESSAGE value="完善商店Dao层，BaseDao中不再处理异常，会把异常抛给具体Dao层处理" />
+    <MESSAGE value="进一步完善Dao层，写了站内消息的Dao层" />
+    <MESSAGE value="修改学生和老师类，添加了status" />
+    <MESSAGE value="修改数据库名称" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改数据库名称" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

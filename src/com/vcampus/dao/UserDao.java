@@ -36,7 +36,13 @@ public class UserDao extends BaseDao {
 
     //删除一个用户，管理员可操作
     public static Boolean deleteUser(String studentID) {
-        return delete("studentID",studentID,"tb_USR");
+        try {
+            delete("studentID",studentID,"tb_USR");
+            return true;
+        }catch (Exception e){
+            System.out.println("wrong");
+            return false;
+        }
     }
 
     public static Boolean reviseType(String studentID, Integer type) {
