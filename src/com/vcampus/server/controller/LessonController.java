@@ -118,8 +118,9 @@ public class LessonController implements Controller{
                 //删除对应课程ID的所有课程,删除对应的考试信息,删除对应学生的课表信息，删除老师的课表信息
                 //具体实现：利用课程ID查到内部ID
                 //转到内部ID的处理
-                String deleteID = msg.getData();//课程ID
-                if (service.delete(deleteID)) return new Message("200", "{res: 'OK'}");
+                Lesson lesson3 = gson.fromJson(msg.getData(), Lesson.class);
+//                String deleteID = msg.getData();//课程ID
+                if (service.delete(lesson3.getLessonID())) return new Message("200", "{res: 'OK'}");
                 else return new Message("200", "{res: 'NO'}");
             case "deleteone":
                 //删除对应老师教授的特定课程
@@ -131,8 +132,9 @@ public class LessonController implements Controller{
                 //执行删除考试函数（输入内部ID，删除对应考试信息）
                 //执行教室退课函数
                 //执行删除课程函数（输入内部ID，在课的表里删除信息）
-                String deleteoneID = msg.getData();//内部编号
-                if (service.deleteone(deleteoneID)) return new Message("200", "{res: 'OK'}");
+                Lesson lesson4 = gson.fromJson(msg.getData(), Lesson.class);
+//                String deleteoneID = msg.getData();//内部编号
+                if (service.deleteone(lesson4.getInnerID())) return new Message("200", "{res: 'OK'}");
                 else return new Message("200", "{res: 'NO'}");
 
             case "get":
