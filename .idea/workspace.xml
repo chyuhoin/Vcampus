@@ -1,27 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="修改数据库名称，修bug">
-      <change afterPath="$PROJECT_DIR$/idea.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/miglayout-core-javadoc.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/miglayout-core-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/miglayout-core.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/miglayout-swing-javadoc.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/miglayout-swing-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/miglayout-swing.jar" afterDir="false" />
+    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="修bug，优化">
       <change afterPath="$PROJECT_DIR$/os.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GUItest/test.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GUItest/test.jfd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GUItest/test1.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/steam.png" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/星空2.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vcampus.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Vcampus.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpMessage/TabbedPanelMessage_S.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpMessage/TabbedPanelMessage_S.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/LessonDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/LessonDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/MessageDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/MessageDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/pojo/LessonGrade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/pojo/LessonGrade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUItest/test.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUItest/test.jfd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUItest/test1.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/TeacherDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/TeacherDao.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +72,7 @@
       <recent name="com.vcampus.client.login" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.LessonDao.test">
+  <component name="RunManager" selected="JUnit.TeacherDao.test">
     <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.vcampus.server.Server" />
       <module name="Vcampus" />
@@ -140,7 +128,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MessageDao.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TeacherDao.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Vcampus" />
       <extension name="coverage">
         <pattern>
@@ -149,7 +137,7 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.vcampus.dao" />
-      <option name="MAIN_CLASS_NAME" value="com.vcampus.dao.MessageDao" />
+      <option name="MAIN_CLASS_NAME" value="com.vcampus.dao.TeacherDao" />
       <option name="METHOD_NAME" value="test" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
@@ -158,11 +146,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.TeacherDao.test" />
         <item itemvalue="JUnit.LessonDao.test" />
         <item itemvalue="Application.myLoginTest2" />
         <item itemvalue="Application.myLoginTest" />
         <item itemvalue="Application.Server" />
-        <item itemvalue="JUnit.MessageDao.test" />
       </list>
     </recent_temporary>
   </component>
@@ -226,7 +214,7 @@
       <workItem from="1661614922106" duration="283000" />
       <workItem from="1661615217119" duration="17000" />
       <workItem from="1661649054777" duration="1091000" />
-      <workItem from="1661650213055" duration="3477000" />
+      <workItem from="1661650213055" duration="4165000" />
     </task>
     <task id="LOCAL-00001" summary="初步写了登录注册">
       <created>1660298515554</created>
@@ -424,7 +412,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661578142800</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="修bug，优化">
+      <created>1661653914200</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1661653914200</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -473,7 +468,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="这次初步写了libraryDao层，但引发了我一个关于数据库隔离的思考，这部分知识我还要好好学一下。目前为止我的Dao层都是静态方法，当查询的时候都是现获取的，这样的方法的弊端一个是效率问题，需要频繁开关，另一个问题则是数据库隔离的隐患。我正在考虑重写某些方法。" />
     <MESSAGE value="重写了下CRUD类中的方法，加入了一个connection参数。写了一个BaseDao，内部定义了一个连接，各个Dao类都继承了BaseDao。现在使用同一个connection进行操作了" />
     <MESSAGE value="为Book增加了字符串形式表示的图片，写了图片和字符串相互转化的类。&#10;修改了LibraryDao层，可以多个条件查询" />
     <MESSAGE value="在lessonDao层添加了增加课程的类" />
@@ -498,7 +492,8 @@
     <MESSAGE value="修改学生和老师类，添加了status" />
     <MESSAGE value="修改数据库名称" />
     <MESSAGE value="修改数据库名称，修bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改数据库名称，修bug" />
+    <MESSAGE value="修bug，优化" />
+    <option name="LAST_COMMIT_MESSAGE" value="修bug，优化" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
