@@ -232,7 +232,7 @@ public class LessonDao extends BaseDao{
     public static List<String> abledRoom(String time) throws Exception {
         List<String>result = new ArrayList<>();
         List<Integer>index = ClassTable.getTimeIndex(time);
-        String sql = "select * from tb+CLASSROOM";
+        String sql = "select * from tb_CLASSROOM";
         List<Map<String,Object>>resultList  =CRUD.Query(sql,conn);
         for(Map<String,Object>map:resultList){
             if(compare(time,(String) map.get("timeTable"))==true){

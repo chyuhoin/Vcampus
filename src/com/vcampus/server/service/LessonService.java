@@ -94,6 +94,7 @@ public class LessonService implements Service{
             if(!LessonDao.search("innerID",user.getInnerID()).isEmpty())//已经有这个内部ID
                 res=false;
             else {
+                user.setLength(setLength(user.getTime()));//设定学时
                 res=LessonDao.addLesson(user);
                 if(!res)return false;
                 if(user.getTeacherID() != null&&user.getStatus()!=0){
@@ -176,6 +177,7 @@ public class LessonService implements Service{
                 res=false;
             else {
                 if(deleteTest(user.getInnerID())){
+                    user.setLength(setLength(user.getTime()));//设定学时
                     res=addLessonnew(user);
                     if(!res){
                         //添加失败，恢复
@@ -199,7 +201,7 @@ public class LessonService implements Service{
         return room;
     }
     public List<Teacher> showAllTeacher(String lessonID) {
-        List<Teacher> teachers=null;
+        List<Teacher> teachers=new ArrayList<>();
         try {
             List<Lesson>lessons=LessonDao.search("lessonID",lessonID);
             for(Lesson lesson:lessons){
@@ -268,11 +270,12 @@ public class LessonService implements Service{
         try {
             List<Lesson>lesson=null;
             String[] tmp = time.split(",");//根据，切分字符串
-            for(String data:tmp){
-                if(!data.equals("0")){
+            for(int i=0;i<65;i++){
+                if(!tmp[i].equals("0")){
                     //此时有课程，将内部ID变为课程名字
-                    lesson=LessonDao.search("innerID",data);
-                    data=lesson.get(0).getName();
+                    lesson=LessonDao.search("innerID",tmp[i]);
+                    tmp[i]=lesson.get(0).getName();
+                    tmp[i]=lesson.get(0).getName();
                 }
             }
             timename = String.join(",",tmp);
@@ -409,7 +412,7 @@ public class LessonService implements Service{
         return res;
     }
     public List<Student> getTeacher(String lessonID) {
-        List<Student> res = null;
+        List<Student> res = new ArrayList<>();
         List<Lesson>data=null;
         List<Student> tmp = null;
         try {
@@ -426,7 +429,7 @@ public class LessonService implements Service{
         return res;
     }
     public List<Student> getSpecificTeacher(String innerID) {
-        List<Student> res = null;
+        List<Student> res = new ArrayList<>();
         List<String>data=null;
         List<Student> tmp = null;
         try {
@@ -830,5 +833,15 @@ public class LessonService implements Service{
         }
         return res.toString();
     }
-
+    public Integer setLength(String time) {
+        //给出时间，计算其时长
+        Integer length=0;
+        try {
+            length=ClassTable.getTimeIndex(time).size();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+        return length;
+    }
 }

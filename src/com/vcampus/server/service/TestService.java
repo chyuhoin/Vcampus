@@ -5,6 +5,7 @@ import com.vcampus.dao.LessonDao;
 import com.vcampus.pojo.Exam;
 import com.vcampus.pojo.Lesson;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TestService implements Service{
@@ -94,14 +95,14 @@ public class TestService implements Service{
     public List<Exam> searchMyExamForTeacher(String teacherID) {
         List<Exam> res = null;
         try {
-            res = ExamDao.searchMyExamForStudent(teacherID);
+            res = ExamDao.searchMyExamForTeacher(teacherID);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return res;
     }
     public List<Exam> searchMyTeacherExam(String teacherID) {
-        List<Exam> res = null;
+        List<Exam> res = new ArrayList<>();
         List<Lesson>tmp=null;
         try {
             tmp=LessonDao.search("teacherID",teacherID);

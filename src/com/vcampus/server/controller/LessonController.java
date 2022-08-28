@@ -69,9 +69,11 @@ public class LessonController implements Controller{
                 return new Message("200", "{res: '"+res3+"'}");
             case "showroom":
                 //输入时间，显示可用教室
+                Lesson lesson2 = gson.fromJson(msg.getData(), Lesson.class);
                 String time = msg.getData();//课程ID
                 HashMap<String, Object> map9 = new HashMap<>();
-                map9.put("res", service.showRoom(time));
+//                map9.put("res", service.showRoom(time));
+                map9.put("res", service.showRoom(lesson2.getTime()));
                 return new Message("200", gson.toJson(map9));
             case "showallteacher":
                 //输入课程号，显示所有老师
