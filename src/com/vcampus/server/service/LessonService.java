@@ -7,6 +7,7 @@ import com.vcampus.pojo.LessonGrade;
 import com.vcampus.pojo.Student;
 import com.vcampus.pojo.Teacher;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -222,7 +223,7 @@ public class LessonService implements Service{
         return res;
     }
     public List<Teacher> viewTeachersTime(String time,String abledMajor) {
-        List<Teacher> res = null;
+        List<Teacher> res = new ArrayList<>();
         try {
             List<Teacher> tmp = TeacherDao.searchTeacher("abledMajor",abledMajor);
             for(Teacher teacher:tmp){
@@ -231,7 +232,15 @@ public class LessonService implements Service{
                 String teachertable=TeacherDao.getLessonTable(teacherID);//取得老师课表
                 String[] temp = teachertable.split(",");//根据，切分字符串
                 List<Integer>times=ClassTable.getTimeIndex(time);
+                List<Integer>teacherunlikes=ClassTable.getTimeIndex(teacher.getTime());
+                //老师不喜欢的时间
                 for(Integer tmptime:times ){
+                    for(Integer teacherunlike:teacherunlikes){
+                        if(tmptime==teacherunlike){
+                            isadd=false;
+                            break;
+                        }
+                    }
                     if(!temp[tmptime].equals("0")){
                     //如果此时老师课表有课或为非偏好时间
                         isadd=false;

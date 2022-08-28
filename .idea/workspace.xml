@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="修改数据库名称">
-      <change afterPath="$PROJECT_DIR$/test/com/vcampus/test/LessonTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="考务系统修改">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/TeacherDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/TeacherDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/utils/ClassTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/utils/ClassTable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/pojo/Lesson.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/pojo/Lesson.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/pojo/Teacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/pojo/Teacher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/LessonDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/LessonDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/vcampus/server/controller/LessonController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/server/controller/LessonController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/vcampus/server/service/LessonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/server/service/LessonService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/com/vcampus/test/LessonTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/com/vcampus/test/LessonTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,23 +42,24 @@
     <option name="foldersAlwaysOnTop" value="false" />
     <option name="showModules" value="false" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Code/JavaWebCode/Vcampus/src&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ToolWindow运行.ShowToolbar": "false",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/Code/JavaWebCode/Vcampus/src",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;ChangesTree.GroupingKeys&quot;: [
-      &quot;directory&quot;,
-      &quot;module&quot;
+  "keyToStringList": {
+    "ChangesTree.GroupingKeys": [
+      "directory",
+      "module"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Code\JavaWebCode\Vcampus\src" />
@@ -74,7 +70,7 @@
       <recent name="com.vcampus.client.login" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.LessonDao.test">
     <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.vcampus.server.Server" />
       <module name="Vcampus" />
@@ -411,7 +407,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661578142800</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="考务系统修改">
+      <created>1661655295898</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1661655295898</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -460,7 +463,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="这次初步写了libraryDao层，但引发了我一个关于数据库隔离的思考，这部分知识我还要好好学一下。目前为止我的Dao层都是静态方法，当查询的时候都是现获取的，这样的方法的弊端一个是效率问题，需要频繁开关，另一个问题则是数据库隔离的隐患。我正在考虑重写某些方法。" />
     <MESSAGE value="重写了下CRUD类中的方法，加入了一个connection参数。写了一个BaseDao，内部定义了一个连接，各个Dao类都继承了BaseDao。现在使用同一个connection进行操作了" />
     <MESSAGE value="为Book增加了字符串形式表示的图片，写了图片和字符串相互转化的类。&#10;修改了LibraryDao层，可以多个条件查询" />
     <MESSAGE value="在lessonDao层添加了增加课程的类" />
@@ -485,7 +487,8 @@
     <MESSAGE value="修改学生和老师类，添加了status" />
     <MESSAGE value="修改数据库名称" />
     <MESSAGE value="修改数据库名称，修bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改数据库名称，修bug" />
+    <MESSAGE value="考务系统修改" />
+    <option name="LAST_COMMIT_MESSAGE" value="考务系统修改" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

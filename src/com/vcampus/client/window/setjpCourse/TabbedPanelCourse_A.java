@@ -29,6 +29,8 @@ public class TabbedPanelCourse_A extends JTabbedPane {
         JPanel jp11 = new JPanel();
         JPanel jp12 = new JPanel();
         JPanel jp13 = new JPanel();
+        JPanel jp14 = new JPanel();
+        JPanel jp15 = new JPanel();
         //选项卡1的内容
         //设置标题
         JLabel lblTitleLabel = new JLabel("教务教务教务");
@@ -40,10 +42,26 @@ public class TabbedPanelCourse_A extends JTabbedPane {
         jp11.add(lblTitleLabel);
         jp12.add(btnRegister);
 
+        /*
+        this.add("选项一",jp11);	//创建三个面板
+        this.add("选项二",jp12);
+        this.add("选项三",jp13);
+         */
+        JPanel teacherInform = new PanelTeacherInform();
+        JPanel deleteCourse = new PanelDeleteCourse();
+        JPanel createCourse = new PanelCreateCourse();
+        JPanel enquireCourse = new PanelEnquireCourse();
+        JPanel manageStudent = new PanelStudentManage();
 
-        this.addTab("选项一", null, jp11,"点击查看选项一");
-        this.addTab("选项二", null, jp12,"点击查看选项二");
-        this.addTab("选项三", null, jp13,"点击查看选项三");
+
+
+
+        this.addTab("创建课程", null, createCourse,"创建课程");
+        this.addTab("删除课程", null, deleteCourse,"删除课程");
+        this.addTab("课程查询", null, enquireCourse,"课程查询");
+        this.addTab("学生管理", null, manageStudent,"学生管理");
+        this.addTab("课表查询", null, jp15,"课表查询");
+        this.addTab("教师信息",null,teacherInform,"教师信息");
         this.setFont(new Font("宋体", Font.BOLD, 24));
 
 
