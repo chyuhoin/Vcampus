@@ -10,10 +10,7 @@ import com.vcampus.server.service.LessonService;
 import com.google.gson.*;
 import com.vcampus.server.service.StudentService;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class LessonController implements Controller{
     @Override
@@ -216,6 +213,14 @@ public class LessonController implements Controller{
                 String oldStr1 = msg.getData();
                 String[] strs1 = oldStr1.split(",");//根据，切分字符串
                 if(service.addGrade(strs1[0],strs1[1],Integer.parseInt(strs1[2])))
+                    return new Message("200", "{res: 'OK'}");
+                else return new Message("200", "{res: 'NO'}");
+            case "addgradeall":
+                //添加成绩
+                //输入一个String的数据
+                //课程号/学生ID/成绩用”,“隔开
+                String grade = msg.getData();
+                if(service.addGradeAll(grade))
                     return new Message("200", "{res: 'OK'}");
                 else return new Message("200", "{res: 'NO'}");
             case "showgradestudent":

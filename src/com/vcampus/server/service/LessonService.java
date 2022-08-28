@@ -351,6 +351,36 @@ public class LessonService implements Service{
         }
         return res;
     }
+    public boolean addGradeAll(String grade) {
+        boolean res=false;
+        try {
+            String []str1s = grade.split(",");
+            for(String str1:str1s){
+                String []str2s=grade.split("/");
+                res=addGrade(str2s[0],addGradeTest(str2s[0],str2s[1]),Integer.valueOf(str2s[2]));
+                if(!res)return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return res;
+    }
+    public String addGradeTest(String studentID, String lessonID) {
+        //输入课程ID，返回此学生上的课的内部ID
+        String res=null;
+        try {
+            List<LessonGrade>tmps=LessonDao.getGrade(studentID);
+            lessonID.length();
+            for(LessonGrade tmp:tmps){
+                if(tmp.getInnerID().substring(0,lessonID.length()).equals(lessonID))
+                    return tmp.getInnerID();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
     public List<LessonGrade> getGrade(String studentID) {
         List<LessonGrade> res = null;
         try {
