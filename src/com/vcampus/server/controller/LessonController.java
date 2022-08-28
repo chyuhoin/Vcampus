@@ -162,15 +162,19 @@ public class LessonController implements Controller{
                 return new Message("200", gson.toJson(map4));
             case "getteacher":
                 //显示选择对应课程的学生 输入课程ID
-                String lessonID = msg.getData();
+                Lesson lesson5 = gson.fromJson(msg.getData(), Lesson.class);
+//                String lessonID = msg.getData();
                 HashMap<String, Object> map5 = new HashMap<>();
-                map5.put("res", service.getTeacher(lessonID));
+//                map5.put("res", service.getTeacher(lessonID));
+                map5.put("res", service.getTeacher(lesson5.getLessonID()));
                 return new Message("200", gson.toJson(map5));
             case "getspecificteacher":
                 //显示选择对应课程的学生 输入内部ID
-                String innerID = msg.getData();
+                Lesson lesson6 = gson.fromJson(msg.getData(), Lesson.class);
+//                String innerID = msg.getData();
                 HashMap<String, Object> map6 = new HashMap<>();
-                map6.put("res", service.getSpecificTeacher(innerID));
+//                map6.put("res", service.getSpecificTeacher(innerID));
+                map6.put("res", service.getSpecificTeacher(lesson6.getInnerID()));
                 return new Message("200", gson.toJson(map6));
             case "showstatusstudent":
                 //输入ID，显示内容：*学生：姓名、身份（1--学生 2--老师）、ID、专业
