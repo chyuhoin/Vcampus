@@ -95,4 +95,8 @@ public class ShopDao extends BaseDao{
     public static List<Record> searchMine(String studentID) throws Exception {
         return searchBy(Record.class,"tb_RECORD","studentID",studentID);
     }
+    @Test
+    public void test(){
+        confirm("123456","1");
+    }
 }
