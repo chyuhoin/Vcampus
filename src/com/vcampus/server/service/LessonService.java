@@ -122,6 +122,7 @@ public class LessonService implements Service{
                     res=LessonDao.selectLessonForClassroom(user.getTime(),user.getInnerID(),user.getClassroom());
                     if(!res){
                         //添加失败，恢复
+                        System.out.println("添加教室的课表,失败");
                         LessonDao.deleteLesson(user.getInnerID());
                         TeacherDao.deleteTeacher(user.getTeacherID());
                         return false;
@@ -132,6 +133,7 @@ public class LessonService implements Service{
             e.printStackTrace();
             return false;
         }
+        System.out.println("添加成功");
         return res;
     }
     public boolean deleteTest(String innerID) {
@@ -643,7 +645,7 @@ public class LessonService implements Service{
                 if(!res)return false;
             }
             tmp=LessonDao.search("status",0);
-            List<Lesson>lessons=null;
+            List<Lesson>lessons=new ArrayList<>() ;
             for(Lesson data:tmp){
                 if(!data.getInnerID().equals(data.getLessonID())){//此时不为空课程
                     lessons.add(data);
@@ -669,6 +671,7 @@ public class LessonService implements Service{
             List<Lesson> lessons=LessonDao.search("innerID",innerID);
             lessons.get(0).setStatus(1);
             res=setLessonnew(lessons.get(0));
+            System.out.println("状态从0变为1");
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -711,7 +714,8 @@ public class LessonService implements Service{
                 Lesson user=new Lesson(lesson.getLessonID(),lesson.getName(),lesson.getTeacherID(),lesson.getMaxSize(),lesson.getLeftSize(),returnTime(time),lesson.getSchool(),lesson.getMajor(),lesson.getIsExam(),roomID,lesson.getLength(),1);
                 System.out.println(user);
                 setLessonnew(user);
-                tmp=scoreTime(time,lesson.getInnerID())+doArrange(lessons);
+                if(lessons.isEmpty())tmp=scoreTime(time,lesson.getInnerID());
+                else tmp=scoreTime(time,lesson.getInnerID())+doArrange(lessons);
                 if(tmp>max){
                     max=tmp;
                     position=i;
@@ -835,9 +839,9 @@ public class LessonService implements Service{
                 }
                 case 4:{
                     for(int j=0;j<4;j++){//第一节课的星期
-                        for(int i=0;i<5;i++){//第一节课的位置
+                        for(int i=0;i<4;i++){//第一节课的位置
                             for(int k=j+1;k<5;k++){//第二课的星期
-                                for(int l=0;l<5;l++){//第二节课的位置
+                                for(int l=0;l<4;l++){//第二节课的位置
                                     List<Integer>tmp=new ArrayList<>();
                                     switch(i){
                                         case 0:{
@@ -895,17 +899,10 @@ public class LessonService implements Service{
                                             }
                                         }
                                     }
-                                    if(tmp.size()==4){
                                         if(isTimeOK(tmp,innerID)){
                                             System.out.println(tmp);
                                             res.add(new ArrayList<>(tmp));
                                         }
-                                        if(!(l==4&&(k!=2||k!=4))){
-                                            tmp.remove(tmp.size()-1);//删除最后一个元素
-                                            tmp.remove(tmp.size()-1);//删除最后一个元素
-                                        }
-                                    }
-
                                 }
                             }
                         }
