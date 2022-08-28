@@ -91,18 +91,25 @@ public class LessonService implements Service{
     public boolean addLessonnew(Lesson user) {
         boolean res;
         try {
-            if(!LessonDao.search("innerID",user.getInnerID()).isEmpty())//已经有这个内部ID
+            if(!LessonDao.search("innerID",user.getInnerID()).isEmpty()){//已经有这个内部ID
+//                System.out.println("已经有这个内部ID");
                 res=false;
+            }
             else {
                 user.setLength(setLength(user.getTime()));//设定学时
                 res=LessonDao.addLesson(user);
-                if(!res)return false;
+                if(!res){
+                    System.out.println("添加失败");
+                    return false;
+                    }
                 if(user.getTeacherID() != null&&user.getStatus()!=0){
                     //添加课程时也添加了老师且此时为有效课
                     //因此要添加老师的课表
+                    System.out.println("添加老师课表");
                     res=TeacherDao.selectLesson(user.getTeacherID(),user.getInnerID());
                     if(!res){
                         //添加失败，恢复
+                        System.out.println("添加老师课表,失败");
                         LessonDao.deleteLesson(user.getInnerID());
                         return false;
                     }
@@ -173,11 +180,13 @@ public class LessonService implements Service{
         boolean res=false;
         try {
             List<Lesson>lessons=LessonDao.search("innerID",user.getInnerID());
+//            System.out.println(lessons);
             if(lessons.isEmpty())//没有这个内部ID
                 res=false;
             else {
                 if(deleteTest(user.getInnerID())){
                     user.setLength(setLength(user.getTime()));//设定学时
+//                    System.out.println(setLength(user.getTime()));
                     res=addLessonnew(user);
                     if(!res){
                         //添加失败，恢复
@@ -377,8 +386,8 @@ public class LessonService implements Service{
                 res=false;
             else{
                 //先执行老师退课函数
-                //res=老师退课函数(lessons.get(0).getTeacherID());
-                //if(!res)return res;
+                res=TeacherDao.returnLesson(lessons.get(0).getTeacherID(),lessons.get(0).getInnerID());
+                if(!res)return res;
                 //再执行学生退课函数
                 List<String> data = null;
                 data=LessonDao.searchStudent(deleteoneID);
