@@ -56,8 +56,8 @@ public class PanelStudentManage_T extends JPanel {
         int txtWidth=110, txtHeight=30;
 
         lblHintLesson.setFont(new Font("宋体", Font.BOLD, 24));
-        lblHintLesson.setBounds(x,y,200,40);
-        txtLessonID.setBounds(x+140,y+5,txtWidth*2,txtHeight);
+        lblHintLesson.setBounds(x+460,y,200,40);
+        txtLessonID.setBounds(x+600,y+5,txtWidth*2,txtHeight);
         txtLessonID.setFont(new Font("楷体", Font.BOLD, 20));
         /*
         lblHintTeacher.setFont(new Font("宋体", Font.BOLD, 24));
@@ -92,7 +92,38 @@ public class PanelStudentManage_T extends JPanel {
                     lesson.setInnerID(txtLessonID.getText()+ID);
                     String s = gson.toJson(lesson);
                     passer.send(new Message("teacher", s, "lesson", "getspecificteacher"));
-                    receiveMessage(s);
+
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException interruptedException) {
+                        interruptedException.printStackTrace();
+                    }
+
+                    Message msg1 = passer.receive();
+                    Map<String, java.util.List<Student>> map = new Gson().fromJson(msg1.getData(), new TypeToken<HashMap<String, java.util.List<Student>>>(){}.getType());
+                    java.util.List<Student> res1 = map.get("res");
+                    if(res1.size()!=0)
+                    {
+                        tableData = new Object[res1.size()][6];//设置表格内容
+                        for (int i = 0; i < res1.size(); i++) {
+                            tableData[i][0] = res1.get(i).getName();
+                            tableData[i][1] = res1.get(i).getStudentID();
+                            tableData[i][2] = res1.get(i).getStudentNumber();
+                            tableData[i][3] = res1.get(i).getSchool();
+                            tableData[i][4] = res1.get(i).getMajor();
+                        }
+                        passer.send(new Message("teacher", s, "lesson", "getgrade"));//获取成绩
+
+                        Message msg2 = passer.receive();
+                        Map<String, java.util.List<String>> map2 = new Gson().fromJson(msg2.getData(), new TypeToken<HashMap<String, java.util.List<String>>>(){}.getType());
+                        List<String> res2 = map2.get("res");
+                        System.out.println(res2);
+                        for(int i=0;i<res1.size();i++)
+                        { tableData[i][5] = res2.get(i).split("/")[1]; }
+                        setTable();
+                    }
+                    else
+                    { informFrame("未查询到学生名单！",true);}
                 }
                 else
                 {informFrame("请输入课程号！",true); }
@@ -137,38 +168,6 @@ public class PanelStudentManage_T extends JPanel {
         });
     }
 
-    public void receiveMessage(String s)
-    {
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException interruptedException) {
-            interruptedException.printStackTrace();
-        }
-        Message msg1 = passer.receive();
-        Map<String, java.util.List<Student>> map = new Gson().fromJson(msg1.getData(), new TypeToken<HashMap<String, java.util.List<Student>>>(){}.getType());
-        java.util.List<Student> res1 = map.get("res");
-        if(res1.size()!=0)
-        {
-            tableData = new Object[res1.size()][6];//设置表格内容
-            for (int i = 0; i < res1.size(); i++) {
-                tableData[i][0] = res1.get(i).getName();
-                tableData[i][1] = res1.get(i).getStudentID();
-                tableData[i][2] = res1.get(i).getStudentNumber();
-                tableData[i][3] = res1.get(i).getSchool();
-                tableData[i][4] = res1.get(i).getMajor();
-            }
-            passer.send(new Message("admin", s, "lesson", "getgradeall"));//获取成绩
-
-            Message msg2 = passer.receive();
-            Map<String, java.util.List<String>> map2 = new Gson().fromJson(msg2.getData(), new TypeToken<HashMap<String, java.util.List<String>>>(){}.getType());
-            List<String> res2 = map2.get("res");
-            for(int i=0;i<res1.size();i++)
-            { tableData[i][5] = res2.get(i).split("/")[1]; }
-            setTable();
-        }
-        else
-        { informFrame("未查询到学生名单！",true);}
-    }
 
     public void setTable()
     {

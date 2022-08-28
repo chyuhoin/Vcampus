@@ -19,7 +19,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class TabbedPanelCourse_T extends JTabbedPane {
-    public TabbedPanelCourse_T()
+    public TabbedPanelCourse_T(String ID)
     {
         //JTabbedPane jtbp=new JTabbedPane();	//创建选项卡
         this.setTabPlacement(2);
@@ -46,7 +46,7 @@ public class TabbedPanelCourse_T extends JTabbedPane {
 
          */
         JPanel teacherInform = new PanelTeacherInform();
-        JPanel manageStudent = new PanelStudentManage_A();
+        JPanel manageStudent = new PanelStudentManage_T(ID);
 
         this.addTab("个人信息", null, teacherInform,"个人信息");
         this.addTab("学生管理", null, manageStudent,"学生管理");

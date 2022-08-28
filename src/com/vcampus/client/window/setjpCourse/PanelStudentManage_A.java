@@ -91,7 +91,7 @@ public class PanelStudentManage_A extends JPanel {
                         lesson.setLessonID(txtLessonID.getText());
                         String s = gson.toJson(lesson);
                         passer.send(new Message("admin", s, "lesson", "getteacher"));
-                        receiveMessage(s);
+                        receiveMessage(s,"getgradeall");
 
                     }
                     else
@@ -99,7 +99,7 @@ public class PanelStudentManage_A extends JPanel {
                         lesson.setInnerID(txtLessonID.getText()+txtTeacherID.getText());
                         String s = gson.toJson(lesson);
                         passer.send(new Message("admin", s, "lesson", "getspecificteacher"));
-                        receiveMessage(s);
+                        receiveMessage(s,"getgrade");
                     }
                 }
                 else
@@ -146,7 +146,7 @@ public class PanelStudentManage_A extends JPanel {
         });
     }
 
-    public void receiveMessage(String s)
+    public void receiveMessage(String s,String operation)
     {
         try {
             Thread.sleep(100);
@@ -166,7 +166,7 @@ public class PanelStudentManage_A extends JPanel {
                 tableData[i][3] = res1.get(i).getSchool();
                 tableData[i][4] = res1.get(i).getMajor();
             }
-            passer.send(new Message("admin", s, "lesson", "getgradeall"));//获取成绩
+            passer.send(new Message("admin", s, "lesson", operation));//获取成绩
 
             Message msg2 = passer.receive();
             Map<String, java.util.List<String>> map2 = new Gson().fromJson(msg2.getData(), new TypeToken<HashMap<String, java.util.List<String>>>(){}.getType());
