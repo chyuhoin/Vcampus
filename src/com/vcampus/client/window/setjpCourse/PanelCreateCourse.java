@@ -197,14 +197,13 @@ public class PanelCreateCourse extends JPanel{
                         tableData1[i][3] = res.get(i).getAbledMajor();
                     }
                     System.out.println("找到老师");
+                    setPanel2();
+                    setCard("panelTeacher");
                 }
                 else
                 {
                     informFrame("未查询到授课教师！",true);
                 }
-
-                setPanel2();
-                setCard("panelTeacher");
             }
         });
 
@@ -237,17 +236,16 @@ public class PanelCreateCourse extends JPanel{
                     for (int i = 0; i < res.size(); i++)
                     {
                         tableData2[i][0] = res.get(i);
-
                     }
-
                     System.out.println("空余教室");
+                    setPanel3();
+                    setCard("panelRoom");
                 }
                 else
                 {
                     informFrame("未查询到空余教室！",true);
                 }
-                setPanel3();
-                setCard("panelRoom");
+
             }
         });
 
@@ -275,6 +273,26 @@ public class PanelCreateCourse extends JPanel{
                 String str3=txtDep.getText();
                 String str4=txtMajor.getText();
                 String str5=txtTime.getText();
+
+///////////////////////////////////////////////没写完
+                Lesson lesson=new Lesson();
+                lesson.setTime(txtTime.getText());
+
+                Gson gson = new Gson();
+                String s = gson.toJson(lesson);
+                passer.send(new Message("admin", s, "lesson", "showroom"));
+
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException interruptedException) {
+                    interruptedException.printStackTrace();
+                }
+
+                /////////??????传回来的是什么？
+                Message msg = passer.receive();
+                Map<String, java.util.List<String>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, java.util.List<String>>>(){}.getType());
+                List<String> res = map.get("res");
+
 
                 //打包回传所有信息，接收消息，如果成功
                 if(true)
@@ -450,7 +468,6 @@ public class PanelCreateCourse extends JPanel{
 
     public void setTable(Object[] title,Object[][] data,JPanel p,MyTable table, JScrollPane scrollPane,int width,int height,int flag)
     {
-
         System.out.println("构件表格");
         DefaultTableModel model= new DefaultTableModel(data,title);
         table=new MyTable(model);
@@ -460,11 +477,6 @@ public class PanelCreateCourse extends JPanel{
         // 数据
         table.setFont(new Font("黑体",Font.PLAIN,18));//表格字体
         table.getTableHeader().setFont(new Font("黑体",Font.BOLD,20));//表头字体
-
-        //添加渲染器
-        //table.getColumn("操作").setCellRenderer(new ButtonRenderer());
-        //添加编辑器
-        //table.getColumn("操作").setCellEditor( new ButtonEditor(new JCheckBox()));
 
         //添加渲染器
         ButtonRenderer btnR=new ButtonRenderer();
@@ -478,51 +490,6 @@ public class PanelCreateCourse extends JPanel{
         scrollPane.setBounds(0,0,width,height);
         p.add(scrollPane);
 
-/*
-        //设置鼠标双击事件
-        table.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if(e.getClickCount()==2){
-                    int rowName=((JTable)e.getSource()).rowAtPoint(e.getPoint());
-                    String teacherID=model.getValueAt(rowName,1).toString();
-                    //连数据库
-
-                    //发消息
-                    //收消息
-
-                    if(true) {
-                        //table.setValueAt("已排课",rowName,data[0].length);
-                        System.out.println("添加老师<" + teacherID + ">");
-                    }else {
-                        JOptionPane.showMessageDialog(null, "数据查询出错", "提示",
-                                JOptionPane.ERROR_MESSAGE);
-                        System.out.println("ERROR:添加老师<" + teacherID + ">：数据查询出错");
-                    }
-                }
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
-        });
-        */
         if(flag==0)
         {
             respond1(table,model);
@@ -538,7 +505,7 @@ public class PanelCreateCourse extends JPanel{
 
     public void respond1(MyTable table,DefaultTableModel model)//添加老师，响应函数
     {
-        table.addMouseListener(new MouseListener() {
+       /* table.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {}
             @Override
@@ -575,6 +542,38 @@ public class PanelCreateCourse extends JPanel{
             public void mouseExited(MouseEvent e) {}
 
         });
+
+        */
+
+
+        btnE.getButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int rowName=btnE.getThisRow();
+                String teacherID=(String)model.getValueAt(rowName, 1);
+
+                System.out.println("当前列"+rowName+"00"+teacherID);
+
+                //收发请求，删掉对应课程老师
+                //如果成功
+                if(true) {
+                    informFrame("添加成功",false);
+                    // tableModel.removeRow(rowName);//不能删最后一行
+                    //setTable();//重新构建表格  拿回所有数据？
+
+                }else {
+                    informFrame("添加失败",true);
+                }
+
+
+            }
+        });
+
+
+
+
+
+
     }
 
     public void respond2(MyTable table,DefaultTableModel model)//添加教室，响应函数
