@@ -290,7 +290,32 @@ public class LessonDao extends BaseDao{
     }
     @Test
     public void test() throws Exception {
-        System.out.println(getGrade("999"));
+        List<Teacher> res = new ArrayList<>();
+        List<Teacher> tmp = TeacherDao.searchTeacher("abledMajor","计算机");
+        System.out.println(TeacherDao.searchTeacher("abledMajor","计算机"));
+        for(Teacher teacher:tmp){
+            boolean isadd=true;
+            String teacherID=teacher.getTeacherID();
+            String teachertable=TeacherDao.getLessonTable(teacherID);//取得老师课表
+            String[] temp = teachertable.split(",");//根据，切分字符串
+            List<Integer>times=ClassTable.getTimeIndex("1/1/2");
+            List<Integer>teacherunlikes=ClassTable.getTimeIndex(teacher.getTime());
+            for(Integer tmptime:times ){
+                for(Integer teacherunlike:teacherunlikes){
+                    if(tmptime==teacherunlike){
+                        isadd=false;
+                        break;
+                    }
+                }
+                if(!temp[tmptime].equals("0")){
+                    //如果此时老师课表有课或为非偏好时间
+                    isadd=false;
+                    break;
+                }
+            }
+            if(isadd)res.add(teacher);
+        }
+        System.out.println(res);
     }
 }
 
