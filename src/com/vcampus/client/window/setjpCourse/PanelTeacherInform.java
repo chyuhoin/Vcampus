@@ -108,7 +108,7 @@ public class PanelTeacherInform extends JPanel{
         }
 
         Message msg = passer.receive();
-        Map<String,java.util.List<Teacher>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, java.util.List<Teacher>>>(){}.getType());
+        Map<String, java.util.List<Teacher>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, java.util.List<Teacher>>>(){}.getType());
         List<Teacher> res = map.get("res");
         System.out.println(res);
 
@@ -198,8 +198,8 @@ public class PanelTeacherInform extends JPanel{
 
     public void setLabelFont(JLabel label,JTextField text)
     {
-        label.setFont(new Font("楷体", Font.BOLD, 24));
-        text.setFont(new Font("楷体", Font.BOLD, 20));
+        label.setFont(new Font("宋体", Font.BOLD, 24));
+        text.setFont(new Font("宋体", Font.BOLD, 20));
     }
 
     public void setPanel(JPanel p,Boolean flag)//传老师的对象
