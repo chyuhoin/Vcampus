@@ -391,6 +391,7 @@ public class PanelCreateCourse extends JPanel{
                 }
 
                 informFrame("添加成功",false);
+                btnE.fireEditingStopped_1();
                 model.removeRow(rowName);
             }
         });

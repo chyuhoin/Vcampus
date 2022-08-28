@@ -102,6 +102,8 @@ public class PanelDeleteCourse extends JPanel{
                     interruptedException.printStackTrace();
                 }
                 setTable();
+                updateUI();
+                repaint();
             }
         });
 
@@ -116,7 +118,7 @@ public class PanelDeleteCourse extends JPanel{
                 Gson gson = new Gson();
                 String s = gson.toJson(lesson);
                 passer.send(new Message("admin", s, "lesson", "delete"));
-                //发送消息，打包课程,删除所有
+
                 tableData=null;
 
                 deleteAll();
@@ -140,6 +142,7 @@ public class PanelDeleteCourse extends JPanel{
 
     public void setTable()
     {
+        panel.removeAll();
         //接收消息
         Message msg = passer.receive();
         Map<String, java.util.List<Lesson>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, List<Lesson>>>(){}.getType());
@@ -226,13 +229,16 @@ public class PanelDeleteCourse extends JPanel{
         }
         updateUI();
         repaint();
+
     }
 
     public void deleteAll()
     {
-        //接收消息
-        //成功
-        if(true)
+        Message msg = passer.receive();
+        System.out.println(msg);
+        Map<String,Object> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String,Object>>(){}.getType());
+
+        if(map.get("res").equals("OK"))
         {
             informFrame("删除成功",false);
             remove(panel);
