@@ -6,6 +6,7 @@ import com.vcampus.pojo.Lesson;
 import com.vcampus.pojo.LessonGrade;
 import com.vcampus.pojo.Student;
 import com.vcampus.pojo.Teacher;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -357,7 +358,7 @@ public class LessonService implements Service{
             String []str1s = grade.split(",");
             for(String str1:str1s){
                 String []str2s=grade.split("/");
-                res=addGrade(str2s[0],addGradeTest(str2s[0],str2s[1]),Integer.valueOf(str2s[2]));
+                res=addGrade(str2s[1],addGradeTest(str2s[1],str2s[0]),Integer.valueOf(str2s[2]));
                 if(!res)return false;
             }
         } catch (Exception e) {
@@ -612,6 +613,7 @@ public class LessonService implements Service{
                     lessons.add(data);
                 }
             }
+//            System.out.println(lessons);
             if(doArrange(lessons)>0){
                 for(Lesson lesson:lessons){
                     res=valueLesson(lesson.getInnerID());
@@ -692,10 +694,13 @@ public class LessonService implements Service{
             Lesson lesson=lessons.get(0);
             lessons.remove(0);
             List<List<Integer>>times=findTime(lesson.getInnerID());
+            System.out.println(times.size());
+            System.out.println(times);
             Integer i=-1;
             for(List<Integer>time:times){
                 i++;
                 String roomID=LessonDao.abledRoom(returnTime(time)).get(0);
+                System.out.println(roomID);
                 Lesson user=new Lesson(lesson.getLessonID(),lesson.getName(),lesson.getTeacherID(),lesson.getMaxSize(),lesson.getLeftSize(),returnTime(time),lesson.getSchool(),lesson.getMajor(),lesson.getIsExam(),roomID,lesson.getLength(),1);
                 setLessonnew(user);
                 tmp=scoreTime(time,lesson.getInnerID())+doArrange(lessons);
@@ -715,72 +720,75 @@ public class LessonService implements Service{
     }
     public List<List<Integer>> findTime(String innerID) {
         //要求:选择一个合适的时间
-        List<List<Integer>> res=new ArrayList<>();
-        List<Integer>tmp=new ArrayList<>();
+        List<List<Integer>> res=new ArrayList<List<Integer>>();
         try {
             List<Lesson> lesson=LessonDao.search("innerID",innerID);
             Integer length=lesson.get(0).getLength();
             switch(length){
                 case 2:{
                     for(int i=0;i<4;i++){
-                        for(int j=0;j<5;j++){
-                            switch(i){
-                                case 0:{
-                                    tmp.add(0+13*j);
-                                    tmp.add(1+13*j);
-                                    if(isTimeOK(tmp,innerID))res.add(tmp);
-                                    tmp.remove(tmp.size()-1);//删除最后一个元素
-                                    tmp.remove(tmp.size()-1);//删除最后一个元素
+                        for(int j=0;j<5;j++) {
+                            List<Integer>tmp=new ArrayList<>();
+                            switch (i) {
+                                case 0: {
+                                    tmp.add(0 + 13 * j);
+                                    tmp.add(1 + 13 * j);
+                                    if (isTimeOK(tmp, innerID)) res.add(new ArrayList<>(tmp));
+                                    tmp.remove(tmp.size() - 1);//删除最后一个元素
+                                    tmp.remove(tmp.size() - 1);//删除最后一个元素
                                     break;
                                 }
-                                case 1:{
-                                    tmp.add(2+13*j);
-                                    tmp.add(3+13*j);
-                                    if(isTimeOK(tmp,innerID))res.add(tmp);
-                                    tmp.remove(tmp.size()-1);//删除最后一个元素
-                                    tmp.remove(tmp.size()-1);//删除最后一个元素
+                                case 1: {
+                                    tmp.add(2 + 13 * j);
+                                    tmp.add(3 + 13 * j);
+                                    if (isTimeOK(tmp, innerID)) res.add(new ArrayList<>(tmp));
+                                    tmp.remove(tmp.size() - 1);//删除最后一个元素
+                                    tmp.remove(tmp.size() - 1);//删除最后一个元素
                                     break;
                                 }
-                                case 2:{
-                                    tmp.add(5+13*j);
-                                    tmp.add(6+13*j);
-                                    if(isTimeOK(tmp,innerID))res.add(tmp);
-                                    tmp.remove(tmp.size()-1);//删除最后一个元素
-                                    tmp.remove(tmp.size()-1);//删除最后一个元素
+                                case 2: {
+                                    tmp.add(5 + 13 * j);
+                                    tmp.add(6 + 13 * j);
+                                    if (isTimeOK(tmp, innerID)) res.add(new ArrayList<>(tmp));
+                                    tmp.remove(tmp.size() - 1);//删除最后一个元素
+                                    tmp.remove(tmp.size() - 1);//删除最后一个元素
                                     break;
                                 }
-                                case 3:{
-                                    tmp.add(7+13*j);
-                                    tmp.add(8+13*j);
-                                    if(isTimeOK(tmp,innerID))res.add(tmp);
-                                    tmp.remove(tmp.size()-1);//删除最后一个元素
-                                    tmp.remove(tmp.size()-1);//删除最后一个元素
+                                case 3: {
+                                    tmp.add(7 + 13 * j);
+                                    tmp.add(8 + 13 * j);
+                                    if (isTimeOK(tmp, innerID)) res.add(new ArrayList<>(tmp));
+                                    tmp.remove(tmp.size() - 1);//删除最后一个元素
+                                    tmp.remove(tmp.size() - 1);//删除最后一个元素
                                     break;
                                 }
                             }
                         }
                     }
-                    tmp.add(23);
-                    tmp.add(24);
-                    if(isTimeOK(tmp,innerID))res.add(tmp);
-                    tmp.remove(tmp.size()-1);//删除最后一个元素
-                    tmp.remove(tmp.size()-1);//删除最后一个元素
-                    tmp.add(49);
-                    tmp.add(50);
-                    if(isTimeOK(tmp,innerID))res.add(tmp);
-                    tmp.remove(tmp.size()-1);//删除最后一个元素
-                    tmp.remove(tmp.size()-1);//删除最后一个元素
+                    List<Integer>tmp1=new ArrayList<>();
+                    tmp1.add(23);
+                    tmp1.add(24);
+                    if(isTimeOK(tmp1,innerID))res.add(new ArrayList<>(tmp1));
+                    tmp1.remove(tmp1.size()-1);//删除最后一个元素
+                    tmp1.remove(tmp1.size()-1);//删除最后一个元素
+                    List<Integer>tmp2=new ArrayList<>();
+                    tmp2.add(49);
+                    tmp2.add(50);
+                    if(isTimeOK(tmp2,innerID))res.add(new ArrayList<>(tmp2));
+                    tmp2.remove(tmp2.size()-1);//删除最后一个元素
+                    tmp2.remove(tmp2.size()-1);//删除最后一个元素
                     break;
                 }
                 case 3:{
                     for(int i=0;i<2;i++){
                         for(int j=0;j<5;j++){
+                            List<Integer>tmp=new ArrayList<>();
                             switch(i){
                                 case 0:{
                                     tmp.add(2+13*j);
                                     tmp.add(3+13*j);
                                     tmp.add(4+13*j);
-                                    if(isTimeOK(tmp,innerID))res.add(tmp);
+                                    if(isTimeOK(tmp,innerID))res.add(new ArrayList<>(tmp));
                                     tmp.remove(tmp.size()-1);//删除最后一个元素
                                     tmp.remove(tmp.size()-1);//删除最后一个元素
                                     tmp.remove(tmp.size()-1);//删除最后一个元素
@@ -790,7 +798,7 @@ public class LessonService implements Service{
                                     tmp.add(7+13*j);
                                     tmp.add(8+13*j);
                                     tmp.add(9+13*j);
-                                    if(isTimeOK(tmp,innerID))res.add(tmp);
+                                    if(isTimeOK(tmp,innerID))res.add(new ArrayList<>(tmp));
                                     tmp.remove(tmp.size()-1);//删除最后一个元素
                                     tmp.remove(tmp.size()-1);//删除最后一个元素
                                     tmp.remove(tmp.size()-1);//删除最后一个元素
@@ -799,55 +807,58 @@ public class LessonService implements Service{
                             }
                         }
                     }
-                    tmp.add(23);
-                    tmp.add(24);
-                    tmp.add(25);
-                    if(isTimeOK(tmp,innerID))res.add(tmp);
-                    tmp.remove(tmp.size()-1);//删除最后一个元素
-                    tmp.remove(tmp.size()-1);//删除最后一个元素
-                    tmp.remove(tmp.size()-1);//删除最后一个元素
-                    tmp.add(49);
-                    tmp.add(50);
-                    tmp.add(51);
-                    if(isTimeOK(tmp,innerID))res.add(tmp);
-                    tmp.remove(tmp.size()-1);//删除最后一个元素
-                    tmp.remove(tmp.size()-1);//删除最后一个元素
-                    tmp.remove(tmp.size()-1);//删除最后一个元素
+                    List<Integer>tmp1=new ArrayList<>();
+                    tmp1.add(23);
+                    tmp1.add(24);
+                    tmp1.add(25);
+                    if(isTimeOK(tmp1,innerID))res.add(new ArrayList<>(tmp1));
+                    tmp1.remove(tmp1.size()-1);//删除最后一个元素
+                    tmp1.remove(tmp1.size()-1);//删除最后一个元素
+                    tmp1.remove(tmp1.size()-1);//删除最后一个元素
+                    List<Integer>tmp2=new ArrayList<>();
+                    tmp2.add(49);
+                    tmp2.add(50);
+                    tmp2.add(51);
+                    if(isTimeOK(tmp2,innerID))res.add(new ArrayList<>(tmp2));
+                    tmp2.remove(tmp2.size()-1);//删除最后一个元素
+                    tmp2.remove(tmp2.size()-1);//删除最后一个元素
+                    tmp2.remove(tmp2.size()-1);//删除最后一个元素
                     break;
                 }
                 case 4:{
                     for(int j=0;j<4;j++){//第一节课的星期
                         for(int i=0;i<5;i++){//第一节课的位置
-                            switch(i){
-                                case 0:{
-                                    tmp.add(0+13*j);
-                                    tmp.add(1+13*j);
-                                    break;
-                                }
-                                case 1:{
-                                    tmp.add(2+13*j);
-                                    tmp.add(3+13*j);
-                                    break;
-                                }
-                                case 2:{
-                                    tmp.add(5+13*j);
-                                    tmp.add(6+13*j);
-                                    break;
-                                }
-                                case 3:{
-                                    tmp.add(7+13*j);
-                                    tmp.add(8+13*j);
-                                    break;
-                                }
-                                case 4:{
-                                    if(j==0||j==2||j==4){
-                                        tmp.add(10+13*j);
-                                        tmp.add(11+13*j);
-                                    }
-                                }
-                            }
                             for(int k=j+1;k<5;k++){//第二课的星期
                                 for(int l=0;l<5;l++){//第二节课的位置
+                                    List<Integer>tmp=new ArrayList<>();
+                                    switch(i){
+                                        case 0:{
+                                            tmp.add(0+13*j);
+                                            tmp.add(1+13*j);
+                                            break;
+                                        }
+                                        case 1:{
+                                            tmp.add(2+13*j);
+                                            tmp.add(3+13*j);
+                                            break;
+                                        }
+                                        case 2:{
+                                            tmp.add(5+13*j);
+                                            tmp.add(6+13*j);
+                                            break;
+                                        }
+                                        case 3:{
+                                            tmp.add(7+13*j);
+                                            tmp.add(8+13*j);
+                                            break;
+                                        }
+                                        case 4:{
+                                            if(j==0||j==2||j==4){
+                                                tmp.add(10+13*j);
+                                                tmp.add(11+13*j);
+                                            }
+                                        }
+                                    }
                                     switch(l){
                                         case 0:{
                                             tmp.add(0+13*k);
@@ -877,7 +888,10 @@ public class LessonService implements Service{
                                         }
                                     }
                                     if(tmp.size()==4){
-                                        if(isTimeOK(tmp,innerID))res.add(tmp);
+                                        if(isTimeOK(tmp,innerID)){
+                                            System.out.println(tmp);
+                                            res.add(new ArrayList<>(tmp));
+                                        }
                                         if(!(l==4&&(k!=2||k!=4))){
                                             tmp.remove(tmp.size()-1);//删除最后一个元素
                                             tmp.remove(tmp.size()-1);//删除最后一个元素
@@ -885,10 +899,6 @@ public class LessonService implements Service{
                                     }
 
                                 }
-                            }
-                            if(tmp.size()==2){
-                            tmp.remove(tmp.size()-1);//删除最后一个元素
-                            tmp.remove(tmp.size()-1);//删除最后一个元素
                             }
                         }
                     }
@@ -937,15 +947,16 @@ public class LessonService implements Service{
             e.printStackTrace();
             return false;
         }
+//        System.out.println("这个时间可以");
         return true;
     }
     public Integer scoreTime(List<Integer> time,String innerID) {
         //要求:给出一个时间，判断其可得几分
         Integer res=0;//得分
         try {
-            List<Integer>day=null;//相对时间 0-12
-            List<Integer>week=null;//星期 0-4
-            List<Integer>noon=null;//上午，下午，晚上 0-2
+            List<Integer>day=new ArrayList<>();//相对时间 0-12
+            List<Integer>week=new ArrayList<>();//星期 0-4
+            List<Integer>noon=new ArrayList<>();//上午，下午，晚上 0-2
             for(Integer tmp:time){
                 day.add(tmp%13);
                 week.add(tmp/13);
@@ -1027,3 +1038,4 @@ public class LessonService implements Service{
         return length;
     }
 }
+

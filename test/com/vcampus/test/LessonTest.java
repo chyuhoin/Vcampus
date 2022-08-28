@@ -39,7 +39,7 @@ public class LessonTest {
 //        passer.send(new Message("no", s, "lesson", "postone"));
 //        passer.send(new Message("no", s, "lesson", "setlesson"));
 //        passer.send(new Message("no", s, "lesson", "showlesson"));
-        passer.send(new Message("no", s, "lesson", "selectlesson"));
+//        passer.send(new Message("no", s, "lesson", "selectlesson"));
 //        passer.send(new Message("no", s, "lesson", "showgradestudent"));
 //        passer.send(new Message("no", s, "lesson", "addgrade"));
 //        passer.send(new Message("no", s, "lesson", "showstatussteacher"));
@@ -57,7 +57,7 @@ public class LessonTest {
 //        passer.send(new Message("no", s, "lesson", "showtablename"));
 //        passer.send(new Message("no", s, "lesson", "deleteone"));
 //        passer.send(new Message("no", s, "lesson", "delete"));
-//        passer.send(new Message("no", s, "lesson", "arrange"));
+        passer.send(new Message("no", s, "lesson", "arrange"));
         Message message = (passer.receive());
         Map<String,Object> map = new Gson().fromJson(message.getData(), new TypeToken<HashMap<String,Object>>(){}.getType());
         System.out.println(map.get("res"));
