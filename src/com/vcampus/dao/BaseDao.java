@@ -54,21 +54,16 @@ public class BaseDao {
         return result;
     }
     //删除的公共方法
-    public static Boolean delete(String field,Object value,String table){
-        try{
+    public static void delete(String field,Object value,String table) throws Exception {
             String sql = "delete from "+table+" "+"where "+field+" = ";
             if(value.getClass()==String.class)
                 sql +="'"+value+"'";
             else if(value.getClass()==Integer.class)
                 sql +=String.valueOf(value);
             CRUD.update(sql,conn);
-            return true;
-        }catch (Exception e){
-            return false;
-        }
     }
     //添加的公共方法
-    public static<T>  Boolean addClass(T temp,String table)  {
+    public static<T>  void addClass(T temp,String table) throws SQLException, IllegalAccessException {
         Class clazz = temp.getClass();
         Field[] fields = clazz.getDeclaredFields();
         String sql = "insert into " + table + " (";
@@ -85,18 +80,13 @@ public class BaseDao {
             }
         }
         sql += sql2;
-        try {
         PreparedStatement ps = conn.prepareStatement(sql);
         for (int i = 0; i < fields.length; i++) {
             fields[i].setAccessible(true);
             ps.setObject(i + 1, fields[i].get(temp));
         }
         ps.executeUpdate();
-            return true;
-        }catch (Exception e){
-            System.out.println("operation failure");
-            return false;
-        }
+
     }
 
 }

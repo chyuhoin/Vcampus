@@ -41,6 +41,32 @@ public class LessonController implements Controller{
                 Lesson lessonone = gson.fromJson(msg.getData(), Lesson.class);
                 if(service.addOneLesson(lessonone)) return new Message("200", "{res: 'OK'}");
                 else return new Message("200", "{res: 'NO'}");
+            case"addlesson":
+                //添加课程
+                //如果存在对应的内部ID则报错
+                //如果有老师ID则在老师的课表里添加信息
+                Lesson addlesson = gson.fromJson(msg.getData(), Lesson.class);
+                if(service.addLessonnew(addlesson)) return new Message("200", "{res: 'OK'}");
+                else return new Message("200", "{res: 'NO'}");
+            case "setlesson":
+                //修改课程
+                //如果不存在对应内部ID则报错
+                //如果老师ID修改了则进行相应处理
+                Lesson setlesson = gson.fromJson(msg.getData(), Lesson.class);
+                if(service.setLessonnew(setlesson)) return new Message("200", "{res: 'OK'}");
+                else return new Message("200", "{res: 'NO'}");
+            case "showtable":
+                //输入学生ID，显示其课表
+                String studentID2 = msg.getData();
+                String res1=service.showTable(studentID2);
+                return new Message("200", "{res: '"+res1+"'}");
+            case "showtablename":
+                //输入学生ID，显示其课表
+                //此时把课程的内部ID改为课的名字
+                String studentID3 = msg.getData();
+                String res2=service.showTable(studentID3);
+                String res3=service.showTableName(res2);
+                return new Message("200", "{res: '"+res3+"'}");
             case "showroom":
                 //输入时间，显示可用教室
                 String time = msg.getData();//课程ID
@@ -62,6 +88,14 @@ public class LessonController implements Controller{
                 HashMap<String, Object> map1 = new HashMap<>();
                 map1.put("res", service.viewTeachers(msg.getData()));
                 return new Message("200", gson.toJson(map1));
+            case "showteachertime":
+                //显示所有可选的老师
+                //输入时间，专业，用","隔开
+                String oldStr6 = msg.getData();
+                String[] strs6 = oldStr6.split(",");//根据，切分字符串
+                HashMap<String, Object> map10 = new HashMap<>();
+                map10.put("res", service.viewTeachersTime(strs6[0],strs6[1]));
+                return new Message("200", gson.toJson(map10));
             case"showtime":
                 //输入老师ID，返回所有不可选的时间
                 //不可选的时间有：非偏好时间、上课时间
@@ -85,6 +119,7 @@ public class LessonController implements Controller{
                 //执行老师退课函数（输入老师ID与内部ID，在老师课表中删除对应课的信息）
                 //执行学生退课函数（输入学生ID与内部ID，在学生和课的表中删除信息，在学生课表中删除信息）
                 //执行删除考试函数（输入内部ID，删除对应考试信息）
+                //执行教室退课函数
                 //执行删除课程函数（输入内部ID，在课的表里删除信息）
                 String deleteoneID = msg.getData();//内部编号
                 if (service.deleteone(deleteoneID)) return new Message("200", "{res: 'OK'}");
@@ -151,7 +186,14 @@ public class LessonController implements Controller{
                 if (service.addTeacher(teacher)) return new Message("200", "{res: 'OK'}");
                 else return new Message("200", "{res: 'NO'}");
             case "arrange":
-                //自动排课，输入课程ID
+                //自动排课
+                //只排未安排的课程
+                if (service.Arrange()) return new Message("200", "{res: 'OK'}");
+                else return new Message("200", "{res: 'NO'}");
+            case "arrangeall":
+                //自动排课所有课程
+                if (service.ArrangeAll()) return new Message("200", "{res: 'OK'}");
+                else return new Message("200", "{res: 'NO'}");
             case "addgrade":
                 //添加成绩
                 //输入学生ID，内部ID，成绩，用“,”隔开
@@ -160,7 +202,13 @@ public class LessonController implements Controller{
                 if(service.addGrade(strs1[0],strs1[1],Integer.parseInt(strs1[2])))
                     return new Message("200", "{res: 'OK'}");
                 else return new Message("200", "{res: 'NO'}");
-
+            case "showgradestudent":
+                //显示成绩
+                //输入学生ID，显示其所有成绩
+                String studentID4 = msg.getData();
+                HashMap<String, Object> map11 = new HashMap<>();
+                map11.put("res", service.getGrade(studentID4));
+                return new Message("200", gson.toJson(map11));
             case "showlesson":
                 //显示课程的状态：可选、已选、已满、时间冲突
                 //输入学生ID与课程号 用","隔开
