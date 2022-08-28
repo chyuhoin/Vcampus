@@ -119,6 +119,13 @@ public class myMainFrame extends JFrame {
         btnModule4.setContentAreaFilled(false);
         btnModule5.setContentAreaFilled(false);
         btnModule6.setContentAreaFilled(false);
+        //去边框
+        btnModule1.setBorder(null);
+        btnModule2.setBorder(null);
+        btnModule3.setBorder(null);
+        btnModule4.setBorder(null);
+        btnModule5.setBorder(null);
+        btnModule6.setBorder(null);
 
         panelTop.add(btnModule1);
         panelTop.add(btnModule2);
