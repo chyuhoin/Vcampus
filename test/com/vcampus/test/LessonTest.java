@@ -28,9 +28,9 @@ public class LessonTest {
 //      String s = gson.toJson(new Teacher("33","李四","计算机学院","计算机","1/01/13",1));
 //      String s = gson.toJson(new Lesson("0002","信号与系统2","123",50,50,"1/3/4,2/3/4","计算机学院","计算机",1,"J3-201",4,1));
 //      String s = gson.toJson(new Lesson("0002","信号与系统2","135",30,29,"1/1/2,2/1/2","计算机学院","计算机",1,"J1-101",4,1));
-      String s = gson.toJson(new Lesson("0003","计算机组成原理","33",10,10,"1/3/4,1/5/6","计算机学院","计算机",1,"J5-201",4,1));
+//      String s = gson.toJson(new Lesson("0003","计算机组成原理","33",10,10,"1/3/4,1/5/6","计算机学院","计算机",1,"J5-201",4,1));
 
-//        String s="0002123";
+        String s="999,000333";
         System.out.println(s);
         MessagePasser passer = ClientMessagePasser.getInstance();
 //        passer.send(new Message("no", s, "lesson", "post"));
@@ -39,7 +39,7 @@ public class LessonTest {
 //        passer.send(new Message("no", s, "lesson", "postone"));
 //        passer.send(new Message("no", s, "lesson", "setlesson"));
 //        passer.send(new Message("no", s, "lesson", "showlesson"));
-//        passer.send(new Message("no", s, "lesson", "selectlesson"));
+        passer.send(new Message("no", s, "lesson", "selectlesson"));
 //        passer.send(new Message("no", s, "lesson", "showgradestudent"));
 //        passer.send(new Message("no", s, "lesson", "addgrade"));
 //        passer.send(new Message("no", s, "lesson", "showstatussteacher"));
