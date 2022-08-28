@@ -101,7 +101,8 @@ public class LessonController implements Controller{
                 String oldStr6 = msg.getData();
                 String[] strs6 = oldStr6.split(",");//根据，切分字符串
                 HashMap<String, Object> map10 = new HashMap<>();
-                map10.put("res", service.viewTeachersTime(lesson1.getTime(),lesson1.getMajor()));
+                //map10.put("res", service.viewTeachersTime(lesson1.getTime(),lesson1.getMajor()));
+                map10.put("res", service.viewTeachersTime(strs6[0],strs6[1]));
                 return new Message("200", gson.toJson(map10));
             case"showtime":
                 //输入老师ID，返回所有不可选的时间
