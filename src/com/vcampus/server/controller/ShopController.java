@@ -85,31 +85,31 @@ public class ShopController implements Controller{
     public Message check(Message msg) {
 
         switch (msg.getOperation()) {
-            case "get":
+            case "get": //传入Goods
                 map.put("res", getGoods(msg));
                 break;
-            case "post":
+            case "post": //传入Goods
                 map.put("res", sellGoods(msg));
                 break;
-            case "delete":
+            case "delete": //传入Goods
                 map.put("res", adminDeleteGoods(msg));
                 break;
-            case "put":
+            case "put": //传入Goods
                 map.put("res", changeSellingGoods(msg));
                 break;
-            case "buy":
+            case "buy": //传入Pair
                 map.put("res", buyGoods(msg));
                 break;
-            case "getSell":
+            case "getSell": //传入User
                 map.put("res", getWhatImSelling(msg));
                 break;
-            case "getBuy":
+            case "getBuy": //传入User
                 map.put("res", getWhatIveBought(msg));
                 break;
-            case "confirm":
+            case "confirm": //传入Pair
                 map.put("res", confirmGoods(msg));
                 break;
-            case "return":
+            case "return": //传入Pair
                 map.put("res", returnGoods(msg));
                 break;
         }
