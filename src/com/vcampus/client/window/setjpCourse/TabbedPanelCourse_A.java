@@ -8,7 +8,7 @@
  *=====================================================
  *Revised Hisytory:
  *1. 2022-8-17,创建此文件
- *2. 2022-8-26，完善选项卡设置 修改人：韩宇
+ *2.
  *3.
  *    修改的内容描述，修改的原因
  */
@@ -22,6 +22,7 @@ public class TabbedPanelCourse_A extends JTabbedPane {
 
     public TabbedPanelCourse_A()
     {
+        //JTabbedPane jtbp=new JTabbedPane();	//创建选项卡
         this.setTabPlacement(2);
         this.setBounds(0,0,1400,650);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
@@ -45,16 +46,24 @@ public class TabbedPanelCourse_A extends JTabbedPane {
         this.add("选项一",jp11);	//创建三个面板
         this.add("选项二",jp12);
         this.add("选项三",jp13);
-
          */
+        JPanel teacherInform = new PanelTeacherInform();
+        JPanel deleteCourse = new PanelDeleteCourse();
+        JPanel createCourse = new PanelCreateCourse();
+        JPanel enquireCourse = new PanelEnquireCourse();
+        JPanel manageStudent = new PanelStudentManage();
 
 
-        this.addTab("创建课程", null, jp11,"创建课程");
-        this.addTab("删除课程", null, jp12,"删除课程");
-        this.addTab("课程查询", null, jp13,"课程查询");
-        this.addTab("学生管理", null, jp14,"学生管理");
+
+
+        this.addTab("创建课程", null, createCourse,"创建课程");
+        this.addTab("删除课程", null, deleteCourse,"删除课程");
+        this.addTab("课程查询", null, enquireCourse,"课程查询");
+        this.addTab("学生管理", null, manageStudent,"学生管理");
         this.addTab("课表查询", null, jp15,"课表查询");
+        this.addTab("教师信息",null,teacherInform,"教师信息");
         this.setFont(new Font("宋体", Font.BOLD, 24));
+
 
 
         //jp.add(jtbp);

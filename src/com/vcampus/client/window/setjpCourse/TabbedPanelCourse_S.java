@@ -46,11 +46,12 @@ public class TabbedPanelCourse_S extends JTabbedPane{
 
          */
 
+
+
         this.addTab("选课系统", null, jp11,"选课系统");
         this.addTab("已选课程", null, jp12,"点击查看选项二");
         this.addTab("我的课表", null, jp13,"点击查看选项三");
         this.setFont(new Font("宋体", Font.BOLD, 24));
-
 
 
 
