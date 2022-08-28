@@ -86,12 +86,26 @@ public class LessonDao extends BaseDao{
                 String sql2 = "select time from tb_LESSON where innerID ='"+innerID+"'";
                 List<Map<String ,Object>> list1 = CRUD.Query(sql1,conn);
                 List<Map<String ,Object>> list2 =CRUD.Query(sql2,conn);
-                String time = (String) list1.get(0).get("time");
-                String timeTable = (String) list2.get(0).get("timeTable");
+                if(list1.isEmpty()){
+                    String sql = "insert into tb_LESSONTABLE (studentID)values('"+studentID+"')";
+                    CRUD.update(sql,conn);
+                    list1 = CRUD.Query(sql1,conn);
+                }
+                String time = (String) list2.get(0).get("time");
+                String timeTable = (String) list1.get(0).get("timeTable");
                  if(compare(time,timeTable)==false)
                      return 2;//冲突不可选
-                else
-                    return 3;//可选
+                else{
+                    String table1 = "(select tb_STUDENTWITHLESSON.innerID,tb_LESSON.lessonID from tb_LESSON,tb_STUDENTWITHLESSON where tb_LESSON.innerID = tb_STUDENTWITHLESSON.innerID as tb_a)";
+                    String table2 = "(select lessonID from tb_LESSON where innerID ='"+innerID+"' as tb_b)";
+                    String sql3 = "select * from tb_a,tb_b where tb_b.lessonID in tb_a.lessonID";
+                    List<Map<String,Object>> list4 = CRUD.Query(sql3,conn);
+                    if(!list4.isEmpty())
+                     return 3;//已选同类课程不可选
+                     else
+                         return 4;//可选
+                 }
+
             }
         }
 
@@ -273,6 +287,10 @@ public class LessonDao extends BaseDao{
             System.out.println("wrong");
             return false;
         }
+    }
+    @Test
+    public void test() throws Exception {
+        System.out.println(getGrade("999"));
     }
 }
 

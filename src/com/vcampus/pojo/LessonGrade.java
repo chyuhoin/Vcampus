@@ -37,4 +37,13 @@ public class LessonGrade {
     public void setGrade(Integer grade) {
         this.grade = grade;
     }
+
+    @Override
+    public String toString() {
+        return "LessonGrade{" +
+                "studentID='" + studentID + '\'' +
+                ", innerID='" + innerID + '\'' +
+                ", grade=" + grade +
+                '}';
+    }
 }
