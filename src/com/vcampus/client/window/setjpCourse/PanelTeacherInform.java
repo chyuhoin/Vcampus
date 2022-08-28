@@ -60,8 +60,6 @@ public class PanelTeacherInform extends JPanel{
 
     public PanelTeacherInform()//以老师对象为参数
     {
-        //this.setLayout(null);
-
         this.setLayout(cardLayout);
         //removeAll();
         JPanel P1 = new JPanel();
@@ -79,11 +77,6 @@ public class PanelTeacherInform extends JPanel{
         btnCancel.setBounds(760,500,btnWidth,btnHeight);
         setButtonFont(btnEdit);
         btnEdit.setBounds(1000,y,btnWidth,btnHeight);
-
-
-
-       //PanelTeacherInform1 P1 = new PanelTeacherInform1();//不可编辑状态
-       //PanelTeacherInform2 P2 = new PanelTeacherInform2();//可编辑状态
 
         P1.add(btnEdit);P1.add(lblHint);
         P2.add(btnAdd);P2.add(btnOk);P2.add(btnCancel);P2.add(lblHint);

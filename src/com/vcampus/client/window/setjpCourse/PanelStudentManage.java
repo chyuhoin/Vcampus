@@ -85,17 +85,19 @@ public class PanelStudentManage extends JPanel {
                 {
                     Lesson lesson=new Lesson();
                     Gson gson = new Gson();
-                    String s = gson.toJson(lesson);
+                    //String s = gson.toJson(lesson);
                     if(txtTeacherID.getText().equals(""))
                     {
                         System.out.println("只有课程号");
                         lesson.setLessonID(txtLessonID.getText());
+                        String s = gson.toJson(lesson);
                         passer.send(new Message("admin", s, "lesson", "getteacher"));
                     }
                     else
                     {
                         System.out.println("内部ID");
                         lesson.setInnerID(txtLessonID.getText()+txtTeacherID.getText());
+                        String s = gson.toJson(lesson);
                         passer.send(new Message("admin", s, "lesson", "getspecificteacher"));
                     }
                 }
@@ -111,6 +113,8 @@ public class PanelStudentManage extends JPanel {
                 Message msg = passer.receive();
                 Map<String, java.util.List<Student>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, java.util.List<Student>>>(){}.getType());
                 List<Student> res = map.get("res");
+                System.out.println(res);
+
                 if(res.size()!=0)
                 {
                     tableData = new Object[res.size()][6];//设置表格内容
@@ -176,8 +180,4 @@ public class PanelStudentManage extends JPanel {
         if(flag) { JOptionPane.showMessageDialog(this, title, "警告", JOptionPane.ERROR_MESSAGE);}
         else { JOptionPane.showMessageDialog(this, title, "提示", JOptionPane.INFORMATION_MESSAGE);}
     }
-
-
-
-
 }
