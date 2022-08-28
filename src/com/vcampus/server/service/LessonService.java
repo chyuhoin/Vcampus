@@ -354,10 +354,15 @@ public class LessonService implements Service{
     }
     public boolean addGradeAll(String grade) {
         boolean res=false;
-        try {
+        try {//课程号/学生ID/成绩
             String []str1s = grade.split(",");
+//            System.out.println(str1s[0]);
+//            System.out.println(str1s[1]);
             for(String str1:str1s){
-                String []str2s=grade.split("/");
+                String []str2s=str1.split("/");
+//                System.out.println(str2s[0]);
+//                System.out.println(str2s[1]);
+//                System.out.println(str2s[2]);
                 res=addGrade(str2s[1],addGradeTest(str2s[1],str2s[0]),Integer.valueOf(str2s[2]));
                 if(!res)return false;
             }

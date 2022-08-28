@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="考务系统修改">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/myLoginTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/myLoginTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/LessonDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/LessonDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/vcampus/server/service/LessonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/server/service/LessonService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/com/vcampus/test/LessonTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/com/vcampus/test/LessonTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +70,7 @@
       <recent name="com.vcampus.client.login" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="应用程序.myLoginTest">
     <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.vcampus.server.Server" />
       <module name="Vcampus" />
@@ -147,9 +144,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="应用程序.myLoginTest" />
         <item itemvalue="应用程序.Server" />
         <item itemvalue="JUnit.LessonDao.test" />
-        <item itemvalue="应用程序.myLoginTest" />
         <item itemvalue="JUnit.MessageDao.test" />
       </list>
     </recent_temporary>
@@ -476,7 +473,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661690041505</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="考务系统修改">
+      <created>1661694253277</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1661694253277</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
