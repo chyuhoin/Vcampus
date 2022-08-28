@@ -13,7 +13,7 @@ public class ExamDao extends BaseDao{
     //学生查看自己安排的考试
     public static List<Exam> searchMyExamForStudent(String studentID) throws Exception {
         String sql = "select tb_EXAM.* from tb_EXAM,tb_STUDENTWITHLESSON"+
-                "where tb_EXAM.innerID = tb_STUDENTWITHLESSON.innerID "+
+                " where tb_EXAM.innerID = tb_STUDENTWITHLESSON.innerID "+
                 "and tb_STUDENTWITHLESSON.studentID = '"+studentID+"'";
         List<Map<String, Object>> resultList = CRUD.Query(sql,conn);
         List<Exam> result = new ArrayList<>();
