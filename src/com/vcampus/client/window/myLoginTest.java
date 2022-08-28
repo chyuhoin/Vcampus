@@ -17,6 +17,7 @@ package com.vcampus.client.window;
 import java.io.IOException;
 import java.net.Socket;
 
+import com.formdev.flatlaf.*;
 import com.vcampus.net.ClientMessagePasser;
 
 public class myLoginTest {
@@ -30,6 +31,9 @@ public class myLoginTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        //皮肤包
+        FlatDarkLaf.setup();
 
         myLoginFrame frame = new myLoginFrame("登录");
         // 当关闭窗口时，退出整个程序

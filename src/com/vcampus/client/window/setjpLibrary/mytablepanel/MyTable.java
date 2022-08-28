@@ -20,10 +20,15 @@ import java.util.Enumeration;
 
 public class MyTable extends JTable {                       // 实现自己的表格类
     // 重写JTable类的构造方法
-    public MyTable(DefaultTableModel tblModel) {//Vector rowData, Vector columnNames
+    public MyTable(DefaultTableModel tblModel) {//DefaultTableModel
         super(tblModel);  // 调用父类的构造方法
         //fitTableColumns(this);//设置列宽随表格内容自动调整
     }
+    public MyTable(Object[][] rowData, Object[] columnNames) {//Object[][]  Object[]
+        super(rowData, columnNames);  // 调用父类的构造方法
+        //fitTableColumns(this);//设置列宽随表格内容自动调整
+    }
+
     // 重写JTable类的getTableHeader()方法
     public JTableHeader getTableHeader() {                  // 定义表格头
         JTableHeader tableHeader = super.getTableHeader();  // 获得表格头对象
