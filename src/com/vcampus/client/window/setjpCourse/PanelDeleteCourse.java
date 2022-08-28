@@ -108,8 +108,14 @@ public class PanelDeleteCourse extends JPanel{
         btnDeleteAll.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String str = txtEnquire.getText();
-                System.out.println(str);
+
+                Lesson lesson=new Lesson();
+                lesson.setLessonID(txtEnquire.getText());
+                System.out.println(lesson);
+
+                Gson gson = new Gson();
+                String s = gson.toJson(lesson);
+                passer.send(new Message("admin", s, "lesson", "delete"));
                 //发送消息，打包课程,删除所有
                 tableData=null;
 
@@ -182,67 +188,37 @@ public class PanelDeleteCourse extends JPanel{
                     int rowName=btnE.getThisRow();
                     String teacherID=(String)tableModel.getValueAt(rowName, 1);
                     String courseID=txtEnquire.getText();
-                    System.out.println(teacherID+"  "+courseID);
+                    //System.out.println(teacherID+"  "+courseID);
 
-                    //收发请求，删掉对应课程老师
-                    //如果成功
-                    if(true) {
+                    Lesson lesson=new Lesson();
+                    lesson.setInnerID(courseID+teacherID);
+                    System.out.println(lesson);
+
+                    Gson gson = new Gson();
+                    String s = gson.toJson(lesson);
+                    passer.send(new Message("admin", s, "lesson", "deleteone"));
+
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException interruptedException) {
+                        interruptedException.printStackTrace();
+                    }
+
+                    Message msg = passer.receive();
+                    System.out.println(msg);
+                    Map<String,Object> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String,Object>>(){}.getType());
+
+                    if(map.get("res").equals("OK"))
+                    {
                         informFrame("删除成功",false);
                         btnE.fireEditingStopped_1();
-                        tableModel.removeRow(rowName);//不能删最后一行
-                        //setTable();//重新构建表格  拿回所有数据？
+                        tableModel.removeRow(rowName);
                         updateUI();
                         repaint();
-                    }else {
-                        informFrame("删除失败",true);
                     }
-
-
+                    else { informFrame("删除失败",true); }
                 }
             });
-
-            /*
-            table.addMouseListener(new MouseListener() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-
-                }
-                @Override
-                public void mousePressed(MouseEvent e) {
-
-                    int rowName=((JTable)e.getSource()).rowAtPoint(e.getPoint());
-                    int columnName=((JTable)e.getSource()).columnAtPoint(e.getPoint());
-                    int temp=tableModel.getRowCount();
-                    if(columnName==4)
-                    {
-                        String teacherID=(String)tableModel.getValueAt(rowName, 1);
-                        String courseID=txtEnquire.getText();
-                        System.out.println("当前列"+rowName+"00"+temp);
-
-                            //收发请求，删掉对应课程老师
-                            //如果成功
-                            if(true) {
-                                informFrame("删除成功",false);
-                                tableModel.removeRow(rowName);//不能删最后一行
-                                //setTable();//重新构建表格  拿回所有数据？
-                                updateUI();
-                                repaint();
-                            }else {
-                                informFrame("删除失败",true);
-                            }
-                    }
-                    btnE.fireEditingStopped_1();
-
-                }
-                @Override
-                public void mouseReleased(MouseEvent e) {}
-                @Override
-                public void mouseEntered(MouseEvent e) {}
-                @Override
-                public void mouseExited(MouseEvent e) {}
-            });
-
-             */
         }
         else
         {
