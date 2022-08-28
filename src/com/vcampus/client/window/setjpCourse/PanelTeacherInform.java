@@ -95,10 +95,10 @@ public class PanelTeacherInform extends JPanel{
         this.add(P1,"P1");
         this.add(P2,"P2");
 
-        Teacher t = new Teacher();
-        t.setTeacherID(ID);
+       // Teacher t = new Teacher();
+        teacher.setTeacherID(ID);
         Gson gson = new Gson();
-        String s = gson.toJson(t);
+        String s = gson.toJson(teacher);
         passer.send(new Message("teacher", s, "lesson", "showstatusteacher"));
 
         try {
@@ -108,9 +108,9 @@ public class PanelTeacherInform extends JPanel{
         }
 
         Message msg = passer.receive();
-        Map<String, java.util.List<Teacher>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, java.util.List<Teacher>>>() {
-        }.getType());
+        Map<String, java.util.List<Teacher>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, java.util.List<Teacher>>>(){}.getType());
         List<Teacher> res = map.get("res");
+        System.out.println(res);
 
         if(res.size()!=0) {
             teacher= res.get(0);
@@ -120,14 +120,6 @@ public class PanelTeacherInform extends JPanel{
         else {
             JOptionPane.showMessageDialog(this, "未查询到身份信息", "警告", JOptionPane.ERROR_MESSAGE);
         }
-
-
-
-
-
-
-
-
 
         btnEdit.addActionListener(new ActionListener() {
             @Override
@@ -140,15 +132,27 @@ public class PanelTeacherInform extends JPanel{
         btnOk.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //teacher.getName=txtName.getText():
-                //teacher.getName=txtName.getText():
-                //teacher.getName=txtName.getText():
-                //teacher.getName=txtName.getText():
-                //teacher.getName=txtName.getText():
+                teacher.setTeacherName(txtName.getText());
+                teacher.setTeacherID(txtIdNum.getText());
+                teacher.setSchool(txtDep.getText());
+                teacher.setAbledMajor(txtMajor.getText());
+                teacher.setTime(txtTime.getText());
 
-                //发消息，接收消息，中间停100ms
+                Gson gson = new Gson();
+                String s = gson.toJson(teacher);
+                passer.send(new Message("teacher", s, "lesson", "setteacher"));
 
-                if(true)//写入成功
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException interruptedException) {
+                    interruptedException.printStackTrace();
+                }
+
+                Message msg = passer.receive();
+                System.out.println(msg);
+                Map<String,Object> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String,Object>>(){}.getType());
+
+                if(map.get("res").equals("OK"))
                 {
                     informFrame("修改成功",false);
                     setCard("P1");
@@ -171,7 +175,8 @@ public class PanelTeacherInform extends JPanel{
 
         btnAdd.addActionListener(new ActionListener() {//添加非偏好时间 下拉框
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e)
+            {
 
 
             }
@@ -187,17 +192,14 @@ public class PanelTeacherInform extends JPanel{
 
     public void informFrame(String title,Boolean flag)
     {
-        if(flag)
-        { JOptionPane.showMessageDialog(this, title, "警告", JOptionPane.ERROR_MESSAGE);}
-        else
-        { JOptionPane.showMessageDialog(this, title, "提示", JOptionPane.INFORMATION_MESSAGE);}
+        if(flag) { JOptionPane.showMessageDialog(this, title, "警告", JOptionPane.ERROR_MESSAGE);}
+        else { JOptionPane.showMessageDialog(this, title, "提示", JOptionPane.INFORMATION_MESSAGE);}
     }
 
     public void setLabelFont(JLabel label,JTextField text)
     {
         label.setFont(new Font("楷体", Font.BOLD, 24));
         text.setFont(new Font("楷体", Font.BOLD, 20));
-        //text.setEditable(f);//true 可编辑，false 不可编辑
     }
 
     public void setPanel(JPanel p,Boolean flag)//传老师的对象
@@ -210,14 +212,11 @@ public class PanelTeacherInform extends JPanel{
 
         for(int i=0;i<5;i++)
         {
-            texts[i].setEditable(flag);
-        }
-        for(int i=0;i<5;i++)
-        {
             labels[i].setBounds(x,y+heightDiffer*i,lblWidth,lblHeight);
             texts[i].setBounds(x+ltDiffer1,y+heightDiffer*i,txtWidth,txtHeight);
             setLabelFont(labels[i],texts[i]);
             p.add(labels[i]); p.add(texts[i]);
+            texts[i].setEditable(flag);
         }
         p.add(lblHint);
         p.updateUI();
