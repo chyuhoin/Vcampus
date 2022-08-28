@@ -10,6 +10,7 @@ import java.util.Objects;
 
 public class ClassTable {
     public static List<Integer> getTimeIndex(String time){
+        System.out.println(time);
         String []str1 = time.split(",");
         List<Integer> timetable=new ArrayList<>();
         for(String str:str1){

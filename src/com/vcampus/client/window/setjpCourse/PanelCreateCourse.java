@@ -57,6 +57,8 @@ public class PanelCreateCourse extends JPanel{
     JTextField txtMajor = new JTextField();
     JLabel lblTime = new JLabel("授课时间");
     JTextField txtTime = new JTextField();
+    JLabel lblSize = new JLabel("课程容量");
+    JTextField txtSize = new JTextField();
     JLabel lblExam = new JLabel("是否安排考试");
     JRadioButton radioBtn01 = new JRadioButton("是");
     JRadioButton radioBtn02 = new JRadioButton("否");
@@ -76,8 +78,8 @@ public class PanelCreateCourse extends JPanel{
 
     ButtonGroup btnGroup = new ButtonGroup();
 
-    JLabel labels[] = {lblName,lblIdNum,lblDep,lblMajor,lblTime,lblExam};
-    JTextField texts[] = {txtName,txtIdNum,txtDep,txtMajor,txtTime};
+    JLabel labels[] = {lblName,lblIdNum,lblDep,lblMajor,lblTime,lblSize,lblExam};
+    JTextField texts[] = {txtName,txtIdNum,txtDep,txtMajor,txtTime,txtSize};
 
     CardLayout cardLayout=new CardLayout();
     ButtonEditor btnE = null;
@@ -100,7 +102,7 @@ public class PanelCreateCourse extends JPanel{
             {"张三","添加"},{"张三","添加"},{"张三","添加"},{"张三","添加"},
             {"张三","添加"},{"张三","添加"},{"张三","添加"},{"张三","添加"}};
 
-    //Lesson lesson = new Lesson();
+    Lesson L = new Lesson();
     MessagePasser passer = ClientMessagePasser.getInstance();
 
     public PanelCreateCourse()
@@ -126,10 +128,9 @@ public class PanelCreateCourse extends JPanel{
         btnReturn1.setBounds(1000,520,btnWidth,btnHeight);
         setButtonFont(btnReturn2);
         btnReturn2.setBounds(1000,520,btnWidth,btnHeight);
-
         //位置
-        radioBtn01.setBounds(500,430,80,25);
-        radioBtn02.setBounds(600,430,80,25);
+        radioBtn01.setBounds(500,487,80,25);
+        radioBtn02.setBounds(600,487,80,25);
         radioBtn01.setFont(new Font("宋体",Font.BOLD, 18));
         radioBtn02.setFont(new Font("宋体",Font.BOLD, 18));
 
@@ -142,7 +143,7 @@ public class PanelCreateCourse extends JPanel{
         tablePanel2.setBounds(330,100,600,400);
 
         //设置其余坐标和字体
-        for(int i=0;i<5;i++)
+        for(int i=0;i<6;i++)
         {
             labels[i].setBounds(x,y+heightDiffer*i,lblWidth,lblHeight);
             texts[i].setBounds(x+ltDiffer1,y+heightDiffer*i,txtWidth,txtHeight);
@@ -150,68 +151,72 @@ public class PanelCreateCourse extends JPanel{
             texts[i].setEditable(true);
             //p.add(labels[i]); p.add(texts[i]);
         }
-        labels[5].setFont(new Font("楷体", Font.BOLD, 24));
-        labels[5].setBounds(x,y+heightDiffer*5,lblWidth,lblHeight);
+        labels[6].setFont(new Font("楷体", Font.BOLD, 24));
+        labels[6].setBounds(x,y+heightDiffer*6,lblWidth,lblHeight);
 
         setPanel1();
 
         btnNext1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String str1=txtName.getText();//lesson.name=
-                String str2=txtIdNum.getText();
-                String str3=txtDep.getText();
-                String str4=txtMajor.getText();
-                String str5=txtTime.getText();
-
-                Lesson lesson=new Lesson();
-                lesson.setMajor(txtMajor.getText());
-                lesson.setTime(txtTime.getText());
-                System.out.println(lesson);
-
-                Gson gson = new Gson();
-                String s = gson.toJson(lesson);
-                passer.send(new Message("admin", s, "lesson", "showteachertime"));
-
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException interruptedException) {
-                    interruptedException.printStackTrace();
-                }
-
-                Message msg = passer.receive();
-                Map<String, java.util.List<Teacher>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, java.util.List<Teacher>>>(){}.getType());
-                List<Teacher> res = map.get("res");
-                System.out.println(res);
-                //发消息，发送课程号和时间，返回老师的list
-                //如果有，跳转第二页并构建表格
-                //如果没有，提示
-                if(res.size()!=0)
+                if(!(txtName.getText().equals("")||txtIdNum.getText().equals("")||txtDep.getText().equals("")||txtMajor.getText().equals("")||txtTime.getText().equals("")))
                 {
-                    tableData1 = new Object[res.size()][5]; //设置表格内容
-                    for (int i = 0; i < res.size(); i++)
-                    {
-                        tableData1[i][0] = res.get(i).getTeacherName();
-                        tableData1[i][1] = res.get(i).getTeacherID();
-                        tableData1[i][2] = res.get(i).getSchool();
-                        tableData1[i][3] = res.get(i).getAbledMajor();
+                    L.setName(txtName.getText());
+                    L.setLessonID(txtIdNum.getText());
+                    L.setSchool(txtDep.getText());
+                    L.setMajor(txtMajor.getText());
+                    L.setTime(txtTime.getText());
+                    L.setMaxSize(Integer.valueOf(txtSize.getText()));
+
+                    Lesson lesson=new Lesson();
+                    lesson.setMajor(txtMajor.getText());
+                    lesson.setTime(txtTime.getText());
+                    System.out.println(lesson);
+
+                    Gson gson = new Gson();
+                    String s = gson.toJson(lesson);
+                    passer.send(new Message("admin", s, "lesson", "showteachertime"));
+
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException interruptedException) {
+                        interruptedException.printStackTrace();
                     }
-                    System.out.println("找到老师");
-                    setPanel2();
-                    setCard("panelTeacher");
+
+                    Message msg = passer.receive();
+                    Map<String, java.util.List<Teacher>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, java.util.List<Teacher>>>(){}.getType());
+                    List<Teacher> res = map.get("res");
+                    System.out.println(res);
+
+                    if(res.size()!=0)
+                    {
+                        tableData1 = new Object[res.size()][5]; //设置表格内容
+                        for (int i = 0; i < res.size(); i++)
+                        {
+                            tableData1[i][0] = res.get(i).getTeacherName();
+                            tableData1[i][1] = res.get(i).getTeacherID();
+                            tableData1[i][2] = res.get(i).getSchool();
+                            tableData1[i][3] = res.get(i).getAbledMajor();
+                        }
+                        setPanel2();
+                        setCard("panelTeacher");
+                    }
+                    else
+                    {
+                        informFrame("未查询到授课教师！",true);
+                    }
                 }
                 else
                 {
-                    informFrame("未查询到授课教师！",true);
+                    informFrame("请填写完整课程信息",true);
                 }
+
             }
         });
 
         btnNext2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //发消息，传上课时间
-                //接收消息，所有空教室
                 Lesson lesson=new Lesson();
                 lesson.setTime(txtTime.getText());
 
@@ -225,19 +230,18 @@ public class PanelCreateCourse extends JPanel{
                     interruptedException.printStackTrace();
                 }
 
-                /////////??????传回来的是什么？
                 Message msg = passer.receive();
                 Map<String, java.util.List<String>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, java.util.List<String>>>(){}.getType());
                 List<String> res = map.get("res");
+                System.out.println(res);
 
                 if(res.size()!=0)//设置表格内容
                 {
-                    tableData2 = new Object[res.size()][4];
+                    tableData2 = new Object[res.size()][2];
                     for (int i = 0; i < res.size(); i++)
                     {
                         tableData2[i][0] = res.get(i);
                     }
-                    System.out.println("空余教室");
                     setPanel3();
                     setCard("panelRoom");
                 }
@@ -245,7 +249,6 @@ public class PanelCreateCourse extends JPanel{
                 {
                     informFrame("未查询到空余教室！",true);
                 }
-
             }
         });
 
@@ -268,43 +271,42 @@ public class PanelCreateCourse extends JPanel{
         btnFinish.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String str1=txtName.getText();
-                String str2=txtIdNum.getText();
-                String str3=txtDep.getText();
-                String str4=txtMajor.getText();
-                String str5=txtTime.getText();
+               if(!(L.getName().equals("")||L.getLessonID().equals("")||L.getMaxSize()!=0||
+                       L.getTeacherID().equals("")||L.getSchool().equals("")||
+                       L.getMajor().equals("")||L.getClassroom().equals("")||L.getTime().equals("")))
+               {
+                   L.setInnerID(L.getLessonID()+L.getTeacherID());
+                   L.setStatus(1);
 
-///////////////////////////////////////////////没写完
-                Lesson lesson=new Lesson();
-                lesson.setTime(txtTime.getText());
+                   Gson gson = new Gson();
+                   String s = gson.toJson(L);
+                   passer.send(new Message("admin", s, "lesson", "addlesson"));
 
-                Gson gson = new Gson();
-                String s = gson.toJson(lesson);
-                passer.send(new Message("admin", s, "lesson", "showroom"));
+                   try {
+                       Thread.sleep(100);
+                   } catch (InterruptedException interruptedException) {
+                       interruptedException.printStackTrace();
+                   }
 
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException interruptedException) {
-                    interruptedException.printStackTrace();
-                }
+                   Message msg = passer.receive();
+                   System.out.println(msg);
+                   Map<String,Object> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String,Object>>(){}.getType());
 
-                /////////??????传回来的是什么？
-                Message msg = passer.receive();
-                Map<String, java.util.List<String>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, java.util.List<String>>>(){}.getType());
-                List<String> res = map.get("res");
-
-
-                //打包回传所有信息，接收消息，如果成功
-                if(true)
-                {
-                    informFrame("创建成功",false);
-                    setPanel1();
-                    setCard("panelCourse");
-                }
-                else
-                {
-                    informFrame("创建失败",true);
-                }
+                   if(map.get("res").equals("OK"))
+                   {
+                       informFrame("创建成功",false);
+                       setPanel1();
+                       setCard("panelCourse");
+                   }
+                   else
+                   {
+                       informFrame("创建失败",true);
+                   }
+               }
+               else
+               {
+                   informFrame("课程信息不完善，无法创建！",true);
+               }
             }
         });
 
@@ -313,8 +315,7 @@ public class PanelCreateCourse extends JPanel{
             public void actionPerformed(ActionEvent e) {
                 if(radioBtn01.isSelected())//如果单选按钮选中，登录按钮才可使用，否则登录按钮无效
                 {
-                    //有考试，设置lesson
-                    System.out.println("有");
+                    L.setIsExam(1);
                 }
             }
         });
@@ -324,8 +325,7 @@ public class PanelCreateCourse extends JPanel{
             public void actionPerformed(ActionEvent e) {
                 if(radioBtn01.isSelected())//如果单选按钮选中，登录按钮才可使用，否则登录按钮无效
                 {
-                    //有考试，设置lesson
-                    System.out.println("没有");
+                    L.setIsExam(0);
                 }
             }
         });
@@ -366,18 +366,12 @@ public class PanelCreateCourse extends JPanel{
         panelCourse.add(radioBtn01);
         panelCourse.add(radioBtn02);
 
-        for(int i=0;i<5;i++)
+        for(int i=0;i<6;i++)
         {
             panelCourse.add(labels[i]); panelCourse.add(texts[i]);
         }
         panelCourse.add(lblExam);
         panelCourse.add(btnNext1);
-
-       // txtName.setText("xxx");//姓名
-        //txtIdNum.setText("213201445");//一卡通
-        //txtDep.setText("计算机科学与工程学院");//学院
-        //txtMajor.setText("计算机科学与技术专业");//专业
-        //txtTime.setText("周一6-7");//时间（可能要转格式）
 
         panelCourse.updateUI();
         panelCourse.repaint();
@@ -394,7 +388,6 @@ public class PanelCreateCourse extends JPanel{
         setTable(columnNames1,tableData1,tablePanel1,table1,scrollPane1,1200,400,0);
 
         panelTeacher.add(tablePanel1);
-
         panelTeacher.updateUI();
         panelTeacher.repaint();
 
@@ -409,49 +402,9 @@ public class PanelCreateCourse extends JPanel{
 
         setTable(columnNames2,tableData2,tablePanel2,table2,scrollPane2,600,400,1);
         panelRoom.add(tablePanel2);
-        //tablePanel2.setBounds(0,0,1200,400);
 
         panelRoom.updateUI();
         panelRoom.repaint();
-
-/*        table2.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {}
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-                int rowName=((JTable)e.getSource()).rowAtPoint(e.getPoint());
-                int columnName=((JTable)e.getSource()).columnAtPoint(e.getPoint());
-                int temp=tableModel2.getRowCount();
-                if(columnName==tableModel2.getColumnCount()-1)
-                {
-                    String teacherID=(String)tableModel2.getValueAt(rowName, 1);
-                    String courseID=txtIdNum.getText();
-                    System.out.println("当前列"+rowName+"00"+temp);
-
-                    //收发请求，删掉对应课程老师
-                    //如果成功
-                    if(true) {
-                        informFrame("添加成功",false);
-                        // tableModel.removeRow(rowName);//不能删最后一行
-                        //setTable();//重新构建表格  拿回所有数据？
-
-                    }else {
-                        informFrame("添加失败",true);
-                    }
-                }
-                btnE.fireEditingStopped_1();
-
-            }
-            @Override
-            public void mouseReleased(MouseEvent e) {}
-            @Override
-            public void mouseEntered(MouseEvent e) {}
-            @Override
-            public void mouseExited(MouseEvent e) {}
-
-        });
- */
     }
 
     public void setButtonFont(JButton button)
@@ -479,12 +432,13 @@ public class PanelCreateCourse extends JPanel{
         table.getTableHeader().setFont(new Font("黑体",Font.BOLD,20));//表头字体
 
         //添加渲染器
-        ButtonRenderer btnR=new ButtonRenderer();
+        ButtonRenderer btnR=new ButtonRenderer("添加");
         table.getColumn("操作").setCellRenderer(btnR);
         //添加编辑器
         btnE =new ButtonEditor(new JCheckBox());
-        table.getColumn("操作").setCellEditor(btnE);
         btnE.getButton().setText("添加");
+        table.getColumn("操作").setCellEditor(btnE);
+
 
         scrollPane = new JScrollPane(table);
         scrollPane.setBounds(0,0,width,height);
@@ -492,157 +446,58 @@ public class PanelCreateCourse extends JPanel{
 
         if(flag==0)
         {
-            respond1(table,model);
+            respond1(model);
         }
         else
         {
-            respond2(table,model);
+            respond2(model);
 
         }
         updateUI();
         repaint();
     }
 
-    public void respond1(MyTable table,DefaultTableModel model)//添加老师，响应函数
+    public void respond1(DefaultTableModel model)//添加老师，响应函数
     {
-       /* table.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {}
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-                int rowName=((JTable)e.getSource()).rowAtPoint(e.getPoint());
-                int columnName=((JTable)e.getSource()).columnAtPoint(e.getPoint());
-                int temp=model.getRowCount();
-                if(columnName==model.getColumnCount()-1)
-                {
-                    String teacherID=(String)model.getValueAt(rowName, 1);
-                    String courseID=txtIdNum.getText();
-                    System.out.println("当前列"+rowName+"00"+teacherID);
-
-                    //收发请求，删掉对应课程老师
-                    //如果成功
-                    if(true) {
-                        informFrame("添加成功",false);
-                        // tableModel.removeRow(rowName);//不能删最后一行
-                        //setTable();//重新构建表格  拿回所有数据？
-
-                    }else {
-                        informFrame("添加失败",true);
-                    }
-                }
-                btnE.fireEditingStopped_1();
-
-            }
-            @Override
-            public void mouseReleased(MouseEvent e) {}
-            @Override
-            public void mouseEntered(MouseEvent e) {}
-            @Override
-            public void mouseExited(MouseEvent e) {}
-
-        });
-
-        */
-
-
         btnE.getButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int rowName=btnE.getThisRow();
-                String teacherID=(String)model.getValueAt(rowName, 1);
+               //String teacherID=(String)model.getValueAt(rowName, 1);
 
-                System.out.println("当前列"+rowName+"00"+teacherID);
-
+                //System.out.println("当前列"+rowName+"00"+teacherID);
+                L.setTeacherID((String)model.getValueAt(rowName, 1));
                 //收发请求，删掉对应课程老师
                 //如果成功
                 if(true) {
                     informFrame("添加成功",false);
-                    // tableModel.removeRow(rowName);//不能删最后一行
-                    //setTable();//重新构建表格  拿回所有数据？
+                    model.removeRow(rowName);
+                }else {
+                    informFrame("添加失败",true);
+                }
+            }
+        });
+    }
+
+    public void respond2(DefaultTableModel model)//添加教室，响应函数
+    {
+        btnE.getButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int rowName=btnE.getThisRow();
+                //String teacherID=(String)model.getValueAt(rowName, 1);
+                //System.out.println("当前列"+rowName+"00"+teacherID);
+                L.setClassroom((String)model.getValueAt(rowName, 0));
+                //如果成功
+                if(true) {
+                    informFrame("添加成功",false);
+                    //btnE.getButton().setText("已排课");
+                    model.removeRow(rowName);
 
                 }else {
                     informFrame("添加失败",true);
                 }
-
-
             }
         });
-
-
-
-
-
-
     }
-
-    public void respond2(MyTable table,DefaultTableModel model)//添加教室，响应函数
-    {
-        table.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {}
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-                int rowName=((JTable)e.getSource()).rowAtPoint(e.getPoint());
-                int columnName=((JTable)e.getSource()).columnAtPoint(e.getPoint());
-
-                if(columnName==model.getColumnCount()-1)
-                {
-                    String roomID=(String)model.getValueAt(rowName, 1);
-                    //String courseID=txtIdNum.getText();
-                    System.out.println("当前列"+rowName+"00"+roomID);
-
-                    //收发请求，添加教室，创建完整课程
-                    //如果成功
-                    if(true) {
-                        informFrame("添加成功",false);
-                        // tableModel.removeRow(rowName);//不能删最后一行
-                        //setTable();//重新构建表格  拿回所有数据？
-
-                    }else {
-                        informFrame("添加失败",true);
-                    }
-                }
-                btnE.fireEditingStopped_1();
-
-            }
-            @Override
-            public void mouseReleased(MouseEvent e) {}
-            @Override
-            public void mouseEntered(MouseEvent e) {}
-            @Override
-            public void mouseExited(MouseEvent e) {}
-
-        });
-    }
-
-    /*
-    public String[][] STRList;//保存所有用户信息
-    //创建信息表格
-    String[] columnNames = {"一卡通号", "密码","权限","操作"}; // 定义表格列名数组
-    // 定义表格数据数组
-    String[][] tableValues = new String[STRList.length][4];
-        for(int i=0;i<STRList.length;i++){
-        System.arraycopy(STRList[i], 0, tableValues[i], 0, 3);
-        tableValues[i][3]=i+"";
-    }
-    // 创建指定列名和数据的表格
-    JTable table = new MyTable(tableValues, columnNames);
-    //表格样式设置
-        table.setRowHeight(30);// 设置行高
-        table.setFont(new Font("黑体",Font.PLAIN,18));//表格字体
-        table.getTableHeader().setFont(new Font("黑体",Font.BOLD,20));//表头字体
-        table.getColumnModel().getColumn(3).setCellRenderer(new MyButtonRender(jp,table));//添加按钮
-
-    // 创建显示表格的滚动面板
-    JScrollPane scrollPane = new JScrollPane(table);
-        jp1.add(scrollPane);
-        layout_Spring.putConstraint(layout_Spring.NORTH, scrollPane, 20, layout_Spring.SOUTH, lbl);
-        layout_Spring.putConstraint(layout_Spring.WEST, scrollPane, 20, layout_Spring.WEST, jp1);
-        layout_Spring.putConstraint(layout_Spring.SOUTH, scrollPane, -40, layout_Spring.SOUTH, jp1);
-        layout_Spring.putConstraint(layout_Spring.EAST, scrollPane, -20, layout_Spring.EAST, jp1);
-
-     */
-
 }

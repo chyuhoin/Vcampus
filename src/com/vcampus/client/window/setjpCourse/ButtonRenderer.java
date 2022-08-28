@@ -11,13 +11,14 @@ import javax.swing.table.TableCellRenderer;
 public class ButtonRenderer implements TableCellRenderer {
     private JButton jButton;
 
-    public ButtonRenderer() {
-        initButton();
+    public ButtonRenderer(String str) {
+        initButton(str);
         //jPanel.add(jButton);
     }
 
-    private void initButton() {
+    private void initButton(String str) {
         jButton = new JButton();
+        jButton.setText(str);
         jButton.addActionListener(
                 new ActionListener() {
                     @Override
@@ -30,8 +31,8 @@ public class ButtonRenderer implements TableCellRenderer {
 
     public JComponent getTableCellRendererComponent(JTable table, Object value,
                                                     boolean isSelected, boolean hasFocus, int row, int column) {
-        jButton.setText("删除");
-        jButton.setToolTipText("从课程中删除该教师");
+       //jButton.setText("删除");
+       //jButton.setToolTipText("从课程中删除该教师");
         return jButton;
     }
 

@@ -18,7 +18,7 @@ class ButtonEditor extends DefaultCellEditor {
     public ButtonEditor(JCheckBox checkBox) {
         super(checkBox);
         button = new JButton();
-        button.setOpaque(false);
+        //button.setOpaque(false);
         //button.setContentAreaFilled(false);
 
 

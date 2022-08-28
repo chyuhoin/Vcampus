@@ -178,7 +178,7 @@ public class PanelDeleteCourse extends JPanel{
 
 
             //添加渲染器
-            ButtonRenderer btnR=new ButtonRenderer();
+            ButtonRenderer btnR=new ButtonRenderer("删除");
             table.getColumn("操作").setCellRenderer(btnR);
             //添加编辑器
             ButtonEditor btnE=new ButtonEditor(new JCheckBox());
