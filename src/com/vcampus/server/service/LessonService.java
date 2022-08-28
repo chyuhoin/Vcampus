@@ -7,6 +7,7 @@ import com.vcampus.pojo.LessonGrade;
 import com.vcampus.pojo.Student;
 import com.vcampus.pojo.Teacher;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -35,8 +36,9 @@ public class LessonService implements Service{
                 if (LessonDao.deleteSpecificLesson(user.getLessonID()))
                 {//删除成功
                     res = LessonDao.addLesson(user);
-                    if(!res)//添加失败，恢复
+                    if(!res){//添加失败，恢复
                         LessonDao.addLesson(lessons.get(0));
+                    }
                     else{//添加课程成功，现在添加老师的课表
                         res=TeacherDao.selectLesson(user.getTeacherID(),user.getInnerID());
                         if(!res){//添加老师课表失败，现在恢复
@@ -89,17 +91,25 @@ public class LessonService implements Service{
     public boolean addLessonnew(Lesson user) {
         boolean res;
         try {
-            if(!LessonDao.search("innerID",user.getInnerID()).isEmpty())//已经有这个内部ID
+            if(!LessonDao.search("innerID",user.getInnerID()).isEmpty()){//已经有这个内部ID
+//                System.out.println("已经有这个内部ID");
                 res=false;
+            }
             else {
+                user.setLength(setLength(user.getTime()));//设定学时
                 res=LessonDao.addLesson(user);
-                if(!res)return false;
+                if(!res){
+                    System.out.println("添加失败");
+                    return false;
+                    }
                 if(user.getTeacherID() != null&&user.getStatus()!=0){
                     //添加课程时也添加了老师且此时为有效课
                     //因此要添加老师的课表
+                    System.out.println("添加老师课表");
                     res=TeacherDao.selectLesson(user.getTeacherID(),user.getInnerID());
                     if(!res){
                         //添加失败，恢复
+                        System.out.println("添加老师课表,失败");
                         LessonDao.deleteLesson(user.getInnerID());
                         return false;
                     }
@@ -169,11 +179,19 @@ public class LessonService implements Service{
     public boolean setLessonnew(Lesson user) {
         boolean res=false;
         try {
-            if(LessonDao.search("innerID",user.getInnerID()).isEmpty())//没有这个内部ID
+            List<Lesson>lessons=LessonDao.search("innerID",user.getInnerID());
+//            System.out.println(lessons);
+            if(lessons.isEmpty())//没有这个内部ID
                 res=false;
             else {
                 if(deleteTest(user.getInnerID())){
+                    user.setLength(setLength(user.getTime()));//设定学时
+//                    System.out.println(setLength(user.getTime()));
                     res=addLessonnew(user);
+                    if(!res){
+                        //添加失败，恢复
+                        addLessonnew(lessons.get(0));
+                    }
                 }
             }
         } catch (Exception e) {
@@ -191,6 +209,21 @@ public class LessonService implements Service{
         }
         return room;
     }
+    public List<Teacher> showAllTeacher(String lessonID) {
+        List<Teacher> teachers=new ArrayList<>();
+        try {
+            List<Lesson>lessons=LessonDao.search("lessonID",lessonID);
+            for(Lesson lesson:lessons){
+                List<Teacher>tmp=TeacherDao.searchTeacher("teacherID",lesson.getTeacherID());
+                for(Teacher temp:tmp){
+                    teachers.add(temp);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return teachers;
+    }
     public List<Teacher> viewTeachers(String abledMajor) {
         List<Teacher> res = null;
         try {
@@ -201,7 +234,7 @@ public class LessonService implements Service{
         return res;
     }
     public List<Teacher> viewTeachersTime(String time,String abledMajor) {
-        List<Teacher> res = null;
+        List<Teacher> res = new ArrayList<>();
         try {
             List<Teacher> tmp = TeacherDao.searchTeacher("abledMajor",abledMajor);
             for(Teacher teacher:tmp){
@@ -210,7 +243,15 @@ public class LessonService implements Service{
                 String teachertable=TeacherDao.getLessonTable(teacherID);//取得老师课表
                 String[] temp = teachertable.split(",");//根据，切分字符串
                 List<Integer>times=ClassTable.getTimeIndex(time);
+                List<Integer>teacherunlikes=ClassTable.getTimeIndex(teacher.getTime());
+                //老师不喜欢的时间
                 for(Integer tmptime:times ){
+                    for(Integer teacherunlike:teacherunlikes){
+                        if(tmptime==teacherunlike){
+                            isadd=false;
+                            break;
+                        }
+                    }
                     if(!temp[tmptime].equals("0")){
                     //如果此时老师课表有课或为非偏好时间
                         isadd=false;
@@ -238,11 +279,12 @@ public class LessonService implements Service{
         try {
             List<Lesson>lesson=null;
             String[] tmp = time.split(",");//根据，切分字符串
-            for(String data:tmp){
-                if(!data.equals("0")){
+            for(int i=0;i<65;i++){
+                if(!tmp[i].equals("0")){
                     //此时有课程，将内部ID变为课程名字
-                    lesson=LessonDao.search("innerID",data);
-                    data=lesson.get(0).getName();
+                    lesson=LessonDao.search("innerID",tmp[i]);
+                    tmp[i]=lesson.get(0).getName();
+                    tmp[i]=lesson.get(0).getName();
                 }
             }
             timename = String.join(",",tmp);
@@ -344,8 +386,8 @@ public class LessonService implements Service{
                 res=false;
             else{
                 //先执行老师退课函数
-                //res=老师退课函数(lessons.get(0).getTeacherID());
-                //if(!res)return res;
+                res=TeacherDao.returnLesson(lessons.get(0).getTeacherID(),lessons.get(0).getInnerID());
+                if(!res)return res;
                 //再执行学生退课函数
                 List<String> data = null;
                 data=LessonDao.searchStudent(deleteoneID);
@@ -379,7 +421,7 @@ public class LessonService implements Service{
         return res;
     }
     public List<Student> getTeacher(String lessonID) {
-        List<Student> res = null;
+        List<Student> res = new ArrayList<>();
         List<Lesson>data=null;
         List<Student> tmp = null;
         try {
@@ -396,7 +438,7 @@ public class LessonService implements Service{
         return res;
     }
     public List<Student> getSpecificTeacher(String innerID) {
-        List<Student> res = null;
+        List<Student> res = new ArrayList<>();
         List<String>data=null;
         List<Student> tmp = null;
         try {
@@ -487,6 +529,7 @@ public class LessonService implements Service{
                 //没有对应数据
                 //视为添加
                 res = TeacherDao.addTeacher(user);
+                if(true)return true;
             }
             else if(!TeacherDao.deleteTeacher(user.getTeacherID())) {//视为修改
                 //删除信息失败
@@ -799,5 +842,15 @@ public class LessonService implements Service{
         }
         return res.toString();
     }
-
+    public Integer setLength(String time) {
+        //给出时间，计算其时长
+        Integer length=0;
+        try {
+            length=ClassTable.getTimeIndex(time).size();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+        return length;
+    }
 }

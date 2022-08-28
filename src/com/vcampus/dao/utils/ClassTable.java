@@ -10,12 +10,13 @@ import java.util.Objects;
 
 public class ClassTable {
     public static List<Integer> getTimeIndex(String time){
+        System.out.println(time);
         String []str1 = time.split(",");
         List<Integer> timetable=new ArrayList<>();
         for(String str:str1){
             String[]temp=str.split("/");
-            int s = Integer.valueOf(temp[0])*13+Integer.valueOf(temp[1])-1;
-            int e = Integer.valueOf(temp[0])*13+Integer.valueOf(temp[2])-1;
+            int s = (Integer.valueOf(temp[0])-1)*13+Integer.valueOf(temp[1])-1;
+            int e = (Integer.valueOf(temp[0])-1)*13+Integer.valueOf(temp[2])-1;
             for(int i=s;i<=e;i++)
                 timetable.add(i);
         }

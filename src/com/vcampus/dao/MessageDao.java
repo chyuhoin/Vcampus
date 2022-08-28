@@ -11,14 +11,14 @@ import java.util.List;
 public class MessageDao extends BaseDao{
     //发送
     public static Boolean sendMessage(String studentID,String des,String content) throws Exception {
-        try {
+   //     try {
             String sql = "insert into tb_MESSAGE (studentID,content,sender,innerID) values ('" + des + "','" + content + "','" + studentID + "',0)";
             CRUD.update(sql,conn);
             return true;
-        }catch (Exception e){
-            System.out.println("wrong");
-            return false;
-        }
+//        }catch (Exception e){
+//            System.out.println("wrong");
+//            return false;
+//        }
     }
     //获取消息
     public static List<InnerMessage> readMessage(String studentID) throws Exception {
@@ -48,9 +48,5 @@ public class MessageDao extends BaseDao{
     //查询所有公共消息
     public static List<PublicMessage> getPublicMessage() throws Exception {
         return searchAll(PublicMessage.class,"tb_PUBLICMESSAGE");
-    }
-    @Test
-    public void test() throws Exception {
-        sendMessage("213202132","123456","test");
     }
 }

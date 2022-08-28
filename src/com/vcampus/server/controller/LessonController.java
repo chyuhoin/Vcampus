@@ -69,10 +69,18 @@ public class LessonController implements Controller{
                 return new Message("200", "{res: '"+res3+"'}");
             case "showroom":
                 //输入时间，显示可用教室
+                Lesson lesson2 = gson.fromJson(msg.getData(), Lesson.class);
                 String time = msg.getData();//课程ID
                 HashMap<String, Object> map9 = new HashMap<>();
-                map9.put("res", service.showRoom(time));
+//                map9.put("res", service.showRoom(time));
+                map9.put("res", service.showRoom(lesson2.getTime()));
                 return new Message("200", gson.toJson(map9));
+            case "showallteacher":
+                //输入课程号，显示所有老师
+                String lessonID1 = msg.getData();//课程ID
+                HashMap<String, Object> map12 = new HashMap<>();
+                map12.put("res", service.showAllTeacher(lessonID1));
+                return new Message("200", gson.toJson(map12));
             case "addroom":
                 //给课程添加教室
                 //输入教室ID，内部ID，给课程添加教室
@@ -91,10 +99,12 @@ public class LessonController implements Controller{
             case "showteachertime":
                 //显示所有可选的老师
                 //输入时间，专业，用","隔开
+                Lesson lesson1 = gson.fromJson(msg.getData(), Lesson.class);
                 String oldStr6 = msg.getData();
                 String[] strs6 = oldStr6.split(",");//根据，切分字符串
                 HashMap<String, Object> map10 = new HashMap<>();
-                map10.put("res", service.viewTeachersTime(strs6[0],strs6[1]));
+                map10.put("res", service.viewTeachersTime(lesson1.getTime(),lesson1.getMajor()));
+                //map10.put("res", service.viewTeachersTime(strs6[0],strs6[1]));
                 return new Message("200", gson.toJson(map10));
             case"showtime":
                 //输入老师ID，返回所有不可选的时间
@@ -108,8 +118,9 @@ public class LessonController implements Controller{
                 //删除对应课程ID的所有课程,删除对应的考试信息,删除对应学生的课表信息，删除老师的课表信息
                 //具体实现：利用课程ID查到内部ID
                 //转到内部ID的处理
-                String deleteID = msg.getData();//课程ID
-                if (service.delete(deleteID)) return new Message("200", "{res: 'OK'}");
+                Lesson lesson3 = gson.fromJson(msg.getData(), Lesson.class);
+//                String deleteID = msg.getData();//课程ID
+                if (service.delete(lesson3.getLessonID())) return new Message("200", "{res: 'OK'}");
                 else return new Message("200", "{res: 'NO'}");
             case "deleteone":
                 //删除对应老师教授的特定课程
@@ -121,8 +132,9 @@ public class LessonController implements Controller{
                 //执行删除考试函数（输入内部ID，删除对应考试信息）
                 //执行教室退课函数
                 //执行删除课程函数（输入内部ID，在课的表里删除信息）
-                String deleteoneID = msg.getData();//内部编号
-                if (service.deleteone(deleteoneID)) return new Message("200", "{res: 'OK'}");
+                Lesson lesson4 = gson.fromJson(msg.getData(), Lesson.class);
+//                String deleteoneID = msg.getData();//内部编号
+                if (service.deleteone(lesson4.getInnerID())) return new Message("200", "{res: 'OK'}");
                 else return new Message("200", "{res: 'NO'}");
 
             case "get":

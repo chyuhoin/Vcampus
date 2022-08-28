@@ -89,4 +89,46 @@ public class ShopTest {
                 new TypeToken<Map<String, String>>(){}.getType());
         System.out.println(map.get("res"));
     }
+
+    @Test
+    public void testReturn() throws Exception {
+        Socket socket = new Socket("localhost", 6666); // 连接指定服务器和端口
+        ClientMessagePasser.build(socket.getInputStream(), socket.getOutputStream());
+        Gson gson = new Gson();
+        MessagePasser passer = ClientMessagePasser.getInstance();
+
+        HashMap<String, String> args = new HashMap<>();
+        args.put("studentID", "1");
+        args.put("goodsID", "155");
+        passer.send(new Message("student", gson.toJson(args), "shop", "return"));
+        Message message = passer.receive();
+        System.out.println(message);
+
+        Map<String, String> map = gson.fromJson(message.getData(),
+                new TypeToken<Map<String, String>>(){}.getType());
+        System.out.println(map.get("res"));
+    }
+
+    @Test
+    public void testConfirm() throws Exception {
+        Socket socket = new Socket("localhost", 6666); // 连接指定服务器和端口
+        ClientMessagePasser.build(socket.getInputStream(), socket.getOutputStream());
+        Gson gson = new Gson();
+        MessagePasser passer = ClientMessagePasser.getInstance();
+
+        HashMap<String, String> args = new HashMap<>();
+        args.put("studentID", "1");
+        args.put("goodsID", "155");
+        passer.send(new Message("student", gson.toJson(args), "shop", "confirm"));
+        Message message = passer.receive();
+        System.out.println(message);
+
+        Map<String, String> map = gson.fromJson(message.getData(),
+                new TypeToken<Map<String, String>>(){}.getType());
+        System.out.println(map.get("res"));
+    }
+
+    @Test
+    public void test() {
+    }
 }

@@ -35,8 +35,10 @@ public class TeacherDao extends UserDao {
     }
     //查找一个老师
     public static List<Teacher> searchTeacher(String field,String value) throws Exception {
-        String sql = "select * from tb_TEACHER where "+field+"'"+value+"'";
+        String sql = "select * from tb_TEACHER where "+field+" ='"+value+"'";
+
         List<Map<String,Object>> resultList = CRUD.Query(sql,conn);
+        System.out.println(resultList);
         List<Teacher> result = new ArrayList<>();
         for(Map<String ,Object>map:resultList){
             Teacher teacher = mapToBean.map2Bean(map,Teacher.class);
@@ -63,7 +65,7 @@ public class TeacherDao extends UserDao {
                 table[temp]=innerID;
             }
             String resultTable=String.join(",",table);
-            String sql3="update tb_LESSONTABLEFORTEACHER set tableTime ='"+resultTable+"' where teacherID ='"+teacherID+"'";
+            String sql3="update tb_LESSONTABLEFORTEACHER set timeTable ='"+resultTable+"' where teacherID ='"+teacherID+"'";
             CRUD.update(sql3,conn);
             return true;
         }catch (Exception e){
