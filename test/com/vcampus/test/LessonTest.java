@@ -30,7 +30,7 @@ public class LessonTest {
 //      String s = gson.toJson(new Lesson("0002","信号与系统2","135",30,29,"1/1/2,2/1/2","计算机学院","计算机",1,"J1-101",4,1));
 //      String s = gson.toJson(new Lesson("0003","计算机组成原理","33",10,10,"1/3/4,1/5/6","计算机学院","计算机",1,"J5-201",4,1));
 
-        String s="999,000333";
+        String s="111,0002123";
         System.out.println(s);
         MessagePasser passer = ClientMessagePasser.getInstance();
 //        passer.send(new Message("no", s, "lesson", "post"));
@@ -57,7 +57,7 @@ public class LessonTest {
 //        passer.send(new Message("no", s, "lesson", "showtablename"));
 //        passer.send(new Message("no", s, "lesson", "deleteone"));
 //        passer.send(new Message("no", s, "lesson", "delete"));
-        passer.send(new Message("no", s, "lesson", "arrange"));
+//        passer.send(new Message("no", s, "lesson", "arrange"));
         Message message = (passer.receive());
         Map<String,Object> map = new Gson().fromJson(message.getData(), new TypeToken<HashMap<String,Object>>(){}.getType());
         System.out.println(map.get("res"));

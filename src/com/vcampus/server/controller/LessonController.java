@@ -225,6 +225,20 @@ public class LessonController implements Controller{
                 HashMap<String, Object> map11 = new HashMap<>();
                 map11.put("res", service.getGrade(studentID4));
                 return new Message("200", gson.toJson(map11));
+            case "getgrade":
+                //输入内部ID
+                //返回一个String的成绩
+                Lesson lesson7 = gson.fromJson(msg.getData(), Lesson.class);
+                HashMap<String, Object> map13 = new HashMap<>();
+                map13.put("res", service.getGradeStudent(lesson7.getInnerID()));
+                return new Message("200", gson.toJson(map13));
+            case "getgradeall":
+                //输入课程ID
+                //返回一个String的成绩
+                Lesson lesson8 = gson.fromJson(msg.getData(), Lesson.class);
+                HashMap<String, Object> map14 = new HashMap<>();
+                map14.put("res", service.getGradeStudentAll(lesson8.getLessonID()));
+                return new Message("200", gson.toJson(map14));
             case "showlesson":
                 //显示课程的状态：可选、已选、已满、时间冲突
                 //输入学生ID与课程号 用","隔开
