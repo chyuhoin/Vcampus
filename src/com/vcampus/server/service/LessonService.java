@@ -118,6 +118,7 @@ public class LessonService implements Service{
                 if(user.getClassroom()!= null&&user.getStatus()!=0){
                     //添加课程时也添加了教室且此时为有效课
                     //因此要添加教室的课表
+                    System.out.println("添加教室的课表");
                     res=LessonDao.selectLessonForClassroom(user.getTime(),user.getInnerID(),user.getClassroom());
                     if(!res){
                         //添加失败，恢复
@@ -355,6 +356,7 @@ public class LessonService implements Service{
     public boolean addGradeAll(String grade) {
         boolean res=false;
         try {//课程号/学生ID/成绩
+            grade = grade.substring(1, grade.length() - 1);
             String []str1s = grade.split(",");
 //            System.out.println(str1s[0]);
 //            System.out.println(str1s[1]);
@@ -707,6 +709,7 @@ public class LessonService implements Service{
                 String roomID=LessonDao.abledRoom(returnTime(time)).get(0);
                 System.out.println(roomID);
                 Lesson user=new Lesson(lesson.getLessonID(),lesson.getName(),lesson.getTeacherID(),lesson.getMaxSize(),lesson.getLeftSize(),returnTime(time),lesson.getSchool(),lesson.getMajor(),lesson.getIsExam(),roomID,lesson.getLength(),1);
+                System.out.println(user);
                 setLessonnew(user);
                 tmp=scoreTime(time,lesson.getInnerID())+doArrange(lessons);
                 if(tmp>max){
