@@ -1,5 +1,5 @@
 /** ===================================================
- * Title: PanelStudentManage.java
+ * Title: PanelStudentManage_A.java
  * Created: [2022-8-27  22:09:20] by  韩宇
  *=====================================================
  * Copyright:  Copyright (c)　东南大学计算机学院, 2021-2022
@@ -8,7 +8,7 @@
  *=====================================================
  *Revised Hisytory:
  *1. 2022-8-27,创建此文件
- *2.
+ *2. 2022-8-28,前后端连接 修改人：韩宇
  *3.
  *    修改的内容描述，修改的原因
  */
@@ -33,7 +33,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public class PanelStudentManage extends JPanel {
+public class PanelStudentManage_A extends JPanel {
     JButton btnInquire = new JButton("查询");
     JLabel lblHintLesson = new JLabel("课程编号 ：");
     JLabel lblHintTeacher = new JLabel("教师一卡通号 ：");
@@ -51,7 +51,7 @@ public class PanelStudentManage extends JPanel {
     MessagePasser passer = ClientMessagePasser.getInstance();
 
 
-    public PanelStudentManage()
+    public PanelStudentManage_A()
     {
         this.setLayout(null);
         int x=160,y=30;//起始坐标
@@ -111,24 +111,22 @@ public class PanelStudentManage extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //List<String> grades = new LinkedList<>();
-                String grades=null;
+                StringBuilder grades= new StringBuilder("");
                 int rowNum=tableModel.getRowCount();
+                //System.out.println(rowNum);
                 for(int i=0;i<rowNum;i++)
                 {
                     if(i!=rowNum-1)
-                    {
-                        grades+=txtLessonID.getText()+"/"+(String)tableModel.getValueAt(rowNum, 1)+"/"+(String)tableModel.getValueAt(rowNum, 5)+",";
-                    }
+                    { grades.append(txtLessonID.getText()).append("/").append((String) tableModel.getValueAt(i, 1)).append("/").append((String) tableModel.getValueAt(i, 5)).append(","); }
                     else
-                    {
-                        grades+=txtLessonID.getText()+"/"+(String)tableModel.getValueAt(rowNum, 1)+"/"+(String)tableModel.getValueAt(rowNum, 5);
-                    }
-
+                    { grades.append(txtLessonID.getText()).append("/").append((String) tableModel.getValueAt(i, 1)).append("/").append((String) tableModel.getValueAt(i, 5)); }
                 }
+
+                System.out.println(grades);
 
                 MessagePasser passer = ClientMessagePasser.getInstance();
                 Gson gson = new Gson();
-                String s = gson.toJson(grades);
+                String s = gson.toJson(grades.toString());
                 passer.send(new Message("admin", s, "lesson", "addgradeall"));
 
                 Message msg = passer.receive();
@@ -140,9 +138,7 @@ public class PanelStudentManage extends JPanel {
                 { informFrame("成绩添加失败",true); }
             }
         });
-
     }
-
 
     public void receiveMessage(String s)
     {
