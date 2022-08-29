@@ -29,28 +29,13 @@ public class TabbedPanelCourse_S extends JTabbedPane{
         JPanel jp12 = new JPanel();
         JPanel jp13 = new JPanel();
         //选项卡1的内容
-        //设置标题
-        JLabel lblTitleLabel = new JLabel("学生教务");
-        lblTitleLabel.setFont(new Font("宋体", Font.BOLD, 50));
-        //按钮
-        JButton btnRegister = new JButton("wwww");
-        btnRegister.setFont(new Font("宋体", Font.BOLD, 50));
 
-        jp11.add(lblTitleLabel);
-        jp12.add(btnRegister);
-
-        /*
-        this.add("选项一",jp11);	//创建三个面板
-        this.add("选项二",jp12);
-        this.add("选项三",jp13);
-
-         */
 
 
 
         this.addTab("选课系统", null, jp11,"选课系统");
-        this.addTab("已选课程", null, jp12,"点击查看选项二");
-        this.addTab("我的课表", null, jp13,"点击查看选项三");
+        this.addTab("已选课程", null, jp12,"查看已选课程");
+        this.addTab("我的课表", null, jp13,"查看我的课表");
         this.setFont(new Font("宋体", Font.BOLD, 24));
 
 
