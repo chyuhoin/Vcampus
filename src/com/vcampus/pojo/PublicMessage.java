@@ -27,4 +27,12 @@ public class PublicMessage {
     public void setContent(String content) {
         this.content = content;
     }
+
+    @Override
+    public String toString() {
+        return "PublicMessage{" +
+                "studentID='" + studentID + '\'' +
+                ", content='" + content + '\'' +
+                '}';
+    }
 }

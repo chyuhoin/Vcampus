@@ -32,14 +32,18 @@ import java.util.List;
 import java.util.Map;
 
 public class TabbedPanelLibrary_A extends JTabbedPane {
-    MessagePasser passer = ClientMessagePasser.getInstance();
 
+    MessagePasser passer = ClientMessagePasser.getInstance();
+    JLabel background = new JLabel();
     Object[] columnNames = new Object[]{"书籍号", "书名", "作者", "类型", "剩余册数"};
 
     public TabbedPanelLibrary_A() {
+        ImageIcon icon = new ImageIcon("D:\\Code\\JavaWebCode\\Vcampus\\resource\\library.jpg"); // 创建背景图片对象
+        background.setIcon(icon);
+        background.setBounds(0,0,1200,650);
         JTabbedPane JTP = this;
         //JTabbedPane jtbp=new JTabbedPane();	//创建选项卡
-        this.setTabPlacement(2);
+        this.setTabPlacement(1);
         this.setBounds(0, 0, 1400, 650);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
         JPanel jp11 = new JPanel();
@@ -98,7 +102,7 @@ public class TabbedPanelLibrary_A extends JTabbedPane {
             public void mouseExited(MouseEvent e) {
             }
         });
-
+        enquireBook.add(background);
         this.addTab("书籍信息总览", null, jp11,"书籍信息总览");//
         this.addTab("查询书籍信息", null, enquireBook,"查询书籍信息");//书籍号 书名 一个或多个
         this.addTab("书籍信息管理", null, manageBook,"书籍信息管理");//增加 删除 修改

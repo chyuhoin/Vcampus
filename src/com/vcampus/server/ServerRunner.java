@@ -11,7 +11,7 @@ public class ServerRunner implements Runnable{
     private InputStream input;
     private OutputStream output;
     private final Controller loginController, libraryController, studentController,
-            lessonController, testController, shopController;
+            lessonController, testController, shopController, chatController;
 
     public ServerRunner(Socket sock) {
         try {
@@ -26,6 +26,7 @@ public class ServerRunner implements Runnable{
         lessonController  = new LessonController();
         testController    = new TestController();
         shopController    = new ShopController();
+        chatController    = new ChatController();
 
     }
 
@@ -56,6 +57,10 @@ public class ServerRunner implements Runnable{
                     break;
                 case "shop":
                     passer.send(shopController.check(message));
+                    break;
+                case "chat":
+                    passer.send(chatController.check(message));
+                    break;
                 default:
                     passer.send(new Message("200", message.getData()));
                     break;

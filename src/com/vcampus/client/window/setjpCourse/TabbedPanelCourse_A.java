@@ -22,7 +22,7 @@ public class TabbedPanelCourse_A extends JTabbedPane {
 
     public TabbedPanelCourse_A()
     {
-        this.setTabPlacement(2);
+        this.setTabPlacement(1);
         this.setBounds(0,0,1400,650);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
         JPanel jp15 = new JPanel();

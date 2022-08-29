@@ -37,7 +37,7 @@ public class MessageDao extends BaseDao{
     //发送到公共聊天频道
     public static Boolean sendToPublic(String studentID,String message){
         try {
-            String sql = "insert into tb_PUBLICMASSAGE (studentID,content) values ('"+studentID+"','"+message+"')";
+            String sql = "insert into tb_PUBLICMESSAGE (studentID,content) values ('"+studentID+"','"+message+"')";
             CRUD.update(sql,conn);
             return true;
         }catch (Exception e){

@@ -40,4 +40,8 @@ public class StringAndImage {
 //        String str = ImageToString("src/os.png");
 //        System.out.println(str.length());
 //    }
+    @Test
+    public void test() throws IOException {
+        System.out.println(ImageToString("D:\\Code\\JavaWebCode\\Vcampus\\idea.png"));
+    }
 }
