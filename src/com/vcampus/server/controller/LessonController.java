@@ -74,9 +74,11 @@ public class LessonController implements Controller{
                 return new Message("200", gson.toJson(map9));
             case "showallteacher":
                 //输入课程号，显示所有老师
-                String lessonID1 = msg.getData();//课程ID
+                Lesson lesson9 = gson.fromJson(msg.getData(), Lesson.class);
+//                String lessonID1 = msg.getData();//课程ID
                 HashMap<String, Object> map12 = new HashMap<>();
-                map12.put("res", service.showAllTeacher(lessonID1));
+//                map12.put("res", service.showAllTeacher(lessonID1));
+                map12.put("res", service.showAllTeacher(lesson9.getLessonID()));
                 return new Message("200", gson.toJson(map12));
             case "addroom":
                 //给课程添加教室

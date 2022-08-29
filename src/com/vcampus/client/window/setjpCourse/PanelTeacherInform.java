@@ -31,7 +31,7 @@ import java.util.List;
 import java.util.Map;
 
 public class PanelTeacherInform extends JPanel{
-    int x=300,y=100;//起始坐标
+    int x=300,y=150;//起始坐标
     int lblWidth=300,lblHeight=40,txtWidth=500, txtHeight=40;
     int heightDiffer=60;//上下两行高度差
     int ltDiffer1=180;//1-左起两列标签文本框间隔 2-第三列标签文本框间隔
@@ -99,7 +99,7 @@ public class PanelTeacherInform extends JPanel{
         teacher.setTeacherID(ID);
         Gson gson = new Gson();
         String s = gson.toJson(teacher);
-        passer.send(new Message("teacher", s, "lesson", "showstatusteacher"));
+        passer.send(new Message("teacher", s, "lesson", "showstatussteacher"));
 
         try {
             Thread.sleep(100);
