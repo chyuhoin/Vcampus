@@ -26,6 +26,7 @@ public class PanelCourseSelection extends JPanel {
         this.setLayout(new BorderLayout());//边界布局
 
         //数据库连接 获取可选课程、对应老师（姓名，ID）
+        // 获取可选课程
         Lesson lesson = new Lesson();
         lesson.setMajor(student.getMajor());//设置院系
         Gson gson = new Gson();
@@ -43,11 +44,22 @@ public class PanelCourseSelection extends JPanel {
         }.getType());
         List<Lesson> res = map.get("res");
 
+        //存放课程ID
+        List<List<Lesson>> majorLesson=null;
         //内容面板
         ContentPanel[] ContentPanelList=null;
         if (res.size() != 0) {
+            for(int i=0;i<res.size();i++){
+                String currID=res.get(i).getLessonID();
+                if(majorLesson!=null)
+                for(int j=0;j<majorLesson.size();j++){
+
+                }
+            }
+
             ContentPanelList=new ContentPanel[res.size()];
             for(int i=0;i<res.size();i++) {
+                //获取课程老师
                 setData(res.get(i));
                 ContentPanelList[i] = new ContentPanel("0001", student.getStudentID(), Data);
             }
@@ -65,6 +77,9 @@ public class PanelCourseSelection extends JPanel {
 
 
     private void setData(Lesson lesson){
+
+
+
         int count=1;//查看有多少老师
         Data=new Object[count][4];
         for(int i=0;i<count;i++){
