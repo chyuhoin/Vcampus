@@ -16,6 +16,7 @@
 package com.vcampus.client.window;
 
 import com.vcampus.client.window.Button.RoundRectButton;
+import com.vcampus.client.window.Panel.ImagePanel;
 import com.vcampus.client.window.setjpStore.TabbedPanelStore_A;
 import com.vcampus.client.window.setjpStore.TabbedPanelStore_S;
 import com.vcampus.client.window.setjpStore.TabbedPanelStore_T;
@@ -45,11 +46,11 @@ public class myMainFrame extends JFrame {
     private JPanel panelMain = new JPanel();
     public JPanel panelTop = new JPanel();
     public  JPanel panelBottom = new JPanel();
-
     public JPanel panelLeft = new JPanel();
 
     public myMainFrame(String title, int flag, String ID)
     {
+
         super(title);//调用父类构造函数，设置窗口名称
         //this.setDefaultLookAndFeelDecorated(true);
         // FlatDarkLaf.setup();
@@ -72,7 +73,7 @@ public class myMainFrame extends JFrame {
         panelMain.setOpaque(false);
         panelTop.setOpaque(false);
         panelBottom.setOpaque(false);
-        //panelLeft.setOpaque(false);
+     //   panelLeft.setOpaque(false);
 
         panelMain.setLayout(null);
         panelTop.setLayout(null);
@@ -89,7 +90,7 @@ public class myMainFrame extends JFrame {
 
         //Logo
         JLabel lblLogoLabel=new JLabel("VCampus");
-        lblLogoLabel.setBounds(200,10,500,80);
+        lblLogoLabel.setBounds(900,10,500,80);
         lblLogoLabel.setFont(new Font("Jokerman",Font.BOLD, 60));
         lblLogoLabel.setForeground(Color.white);
         panelTop.add(lblLogoLabel);
@@ -99,12 +100,21 @@ public class myMainFrame extends JFrame {
         panelTop.add(btnExit);
         //加背景图片
         JLabel topBack = new JLabel();
-        ImageIcon icon = new ImageIcon("resource\\top.jpg");
-        topBack.setIcon(icon);
+        ImageIcon topImg = new ImageIcon("resource\\top.png");
+        topBack.setIcon(topImg);
         topBack.setBounds(0,0,1400,100);
         panelTop.add(topBack);
+        JLabel leftBack = new JLabel();
+        leftBack.setOpaque(false);
+       // ImageIcon leftImg = new ImageIcon("resource\\left.jpg");
+       // leftBack.setIcon(leftImg);
+       // leftBack.setBounds(0,100,180,750);
+       // panelLeft.add(leftBack);
 
         //panelLeft按钮设置
+        //设置背景
+        Color color = new Color(252,199,64);
+        panelLeft.setBackground(color);
         //菜单按钮设置
         JButton btnModule1 = new RoundRectButton("用户管理");
         JButton btnModule2 = new RoundRectButton("学籍管理");
@@ -151,19 +161,38 @@ public class myMainFrame extends JFrame {
         btnModule5.setBorder(null);
         btnModule6.setBorder(null);
 
+
+        //添加按钮
         panelLeft.add(btnModule1);
         panelLeft.add(btnModule2);
         panelLeft.add(btnModule3);
         panelLeft.add(btnModule4);
         panelLeft.add(btnModule5);
         panelLeft.add(btnModule6);
-        //设置背景
-        Color color = new Color(135,206,250);
-        panelLeft.setBackground(color);
+
         for(int i=0;i<6;i++){
+            btn[i].setOpaque(false);
             btn[i].setBackground(color);
         }
-
+       // 设置图标背景
+        ImageIcon btnicon1 = new ImageIcon("resource//user.png");
+        btnModule1.setIcon(btnicon1);
+        btnModule1.setHorizontalTextPosition(SwingConstants.RIGHT);
+        ImageIcon btnicon2 = new ImageIcon("resource//student.png");
+        btnModule2.setIcon(btnicon2);
+        btnModule2.setHorizontalTextPosition(SwingConstants.RIGHT);
+        ImageIcon btnicon3 = new ImageIcon("resource//lesson.png");
+        btnModule3.setIcon(btnicon3);
+        btnModule3.setHorizontalTextPosition(SwingConstants.RIGHT);
+        ImageIcon btnicon4 = new ImageIcon("resource//library.png");
+        btnModule4.setIcon(btnicon4);
+        btnModule4.setHorizontalTextPosition(SwingConstants.RIGHT);
+        ImageIcon btnicon5 = new ImageIcon("resource//store.png");
+        btnModule5.setIcon(btnicon5);
+        btnModule5.setHorizontalTextPosition(SwingConstants.RIGHT);
+        ImageIcon btnicon6 = new ImageIcon("resource//message.png");
+        btnModule6.setIcon(btnicon6);
+        btnModule6.setHorizontalTextPosition(SwingConstants.RIGHT);
         //创建各模块各权限对应面板
         //用户管理模块
         JTabbedPane[] userModule = {
