@@ -627,6 +627,11 @@ public class LessonService implements Service{
             System.out.println(lessons);
             if(i>0){
                 System.out.println(lessons);
+                for(Lesson data:tmp){
+                    if(!data.getInnerID().equals(data.getLessonID())){//此时不为空课程
+                        lessons.add(data);
+                    }
+                }
                 for(Lesson lesson:lessons){
                     res=valueLesson(lesson.getInnerID());
                     if(!res)return false;
@@ -655,6 +660,11 @@ public class LessonService implements Service{
                 }
             }
             if(doArrange(lessons)>0){
+                for(Lesson data:tmp){
+                    if(!data.getInnerID().equals(data.getLessonID())){//此时不为空课程
+                        lessons.add(data);
+                    }
+                }
                 for(Lesson lesson:lessons){
                     res=valueLesson(lesson.getInnerID());
                     if(!res)return false;
