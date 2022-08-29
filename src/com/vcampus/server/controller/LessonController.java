@@ -54,14 +54,16 @@ public class LessonController implements Controller{
                 else return new Message("200", "{res: 'NO'}");
             case "showtable":
                 //输入学生ID，显示其课表
-                String studentID2 = msg.getData();
-                String res1=service.showTable(studentID2);
+                Student studentID5 = gson.fromJson(msg.getData(), Student.class);
+//                String studentID2 = msg.getData();
+                String res1=service.showTable(studentID5.getStudentID());
                 return new Message("200", "{res: '"+res1+"'}");
             case "showtablename":
                 //输入学生ID，显示其课表
                 //此时把课程的内部ID改为课的名字
-                String studentID3 = msg.getData();
-                String res2=service.showTable(studentID3);
+                Student studentID6 = gson.fromJson(msg.getData(), Student.class);
+//                String studentID3 = msg.getData();
+                String res2=service.showTable(studentID6.getStudentID());
                 String res3=service.showTableName(res2);
                 return new Message("200", "{res: '"+res3+"'}");
             case "showroom":
@@ -154,10 +156,11 @@ public class LessonController implements Controller{
                 return new Message("200", gson.toJson(map3));
             case"getstudent":
                 //显示对应学生选的课 输入学生ID
-                String studentID = msg.getData();
+                Student studentID4 = gson.fromJson(msg.getData(), Student.class);
+//                String studentID = msg.getData();
 
                 HashMap<String, Object> map4 = new HashMap<>();
-                map4.put("res", service.searchMine(studentID));
+                map4.put("res", service.searchMine(studentID4.getStudentID()));
                 return new Message("200", gson.toJson(map4));
             case "getteacher":
                 //显示选择对应课程的学生 输入课程ID
@@ -179,9 +182,11 @@ public class LessonController implements Controller{
                 //输入ID，显示内容：*学生：姓名、身份（1--学生 2--老师）、ID、专业
                 //               老师：姓名、身份、ID、可选专业、偏好时间
                 //返回一个学生的类的list
-                String studentID1 = msg.getData();
+                Student studentID1 = gson.fromJson(msg.getData(), Student.class);
+//                String studentID1 = msg.getData();
                 HashMap<String, Object> map7 = new HashMap<>();
-                map7.put("res", service.searchStudent(studentID1));
+//                map7.put("res", service.searchStudent(studentID1));
+                map7.put("res", service.searchStudent(studentID1.getStudentID()));
                 return new Message("200", gson.toJson(map7));
 
             case "showstatussteacher":
@@ -245,9 +250,9 @@ public class LessonController implements Controller{
             case "showgradestudent":
                 //显示成绩
                 //输入学生ID，显示其所有成绩
-                String studentID4 = msg.getData();
+                String studentID7 = msg.getData();
                 HashMap<String, Object> map11 = new HashMap<>();
-                map11.put("res", service.getGrade(studentID4));
+                map11.put("res", service.getGrade(studentID7));
                 return new Message("200", gson.toJson(map11));
             case "getgrade":
                 //输入内部ID
@@ -266,24 +271,30 @@ public class LessonController implements Controller{
             case "showlesson":
                 //显示课程的状态：可选、已选、已满、时间冲突
                 //输入学生ID与课程号 用","隔开
-                String oldStr2 = msg.getData();
-                String[] strs2 = oldStr2.split(",");//根据，切分字符串
-                String data1=service.judgeLesson(strs2[0],strs2[1]);
+                Lesson lesson12 = gson.fromJson(msg.getData(), Lesson.class);
+//                String oldStr2 = msg.getData();
+//                String[] strs2 = oldStr2.split(",");//根据，切分字符串
+//                String data1=service.judgeLesson(strs2[0],strs2[1]);
+                String data1=service.judgeLesson(lesson12.getTeacherID(),lesson12.getInnerID());
                 return new Message("200", "{res: "+"'"+data1+"'}");
             case "selectlesson":
                 //学生选课
-                //输入学生ID与课程号 用","隔开
-                String oldStr3 = msg.getData();
-                String[] strs3 = oldStr3.split(",");//根据，切分字符串
-                if(service.selectLesson(strs3[0],strs3[1]))
+                //输入学生ID与内部ID 用","隔开
+                Lesson lesson10 = gson.fromJson(msg.getData(), Lesson.class);
+//                String oldStr3 = msg.getData();
+//                String[] strs3 = oldStr3.split(",");//根据，切分字符串
+//                if(service.selectLesson(strs3[0],strs3[1]))
+                if(service.selectLesson(lesson10.getTeacherID(),lesson10.getInnerID()))
                     return new Message("200", "{res: 'OK'}");
                 else return new Message("200", "{res: 'NO'}");
             case "returnlesson":
                 //学生退课
                 //输入学生ID与课程号 用","隔开
-                String oldStr4 = msg.getData();
-                String[] strs4 = oldStr4.split(",");//根据，切分字符串
-                if(service.returnLesson(strs4[0],strs4[1]))
+                Lesson lesson11 = gson.fromJson(msg.getData(), Lesson.class);
+//                String oldStr4 = msg.getData();
+//                String[] strs4 = oldStr4.split(",");//根据，切分字符串
+//                if(service.returnLesson(strs4[0],strs4[1]))
+                if(service.returnLesson(lesson11.getTeacherID(),lesson11.getInnerID()))
                     return new Message("200", "{res: 'OK'}");
                 else return new Message("200", "{res: 'NO'}");
 
