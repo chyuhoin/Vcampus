@@ -78,7 +78,7 @@ public class PanelTeacherInform extends JPanel{
         P1.setLayout(null);
         P2.setLayout(null);
 
-        lblHint.setBounds(x+280,40,lblWidth,lblHeight);
+        lblHint.setBounds(x+260,40,lblWidth,lblHeight);
         lblHint.setFont(new Font("宋体",Font.BOLD, 28));
         setButtonFont(btnAdd);
         btnAdd.setBounds(1000,345,btnWidth,btnHeight);
@@ -133,7 +133,7 @@ public class PanelTeacherInform extends JPanel{
             @Override
             public void actionPerformed(ActionEvent e) {
                 teacher.setTeacherName(txtName.getText());
-                teacher.setTeacherID(txtIdNum.getText());
+                //teacher.setTeacherID(txtIdNum.getText());
                 teacher.setSchool(txtDep.getText());
                 teacher.setAbledMajor(txtMajor.getText());
                 teacher.setTime(txtTime.getText());
@@ -218,6 +218,7 @@ public class PanelTeacherInform extends JPanel{
             p.add(labels[i]); p.add(texts[i]);
             texts[i].setEditable(flag);
         }
+        txtIdNum.setEditable(false);
         p.add(lblHint);
         p.updateUI();
         p.repaint();
