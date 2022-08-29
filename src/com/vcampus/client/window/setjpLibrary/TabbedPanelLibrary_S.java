@@ -23,17 +23,27 @@ import com.vcampus.net.Message;
 import com.vcampus.net.MessagePasser;
 import com.vcampus.pojo.Book;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class TabbedPanelLibrary_S extends JTabbedPane {
     MessagePasser passer = ClientMessagePasser.getInstance();
-    public TabbedPanelLibrary_S(String myID)
-    {
-        //JTabbedPane jtbp=new JTabbedPane();	//创建选项卡
+    JLabel background = new JLabel();
+    public TabbedPanelLibrary_S(String myID) {
+
+
+        ImageIcon icon = new ImageIcon("D:\\Code\\JavaWebCode\\Vcampus\\resource\\library.jpg"); // 创建背景图片对象
+        background.setIcon(icon);
+        background.setBounds(0,0,1400,650);
+       // this.add(background);
+        this.setOpaque(false);
         this.setTabPlacement(2);
         this.setBounds(0,0,1400,650);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
@@ -77,7 +87,8 @@ public class TabbedPanelLibrary_S extends JTabbedPane {
         this.addTab("查询书籍信息", null, enquireBook,"查询书籍信息");
         this.addTab("我的借阅", null, jp13,"查询借阅情况");
         this.setFont(new Font("宋体", Font.BOLD, 24));
-
+        enquireBook.setOpaque(false);
+        enquireBook.add(background);
 
 
         //jp.add(jtbp);

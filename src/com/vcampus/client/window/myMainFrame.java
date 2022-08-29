@@ -71,6 +71,7 @@ public class myMainFrame extends JFrame {
 
         panelMain.setLayout(null);
         panelTop.setLayout(null);
+       // panelTop.setLayout(new GridLayout(0,6));
         panelBottom.setLayout(null);
 
         panelTop.setBounds(0, 0, 1400, 200);

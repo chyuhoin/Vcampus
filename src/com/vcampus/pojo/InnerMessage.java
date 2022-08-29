@@ -5,15 +5,16 @@ public class InnerMessage {
     String content;
     String sender;
 
-    String innerID;
+    Integer innerID;
 
     public InnerMessage() {
     }
 
-    public InnerMessage(String studentID, String content, String from) {
+    public InnerMessage(String studentID, String content, String from, Integer innerID) {
         this.studentID=studentID;
         this.content = content;
         this.sender = from;
+        this.innerID = innerID;
     }
 
 
@@ -39,6 +40,14 @@ public class InnerMessage {
 
     public void setSender(String from) {
         this.sender = from;
+    }
+
+    public Integer getInnerID() {
+        return innerID;
+    }
+
+    public void setInnerID(Integer innerID) {
+        this.innerID = innerID;
     }
 
     @Override

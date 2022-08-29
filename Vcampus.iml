@@ -56,5 +56,6 @@
     </orderEntry>
     <orderEntry type="library" name="MigLayout" level="project" />
     <orderEntry type="library" name="flatlaf-1.6.5" level="project" />
+    <orderEntry type="library" name="beautyeye_lnf" level="project" />
   </component>
 </module>

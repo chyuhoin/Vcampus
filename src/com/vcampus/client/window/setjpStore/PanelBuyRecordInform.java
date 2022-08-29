@@ -7,6 +7,7 @@ import com.vcampus.net.MessagePasser;
 import com.vcampus.pojo.Record;
 
 public class PanelBuyRecordInform {
+
     String [] columNames = {"商品名称","售卖者","购买日期","价格","交易状态"};
     MessagePasser passer = ClientMessagePasser.getInstance();
     public PanelBuyRecordInform(String studentID){

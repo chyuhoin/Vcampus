@@ -40,6 +40,7 @@ public class myLoginFrame extends JFrame  {
 
     public myLoginFrame(String title)
     {
+
         //loginFrame = new JFrame(title);
         //调用父类构造函数，设置窗口名称
         //super(title);

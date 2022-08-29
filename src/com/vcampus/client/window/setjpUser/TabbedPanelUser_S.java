@@ -22,6 +22,7 @@ import java.awt.event.MouseListener;
 
 public class TabbedPanelUser_S extends JTabbedPane {
     public TabbedPanelUser_S(String id) {
+
         JTabbedPane JTP=this;
 
         this.setTabPlacement(2);
