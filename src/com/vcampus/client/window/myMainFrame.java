@@ -38,6 +38,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class myMainFrame extends JFrame {
     private JPanel panelMain = new JPanel();
@@ -138,28 +139,29 @@ public class myMainFrame extends JFrame {
 
         //创建各模块各权限对应面板
         //用户管理模块
+
         JTabbedPane[] userModule = {
                 new JTabbedPane(),
-                new TabbedPanelUser_S(ID),
-                new TabbedPanelUser_T(ID),
-                new TabbedPanelUser_A(ID)};
+                new TabbedPanelUser_S(flag,ID),
+                new TabbedPanelUser_T(flag,ID),
+                new TabbedPanelUser_A(flag,ID)};
         //学籍管理模块
         JTabbedPane[] schoolModule = {
                 new JTabbedPane(),
-                new TabbedPanelSchool_S(ID),
-                new TabbedPanelSchool_T(ID),
-                new TabbedPanelSchool_A(ID)};
+                new TabbedPanelSchool_S(flag,ID),
+                new TabbedPanelSchool_T(flag,ID),
+                new TabbedPanelSchool_A(flag,ID)};
         //教务系统
         JTabbedPane[] courseModule = {
                 new JTabbedPane(),
-                new TabbedPanelCourse_S(),
-                new TabbedPanelCourse_T(ID),
+                new TabbedPanelCourse_S(flag,ID),
+                new TabbedPanelCourse_T(flag,ID),
                 new TabbedPanelCourse_A()};
         //图书馆
         JTabbedPane[] LibraryModule = {
                 new JTabbedPane(),
-                new TabbedPanelLibrary_S(ID),
-                new TabbedPanelLibrary_T(ID),
+                new TabbedPanelLibrary_S(flag,ID),
+                new TabbedPanelLibrary_T(flag,ID),
                 new TabbedPanelLibrary_A()};
         //商店
         JTabbedPane[] storeModule = {

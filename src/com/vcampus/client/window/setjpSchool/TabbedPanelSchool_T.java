@@ -19,21 +19,22 @@ import javax.swing.*;
 import java.awt.*;
 
 public class TabbedPanelSchool_T extends JTabbedPane {
-    public TabbedPanelSchool_T(String ID)
+    public TabbedPanelSchool_T(int flag,String ID)
     {
-        this.setTabPlacement(2);
-        this.setBounds(0,0,1400,650);//注意！！！！！！！！！！！！！！！！！！！！！！！
+        if(flag==2) {
+            this.setTabPlacement(2);
+            this.setBounds(0, 0, 1400, 650);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
-        JPanel panel = new JPanel();
-        JLabel lblHint = new JLabel("未查询到学籍信息！");
-        lblHint.setFont(new Font("宋体", Font.BOLD, 28));
-        lblHint.setBounds(40,70,200,70);
-        panel.add(lblHint);
+            JPanel panel = new JPanel();
+            JLabel lblHint = new JLabel("未查询到学籍信息！");
+            lblHint.setFont(new Font("宋体", Font.BOLD, 28));
+            lblHint.setBounds(40, 70, 200, 70);
+            panel.add(lblHint);
 
-        this.addTab("查看个人学籍信息", null, panel,"查看个人学籍信息");
+            this.addTab("查看个人学籍信息", null, panel, "查看个人学籍信息");
 
-        this.setFont(new Font("宋体", Font.BOLD, 24));
-
+            this.setFont(new Font("宋体", Font.BOLD, 24));
+        }
 
         // jp.add(jtbp);
     }

@@ -15,30 +15,42 @@
 
 package com.vcampus.client.window.setjpCourse;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.vcampus.net.ClientMessagePasser;
+import com.vcampus.net.Message;
+import com.vcampus.net.MessagePasser;
+import com.vcampus.pojo.Lesson;
+import com.vcampus.pojo.Student;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-public class TabbedPanelCourse_S extends JTabbedPane{
-    public TabbedPanelCourse_S()
-    {
-        //JTabbedPane jtbp=new JTabbedPane();	//创建选项卡
-        this.setTabPlacement(2);
-        this.setBounds(0,0,1400,650);//注意！！！！！！！！！！！！！！！！！！！！！！！
+public class TabbedPanelCourse_S extends JTabbedPane {
+    MessagePasser passer = ClientMessagePasser.getInstance();
 
-        JPanel jp11 = new JPanel();
-        JPanel jp12 = new JPanel();
-        JPanel jp13 = new JPanel();
-        //选项卡1的内容
-
+    public TabbedPanelCourse_S(int flag,String ID) {
+        if(flag==1) {
+            this.setTabPlacement(2);
+            this.setBounds(0, 0, 1400, 650);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
 
+            JPanel jp11 = new JPanel(new GridLayout(1,1));
+            JPanel jp12 = new JPanel();
+            JPanel jp13 = new JPanel();
 
-        this.addTab("选课系统", null, jp11,"选课系统");
-        this.addTab("已选课程", null, jp12,"查看已选课程");
-        this.addTab("我的课表", null, jp13,"查看我的课表");
-        this.setFont(new Font("宋体", Font.BOLD, 24));
+            //选项卡1的内容
+            jp11.add(new PanelCourseSelection(ID));
 
 
+            this.addTab("选课系统", null, jp11, "选课系统");
+            this.addTab("已选课程", null, jp12, "查看已选课程");
+            this.addTab("我的课表", null, jp13, "查看我的课表");
+            this.setFont(new Font("宋体", Font.BOLD, 24));
+        }
 
         //jp.add(jtbp);
     }

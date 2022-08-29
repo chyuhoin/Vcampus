@@ -88,8 +88,8 @@ public class MyTablePanel extends JPanel{
             setLastPage(tblLength/getPageSize()+1);
         }
         if(getLastPage()==0) setCurrentPage(0);
-        System.out.println("表格数据总长度为："+tblLength);
-        System.out.println("总页数为："+getLastPage());
+        //System.out.println("表格数据总长度为："+tblLength);
+       // System.out.println("总页数为："+getLastPage());
 
         //布局设置---
         setLayout(layC);//卡片布局
@@ -270,7 +270,7 @@ public class MyTablePanel extends JPanel{
                 public void itemStateChanged(ItemEvent e) {
                     if (e.getStateChange() == ItemEvent.SELECTED) {
                         showTable((Integer) comboBox.getSelectedIndex() + 1);
-                        System.out.println("选中: " + comboBox.getSelectedIndex() + " = " + comboBox.getSelectedItem());
+                     //   System.out.println("选中: " + comboBox.getSelectedIndex() + " = " + comboBox.getSelectedItem());
                     }
                 }
             });
@@ -291,10 +291,10 @@ public class MyTablePanel extends JPanel{
     public void showTable(int currentPage) {
         dtm.setRowCount(0);// 清除原有行
         setCurrentPage(currentPage);//设置当前页
-        System.out.println("showTable：当前页："+getCurrentPage());
+       // System.out.println("showTable：当前页："+getCurrentPage());
 
         int tempSize= Math.min(pageSize, dList.length);
-        System.out.println("showTable：tempSize="+tempSize);
+      //  System.out.println("showTable：tempSize="+tempSize);
         for (int row = 0; row < tempSize; row++)    //获得数据
         {
             if(row+(currentPage-1)*tempSize>=dList.length) break;
@@ -308,7 +308,7 @@ public class MyTablePanel extends JPanel{
         lbl.setText("当前是第"+getCurrentPage()+"页，共"+getLastPage()+"页");
         layS.putConstraint(layS.WEST, lbl, JP1.getWidth()/2-lbl.getWidth()/2, layS.WEST, JP1);
         //默认选中的条目更新
-        System.out.println("showTable: 总页数为（if前）："+getLastPage());
+       // System.out.println("showTable: 总页数为（if前）："+getLastPage());
         if(getLastPage()>0&&comboBox!=null) {
             comboBox.setSelectedIndex(getCurrentPage() - 1);
         }

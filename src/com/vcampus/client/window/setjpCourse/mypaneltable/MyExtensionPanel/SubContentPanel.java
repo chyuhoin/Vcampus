@@ -1,6 +1,7 @@
 package com.vcampus.client.window.setjpCourse.mypaneltable.MyExtensionPanel;
 
-import tool.RoundBorder;
+
+import com.vcampus.client.window.setjpCourse.mypaneltable.RoundBorder;
 
 import javax.swing.*;
 import java.awt.*;
