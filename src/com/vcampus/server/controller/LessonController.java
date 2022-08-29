@@ -110,8 +110,9 @@ public class LessonController implements Controller{
             case"showtime":
                 //输入老师ID，返回所有不可选的时间
                 //不可选的时间有：非偏好时间、上课时间
-                String teacherID = msg.getData();//课程ID
-                String res=service.showTecherTime(teacherID);
+                Teacher teacherID = gson.fromJson(msg.getData(), Teacher.class);
+//                String teacherID = msg.getData();//课程ID
+                String res=service.showTecherTime(teacherID.getTeacherID());
                 return new Message("200", "{res: '"+res+"'}");
             case "delete":
                 //删除课程
