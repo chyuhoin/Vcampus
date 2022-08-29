@@ -22,7 +22,7 @@ import java.awt.*;
 public class TabbedPanelMessage_S extends JTabbedPane {
     public TabbedPanelMessage_S()
     {
-        this.setTabPlacement(2);
+        this.setTabPlacement(1);
         this.setBounds(0,0,1400,650);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
         JPanel jp11 = new JPanel();
