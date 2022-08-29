@@ -331,8 +331,8 @@ public class JExtensionPanel extends JPanel implements MouseListener {
 
         jsp.setViewportView(c);
         jsp.getVerticalScrollBar().setUnitIncrement(10);//设置滚轮速度
-
-        //c.setPreferredSize( new Dimension(jsp.getPreferredSize().width, 1200));
+        //有没有更好的方法
+        c.setPreferredSize( new Dimension(jsp.getPreferredSize().width, 1200));
 
         JP.add(jsp);
         f.add(JP);
