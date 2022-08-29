@@ -45,11 +45,13 @@ public class TabbedPanelStore_S extends JTabbedPane {
 
          */
 
-
-        this.addTab("学校商店", null, jp11,"点击查看学校商店");
-        this.addTab("二手商店", null, jp12,"点击查看二手商店");
+        JPanel BuyPanel = new PanelBuyGoods();
+        JPanel SellPanel = new PanelSellGoods();
+        this.addTab("商店", null, BuyPanel,"点击查看学校商店");
+        this.addTab("卖二手", null, SellPanel,"点击查看二手商店");
         this.addTab("我的购买记录", null, jp13,"点击查看我的记录");
         this.setFont(new Font("宋体", Font.BOLD, 24));
+
 
 
 
