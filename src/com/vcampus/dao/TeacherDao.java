@@ -26,7 +26,7 @@ public class TeacherDao extends UserDao {
     //删除一个老师
     public static Boolean deleteTeacher(String teacherID){
         try {
-            delete("teacherID",teacherID,"tb_USR");
+            delete("teacherID",teacherID,"tb_TEACHER");
             return true;
         }catch (Exception e){
             System.out.println("wrong");
