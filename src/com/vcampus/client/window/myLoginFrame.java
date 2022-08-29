@@ -135,7 +135,6 @@ public class myLoginFrame extends JFrame  {
                     //loginFrame.setVisible(false);
                     System.out.println("跳转完成");
                     new myMainFrame("VCampus虚拟校园系统",flag,userName);
-
                     dispose();
                 }
                 else//未输入用户名或密码，无法登陆，弹出窗口提示

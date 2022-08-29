@@ -141,16 +141,17 @@ public class StudentStatusEnquire_A extends JPanel {
 
         //照片
         ImageIcon img = null;// 这是背景图片 .png .jpg .gif 等格式的图片都可以
-        try {
-            img = new ImageIcon(StringAndImage.StringToImage(student.getImage()));
-        } catch (IOException e) {
-            e.printStackTrace();
+        if(student.getImage()!=null) {
+            try {
+                img = new ImageIcon(StringAndImage.StringToImage(student.getImage()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            //ImageIcon img = new ImageIcon(student.getImage());
+            img.setImage(img.getImage().getScaledInstance(120, 150, Image.SCALE_DEFAULT));//这里设置图片大小，目前是20*20
+            lblImg.setIcon(img);
+            lblImg.setBounds(30, 30, 120, 150);
         }
-        //ImageIcon img = new ImageIcon(student.getImage());
-        img.setImage(img.getImage().getScaledInstance(120,150,Image.SCALE_DEFAULT));//这里设置图片大小，目前是20*20
-        lblImg.setIcon(img);
-        lblImg.setBounds(30,30,120,150);
-
         //第一行信息，姓名 学号 一卡通号
         lblName.setBounds(x,y,lblWidth,lblHeight);
         txtName.setBounds(x+ltDiffer1,y,txtWidth,txtHeight);
@@ -175,8 +176,10 @@ public class StudentStatusEnquire_A extends JPanel {
 
         lblGender.setBounds(x+llDiffer,y+heightDiffer,lblWidth,lblHeight);
         txtGender.setBounds(x+llDiffer+ltDiffer1,y+heightDiffer,txtWidth,txtHeight);
-        String gender=(student.getSex()==0)?"男":"女";
-        txtGender.setText(gender);
+        if(student.getSex()!=null) {
+            String gender = (student.getSex() == 0) ? "男" : "女";
+            txtGender.setText(gender);
+        }
         setLabelFont(lblGender,txtGender);
 
         lblPolitic.setBounds(x+llDiffer*2,y+heightDiffer,lblWidth,lblHeight);
