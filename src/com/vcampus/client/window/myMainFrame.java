@@ -153,7 +153,7 @@ public class myMainFrame extends JFrame {
         JTabbedPane[] courseModule = {
                 new JTabbedPane(),
                 new TabbedPanelCourse_S(),
-                new TabbedPanelCourse_T(),
+                new TabbedPanelCourse_T(ID),
                 new TabbedPanelCourse_A()};
         //图书馆
         JTabbedPane[] LibraryModule = {

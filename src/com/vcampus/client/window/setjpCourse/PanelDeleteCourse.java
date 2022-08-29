@@ -33,7 +33,6 @@ import java.awt.event.MouseListener;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 public class PanelDeleteCourse extends JPanel{
     JButton btnInquire = new JButton("查询");//查询
     JButton btnOk = new JButton("确认");
@@ -53,45 +52,33 @@ public class PanelDeleteCourse extends JPanel{
     int btnWidth = 120, btnHeight = 30;
     int txtWidth=110, txtHeight=32;
     MessagePasser passer = ClientMessagePasser.getInstance();
-
     public PanelDeleteCourse()
     {
         this.setLayout(null);
         int x=60,y=50,differ=160;
-
         setButtonFont(btnInquire);
         btnInquire.setBounds(970,y,btnWidth,btnHeight);
-
         setButtonFont(btnOk);
         btnOk.setBounds(420,500,btnWidth,btnHeight);
-
         setButtonFont(btnCancel);
         btnCancel.setBounds(660,500,btnWidth,btnHeight);
-
         setButtonFont(btnDeleteAll);
         btnDeleteAll.setBounds(850,550,btnWidth*2,btnHeight);
 
         lblHint.setFont(new Font("宋体", Font.BOLD, 24));
         lblHint.setBounds(535,y-5,200,40);
-
         txtEnquire.setBounds(730,y,txtWidth*2,txtHeight);
         txtEnquire.setFont(new Font("楷体", Font.BOLD, 20));
-
         panel.setLayout(null);
         panel.setBounds(10,120,1200,400);
-
-        this.add(btnInquire);
-        this.add(lblHint);
-        this.add(txtEnquire);
-        this.add(panel);
-
+        this.add(btnInquire);this.add(lblHint);
+        this.add(txtEnquire);this.add(panel);
         btnInquire.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Lesson lesson=new Lesson();
                 lesson.setLessonID(txtEnquire.getText());
                 System.out.println(lesson);
-
                 Gson gson = new Gson();
                 String s = gson.toJson(lesson);
                 passer.send(new Message("admin", s, "lesson", "getone"));
@@ -102,25 +89,19 @@ public class PanelDeleteCourse extends JPanel{
                     interruptedException.printStackTrace();
                 }
                 setTable();
-                updateUI();
-                repaint();
+                updateUI();repaint();
             }
         });
-
         btnDeleteAll.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 Lesson lesson=new Lesson();
                 lesson.setLessonID(txtEnquire.getText());
                 System.out.println(lesson);
-
                 Gson gson = new Gson();
                 String s = gson.toJson(lesson);
                 passer.send(new Message("admin", s, "lesson", "delete"));
-
                 tableData=null;
-
                 deleteAll();
             }
         });
@@ -134,10 +115,8 @@ public class PanelDeleteCourse extends JPanel{
 
     public void informFrame(String title,Boolean flag)
     {
-        if(flag)
-        { JOptionPane.showMessageDialog(this, title, "警告", JOptionPane.ERROR_MESSAGE);}
-        else
-        { JOptionPane.showMessageDialog(this, title, "提示", JOptionPane.INFORMATION_MESSAGE);}
+        if(flag) { JOptionPane.showMessageDialog(this, title, "警告", JOptionPane.ERROR_MESSAGE);}
+        else { JOptionPane.showMessageDialog(this, title, "提示", JOptionPane.INFORMATION_MESSAGE);}
     }
 
     public void setTable()
@@ -161,26 +140,18 @@ public class PanelDeleteCourse extends JPanel{
                 tableData[i][3] = res.get(i).getMajor();
                 tableData[i][4] = res.get(i).getTime();
                 tableData[i][5] = res.get(i).getClassroom();
-                tableData[i][6] = res.get(i).getMaxSize();
-            }
-
+                tableData[i][6] = res.get(i).getMaxSize(); }
             tableModel =new DefaultTableModel(tableData,columnNames);
             table=new MyTable(tableModel);
             table.setRowSelectionAllowed(true);
             table.getColumnModel().getColumn(1).setPreferredWidth(120);
-
-            // 数据
             table.setRowHeight(30);// 设置行高
             table.setFont(new Font("黑体",Font.PLAIN,18));//表格字体
             table.getTableHeader().setFont(new Font("黑体",Font.BOLD,20));//表头字体
-
-            //添加渲染器
-            ButtonRenderer btnR=new ButtonRenderer("删除");
+            ButtonRenderer btnR=new ButtonRenderer("删除");//添加渲染器
             table.getColumn("操作").setCellRenderer(btnR);
-            //添加编辑器
-            ButtonEditor btnE=new ButtonEditor(new JCheckBox());
+            ButtonEditor btnE=new ButtonEditor(new JCheckBox());//添加编辑器
             table.getColumn("操作").setCellEditor(btnE);
-
             scrollPane = new JScrollPane(table);
             scrollPane.setBounds(0,0,1200,400);
             panel.add(scrollPane);
@@ -191,8 +162,6 @@ public class PanelDeleteCourse extends JPanel{
                     int rowName=btnE.getThisRow();
                     String teacherID=(String)tableModel.getValueAt(rowName, 1);
                     String courseID=txtEnquire.getText();
-                    //System.out.println(teacherID+"  "+courseID);
-
                     Lesson lesson=new Lesson();
                     lesson.setInnerID(courseID+teacherID);
                     System.out.println(lesson);
@@ -200,17 +169,14 @@ public class PanelDeleteCourse extends JPanel{
                     Gson gson = new Gson();
                     String s = gson.toJson(lesson);
                     passer.send(new Message("admin", s, "lesson", "deleteone"));
-
                     try {
                         Thread.sleep(100);
                     } catch (InterruptedException interruptedException) {
                         interruptedException.printStackTrace();
                     }
-
                     Message msg = passer.receive();
                     System.out.println(msg);
                     Map<String,Object> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String,Object>>(){}.getType());
-
                     if(map.get("res").equals("OK"))
                     {
                         informFrame("删除成功",false);
@@ -222,14 +188,9 @@ public class PanelDeleteCourse extends JPanel{
                     else { informFrame("删除失败",true); }
                 }
             });
-        }
-        else
-        {
-            informFrame("未查询到相关课程",true);
-        }
+        } else { informFrame("未查询到相关课程",true); }
         updateUI();
         repaint();
-
     }
 
     public void deleteAll()
@@ -237,19 +198,12 @@ public class PanelDeleteCourse extends JPanel{
         Message msg = passer.receive();
         System.out.println(msg);
         Map<String,Object> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String,Object>>(){}.getType());
-
         if(map.get("res").equals("OK"))
         {
             informFrame("删除成功",false);
-            remove(panel);
-            remove(btnDeleteAll);
+            remove(panel);remove(btnDeleteAll);
             updateUI();
             repaint();
-        }
-        else
-        {
-            informFrame("删除失败",true);
-        }
+        } else {informFrame("删除失败",true); }
     }
-
 }

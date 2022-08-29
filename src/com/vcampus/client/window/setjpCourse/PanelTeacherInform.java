@@ -14,10 +14,21 @@
  */
 package com.vcampus.client.window.setjpCourse;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.vcampus.net.ClientMessagePasser;
+import com.vcampus.net.Message;
+import com.vcampus.net.MessagePasser;
+import com.vcampus.pojo.Student;
+import com.vcampus.pojo.Teacher;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class PanelTeacherInform extends JPanel{
     int x=300,y=100;//起始坐标
@@ -47,7 +58,6 @@ public class PanelTeacherInform extends JPanel{
     JButton btnOk = new JButton("确定");
     JButton btnCancel = new JButton("取消");
 
-
     JLabel labels[] = {lblName,lblIdNum,lblDep,lblMajor,lblTime};
     JTextField texts[] = {txtName,txtIdNum,txtDep,txtMajor,txtTime};
 
@@ -56,15 +66,13 @@ public class PanelTeacherInform extends JPanel{
     JComboBox<String>[] comboBoxWeek;
 
     CardLayout cardLayout=new CardLayout();
+    MessagePasser passer = ClientMessagePasser.getInstance();
 
-    //Teacher teacher = new Teacher();//承接结果
+    Teacher teacher = new Teacher();//承接结果
 
-    public PanelTeacherInform()//以老师对象为参数
+    public PanelTeacherInform(String ID)//以老师对象为参数
     {
-        //this.setLayout(null);
-
         this.setLayout(cardLayout);
-        //removeAll();
         JPanel P1 = new JPanel();
         JPanel P2 = new JPanel();
         P1.setLayout(null);
@@ -81,18 +89,37 @@ public class PanelTeacherInform extends JPanel{
         setButtonFont(btnEdit);
         btnEdit.setBounds(1000,y,btnWidth,btnHeight);
 
-
-
-       //PanelTeacherInform1 P1 = new PanelTeacherInform1();//不可编辑状态
-       //PanelTeacherInform2 P2 = new PanelTeacherInform2();//可编辑状态
-
         P1.add(btnEdit);P1.add(lblHint);
         P2.add(btnAdd);P2.add(btnOk);P2.add(btnCancel);P2.add(lblHint);
 
         this.add(P1,"P1");
         this.add(P2,"P2");
-        setCard("P1");
-        setPanel(P1,false);
+
+       // Teacher t = new Teacher();
+        teacher.setTeacherID(ID);
+        Gson gson = new Gson();
+        String s = gson.toJson(teacher);
+        passer.send(new Message("teacher", s, "lesson", "showstatusteacher"));
+
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException interruptedException) {
+            interruptedException.printStackTrace();
+        }
+
+        Message msg = passer.receive();
+        Map<String, java.util.List<Teacher>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, java.util.List<Teacher>>>(){}.getType());
+        List<Teacher> res = map.get("res");
+        System.out.println(res);
+
+        if(res.size()!=0) {
+            teacher= res.get(0);
+            setCard("P1");
+            setPanel(P1,false);
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "未查询到身份信息", "警告", JOptionPane.ERROR_MESSAGE);
+        }
 
         btnEdit.addActionListener(new ActionListener() {
             @Override
@@ -105,15 +132,27 @@ public class PanelTeacherInform extends JPanel{
         btnOk.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //teacher.getName=txtName.getText():
-                //teacher.getName=txtName.getText():
-                //teacher.getName=txtName.getText():
-                //teacher.getName=txtName.getText():
-                //teacher.getName=txtName.getText():
+                teacher.setTeacherName(txtName.getText());
+                teacher.setTeacherID(txtIdNum.getText());
+                teacher.setSchool(txtDep.getText());
+                teacher.setAbledMajor(txtMajor.getText());
+                teacher.setTime(txtTime.getText());
 
-                //发消息，接收消息，中间停100ms
+                Gson gson = new Gson();
+                String s = gson.toJson(teacher);
+                passer.send(new Message("teacher", s, "lesson", "setteacher"));
 
-                if(true)//写入成功
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException interruptedException) {
+                    interruptedException.printStackTrace();
+                }
+
+                Message msg = passer.receive();
+                System.out.println(msg);
+                Map<String,Object> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String,Object>>(){}.getType());
+
+                if(map.get("res").equals("OK"))
                 {
                     informFrame("修改成功",false);
                     setCard("P1");
@@ -136,7 +175,8 @@ public class PanelTeacherInform extends JPanel{
 
         btnAdd.addActionListener(new ActionListener() {//添加非偏好时间 下拉框
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e)
+            {
 
 
             }
@@ -152,92 +192,39 @@ public class PanelTeacherInform extends JPanel{
 
     public void informFrame(String title,Boolean flag)
     {
-        if(flag)
-        { JOptionPane.showMessageDialog(this, title, "警告", JOptionPane.ERROR_MESSAGE);}
-        else
-        { JOptionPane.showMessageDialog(this, title, "提示", JOptionPane.INFORMATION_MESSAGE);}
+        if(flag) { JOptionPane.showMessageDialog(this, title, "警告", JOptionPane.ERROR_MESSAGE);}
+        else { JOptionPane.showMessageDialog(this, title, "提示", JOptionPane.INFORMATION_MESSAGE);}
     }
 
     public void setLabelFont(JLabel label,JTextField text)
     {
-        label.setFont(new Font("楷体", Font.BOLD, 24));
-        text.setFont(new Font("楷体", Font.BOLD, 20));
-        //text.setEditable(f);//true 可编辑，false 不可编辑
+        label.setFont(new Font("宋体", Font.BOLD, 24));
+        text.setFont(new Font("宋体", Font.BOLD, 20));
     }
 
     public void setPanel(JPanel p,Boolean flag)//传老师的对象
     {
-        //p.removeAll();
+        txtName.setText(teacher.getTeacherName());//姓名
+        txtIdNum.setText(teacher.getTeacherID());//一卡通
+        txtDep.setText(teacher.getSchool());//学院
+        txtMajor.setText(teacher.getAbledMajor());//专业
+        txtTime.setText(teacher.getTime());//时间（可能要转格式）
 
-        //lblHint.setBounds(x+280,40,lblWidth,lblHeight);
-        //lblHint.setFont(new Font("宋体",Font.BOLD, 28));
-        txtName.setText("xxx");//姓名
-        txtIdNum.setText("213201445");//一卡通
-        txtDep.setText("计算机科学与工程学院");//学院
-        txtMajor.setText("计算机科学与技术专业");//专业
-        txtTime.setText("周一6-7");//时间（可能要转格式）
-
-        for(int i=0;i<5;i++)
-        {
-            texts[i].setEditable(flag);
-        }
-
-        //设置其余坐标和字体
         for(int i=0;i<5;i++)
         {
             labels[i].setBounds(x,y+heightDiffer*i,lblWidth,lblHeight);
             texts[i].setBounds(x+ltDiffer1,y+heightDiffer*i,txtWidth,txtHeight);
             setLabelFont(labels[i],texts[i]);
             p.add(labels[i]); p.add(texts[i]);
+            texts[i].setEditable(flag);
         }
-
-
         p.add(lblHint);
         p.updateUI();
         p.repaint();
-
     }
     public void setButtonFont(JButton button)
     {
         button.setFont(new Font("宋体",Font.BOLD, 18));
-        //button.setOpaque(true);
         button.setContentAreaFilled(false);
     }
-
-    /*
-    public class PanelTeacherInform1 extends JPanel{
-
-        public PanelTeacherInform1()
-        {
-            this.setLayout(null);
-
-            setButtonFont(btnEdit);
-            btnEdit.setBounds(1000,y,btnWidth,btnHeight);
-            add(btnEdit);
-            //setPanel(this,false);
-        }
-
-    }
-    public class PanelTeacherInform2 extends JPanel{
-        public PanelTeacherInform2()
-        {
-            this.setLayout(null);
-
-            setButtonFont(btnAdd);
-            btnAdd.setBounds(1000,345,btnWidth,btnHeight);
-            setButtonFont(btnOk);
-            btnOk.setBounds(520,500,btnWidth,btnHeight);
-            setButtonFont(btnCancel);
-            btnCancel.setBounds(760,500,btnWidth,btnHeight);
-
-            add(btnAdd);add(btnOk);add(btnCancel);
-            //setPanel(this,true);
-
-        }
-
-    }
-
-     */
-
-
 }

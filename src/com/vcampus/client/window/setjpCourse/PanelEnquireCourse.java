@@ -41,6 +41,7 @@ public class PanelEnquireCourse extends JPanel {
     JComboBox<String> comboBox = new JComboBox<String>(listData);
     JTextField txtEnquire = new JTextField();
     MessagePasser passer = ClientMessagePasser.getInstance();
+    MyTablePanel_Course tableP=new MyTablePanel_Course(tableData,columnNames);
 
     public PanelEnquireCourse ()
     {
@@ -116,6 +117,7 @@ public class PanelEnquireCourse extends JPanel {
                 Map<String, java.util.List<Lesson>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, List<Lesson>>>(){}.getType());
                 List<Lesson> res = map.get("res");
 
+                remove(tableP);
                 //如果不空，构建表格
                 if(res.size()!=0)
                 {
@@ -152,13 +154,13 @@ public class PanelEnquireCourse extends JPanel {
 
     public void setPanel()
     {
-        //绘制表格
-       //System.out.println("chegg");
-        MyTablePanel_Course tableP=new MyTablePanel_Course(tableData,columnNames);
+        tableP=new MyTablePanel_Course(tableData,columnNames);
         this.add(tableP);
         tableP.getTable().getColumnModel().getColumn(1).setPreferredWidth(120);
         tableP.setBounds(20,110,1210,510);//设置位置和大小
 
+        updateUI();
+        repaint();
     }
 
 

@@ -10,10 +10,7 @@ import com.vcampus.server.service.LessonService;
 import com.google.gson.*;
 import com.vcampus.server.service.StudentService;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class LessonController implements Controller{
     @Override
@@ -189,10 +186,27 @@ public class LessonController implements Controller{
                 //输入ID，显示内容：学生：姓名、身份（1--学生 2--老师）、ID、专业
                 //               *老师：姓名、身份、ID、可选专业、偏好时间
                 //返回一个老师的类的list
-                String teacherID1 = msg.getData();
-                HashMap<String, Object> map8 = new HashMap<>();
-                map8.put("res", service.searchTeacher(teacherID1));
-                return new Message("200", gson.toJson(map8));
+////                String teacherID1 = msg.getData();
+//                Teacher teacher1 = gson.fromJson(msg.getData(), Teacher.class);
+//                HashMap<String, Object> map8 = new HashMap<>();
+////                map8.put("res", service.searchTeacher(teacherID1));
+//                map8.put("res", service.searchTeacher(teacher1.getTeacherID()));
+//                return new Message("200", gson.toJson(map8));
+//                String data2 = msg.getData();
+//                Map<String, String> map8 = gson.fromJson(data2, new TypeToken<HashMap<String, String>>() {}.getType());
+//                HashMap<String, Object> map15 = new HashMap<>();
+//                Set<Teacher> teacherSet = new HashSet<>();
+//                for (Map.Entry<String, String> entry : map8.entrySet()) {
+//                    teacherSet.addAll(service.searchTeacher(entry.getValue()));
+//                }
+//                map15.put("res", teacherSet);
+//                return new Message("200", gson.toJson(map15));
+                Teacher teacherID1 = gson.fromJson(msg.getData(), Teacher.class);
+//                String lessonID = msg.getData();
+                HashMap<String, Object> map15 = new HashMap<>();
+//                map5.put("res", service.getTeacher(lessonID));
+                map15.put("res", service.searchTeacher(teacherID1.getTeacherID()));
+                return new Message("200", gson.toJson(map15));
             case "setteacher":
                 //修改老师的可选专业与偏好时间
                 //输入一个老师的类
@@ -216,6 +230,14 @@ public class LessonController implements Controller{
                 String oldStr1 = msg.getData();
                 String[] strs1 = oldStr1.split(",");//根据，切分字符串
                 if(service.addGrade(strs1[0],strs1[1],Integer.parseInt(strs1[2])))
+                    return new Message("200", "{res: 'OK'}");
+                else return new Message("200", "{res: 'NO'}");
+            case "addgradeall":
+                //添加成绩
+                //输入一个String的数据
+                //课程号/学生ID/成绩用”,“隔开
+                String grade = msg.getData();
+                if(service.addGradeAll(grade))
                     return new Message("200", "{res: 'OK'}");
                 else return new Message("200", "{res: 'NO'}");
             case "showgradestudent":
