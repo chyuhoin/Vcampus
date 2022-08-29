@@ -48,6 +48,7 @@ public class PanelTeacherInform extends JPanel{
     JTextField txtMajor = new JTextField();
     JLabel lblTime = new JLabel("非偏好时间  ");
     JTextField txtTime = new JTextField();
+    JLabel lblHintTip = new JLabel("提示：输入格式 “周数/开始节数/结束节数”,示例：周三1-2节 - “3/1/2”");
 
     //JComboBox
     String[] listTime = new String[]{"","1","2","3","4","5","6","7","8","9","10","11","12","13"};
@@ -80,8 +81,11 @@ public class PanelTeacherInform extends JPanel{
 
         lblHint.setBounds(x+260,40,lblWidth,lblHeight);
         lblHint.setFont(new Font("宋体",Font.BOLD, 28));
+
+        lblHintTip.setBounds(x+30,430,lblWidth*3,lblHeight);
+        lblHintTip.setFont(new Font("宋体",Font.BOLD, 18));
         setButtonFont(btnAdd);
-        btnAdd.setBounds(1000,345,btnWidth,btnHeight);
+        btnAdd.setBounds(1000,395,btnWidth,btnHeight);
         setButtonFont(btnOk);
         btnOk.setBounds(520,500,btnWidth,btnHeight);
         setButtonFont(btnCancel);
@@ -90,7 +94,9 @@ public class PanelTeacherInform extends JPanel{
         btnEdit.setBounds(1000,y,btnWidth,btnHeight);
 
         P1.add(btnEdit);P1.add(lblHint);
-        P2.add(btnAdd);P2.add(btnOk);P2.add(btnCancel);P2.add(lblHint);
+        //P2.add(btnAdd);
+        P2.add(btnOk);P2.add(btnCancel);P2.add(lblHint);
+        P2.add(lblHintTip);
 
         this.add(P1,"P1");
         this.add(P2,"P2");
