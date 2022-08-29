@@ -1,0 +1,574 @@
+Index: src/com/vcampus/server/controller/LessonController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/com/vcampus/server/controller/LessonController.java b/src/com/vcampus/server/controller/LessonController.java
+--- a/src/com/vcampus/server/controller/LessonController.java	
++++ b/src/com/vcampus/server/controller/LessonController.java	
+@@ -73,6 +73,12 @@
+                 HashMap<String, Object> map9 = new HashMap<>();
+                 map9.put("res", service.showRoom(time));
+                 return new Message("200", gson.toJson(map9));
++            case "showallteacher":
++                //输入课程号，显示所有老师
++                String lessonID1 = msg.getData();//课程ID
++                HashMap<String, Object> map12 = new HashMap<>();
++                map12.put("res", service.showAllTeacher(lessonID1));
++                return new Message("200", gson.toJson(map12));
+             case "addroom":
+                 //给课程添加教室
+                 //输入教室ID，内部ID，给课程添加教室
+Index: src/com/vcampus/server/service/LessonService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/com/vcampus/server/service/LessonService.java b/src/com/vcampus/server/service/LessonService.java
+--- a/src/com/vcampus/server/service/LessonService.java	
++++ b/src/com/vcampus/server/service/LessonService.java	
+@@ -35,8 +35,9 @@
+                 if (LessonDao.deleteSpecificLesson(user.getLessonID()))
+                 {//删除成功
+                     res = LessonDao.addLesson(user);
+-                    if(!res)//添加失败，恢复
++                    if(!res){//添加失败，恢复
+                         LessonDao.addLesson(lessons.get(0));
++                    }
+                     else{//添加课程成功，现在添加老师的课表
+                         res=TeacherDao.selectLesson(user.getTeacherID(),user.getInnerID());
+                         if(!res){//添加老师课表失败，现在恢复
+@@ -169,11 +170,16 @@
+     public boolean setLessonnew(Lesson user) {
+         boolean res=false;
+         try {
+-            if(LessonDao.search("innerID",user.getInnerID()).isEmpty())//没有这个内部ID
++            List<Lesson>lessons=LessonDao.search("innerID",user.getInnerID());
++            if(lessons.isEmpty())//没有这个内部ID
+                 res=false;
+             else {
+                 if(deleteTest(user.getInnerID())){
+                     res=addLessonnew(user);
++                    if(!res){
++                        //添加失败，恢复
++                        addLessonnew(lessons.get(0));
++                    }
+                 }
+             }
+         } catch (Exception e) {
+@@ -191,6 +197,21 @@
+         }
+         return room;
+     }
++    public List<Teacher> showAllTeacher(String lessonID) {
++        List<Teacher> teachers=null;
++        try {
++            List<Lesson>lessons=LessonDao.search("lessonID",lessonID);
++            for(Lesson lesson:lessons){
++                List<Teacher>tmp=TeacherDao.searchTeacher("teacherID",lesson.getTeacherID());
++                for(Teacher temp:tmp){
++                    teachers.add(temp);
++                }
++            }
++        } catch (Exception e) {
++            e.printStackTrace();
++        }
++        return teachers;
++    }
+     public List<Teacher> viewTeachers(String abledMajor) {
+         List<Teacher> res = null;
+         try {
+@@ -258,7 +279,7 @@
+             String[] tmp = res.split(",");//根据，切分字符串
+             List<Teacher>teacher=TeacherDao.searchTeacher("teacherID",teacherID);
+             if(teacher.isEmpty())return null;
+-            List<Integer>Liketime= ClassTable.getTimeIndex(teacher.get(0).getTime());
++            List<Integer>Liketime= ClassTable.getTimeIndex(teacher.get(0).getTimeTable());
+             for(Integer liketime:Liketime){
+                 if(tmp[liketime].equals("0"))//如果非偏好时间没有选课，则将其变为1
+                     tmp[liketime]="1";
+@@ -487,6 +508,7 @@
+                 //没有对应数据
+                 //视为添加
+                 res = TeacherDao.addTeacher(user);
++                if(true)return true;
+             }
+             else if(!TeacherDao.deleteTeacher(user.getTeacherID())) {//视为修改
+                 //删除信息失败
+Index: src/com/vcampus/pojo/Lesson.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/com/vcampus/pojo/Lesson.java b/src/com/vcampus/pojo/Lesson.java
+--- a/src/com/vcampus/pojo/Lesson.java	
++++ b/src/com/vcampus/pojo/Lesson.java	
+@@ -19,7 +19,8 @@
+ 
+     //lesson的innerID为lessonID+teacherID，不需要手动输入
+     public Lesson(String lessonID, String name, String teacherID, Integer maxSize, Integer leftSize, String time, String school, String major, Integer isExam,String classroom,Integer length,Integer status) {
+-        this.innerID = lessonID+teacherID;
++        if(teacherID == null)this.innerID =lessonID;
++        else this.innerID = lessonID+teacherID;
+         this.lessonID = lessonID;
+         this.name = name;
+         this.teacherID = teacherID;
+Index: src/com/vcampus/dao/utils/ClassTable.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/com/vcampus/dao/utils/ClassTable.java b/src/com/vcampus/dao/utils/ClassTable.java
+--- a/src/com/vcampus/dao/utils/ClassTable.java	
++++ b/src/com/vcampus/dao/utils/ClassTable.java	
+@@ -14,8 +14,8 @@
+         List<Integer> timetable=new ArrayList<>();
+         for(String str:str1){
+             String[]temp=str.split("/");
+-            int s = Integer.valueOf(temp[0])*13+Integer.valueOf(temp[1])-1;
+-            int e = Integer.valueOf(temp[0])*13+Integer.valueOf(temp[2])-1;
++            int s = (Integer.valueOf(temp[0])-1)*13+Integer.valueOf(temp[1])-1;
++            int e = (Integer.valueOf(temp[0])-1)*13+Integer.valueOf(temp[2])-1;
+             for(int i=s;i<=e;i++)
+                 timetable.add(i);
+         }
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -1,27 +1,18 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ChangeListManager">
+-    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="修改数据库名称，修bug">
+-      <change afterPath="$PROJECT_DIR$/idea.png" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/lib/miglayout-core-javadoc.jar" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/lib/miglayout-core-sources.jar" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/lib/miglayout-core.jar" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/lib/miglayout-swing-javadoc.jar" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/lib/miglayout-swing-sources.jar" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/lib/miglayout-swing.jar" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/os.png" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/GUItest/test.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/GUItest/test.jfd" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/GUItest/test1.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/steam.png" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/星空2.jpg" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
++    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="修改数据库名称">
++      <change afterPath="$PROJECT_DIR$/test/com/vcampus/test/LessonTest.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/Vcampus.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Vcampus.iml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpMessage/TabbedPanelMessage_S.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpMessage/TabbedPanelMessage_S.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/LessonDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/LessonDao.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/MessageDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/MessageDao.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/pojo/LessonGrade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/pojo/LessonGrade.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/GUItest/test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUItest/test.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/TeacherDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/TeacherDao.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/utils/ClassTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/utils/ClassTable.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/com/vcampus/pojo/Lesson.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/pojo/Lesson.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/com/vcampus/pojo/Teacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/pojo/Teacher.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/com/vcampus/server/controller/LessonController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/server/controller/LessonController.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/com/vcampus/server/service/LessonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/server/service/LessonService.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -65,7 +56,7 @@
+     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+     &quot;last_opened_file_path&quot;: &quot;D:/Code/JavaWebCode/Vcampus/src&quot;,
+-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
++    &quot;settings.editor.selected.configurable&quot;: &quot;File.Encoding&quot;
+   },
+   &quot;keyToStringList&quot;: {
+     &quot;ChangesTree.GroupingKeys&quot;: [
+@@ -80,17 +71,16 @@
+       <recent name="D:\Code\JavaWebCode\Vcampus" />
+     </key>
+     <key name="CopyClassDialog.RECENTS_KEY">
+-      <recent name="com.vcampus.client.window" />
+       <recent name="com.vcampus.client.login" />
+     </key>
+   </component>
+-  <component name="RunManager" selected="JUnit.LessonDao.test">
+-    <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+-      <option name="MAIN_CLASS_NAME" value="com.vcampus.server.Server" />
++  <component name="RunManager" selected="JUnit.MessageDao.test">
++    <configuration name="Client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
++      <option name="MAIN_CLASS_NAME" value="com.vcampus.client.Client" />
+       <module name="Vcampus" />
+       <extension name="coverage">
+         <pattern>
+-          <option name="PATTERN" value="com.vcampus.server.*" />
++          <option name="PATTERN" value="com.vcampus.client.*" />
+           <option name="ENABLED" value="true" />
+         </pattern>
+       </extension>
+@@ -111,20 +101,23 @@
+         <option name="Make" enabled="true" />
+       </method>
+     </configuration>
+-    <configuration name="myLoginTest2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+-      <option name="MAIN_CLASS_NAME" value="com.vcampus.client.window.myLoginTest2" />
++    <configuration name="LibraryDao.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+       <module name="Vcampus" />
+       <extension name="coverage">
+         <pattern>
+-          <option name="PATTERN" value="com.vcampus.client.window.*" />
++          <option name="PATTERN" value="com.vcampus.dao.*" />
+           <option name="ENABLED" value="true" />
+         </pattern>
+       </extension>
++      <option name="PACKAGE_NAME" value="com.vcampus.dao" />
++      <option name="MAIN_CLASS_NAME" value="com.vcampus.dao.LibraryDao" />
++      <option name="METHOD_NAME" value="test" />
++      <option name="TEST_OBJECT" value="method" />
+       <method v="2">
+         <option name="Make" enabled="true" />
+       </method>
+     </configuration>
+-    <configuration name="LessonDao.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
++    <configuration name="MessageDao.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+       <module name="Vcampus" />
+       <extension name="coverage">
+         <pattern>
+@@ -133,14 +126,14 @@
+         </pattern>
+       </extension>
+       <option name="PACKAGE_NAME" value="com.vcampus.dao" />
+-      <option name="MAIN_CLASS_NAME" value="com.vcampus.dao.LessonDao" />
++      <option name="MAIN_CLASS_NAME" value="com.vcampus.dao.MessageDao" />
+       <option name="METHOD_NAME" value="test" />
+       <option name="TEST_OBJECT" value="method" />
+       <method v="2">
+         <option name="Make" enabled="true" />
+       </method>
+     </configuration>
+-    <configuration name="MessageDao.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
++    <configuration name="ShopDao.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+       <module name="Vcampus" />
+       <extension name="coverage">
+         <pattern>
+@@ -149,7 +142,7 @@
+         </pattern>
+       </extension>
+       <option name="PACKAGE_NAME" value="com.vcampus.dao" />
+-      <option name="MAIN_CLASS_NAME" value="com.vcampus.dao.MessageDao" />
++      <option name="MAIN_CLASS_NAME" value="com.vcampus.dao.ShopDao" />
+       <option name="METHOD_NAME" value="test" />
+       <option name="TEST_OBJECT" value="method" />
+       <method v="2">
+@@ -158,11 +151,9 @@
+     </configuration>
+     <recent_temporary>
+       <list>
+-        <item itemvalue="JUnit.LessonDao.test" />
+-        <item itemvalue="Application.myLoginTest2" />
+-        <item itemvalue="Application.myLoginTest" />
+-        <item itemvalue="Application.Server" />
+         <item itemvalue="JUnit.MessageDao.test" />
++        <item itemvalue="JUnit.ShopDao.test" />
++        <item itemvalue="JUnit.LibraryDao.test" />
+       </list>
+     </recent_temporary>
+   </component>
+@@ -219,14 +210,6 @@
+       <workItem from="1661493808008" duration="4491000" />
+       <workItem from="1661517869568" duration="64000" />
+       <workItem from="1661574179229" duration="55000" />
+-      <workItem from="1661578119722" duration="95000" />
+-      <workItem from="1661599830974" duration="1561000" />
+-      <workItem from="1661612199823" duration="1601000" />
+-      <workItem from="1661613824599" duration="1077000" />
+-      <workItem from="1661614922106" duration="283000" />
+-      <workItem from="1661615217119" duration="17000" />
+-      <workItem from="1661649054777" duration="1091000" />
+-      <workItem from="1661650213055" duration="3477000" />
+     </task>
+     <task id="LOCAL-00001" summary="初步写了登录注册">
+       <created>1660298515554</created>
+@@ -417,14 +400,7 @@
+       <option name="project" value="LOCAL" />
+       <updated>1661494827120</updated>
+     </task>
+-    <task id="LOCAL-00028" summary="修改数据库名称，修bug">
+-      <created>1661578142800</created>
+-      <option name="number" value="00028" />
+-      <option name="presentableId" value="LOCAL-00028" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1661578142800</updated>
+-    </task>
+-    <option name="localTasksCounter" value="29" />
++    <option name="localTasksCounter" value="28" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -473,6 +449,7 @@
+   </component>
+   <component name="VcsManagerConfiguration">
+     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
++    <MESSAGE value="完成了studentDao层，暂时没有把照片添加进去，主要是照片的读取之类的需要特殊方法，我要再学习一下" />
+     <MESSAGE value="这次初步写了libraryDao层，但引发了我一个关于数据库隔离的思考，这部分知识我还要好好学一下。目前为止我的Dao层都是静态方法，当查询的时候都是现获取的，这样的方法的弊端一个是效率问题，需要频繁开关，另一个问题则是数据库隔离的隐患。我正在考虑重写某些方法。" />
+     <MESSAGE value="重写了下CRUD类中的方法，加入了一个connection参数。写了一个BaseDao，内部定义了一个连接，各个Dao类都继承了BaseDao。现在使用同一个connection进行操作了" />
+     <MESSAGE value="为Book增加了字符串形式表示的图片，写了图片和字符串相互转化的类。&#10;修改了LibraryDao层，可以多个条件查询" />
+@@ -497,8 +474,7 @@
+     <MESSAGE value="进一步完善Dao层，写了站内消息的Dao层" />
+     <MESSAGE value="修改学生和老师类，添加了status" />
+     <MESSAGE value="修改数据库名称" />
+-    <MESSAGE value="修改数据库名称，修bug" />
+-    <option name="LAST_COMMIT_MESSAGE" value="修改数据库名称，修bug" />
++    <option name="LAST_COMMIT_MESSAGE" value="修改数据库名称" />
+   </component>
+   <component name="XSLT-Support.FileAssociations.UIState">
+     <expand />
+Index: test/com/vcampus/test/LessonTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/test/com/vcampus/test/LessonTest.java b/test/com/vcampus/test/LessonTest.java
+new file mode 100644
+--- /dev/null	
++++ b/test/com/vcampus/test/LessonTest.java	
+@@ -0,0 +1,59 @@
++package com.vcampus.test;
++
++import com.google.gson.Gson;
++import com.google.gson.JsonElement;
++import com.google.gson.reflect.TypeToken;
++import com.vcampus.net.ClientMessagePasser;
++import com.vcampus.net.Message;
++import com.vcampus.net.MessagePasser;
++import com.vcampus.pojo.Book;
++import com.vcampus.pojo.Lesson;
++import com.vcampus.pojo.Teacher;
++import com.vcampus.pojo.User;
++import org.junit.Test;
++
++import java.io.IOException;
++import java.net.Socket;
++import java.util.ArrayList;
++import java.util.HashMap;
++import java.util.List;
++import java.util.Map;
++
++public class LessonTest {
++    public static void main(String[] args) throws IOException {
++        Socket socket = new Socket("localhost", 6666); // 连接指定服务器和端口
++        ClientMessagePasser.build(socket.getInputStream(), socket.getOutputStream());
++        Gson gson = new Gson();
++//        String s = gson.toJson(new Lesson("0003","计算机组成原理",null,null,null,null,"计算机学院","计算机",1,null,null,0));
++//    String s = gson.toJson(new Teacher("33","李四","计算机学院","计算机","1/01/13",1));
++//        String s = gson.toJson(new Lesson("0002","信号与系统2","123",50,50,"1/3/4,2/3/4","计算机学院","计算机",1,"J3-201",4,1));
++//        String s = gson.toJson(new Lesson("0002","信号与系统2","135",30,30,"1/1/2,2/1/2","计算机学院","计算机",1,"J1-101",4,1));
++//        String s = gson.toJson(new Lesson("0003","计算机组成原理","33",10,10,"1/3/4,1/5/6","计算机学院","计算机",1,"J5-201",4,1));
++
++        String s="33";
++        System.out.println(s);
++        MessagePasser passer = ClientMessagePasser.getInstance();
++//        passer.send(new Message("no", s, "lesson", "post"));
++//                passer.send(new Message("no", s, "lesson", "setteacher"));
++//        passer.send(new Message("no", s, "lesson", "postone"));
++//        passer.send(new Message("no", s, "lesson", "setlesson"));
++//        passer.send(new Message("no", s, "lesson", "showlesson"));
++//        passer.send(new Message("no", s, "lesson", "selectlesson"));
++//        passer.send(new Message("no", s, "lesson", "showgradestudent"));
++//        passer.send(new Message("no", s, "lesson", "addgrade"));
++        passer.send(new Message("no", s, "lesson", "showstatussteacher"));
++//        passer.send(new Message("no", s, "lesson", "showstatusstudent"));
++        Message message = (passer.receive());
++        Map<String,Object> map = new Gson().fromJson(message.getData(), new TypeToken<HashMap<String,Object>>(){}.getType());
++        System.out.println(map.get("res"));
++    }
++}
++//    String s = gson.toJson(new Lesson("0002","信号与系统2",null,null,null,null,"计算机学院","计算机",1,null,null,0));
++//        System.out.println(s);
++//                MessagePasser passer = ClientMessagePasser.getInstance();
++//                passer.send(new Message("no", s, "lesson", "setlesson"));
++
++//    String s = gson.toJson(new Teacher("123","于济源","计算机学院","计算机","1/01/02,2/01/02,3/01/02,4/01/02,5/01/02",1));
++//        System.out.println(s);
++//                MessagePasser passer = ClientMessagePasser.getInstance();
++//                passer.send(new Message("no", s, "lesson", "setteacher"));
+\ No newline at end of file
+Index: src/com/vcampus/dao/TeacherDao.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/com/vcampus/dao/TeacherDao.java b/src/com/vcampus/dao/TeacherDao.java
+--- a/src/com/vcampus/dao/TeacherDao.java	
++++ b/src/com/vcampus/dao/TeacherDao.java	
+@@ -7,6 +7,7 @@
+ import org.junit.Test;
+ 
+ import java.rmi.MarshalledObject;
++import java.sql.SQLException;
+ import java.util.ArrayList;
+ import java.util.List;
+ import java.util.Map;
+@@ -14,14 +15,14 @@
+ import static com.vcampus.dao.utils.ClassTable.getTimeIndex;
+ 
+ public class TeacherDao extends UserDao {
+-    public static Boolean addTeacher(Teacher teacher){
+-       try {
++    public static Boolean addTeacher(Teacher teacher) throws SQLException, IllegalAccessException {
++      // try {
+            addClass(teacher,"tb_TEACHER");
+            return true;
+-       }catch (Exception e){
+-           System.out.println("wrong");
+-           return false;
+-       }
++//       }catch (Exception e){
++//           System.out.println("wrong");
++//           return false;
++//       }
+     }
+     //删除一个老师
+     public static Boolean deleteTeacher(String teacherID){
+@@ -35,7 +36,7 @@
+     }
+     //查找一个老师
+     public static List<Teacher> searchTeacher(String field,String value) throws Exception {
+-        String sql = "select * from tb_TEACHER where "+field+"'"+value+"'";
++        String sql = "select * from tb_TEACHER where "+field+"='"+value+"'";
+         List<Map<String,Object>> resultList = CRUD.Query(sql,conn);
+         List<Teacher> result = new ArrayList<>();
+         for(Map<String ,Object>map:resultList){
+@@ -45,8 +46,8 @@
+         return result;
+     }
+     //老师课表的选课与退课
+-    public static Boolean selectLesson(String teacherID,String innerID){
+-        try {
++    public static Boolean selectLesson(String teacherID,String innerID) throws Exception {
++       // try {
+             String sql = "select timeTable from tb_LESSONTABLEFORTEACHER where teacherID = '" + teacherID + "'";
+             List<Map<String, Object>> resultList = CRUD.Query(sql, conn);
+             if(resultList.isEmpty()){
+@@ -63,13 +64,13 @@
+                 table[temp]=innerID;
+             }
+             String resultTable=String.join(",",table);
+-            String sql3="update tb_LESSONTABLEFORTEACHER set tableTime ='"+resultTable+"' where teacherID ='"+teacherID+"'";
++            String sql3="update tb_LESSONTABLEFORTEACHER set timeTable ='"+resultTable+"' where teacherID ='"+teacherID+"'";
+             CRUD.update(sql3,conn);
+             return true;
+-        }catch (Exception e){
+-            System.out.println("wrong");
+-            return false;
+-        }
++//        }catch (Exception e){
++//            System.out.println("wrong");
++//            return false;
++//        }
+     }
+     //老师退课
+     public static Boolean returnLesson(String teacherID,String innerID){
+Index: .idea/dataSources.local.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/dataSources.local.xml b/.idea/dataSources.local.xml
+--- a/.idea/dataSources.local.xml	
++++ b/.idea/dataSources.local.xml	
+@@ -1,14 +1,14 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+-  <component name="dataSourceStorageLocal" created-in="IU-221.6008.13">
+-    <data-source name="vcampus" uuid="16ab1209-50a4-4f5c-abc4-19d56b62a9e5">
++  <component name="dataSourceStorageLocal" created-in="IU-222.3345.118">
++    <data-source name="vcampus" uuid="da3e7a7f-58f7-4008-9d28-dc14faad0643">
+       <database-info product="MySQL" version="5.7.38-log" jdbc-version="4.2" driver-name="MySQL Connector/J" driver-version="mysql-connector-java-8.0.25 (Revision: 08be9e9b4cba6aa115f9b27b215887af40b159e0)" dbms="MYSQL" exact-version="5.7.38" exact-driver-version="8.0">
+         <extra-name-characters>#@</extra-name-characters>
+         <identifier-quote-string>`</identifier-quote-string>
+       </database-info>
+       <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact" />
+       <secret-storage>master_key</secret-storage>
+-      <user-name>summer</user-name>
++      <user-name>Vcampus</user-name>
+       <schema-mapping>
+         <introspection-scope>
+           <node kind="schema" qname="@" />
+Index: .idea/dataSources.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/dataSources.xml b/.idea/dataSources.xml
+--- a/.idea/dataSources.xml	
++++ b/.idea/dataSources.xml	
+@@ -1,11 +1,11 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+-    <data-source source="LOCAL" name="vcampus" uuid="16ab1209-50a4-4f5c-abc4-19d56b62a9e5">
++    <data-source source="LOCAL" name="vcampus" uuid="da3e7a7f-58f7-4008-9d28-dc14faad0643">
+       <driver-ref>mysql.8</driver-ref>
+       <synchronize>true</synchronize>
+       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+-      <jdbc-url>jdbc:mysql://180.76.235.163:3306/summer</jdbc-url>
++      <jdbc-url>jdbc:mysql://180.76.235.163:3306/vcampus</jdbc-url>
+       <working-dir>$ProjectFileDir$</working-dir>
+     </data-source>
+   </component>
+Index: src/com/vcampus/pojo/Teacher.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/com/vcampus/pojo/Teacher.java b/src/com/vcampus/pojo/Teacher.java
+--- a/src/com/vcampus/pojo/Teacher.java	
++++ b/src/com/vcampus/pojo/Teacher.java	
+@@ -5,14 +5,14 @@
+     String teacherName;
+     String school;
+     String abledMajor;
+-    String time;
++    String timeTable;
+     Integer status;
+     public Teacher(String teacherID, String teacherName, String school, String abledMajor, String time,Integer status) {
+         this.teacherID = teacherID;
+         this.teacherName = teacherName;
+         this.school = school;
+         this.abledMajor = abledMajor;
+-        this.time = time;
++        this.timeTable = time;
+         this.status = status;
+     }
+ 
+@@ -43,12 +43,12 @@
+         this.abledMajor = abledMajor;
+     }
+ 
+-    public String getTime() {
+-        return time;
++    public String getTimeTable() {
++        return timeTable;
+     }
+ 
+-    public void setTime(String time) {
+-        this.time = time;
++    public void setTime(String timeTable) {
++        this.timeTable = timeTable;
+     }
+ 
+     public String getSchool() {
+@@ -74,7 +74,7 @@
+                 ", teacherName='" + teacherName + '\'' +
+                 ", school='" + school + '\'' +
+                 ", abledMajor='" + abledMajor + '\'' +
+-                ", time='" + time + '\'' +
++            //    ", time='" + time + '\'' +
+                 '}';
+     }
+ }

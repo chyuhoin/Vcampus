@@ -1,0 +1,612 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"15435ea3-daf0-45be-876d-97d3668b8c59\" name=\"Changes\" comment=\"考务系统修改\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/com/vcampus/server/controller/LessonController.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/com/vcampus/server/controller/LessonController.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"PUSH_TAGS\">\r\n      <GitPushTagMode>\r\n        <option name=\"argument\" value=\"--tags\" />\r\n        <option name=\"title\" value=\"All\" />\r\n      </GitPushTagMode>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n    <option name=\"RESET_MODE\" value=\"MIXED\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2DFN8UqGaWdtufeJ3QLOdvtrWZL\" />\r\n  <component name=\"ProjectLevelVcsManager\">\r\n    <OptionsSetting value=\"false\" id=\"Update\" />\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"foldersAlwaysOnTop\" value=\"false\" />\r\n    <option name=\"showModules\" value=\"false\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\r\n    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;D:/Code/JavaWebCode/Vcampus/src&quot;,\r\n    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;\r\n  },\r\n  &quot;keyToStringList&quot;: {\r\n    &quot;ChangesTree.GroupingKeys&quot;: [\r\n      &quot;directory&quot;,\r\n      &quot;module&quot;\r\n    ],\r\n    &quot;DatabaseDriversLRU&quot;: [\r\n      &quot;mysql&quot;\r\n    ]\r\n  }\r\n}</component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"D:\\Code\\JavaWebCode\\Vcampus\\src\" />\r\n      <recent name=\"D:\\Code\\JavaWebCode\\Vcampus\" />\r\n    </key>\r\n    <key name=\"CopyClassDialog.RECENTS_KEY\">\r\n      <recent name=\"com.vcampus.client.window\" />\r\n      <recent name=\"com.vcampus.client.login\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"JUnit.LessonDao.test\">\r\n    <configuration name=\"Server\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.vcampus.server.Server\" />\r\n      <module name=\"Vcampus\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"com.vcampus.server.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"myLoginTest\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.vcampus.client.window.myLoginTest\" />\r\n      <module name=\"Vcampus\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"com.vcampus.client.window.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"myLoginTest2\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.vcampus.client.window.myLoginTest2\" />\r\n      <module name=\"Vcampus\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"com.vcampus.client.window.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"LessonDao.test\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"Vcampus\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"com.vcampus.dao.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <option name=\"PACKAGE_NAME\" value=\"com.vcampus.dao\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.vcampus.dao.LessonDao\" />\r\n      <option name=\"METHOD_NAME\" value=\"test\" />\r\n      <option name=\"TEST_OBJECT\" value=\"method\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"MessageDao.test\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"Vcampus\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"com.vcampus.dao.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <option name=\"PACKAGE_NAME\" value=\"com.vcampus.dao\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.vcampus.dao.MessageDao\" />\r\n      <option name=\"METHOD_NAME\" value=\"test\" />\r\n      <option name=\"TEST_OBJECT\" value=\"method\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"应用程序.Server\" />\r\n        <item itemvalue=\"应用程序.myLoginTest\" />\r\n        <item itemvalue=\"JUnit.LessonDao.test\" />\r\n        <item itemvalue=\"JUnit.MessageDao.test\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"15435ea3-daf0-45be-876d-97d3668b8c59\" name=\"Changes\" comment=\"\" />\r\n      <created>1660290718338</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1660290718338</updated>\r\n      <workItem from=\"1660290720744\" duration=\"7006000\" />\r\n      <workItem from=\"1660394444650\" duration=\"60000\" />\r\n      <workItem from=\"1660394516873\" duration=\"56000\" />\r\n      <workItem from=\"1660394584644\" duration=\"9000\" />\r\n      <workItem from=\"1660395297646\" duration=\"18000\" />\r\n      <workItem from=\"1660397164596\" duration=\"38000\" />\r\n      <workItem from=\"1660397307971\" duration=\"4358000\" />\r\n      <workItem from=\"1660403234776\" duration=\"303000\" />\r\n      <workItem from=\"1660454140324\" duration=\"96000\" />\r\n      <workItem from=\"1660455383694\" duration=\"9368000\" />\r\n      <workItem from=\"1660546281143\" duration=\"210000\" />\r\n      <workItem from=\"1660553294493\" duration=\"5398000\" />\r\n      <workItem from=\"1660563636857\" duration=\"2164000\" />\r\n      <workItem from=\"1660619044349\" duration=\"4132000\" />\r\n      <workItem from=\"1660637701493\" duration=\"2215000\" />\r\n      <workItem from=\"1660639997270\" duration=\"5427000\" />\r\n      <workItem from=\"1660648925845\" duration=\"884000\" />\r\n      <workItem from=\"1660694384311\" duration=\"5422000\" />\r\n      <workItem from=\"1660745486230\" duration=\"183000\" />\r\n      <workItem from=\"1660745889106\" duration=\"473000\" />\r\n      <workItem from=\"1660815934556\" duration=\"2473000\" />\r\n      <workItem from=\"1660831786373\" duration=\"1983000\" />\r\n      <workItem from=\"1660888580099\" duration=\"3413000\" />\r\n      <workItem from=\"1660918724497\" duration=\"1503000\" />\r\n      <workItem from=\"1660922180929\" duration=\"80000\" />\r\n      <workItem from=\"1660969405563\" duration=\"1904000\" />\r\n      <workItem from=\"1660975764803\" duration=\"1456000\" />\r\n      <workItem from=\"1660977503920\" duration=\"596000\" />\r\n      <workItem from=\"1660991092243\" duration=\"1569000\" />\r\n      <workItem from=\"1660993852382\" duration=\"3050000\" />\r\n      <workItem from=\"1661001183994\" duration=\"134000\" />\r\n      <workItem from=\"1661001398741\" duration=\"2035000\" />\r\n      <workItem from=\"1661047449565\" duration=\"70000\" />\r\n      <workItem from=\"1661048117757\" duration=\"4529000\" />\r\n      <workItem from=\"1661073362879\" duration=\"595000\" />\r\n      <workItem from=\"1661147223714\" duration=\"78000\" />\r\n      <workItem from=\"1661147390790\" duration=\"5933000\" />\r\n      <workItem from=\"1661299612812\" duration=\"7912000\" />\r\n      <workItem from=\"1661346871285\" duration=\"462000\" />\r\n      <workItem from=\"1661349075908\" duration=\"562000\" />\r\n      <workItem from=\"1661393455217\" duration=\"1940000\" />\r\n      <workItem from=\"1661478189564\" duration=\"7499000\" />\r\n      <workItem from=\"1661493808008\" duration=\"4491000\" />\r\n      <workItem from=\"1661517869568\" duration=\"64000\" />\r\n      <workItem from=\"1661574179229\" duration=\"55000\" />\r\n      <workItem from=\"1661578119722\" duration=\"95000\" />\r\n      <workItem from=\"1661599830974\" duration=\"1561000\" />\r\n      <workItem from=\"1661612199823\" duration=\"1601000\" />\r\n      <workItem from=\"1661613824599\" duration=\"1077000\" />\r\n      <workItem from=\"1661614922106\" duration=\"283000\" />\r\n      <workItem from=\"1661615217119\" duration=\"17000\" />\r\n      <workItem from=\"1661649054777\" duration=\"1091000\" />\r\n      <workItem from=\"1661650213055\" duration=\"3477000\" />\r\n      <workItem from=\"1661666663630\" duration=\"13284000\" />\r\n      <workItem from=\"1661698974821\" duration=\"3789000\" />\r\n      <workItem from=\"1661740701953\" duration=\"579000\" />\r\n      <workItem from=\"1661741299965\" duration=\"62000\" />\r\n      <workItem from=\"1661741560165\" duration=\"100000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"初步写了登录注册\">\r\n      <created>1660298515554</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1660298515554</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"写了一个方法把map转为bean对象\">\r\n      <created>1660401643513</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1660401643513</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"实现可序列化接口\">\r\n      <created>1660554878384</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1660554878384</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"对注册添加了类型验证\">\r\n      <created>1660555737524</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1660555737524</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"完成了studentDao层，暂时没有把照片添加进去，主要是照片的读取之类的需要特殊方法，我要再学习一下\">\r\n      <created>1660567403654</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1660567403654</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"这次初步写了libraryDao层，但引发了我一个关于数据库隔离的思考，这部分知识我还要好好学一下。目前为止我的Dao层都是静态方法，当查询的时候都是现获取的，这样的方法的弊端一个是效率问题，需要频繁开关，另一个问题则是数据库隔离的隐患。我正在考虑重写某些方法。\">\r\n      <created>1660648795402</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1660648795402</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"重写了下CRUD类中的方法，加入了一个connection参数。写了一个BaseDao，内部定义了一个连接，各个Dao类都继承了BaseDao。现在使用同一个connection进行操作了\">\r\n      <created>1660649808298</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1660649808298</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00008\" summary=\"为Book增加了字符串形式表示的图片，写了图片和字符串相互转化的类。&#10;修改了LibraryDao层，可以多个条件查询\">\r\n      <created>1660700337585</created>\r\n      <option name=\"number\" value=\"00008\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1660700337585</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00009\" summary=\"在lessonDao层添加了增加课程的类\">\r\n      <created>1660745584712</created>\r\n      <option name=\"number\" value=\"00009\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1660745584712</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00010\" summary=\"修改了UserDao层的错误，但service和controller仍存在错误\">\r\n      <created>1660746328997</created>\r\n      <option name=\"number\" value=\"00010\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1660746328997</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00011\" summary=\"给Student添加了image对象\">\r\n      <created>1660820650348</created>\r\n      <option name=\"number\" value=\"00011\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1660820650348</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00012\" summary=\"添加了exam类，初步写了examDao层\">\r\n      <created>1660833772622</created>\r\n      <option name=\"number\" value=\"00012\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00012\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1660833772623</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00013\" summary=\"增强了student，加入了民族信息；同时推进了部分examDao层\">\r\n      <created>1660890949742</created>\r\n      <option name=\"number\" value=\"00013\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00013\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1660890949742</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00014\" summary=\"baseDao增加了一些公共函数\">\r\n      <created>1660898810557</created>\r\n      <option name=\"number\" value=\"00014\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00014\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1660898810557</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00015\" summary=\"继续完善了一些类\">\r\n      <created>1660902650513</created>\r\n      <option name=\"number\" value=\"00015\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00015\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1660902650513</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00016\" summary=\"增加了选课判断函数\">\r\n      <created>1660903186114</created>\r\n      <option name=\"number\" value=\"00016\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00016\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1660903186114</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00017\" summary=\"出bug了，测试下\">\r\n      <created>1660919678034</created>\r\n      <option name=\"number\" value=\"00017\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00017\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1660919678034</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00018\" summary=\"初步建立了课表，好难啊\">\r\n      <created>1661003442415</created>\r\n      <option name=\"number\" value=\"00018\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00018\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1661003442415</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00019\" summary=\"修改了student类\">\r\n      <created>1661048787851</created>\r\n      <option name=\"number\" value=\"00019\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00019\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1661048787851</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00020\" summary=\"在lessonDao里添加了几个函数\">\r\n      <created>1661051089899</created>\r\n      <option name=\"number\" value=\"00020\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00020\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1661051089899</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00021\" summary=\"对teacherDao层，增加了返回老师课表的功能\">\r\n      <created>1661300170937</created>\r\n      <option name=\"number\" value=\"00021\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00021\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1661300170937</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00022\" summary=\"增加了借书时间\">\r\n      <created>1661302879739</created>\r\n      <option name=\"number\" value=\"00022\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00022\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1661302879739</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00023\" summary=\"教室课表\">\r\n      <created>1661306591233</created>\r\n      <option name=\"number\" value=\"00023\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00023\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1661306591233</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00024\" summary=\"为lesson增加了room，添加了删除函数\">\r\n      <created>1661347303508</created>\r\n      <option name=\"number\" value=\"00024\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00024\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1661347303508</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00025\" summary=\"初步写了商店的dao层\">\r\n      <created>1661396068079</created>\r\n      <option name=\"number\" value=\"00025\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00025\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1661396068079</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00026\" summary=\"完善商店Dao层，BaseDao中不再处理异常，会把异常抛给具体Dao层处理\">\r\n      <created>1661481659828</created>\r\n      <option name=\"number\" value=\"00026\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00026\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1661481659828</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00027\" summary=\"修改学生和老师类，添加了status\">\r\n      <created>1661494827120</created>\r\n      <option name=\"number\" value=\"00027\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00027\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1661494827120</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00028\" summary=\"修改数据库名称，修bug\">\r\n      <created>1661578142800</created>\r\n      <option name=\"number\" value=\"00028\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00028\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1661578142800</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00029\" summary=\"考务系统修改\">\r\n      <created>1661655295898</created>\r\n      <option name=\"number\" value=\"00029\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00029\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1661655295898</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00030\" summary=\"考务系统修改\">\r\n      <created>1661657071847</created>\r\n      <option name=\"number\" value=\"00030\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00030\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1661657071847</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00031\" summary=\"考务系统修改\">\r\n      <created>1661658725523</created>\r\n      <option name=\"number\" value=\"00031\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00031\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1661658725523</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00032\" summary=\"考务系统修改\">\r\n      <created>1661659348468</created>\r\n      <option name=\"number\" value=\"00032\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00032\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1661659348468</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00033\" summary=\"考务系统修改\">\r\n      <created>1661671644124</created>\r\n      <option name=\"number\" value=\"00033\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00033\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1661671644124</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00034\" summary=\"考务系统修改\">\r\n      <created>1661674642769</created>\r\n      <option name=\"number\" value=\"00034\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00034\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1661674642769</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00035\" summary=\"考务系统修改\">\r\n      <created>1661676130692</created>\r\n      <option name=\"number\" value=\"00035\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00035\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1661676130692</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00036\" summary=\"考务系统修改\">\r\n      <created>1661686865423</created>\r\n      <option name=\"number\" value=\"00036\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00036\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1661686865423</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00037\" summary=\"考务系统修改\">\r\n      <created>1661690041505</created>\r\n      <option name=\"number\" value=\"00037\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00037\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1661690041505</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00038\" summary=\"考务系统修改\">\r\n      <created>1661694253277</created>\r\n      <option name=\"number\" value=\"00038\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00038\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1661694253277</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00039\" summary=\"考务系统修改\">\r\n      <created>1661694956861</created>\r\n      <option name=\"number\" value=\"00039\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00039\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1661694956861</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00040\" summary=\"考务系统修改\">\r\n      <created>1661696546013</created>\r\n      <option name=\"number\" value=\"00040\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00040\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1661696546013</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00041\" summary=\"考务系统修改\">\r\n      <created>1661699944645</created>\r\n      <option name=\"number\" value=\"00041\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00041\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1661699944645</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00042\" summary=\"考务系统修改\">\r\n      <created>1661700628024</created>\r\n      <option name=\"number\" value=\"00042\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00042\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1661700628024</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00043\" summary=\"考务系统修改\">\r\n      <created>1661702056579</created>\r\n      <option name=\"number\" value=\"00043\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00043\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1661702056579</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00044\" summary=\"考务系统修改\">\r\n      <created>1661741336402</created>\r\n      <option name=\"number\" value=\"00044\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00044\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1661741336402</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"45\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n        <entry key=\"c229b710-18e0-4633-9ddc-e3541ee754eb\">\r\n          <value>\r\n            <State>\r\n              <option name=\"SHOW_ONLY_AFFECTED_CHANGES\" value=\"true\" />\r\n              <option name=\"FILTERS\">\r\n                <map>\r\n                  <entry key=\"branch\">\r\n                    <value>\r\n                      <list>\r\n                        <option value=\"HEAD\" />\r\n                      </list>\r\n                    </value>\r\n                  </entry>\r\n                  <entry key=\"roots\">\r\n                    <value>\r\n                      <list>\r\n                        <option value=\"$PROJECT_DIR$\" />\r\n                      </list>\r\n                    </value>\r\n                  </entry>\r\n                </map>\r\n              </option>\r\n            </State>\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n    <option name=\"OPEN_GENERIC_TABS\">\r\n      <map>\r\n        <entry key=\"c229b710-18e0-4633-9ddc-e3541ee754eb\" value=\"TOOL_WINDOW\" />\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <option name=\"ADD_EXTERNAL_FILES_SILENTLY\" value=\"true\" />\r\n    <MESSAGE value=\"重写了下CRUD类中的方法，加入了一个connection参数。写了一个BaseDao，内部定义了一个连接，各个Dao类都继承了BaseDao。现在使用同一个connection进行操作了\" />\r\n    <MESSAGE value=\"为Book增加了字符串形式表示的图片，写了图片和字符串相互转化的类。&#10;修改了LibraryDao层，可以多个条件查询\" />\r\n    <MESSAGE value=\"在lessonDao层添加了增加课程的类\" />\r\n    <MESSAGE value=\"修改了UserDao层的错误，但service和controller仍存在错误\" />\r\n    <MESSAGE value=\"给Student添加了image对象\" />\r\n    <MESSAGE value=\"添加了exam类，初步写了examDao层\" />\r\n    <MESSAGE value=\"增强了student，加入了民族信息；同时推进了部分examDao层\" />\r\n    <MESSAGE value=\"baseDao增加了一些公共函数\" />\r\n    <MESSAGE value=\"继续完善了一些类\" />\r\n    <MESSAGE value=\"增加了选课判断函数\" />\r\n    <MESSAGE value=\"出bug了，测试下\" />\r\n    <MESSAGE value=\"初步建立了课表，好难啊\" />\r\n    <MESSAGE value=\"修改了student类\" />\r\n    <MESSAGE value=\"在lessonDao里添加了几个函数\" />\r\n    <MESSAGE value=\"对teacherDao层，增加了返回老师课表的功能\" />\r\n    <MESSAGE value=\"增加了借书时间\" />\r\n    <MESSAGE value=\"教室课表\" />\r\n    <MESSAGE value=\"为lesson增加了room，添加了删除函数\" />\r\n    <MESSAGE value=\"初步写了商店的dao层\" />\r\n    <MESSAGE value=\"完善商店Dao层，BaseDao中不再处理异常，会把异常抛给具体Dao层处理\" />\r\n    <MESSAGE value=\"进一步完善Dao层，写了站内消息的Dao层\" />\r\n    <MESSAGE value=\"修改学生和老师类，添加了status\" />\r\n    <MESSAGE value=\"修改数据库名称\" />\r\n    <MESSAGE value=\"修改数据库名称，修bug\" />\r\n    <MESSAGE value=\"考务系统修改\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"考务系统修改\" />\r\n  </component>\r\n  <component name=\"XDebuggerManager\">\r\n    <breakpoint-manager>\r\n      <breakpoints>\r\n        <breakpoint enabled=\"true\" type=\"java-exception\">\r\n          <properties class=\"java.lang.NullPointerException\" package=\"java.lang\" />\r\n          <option name=\"timeStamp\" value=\"1\" />\r\n        </breakpoint>\r\n      </breakpoints>\r\n    </breakpoint-manager>\r\n  </component>\r\n  <component name=\"XSLT-Support.FileAssociations.UIState\">\r\n    <expand />\r\n    <select />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision a843f66ee2826c89f148d562be9cd1771979dfe4)
++++ b/.idea/workspace.xml	(date 1661764293896)
+@@ -2,8 +2,11 @@
+ <project version="4">
+   <component name="ChangeListManager">
+     <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="考务系统修改">
++      <change afterPath="$PROJECT_DIR$/test/window/loginFrame.java" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/test/window/loginTest.java" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/test/window/myTest.java" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/test/window/seu.png" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/server/controller/LessonController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/server/controller/LessonController.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -70,7 +73,7 @@
+       <recent name="com.vcampus.client.login" />
+     </key>
+   </component>
+-  <component name="RunManager" selected="JUnit.LessonDao.test">
++  <component name="RunManager">
+     <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+       <option name="MAIN_CLASS_NAME" value="com.vcampus.server.Server" />
+       <module name="Vcampus" />
+@@ -145,8 +148,8 @@
+     <recent_temporary>
+       <list>
+         <item itemvalue="应用程序.Server" />
+-        <item itemvalue="应用程序.myLoginTest" />
+         <item itemvalue="JUnit.LessonDao.test" />
++        <item itemvalue="应用程序.myLoginTest" />
+         <item itemvalue="JUnit.MessageDao.test" />
+       </list>
+     </recent_temporary>
+@@ -216,7 +219,9 @@
+       <workItem from="1661698974821" duration="3789000" />
+       <workItem from="1661740701953" duration="579000" />
+       <workItem from="1661741299965" duration="62000" />
+-      <workItem from="1661741560165" duration="100000" />
++      <workItem from="1661741560165" duration="144000" />
++      <workItem from="1661752908888" duration="283000" />
++      <workItem from="1661753213083" duration="10996000" />
+     </task>
+     <task id="LOCAL-00001" summary="初步写了登录注册">
+       <created>1660298515554</created>
+@@ -526,7 +531,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1661741336402</updated>
+     </task>
+-    <option name="localTasksCounter" value="45" />
++    <task id="LOCAL-00045" summary="考务系统修改">
++      <created>1661741675916</created>
++      <option name="number" value="00045" />
++      <option name="presentableId" value="LOCAL-00045" />
++      <option name="project" value="LOCAL" />
++      <updated>1661741675916</updated>
++    </task>
++    <option name="localTasksCounter" value="46" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+Index: test/window/myTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/test/window/myTest.java b/test/window/myTest.java
+new file mode 100644
+--- /dev/null	(date 1661763818417)
++++ b/test/window/myTest.java	(date 1661763818417)
+@@ -0,0 +1,284 @@
++package window;
++
++import com.google.gson.Gson;
++import com.google.gson.reflect.TypeToken;
++import com.vcampus.client.window.myLoginFrame;
++import com.vcampus.client.window.myMainFrame;
++import com.vcampus.net.ClientMessagePasser;
++import com.vcampus.net.Message;
++import com.vcampus.net.MessagePasser;
++import com.vcampus.pojo.User;
++
++import javax.swing.*;
++import java.awt.*;
++import java.awt.event.*;
++import java.util.HashMap;
++import java.util.Map;
++
++public class myTest extends JFrame {
++    JTextField txtUserName = new JTextField(20);
++    JPasswordField txtPassWord = new JPasswordField(20);
++    JButton btnLogin = new JButton("登录");
++    JLabel lblTitleLabel=new JLabel("测试");
++
++    JLabel lblUserName = new JLabel("用户名:");
++
++    JLabel lblPassWord = new JLabel("密码:");
++
++    //加载图片
++    ImageIcon icon=new ImageIcon("test/window/seu.png");
++    //将图片放入label中
++    JLabel label=new JLabel(icon);
++
++    int flag=0;
++    String userName = "";
++
++    public myTest(String title)
++    {
++        //调用父类构造函数，设置窗口名称
++        //添加面板
++        JPanel panel = new JPanel();
++        this.add(panel);
++        //设置布局
++        panel.setLayout(null);
++
++        // 当关闭窗口时，退出整个程序
++        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
++
++        // 设置窗口的其他参数，如窗口大小
++        this.setSize(350, 270);
++        this.setResizable(true);//窗口大小不可改
++
++        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
++        this.setLocation((screenSize.width - this.getWidth()) / 2, (screenSize.height - this.getHeight()) / 2);
++
++        // 显示窗口
++        this.setVisible(true);
++
++        //显示背景
++        label.setBounds(0,0,this.getWidth(),this.getHeight());
++        this.getLayeredPane().add(label,new Integer(Integer.MIN_VALUE));
++        panel.setOpaque(false);
++        JPanel j=(JPanel)this.getContentPane();
++        j.setOpaque(false);
++
++
++
++        //设置标题
++        lblTitleLabel.setBounds(120,20,200,90);
++        lblTitleLabel.setFont(new Font("宋体",Font.BOLD, 50));
++        panel.add(lblTitleLabel);
++
++        // 创建用户名和密码输入提示 JLabel
++        lblUserName.setBounds(10,70,80,25);
++        panel.add(lblUserName);
++        lblPassWord.setBounds(10,100,80,25);
++        panel.add(lblPassWord);
++
++        //创建文本框用于用户名和密码输入
++        txtUserName.setBounds(100,70,165,25);
++        panel.add(txtUserName);
++        txtPassWord.setBounds(100,100,165,25);
++        panel.add(txtPassWord);
++
++        //创建单选按钮并设置其位置
++        JRadioButton radioBtn01 = new JRadioButton("学生");
++        JRadioButton radioBtn02 = new JRadioButton("教师");
++        JRadioButton radioBtn03 = new JRadioButton("管理员");
++        radioBtn01.setBounds(40,135,80,25);
++        radioBtn02.setBounds(120,135,80,25);
++        radioBtn03.setBounds(200,135,80,25);
++        panel.add(radioBtn01);
++        panel.add(radioBtn02);
++        panel.add(radioBtn03);
++
++        // 创建按钮组，把两个单选按钮添加到该组
++        ButtonGroup btnGroup = new ButtonGroup();
++        btnGroup.add(radioBtn01);
++        btnGroup.add(radioBtn02);
++        btnGroup.add(radioBtn03);
++
++        // 创建登录按钮
++        btnLogin.setBounds(40, 170, 260, 25);
++        panel.add(btnLogin);
++        btnLogin.setEnabled(false);
++
++        //监听三个单选按钮选中事件，选中其中一个登录按钮才可使用
++        responseSelected(radioBtn01,1);
++        responseSelected(radioBtn02,2);
++        responseSelected(radioBtn03,3);
++
++        //设置登录按钮的监听事件
++        btnLogin.addActionListener(new ActionListener() {
++            @Override
++            public void actionPerformed(ActionEvent e) {
++                if(readTextContent())
++                {
++                    switch(flag)//学生——1，教师——2，管理员——3，用以区分权限
++                    {
++                        case(1):
++                            System.out.println("学生申请登录");
++                            break;
++                        case(2):
++                            System.out.println("教师申请登录");
++                            break;
++                        case(3):
++                            System.out.println("管理员申请登录");
++                            break;
++                    }
++                    //loginFrame.setVisible(false);
++                    System.out.println("跳转完成");
++                    new myMainFrame("VCampus虚拟校园系统",flag,userName);
++
++                    dispose();
++                }
++                else//未输入用户名或密码，无法登陆，弹出窗口提示
++                {
++                    JOptionPane.showMessageDialog(panel, "用户名或密码错误！", "警告", JOptionPane.ERROR_MESSAGE);
++                    clearText();
++                }
++            }
++        });
++        this.addWindowStateListener(new WindowStateListener() {
++            @Override
++            public void windowStateChanged(WindowEvent e) {
++//                System.out.println("windowStateChanged: " + e.getNewState());
++            }
++        });
++        this.addWindowFocusListener(new WindowFocusListener() {
++            @Override
++            public void windowGainedFocus(WindowEvent e) {
++//                System.out.println("windowGainedFocus: 窗口得到焦点");
++            }
++
++            @Override
++            public void windowLostFocus(WindowEvent e) {
++//                System.out.println("windowLostFocus: 窗口失去焦点");
++            }
++        });
++        this.addWindowListener(new WindowListener() {
++            @Override
++            public void windowOpened(WindowEvent e) {
++//                System.out.println("windowOpened: 窗口首次变为可见时调用");
++            }
++
++            @Override
++            public void windowClosing(WindowEvent e) {
++//                System.out.println("windowClosing: 用户试图从窗口的系统菜单中关闭窗口时调用");
++            }
++
++            @Override
++            public void windowClosed(WindowEvent e) {
++//                System.out.println("windowClosed: 窗口调用 dispose 而将其关闭时调用");
++            }
++
++            @Override
++            public void windowIconified(WindowEvent e) {
++//                System.out.println("windowIconified: 窗口从正常状态变为最小化状态时调用");
++            }
++
++            @Override
++            public void windowDeiconified(WindowEvent e) {
++//                System.out.println("windowDeiconified: 窗口从最小化状态变为正常状态时调用");
++            }
++
++            @Override
++            public void windowActivated(WindowEvent e) {
++//                System.out.println("windowActivated: 窗口变为活动状态时调用");
++            }
++
++            @Override
++            public void windowDeactivated(WindowEvent e) {
++//                System.out.println("windowDeactivated: 窗口变为不再是活动状态时调用");
++            }
++        });
++        this.addMouseMotionListener(new MouseMotionListener() {
++            @Override
++            public void mouseDragged(MouseEvent e) {
++                // 鼠标保持按下状态移动即为拖动
++//                System.out.println("鼠标拖动");
++            }
++            @Override
++            public void mouseMoved(MouseEvent e) {
++//                System.out.println("鼠标移动");
++            }
++        });
++        this.addComponentListener(new ComponentAdapter() {//拖动窗口监听
++
++            public void componentResized(ComponentEvent e) {
++                System.out.println("窗口拖动");
++                Resized();
++            }
++        });
++}
++
++    public Boolean readTextContent()
++    {
++        //读取输入的用户名和密码
++        userName = txtUserName.getText().trim();
++        String passWord = new String(txtPassWord.getPassword());
++
++        MessagePasser passer = ClientMessagePasser.getInstance();
++        User user = new User(userName, passWord, flag);
++        Gson gson = new Gson();
++        passer.send(new Message("no", gson.toJson(user), "login", "get"));
++
++        Message msg = passer.receive();
++        Map<String,Object> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String,Object>>(){}.getType());
++        return map.get("res").equals("OK");
++    }
++
++    //选中学生/教师/管理员后的响应
++    public void responseSelected(JRadioButton button, int num)
++    {
++        button.addActionListener(new ActionListener() {
++            @Override
++            public void actionPerformed(ActionEvent e) {
++                if(button.isSelected())//如果单选按钮选中，登录按钮才可使用，否则登录按钮无效
++                {
++                    btnLogin.setEnabled(true);//
++                    flag=num;//学生——1，教师——2，管理员——3，用以区分权限
++                }
++            }
++        });
++    }
++
++    public void clearText()
++    {
++        txtUserName.setText("");
++        txtPassWord.setText("");
++    }
++    public void Resized()
++    {
++        System.out.println(this.getWidth());
++        int width=this.getWidth();//获取窗口宽度
++        int height=this.getHeight();//获取窗口高度 你也可以设置高度居中
++
++        label.setBounds(0,0,this.getWidth(),this.getHeight());
++        //图片
++        lblTitleLabel.setBounds((int) (width*0.15), (int) (height*0.05), (int) (width*0.3), (int) (height*0.2));
++        lblTitleLabel.setFont(new Font("宋体",Font.BOLD, (int) (width*height*0.00015)));
++        //标题
++
++        lblUserName.setBounds((int) (width*0.02), (int) (height*0.3), (int) (width*0.09), (int) (height*0.1));
++        lblUserName.setFont(new Font("宋体",Font.BOLD, (int) (width*height*0.00004)));
++
++        lblPassWord.setBounds((int) (width*0.02), (int) (height*0.45), (int) (width*0.09), (int) (height*0.1));
++        lblPassWord.setFont(new Font("宋体",Font.BOLD, (int) (width*height*0.00004)));
++
++        txtUserName.setBounds((int) (width*0.1), (int) (height*0.3), (int) (width*0.4), (int) (height*0.1));
++        txtUserName.setFont(new Font("宋体",Font.BOLD, (int) (width*height*0.00004)));
++        //(起始点x，起始点y，宽地w，高h) 标签设置宽高不明显//将lable放在 窗口左边的1/2处
++//
++        txtPassWord.setBounds((int) (width*0.1), (int) (height*0.45), (int) (width*0.4), (int) (height*0.1));
++        txtPassWord.setFont(new Font("宋体",Font.BOLD, (int) (width*height*0.00004)));
++        //(起始点x，起始点y，宽地w，高h)//宽度始终是窗口的1/2
++//
++        btnLogin.setBounds((int) (width*0.05), (int) (height*0.7), (int) (width*0.5), (int) (height*0.15));
++        //(起始点x，起始点y，宽地w，高h)
++    }
++    public static void main(String[] args){
++        myTest frame = new myTest("登录");
++    }
++
++}
+Index: test/window/loginFrame.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/test/window/loginFrame.java b/test/window/loginFrame.java
+new file mode 100644
+--- /dev/null	(date 1661756438090)
++++ b/test/window/loginFrame.java	(date 1661756438090)
+@@ -0,0 +1,195 @@
++package window;
++
++import com.google.gson.Gson;
++import com.google.gson.reflect.TypeToken;
++import com.vcampus.client.window.myMainFrame;
++import com.vcampus.net.ClientMessagePasser;
++import com.vcampus.net.Message;
++import com.vcampus.net.MessagePasser;
++import com.vcampus.pojo.User;
++
++import javax.swing.*;
++import java.awt.*;
++import java.awt.event.ActionEvent;
++import java.awt.event.ActionListener;
++import java.awt.event.WindowEvent;
++import java.awt.event.WindowStateListener;
++import java.util.HashMap;
++import java.util.Map;
++
++public class loginFrame extends JFrame {
++
++    JTextField txtUserName = new JTextField(20);
++    JPasswordField txtPassWord = new JPasswordField(20);
++    JButton btnLogin = new JButton("登录");
++    //JFrame loginFrame;
++    int flag=0;
++    String userName = "";
++
++    public loginFrame(String title)
++    {
++        //loginFrame = new JFrame(title);
++        //调用父类构造函数，设置窗口名称
++        //super(title);
++        //添加面板
++        JPanel panel = new JPanel();
++        this.add(panel);
++        //设置布局
++        panel.setLayout(null);
++
++        // 当关闭窗口时，退出整个程序
++        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
++
++        // 设置窗口的其他参数，如窗口大小
++        this.setSize(350, 270);
++        this.setResizable(false);//窗口大小不可改
++
++        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
++        this.setLocation((screenSize.width - this.getWidth()) / 2, (screenSize.height - this.getHeight()) / 2);
++
++        // 显示窗口
++        this.setVisible(true);
++
++        //设置标题
++        JLabel lblTitleLabel=new JLabel("用户登录");
++        lblTitleLabel.setBounds(120,20,100,45);
++        lblTitleLabel.setFont(new Font("宋体",Font.BOLD, 20));
++        panel.add(lblTitleLabel);
++
++        // 创建用户名和密码输入提示 JLabel
++        JLabel lblUserName = new JLabel("用户名:");
++        lblUserName.setBounds(10,70,80,25);
++        panel.add(lblUserName);
++        JLabel lblPassWord = new JLabel("密码:");
++        lblPassWord.setBounds(10,100,80,25);
++        panel.add(lblPassWord);
++
++        //创建文本框用于用户名和密码输入
++        //JTextField userText = new JTextField(20);
++        txtUserName.setBounds(100,70,165,25);
++        panel.add(txtUserName);
++        //JPasswordField passWordText = new JPasswordField(20);
++        txtPassWord.setBounds(100,100,165,25);
++        panel.add(txtPassWord);
++
++        //创建单选按钮并设置其位置
++        JRadioButton radioBtn01 = new JRadioButton("学生");
++        JRadioButton radioBtn02 = new JRadioButton("教师");
++        JRadioButton radioBtn03 = new JRadioButton("管理员");
++        radioBtn01.setBounds(40,135,80,25);
++        radioBtn02.setBounds(120,135,80,25);
++        radioBtn03.setBounds(200,135,80,25);
++        panel.add(radioBtn01);
++        panel.add(radioBtn02);
++        panel.add(radioBtn03);
++
++        // 创建按钮组，把两个单选按钮添加到该组
++        ButtonGroup btnGroup = new ButtonGroup();
++        btnGroup.add(radioBtn01);
++        btnGroup.add(radioBtn02);
++        btnGroup.add(radioBtn03);
++
++        // 创建登录按钮
++        //JButton loginButton = new JButton("登录");
++        btnLogin.setBounds(40, 170, 260, 25);
++        panel.add(btnLogin);
++        btnLogin.setEnabled(false);
++
++        //监听三个单选按钮选中事件，选中其中一个登录按钮才可使用
++        responseSelected(radioBtn01,1);
++        responseSelected(radioBtn02,2);
++        responseSelected(radioBtn03,3);
++
++        // JFrame tempjf=this;
++        //设置登录按钮的监听事件
++        btnLogin.addActionListener(new ActionListener() {
++            @Override
++            public void actionPerformed(ActionEvent e) {
++                if(readTextContent())
++                {
++                    switch(flag)//学生——1，教师——2，管理员——3，用以区分权限
++                    {
++                        case(1):
++                            System.out.println("学生申请登录");
++                            break;
++                        case(2):
++                            System.out.println("教师申请登录");
++                            break;
++                        case(3):
++                            System.out.println("管理员申请登录");
++                            break;
++                    }
++                    //loginFrame.setVisible(false);
++                    System.out.println("跳转完成");
++                    new myMainFrame("VCampus虚拟校园系统",flag,userName);
++
++                    dispose();
++                }
++                else//未输入用户名或密码，无法登陆，弹出窗口提示
++                {
++                    JOptionPane.showMessageDialog(panel, "用户名或密码错误！", "警告", JOptionPane.ERROR_MESSAGE);
++                    clearText();
++                }
++            }
++        });
++    }
++
++    public Boolean readTextContent()
++    {
++        //读取输入的用户名和密码
++        /*String userName = txtUserName.getText();
++        String passWord = new String(txtPassWord.getPassword());
++
++        if(userName.length()!=0 && passWord.length()!=0)//如果用户名和密码已输入
++        {
++            System.out.println(userName+'\n'+passWord);//输出登录名和密码
++            return true;
++        }
++        else
++            return false;
++
++         */
++
++        //读取输入的用户名和密码
++        userName = txtUserName.getText().trim();
++        String passWord = new String(txtPassWord.getPassword());
++
++        MessagePasser passer = ClientMessagePasser.getInstance();
++        User user = new User(userName, passWord, flag);
++        Gson gson = new Gson();
++        passer.send(new Message("no", gson.toJson(user), "login", "get"));
++
++        Message msg = passer.receive();
++        Map<String,Object> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String,Object>>(){}.getType());
++        return map.get("res").equals("OK");
++
++//        if(userName.length()!=0 && passWord.length()!=0)//如果用户名和密码已输入
++//        {
++//            System.out.println(userName+'\n'+passWord);//输出登录名和密码
++//            return true;
++//        }
++//        else
++//            return false;
++    }
++
++    //选中学生/教师/管理员后的响应
++    public void responseSelected(JRadioButton button, int num)
++    {
++        button.addActionListener(new ActionListener() {
++            @Override
++            public void actionPerformed(ActionEvent e) {
++                if(button.isSelected())//如果单选按钮选中，登录按钮才可使用，否则登录按钮无效
++                {
++                    btnLogin.setEnabled(true);//
++                    flag=num;//学生——1，教师——2，管理员——3，用以区分权限
++                }
++            }
++        });
++    }
++
++    public void clearText()
++    {
++        txtUserName.setText("");
++        txtPassWord.setText("");
++    }
++}
+Index: test/window/loginTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/test/window/loginTest.java b/test/window/loginTest.java
+new file mode 100644
+--- /dev/null	(date 1661754286460)
++++ b/test/window/loginTest.java	(date 1661754286460)
+@@ -0,0 +1,34 @@
++package window;
++
++import com.vcampus.client.window.myLoginFrame;
++import com.vcampus.net.ClientMessagePasser;
++
++import javax.swing.*;
++import java.io.IOException;
++import java.net.Socket;
++
++public class loginTest {
++    public static void main(String[] args)
++    {
++
++        Socket socket = null; // 连接指定服务器和端口
++        try {
++            socket = new Socket("localhost", 6666);
++            ClientMessagePasser.build(socket.getInputStream(), socket.getOutputStream());
++        } catch (IOException e) {
++            e.printStackTrace();
++        }
++        myLoginFrame frame = new myLoginFrame("登录");
++        // 当关闭窗口时，退出整个程序
++       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
++
++        // 设置窗口的其他参数，如窗口大小
++        frame.setSize(500, 500);
++        frame.setResizable(true);//窗口大小不可改
++
++        // 显示窗口
++        frame.setVisible(true);
++
++
++    }
++}
