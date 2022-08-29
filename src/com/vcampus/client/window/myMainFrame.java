@@ -192,7 +192,7 @@ public class myMainFrame extends JFrame {
                 new JTabbedPane(),
                 new TabbedPanelMessage_S(),
                 new TabbedPanelMessage_T(),
-                new TabbedPanelMessage_A()};
+                new TabbedPanelMessage_A(ID)};
 
         //菜单按钮响应函数
         btnModule1.addActionListener(new ActionListener() {
