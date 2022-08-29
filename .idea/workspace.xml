@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="界面改为了侧边栏">
-      <change afterPath="$PROJECT_DIR$/resource/button.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resource/icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/Button/RoundBorder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/Button/RoundRectButton.java" afterDir="false" />
+    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="考务系统修改">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/myMainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/myMainFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpUser/TabbedPanelUser_A.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpUser/TabbedPanelUser_A.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/server/controller/LessonController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/server/controller/LessonController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,26 +39,26 @@
     <option name="foldersAlwaysOnTop" value="false" />
     <option name="showModules" value="false" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/Code/JavaWebCode/Vcampus/lib",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Code/JavaWebCode/Vcampus/lib&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   },
-  "keyToStringList": {
-    "ChangesTree.GroupingKeys": [
-      "directory",
-      "module"
+  &quot;keyToStringList&quot;: {
+    &quot;ChangesTree.GroupingKeys&quot;: [
+      &quot;directory&quot;,
+      &quot;module&quot;
     ],
-    "DatabaseDriversLRU": [
-      "mysql"
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Code\JavaWebCode\Vcampus\lib" />
@@ -78,7 +73,7 @@
       <recent name="com.vcampus.client.login" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.myLoginTest">
+  <component name="RunManager" selected="JUnit.LessonDao.test">
     <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.vcampus.server.Server" />
       <module name="Vcampus" />
@@ -155,8 +150,6 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.myLoginTest" />
-        <item itemvalue="Application.Server" />
         <item itemvalue="JUnit.StringAndImage.test" />
         <item itemvalue="JUnit.LessonDao.test" />
         <item itemvalue="JUnit.MessageDao.test" />
@@ -499,7 +492,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661763246770</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="考务系统修改">
+      <created>1661768295746</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1661768295746</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -569,11 +569,11 @@
     <MESSAGE value="修改学生和老师类，添加了status" />
     <MESSAGE value="修改数据库名称" />
     <MESSAGE value="修改数据库名称，修bug" />
-    <MESSAGE value="考务系统修改" />
     <MESSAGE value="写了点商店的界面" />
     <MESSAGE value="修bug" />
     <MESSAGE value="界面改为了侧边栏" />
-    <option name="LAST_COMMIT_MESSAGE" value="界面改为了侧边栏" />
+    <MESSAGE value="考务系统修改" />
+    <option name="LAST_COMMIT_MESSAGE" value="考务系统修改" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
