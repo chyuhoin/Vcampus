@@ -53,8 +53,10 @@ public class InnerMessage {
     @Override
     public String toString() {
         return "InnerMessage{" +
+                "studentID='" + studentID + '\'' +
                 ", content='" + content + '\'' +
                 ", sender='" + sender + '\'' +
+                ", innerID=" + innerID +
                 '}';
     }
 }
