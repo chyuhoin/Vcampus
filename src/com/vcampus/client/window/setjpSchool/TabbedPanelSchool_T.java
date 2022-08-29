@@ -21,7 +21,7 @@ import java.awt.*;
 public class TabbedPanelSchool_T extends JTabbedPane {
     public TabbedPanelSchool_T(String ID)
     {
-        this.setTabPlacement(2);
+        this.setTabPlacement(1);
         this.setBounds(0,0,1400,650);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
         JPanel panel = new JPanel();

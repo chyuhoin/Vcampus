@@ -37,15 +37,13 @@ public class TabbedPanelLibrary_S extends JTabbedPane {
     MessagePasser passer = ClientMessagePasser.getInstance();
     JLabel background = new JLabel();
     public TabbedPanelLibrary_S(String myID) {
-
-
-        ImageIcon icon = new ImageIcon("D:\\Code\\JavaWebCode\\Vcampus\\resource\\library.jpg"); // 创建背景图片对象
+        ImageIcon icon = new ImageIcon("resource\\library.jpg"); // 创建背景图片对象
         background.setIcon(icon);
-        background.setBounds(0,0,1400,650);
+        background.setBounds(0,0,1200,650);
        // this.add(background);
         this.setOpaque(false);
-        this.setTabPlacement(2);
-        this.setBounds(0,0,1400,650);//注意！！！！！！！！！！！！！！！！！！！！！！！
+        this.setTabPlacement(1);
+        this.setBounds(0,0,1200,650);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
         JPanel jp11 = new JPanel();
         JPanel jp12 = new JPanel();
@@ -89,8 +87,5 @@ public class TabbedPanelLibrary_S extends JTabbedPane {
         this.setFont(new Font("宋体", Font.BOLD, 24));
         enquireBook.setOpaque(false);
         enquireBook.add(background);
-
-
-        //jp.add(jtbp);
     }
 }

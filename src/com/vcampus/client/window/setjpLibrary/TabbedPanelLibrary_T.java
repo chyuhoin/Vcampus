@@ -34,7 +34,7 @@ public class TabbedPanelLibrary_T extends JTabbedPane {
     public TabbedPanelLibrary_T(String myID)
     {
         //JTabbedPane jtbp=new JTabbedPane();	//创建选项卡
-        this.setTabPlacement(2);
+        this.setTabPlacement(1);
         this.setBounds(0,0,1400,650);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
 

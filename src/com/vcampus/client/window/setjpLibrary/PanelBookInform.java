@@ -49,7 +49,7 @@ public class PanelBookInform extends JPanel {
         this.setLayout(null);
         //setPanel(book,false);
         int x=380,y=30;//起始坐标
-        int lblWidth=300,lblHeight=40,txtWidth=500, txtHeight=40;
+        int lblWidth=200,lblHeight=40,txtWidth=300, txtHeight=40;
         int heightDiffer=60;//上下两行高度差
         int ltDiffer1=150;//1-左起两列标签文本框间隔 2-第三列标签文本框间隔
         removeAll();
