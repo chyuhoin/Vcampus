@@ -15,6 +15,7 @@
  */
 package com.vcampus.client.window;
 
+import com.vcampus.client.window.Button.RoundRectButton;
 import com.vcampus.client.window.setjpStore.TabbedPanelStore_A;
 import com.vcampus.client.window.setjpStore.TabbedPanelStore_S;
 import com.vcampus.client.window.setjpStore.TabbedPanelStore_T;
@@ -105,22 +106,28 @@ public class myMainFrame extends JFrame {
 
         //panelLeft按钮设置
         //菜单按钮设置
-        JButton btnModule1 = new JButton("用户管理");
-        JButton btnModule2 = new JButton("学籍管理");
-        JButton btnModule3 = new JButton("教务管理");
-        JButton btnModule4 = new JButton("校图书馆");
-        JButton btnModule5 = new JButton("校园商店");
-        JButton btnModule6 = new JButton("站内消息");
+        JButton btnModule1 = new RoundRectButton("用户管理");
+        JButton btnModule2 = new RoundRectButton("学籍管理");
+        JButton btnModule3 = new RoundRectButton("教务管理");
+        JButton btnModule4 = new RoundRectButton("校图书馆");
+        JButton btnModule5 = new RoundRectButton("校园商店");
+        JButton btnModule6 = new RoundRectButton("站内消息");
         JButton[] btn = {btnModule1,btnModule2,btnModule3,btnModule4,btnModule5,btnModule6};
         //退出按钮
 
 
-        btnModule1.setFont(new Font("宋体",Font.BOLD, 24));
-        btnModule2.setFont(new Font("宋体",Font.BOLD, 24));
-        btnModule3.setFont(new Font("宋体",Font.BOLD, 24));
-        btnModule4.setFont(new Font("宋体",Font.BOLD, 24));
-        btnModule5.setFont(new Font("宋体",Font.BOLD, 24));
-        btnModule6.setFont(new Font("宋体",Font.BOLD, 24));
+        btnModule1.setFont(new Font("正楷",Font.BOLD, 24));
+        btnModule1.setForeground(Color.WHITE);
+        btnModule2.setFont(new Font("正楷",Font.BOLD, 24));
+        btnModule2.setForeground(Color.WHITE);
+        btnModule3.setFont(new Font("正楷",Font.BOLD, 24));
+        btnModule3.setForeground(Color.WHITE);
+        btnModule4.setFont(new Font("正楷",Font.BOLD, 24));
+        btnModule4.setForeground(Color.WHITE);
+        btnModule5.setFont(new Font("正楷",Font.BOLD, 24));
+        btnModule5.setForeground(Color.WHITE);
+        btnModule6.setFont(new Font("正楷",Font.BOLD, 24));
+        btnModule6.setForeground(Color.WHITE);
 
         btnModule1.setBounds(20,10,150,60);
         btnModule2.setBounds(20,10+110,150,60);
@@ -128,6 +135,7 @@ public class myMainFrame extends JFrame {
         btnModule4.setBounds(20,10+110*3,150,60);
         btnModule5.setBounds(20,10+110*4,150,60);
         btnModule6.setBounds(20,10+110*5,150,60);
+
 
 //        btnModule1.setContentAreaFilled(false);
 //        btnModule2.setContentAreaFilled(false);
@@ -201,8 +209,10 @@ public class myMainFrame extends JFrame {
 
                 for(int i=0;i<6;i++){
                     btn[i].setBackground(color);
+                    btn[i].setForeground(Color.WHITE);
                 }
                 btnModule1.setBackground(Color.WHITE);
+                btnModule1.setForeground(Color.BLACK);
                 setPanelSwitch(userModule[flag]);
                 System.out.println("用户管理系统");
             }
@@ -213,8 +223,10 @@ public class myMainFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 for(int i=0;i<6;i++){
                     btn[i].setBackground(color);
+                    btn[i].setForeground(Color.WHITE);
                 }
                 btnModule2.setBackground(Color.WHITE);
+                btnModule2.setForeground(Color.BLACK);
                 setPanelSwitch(schoolModule[flag]);
                 System.out.println("学籍管理系统");
             }
@@ -225,8 +237,10 @@ public class myMainFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 for(int i=0;i<6;i++){
                     btn[i].setBackground(color);
+                    btn[i].setForeground(Color.WHITE);
                 }
                 btnModule3.setBackground(Color.WHITE);
+                btnModule3.setForeground(Color.BLACK);
                 setPanelSwitch(courseModule[flag]);
                 System.out.println("教务管理系统");
             }
@@ -237,8 +251,10 @@ public class myMainFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 for(int i=0;i<6;i++){
                 btn[i].setBackground(color);
+                    btn[i].setForeground(Color.WHITE);
             }
                 btnModule4.setBackground(Color.WHITE);
+                btnModule4.setForeground(Color.BLACK);
                 setPanelSwitch(LibraryModule[flag]);
                 System.out.println("图书馆管理系统");
             }
@@ -249,8 +265,10 @@ public class myMainFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 for(int i=0;i<6;i++){
                     btn[i].setBackground(color);
+                    btn[i].setForeground(Color.WHITE);
                 }
                 btnModule5.setBackground(Color.WHITE);
+                btnModule5.setForeground(Color.BLACK);
                 setPanelSwitch(storeModule[flag]);
                 System.out.println("校园商城管理系统");
             }
@@ -261,8 +279,10 @@ public class myMainFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 for(int i=0;i<6;i++){
                     btn[i].setBackground(color);
+                    btn[i].setForeground(Color.WHITE);
                 }
                 btnModule6.setBackground(Color.WHITE);
+                btnModule6.setForeground(Color.BLACK);
                 setPanelSwitch(messageModule[flag]);
                 System.out.println("站内消息管理系统");
             }

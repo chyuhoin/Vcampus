@@ -22,7 +22,7 @@ public class TabbedPanelUser_A extends JTabbedPane{
     public TabbedPanelUser_A(String id)
     {
         this.setTabPlacement(1);
-        this.setBounds(0,0,1400,650);//注意！！！！！！！！！！！！！！！！！！！！！！！
+        this.setBounds(0,0,1200,650);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
         // 创建卡片布局，卡片间水平和竖直间隔为 10
         final CardLayout layout_Card = new CardLayout(10, 10);
@@ -39,6 +39,6 @@ public class TabbedPanelUser_A extends JTabbedPane{
         this.addTab("个人信息",null,jp11,"查看个人信息");
         this.addTab("用户信息管理",null,jp12,"查询和修改用户基本信息");
        //this.addTab("权限设置",null,jp13,"修改权限");
-        this.setFont(new Font("宋体",Font.BOLD,24));
+        this.setFont(new Font("正楷",Font.BOLD,24));
     }
 }
