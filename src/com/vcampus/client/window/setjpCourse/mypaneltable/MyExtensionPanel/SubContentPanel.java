@@ -27,6 +27,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -282,6 +284,8 @@ public class SubContentPanel extends JPanel{
         String ss = gson.toJson(temp);
         passer.send(new Message("admin", ss, "lesson", "getone"));
 
+
+
         Message msg2 = passer.receive();
         Map<String, java.util.List<Lesson>> map2 = new Gson().fromJson(msg2.getData(), new TypeToken<HashMap<String, java.util.List<Lesson>>>() {
         }.getType());
@@ -421,4 +425,32 @@ public class SubContentPanel extends JPanel{
         btn2.setFont(new Font("黑体",Font.PLAIN,size));
     }
 
+    public void upDateSubPanel(ContentPanel panel_super){
+        panel_super.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                getDataFromSQL(lessonID,Info[3].toString());
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+    }
 }
