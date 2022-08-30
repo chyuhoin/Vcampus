@@ -83,6 +83,7 @@ public class PanelMyPurchaseOrder_ST extends JPanel{
     public void setTable(Object[] columnNames,Object[][] tableData)
     {
         //remove(tablePanel);
+        tablePanel.removeAll();
         this.add(lblHint);
         System.out.println("构件表格");
         DefaultTableModel model= new DefaultTableModel(tableData,columnNames);
@@ -186,6 +187,8 @@ public class PanelMyPurchaseOrder_ST extends JPanel{
         this.add(tablePanel);
         updateUI();
         repaint();
+        tablePanel.updateUI();
+        tablePanel.repaint();
     }
 }
 

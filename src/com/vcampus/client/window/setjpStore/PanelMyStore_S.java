@@ -172,6 +172,7 @@ public class PanelMyStore_S  extends JPanel{
                     {
                         informFrame("修改成功！",false);
                         setPanel2(goods);
+                        setCard("panelInform");
                     }
 
                 }
@@ -321,6 +322,7 @@ public class PanelMyStore_S  extends JPanel{
 
     public void setTable(int width,int height)
     {
+        tablePanel.removeAll();
         DefaultTableModel model= new DefaultTableModel(tableData,columnNames);
         table=new MyTable_Shop(model);
         table.setRowSelectionAllowed(true);
@@ -391,8 +393,8 @@ public class PanelMyStore_S  extends JPanel{
             }
         });
 
-        updateUI();
-        repaint();
+        tablePanel.updateUI();
+        tablePanel.repaint();
     }
 
     public void addPicture(JLabel lbl) {

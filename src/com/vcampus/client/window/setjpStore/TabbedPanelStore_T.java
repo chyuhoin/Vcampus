@@ -40,7 +40,7 @@ public class TabbedPanelStore_T extends JTabbedPane {
         this.setTabPlacement(1);
         this.setBounds(0,0,1400,650);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
-        PanelHomePage_ST homePage = new PanelHomePage_ST();
+        PanelHomePage_ST homePage = new PanelHomePage_ST(ID,flag);
         PanelMyPurchaseOrder_ST myPurchase = new PanelMyPurchaseOrder_ST(ID,flag);
 
         this.addTab("商城首页", null, homePage,"商城首页");
