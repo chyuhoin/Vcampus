@@ -19,24 +19,25 @@ import javax.swing.*;
 import java.awt.*;
 
 public class TabbedPanelStore_T extends JTabbedPane {
-    public TabbedPanelStore_T()
+    public TabbedPanelStore_T(int flag)
     {
-        this.setTabPlacement(1);
-        this.setBounds(0,0,1400,650);//注意！！！！！！！！！！！！！！！！！！！！！！！
+        if(flag==2) {
+            this.setTabPlacement(1);
+            this.setBounds(0, 0, 1400, 650);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
-        JPanel jp11 = new JPanel();
-        JPanel jp12 = new JPanel();
-        JPanel jp13 = new JPanel();
-        //选项卡1的内容
-        //设置标题
-        JLabel lblTitleLabel = new JLabel("教师校园商城");
-        lblTitleLabel.setFont(new Font("宋体", Font.BOLD, 50));
-        //按钮
-        JButton btnRegister = new JButton("SSSSS");
-        btnRegister.setFont(new Font("宋体", Font.BOLD, 50));
+            JPanel jp11 = new JPanel();
+            JPanel jp12 = new JPanel();
+            JPanel jp13 = new JPanel();
+            //选项卡1的内容
+            //设置标题
+            JLabel lblTitleLabel = new JLabel("教师校园商城");
+            lblTitleLabel.setFont(new Font("宋体", Font.BOLD, 50));
+            //按钮
+            JButton btnRegister = new JButton("SSSSS");
+            btnRegister.setFont(new Font("宋体", Font.BOLD, 50));
 
-        jp11.add(lblTitleLabel);
-        jp12.add(btnRegister);
+            jp11.add(lblTitleLabel);
+            jp12.add(btnRegister);
 
         /*
         this.add("选项一",jp11);	//创建三个面板
@@ -46,12 +47,12 @@ public class TabbedPanelStore_T extends JTabbedPane {
          */
 
 
-        this.addTab("选项一", null, jp11,"点击查看选项一");
-        this.addTab("选项二", null, jp12,"点击查看选项二");
-        this.addTab("选项三", null, jp13,"点击查看选项三");
-        this.setFont(new Font("宋体", Font.BOLD, 24));
+            this.addTab("选项一", null, jp11, "点击查看选项一");
+            this.addTab("选项二", null, jp12, "点击查看选项二");
+            this.addTab("选项三", null, jp13, "点击查看选项三");
+            this.setFont(new Font("宋体", Font.BOLD, 24));
 
-
+        }
 
         //jp.add(jtbp);
     }

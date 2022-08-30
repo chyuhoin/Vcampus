@@ -1,12 +1,35 @@
+/** ===================================================
+ * Title: PanelStudentManage_T.java
+ * Created: [2022-8-30  00:53:12] by  张星喆
+ *=====================================================
+ * Copyright:  Copyright (c)　东南大学计算机学院, 2021-2022
+ * =====================================================
+ * Description: 教务系统-学生-选课-基于选课的小面板，存放每位老师的信息
+ *=====================================================
+ *Revised Hisytory:
+ *1. 2022-8-30,创建此文件
+ *2. 2022-8-30,完善设置
+ *3.2022-8-30,前后端连接 修改人：张星喆
+ *    修改的内容描述，修改的原因
+ */
 package com.vcampus.client.window.setjpCourse.mypaneltable.MyExtensionPanel;
 
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.vcampus.client.window.setjpCourse.mypaneltable.RoundBorder;
+import com.vcampus.net.ClientMessagePasser;
+import com.vcampus.net.Message;
+import com.vcampus.net.MessagePasser;
+import com.vcampus.pojo.Lesson;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class SubContentPanel extends JPanel{
@@ -15,11 +38,12 @@ public class SubContentPanel extends JPanel{
 
     //数据
     private String lessonID=null;//课程ID
+    private Lesson mylesson=null;//当前课程
     private String studentID=null;//学生ID
     private Object[] Info=new Object[4];//教师-时间-最大人数-教师ID
     private int nowNum=0;//当前已选人数
     private int MaxNum=0;
-    public String statusLesson=null;//判断课程状态
+    public String statusLesson="Optional";//判断课程状态，初始化为可选
 
     //控件
     private JLabel[] lblList=new JLabel[3];//信息
@@ -29,22 +53,28 @@ public class SubContentPanel extends JPanel{
     private JLabel lblFlag=new JLabel();//状态标签1：已选、可选、已满
     private JLabel lblFlag2=new JLabel();//状态标签2：是否冲突
 
-
+    MessagePasser passer = ClientMessagePasser.getInstance();
 
     /**
      * 构造函数
-     * @param lID
+     * @param lesson
+     * @param sID
      * @param info
+     * @param supPanel
      */
-    public SubContentPanel(String lID,String sID,Object[] info){
+    public SubContentPanel(Lesson lesson, String sID, Object[] info, JPanel supPanel){
         super();
         thisPanel=this;
-        lessonID=lID;
+        lessonID=lesson.getLessonID();
+        mylesson=lesson;
         studentID=sID;
         Info=info;
+        setSuperPanel(supPanel);
         //状态获取
-        setJudgeLesson(lID,Info[3].toString(),sID);
+        setJudgeLesson(lessonID,Info[3].toString(),sID);
+        //panel设置
         createSubContent();
+        this.setPreferredSize(new Dimension(superPanel.getPreferredSize().width/3,200));
     }
     public SubContentPanel(){
         super();
@@ -60,7 +90,8 @@ public class SubContentPanel extends JPanel{
         SpringLayout layS=new SpringLayout();
         this.setLayout(layS);
         this.setBorder(new RoundBorder(Color.GRAY));
-        //内容
+
+        //内容设置
         String[] strLbl=new String[]{"教师：","时间：","已选："};
         Object[] strText=new Object[]{"","",50};
         if(Info.length==4){
@@ -74,8 +105,8 @@ public class SubContentPanel extends JPanel{
             lblList[i]=new JLabel(strLbl[i]);
             add(lblList[i]);
             if(i==0){
-                layS.putConstraint(layS.NORTH,lblList[i],10,layS.NORTH,this);
-                layS.putConstraint(layS.WEST,lblList[i],10,layS.WEST,this);
+                layS.putConstraint(layS.NORTH,lblList[i],20,layS.NORTH,this);
+                layS.putConstraint(layS.WEST,lblList[i],20,layS.WEST,this);
             }else {
                 layS.putConstraint(layS.NORTH,lblList[i],10,layS.SOUTH,lblList[i-1]);
                 layS.putConstraint(layS.WEST,lblList[i],0,layS.WEST,lblList[i-1]);
@@ -86,16 +117,21 @@ public class SubContentPanel extends JPanel{
                 textList[i]=new JTextField(nowNum+"/"+strText[i]);
             else textList[i]=new JTextField(strText[i].toString());
             add(textList[i]);
+            textList[i].setEditable(false);//设置不可编辑
             layS.putConstraint(layS.NORTH,textList[i], 0,layS.NORTH,lblList[i]);
             layS.putConstraint(layS.WEST,textList[i],10,layS.EAST,lblList[i]);
-            layS.putConstraint(layS.EAST,textList[i],-10,layS.EAST,this);
+            layS.putConstraint(layS.EAST,textList[i],-20,layS.EAST,this);
         }
+
+        //首先更新课程状态
+        getDataFromSQL(lessonID,Info[3].toString());
+
 
         //状态标签1
         setLabel1();
         add(lblFlag);
-        layS.putConstraint(layS.NORTH,lblFlag, 10,layS.SOUTH,lblList[2]);
-        layS.putConstraint(layS.WEST,lblFlag,10,layS.WEST,this);
+        layS.putConstraint(layS.NORTH,lblFlag, 20,layS.SOUTH,lblList[2]);
+        layS.putConstraint(layS.WEST,lblFlag,20,layS.WEST,this);
         //状态标签2
         setLabel2();
         add(lblFlag2);
@@ -113,40 +149,63 @@ public class SubContentPanel extends JPanel{
         layS.putConstraint(layS.NORTH,btn, 10,layS.SOUTH,lblFlag);
         layS.putConstraint(layS.EAST,btn,-10,layS.WEST,btn2);
 
+        //设置文本大小
+        setBoundsOfC();
+
         //监听事件
+        //选课按钮
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //数据库操作--------------------------------------------------------------------------------
-                //数据库操作-------------------------------------------------------------
-                String tID=Info[3].toString();//老师ID
-                setJudgeLesson(lessonID,tID,studentID);//更新课程状态
-                if(Objects.equals(statusLesson, "Optional")){//课程可选
-                    JOptionPane.showMessageDialog(
-                            superPanel==null?thisPanel:superPanel,//避免superPanel为空
-                            "选课成功",
-                            " ",
-                            JOptionPane.INFORMATION_MESSAGE
-                    );
+                //首先更新课程状态
+                getDataFromSQL(lessonID,Info[3].toString());
 
+                //一些必要信息：教师ID,便于缩短程序长度
+                String tID=Info[3].toString();//老师ID
+
+                //课程状态为“可选”
+                if(Objects.equals(statusLesson, "Optional")){
                     //数据库操作--------------------------------------------------------------------------------
-                    //数据库操作------------------------------------------------------------------------------------------------
-                    //利用lessonID+teacherID
-                    int cNum=30;//获取当前已选人数=总人数-剩余名额
-                    upDateData(cNum);
-                    System.out.println("选择课程：" + lessonID + " 老师：" + Info[3].toString());
-                }else {
+                    //"selectlesson"执行选课
+                    Lesson lesson = new Lesson();
+                    lesson.setTeacherID(studentID);//设置学生ID
+                    lesson.setInnerID(lessonID+tID);//设置内部ID
+                    Gson gson = new Gson();
+                    String s = gson.toJson(lesson);
+                    passer.send(new Message("admin", s, "lesson", "selectlesson"));
+
+                    Message msg = passer.receive();
+                    Map<String, String> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, String>>() {
+                    }.getType());
+                    String res = map.get("res");
+                    //数据库操作---------------------------------------------------------------------
+                    //选课成功-系统执行顺利
+                    if(Objects.equals(res, "OK")) {
+                        JOptionPane.showMessageDialog(superPanel == null ? thisPanel : superPanel,//避免superPanel为空
+                                "选课成功", " ", JOptionPane.INFORMATION_MESSAGE);
+                        //更新课程状态:查看数据库，并转为已选，同时需要更新界面
+                        getDataFromSQL(lessonID,Info[3].toString());
+
+                        System.out.println("选择课程成功：" + lessonID + " 老师：" + Info[3].toString());
+                    }else JOptionPane.showMessageDialog(superPanel == null ? thisPanel : superPanel,//避免superPanel为空
+                            "选课失败", "数据库操作警告", JOptionPane.WARNING_MESSAGE);
+
+                }else {//课程状态“不可选”或“已选”
                     if(Objects.equals(statusLesson, "full"))
                         JOptionPane.showMessageDialog(
-                            superPanel==null?thisPanel:superPanel,//避免superPanel为空
-                            "该课程人数已满", "提示", JOptionPane.WARNING_MESSAGE);
+                                superPanel==null?thisPanel:superPanel,//避免superPanel为空
+                                "该课程人数已满", "提示", JOptionPane.WARNING_MESSAGE);
                     else if(Objects.equals(statusLesson, "conflict"))
                         JOptionPane.showMessageDialog(
                                 superPanel==null?thisPanel:superPanel,//避免superPanel为空
                                 "该课程有冲突", "提示", JOptionPane.WARNING_MESSAGE);
-                    else JOptionPane.showMessageDialog(
+                    else if(Objects.equals(statusLesson, "Selected"))
+                        JOptionPane.showMessageDialog(
                                 superPanel==null?thisPanel:superPanel,//避免superPanel为空
                                 "您已选择该课程", "提示", JOptionPane.INFORMATION_MESSAGE);
+                    else JOptionPane.showMessageDialog(
+                                superPanel==null?thisPanel:superPanel,//避免superPanel为空
+                                "课程状态有错(超过了4种)", "警告", JOptionPane.WARNING_MESSAGE);
                 }
             }
         });
@@ -155,33 +214,91 @@ public class SubContentPanel extends JPanel{
         btn2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //首先更新课程状态
+                getDataFromSQL(lessonID,Info[3].toString());
+
+                //一些必要信息：教师ID,便于缩短程序长度
+                String tID=Info[3].toString();//老师ID
+
+                //退选确认
                 int result = JOptionPane.showConfirmDialog(
                         superPanel == null ? thisPanel : superPanel,//避免superPanel为空,
-                        "确认退选该课程？", "提示", JOptionPane.YES_NO_OPTION
-                );
+                        "确认退选该课程？", "提示", JOptionPane.YES_NO_OPTION);
+                //对话框结果判断
                 if (result == 1) {//确认退选
-                    JOptionPane.showMessageDialog(
-                            superPanel == null ? thisPanel : superPanel,//避免superPanel为空
-                            "退课成功", " ", JOptionPane.INFORMATION_MESSAGE
-                    );
-
                     //数据库操作------------------------------------------------------------------------------------------------
-                    //利用lessonID+teacherID
-                    int cNum=30;//获取当前已选人数=总人数-剩余名额
-                    upDateData(cNum);
-                    System.out.println("退选该课程：" + lessonID + " 老师：" + Info[4].toString());
+                    //"returnlesson"执行退课
+                    Lesson lesson = new Lesson();
+                    lesson.setTeacherID(studentID);//设置学生ID
+                    lesson.setInnerID(lessonID+tID);//设置内部ID
+                    Gson gson = new Gson();
+                    String s = gson.toJson(lesson);
+                    passer.send(new Message("admin", s, "lesson", "returnlesson"));
+
+                    Message msg = passer.receive();
+                    Map<String, String> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, String>>() {
+                    }.getType());
+                    String res = map.get("res");
+                    //数据库操作---------------------------------------------------------------------
+                    //退课成功-系统执行顺利
+                    if(Objects.equals(res, "OK")) {
+                        //弹出消息对话框
+                        JOptionPane.showMessageDialog(superPanel == null ? thisPanel : superPanel,//避免superPanel为空
+                                "退课成功", " ", JOptionPane.INFORMATION_MESSAGE);
+
+                        //更新课程状态:查看数据库，并更新课程状态，同时需要更新界面
+                        getDataFromSQL(lessonID,Info[3].toString());
+
+                        System.out.println("退选该课程：" + lessonID + " 老师：" + Info[3].toString());
+                    }else JOptionPane.showMessageDialog(superPanel == null ? thisPanel : superPanel,//避免superPanel为空
+                            "退课失败", "数据库操作警告", JOptionPane.WARNING_MESSAGE);
+
+                }else { //取消退选
+                    //什么也不做
                 }
 
             }
         });
 
+    }
 
+    /**
+     * 进行选课/退课操作
+     * @param lessonID
+     * @param teacherID
+     */
+    private void getDataFromSQL(String lessonID,String teacherID){
+        //数据库操作------
+        //传数据 "getone" 查看当前课程状态
+        //需要返回：总人数 and 剩余可选人数
+        Lesson temp=new Lesson();
+        temp.setInnerID(lessonID+Info[3].toString());//内部编号InnerID=lessonID+teacherID
+        Gson gson=new Gson();
+        String ss = gson.toJson(temp);
+        passer.send(new Message("admin", ss, "lesson", "getone"));
+
+        Message msg2 = passer.receive();
+        Map<String, java.util.List<Lesson>> map2 = new Gson().fromJson(msg2.getData(), new TypeToken<HashMap<String, java.util.List<Lesson>>>() {
+        }.getType());
+        List<Lesson> res2 = map2.get("res");
+
+        if(res2.size()>0){
+            //计算已选人数
+            nowNum=res2.get(0).getMaxSize()-res2.get(0).getLeftSize();
+            //更新当前状态
+            setJudgeLesson(lessonID,teacherID,studentID);
+            //更新界面
+            upDateData(nowNum);
+        }else {
+            System.out.println("函数getDataFromSQL(String lessonID,String teacherID)查询数据库失败");
+        }
 
     }
 
+
     //状态更新
     /**
-     * 设置状态标签1
+     * 设置状态标签1 & 2
      */
     public void setLabel1(){
         lblFlag.setOpaque(true);
@@ -200,9 +317,10 @@ public class SubContentPanel extends JPanel{
                 lblFlag.setText(" 不可选 ");
                 lblFlag.setBackground(new Color(128,128,128));break;
             default:
-                break;
+                lblFlag.setText(" --"+statusLesson+"-- ");
+                lblFlag.setBackground(Color.BLACK);break;
         }
-        lblFlag.repaint();
+        System.out.println("学生选课：设置标签1为"+statusLesson);
     }
     public void setLabel2(){
         if(Objects.equals(statusLesson, "conflict")){
@@ -210,8 +328,11 @@ public class SubContentPanel extends JPanel{
             lblFlag2.setOpaque(true);
             lblFlag2.setForeground(Color.white);//前景色白色
             lblFlag2.setBackground(new Color(255,69,0));//底色红色
+
+            System.out.println("学生选课：设置标签2显示");
         }else {
             lblFlag2.setVisible(false);//隐藏标签
+            System.out.println("学生选课：设置标签2隐藏");
         }
     }
 
@@ -226,7 +347,6 @@ public class SubContentPanel extends JPanel{
         nowNum=num;
         String maxNum=Info[2].toString();
         textList[2].setText(nowNum+"/"+maxNum);
-        this.repaint();
     }
     public int getNowNum(){
         return nowNum;
@@ -243,14 +363,14 @@ public class SubContentPanel extends JPanel{
      * 汇总：更新页面状态
      */
     private void upDateData(int cNum){
-        setNowNum(cNum);
-        setLabel1();
-        setBtn2Eable();
+        setNowNum(cNum);//更新已选人数文本框
+        setLabel1();//更新label1
+        setLabel2();//更新label2
+        setBtn2Eable();//更新“退选”按钮是否可选
 
         thisPanel.updateUI();
         thisPanel.repaint();
     }
-
 
 
     //数据获取
@@ -262,37 +382,35 @@ public class SubContentPanel extends JPanel{
      */
     public void setJudgeLesson(String lessonID,String teacherID,String studentID){
         //"showlesson"
-        //数据库
+        Lesson lesson = new Lesson();
+        lesson.setTeacherID(studentID);//设置学生ID
+        lesson.setInnerID(lessonID+teacherID);//设置内部ID
+        Gson gson = new Gson();
+        String s = gson.toJson(lesson);
+        passer.send(new Message("admin", s, "lesson", "showlesson"));
 
-        //statusLesson=res;
-        statusLesson="Selected";
+        Message msg = passer.receive();
+        Map<String, String> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, String>>() {
+        }.getType());
+        String res = map.get("res");
+
+        if(!Objects.equals(res, ""))
+            statusLesson=res;
+        else System.out.println("String返回出错！！！！！！！");
 
     }
 
-    /**
-     * 进行选课/退课操作
-     * @param Op
-     * @param lessonID
-     * @param teacherID
-     */
-    private void getDataFromSQL_and_UpDate(String Op,String lessonID,String teacherID){
-        //数据库操作------------------------------------------------------------------------------------------------
-        //传数据
-
-        //需要返回：总人数 and 剩余可选人数 "getone"
-
-        if(Objects.equals(Op, "selectlesson")) {
-            //选课相关操作
-            System.out.println("selectlesson");
-        } else {
-            //退课相关操作
-            System.out.println("returnlesson");
-        }
-
-        if(true){
-            //操作
-        }
-
+    //美化
+    private void setBoundsOfC(){
+        int size=18;
+        for(int i=0;i<lblList.length;i++)
+            lblList[i].setFont(new Font("黑体",Font.PLAIN,size));
+        for(int i=0;i< textList.length;i++)
+            textList[i].setFont(new Font("黑体",Font.PLAIN,size-2));
+        lblFlag.setFont(new Font("黑体",Font.PLAIN,size));
+        lblFlag2.setFont(new Font("黑体",Font.PLAIN,size));
+        btn.setFont(new Font("黑体",Font.PLAIN,size));
+        btn2.setFont(new Font("黑体",Font.PLAIN,size));
     }
 
 }

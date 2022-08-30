@@ -19,32 +19,33 @@ import javax.swing.*;
 import java.awt.*;
 
 public class TabbedPanelMessage_T extends JTabbedPane {
-    public TabbedPanelMessage_T()
+    public TabbedPanelMessage_T(int flag)
     {
-        this.setTabPlacement(1);
-        this.setBounds(0,0,1400,650);//注意！！！！！！！！！！！！！！！！！！！！！！！
+        if(flag==2) {
+            this.setTabPlacement(1);
+            this.setBounds(0, 0, 1400, 650);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
-        JPanel jp11 = new JPanel();
-        JPanel jp12 = new JPanel();
-        JPanel jp13 = new JPanel();
-        //选项卡1的内容
-        //设置标题
-        JLabel lblTitleLabel = new JLabel("教师站内消息");
-        lblTitleLabel.setFont(new Font("宋体", Font.BOLD, 50));
-        //按钮
-        JButton btnRegister = new JButton("啦啦啦啦啦");
-        btnRegister.setFont(new Font("宋体", Font.BOLD, 50));
+            JPanel jp11 = new JPanel();
+            JPanel jp12 = new JPanel();
+            JPanel jp13 = new JPanel();
+            //选项卡1的内容
+            //设置标题
+            JLabel lblTitleLabel = new JLabel("教师站内消息");
+            lblTitleLabel.setFont(new Font("宋体", Font.BOLD, 50));
+            //按钮
+            JButton btnRegister = new JButton("啦啦啦啦啦");
+            btnRegister.setFont(new Font("宋体", Font.BOLD, 50));
 
-        jp11.add(lblTitleLabel);
-        jp12.add(btnRegister);
-
-
-        this.addTab("选项一", null, jp11,"点击查看选项一");
-        this.addTab("选项二", null, jp12,"点击查看选项二");
-        this.addTab("选项三", null, jp13,"点击查看选项三");
-        this.setFont(new Font("宋体", Font.BOLD, 24));
+            jp11.add(lblTitleLabel);
+            jp12.add(btnRegister);
 
 
+            this.addTab("选项一", null, jp11, "点击查看选项一");
+            this.addTab("选项二", null, jp12, "点击查看选项二");
+            this.addTab("选项三", null, jp13, "点击查看选项三");
+            this.setFont(new Font("宋体", Font.BOLD, 24));
+
+        }
 
         //jp.add(jtbp);
     }

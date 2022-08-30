@@ -4,7 +4,7 @@
  *=====================================================
  * Copyright:  Copyright (c)　东南大学计算机学院, 2021-2022
  * =====================================================
- * Description: 图书信息展示界面-通用
+ * Description: 图书信息展示界面-通用:创建可以翻页的表格，每页设置最大页数为10
  *=====================================================
  *Revised Hisytory:
  *1. 2022-8-22,创建此文件
@@ -72,7 +72,7 @@ public class MyTablePanel extends JPanel{
         PANEL=this;
 
         //数据获取
-        if(rowData.length>0) {
+        if(rowData!=null && rowData.length>0) {
             dList = new Object[rowData.length][rowData[0].length];
             for (int i = 0; i < rowData.length; i++)
                 System.arraycopy(rowData[i], 0, dList[i], 0, rowData[i].length);

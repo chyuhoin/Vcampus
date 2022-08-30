@@ -1,8 +1,10 @@
 package com.vcampus.client.window.setjpCourse.mypaneltable.MyExtensionPanel;
 
-
-
+import com.formdev.flatlaf.FlatLightLaf;
+import com.sun.org.apache.xpath.internal.FoundIndex;
+import com.vcampus.client.window.setjpCourse.mypaneltable.MyExtensionPanel.ContentPanel;
 import com.vcampus.client.window.setjpCourse.mypaneltable.RoundBorder;
+import com.vcampus.pojo.Lesson;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -30,7 +32,7 @@ public class JExtensionPanel extends JPanel implements MouseListener {
      * 可以伸缩的面板,默认展开
      * */
     public JExtensionPanel() {
-        this("", null, true);
+        this(null, null, true);
     }
 
     /**
@@ -38,26 +40,26 @@ public class JExtensionPanel extends JPanel implements MouseListener {
      * @param c 内容面板
      * */
     public JExtensionPanel(Component c) {
-        this("", c, true);
+        this(null, c, true);
     }
 
     /**
      * 可以伸缩的面板,默认展开
-     * @param title 标题
+     * @param lesson 标题
      * @param c 内容面板
      * */
-    public JExtensionPanel(String title, Component c) {
-        this(title, c, true);
+    public JExtensionPanel(Lesson lesson, Component c) {
+        this(lesson, c, true);
     }
 
     /**
      * 可伸缩面板-构造函数
-     * @param title
+     * @param lesson
      * @param c
      * @param isExpand
      */
-    public JExtensionPanel(String title, Component c, boolean isExpand) {
-        this.title = title;
+    public JExtensionPanel(Lesson lesson, Component c, boolean isExpand) {
+        title="   "+lesson.getName();
         this.isExpand = isExpand;
         this.panel = c;
         init();
@@ -204,7 +206,8 @@ public class JExtensionPanel extends JPanel implements MouseListener {
             }
         }
         label.setBorder(new RoundBorder(Color.GRAY));
-        label.setPreferredSize(new Dimension(this.getPreferredSize().width,60));
+        label.setFont(new Font("黑体",Font.BOLD,25));
+        label.setPreferredSize(new Dimension(this.getPreferredSize().width,80));
         this.add(this.label, BorderLayout.NORTH);
 
         this.label.addMouseListener(this);
@@ -250,10 +253,6 @@ public class JExtensionPanel extends JPanel implements MouseListener {
     public void mouseReleased(MouseEvent e) {
     }
 
-    /**
-     * 用于测试
-     * @param args
-     */
     public static void main(String[] args) {
         JFrame f = new JFrame();
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -293,25 +292,28 @@ public class JExtensionPanel extends JPanel implements MouseListener {
                 {"张三","1-01-02",50,"ID1"},
         };
 
+        Lesson tempLesson=new Lesson();
+        tempLesson.setLessonID("0001");
+        tempLesson.setName("示例：信号与系统");
 
-        ContentPanel panel1=new ContentPanel("0001","00000001",str1);
-        ContentPanel panel2=new ContentPanel("0002","00000002",str2);
-        ContentPanel panel3=new ContentPanel("0002","00000002",str3);
-        ContentPanel panel4=new ContentPanel("0002","00000002",str2);
-        ContentPanel panel5=new ContentPanel("0002","00000002",str2);
-        ContentPanel panel6=new ContentPanel("0002","00000002",str1);
-        ContentPanel panel7=new ContentPanel("0002","00000002",str1);
-        ContentPanel panel8=new ContentPanel("0002","00000002",str1);
+        ContentPanel panel1=new ContentPanel(tempLesson,"00000001",str1);
+        ContentPanel panel2=new ContentPanel(tempLesson,"00000002",str2);
+        ContentPanel panel3=new ContentPanel(tempLesson,"00000002",str3);
+        ContentPanel panel4=new ContentPanel(tempLesson,"00000002",str2);
+        ContentPanel panel5=new ContentPanel(tempLesson,"00000002",str2);
+        ContentPanel panel6=new ContentPanel(tempLesson,"00000002",str1);
+        ContentPanel panel7=new ContentPanel(tempLesson,"00000002",str1);
+        ContentPanel panel8=new ContentPanel(tempLesson,"00000002",str1);
         //内容面板
         JExtensionPanel[] JEList={
-                new JExtensionPanel("test1", panel1,false),
-                new JExtensionPanel("test2", panel2,false),
-                new JExtensionPanel("test3", panel3,false),
-                new JExtensionPanel("test4", panel4,false),
-                new JExtensionPanel("test5", panel5,false),
-                new JExtensionPanel("test6", panel6,false),
-                new JExtensionPanel("test7", panel7,false),
-                new JExtensionPanel("test8", panel8,false)
+                new JExtensionPanel(tempLesson, panel1,false),
+                new JExtensionPanel(tempLesson, panel2,false),
+                new JExtensionPanel(tempLesson, panel3,false),
+                new JExtensionPanel(tempLesson, panel4,false),
+                new JExtensionPanel(tempLesson, panel5,false),
+                new JExtensionPanel(tempLesson, panel6,false),
+                new JExtensionPanel(tempLesson, panel7,false),
+                new JExtensionPanel(tempLesson, panel8,false)
         };
 
         for(int i=0;i<JEList.length;i++){
@@ -329,9 +331,10 @@ public class JExtensionPanel extends JPanel implements MouseListener {
         }
 
 
+
         jsp.setViewportView(c);
         jsp.getVerticalScrollBar().setUnitIncrement(10);//设置滚轮速度
-        //有没有更好的方法
+
         c.setPreferredSize( new Dimension(jsp.getPreferredSize().width, 1200));
 
         JP.add(jsp);

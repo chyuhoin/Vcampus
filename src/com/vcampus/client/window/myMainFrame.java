@@ -184,25 +184,25 @@ public class myMainFrame extends JFrame {
                 new JTabbedPane(),
                 new TabbedPanelCourse_S(flag,ID),
                 new TabbedPanelCourse_T(flag,ID),
-                new TabbedPanelCourse_A()};
+                new TabbedPanelCourse_A(flag)};
         //图书馆
         JTabbedPane[] LibraryModule = {
                 new JTabbedPane(),
                 new TabbedPanelLibrary_S(flag,ID),
                 new TabbedPanelLibrary_T(flag,ID),
-                new TabbedPanelLibrary_A()};
+                new TabbedPanelLibrary_A(flag)};
         //商店
         JTabbedPane[] storeModule = {
                 new JTabbedPane(),
-                new TabbedPanelStore_S(),
-                new TabbedPanelStore_T(),
-                new TabbedPanelStore_A()};
+                new TabbedPanelStore_S(flag),
+                new TabbedPanelStore_T(flag),
+                new TabbedPanelStore_A(flag)};
         //站内消息
         JTabbedPane[] messageModule = {
                 new JTabbedPane(),
-                new TabbedPanelMessage_S(),
-                new TabbedPanelMessage_T(),
-                new TabbedPanelMessage_A(ID)};
+                new TabbedPanelMessage_S(flag),
+                new TabbedPanelMessage_T(flag),
+                new TabbedPanelMessage_A(flag,ID)};
 
         //菜单按钮响应函数
         btnModule1.addActionListener(new ActionListener() {

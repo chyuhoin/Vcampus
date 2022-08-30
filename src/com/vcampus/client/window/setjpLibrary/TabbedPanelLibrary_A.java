@@ -37,80 +37,82 @@ public class TabbedPanelLibrary_A extends JTabbedPane {
     JLabel background = new JLabel();
     Object[] columnNames = new Object[]{"书籍号", "书名", "作者", "类型", "剩余册数"};
 
-    public TabbedPanelLibrary_A() {
-        ImageIcon icon = new ImageIcon("D:\\Code\\JavaWebCode\\Vcampus\\resource\\library.jpg"); // 创建背景图片对象
-        background.setIcon(icon);
-        background.setBounds(0,0,1200,650);
-        JTabbedPane JTP = this;
-        //JTabbedPane jtbp=new JTabbedPane();	//创建选项卡
-        this.setTabPlacement(1);
-        this.setBounds(0, 0, 1400, 650);//注意！！！！！！！！！！！！！！！！！！！！！！！
+    public TabbedPanelLibrary_A(int flag) {
+        if(flag==3) {
 
-        JPanel jp11 = new JPanel();
-        JPanel jp12 = new JPanel();
-        JPanel jp13 = new JPanel();
-        JPanel jp14 = new JPanel();
-        JPanel jp15 = new JPanel();
-        //选项卡1的内容
-        jp11.setLayout(new CardLayout(10, 10));
-        jp11.add(new MyTablePanel(getAllOfBook(), columnNames));
+            ImageIcon icon = new ImageIcon("D:\\Code\\JavaWebCode\\Vcampus\\resource\\library.jpg"); // 创建背景图片对象
+            background.setIcon(icon);
+            background.setBounds(0, 0, 1200, 650);
+            JTabbedPane JTP = this;
+            //JTabbedPane jtbp=new JTabbedPane();	//创建选项卡
+            this.setTabPlacement(1);
+            this.setBounds(0, 0, 1400, 650);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
-        //选项卡2的内容
-        JPanel enquireBook = new PanelEnquireBook("admin");
+            JPanel jp11 = new JPanel();
+            JPanel jp12 = new JPanel();
+            JPanel jp13 = new JPanel();
+            JPanel jp14 = new JPanel();
+            JPanel jp15 = new JPanel();
+            //选项卡1的内容
+            jp11.setLayout(new CardLayout(10, 10));
+            jp11.add(new MyTablePanel(getAllOfBook(), columnNames));
 
-
-        //jp.add(enquireBooK);
-        //jp12.add(enquireBooK);
-       // jp12.setOpaque(true);
+            //选项卡2的内容
+            JPanel enquireBook = new PanelEnquireBook("admin");
 
 
-        //选项卡3的内容
-        JPanel manageBook = new PanelBookManage();
+            //jp.add(enquireBooK);
+            //jp12.add(enquireBooK);
+            // jp12.setOpaque(true);
 
-        //选项卡4的内容
-        JPanel borrowReturnBook = new PanelBorrowAndReturn();
 
-        //选项卡5的内容
-        jp15.setLayout(new CardLayout(10, 10));
-        jp15.setBackground(Color.ORANGE);
-        jp15.add(new PanelEnquireBandR());
+            //选项卡3的内容
+            JPanel manageBook = new PanelBookManage();
 
-        //选项卡刷新
-        this.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                // TODO Auto-generated method stub
-                if (e.getClickCount() == 1) {
+            //选项卡4的内容
+            JPanel borrowReturnBook = new PanelBorrowAndReturn();
+
+            //选项卡5的内容
+            jp15.setLayout(new CardLayout(10, 10));
+            jp15.setBackground(Color.ORANGE);
+            jp15.add(new PanelEnquireBandR());
+
+            //选项卡刷新
+            this.addMouseListener(new MouseListener() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    // TODO Auto-generated method stub
+                    if (e.getClickCount() == 1) {
                         jp11.removeAll();
                         jp11.add(new MyTablePanel(getAllOfBook(), columnNames));
+                    }
                 }
-            }
 
-            @Override
-            public void mousePressed(MouseEvent e) {
-            }
+                @Override
+                public void mousePressed(MouseEvent e) {
+                }
 
-            @Override
-            public void mouseReleased(MouseEvent e) {
-            }
+                @Override
+                public void mouseReleased(MouseEvent e) {
+                }
 
-            @Override
-            public void mouseEntered(MouseEvent e) {
-            }
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                }
 
-            @Override
-            public void mouseExited(MouseEvent e) {
-            }
-        });
-        enquireBook.add(background);
-        this.addTab("书籍信息总览", null, jp11,"书籍信息总览");//
-        this.addTab("查询书籍信息", null, enquireBook,"查询书籍信息");//书籍号 书名 一个或多个
-        this.addTab("书籍信息管理", null, manageBook,"书籍信息管理");//增加 删除 修改
-        this.addTab("书籍借阅/退还", null, borrowReturnBook,"书籍借阅/退还");
-        this.addTab("查询借阅情况", null, jp15,"查询借阅情况");//某一个人的借阅
-        this.setFont(new Font("宋体", Font.BOLD, 24));
+                @Override
+                public void mouseExited(MouseEvent e) {
+                }
+            });
+            enquireBook.add(background);
+            this.addTab("书籍信息总览", null, jp11, "书籍信息总览");//
+            this.addTab("查询书籍信息", null, enquireBook, "查询书籍信息");//书籍号 书名 一个或多个
+            this.addTab("书籍信息管理", null, manageBook, "书籍信息管理");//增加 删除 修改
+            this.addTab("书籍借阅/退还", null, borrowReturnBook, "书籍借阅/退还");
+            this.addTab("查询借阅情况", null, jp15, "查询借阅情况");//某一个人的借阅
+            this.setFont(new Font("宋体", Font.BOLD, 24));
 
-
+        }
 
         //jp.add(jtbp);
     }

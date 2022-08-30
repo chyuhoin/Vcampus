@@ -1,3 +1,17 @@
+/** ===================================================
+ * Title: PanelStudentManage_T.java
+ * Created: [2022-8-30  00:53:12] by  张星喆
+ *=====================================================
+ * Copyright:  Copyright (c)　东南大学计算机学院, 2021-2022
+ * =====================================================
+ * Description: 工具,用于给组件添加圆角边框
+ *=====================================================
+ *Revised Hisytory:
+ *1. 2022-8-30,创建此文件
+ *2. 2022-8-30,完善设置
+ *3.2022-8-30,前后端连接 修改人：张星喆
+ *    修改的内容描述，修改的原因
+ */
 package com.vcampus.client.window.setjpCourse.mypaneltable;
 
 import javax.swing.border.Border;
@@ -13,7 +27,6 @@ import java.awt.*;
  * close.setBorder(new RoundBorder());黑色的圆角边框
  * close.setBorder(new RoundBorder(Color.RED)); 红色的圆角边框
  *
- * @author Monsoons
  */
 public class RoundBorder implements Border {
     private Color color;

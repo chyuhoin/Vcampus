@@ -32,34 +32,35 @@ import java.util.List;
 import java.util.Map;
 
 public class TabbedPanelMessage_A extends JTabbedPane{
-    public TabbedPanelMessage_A(String ID)
+    public TabbedPanelMessage_A(int flag,String ID)
     {
-        this.setTabPlacement(1);
-        this.setBounds(0,0,1400,650);//注意！！！！！！！！！！！！！！！！！！！！！！！
+        if(flag==3) {
+            this.setTabPlacement(1);
+            this.setBounds(0, 0, 1400, 650);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
-        JPanel jp11 = new JPanel();
-        JPanel jp12 = new JPanel();
-        JPanel jp13 = new JPanel();
-        //选项卡1的内容
-        //按钮
-        JButton btnRegister = new JButton("啦啦啦啦啦");
-        btnRegister.setFont(new Font("宋体", Font.BOLD, 50));
+            JPanel jp11 = new JPanel();
+            JPanel jp12 = new JPanel();
+            JPanel jp13 = new JPanel();
+            //选项卡1的内容
+            //按钮
+            JButton btnRegister = new JButton("啦啦啦啦啦");
+            btnRegister.setFont(new Font("宋体", Font.BOLD, 50));
 
-        jp12.add(btnRegister);
-        JPanel panel = new PanelSendMassage();
+            jp12.add(btnRegister);
+            JPanel panel = new PanelSendMassage();
 
-        jp11.setLayout(new CardLayout(10, 10));
-        jp11.add(new MyTablePanel(getAllMessage(), new Object[]{"消息"}));
-        jp13.setLayout(new CardLayout(10, 10));
-        jp13.add(new MyTablePanel(getPubMessage(), new Object[]{"消息"}));
-
-
-        this.addTab("查看私信", null, jp11,"查看私信");
-        this.addTab("公共频道", null, jp13,"查看公共频道消息");
-        this.addTab("发送消息", null, panel,"发送消息");
-        this.setFont(new Font("宋体", Font.BOLD, 24));
+            jp11.setLayout(new CardLayout(10, 10));
+            jp11.add(new MyTablePanel(getAllMessage(), new Object[]{"消息"}));
+            jp13.setLayout(new CardLayout(10, 10));
+            jp13.add(new MyTablePanel(getPubMessage(), new Object[]{"消息"}));
 
 
+            this.addTab("查看私信", null, jp11, "查看私信");
+            this.addTab("公共频道", null, jp13, "查看公共频道消息");
+            this.addTab("发送消息", null, panel, "发送消息");
+            this.setFont(new Font("宋体", Font.BOLD, 24));
+
+        }
 
         //jp.add(jtbp);
     }

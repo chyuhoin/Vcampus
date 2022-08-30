@@ -178,11 +178,15 @@ public class StudentStatusEnquire_S extends JPanel {
 
          */
 
-        try {
-            Image Img = Toolkit.getDefaultToolkit().createImage(StringAndImage.StringToImage(student.getImage()));
-            img = new ImageIcon(Img);
-        } catch (IOException e) {
-            e.printStackTrace();
+        if(student.getImage()!=null) {
+            try {
+                Image Img = Toolkit.getDefaultToolkit().createImage(StringAndImage.StringToImage(student.getImage()));
+                img = new ImageIcon(Img);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }else {
+            img = new ImageIcon("noFig.png");
         }
 
 

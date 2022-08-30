@@ -34,7 +34,7 @@ public class myLoginTest {
         }
 
         //皮肤包
-        FlatLightLaf.setup();
+        //FlatLightLaf.setup();
 
         myLoginFrame frame = new myLoginFrame("登录");
         // 当关闭窗口时，退出整个程序
