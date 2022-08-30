@@ -550,6 +550,9 @@ public class LessonService implements Service{
                     res="conflict";//冲突
                     break;
                 case 3:
+                    res="SameSelected";//已选同类课程，不可选
+                    break;
+                case 4:
                     res="Optional";//可选
                     break;
                 default:
