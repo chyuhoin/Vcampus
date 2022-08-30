@@ -1,0 +1,14 @@
+Index: src/GUItest/test.java
+===================================================================
+diff --git a/src/GUItest/test.java b/src/GUItest/test.java
+--- a/src/GUItest/test.java	
++++ b/src/GUItest/test.java	
+@@ -5,7 +5,7 @@
+ package GUItest;
+ 
+ import javax.swing.*;
+-import net.miginfocom.swing.*;
++//import net.miginfocom.swing.*;
+ 
+ /**
+  * @author unknown
