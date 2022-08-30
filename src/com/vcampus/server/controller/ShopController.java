@@ -113,7 +113,7 @@ public class ShopController implements Controller{
                 map.put("res", returnGoods(msg));
                 break;
         }
-        System.out.println(gson.toJson(map));
+
         if(map.isEmpty()) return new Message("404", "{res: Wrong Request!}");
         else return new Message("200", gson.toJson(map));
     }

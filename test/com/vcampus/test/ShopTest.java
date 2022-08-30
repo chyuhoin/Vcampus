@@ -24,7 +24,6 @@ public class ShopTest {
         MessagePasser passer = ClientMessagePasser.getInstance();
 
         Goods goods = new Goods();
-        goods.setGoodsName("cookie");
         passer.send(new Message("student", gson.toJson(goods), "shop", "get"));
         Message message = passer.receive();
         System.out.println(message);
