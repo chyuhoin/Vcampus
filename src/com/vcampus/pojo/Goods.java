@@ -114,6 +114,7 @@ public class Goods {
                 ", dealDate='" + dealDate + '\'' +
                 ", num=" + num +
                 ", type=" + type +
+                ", image=" + picture +
                 '}';
     }
 }
