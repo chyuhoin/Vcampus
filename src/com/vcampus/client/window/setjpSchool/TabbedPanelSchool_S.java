@@ -24,11 +24,17 @@ public class TabbedPanelSchool_S extends JTabbedPane {
     public TabbedPanelSchool_S(int flag,String ID)
     {
         if(flag==1) {
+            JLabel background1 =new JLabel();
+            ImageIcon back = new ImageIcon("resource//User_background.png");
+            background1.setIcon(back);
+            background1.setBounds(0,0,1200,650);
+            background1.setOpaque(false);
+
             this.setTabPlacement(1);
             this.setBounds(0, 0, 1400, 650);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
             JPanel panelEnquire = new StudentStatusEnquire_S(ID);
-
+            panelEnquire.add(background1);
             this.addTab("查看学籍信息", null, panelEnquire, "查看个人学籍信息");
             this.setFont(new Font("宋体", Font.BOLD, 24));
         }

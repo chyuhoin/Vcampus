@@ -1,6 +1,6 @@
 package com.vcampus.client.window.setjpCourse.mypaneltable;
 
-import com.formdev.flatlaf.FlatLightLaf;
+//import com.formdev.flatlaf.FlatLightLaf;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,7 +8,7 @@ import java.awt.*;
 public class Test_PanelTable {
     public static void main(String[] args) throws Exception {
         //皮肤包
-        FlatLightLaf.setup();
+        //FlatLightLaf.setup();
 
         //创建登录自己的窗口对象
         JFrame frame = new JFrame("按钮表格");

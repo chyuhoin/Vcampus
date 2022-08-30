@@ -17,44 +17,49 @@ package com.vcampus.client.window.setjpStore;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class TabbedPanelStore_A extends JTabbedPane {
-    public TabbedPanelStore_A(int flag)
+
+    //回头改到教师和学生那里
+
+    //////////////
+
+
+
+    public TabbedPanelStore_A()
     {
-        if(flag==3) {
-            this.setTabPlacement(1);
-            this.setBounds(0, 0, 1400, 650);//注意！！！！！！！！！！！！！！！！！！！！！！！
+        this.setTabPlacement(1);
+        this.setBounds(0,0,1400,650);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
-            JPanel jp11 = new JPanel();
-            JPanel jp12 = new JPanel();
-            JPanel jp13 = new JPanel();
-            //选项卡1的内容
-            //设置标题
-            JLabel lblTitleLabel = new JLabel("校园商城");
-            lblTitleLabel.setFont(new Font("宋体", Font.BOLD, 50));
-            //按钮
-            JButton btnRegister = new JButton("SSSSS");
-            btnRegister.setFont(new Font("宋体", Font.BOLD, 50));
-
-            jp11.add(lblTitleLabel);
-            jp12.add(btnRegister);
+        //JPanel goodsSimpleInform = new PanelGoodsSimpleInform();
+        //goodsSimpleInform.setBounds(50,80,320,170);
+        //goodsSimpleInform.setBorder(BorderFactory.createTitledBorder("分组框")); //设置面板边框，实现分组框的效果，此句代码为关键代码
+        //goodsSimpleInform.setBorder(BorderFactory.createLineBorder(Color.red));//设置面板边框颜色
+        //panelTest.add(goodsSimpleInform);
 
         /*
-        this.add("选项一",jp11);	//创建三个面板
-        this.add("选项二",jp12);
-        this.add("选项三",jp13);
-
-         */
-
-
-            this.addTab("选项一", null, jp11, "点击查看选项一");
-            this.addTab("选项二", null, jp12, "点击查看选项二");
-            this.addTab("选项三", null, jp13, "点击查看选项三");
-            this.setFont(new Font("宋体", Font.BOLD, 24));
-        }
+        JPanel myStore = new PanelMyStore_S();
+        PanelHomePage_ST homePage = new PanelHomePage_ST();
+        PanelMyPurchaseOrder_ST purchaseOrder = new PanelMyPurchaseOrder_ST();
+        purchaseOrder.setTable(columnNames,getAllOrder());
+ */
+        PanelGoodsManage_A goodsManage = new PanelGoodsManage_A();
+        JPanel dealManage = new PanelDealManage_A();
 
 
-        //jp.add(jtbp);
+
+
+        this.addTab("商品管理",null,goodsManage,"商品管理");
+        this.addTab("交易记录", null, dealManage,"交易信息");
+        this.setFont(new Font("宋体", Font.BOLD, 24));
+
     }
+
+
 
 }

@@ -133,7 +133,7 @@ public class PanelStudentManage_T extends JPanel {
         btnMark.addActionListener(new ActionListener() {//添加成绩
             @Override
             public void actionPerformed(ActionEvent e) {
-                //List<String> grades = new LinkedList<>();
+                //
                 StringBuilder grades= new StringBuilder("");
                 int rowNum=tableModel.getRowCount();
                 //System.out.println(rowNum);

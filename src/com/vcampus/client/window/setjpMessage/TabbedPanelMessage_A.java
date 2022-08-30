@@ -129,7 +129,7 @@ public class TabbedPanelMessage_A extends JTabbedPane{
                 }
             }
         });
-        thread.start();
+      //  thread.start();
         //jp.add(jtbp);
     }
 
