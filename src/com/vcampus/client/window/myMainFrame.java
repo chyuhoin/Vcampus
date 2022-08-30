@@ -190,37 +190,37 @@ public class myMainFrame extends JFrame {
         }
        // 设置图标背景
         ImageIcon[]btnicon =new ImageIcon[6];
-        btnicon[0] = new ImageIcon("resource//btn_user.png");
+        btnicon[0] = new ImageIcon("Vcampus/resource//btn_user.png");
         btnModule1.setIcon(btnicon[0]);
         btnModule1.setHorizontalTextPosition(JButton.CENTER);
         btnModule1.setVerticalTextPosition(JButton.BOTTOM);
-        btnicon[1] = new ImageIcon("resource//btn_student.png");
+        btnicon[1] = new ImageIcon("Vcampus/resource//btn_student.png");
         btnModule2.setIcon(btnicon[1]);
         btnModule2.setHorizontalTextPosition(JButton.CENTER);
         btnModule2.setVerticalTextPosition(JButton.BOTTOM);
-        btnicon[2] = new ImageIcon("resource//btn_lesson.png");
+        btnicon[2] = new ImageIcon("Vcampus/resource//btn_lesson.png");
         btnModule3.setIcon(btnicon[2]);
         btnModule3.setHorizontalTextPosition(JButton.CENTER);
         btnModule3.setVerticalTextPosition(JButton.BOTTOM);
-        btnicon[3] = new ImageIcon("resource//btn_library.png");
+        btnicon[3] = new ImageIcon("Vcampus/resource//btn_library.png");
         btnModule4.setIcon(btnicon[3]);
         btnModule4.setHorizontalTextPosition(JButton.CENTER);
         btnModule4.setVerticalTextPosition(JButton.BOTTOM);
-        btnicon[4] = new ImageIcon("resource//btn_store.png");
+        btnicon[4] = new ImageIcon("Vcampus/resource//btn_store.png");
         btnModule5.setIcon(btnicon[4]);
         btnModule5.setHorizontalTextPosition(JButton.CENTER);
         btnModule5.setVerticalTextPosition(JButton.BOTTOM);
-        btnicon[5] = new ImageIcon("resource//btn_message.png");
+        btnicon[5] = new ImageIcon("Vcampus/resource//btn_message.png");
         btnModule6.setIcon(btnicon[5]);
         btnModule6.setHorizontalTextPosition(JButton.CENTER);
         btnModule6.setVerticalTextPosition(JButton.BOTTOM);
         ImageIcon[]btnicon_selected = new ImageIcon[6];
-        btnicon_selected[0] = new ImageIcon("resource//btn_user_selected.png");
-        btnicon_selected[1] = new ImageIcon("resource//btn_student_selected.png");
-        btnicon_selected[2] = new ImageIcon("resource//btn_lesson_selected.png");
-        btnicon_selected[3] = new ImageIcon("resource//btn_library_selected.png");
-        btnicon_selected[4] = new ImageIcon("resource//btn_store_selected.png");
-        btnicon_selected[5] = new ImageIcon("resource//btn_message_selected.png");
+        btnicon_selected[0] = new ImageIcon("Vcampus/resource//btn_user_selected.png");
+        btnicon_selected[1] = new ImageIcon("Vcampus/resource//btn_student_selected.png");
+        btnicon_selected[2] = new ImageIcon("Vcampus/resource//btn_lesson_selected.png");
+        btnicon_selected[3] = new ImageIcon("Vcampus/resource//btn_library_selected.png");
+        btnicon_selected[4] = new ImageIcon("Vcampus/resource//btn_store_selected.png");
+        btnicon_selected[5] = new ImageIcon("Vcampus/resource//btn_message_selected.png");
         //添加按钮
         panelLeft.add(btnModule1);
         panelLeft.add(btnModule2);
@@ -229,6 +229,7 @@ public class myMainFrame extends JFrame {
         panelLeft.add(btnModule5);
         panelLeft.add(btnModule6);
         //创建各模块各权限对应面板
+
         //用户管理模块
         JTabbedPane[] userModule = {
                 new JTabbedPane(),
@@ -258,7 +259,7 @@ public class myMainFrame extends JFrame {
                 new JTabbedPane(),
                 new TabbedPanelStore_S(flag,ID),
                 new TabbedPanelStore_T(flag,ID),
-                new TabbedPanelStore_A()};
+                new TabbedPanelStore_A(flag)};
         //站内消息
         JTabbedPane[] messageModule = {
                 new JTabbedPane(),
@@ -331,7 +332,7 @@ public class myMainFrame extends JFrame {
                 System.exit(0);
             }
         });
-        ImageIcon exitIcon2 = new ImageIcon("resource//exit2.png");
+        ImageIcon exitIcon2 = new ImageIcon("Vcampus/resource//exit2.png");
         btnExit.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -358,6 +359,8 @@ public class myMainFrame extends JFrame {
                 btnExit.setIcon(exitIcon);
             }
         });
+
+
     }
 
     //实现下方面板切换

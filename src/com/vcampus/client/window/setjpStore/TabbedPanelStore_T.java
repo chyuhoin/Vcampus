@@ -37,43 +37,46 @@ public class TabbedPanelStore_T extends JTabbedPane {
     Object[] columnNames = new Object[]{"已购商品编号","购买日期","商品状态","收货","退货"};
     public TabbedPanelStore_T(int flag, String ID)
     {
-        this.setTabPlacement(1);
-        this.setBounds(0,0,1400,650);//注意！！！！！！！！！！！！！！！！！！！！！！！
+        if(flag==2) {
+            this.setTabPlacement(1);
+            this.setBounds(0, 0, 1400, 650);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
-        PanelHomePage_ST homePage = new PanelHomePage_ST(ID,flag);
-        PanelMyPurchaseOrder_ST myPurchase = new PanelMyPurchaseOrder_ST(ID,flag);
+            PanelHomePage_ST homePage = new PanelHomePage_ST(ID, flag);
+            PanelMyPurchaseOrder_ST myPurchase = new PanelMyPurchaseOrder_ST(ID, flag);
 
-        this.addTab("商城首页", null, homePage,"商城首页");
-        this.addTab("我的订单", null, myPurchase,"我的订单");
-        this.setFont(new Font("宋体", Font.BOLD, 24));
+            this.addTab("商城首页", null, homePage, "商城首页");
+            this.addTab("我的订单", null, myPurchase, "我的订单");
+            this.setFont(new Font("宋体", Font.BOLD, 24));
 
-        this.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                // TODO Auto-generated method stub
-                if (e.getClickCount() == 1) {
-                    myPurchase.removeAll();
-                    myPurchase.setTable(columnNames,getAllOrder(ID));
-                    // purchaseOrder.updateUI();
-                    // purchaseOrder.repaint();
+            this.addMouseListener(new MouseListener() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    // TODO Auto-generated method stub
+                    if (e.getClickCount() == 1) {
+                        myPurchase.removeAll();
+                        myPurchase.setTable(columnNames, getAllOrder(ID));
+                        // purchaseOrder.updateUI();
+                        // purchaseOrder.repaint();
+                    }
                 }
-            }
-            @Override
-            public void mousePressed(MouseEvent e) {
-            }
 
-            @Override
-            public void mouseReleased(MouseEvent e) {
-            }
+                @Override
+                public void mousePressed(MouseEvent e) {
+                }
 
-            @Override
-            public void mouseEntered(MouseEvent e) {
-            }
+                @Override
+                public void mouseReleased(MouseEvent e) {
+                }
 
-            @Override
-            public void mouseExited(MouseEvent e) {
-            }
-        });
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+                }
+            });
+        }
 
     }
 
