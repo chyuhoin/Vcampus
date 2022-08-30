@@ -1,7 +1,7 @@
 package 模拟QQ;
 
-//import com.formdev.flatlaf.FlatDarkLaf;
-//import com.formdev.flatlaf.FlatLightLaf;
+import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 import com.vcampus.net.ClientMessagePasser;
 
 import javax.swing.*;
