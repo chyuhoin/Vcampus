@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="修bug">
+    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="登录界面">
+      <change afterPath="$PROJECT_DIR$/test/img/背景1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/img/背景2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/img/背景3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/模拟QQ/My_Frame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/LessonDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/LessonDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/模拟QQ/Create_GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/模拟QQ/Create_GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/模拟QQ/MyQQ_Frame.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/模拟QQ/MyQQ_Frame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,6 +72,7 @@
       <recent name="D:\Code\JavaWebCode\Vcampus" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Study\Git\Vcampus\Vcampus\test\img" />
       <recent name="D:\Code\JavaWebCode\Vcampus\resource" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -73,7 +80,7 @@
       <recent name="com.vcampus.client.login" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.LessonDao.test2">
+  <component name="RunManager">
     <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.vcampus.server.Server" />
       <module name="Vcampus" />
@@ -151,8 +158,6 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.LessonDao.test2" />
-        <item itemvalue="Application.myLoginTest" />
-        <item itemvalue="Application.Server" />
         <item itemvalue="JUnit.StringAndImage.test" />
         <item itemvalue="JUnit.LessonDao.test" />
       </list>
@@ -220,6 +225,7 @@
       <workItem from="1661649054777" duration="1091000" />
       <workItem from="1661650213055" duration="3477000" />
       <workItem from="1661666663630" duration="13284000" />
+      <workItem from="1661859468677" duration="4768000" />
     </task>
     <task id="LOCAL-00001" summary="初步写了登录注册">
       <created>1660298515554</created>

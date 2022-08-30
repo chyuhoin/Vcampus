@@ -25,7 +25,7 @@ import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.MatteBorder;
 
-public class MyQQ_Frame extends JFrame{
+public class My_Frame extends JFrame{
     int x,y;
     int flag=1;//1--学生 2--老师 3--管理员
 
@@ -46,7 +46,9 @@ public class MyQQ_Frame extends JFrame{
     //承接头像图片
     JLabel tx=new JLabel();
     //写文字QQ
-    JLabel qq=new Create_label("2020",Color.white);
+    JLabel qq=new Create_label("Welcom for Vcampus!",Color.black);
+    JLabel qq1=new Create_label("用户名",Color.GRAY);
+    JLabel qq2=new Create_label("密码",Color.GRAY);
     //用户名输入框
     JTextField userfield=new Create_textfield(10);
     //密码输入框
@@ -66,6 +68,9 @@ public class MyQQ_Frame extends JFrame{
     URL url9=getClass().getResource("/img/学校1.png");
     URL url10=getClass().getResource("/img/学校2.png");
     URL url11=getClass().getResource("/img/学校3.png");
+    URL url12=getClass().getResource("/img/背景1.png");
+    URL url13=getClass().getResource("/img/背景2.png");
+    URL url14=getClass().getResource("/img/背景3.png");
     //声明图标
     ImageIcon Users_icon=new ImageIcon(url0);
     ImageIcon codes_icon=new ImageIcon(url1);
@@ -82,12 +87,16 @@ public class MyQQ_Frame extends JFrame{
     ImageIcon seu1=new ImageIcon(url9);
     ImageIcon seu2=new ImageIcon(url10);
     ImageIcon seu3=new ImageIcon(url11);
+
+    ImageIcon seubg1=new ImageIcon(url12);
+    ImageIcon seubg2=new ImageIcon(url13);
+    ImageIcon seubg3=new ImageIcon(url14);
     int left,top;
     //构造方法
-    public MyQQ_Frame() {
+    public My_Frame() {
 
         //设置窗体大小
-        setSize(500,350);
+        setSize(1400, 850);
         //去除标题栏
         setUndecorated(true);
         //设置可见性
@@ -103,7 +112,7 @@ public class MyQQ_Frame extends JFrame{
 
 
         // 设置窗体透明度
-        com.sun.awt.AWTUtilities.setWindowOpacity(this, 0.9f);
+//        com.sun.awt.AWTUtilities.setWindowOpacity(this, 0.9f);
         //由于没有标题栏所以界面不能拖动改变位置
         //采取以下方法可以解决
         //静态鼠标触发器
@@ -139,9 +148,9 @@ public class MyQQ_Frame extends JFrame{
         codes_icon.setImage(codes_icon.getImage().getScaledInstance((int)(0.05*width),(int)(0.06*height),Image.SCALE_DEFAULT));
         codes.setIcon(codes_icon);
 //        bg.setIcon(bg_icon);
-        close_icon.setImage(close_icon.getImage().getScaledInstance((int)(0.05*width),(int)(0.05*width),Image.SCALE_DEFAULT));
+        close_icon.setImage(close_icon.getImage().getScaledInstance((int)(0.025*width),(int)(0.025*width),Image.SCALE_DEFAULT));
         close.setIcon(close_icon);
-        min_icon.setImage(min_icon.getImage().getScaledInstance((int)(0.06*width),(int)(0.06*width),Image.SCALE_DEFAULT));
+        min_icon.setImage(min_icon.getImage().getScaledInstance((int)(0.03*width),(int)(0.03*width),Image.SCALE_DEFAULT));
         min.setIcon(min_icon);
         tengxun.setImage(tengxun.getImage().getScaledInstance((int)(0.24*width),(int)(0.36*height),Image.SCALE_DEFAULT));
         tx.setIcon(tengxun);
@@ -160,16 +169,16 @@ public class MyQQ_Frame extends JFrame{
         //添加文本框
         MatteBorder matteBorder=new MatteBorder(0, 0, 1, 0, Color.gray);
         userfield.setBorder(matteBorder);
-        userfield.setBounds((int)(0.26*width),(int)(0.455*height),(int)(0.48*width),(int)(0.08*height));
+        userfield.setBounds((int)(0.32*width),(int)(0.38*height),(int)(0.34*width),(int)(0.06*height));
         jPanel.add(userfield);
         //添加用户图标
         Users.setBounds((int)(0.21*width),(int)(0.455*height),(int)(0.05*width),(int)(0.08*height));
-        jPanel.add(Users);
+//        jPanel.add(Users);
         codes.setBounds((int)(0.21*width),(int)(0.6*height),(int)(0.05*width),(int)(0.08*height));
-        jPanel.add(codes);
+//        jPanel.add(codes);
         //添加密码
         codefield.setBorder(matteBorder);
-        codefield.setBounds((int)(0.26*width),(int)(0.6*height),(int)(0.48*width),(int)(0.08*height));
+        codefield.setBounds((int)(0.32*width),(int)(0.50*height),(int)(0.34*width),(int)(0.06*height));
         jPanel.add(codefield);
         Border border=BorderFactory.createEmptyBorder(1, 1, 1, 1);
         close.setFocusPainted(false);
@@ -188,7 +197,7 @@ public class MyQQ_Frame extends JFrame{
         close.addActionListener((e)->{
             this.dispose();
         });
-        close.setBounds((int)(0.92*width),(int)(0*height),(int)(0.08*width),(int)(0.08*width));
+        close.setBounds((int)(0.96*width),(int)(0*height),(int)(0.04*width),(int)(0.04*width));
         jPanel.add(close);
         min.setFocusPainted(false);
         min.setBackground(new Color(192, 192, 225, 131));;//加了才能不显示
@@ -206,7 +215,7 @@ public class MyQQ_Frame extends JFrame{
         min.addActionListener((e)->{
             this.setExtendedState(JFrame.ICONIFIED);
         });
-        min.setBounds((int)(0.84*width),(int)(0*height),(int)(0.08*width),(int)(0.08*width));
+        min.setBounds((int)(0.92*width),(int)(0*height),(int)(0.04*width),(int)(0.04*width));
         jPanel.add(min);
         //添加状态
         Status.setFocusPainted(false);
@@ -217,59 +226,87 @@ public class MyQQ_Frame extends JFrame{
             flag=(flag)%3+1;
             switch(flag){
                 case 1:{
-                    student.setImage(student.getImage().getScaledInstance((int)(0.08*width),(int)(0.08*height),Image.SCALE_DEFAULT));
+                    student.setImage(student.getImage().getScaledInstance((int)(0.04*width),(int)(0.035*width),Image.SCALE_DEFAULT));
                     Status.setIcon(student);
                     Status.setHorizontalTextPosition(SwingConstants.LEFT);
                     Status.setText("学生");
-                    setFont(new Font("宋体", 1, 20));
-                    seu1.setImage(seu1.getImage().getScaledInstance((int)(1*width),(int)(0.4*height),Image.SCALE_DEFAULT));
-                    bg.setIcon(seu1);
-                    bg.setBounds((int)(0*width),(int)(0*height),(int)(1*width),(int)(0.4*height));
+                    Status.setFont(new Font("宋体", 1, 20));
+//                    seu1.setImage(seu1.getImage().getScaledInstance((int)(1*width),(int)(0.4*height),Image.SCALE_DEFAULT));
+//                    bg.setIcon(seu1);
+//                    bg.setBounds((int)(0*width),(int)(0*height),(int)(1*width),(int)(0.4*height));
+                    seubg1.setImage(seubg1.getImage().getScaledInstance((int)(1*width),(int)(1*height),Image.SCALE_DEFAULT));
+                    bg.setIcon(seubg1);
+                    bg.setBounds((int)(0*width),(int)(0*height),(int)(1*width),(int)(1*height));
                     jPanel.add(bg);
                     break;
                 }
                 case 2:{
-                    teacher.setImage(teacher.getImage().getScaledInstance((int)(0.08*width),(int)(0.08*height),Image.SCALE_DEFAULT));
+                    teacher.setImage(teacher.getImage().getScaledInstance((int)(0.04*width),(int)(0.035*width),Image.SCALE_DEFAULT));
                     Status.setIcon(teacher);
                     Status.setHorizontalTextPosition(SwingConstants.LEFT);
                     Status.setText("教师");
-                    setFont(new Font("宋体", 1, 20));
-                    seu2.setImage(seu2.getImage().getScaledInstance((int)(1*width),(int)(0.4*height),Image.SCALE_DEFAULT));
-                    bg.setIcon(seu2);
-                    bg.setBounds((int)(0*width),(int)(0*height),(int)(1*width),(int)(0.4*height));
+                    Status.setFont(new Font("宋体", 1, 20));
+//                    seu2.setImage(seu2.getImage().getScaledInstance((int)(1*width),(int)(0.4*height),Image.SCALE_DEFAULT));
+//                    bg.setIcon(seu2);
+//                    bg.setBounds((int)(0*width),(int)(0*height),(int)(1*width),(int)(0.4*height));
+                    seubg2.setImage(seubg2.getImage().getScaledInstance((int)(1*width),(int)(1*height),Image.SCALE_DEFAULT));
+                    bg.setIcon(seubg2);
+                    bg.setBounds((int)(0*width),(int)(0*height),(int)(1*width),(int)(1*height));
                     jPanel.add(bg);
                     break;
                 }
                 case 3:{
-                    administrator.setImage(administrator.getImage().getScaledInstance((int)(0.08*width),(int)(0.08*height),Image.SCALE_DEFAULT));
+                    administrator.setImage(administrator.getImage().getScaledInstance((int)(0.03*width),(int)(0.025*width),Image.SCALE_DEFAULT));
                     Status.setIcon(administrator);
                     Status.setHorizontalTextPosition(SwingConstants.LEFT);
                     Status.setText("管理员");
-                    setFont(new Font("宋体", 1, 20));
-                    seu3.setImage(seu3.getImage().getScaledInstance((int)(1*width),(int)(0.4*height),Image.SCALE_DEFAULT));
-                    bg.setIcon(seu3);
-                    bg.setBounds((int)(0*width),(int)(0*height),(int)(1*width),(int)(0.4*height));
+                    Status.setFont(new Font("宋体", 1, 20));
+//                    seu3.setImage(seu3.getImage().getScaledInstance((int)(1*width),(int)(0.4*height),Image.SCALE_DEFAULT));
+//                    bg.setIcon(seu3);
+//                    bg.setBounds((int)(0*width),(int)(0*height),(int)(1*width),(int)(0.4*height));
+                    seubg3.setImage(seubg3.getImage().getScaledInstance((int)(1*width),(int)(1*height),Image.SCALE_DEFAULT));
+                    bg.setIcon(seubg3);
+                    bg.setBounds((int)(0*width),(int)(0*height),(int)(1*width),(int)(1*height));
                     jPanel.add(bg);
                     break;
                 }
             }
 //            this.setExtendedState(JFrame.ICONIFIED);
         });
-        Status.setBounds((int)(0.80*width),(int)(1*height-0.1*width),(int)(0.20*width),(int)(0.1*width));
+        student.setImage(student.getImage().getScaledInstance((int)(0.04*width),(int)(0.035*width),Image.SCALE_DEFAULT));
+        Status.setIcon(student);
+        Status.setHorizontalTextPosition(SwingConstants.LEFT);
+        Status.setText("学生");
+        Status.setFont(new Font("宋体", 1, 20));
+        Status.setBounds((int)(0.63*width),(int)(0.66*height),(int)(0.08*width),(int)(0.045*width));
+
         jPanel.add(Status);
         tx.setBounds((int)(0.24*width),(int)(0.04*height),(int)(0.24*width),(int)(0.36*height));
 //        jPanel.add(tx);
-        qq.setBounds((int)(0.30*width),(int)(0.02*height),(int)(0.40*width),(int)(0.36*height));
-        qq.setText("Vcampus");
+        qq.setBounds((int)(0.32*width),(int)(0.12*height),(int)(0.40*width),(int)(0.36*height));
+        qq.setFont(new Font("微软雅黑", 1, 26));
+        qq.setHorizontalAlignment(SwingConstants.LEFT);
         jPanel.add(qq);
+        qq1.setBounds((int)(0.32*width),(int)(0.18*height),(int)(0.40*width),(int)(0.36*height));
+        qq1.setFont(new Font("微软雅黑", 1, 20));
+        qq1.setHorizontalAlignment(SwingConstants.LEFT);
+        jPanel.add(qq1);
+        qq2.setBounds((int)(0.32*width),(int)(0.30*height),(int)(0.40*width),(int)(0.36*height));
+        qq2.setFont(new Font("微软雅黑", 1, 20));
+        qq2.setHorizontalAlignment(SwingConstants.LEFT);
+        jPanel.add(qq2);
 //        bg.setBounds((int)(0*width),(int)(0*height),(int)(1*width),(int)(0.4*height));
 //        jPanel.add(bg);
-        seu1.setImage(seu1.getImage().getScaledInstance((int)(1*width),(int)(0.4*height),Image.SCALE_DEFAULT));
-        bg.setIcon(seu1);
-        bg.setBounds((int)(0*width),(int)(0*height),(int)(1*width),(int)(0.4*height));
-        jPanel.add(bg);
-        button.setBounds((int)(0.23*width),(int)(0.775*height),(int)(0.53*width),(int)(0.1*height));
+//        seu1.setImage(seu1.getImage().getScaledInstance((int)(1*width),(int)(0.4*height),Image.SCALE_DEFAULT));
+//        bg.setIcon(seu1);
+//        bg.setBounds((int)(0*width),(int)(0*height),(int)(1*width),(int)(0.4*height));
+        seubg1.setImage(seubg1.getImage().getScaledInstance((int)(1*width),(int)(1*height),Image.SCALE_DEFAULT));
+        bg.setIcon(seubg1);
+        bg.setBounds((int)(0*width),(int)(0*height),(int)(1*width),(int)(1*height));
+
+        button.setBounds((int)(0.32*width),(int)(0.62*height),(int)(0.06*width),(int)(0.06*height));
         jPanel.add(button);
+        jPanel.add(bg);
         button.addActionListener((e)->{
             String names=userfield.getText();
             @SuppressWarnings("deprecation")
@@ -332,4 +369,5 @@ public class MyQQ_Frame extends JFrame{
         }
     }
 }
+
 
