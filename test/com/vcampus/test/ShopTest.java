@@ -173,9 +173,9 @@ public class ShopTest {
         Gson gson = new Gson();
         MessagePasser passer = ClientMessagePasser.getInstance();
 
-        Goods goods = new Goods("037", "coffee", "1",
-                "350", "state", "2022-8-16",
-                null, 5, 1);
+        Goods goods = new Goods("11", "11", "1",
+                "1", "1", "1",
+                "null", 1, 1);
         passer.send(new Message("student", gson.toJson(goods), "shop", "put"));
         Message message = passer.receive();
         System.out.println(message);

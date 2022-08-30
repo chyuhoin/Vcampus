@@ -31,16 +31,17 @@ public class TabbedPanelStore_A extends JTabbedPane {
 
 
 
-    public TabbedPanelStore_A()
+    public TabbedPanelStore_A(int flag)
     {
-        this.setTabPlacement(1);
-        this.setBounds(0,0,1400,650);//注意！！！！！！！！！！！！！！！！！！！！！！！
+        if(flag==3) {
+            this.setTabPlacement(1);
+            this.setBounds(0, 0, 1400, 650);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
-        //JPanel goodsSimpleInform = new PanelGoodsSimpleInform();
-        //goodsSimpleInform.setBounds(50,80,320,170);
-        //goodsSimpleInform.setBorder(BorderFactory.createTitledBorder("分组框")); //设置面板边框，实现分组框的效果，此句代码为关键代码
-        //goodsSimpleInform.setBorder(BorderFactory.createLineBorder(Color.red));//设置面板边框颜色
-        //panelTest.add(goodsSimpleInform);
+            //JPanel goodsSimpleInform = new PanelGoodsSimpleInform();
+            //goodsSimpleInform.setBounds(50,80,320,170);
+            //goodsSimpleInform.setBorder(BorderFactory.createTitledBorder("分组框")); //设置面板边框，实现分组框的效果，此句代码为关键代码
+            //goodsSimpleInform.setBorder(BorderFactory.createLineBorder(Color.red));//设置面板边框颜色
+            //panelTest.add(goodsSimpleInform);
 
         /*
         JPanel myStore = new PanelMyStore_S();
@@ -48,15 +49,14 @@ public class TabbedPanelStore_A extends JTabbedPane {
         PanelMyPurchaseOrder_ST purchaseOrder = new PanelMyPurchaseOrder_ST();
         purchaseOrder.setTable(columnNames,getAllOrder());
  */
-        PanelGoodsManage_A goodsManage = new PanelGoodsManage_A();
-        JPanel dealManage = new PanelDealManage_A();
+            PanelGoodsManage_A goodsManage = new PanelGoodsManage_A();
+            JPanel dealManage = new PanelDealManage_A();
 
 
-
-
-        this.addTab("商品管理",null,goodsManage,"商品管理");
-        this.addTab("交易记录", null, dealManage,"交易信息");
-        this.setFont(new Font("宋体", Font.BOLD, 24));
+            this.addTab("商品管理", null, goodsManage, "商品管理");
+            this.addTab("交易记录", null, dealManage, "交易信息");
+            this.setFont(new Font("宋体", Font.BOLD, 24));
+        }
 
     }
 

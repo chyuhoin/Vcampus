@@ -9,6 +9,7 @@ import com.vcampus.pojo.Record;
 import com.vcampus.pojo.User;
 import com.vcampus.server.service.ShopService;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -82,7 +83,7 @@ public class ShopController implements Controller{
     }
 
     @Override
-    public Message check(Message msg) {
+    public Message check(Message msg)  {
 
         switch (msg.getOperation()) {
             case "get": //传入Goods

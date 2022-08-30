@@ -60,7 +60,7 @@ public class PanelBookInform extends JPanel {
         if(book.getImage()==null)
         {
             System.out.println("没有图片");
-            img = new ImageIcon("noFig.png");
+            img = new ImageIcon("Vcampus/img/noFig.png");
             //img.setImage(img.getImage().getScaledInstance(180,220,Image.SCALE_DEFAULT));
         }
         else

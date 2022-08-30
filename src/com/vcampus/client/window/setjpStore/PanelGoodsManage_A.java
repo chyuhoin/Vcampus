@@ -15,7 +15,14 @@
 
 package com.vcampus.client.window.setjpStore;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.vcampus.dao.utils.StringAndImage;
+import com.vcampus.net.ClientMessagePasser;
+import com.vcampus.net.Message;
+import com.vcampus.net.MessagePasser;
 import com.vcampus.pojo.Goods;
+import com.vcampus.pojo.User;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -26,12 +33,15 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.*;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 
 public class PanelGoodsManage_A extends JPanel {
-    //JLabel lblHint = new JLabel("在售商品");
     JPanel panelAll = new JPanel();
-    PanelGoodsInform panelInform = new PanelGoodsInform(new Goods("","","","","","","",0,0),true);
+    JPanel panelInform = new JPanel();
+    PanelGoodsInform Inform = new PanelGoodsInform(new Goods("","","","","","","",0,0),true);
     JPanel panelAdd = new JPanel();
 
     JButton btnAdd = new JButton("上架商品");
@@ -43,42 +53,23 @@ public class PanelGoodsManage_A extends JPanel {
 
     JButton btnInquire = new JButton("查询");
     String[] listData = new String[]{"输入搜索条件","全部","商品名称", "商品编号", "商品价格"};
-    // 创建一个下拉列表框
     JComboBox<String> comboBox = new JComboBox<String>(listData);
     JTextField txtEnquire = new JTextField();
 
-
     CardLayout cardLayout=new CardLayout();
-    //ButtonEditor btnE1 = null;
-    //表格数据
-    String ImgPath="addFig.jpg";
+    String ImgPath="Vcampus/img/addFig.jpg";
 
-    //MessagePasser passer = ClientMessagePasser.getInstance();
-    //MyTablePanel_Shop tableP=new MyTablePanel_Shop(tableData,columnNames);
     MyTable_Shop table=null;//老师
     JScrollPane scrollPane = null;
     JPanel tablePanel = new JPanel();
-    PanelGoodsInform panelInfo1=null;
-    PanelGoodsInform panelInfo2=null;
 
-    //List<goods>承接所以有回传的结果？？？
-    //可能需要一个商品对象来回改
-    Object[] columnNames={"商品名称", "商品编号","上架时间","商品价格","剩余数量","查看","操作"};
-    Object[][] tableData=new Object[][]{{"张三","2233","计算机","计算机","添加"},
-            {"张三","2233","计算机","计算机","添加"},
-            {"张三","2233","计算机","计算机","添加"},
-            {"张三","2233","计算机","计算机","添加"},
-            {"张三","2233","计算机","计算机","添加"},
-            {"张三","2233","计算机","计算机","添加"},
-            {"张三","2233","计算机","计算机","添加"},
-            {"张三","2233","计算机","计算机","添加"},
-            {"张三","2233","计算机","计算机","添加"},
-            {"张三","2233","计算机","计算机","添加"},
-            {"张三","2233","计算机","计算机","添加"},
-            {"张三","2233","计算机","计算机","添加"},
-            {"张三","2233","计算机","计算机","添加"},
-            {"张三","2233","计算机","计算机","添加"},
-            {"张三","2233","计算机","计算机","添加"}};//保存所有用户信息
+    Goods goods = new Goods();
+    String operation;
+    MessagePasser passer = ClientMessagePasser.getInstance();
+
+    Object[] columnNames={"商品编号","商品名称","上架时间","商品价格","剩余数量","查看","操作"};
+    Object[][] tableData=new Object[][]{};//保存所有用户信息
+    List<Goods>res=null;
 
     public PanelGoodsManage_A()
     {
@@ -90,9 +81,6 @@ public class PanelGoodsManage_A extends JPanel {
         int x=120+10,y=20;//起始坐标
         int btnWidth = 80, btnHeight = 30;
         int txtWidth=110, txtHeight=30;
-
-        //lblHint.setBounds(x,y,300,40);
-        //lblHint.setFont(new Font("宋体", Font.BOLD, 30));
 
         btnAdd.setBounds(x+878,y+15,btnWidth*2,btnHeight+5);
         setButtonFont(btnAdd);
@@ -107,7 +95,6 @@ public class PanelGoodsManage_A extends JPanel {
         btnDelete.setBounds(400,500,btnWidth,btnHeight);
         setButtonFont(btnDelete);
 
-
         comboBox.setBounds(x-110+290,y+15,220,35);
         comboBox.setFont(new Font("楷体", Font.BOLD, 20));
         comboBox.setOpaque(true);
@@ -118,7 +105,6 @@ public class PanelGoodsManage_A extends JPanel {
         btnInquire.setBounds(x+480+290,y+15,btnWidth,btnHeight+5);
         setButtonFont(btnInquire);
 
-
         tablePanel.setLayout(null);
         tablePanel.setBounds(20,80,1150,500);
 
@@ -126,14 +112,12 @@ public class PanelGoodsManage_A extends JPanel {
         this.add(panelInform,"panelInform");
         this.add(panelAdd,"panelAdd");
 
-        //发消息，获取全部商品放入表格
-        setPanel1();//一打开就显示第一页
+
+        setPanel1(goods);//一打开就显示第一页
 
         btnInquire.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String str = txtEnquire.getText();
-                System.out.println(str);//传送，接收结果bool型
 
                 int temp = comboBox.getSelectedIndex();
                 switch(temp)//发出消息
@@ -142,31 +126,39 @@ public class PanelGoodsManage_A extends JPanel {
                         informFrame("请选择搜索条件类型！",true);
                         break;
                     case 1:
-                        //打包空商品，查所有
+                        goods = new Goods();
+                        setPanel1(goods);
                         break;
                     case 2:
-                        System.out.println("名称"+str);
+                        goods = new Goods();
+                        goods.setGoodsName(txtEnquire.getText());
+                        setPanel1(goods);
                         break;
                     case 3:
-                        System.out.println("编号"+str);//book。set
+                        goods = new Goods();
+                        goods.setGoodsID(txtEnquire.getText());
+                        setPanel1(goods);
                         break;
                     case 4:
-                        System.out.println("价格"+str);//book。set
+                        goods = new Goods();
+                        goods.setPrice(txtEnquire.getText());
+                        setPanel1(goods);
                         break;
                     default:
                         break;
                 }
-                //传消息出去
-                setPanel1();
+                //setPanel1();
                 setCard("panelAll");
-
+                repaint();
+                updateUI();
             }
         });
 
         btnAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setPanel3(0);
+                operation="post";
+                setPanel3(new Goods("","","","","","","",0,0),0);
                 setCard("panelAdd");//传入空的商品
             }
         });
@@ -174,7 +166,7 @@ public class PanelGoodsManage_A extends JPanel {
         btnEdit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setPanel3(1);
+                operation="put";
                 setCard("panelAdd");//传入当前正在查看详情的商品
             }
         });
@@ -189,13 +181,26 @@ public class PanelGoodsManage_A extends JPanel {
         btnDelete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String str = panelInfo1.txtGoodsID.getText();
-                //打包传消息，接收消息，删除商品
-                //如果成功
-                if (true)//操作成功
+                Goods goods = new Goods();
+                goods.setGoodsID(Inform.txtGoodsID.getText());
+
+                Gson gson = new Gson();
+                String s = gson.toJson(goods);
+                passer.send(new Message("student", s, "shop", "delete"));
+
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException interruptedException) {
+                    interruptedException.printStackTrace();
+                }
+
+                Message msg = passer.receive();
+                Map<String,Object> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String,Object>>(){}.getType());
+
+                if(map.get("res").equals("OK"))
                 {
                     informFrame("商品下架成功！", false);
-                    setPanel1();
+                    //setPanel1();
                     setCard("panelAll");
                 } else {
                     informFrame("商品下架失败！", true);
@@ -207,27 +212,62 @@ public class PanelGoodsManage_A extends JPanel {
         btnOk.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String str1 = panelInform.txtGoodsName.getText();
-                String str2 = panelInform.txtGoodsID.getText();
-                String str3 = panelInform.txtSeller.getText();//////直接设查询者的一卡通，不允许输入，不可编辑
-                String str5 = panelInform.txtDealTime.getText();
-                String str6 = panelInform.txtPrice.getText();
-                String str7 = panelInform.txtNum.getText();
-                //差图片设置
+                Goods goods = new Goods();
+                goods.setGoodsName(Inform.txtGoodsName.getText());
+                goods.setGoodsID(Inform.txtGoodsID.getText());
+                goods.setSeller(Inform.txtSeller.getText());
+                goods.setDealDate(Inform.txtDealTime.getText());
+                goods.setPrice(Inform.txtPrice.getText());
+                goods.setNum(Integer.valueOf(Inform.txtNum.getText()));
 
-                //获取添加页所有信息，打包整个商品回传
-                // 传消息，收消息，成功后返回表格页，表格页更新
-                //失败留在这页
-                if(true)
+                System.out.println(goods);
+                try {
+                    goods.setPicture(StringAndImage.ImageToString(ImgPath));
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+
+                Gson gson = new Gson();
+                String s = gson.toJson(goods);
+                passer.send(new Message("student", s, "shop", operation));
+
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException interruptedException) {
+                    interruptedException.printStackTrace();
+                }
+
+                Message msg = passer.receive();
+                Map<String,Object> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String,Object>>(){}.getType());
+
+                if(map.get("res").equals("OK"))
                 {
-                    informFrame("商品已上架！",false);
-                    setPanel1();
-                    setCard("panelAll");
+                    if(operation.equals("post"))
+                    {
+                        informFrame("商品已上架！",false);
+                        Goods t = new Goods();
+                        setPanel1(t);
+                        setCard("panelAll");
+                        //panelAll.updateUI();
+                        //panelAll.repaint();
+                    }
+                    else
+                    {
+                        informFrame("修改成功！",false);
+                        setPanel2(goods);
+                        setCard("panelInform");
+                    }
+
                 }
                 else
                 {
-                    informFrame("商品上架失败！",true);
+                    if(operation.equals("post"))
+                    { informFrame("商品上架失败！",true); }
+                    else
+                    { informFrame("修改失败！",true); }
+
                 }
+
             }
         });
 
@@ -258,24 +298,33 @@ public class PanelGoodsManage_A extends JPanel {
         { JOptionPane.showMessageDialog(this, title, "提示", JOptionPane.INFORMATION_MESSAGE);}
     }
 
-    public void setPanel1()//显示所有在售商品表格
+    public void setPanel1(Goods g)//显示所有在售商品表格
     {
-        //用个人一卡通号，getSeller
-        //发消息，收消息，不为空
-        if(true)
+        Gson gson = new Gson();
+        String s = gson.toJson(g);
+        passer.send(new Message("admin", s, "shop", "get"));
+
+        panelAll.removeAll();
+        Message msg = passer.receive();
+        Map<String, List<Goods>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, List<Goods>>>() {}.getType());
+        res = map.get("res");
+        if(res.size()!=0)
         {
-            //tableData=[][7];
-            for(int i=0;i<6;i++)
-            {
-                //设置表格内容
+            tableData = new Object[res.size()][7];
+            for (int i = 0; i < res.size(); i++) {
+                tableData[i][0] = res.get(i).getGoodsID();
+                tableData[i][1] = res.get(i).getGoodsName();
+                tableData[i][2] = res.get(i).getDealDate();
+                tableData[i][3] = res.get(i).getPrice();
+                tableData[i][4] = res.get(i).getNum();
             }
         }
         else
         {
+            informFrame("暂无商品上架",true);
             tableData=null;
         }
-        panelAll.removeAll();
-       // panelAll.add(lblHint);
+
         panelAll.add(btnAdd);
         panelAll.add(btnInquire);
         panelAll.add(comboBox);
@@ -287,46 +336,55 @@ public class PanelGoodsManage_A extends JPanel {
         panelAll.repaint();
     }
 
-    public void setPanel2()//显示商品详情，要传入一个商品
+    public void setPanel2(Goods g)//显示商品详情，要传入一个商品
     {
+        System.out.println(g);
         panelInform.removeAll();
         panelInform.add(btnReturn);
         panelInform.add(btnEdit);
         panelInform.add(btnDelete);
 
-        //panelInfo1 = new PanelGoodsInform();//传入商品对象为参数
-        panelInfo1.setBounds(150,50,800,500);
-        panelInform.add(panelInfo1);
+        Inform = new PanelGoodsInform(g,false);//传入商品对象为参数
+        Inform.setBounds(150,50,800,500);
+        panelInform.add(Inform);
 
         panelInform.updateUI();
         panelInform.repaint();
     }
 
-    public void setPanel3(int flag)//显示添加商品界面||修改界面  传入商品对象，空的就是添加，有东西就是修改
+    public void setPanel3(Goods g,int flag)//显示添加商品界面||修改界面  传入商品对象，空的就是添加，有东西就是修改
     {
         panelAdd.removeAll();
         panelAdd.add(btnOk);
         panelAdd.add(btnCancel);
 
-        //panelInfo2 = new PanelGoodsInform();//传入对象，文本框可编辑并且一卡通设置成自己且不可编辑！！
-        panelInfo2.setBounds(150,50,800,500);
+        Inform = new PanelGoodsInform(g,true);//传入对象，文本框可编辑并且一卡通设置成自己且不可编辑！！
+        Inform.setBounds(150,50,800,500);
+
         if(flag==0)
         {
-            ImageIcon img = new ImageIcon("Pictures//addFig.jpg");// 这是背景图片 .png .jpg .gif 等格式的图片都可以
+            ImageIcon img = new ImageIcon("Vcampus/img/addFig.jpg");// 这是背景图片 .png .jpg .gif 等格式的图片都可以
             img.setImage(img.getImage().getScaledInstance(180,220,Image.SCALE_DEFAULT));//这里设置图片大小，目前是20*20
-            panelInfo2.lblImg.setIcon(img);
-            panelInfo2.updateUI();
-            panelInfo2.repaint();
+            Inform.lblImg.setIcon(img);
+            Inform.updateUI();
+            Inform.repaint();
+        }
+        if(flag==1)
+        {
+            Inform.txtGoodsID.setText(g.getGoodsID());
+            Inform.txtGoodsID.setEditable(false);
+            Inform.txtSeller.setText(g.getSeller());
+            Inform.txtSeller.setEditable(false);
         }
 
         //panelInform.add(panelInform.lblImg);
 
-        panelInfo2.lblImg.addMouseListener(new MouseListener() {
+        Inform.lblImg.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 // TODO Auto-generated method stub
                 if (e.getClickCount() == 1) {
-                    addPicture(panelInfo2.lblImg);
+                    addPicture(Inform.lblImg);
                 }
             }
             @Override
@@ -338,7 +396,7 @@ public class PanelGoodsManage_A extends JPanel {
             @Override
             public void mouseExited(MouseEvent e) {}
         });
-        panelAdd.add(panelInfo2);
+        panelAdd.add(Inform);
 
         panelAdd.updateUI();
         panelAdd.repaint();
@@ -346,6 +404,8 @@ public class PanelGoodsManage_A extends JPanel {
 
     public void setTable(int width,int height)
     {
+        tablePanel.removeAll();
+
         System.out.println("构件表格");
         DefaultTableModel model= new DefaultTableModel(tableData,columnNames);
         table=new MyTable_Shop(model);
@@ -377,12 +437,10 @@ public class PanelGoodsManage_A extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int rowName=btnE1.getThisRow();
-
                 //传递对应商品到详情页
-                setPanel2();//传入”res[rowName],构建详情表格
-                System.out.println(rowName);
+                setPanel2(res.get(rowName));
+                setPanel3(res.get(rowName),1);//顺便构建修改页
                 setCard("panelInform");
-
 
                 btnE1.fireEditingStopped_1();
             }
@@ -392,11 +450,26 @@ public class PanelGoodsManage_A extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int rowName = btnE2.getThisRow();
-                //获取商品号，打包商品，delete
-                //发送消息，接收消息
-                if (true)//操作成功
+
+                Goods goods = new Goods();
+                goods.setGoodsID((String)model.getValueAt(rowName, 0));
+                Gson gson = new Gson();
+                String s = gson.toJson(goods);
+                passer.send(new Message("student", s, "shop", "delete"));
+
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException interruptedException) {
+                    interruptedException.printStackTrace();
+                }
+
+                Message msg = passer.receive();
+                Map<String,Object> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String,Object>>(){}.getType());
+
+                if(map.get("res").equals("OK"))
                 {
                     informFrame("商品下架成功！", false);
+                    btnE2.fireEditingStopped_1();
                     model.removeRow(rowName);//表格里删掉这一行
                 } else {
                     informFrame("商品下架失败！", true);
@@ -404,8 +477,8 @@ public class PanelGoodsManage_A extends JPanel {
             }
         });
 
-        updateUI();
-        repaint();
+        tablePanel.updateUI();
+        tablePanel.repaint();
     }
 
     public void addPicture(JLabel lbl) {

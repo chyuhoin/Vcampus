@@ -1,24 +1,13 @@
-package 模拟QQ;
+package com.vcampus.client.window.login;
 
+import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.MatteBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.net.URL;
-
-import javax.swing.BorderFactory;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.border.Border;
-import javax.swing.border.MatteBorder;
 
 public class MyQQ_Frame extends JFrame{
     int x,y;
@@ -269,7 +258,7 @@ public class MyQQ_Frame extends JFrame{
             String names=userfield.getText();
             @SuppressWarnings("deprecation")
             String mima=codefield.getText();
-            模拟QQ.Users[]yonghu=new Users[5];
+            Users[]yonghu=new Users[5];
             for(int q=0;q<5;q++){
                 yonghu[q]=new Users();
             }
