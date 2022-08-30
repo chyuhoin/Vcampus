@@ -288,6 +288,11 @@ public class PanelMyStore_S  extends JPanel{
             Inform.updateUI();
             Inform.repaint();
         }
+        if(flag==1)
+        {
+            Inform.txtGoodsID.setText(g.getGoodsID());
+            Inform.txtGoodsID.setEditable(false);
+        }
 
         //panelInform.add(panelInform.lblImg);
 
