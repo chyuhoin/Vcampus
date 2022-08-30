@@ -271,7 +271,7 @@ public class LessonController implements Controller{
                 return new Message("200", gson.toJson(map14));
             case "showlesson":
                 //显示课程的状态：可选、已选、已满、时间冲突
-                //输入学生ID与课程号 用","隔开
+                //输入学生ID与内部ID
                 Lesson lesson12 = gson.fromJson(msg.getData(), Lesson.class);
 //                String oldStr2 = msg.getData();
 //                String[] strs2 = oldStr2.split(",");//根据，切分字符串
