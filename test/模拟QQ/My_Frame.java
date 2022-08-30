@@ -30,8 +30,8 @@ public class My_Frame extends JFrame{
     int flag=1;//1--学生 2--老师 3--管理员
 
     //承接用户状态图标
+//    JButton Status=new JButton("学生");
     JButton Status=new JButton("学生");
-
     //承接用户名图标
     JLabel Users=new JLabel();
     //承接密码图标
@@ -148,9 +148,9 @@ public class My_Frame extends JFrame{
         codes_icon.setImage(codes_icon.getImage().getScaledInstance((int)(0.05*width),(int)(0.06*height),Image.SCALE_DEFAULT));
         codes.setIcon(codes_icon);
 //        bg.setIcon(bg_icon);
-        close_icon.setImage(close_icon.getImage().getScaledInstance((int)(0.025*width),(int)(0.025*width),Image.SCALE_DEFAULT));
+        close_icon.setImage(close_icon.getImage().getScaledInstance((int)(0.015*width),(int)(0.015*width),Image.SCALE_DEFAULT));
         close.setIcon(close_icon);
-        min_icon.setImage(min_icon.getImage().getScaledInstance((int)(0.03*width),(int)(0.03*width),Image.SCALE_DEFAULT));
+        min_icon.setImage(min_icon.getImage().getScaledInstance((int)(0.02*width),(int)(0.02*width),Image.SCALE_DEFAULT));
         min.setIcon(min_icon);
         tengxun.setImage(tengxun.getImage().getScaledInstance((int)(0.24*width),(int)(0.36*height),Image.SCALE_DEFAULT));
         tx.setIcon(tengxun);
@@ -188,7 +188,7 @@ public class My_Frame extends JFrame{
         close.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent e){
                 close.setOpaque(true);
-                close.setBackground(Color.red);
+                close.setBackground(new Color(0xF13B3B));
             }
             public void mouseExited(MouseEvent e) {
                 close.setOpaque(false);
@@ -197,16 +197,16 @@ public class My_Frame extends JFrame{
         close.addActionListener((e)->{
             this.dispose();
         });
-        close.setBounds((int)(0.96*width),(int)(0*height),(int)(0.04*width),(int)(0.04*width));
+        close.setBounds((int)(0.95*width),(int)(0*height),(int)(0.05*width),(int)(0.05*height));
         jPanel.add(close);
         min.setFocusPainted(false);
-        min.setBackground(new Color(192, 192, 225, 131));;//加了才能不显示
+        min.setBackground(new Color(165, 200, 250, 255));;//加了才能不显示
         min.setOpaque(false);
         min.setBorder(border);
         min.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent e){
                 min.setOpaque(true);
-                min.setBackground(new Color(122, 122, 207, 255));
+                min.setBackground(new Color(165, 200, 250, 255));
             }
             public void mouseExited(MouseEvent e) {
                 min.setOpaque(false);
@@ -215,7 +215,7 @@ public class My_Frame extends JFrame{
         min.addActionListener((e)->{
             this.setExtendedState(JFrame.ICONIFIED);
         });
-        min.setBounds((int)(0.92*width),(int)(0*height),(int)(0.04*width),(int)(0.04*width));
+        min.setBounds((int)(0.9*width),(int)(0*height),(int)(0.05*width),(int)(0.05*height));
         jPanel.add(min);
         //添加状态
         Status.setFocusPainted(false);
@@ -226,11 +226,11 @@ public class My_Frame extends JFrame{
             flag=(flag)%3+1;
             switch(flag){
                 case 1:{
-                    student.setImage(student.getImage().getScaledInstance((int)(0.04*width),(int)(0.035*width),Image.SCALE_DEFAULT));
+                    student.setImage(student.getImage().getScaledInstance((int)(0.03*width),(int)(0.025*width),Image.SCALE_DEFAULT));
                     Status.setIcon(student);
                     Status.setHorizontalTextPosition(SwingConstants.LEFT);
                     Status.setText("学生");
-                    Status.setFont(new Font("宋体", 1, 20));
+                    Status.setFont(new Font("黑体", 1, 20));
 //                    seu1.setImage(seu1.getImage().getScaledInstance((int)(1*width),(int)(0.4*height),Image.SCALE_DEFAULT));
 //                    bg.setIcon(seu1);
 //                    bg.setBounds((int)(0*width),(int)(0*height),(int)(1*width),(int)(0.4*height));
@@ -241,11 +241,11 @@ public class My_Frame extends JFrame{
                     break;
                 }
                 case 2:{
-                    teacher.setImage(teacher.getImage().getScaledInstance((int)(0.04*width),(int)(0.035*width),Image.SCALE_DEFAULT));
+                    teacher.setImage(teacher.getImage().getScaledInstance((int)(0.03*width),(int)(0.025*width),Image.SCALE_DEFAULT));
                     Status.setIcon(teacher);
                     Status.setHorizontalTextPosition(SwingConstants.LEFT);
                     Status.setText("教师");
-                    Status.setFont(new Font("宋体", 1, 20));
+                    Status.setFont(new Font("黑体", 1, 20));
 //                    seu2.setImage(seu2.getImage().getScaledInstance((int)(1*width),(int)(0.4*height),Image.SCALE_DEFAULT));
 //                    bg.setIcon(seu2);
 //                    bg.setBounds((int)(0*width),(int)(0*height),(int)(1*width),(int)(0.4*height));
@@ -260,7 +260,7 @@ public class My_Frame extends JFrame{
                     Status.setIcon(administrator);
                     Status.setHorizontalTextPosition(SwingConstants.LEFT);
                     Status.setText("管理员");
-                    Status.setFont(new Font("宋体", 1, 20));
+                    Status.setFont(new Font("黑体", 1, 20));
 //                    seu3.setImage(seu3.getImage().getScaledInstance((int)(1*width),(int)(0.4*height),Image.SCALE_DEFAULT));
 //                    bg.setIcon(seu3);
 //                    bg.setBounds((int)(0*width),(int)(0*height),(int)(1*width),(int)(0.4*height));
@@ -273,11 +273,62 @@ public class My_Frame extends JFrame{
             }
 //            this.setExtendedState(JFrame.ICONIFIED);
         });
-        student.setImage(student.getImage().getScaledInstance((int)(0.04*width),(int)(0.035*width),Image.SCALE_DEFAULT));
+//        Status.addActionListener((e)->{
+//            flag=(flag)%3+1;
+//            switch(flag){
+//                case 1:{
+//                    student.setImage(student.getImage().getScaledInstance((int)(0.03*width),(int)(0.025*width),Image.SCALE_DEFAULT));
+//                    Status.setIcon(student);
+//                    Status.setHorizontalTextPosition(SwingConstants.LEFT);
+//                    Status.setText("学生");
+//                    Status.setFont(new Font("黑体", 1, 20));
+////                    seu1.setImage(seu1.getImage().getScaledInstance((int)(1*width),(int)(0.4*height),Image.SCALE_DEFAULT));
+////                    bg.setIcon(seu1);
+////                    bg.setBounds((int)(0*width),(int)(0*height),(int)(1*width),(int)(0.4*height));
+//                    seubg1.setImage(seubg1.getImage().getScaledInstance((int)(1*width),(int)(1*height),Image.SCALE_DEFAULT));
+//                    bg.setIcon(seubg1);
+//                    bg.setBounds((int)(0*width),(int)(0*height),(int)(1*width),(int)(1*height));
+//                    jPanel.add(bg);
+//                    break;
+//                }
+//                case 2:{
+//                    teacher.setImage(teacher.getImage().getScaledInstance((int)(0.03*width),(int)(0.025*width),Image.SCALE_DEFAULT));
+//                    Status.setIcon(teacher);
+//                    Status.setHorizontalTextPosition(SwingConstants.LEFT);
+//                    Status.setText("教师");
+//                    Status.setFont(new Font("黑体", 1, 20));
+////                    seu2.setImage(seu2.getImage().getScaledInstance((int)(1*width),(int)(0.4*height),Image.SCALE_DEFAULT));
+////                    bg.setIcon(seu2);
+////                    bg.setBounds((int)(0*width),(int)(0*height),(int)(1*width),(int)(0.4*height));
+//                    seubg2.setImage(seubg2.getImage().getScaledInstance((int)(1*width),(int)(1*height),Image.SCALE_DEFAULT));
+//                    bg.setIcon(seubg2);
+//                    bg.setBounds((int)(0*width),(int)(0*height),(int)(1*width),(int)(1*height));
+//                    jPanel.add(bg);
+//                    break;
+//                }
+//                case 3:{
+//                    administrator.setImage(administrator.getImage().getScaledInstance((int)(0.03*width),(int)(0.025*width),Image.SCALE_DEFAULT));
+//                    Status.setIcon(administrator);
+//                    Status.setHorizontalTextPosition(SwingConstants.LEFT);
+//                    Status.setText("管理员");
+//                    Status.setFont(new Font("黑体", 1, 20));
+////                    seu3.setImage(seu3.getImage().getScaledInstance((int)(1*width),(int)(0.4*height),Image.SCALE_DEFAULT));
+////                    bg.setIcon(seu3);
+////                    bg.setBounds((int)(0*width),(int)(0*height),(int)(1*width),(int)(0.4*height));
+//                    seubg3.setImage(seubg3.getImage().getScaledInstance((int)(1*width),(int)(1*height),Image.SCALE_DEFAULT));
+//                    bg.setIcon(seubg3);
+//                    bg.setBounds((int)(0*width),(int)(0*height),(int)(1*width),(int)(1*height));
+//                    jPanel.add(bg);
+//                    break;
+//                }
+//            }
+////            this.setExtendedState(JFrame.ICONIFIED);
+//        });
+        student.setImage(student.getImage().getScaledInstance((int)(0.03*width),(int)(0.025*width),Image.SCALE_DEFAULT));
         Status.setIcon(student);
         Status.setHorizontalTextPosition(SwingConstants.LEFT);
         Status.setText("学生");
-        Status.setFont(new Font("宋体", 1, 20));
+        Status.setFont(new Font("黑体", 1, 20));
         Status.setBounds((int)(0.63*width),(int)(0.66*height),(int)(0.08*width),(int)(0.045*width));
 
         jPanel.add(Status);
@@ -364,7 +415,7 @@ public class My_Frame extends JFrame{
             setPreferredSize(new Dimension(215, 37));
             setForeground(Color.white);
             setFocusPainted(false);
-            setFont(new Font("微软雅黑", 1, 15));
+            setFont(new Font("微软雅黑", 1, 20));
             setHorizontalAlignment(SwingConstants.CENTER);
         }
     }
