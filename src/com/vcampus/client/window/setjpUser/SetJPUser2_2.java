@@ -54,8 +54,11 @@ public class SetJPUser2_2 {
         jp.setLayout(layout_Spring);
         //标题
         JLabel lbl = new JLabel("密码修改");
+        ImageIcon lblIcon = new ImageIcon("resource//User_passwordRevise.png");
+        lbl.setIcon(lblIcon);
+        lbl.setHorizontalTextPosition(SwingConstants.RIGHT);
         jp.add(lbl);
-        lbl.setFont(new Font("黑体", Font.BOLD, 50));
+        lbl.setFont(new Font("黑体", Font.BOLD, 30));
         layout_Spring.putConstraint(layout_Spring.NORTH, lbl, 20, layout_Spring.NORTH, jp);
         layout_Spring.putConstraint(layout_Spring.WEST, lbl, 20, layout_Spring.WEST, jp);
         //信息列表：
