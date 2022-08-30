@@ -26,6 +26,7 @@ import com.vcampus.pojo.Student;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +37,7 @@ public class PanelTimeTable_S extends JPanel {
     private String studentID;
     private String[] columnName={"节数","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
     private String[][] tableData=new String[13][8];//一周7天+纵向表头，一天13节课
+    private Color[][] tableColor=new Color[13][8];//课表颜色
     MessagePasser passer = ClientMessagePasser.getInstance();
 
     public PanelTimeTable_S(String ID){
@@ -59,14 +61,22 @@ public class PanelTimeTable_S extends JPanel {
                 }
             };
 
-            table.setRowHeight(30);
+            table.setRowHeight(50);
             table.setFont(new Font("黑体",Font.PLAIN,20));
 
             //table.getTableHeader().setVisible(true);
             table.getTableHeader().setFont(new Font("黑体",Font.PLAIN,20));
+            table.getTableHeader().setResizingAllowed(false);               // 设置不允许手动改变列宽
+            table.getTableHeader().setReorderingAllowed(false);             // 设置不允许拖动重新排序各列
             //table.getColumn(0).setMaxWidth(60);
-
+/*
+            for(int i=0;i<table.getRowCount();i++)
+                for(int j=0;j<table.getColumnCount();j++){
+                    table.getColumn(j).
+                }
             panel.add(table);
+
+ */
 
         } else{
             panel.setLayout(new BorderLayout());
@@ -99,22 +109,56 @@ public class PanelTimeTable_S extends JPanel {
             //数据处理，更方便处理课表
             for(int i=0;i<tableData.length;i++) {
                 tableData[i][0]="第"+(i+1)+"节";
+                tableColor[i][0]=new Color(112, 128 ,144);
                 for (int j = 1; j < tableData[i].length-2; j++) {
                     String temp=stringArr[i + 13*(j-1)];
                     if ("0".equals(temp)) {
                         tableData[i][j] = " ";
+                        setTableColor(i,j);
                     } else {
                         tableData[i][j] = temp;
+                        setTableColor(i,j);
                     }
 
                 }
                 tableData[i][tableData[i].length-2]=" ";//周六
+                tableColor[i][tableData[i].length-2]=Color.gray;
                 tableData[i][tableData[i].length-1]=" ";//周日
+                tableColor[i][tableData[i].length-1]=Color.gray;
             }
 
         }else {
             existTable=false;
         }
+    }
+
+    private void setTableColor(int i,int j){
+        int c=i + 13*(j-1);
+        List<Integer> color1= Arrays.asList(0,1,10,11,12,31,32,52,53,62,63,64);
+        List<Integer> color2= Arrays.asList(2,3,4,33,34,35,54,55,56);
+        List<Integer> color3= Arrays.asList(5,6,26,27,36,37,38,57,58);
+        List<Integer> color4= Arrays.asList(7,8,9,28,29,30,59,60,61);
+        List<Integer> color5= Arrays.asList(13,14,23,24,25,44,45);
+        List<Integer> color6= Arrays.asList(15,16,17,41,42,43,46,47,48);
+        List<Integer> color7= Arrays.asList(18,19,49,50,51);
+        List<Integer> color8= Arrays.asList(20,21,22,39,40,41);
+        if(color1.contains(c))
+            tableColor[i][j]=new Color(221 ,160 ,221);
+        else if(color2.contains(c))
+            tableColor[i][j]=new Color(187 ,255 ,255);
+        else if(color3.contains(c))
+            tableColor[i][j]=new Color(255 ,174 ,185);
+        else if(color4.contains(c))
+            tableColor[i][j]=new Color(255 ,246 ,143);
+        else if(color5.contains(c))
+            tableColor[i][j]=new Color(193 ,255, 193);
+        else if(color6.contains(c))
+            tableColor[i][j]=new Color(255 ,165, 79);
+        else if(color7.contains(c))
+            tableColor[i][j]=new Color(152, 251 ,152);
+        else if(color8.contains(c))
+            tableColor[i][j]=new Color(250 ,128 ,114);
+        else tableColor[i][j]=new Color(255 ,222 ,173);
     }
 
 }
