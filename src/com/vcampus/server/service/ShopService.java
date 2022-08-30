@@ -39,7 +39,12 @@ public class ShopService implements Service {
                 Object resultValue = field.get(goods);
 
                 if(resultValue == null) continue;
-                res.removeIf(item -> !item.equals(resultValue));
+                Iterator<Goods> it = res.iterator();
+                while(it.hasNext()) {
+                    Goods item = it.next();
+                    if(!field.get(item).equals(resultValue))
+                        it.remove();
+                }
 
                 System.out.println(name + ": " + resultValue);
             }

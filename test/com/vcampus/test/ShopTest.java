@@ -61,7 +61,7 @@ public class ShopTest {
         MessagePasser passer = ClientMessagePasser.getInstance();
 
         User user = new User();
-        user.setStudentID("5");
+        user.setStudentID("333");
         passer.send(new Message("student", gson.toJson(user), "shop", "getSell"));
         Message message = passer.receive();
         System.out.println(message);

@@ -46,8 +46,8 @@ public class Record {
         return date;
     }
 
-    public void setDate(Date date) {
-        this.date = String.format("%1$tY-%1$tm-%1$td", date);
+    public void setDate(String date) {
+        this.date = date;
     }
 
     @Override
