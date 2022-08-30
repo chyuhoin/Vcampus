@@ -40,6 +40,7 @@ public class PanelEnquireBook extends JPanel{
     // 创建一个下拉列表框
     JComboBox<String> comboBox = new JComboBox<String>(listData);
     JTextField txtEnquire = new JTextField();
+    JLabel backGround = new JLabel();
     PanelBookInform panelInform = new PanelBookInform(new Book("","","","",0,""),true);
 
     MessagePasser passer = ClientMessagePasser.getInstance();
@@ -47,24 +48,35 @@ public class PanelEnquireBook extends JPanel{
     public PanelEnquireBook(String status)
     {
         this.setLayout(null);
-        int x=470,y=50;//起始坐标
+        //this.setOpaque(false);
+        int x=430,y=50;//起始坐标
         int txtWidth=110, txtHeight=42;
 
-        comboBox.setBounds(x-110,y,220,40);
+        backGround.setBounds(0,0,1200,650);
+        backGround.setOpaque(false);
+
+
+        comboBox.setBounds(x-180,y,220,40);
         comboBox.setFont(new Font("楷体", Font.BOLD, 24));
         comboBox.setOpaque(true);
 
-        txtEnquire.setBounds(x+130,y,txtWidth*3,txtHeight);
+        txtEnquire.setBounds(x+60,y,txtWidth*3,txtHeight);
         txtEnquire.setFont(new Font("楷体", Font.BOLD, 20));
 
         btnInquire.setFont(new Font("宋体",Font.BOLD, 20));
-        btnInquire.setBounds(x+480,y,80,40);
+        btnInquire.setBounds(x+410,y,140,40);
 
         // 添加到内容面板
         this.add(comboBox);
         this.add(txtEnquire);
         this.add(btnInquire);
-
+        this.add(backGround);
+        //设置背景
+        ImageIcon back = new ImageIcon("resource//library.png");
+        backGround.setIcon(back);
+        //设置搜索
+        ImageIcon btnIcon = new ImageIcon("resource//search.png");
+        btnInquire.setIcon(btnIcon);
         btnInquire.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

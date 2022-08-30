@@ -70,7 +70,7 @@ public class MyTablePanel extends JPanel{
     public MyTablePanel(Object[][] rowData, Object[] columnNames){
         //卡片
         PANEL=this;
-
+        this.setOpaque(false);
         //数据获取
         if(rowData!=null && rowData.length>0) {
             dList = new Object[rowData.length][rowData[0].length];
