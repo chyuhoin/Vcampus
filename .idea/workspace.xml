@@ -1,22 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="界面改为了侧边栏">
-      <change afterPath="$PROJECT_DIR$/resource/bottom.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resource/top.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-24_21_22___Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2022-08-24_21_22___Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-25_12_36___Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2022-08-25_12_36___Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-27_19_05___Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2022-08-27_19_05___Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-28_10_32___Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2022-08-28_10_32___Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-28_10_35___Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2022-08-28_10_35___Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-28_10_35___Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2022-08-28_10_35___Changes_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-28_10_42___Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2022-08-28_10_42___Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-28_19_24___Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2022-08-28_19_24___Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-29_17_12___Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2022-08-29_17_12___Changes_.xml" afterDir="false" />
+    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="修bug">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/myMainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/myMainFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpUser/SetJPUser1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpUser/SetJPUser1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpUser/TabbedPanelUser_S.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpUser/TabbedPanelUser_S.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/LessonDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/LessonDao.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -87,7 +73,7 @@
       <recent name="com.vcampus.client.login" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.myLoginTest">
+  <component name="RunManager" selected="JUnit.LessonDao.test2">
     <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.vcampus.server.Server" />
       <module name="Vcampus" />
@@ -130,7 +116,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MessageDao.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="LessonDao.test2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Vcampus" />
       <extension name="coverage">
         <pattern>
@@ -139,8 +125,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.vcampus.dao" />
-      <option name="MAIN_CLASS_NAME" value="com.vcampus.dao.MessageDao" />
-      <option name="METHOD_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="com.vcampus.dao.LessonDao" />
+      <option name="METHOD_NAME" value="test2" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -164,11 +150,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.LessonDao.test2" />
         <item itemvalue="Application.myLoginTest" />
         <item itemvalue="Application.Server" />
         <item itemvalue="JUnit.StringAndImage.test" />
         <item itemvalue="JUnit.LessonDao.test" />
-        <item itemvalue="JUnit.MessageDao.test" />
       </list>
     </recent_temporary>
   </component>
@@ -508,7 +494,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661763246770</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="修bug">
+      <created>1661829104066</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1661829104066</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -580,9 +573,9 @@
     <MESSAGE value="修改数据库名称，修bug" />
     <MESSAGE value="考务系统修改" />
     <MESSAGE value="写了点商店的界面" />
-    <MESSAGE value="修bug" />
     <MESSAGE value="界面改为了侧边栏" />
-    <option name="LAST_COMMIT_MESSAGE" value="界面改为了侧边栏" />
+    <MESSAGE value="修bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="修bug" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
