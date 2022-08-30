@@ -37,6 +37,14 @@ public class TabbedPanelCourse_S extends JTabbedPane {
             PanelViewCourse_S jp12 = new PanelViewCourse_S(ID);
             PanelTimeTable_S jp13 = new PanelTimeTable_S(ID);
 
+            JLabel background1 =new JLabel();
+            ImageIcon back = new ImageIcon("resource//User_background.png");
+            background1.setIcon(back);
+            background1.setBounds(0,0,1200,650);
+            background1.setOpaque(false);
+            jp11.setOpaque(false);
+            jp11.add(background1);
+
             this.addTab("选课系统", null, jp11, "选课系统");
             this.addTab("已选课程", null, jp12, "查看已选课程");
             this.addTab("我的课表", null, jp13, "查看我的课表");

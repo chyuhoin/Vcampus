@@ -22,7 +22,7 @@ public class TabbedPanelUser_A extends JTabbedPane{
     public TabbedPanelUser_A(int flag,String id)
     {
         if(flag==3) {
-            this.setTabPlacement(2);
+            this.setTabPlacement(1);
             this.setBounds(0, 0, 1400, 650);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
             // 创建卡片布局，卡片间水平和竖直间隔为 10

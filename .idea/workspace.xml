@@ -1,9 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="修bug">
+    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="新的界面">
+      <change afterPath="$PROJECT_DIR$/resource/User_background.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resource/User_passwordRevise.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resource/User_personalInfo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resource/exit.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/LessonDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/LessonDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/btn_library.png" beforeDir="false" afterPath="$PROJECT_DIR$/resource/btn_library.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/lesson.png" beforeDir="false" afterPath="$PROJECT_DIR$/resource/lesson.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/message.png" beforeDir="false" afterPath="$PROJECT_DIR$/resource/message.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/store.png" beforeDir="false" afterPath="$PROJECT_DIR$/resource/store.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/student.png" beforeDir="false" afterPath="$PROJECT_DIR$/resource/student.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/top.png" beforeDir="false" afterPath="$PROJECT_DIR$/resource/top.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/user.png" beforeDir="false" afterPath="$PROJECT_DIR$/resource/user.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/myMainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/myMainFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpCourse/TabbedPanelCourse_S.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpCourse/TabbedPanelCourse_S.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpLibrary/mytablepanel/MyTablePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpLibrary/mytablepanel/MyTablePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpSchool/TabbedPanelSchool_S.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpSchool/TabbedPanelSchool_S.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpUser/SetJPUser1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpUser/SetJPUser1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpUser/SetJPUser2_2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpUser/SetJPUser2_2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpUser/TabbedPanelUser_A.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpUser/TabbedPanelUser_A.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpUser/TabbedPanelUser_S.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpUser/TabbedPanelUser_S.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/ShopDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/ShopDao.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +92,20 @@
       <recent name="com.vcampus.client.login" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.LessonDao.test2">
+  <component name="RunManager" selected="Application.myLoginTest">
+    <configuration name="Create_GUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="模拟QQ.Create_GUI" />
+      <module name="Vcampus" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="模拟QQ.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.vcampus.server.Server" />
       <module name="Vcampus" />
@@ -100,22 +132,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LessonDao.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Vcampus" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.vcampus.dao.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.vcampus.dao" />
-      <option name="MAIN_CLASS_NAME" value="com.vcampus.dao.LessonDao" />
-      <option name="METHOD_NAME" value="test" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="LessonDao.test2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Vcampus" />
       <extension name="coverage">
@@ -132,16 +148,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StringAndImage.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ShopDao.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Vcampus" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.vcampus.dao.utils.*" />
+          <option name="PATTERN" value="com.vcampus.dao.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.vcampus.dao.utils" />
-      <option name="MAIN_CLASS_NAME" value="com.vcampus.dao.utils.StringAndImage" />
+      <option name="PACKAGE_NAME" value="com.vcampus.dao" />
+      <option name="MAIN_CLASS_NAME" value="com.vcampus.dao.ShopDao" />
       <option name="METHOD_NAME" value="test" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
@@ -150,11 +166,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.LessonDao.test2" />
         <item itemvalue="Application.myLoginTest" />
+        <item itemvalue="JUnit.ShopDao.test" />
         <item itemvalue="Application.Server" />
-        <item itemvalue="JUnit.StringAndImage.test" />
-        <item itemvalue="JUnit.LessonDao.test" />
+        <item itemvalue="Application.Create_GUI" />
+        <item itemvalue="JUnit.LessonDao.test2" />
       </list>
     </recent_temporary>
   </component>
@@ -220,6 +236,8 @@
       <workItem from="1661649054777" duration="1091000" />
       <workItem from="1661650213055" duration="3477000" />
       <workItem from="1661666663630" duration="13284000" />
+      <workItem from="1661841604009" duration="2655000" />
+      <workItem from="1661844610764" duration="4940000" />
     </task>
     <task id="LOCAL-00001" summary="初步写了登录注册">
       <created>1660298515554</created>
@@ -501,7 +519,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661829104066</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="修bug">
+      <created>1661830923513</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1661830923513</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -550,7 +575,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="修改了UserDao层的错误，但service和controller仍存在错误" />
     <MESSAGE value="给Student添加了image对象" />
     <MESSAGE value="添加了exam类，初步写了examDao层" />
     <MESSAGE value="增强了student，加入了民族信息；同时推进了部分examDao层" />
@@ -575,7 +599,8 @@
     <MESSAGE value="写了点商店的界面" />
     <MESSAGE value="界面改为了侧边栏" />
     <MESSAGE value="修bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="修bug" />
+    <MESSAGE value="新的界面" />
+    <option name="LAST_COMMIT_MESSAGE" value="新的界面" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

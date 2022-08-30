@@ -94,7 +94,9 @@ public class MyTablePanel extends JPanel{
         //布局设置---
         setLayout(layC);//卡片布局
         JP1=new JPanel(layS);//弹性布局
+        JP1.setOpaque(false);
         JP2=new JPanel(layS);
+        JP2.setOpaque(false);
         add(JP1);
         add(JP2);
 
@@ -149,7 +151,7 @@ public class MyTablePanel extends JPanel{
         //表格设置---
         dtm=new DefaultTableModel(null,columnNames);
         table=new MyTable(dtm);
-
+        table.setOpaque(false);
         table.setRowHeight(60);//设置行高
         table.setFont(new Font("黑体",Font.PLAIN,18));//设置表格字体
         table.getTableHeader().setFont(new Font("黑体",Font.PLAIN,20));//设置表头字体

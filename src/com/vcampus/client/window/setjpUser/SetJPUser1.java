@@ -93,8 +93,11 @@ public class SetJPUser1 extends JPanel {
         //jp1内容
         //标题
         JLabel lbl = new JLabel("个人信息");
+        ImageIcon lblIcon = new ImageIcon("resource//User_personalInfo.png");
+        lbl.setIcon(lblIcon);
+        lbl.setHorizontalTextPosition(SwingConstants.RIGHT);
         jp1.add(lbl);
-        lbl.setFont(new Font("黑体", Font.BOLD, 50));
+        lbl.setFont(new Font("黑体", Font.BOLD, 30));
         layout_Spring.putConstraint(layout_Spring.NORTH, lbl, 20, layout_Spring.NORTH, jp1);  //标签1北侧——>容器北侧
         layout_Spring.putConstraint(layout_Spring.WEST, lbl, 20, layout_Spring.WEST, jp1);    //标签1西侧——>容器西侧
         // 创建修改按钮

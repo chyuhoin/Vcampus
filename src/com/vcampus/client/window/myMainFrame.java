@@ -15,6 +15,8 @@
  */
 package com.vcampus.client.window;
 
+import com.formdev.flatlaf.FlatDarculaLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 import com.vcampus.client.window.Button.RoundRectButton;
 import com.vcampus.client.window.Panel.ImagePanel;
 import com.vcampus.client.window.setjpStore.TabbedPanelStore_A;
@@ -57,7 +59,8 @@ public class myMainFrame extends JFrame {
 
         super(title);//调用父类构造函数，设置窗口名称
         //this.setDefaultLookAndFeelDecorated(true);
-        // FlatDarkLaf.setup();
+//        FlatDarculaLaf FlatLightLafLaf;
+//        FlatLightLaf.setup();
         final int[] current = new int[1];//当前在哪个界面
         current[0] =-1;
         this.setSize(1400, 850);// 设置窗口的其他参数，如窗口大小
@@ -78,7 +81,8 @@ public class myMainFrame extends JFrame {
 
         panelMain.setOpaque(false);
         panelTop.setOpaque(false);
-     //   panelBottom.setOpaque(false);
+        panelBottom.setOpaque(false);
+      //  panelBottom,setContentPane();
      //   panelLeft.setOpaque(false);
 
         panelMain.setLayout(null);
@@ -103,9 +107,12 @@ public class myMainFrame extends JFrame {
         lblLogoLabel.setFont(new Font("Jokerman",Font.BOLD, 60));
         lblLogoLabel.setForeground(Color.white);
         panelTop.add(lblLogoLabel);
-        JButton btnExit = new JButton("退出");
+        JButton btnExit = new JButton();
+        ImageIcon exitIcon = new ImageIcon("resource//exit.png");
+        btnExit.setIcon(exitIcon);
+        btnExit.setOpaque(false);
         btnExit.setFont(new Font("宋体",Font.BOLD, 16));
-        btnExit.setBounds(1200,40,70,30);
+        btnExit.setBounds(1200,40,120,50);
         panelTop.add(btnExit);
         //加背景图片
         JLabel topBack = new JLabel();
@@ -136,26 +143,26 @@ public class myMainFrame extends JFrame {
         //退出按钮
 
 
-        btnModule1.setFont(new Font("正楷",Font.BOLD, 24));
+        btnModule1.setFont(new Font("正楷",Font.BOLD, 20));
         btnModule1.setForeground(Color.WHITE);
        // btnModule1.setOpaque(false);
-        btnModule2.setFont(new Font("正楷",Font.BOLD, 24));
+        btnModule2.setFont(new Font("正楷",Font.BOLD, 20));
         btnModule2.setForeground(Color.WHITE);
-        btnModule3.setFont(new Font("正楷",Font.BOLD, 24));
+        btnModule3.setFont(new Font("正楷",Font.BOLD, 20));
         btnModule3.setForeground(Color.WHITE);
-        btnModule4.setFont(new Font("正楷",Font.BOLD, 24));
+        btnModule4.setFont(new Font("正楷",Font.BOLD, 20));
         btnModule4.setForeground(Color.WHITE);
-        btnModule5.setFont(new Font("正楷",Font.BOLD, 24));
+        btnModule5.setFont(new Font("正楷",Font.BOLD, 20));
         btnModule5.setForeground(Color.WHITE);
-        btnModule6.setFont(new Font("正楷",Font.BOLD, 24));
+        btnModule6.setFont(new Font("正楷",Font.BOLD, 20));
         btnModule6.setForeground(Color.WHITE);
 
-        btnModule1.setBounds(20,10,150,60);
-        btnModule2.setBounds(20,10+110,150,60);
-        btnModule3.setBounds(20,10+110+110,150,60);
-        btnModule4.setBounds(20,10+110*3,150,60);
-        btnModule5.setBounds(20,10+110*4,150,60);
-        btnModule6.setBounds(20,10+110*5,150,60);
+        btnModule1.setBounds(20,10,150,100);
+        btnModule2.setBounds(20,10+110,150,100);
+        btnModule3.setBounds(20,10+110+110,150,100);
+        btnModule4.setBounds(20,10+110*3,150,100);
+        btnModule5.setBounds(20,10+110*4,150,100);
+        btnModule6.setBounds(20,10+110*5,150,100);
 
 
 //        btnModule1.setContentAreaFilled(false);
@@ -173,13 +180,7 @@ public class myMainFrame extends JFrame {
         btnModule6.setBorder(null);
 
 
-        //添加按钮
-        panelLeft.add(btnModule1);
-        panelLeft.add(btnModule2);
-        panelLeft.add(btnModule3);
-        panelLeft.add(btnModule4);
-        panelLeft.add(btnModule5);
-        panelLeft.add(btnModule6);
+
 
         for(int i=0;i<6;i++){
             btn[i].setOpaque(false);
@@ -188,22 +189,35 @@ public class myMainFrame extends JFrame {
        // 设置图标背景
         ImageIcon btnicon1 = new ImageIcon("resource//user.png");
         btnModule1.setIcon(btnicon1);
-        btnModule1.setHorizontalTextPosition(SwingConstants.RIGHT);
+        btnModule1.setHorizontalTextPosition(JButton.CENTER);
+        btnModule1.setVerticalTextPosition(JButton.BOTTOM);
         ImageIcon btnicon2 = new ImageIcon("resource//student.png");
         btnModule2.setIcon(btnicon2);
-        btnModule2.setHorizontalTextPosition(SwingConstants.RIGHT);
+        btnModule2.setHorizontalTextPosition(JButton.CENTER);
+        btnModule2.setVerticalTextPosition(JButton.BOTTOM);
         ImageIcon btnicon3 = new ImageIcon("resource//lesson.png");
         btnModule3.setIcon(btnicon3);
-        btnModule3.setHorizontalTextPosition(SwingConstants.RIGHT);
+        btnModule3.setHorizontalTextPosition(JButton.CENTER);
+        btnModule3.setVerticalTextPosition(JButton.BOTTOM);
         ImageIcon btnicon4 = new ImageIcon("resource//btn_library.png");
         btnModule4.setIcon(btnicon4);
-        btnModule4.setHorizontalTextPosition(SwingConstants.RIGHT);
+        btnModule4.setHorizontalTextPosition(JButton.CENTER);
+        btnModule4.setVerticalTextPosition(JButton.BOTTOM);
         ImageIcon btnicon5 = new ImageIcon("resource//store.png");
         btnModule5.setIcon(btnicon5);
-        btnModule5.setHorizontalTextPosition(SwingConstants.RIGHT);
+        btnModule5.setHorizontalTextPosition(JButton.CENTER);
+        btnModule5.setVerticalTextPosition(JButton.BOTTOM);
         ImageIcon btnicon6 = new ImageIcon("resource//message.png");
         btnModule6.setIcon(btnicon6);
-        btnModule6.setHorizontalTextPosition(SwingConstants.RIGHT);
+        btnModule6.setHorizontalTextPosition(JButton.CENTER);
+        btnModule6.setVerticalTextPosition(JButton.BOTTOM);
+        //添加按钮
+        panelLeft.add(btnModule1);
+        panelLeft.add(btnModule2);
+        panelLeft.add(btnModule3);
+        panelLeft.add(btnModule4);
+        panelLeft.add(btnModule5);
+        panelLeft.add(btnModule6);
         //创建各模块各权限对应面板
         //用户管理模块
         JTabbedPane[] userModule = {
