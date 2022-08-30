@@ -35,7 +35,7 @@ public class TabbedPanelCourse_S extends JTabbedPane {
 
             JPanel jp11 = new PanelCourseSelection_S(ID);
             PanelViewCourse_S jp12 = new PanelViewCourse_S(ID);
-            JPanel jp13 = new PanelTimeTable_S(ID);
+            PanelTimeTable_S jp13 = new PanelTimeTable_S(ID);
 
             this.addTab("选课系统", null, jp11, "选课系统");
             this.addTab("已选课程", null, jp12, "查看已选课程");
@@ -49,6 +49,9 @@ public class TabbedPanelCourse_S extends JTabbedPane {
                 @Override public void mousePressed(MouseEvent e) {
                     if(JTP.getSelectedIndex()==1){
                         jp12.repaintPanel();
+                    }
+                    if(JTP.getSelectedIndex()==2){
+                        jp13.upDateTable();
                     }
                 }
                 @Override public void mouseReleased(MouseEvent e) {}

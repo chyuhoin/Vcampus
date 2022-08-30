@@ -318,7 +318,7 @@ public class SubContentPanel extends JPanel{
                 lblFlag.setBackground(new Color(76,153,0));break;
             case "SameSelected":
                 lblFlag.setText(" 已选同类课程 ");
-                lblFlag.setBackground(new Color(0 ,205 ,205));break;
+                lblFlag.setBackground(new Color(0,139,139));break;
             case "full":
                 lblFlag.setText(" 已满 ");
                 lblFlag.setBackground(new Color(220,20,60));break;
