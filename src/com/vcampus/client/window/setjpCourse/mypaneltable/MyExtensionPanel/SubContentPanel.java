@@ -230,7 +230,7 @@ public class SubContentPanel extends JPanel{
                         superPanel == null ? thisPanel : superPanel,//避免superPanel为空,
                         "确认退选该课程？", "提示", JOptionPane.YES_NO_OPTION);
                 //对话框结果判断
-                if (result == 1) {//确认退选
+                if (result == JOptionPane.YES_OPTION) {//确认退选
                     //数据库操作------------------------------------------------------------------------------------------------
                     //"returnlesson"执行退课
                     Lesson lesson = new Lesson();

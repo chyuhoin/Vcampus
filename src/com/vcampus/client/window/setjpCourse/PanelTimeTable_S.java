@@ -74,9 +74,10 @@ public class PanelTimeTable_S extends JPanel {
                 for(int j=0;j<table.getColumnCount();j++){
                     table.getColumn(j).
                 }
+                 */
             panel.add(table);
 
- */
+
 
         } else{
             panel.setLayout(new BorderLayout());

@@ -69,7 +69,9 @@ public class PanelViewCourse_S extends JPanel {
                 rowData[i][3]=res.get(i).getSchool();
                 rowData[i][4]=res.get(i).getTime();
                 rowData[i][5]=res.get(i).getClassroom();
-                rowData[i][6]=res.get(i).getIsExam()==1?"考试":"其他";
+                if(res.get(i).getIsExam()!=null)
+                    rowData[i][6]=res.get(i).getIsExam()==1?"考试":"其他";
+                else rowData[i][6]="暂未安排";
                 rowData[i][7]="暂无成绩";// 成绩
                 //获取教师姓名
                 Teacher teacher=new Teacher();
@@ -81,7 +83,8 @@ public class PanelViewCourse_S extends JPanel {
                 Map<String, java.util.List<Teacher>> map2 = new Gson().fromJson(msg2.getData(), new TypeToken<HashMap<String, java.util.List<Teacher>>>() {
                 }.getType());
                 List<Teacher> res2 = map2.get("res");
-                if(res.size()>0)
+
+                if(res2.size()>0)
                     rowData[i][2]=res2.get(0).getTeacherName();
 
                 //获取成绩 "showgradestudent"
