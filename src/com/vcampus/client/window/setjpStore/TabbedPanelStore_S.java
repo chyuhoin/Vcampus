@@ -16,18 +16,34 @@
 
 package com.vcampus.client.window.setjpStore;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.vcampus.net.ClientMessagePasser;
+import com.vcampus.net.Message;
+import com.vcampus.net.MessagePasser;
+import com.vcampus.pojo.Record;
+import com.vcampus.pojo.User;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class TabbedPanelStore_S extends JTabbedPane {
-    public TabbedPanelStore_S()
+
+    MessagePasser passer = ClientMessagePasser.getInstance();
+    Object[] columnNames = new Object[]{"已购商品编号","购买日期","商品状态","收货","退货"};
+    public TabbedPanelStore_S(int flag,String ID)
     {
         this.setTabPlacement(2);
         this.setBounds(0,0,1400,650);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
         PanelHomePage_ST homePage = new PanelHomePage_ST();
         PanelMyStore_S myStore = new PanelMyStore_S();
-        PanelMyPurchaseOrder_ST myPurchase = new PanelMyPurchaseOrder_ST();
+        PanelMyPurchaseOrder_ST myPurchase = new PanelMyPurchaseOrder_ST(ID,flag);
 
 
         this.addTab("商城首页", null, homePage,"商城首页");
@@ -35,17 +51,15 @@ public class TabbedPanelStore_S extends JTabbedPane {
         this.addTab("我的订单", null, myPurchase,"我的订单");
         this.setFont(new Font("宋体", Font.BOLD, 24));
 
-
-        //////////////改到老师和学生，修改选项卡
         //选项卡刷新??????????好像不更新
-        /*
+
         this.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 // TODO Auto-generated method stub
                 if (e.getClickCount() == 1) {
-                    purchaseOrder.removeAll();
-                    purchaseOrder.setTable(columnNames,getAllOrder());
+                    myPurchase.removeAll();
+                    myPurchase.setTable(columnNames,getAllOrder(ID));
                    // purchaseOrder.updateUI();
                    // purchaseOrder.repaint();
                 }
@@ -68,35 +82,35 @@ public class TabbedPanelStore_S extends JTabbedPane {
             }
         });
 
-         */
-
-        //jp.add(jtbp);
     }
 
 
 
-    public Object[][] getAllOrder(){
-        //查询数据库
-        //发消息，收消息
-        if(true)
-        {
-            /*
-        Object[][] rowData = new Object[res.size()][5];
-        for (int i = 0; i < res.size(); i++) {
-            rowData[i][0] = res.get(i).getBookID();
-            rowData[i][1] = res.get(i).getBookName();
-            rowData[i][2] = res.get(i).getAuthor();
-            rowData[i][3] = res.get(i).getType();
-            rowData[i][4] = res.get(i).getLeftSize();
+    public Object[][] getAllOrder(String ID){
+        User user = new User();
+        user.setStudentID(ID);
+        Gson gson = new Gson();
+        String s = gson.toJson(user);
+        passer.send(new Message("student", s, "shop", "getBuy"));
+
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException interruptedException) {
+            interruptedException.printStackTrace();
         }
 
-         */
-            Object[][] rowData=new Object[][]{{"张三","2233","计算机"},
-                    {"张三","2233","计算机"}, {"张三","2233","计算机"}, {"张三","2233","计算机"},
-                    {"张三","2233","计算机"}, {"张三","2233","计算机"}, {"张三","2233","计算机"},
-                    {"张三","2233","计算机"}, {"张三","2233","计算机"}, {"张三","2233","计算机"},
-                    {"张三","2233","计算机"}, {"张三","2233","计算机"}, {"张三","2233","计算机"},
-                    {"张三","2233","计算机"}, {"张三","2233","计算机"}};
+        Message msg = passer.receive();
+        Map<String, java.util.List<Record>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, java.util.List<Record>>>() {}.getType());
+        List<Record> res = map.get("res");
+
+        if(res.size()!=0)
+        {
+            Object[][] rowData = new Object[res.size()][5];
+            for (int i = 0; i < res.size(); i++) {
+                rowData[i][0] = res.get(i).getGoodsID();
+                rowData[i][1] = res.get(i).getDate();
+                rowData[i][2] = res.get(i).getStatus();
+            }
             return rowData;
         }
         else
@@ -104,8 +118,6 @@ public class TabbedPanelStore_S extends JTabbedPane {
             JOptionPane.showMessageDialog(this, "未查询到购买界面", "警告", JOptionPane.ERROR_MESSAGE);
             return null;
         }
-
-
     }
 
 

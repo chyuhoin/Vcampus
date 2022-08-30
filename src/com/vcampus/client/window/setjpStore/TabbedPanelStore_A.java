@@ -26,9 +26,7 @@ import java.util.Map;
 public class TabbedPanelStore_A extends JTabbedPane {
 
     //回头改到教师和学生那里
-    //MessagePasser passer = ClientMessagePasser.getInstance();
 
-    Object[] columnNames = new Object[]{"已购商品编号","购买日期","商品状态","收货","退货"};
     //////////////
 
 

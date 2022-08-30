@@ -14,6 +14,12 @@
  */
 package com.vcampus.client.window.setjpStore;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.vcampus.net.Message;
+import com.vcampus.pojo.Record;
+import com.vcampus.pojo.User;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
@@ -23,7 +29,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.*;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 
 public class PanelMyPurchaseOrder_ST extends JPanel{
     JLabel lblHint = new JLabel("已购商品");
@@ -33,6 +42,8 @@ public class PanelMyPurchaseOrder_ST extends JPanel{
     MyTable_Shop table=null;//老师
     JScrollPane scrollPane = null;
     JPanel tablePanel = new JPanel();
+    String userID;
+    String status;
 
     //List<goods>承接所以有回传的结果？？？
     //可能需要一个商品对象来回改
@@ -40,11 +51,15 @@ public class PanelMyPurchaseOrder_ST extends JPanel{
 
    // Object[][] tableData=new Object[][]{{"张三","2233","计算机"},{"张三","2233","计算机"}, {"张三","2233","计算机"}, {"张三","2233","计算机"},{"张三","2233","计算机"}, {"张三","2233","计算机"}, {"张三","2233","计算机"},{"张三","2233","计算机"}, {"张三","2233","计算机"}, {"张三","2233","计算机"},{"张三","2233","计算机"}, {"张三","2233","计算机"}, {"张三","2233","计算机"},{"张三","2233","计算机"}, {"张三","2233","计算机"}};//保存所有用户信息
 
-    public PanelMyPurchaseOrder_ST()//传入用户ID 改成选项卡更新就传表头和数据
+    public PanelMyPurchaseOrder_ST(String ID,int flag)//传入用户ID 改成选项卡更新就传表头和数据
     {
         this.setLayout(null);
 
         int x=120,y=20;//起始坐标
+
+        userID=ID;
+        if(flag==1){ status="student";}
+        if(flag==2){ status="teacher";};
 
         lblHint.setBounds(x,y,300,40);
         lblHint.setFont(new Font("宋体", Font.BOLD, 30));
@@ -58,8 +73,8 @@ public class PanelMyPurchaseOrder_ST extends JPanel{
         //发消息 收消息 getBuy //写成选项卡更新！
         //如果有
 
-        if(true)
-        {
+        //if(true)
+        //{
             //设置表格数据
             //tableData= new
             /*for(int i=0;i< ;i++)
@@ -68,13 +83,13 @@ public class PanelMyPurchaseOrder_ST extends JPanel{
             }
              */
             //setTable();
-        }
-        else
-        {
+        //}
+        //else
+        //{
             //informFrame("未查询到购买记录",true);
             //tableData=null;
             //setTable();
-        }
+       // }
 
     }
 
@@ -122,6 +137,24 @@ public class PanelMyPurchaseOrder_ST extends JPanel{
             @Override
             public void actionPerformed(ActionEvent e) {
                 int rowName=btnE1.getThisRow();
+/*
+                User user = new User();
+                user.setStudentID(ID);
+                Gson gson = new Gson();
+                String s = gson.toJson(user);
+                passer.send(new Message(status, s, "shop", "getBuy"));
+
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException interruptedException) {
+                    interruptedException.printStackTrace();
+                }
+
+                Message msg = passer.receive();
+                Map<String, java.util.List<Record>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, java.util.List<Record>>>() {}.getType());
+                List<Record> res = map.get("res");
+
+ */
 
                 if (true)//操作成功
                 {

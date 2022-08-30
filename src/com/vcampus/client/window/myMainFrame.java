@@ -232,8 +232,8 @@ public class myMainFrame extends JFrame {
         //商店
         JTabbedPane[] storeModule = {
                 new JTabbedPane(),
-                new TabbedPanelStore_S(),
-                new TabbedPanelStore_T(),
+                new TabbedPanelStore_S(flag,ID),
+                new TabbedPanelStore_T(flag,ID),
                 new TabbedPanelStore_A()};
         //站内消息
         JTabbedPane[] messageModule = {
