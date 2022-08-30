@@ -35,8 +35,8 @@ import java.util.Map;
 public class TabbedPanelMessage_A extends JTabbedPane{
 
     JButton btn = new JButton("刷新");
-    public MyTablePanel priMessage;
-    public MyTablePanel pubMessage;
+    public MyMassagePanel priMessage;
+    public MyMassagePanel pubMessage;
     final MessagePasser passer = ClientMessagePasser.getInstance();
     Thread thread;
     String ID;
@@ -45,7 +45,7 @@ public class TabbedPanelMessage_A extends JTabbedPane{
         this.ID = ID;
 
         this.setTabPlacement(1);
-        this.setBounds(0, 0, 1400, 650);//注意！！！！！！！！！！！！！！！！！！！！！！！
+        this.setBounds(0, 0, 1200, 650);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
         JPanel jp11 = new JPanel();
         JPanel jp12 = new JPanel();
@@ -63,6 +63,22 @@ public class TabbedPanelMessage_A extends JTabbedPane{
         JTextField txtEnquire = new JTextField();
         txtEnquire.setBounds(50, 150,500, 50);
         txtEnquire.setFont(new Font("楷体", Font.BOLD, 20));
+        btn.setBounds(500, 300, 100, 50);
+        btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                synchronized (passer) {
+                    priMessage.keepTabelPage(getAllMessage());
+                    pubMessage.keepTabelPage(getPubMessage());
+                }
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
+                System.out.println("renew!");
+            }
+        });
 
         btnRegister.addActionListener(new ActionListener() {
             @Override
@@ -88,13 +104,11 @@ public class TabbedPanelMessage_A extends JTabbedPane{
         jp12.add(btnRegister);
         jp12.add(txtEnquire);
         jp12.add(label);
+        jp12.add(btn);
         JPanel panel = new PanelSendMassage(ID);
 
-        priMessage = new MyTablePanel(getAllMessage(), new Object[]{"id", "消息"});
-        pubMessage = new MyTablePanel(getPubMessage(), new Object[]{"消息"});
-
-        priMessage.add(btn);
-        pubMessage.add(btn);
+        priMessage = new MyMassagePanel(getAllMessage(), new Object[]{"id", "消息"});
+        pubMessage = new MyMassagePanel(getPubMessage(), new Object[]{"消息"});
 
         jp11.setLayout(new CardLayout(10, 10));
         jp11.add(priMessage);
@@ -104,32 +118,9 @@ public class TabbedPanelMessage_A extends JTabbedPane{
         this.addTab("查看私信", null, jp11, "查看私信");
         this.addTab("公共频道", null, jp13, "查看公共频道消息");
         this.addTab("发送消息", null, panel, "发送消息");
-        this.addTab("删除消息", null, jp12, "删除私有消息");
+        this.addTab("操作消息", null, jp12, "删除私有消息");
         this.setFont(new Font("宋体", Font.BOLD, 24));
 
-
-        thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (true) {
-                    synchronized (passer) {
-                        priMessage = new MyTablePanel(getAllMessage(), new Object[]{"id", "消息"});
-                        pubMessage = new MyTablePanel(getPubMessage(), new Object[]{"消息"});
-                        jp11.removeAll();
-                        jp13.removeAll();
-                        jp11.add(priMessage);
-                        jp13.add(pubMessage);
-                    }
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    System.out.println("renew!");
-                }
-            }
-        });
-      //  thread.start();
         //jp.add(jtbp);
     }
 
@@ -150,31 +141,12 @@ public class TabbedPanelMessage_A extends JTabbedPane{
         Object[][] rowData = new Object[res.size()][2];
         for (int i = 0; i < res.size(); i++) {
             InnerMessage iMsg = res.get(res.size() - i - 1);
-            String from = iMsg.getStudentID();
+            String from = iMsg.getSender();
             String content = iMsg.getContent();
             rowData[i][1] = "来自" + from + "的消息：" + content;
 
             rowData[i][0] = iMsg.getInnerID();
 
-//            JButton button = new JButton("删除");
-//            button.addActionListener(new ActionListener() {
-//                @Override
-//                public void actionPerformed(ActionEvent e) {
-//                    String id = iMsg.getInnerID().toString();
-//                    Message message;
-//                    synchronized (passer) {
-//                        passer.send(new Message("student", gson.toJson(iMsg),
-//                                "chat", "delete"));
-//                        message = passer.receive();
-//                        Map<String, String> map = gson.fromJson(message.getData(),
-//                                new TypeToken<Map<String, String>>(){}.getType());
-//                        String res = map.get("res");
-//                        if(!res.equals("OK")) warningFrame("发送失败！");
-//                        else informFrame("发送成功");
-//                    }
-//                }
-//            });
-//            rowData[i][2] = button;
         }
         return rowData;
     }
