@@ -98,7 +98,7 @@ public class LessonDao extends BaseDao{
                 else{
                     String table1 = "(select tb_STUDENTWITHLESSON.innerID,tb_LESSON.lessonID from tb_LESSON,tb_STUDENTWITHLESSON where tb_LESSON.innerID = tb_STUDENTWITHLESSON.innerID as tb_a)";
                     String table2 = "(select lessonID from tb_LESSON where innerID ='"+innerID+"' as tb_b)";
-                    String sql3 = "select * from tb_a,tb_b where tb_b.lessonID in tb_a.lessonID";
+                    String sql3 = "select * from "+table1+", "+table2+ " where "+ table2+".lessonID in "+table1+".lessonID";
                     List<Map<String,Object>> list4 = CRUD.Query(sql3,conn);
                     if(!list4.isEmpty())
                      return 3;//已选同类课程不可选

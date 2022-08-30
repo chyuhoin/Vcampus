@@ -125,6 +125,7 @@ public class SetJPUser1 extends JPanel {
         for(int i=0;i<textList.length;i++){
             textList[i].setText(strList[i]);
         }
+
         for(int i=0;i<textList.length;i++){
             JTextField texti=textList[i];
             jp1.add(texti);
