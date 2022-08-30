@@ -23,19 +23,20 @@ import java.awt.*;
 
 public class TabbedPanelSchool_A extends JTabbedPane {
 
-    public TabbedPanelSchool_A(String ID)
+    public TabbedPanelSchool_A(int flag,String ID)
     {
-        this.setTabPlacement(1);
-        this.setBounds(0,0,1400,650);
+        if(flag==3) {
+            this.setTabPlacement(2);
+            this.setBounds(0, 0, 1400, 650);
 
-        JPanel panelEnquire = new StudentStatusEnquire_A(ID);
-        JPanel panelChange = new StudentStatusChange_A(ID);
+            JPanel panelEnquire = new StudentStatusEnquire_A(ID);
+            JPanel panelChange = new StudentStatusChange_A(ID);
 
-        this.addTab("查看学籍信息", null, panelEnquire,"查看学籍信息");
-        this.addTab("修改学籍信息", null, panelChange,"修改学籍信息");
-        //this.addTab("选项三", null, jp13,"点击查看选项三");
-        this.setFont(new Font("宋体", Font.BOLD, 24));
-
+            this.addTab("查看学籍信息", null, panelEnquire, "查看学籍信息");
+            this.addTab("修改学籍信息", null, panelChange, "修改学籍信息");
+            //this.addTab("选项三", null, jp13,"点击查看选项三");
+            this.setFont(new Font("宋体", Font.BOLD, 24));
+        }
     }
 
 

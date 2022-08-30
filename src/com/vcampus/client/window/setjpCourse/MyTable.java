@@ -16,15 +16,26 @@ package com.vcampus.client.window.setjpCourse;
 
 import javax.swing.*;
 import javax.swing.table.*;
+import java.util.Arrays;
 import java.util.Enumeration;
+import java.util.List;
 
 public class MyTable extends JTable {                       // 实现自己的表格类
     // 重写JTable类的构造方法
     int lastColumn;
-    public MyTable(DefaultTableModel tblModel) {//Vector rowData, Vector columnNames
+    List<Integer> columnEditable=null;
+    public MyTable(Object[][] rowData,Object[] columnName){
+        this(new DefaultTableModel(rowData,columnName),null);
+    }
+    public MyTable(DefaultTableModel tblModel) {
+        this(tblModel,null);
+    }
+    public MyTable(DefaultTableModel tblModel,Integer[] cEditableArray) {
         super(tblModel);  // 调用父类的构造方法
         //fitTableColumns(this);//设置列宽随表格内容自动调整
         lastColumn=tblModel.getColumnCount();
+        if(cEditableArray!=null && cEditableArray.length>0)
+            columnEditable= Arrays.asList(cEditableArray);
     }
     // 重写JTable类的getTableHeader()方法
     public JTableHeader getTableHeader() {                  // 定义表格头
@@ -34,7 +45,7 @@ public class MyTable extends JTable {                       // 实现自己的�
         DefaultTableCellRenderer hr = (DefaultTableCellRenderer) tableHeader
                 .getDefaultRenderer();                      // 获得表格头的单元格对象
         //hr.setFont(new Font("黑体",Font.BOLD,30));//表头字体
-        //hr.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);     // 设置列名居中显示
+        hr.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);     // 设置列名居中显示
         return tableHeader;
     }
     // 重写JTable类的getDefaultRenderer(Class<?> columnClass)方法
@@ -47,7 +58,7 @@ public class MyTable extends JTable {                       // 实现自己的�
     // 重写JTable类的isCellEditable(int row, int column)方法
     public boolean isCellEditable(int row, int column)
     {  // 表格不可编辑---
-        return column==lastColumn-1;
+        return columnEditable.contains(column);
     }
 
     //设置列宽随表格内容自动调整

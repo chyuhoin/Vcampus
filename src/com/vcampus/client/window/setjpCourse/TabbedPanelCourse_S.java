@@ -15,45 +15,29 @@
 
 package com.vcampus.client.window.setjpCourse;
 
+import com.vcampus.net.ClientMessagePasser;
+import com.vcampus.net.MessagePasser;
+
 import javax.swing.*;
 import java.awt.*;
 
-public class TabbedPanelCourse_S extends JTabbedPane{
-    public TabbedPanelCourse_S()
-    {
-        //JTabbedPane jtbp=new JTabbedPane();	//创建选项卡
-        this.setTabPlacement(1);
-        this.setBounds(0,0,1400,650);//注意！！！！！！！！！！！！！！！！！！！！！！！
+public class TabbedPanelCourse_S extends JTabbedPane {
+    MessagePasser passer = ClientMessagePasser.getInstance();
 
-        JPanel jp11 = new JPanel();
-        JPanel jp12 = new JPanel();
-        JPanel jp13 = new JPanel();
-        //选项卡1的内容
-        //设置标题
-        JLabel lblTitleLabel = new JLabel("学生教务");
-        lblTitleLabel.setFont(new Font("宋体", Font.BOLD, 50));
-        //按钮
-        JButton btnRegister = new JButton("wwww");
-        btnRegister.setFont(new Font("宋体", Font.BOLD, 50));
+    public TabbedPanelCourse_S(int flag,String ID) {
+        if(flag==1) {
+            this.setTabPlacement(1);
+            this.setBounds(0, 0, 1200, 650);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
-        jp11.add(lblTitleLabel);
-        jp12.add(btnRegister);
+            JPanel jp11 = new PanelCourseSelection_S(ID);
+            JPanel jp12 = new PanelViewCourse_S(ID);
+            JPanel jp13 = new PanelTimeTable_S(ID);
 
-        /*
-        this.add("选项一",jp11);	//创建三个面板
-        this.add("选项二",jp12);
-        this.add("选项三",jp13);
-
-         */
-        JPanel enquireCourse = new PanelEnquireCourse();
-
-        this.addTab("课程查询",null,enquireCourse,"课程查询");
-        this.addTab("选课系统", null, jp11,"选课系统");
-        this.addTab("已选课程", null, jp12,"点击查看选项二");
-        this.addTab("我的课表", null, jp13,"点击查看选项三");
-        this.setFont(new Font("宋体", Font.BOLD, 24));
-
-
+            this.addTab("选课系统", null, jp11, "选课系统");
+            this.addTab("已选课程", null, jp12, "查看已选课程");
+            this.addTab("我的课表", null, jp13, "查看我的课表");
+            this.setFont(new Font("宋体", Font.BOLD, 24));
+        }
 
         //jp.add(jtbp);
     }
