@@ -33,14 +33,19 @@ import java.util.List;
 
 public class PanelViewCourse_S extends JPanel {
 
+    private String MyID;
     private Object[][] rowData=null;
     private Object[] colummName={"课程编号","课程名称","授课教师","开课院系","上课时间","上课教室","考核方式","成绩"};
     MessagePasser passer = ClientMessagePasser.getInstance();
     public PanelViewCourse_S(String studentID){
         this.setLayout(new CardLayout(20,10));
 
-        setData(studentID);
+        MyID=studentID;
 
+    }
+
+    private void setPanel(){
+        setData(MyID);//设置数据
         //设置表格
         MyTablePanel table=new MyTablePanel(rowData,colummName);
         this.add(table);
@@ -119,6 +124,12 @@ public class PanelViewCourse_S extends JPanel {
         }else {
             System.out.println("学生-教务系统-已选课程-未查到任何成绩");
             return null;
+
         }
+    }
+
+    public void repaintPanel(){
+        this.removeAll();
+        setPanel();//设置表格内容
     }
 }

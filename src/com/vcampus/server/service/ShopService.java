@@ -7,6 +7,7 @@ import com.vcampus.pojo.User;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class ShopService implements Service {
@@ -38,8 +39,11 @@ public class ShopService implements Service {
                 Object resultValue = field.get(goods);
 
                 if(resultValue == null) continue;
-                for(Goods item: res) {
-                    if(!field.get(item).equals(resultValue)) res.remove(item);
+                Iterator<Goods> it = res.iterator();
+                while(it.hasNext()) {
+                    Goods item = it.next();
+                    if(!field.get(item).equals(resultValue))
+                        it.remove();
                 }
 
                 System.out.println(name + ": " + resultValue);
@@ -59,7 +63,7 @@ public class ShopService implements Service {
     }
 
     public boolean deleteOneKind(Goods goods) {
-        return ShopDao.deleteGoods("num", goods.getGoodsID());
+        return ShopDao.deleteGoods("goodsID", goods.getGoodsID());
     }
 
     public boolean changeOne(Goods goods) {

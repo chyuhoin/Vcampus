@@ -1,44 +1,29 @@
 /** ===================================================
  * Title: MyTablePanel.java
- * Created: [2022-8-22  12:35:13] by  张星喆
+ * Created: [2022-8-30 12:35:13] by  张星喆
  *=====================================================
  * Copyright:  Copyright (c)　东南大学计算机学院, 2021-2022
  * =====================================================
- * Description: 图书信息展示界面-通用:创建可以翻页的表格，每页设置最大页数为10
+ * Description: 消息管理-展示消息
  *=====================================================
  *Revised Hisytory:
- *1. 2022-8-22,创建此文件
- *2. 2022-8-23, 完善设置 修改人：张星喆
+ *1. 2022-8-30,创建此文件
+ *2. 2022-8-30, 完善设置 修改人：张星喆
  *    修改的内容描述，修改的原因
  */
-
-package com.vcampus.client.window.setjpLibrary.mytablepanel;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.vcampus.client.window.setjpLibrary.PanelBookInform;
-import com.vcampus.net.ClientMessagePasser;
-import com.vcampus.net.Message;
-import com.vcampus.net.MessagePasser;
-import com.vcampus.pojo.Book;
-import com.vcampus.pojo.User;
+package com.vcampus.client.window.setjpMessage;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-public class MyTablePanel extends JPanel{
-    MessagePasser passer = ClientMessagePasser.getInstance();
-    CardLayout layC=new CardLayout(10,10);//卡片布局
+public class MyMassagePanel extends JPanel {
     SpringLayout layS=new SpringLayout();//弹性布局
     private int currentPage=1;//当前页面
     private  int pageSize=10;//每一页最多有多少行
     private int lastPage;//最末页
-    MyTable table=null;//表格
+    JTable table=null;//表格
     DefaultTableModel dtm=null;//表格模型
     JLabel lbl;//顶端标签
     Object[][] dList;//存储表格内容
@@ -46,7 +31,6 @@ public class MyTablePanel extends JPanel{
     //卡片
     JPanel PANEL=new JPanel();
     JPanel JP1;
-    JPanel JP2;
 
     public int getLastPage() {//获取末页页码
         return lastPage;
@@ -67,10 +51,30 @@ public class MyTablePanel extends JPanel{
         this.pageSize = pageSize;
     }
 
-    public MyTablePanel(Object[][] rowData, Object[] columnNames){
+    /**
+     * 构造函数，数据处理、计算总页数，总体布局
+     * @param rowData
+     * @param columnNames
+     */
+    public MyMassagePanel(Object[][] rowData, Object[] columnNames){
         //卡片
         PANEL=this;
         this.setOpaque(false);
+
+        //处理和计算数据
+        setData(rowData);
+
+        //布局设置---
+        JP1=new JPanel(layS);//弹性布局
+        add(JP1);
+
+        setJP1(rowData, columnNames);
+
+        layS.putConstraint(layS.SOUTH, lbl, -35, layS.SOUTH, JP1);
+        layS.putConstraint(layS.WEST, lbl, 516, layS.WEST, JP1);
+    }
+
+    public void setData(Object[][] rowData){
         //数据获取
         if(rowData!=null && rowData.length>0) {
             dList = new Object[rowData.length][rowData[0].length];
@@ -89,24 +93,11 @@ public class MyTablePanel extends JPanel{
         }
         if(getLastPage()==0) setCurrentPage(0);
         //System.out.println("表格数据总长度为："+tblLength);
-       // System.out.println("总页数为："+getLastPage());
-
-        //布局设置---
-        setLayout(layC);//卡片布局
-        JP1=new JPanel(layS);//弹性布局
-        JP1.setOpaque(false);
-        JP2=new JPanel(layS);
-        JP2.setOpaque(false);
-        add(JP1);
-        add(JP2);
-
-        setJP1(rowData, columnNames);
-        layS.putConstraint(layS.SOUTH, lbl, -35, layS.SOUTH, JP1);
-        layS.putConstraint(layS.WEST, lbl, 516, layS.WEST, JP1);
+        // System.out.println("总页数为："+getLastPage());
     }
 
     /**
-     * 设置第一张卡片的界面
+     * 设置界面
      * @param rowData
      * @param columnNames
      */
@@ -117,18 +108,19 @@ public class MyTablePanel extends JPanel{
         lbl.setFont(new Font("黑体",Font.PLAIN,15));
         //顶端标签位置
         layS.putConstraint(layS.SOUTH, lbl, -35, layS.SOUTH, JP1);
-        layS.putConstraint(layS.WEST, lbl, 516, layS.WEST, JP1);
+        layS.putConstraint(layS.WEST, lbl,
+                this.getPreferredSize().width/2-lbl.getPreferredSize().width/2, layS.WEST, JP1);
 
         //按钮设置---
         JButton btn1 = new JButton("首页");
-        btn1.addActionListener(new MyTableListener());
+        btn1.addActionListener(new MyMassagePanel.MyTableListener());
         btn1.setActionCommand("首页");
         JButton btn2 = new JButton("上一页");
-        btn2.addActionListener(new MyTableListener());
+        btn2.addActionListener(new MyMassagePanel.MyTableListener());
         JButton btn3 = new JButton("下一页");
-        btn3.addActionListener(new MyTableListener());
+        btn3.addActionListener(new MyMassagePanel.MyTableListener());
         JButton btn4 = new JButton("末页");
-        btn4.addActionListener(new MyTableListener());
+        btn4.addActionListener(new MyMassagePanel.MyTableListener());
         JP1.add(btn1);
         JP1.add(btn2);
         JP1.add(btn3);
@@ -150,11 +142,19 @@ public class MyTablePanel extends JPanel{
 
         //表格设置---
         dtm=new DefaultTableModel(null,columnNames);
-        table=new MyTable(dtm);
-        table.setOpaque(false);
+        table=new JTable(dtm){
+            @Override
+            public boolean isCellEditable(int row, int column)
+            {  // 表格不可编辑---
+                return false;
+            }
+        };
+
         table.setRowHeight(60);//设置行高
         table.setFont(new Font("黑体",Font.PLAIN,18));//设置表格字体
         table.getTableHeader().setFont(new Font("黑体",Font.PLAIN,20));//设置表头字体
+        table.getTableHeader().setReorderingAllowed(false);//不允许拖动列头，以重新排序各列
+        table.getTableHeader().setResizingAllowed(false);//不允许手动拖动来调整各列的大小
 
         JScrollPane jsp = new JScrollPane();
         jsp.setViewportView(table);
@@ -166,49 +166,7 @@ public class MyTablePanel extends JPanel{
 
         showTable(currentPage);//显示第一页
 
-        //设置鼠标双击事件
-        table.addMouseListener(new MouseListener() {
-            @Override public void mouseClicked(MouseEvent e) {
-                // TODO Auto-generated method stub
-                if (e.getClickCount() == 2) {
-                    System.out.println("双击表格");
-                    int row=((JTable)e.getSource()).rowAtPoint(e.getPoint());
-                    String bookID=(String)dtm.getValueAt(row, 0);
-                    String bookName=(String)dtm.getValueAt(row, 1);
-
-                    //查询数据库
-                    Book book=new Book();
-                    book.setBookID(bookID);
-                    book.setBookName(bookName);
-                    Gson gson = new Gson();
-                    String s = gson.toJson(book);
-                    passer.send(new Message("admin", s, "library", "get"));
-
-                    Message msg = passer.receive();
-                    Map<String, java.util.List<Book>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, java.util.List<Book>>>(){}.getType());
-                    List<Book> res = map.get("res");
-
-                    if(res.size()!=0) {
-                        JP2.removeAll();
-                        setJP2(res.get(0));//????? 仅根据书号返回的是Book List ????????
-                        layC.next(PANEL);//切换到第二张卡
-                        PANEL.updateUI();
-                        PANEL.repaint();
-                        System.out.println("查看书号为<" + bookID + ">的书的详情");
-                    }else {
-                        JOptionPane.showMessageDialog(null, "数据查询出错", "提示",
-                                JOptionPane.ERROR_MESSAGE);
-                        System.out.println("ERROR:查看书号为<" + bookID + ">的书的详情：数据查询出错");
-                    }
-                }
-            }
-            @Override public void mousePressed(MouseEvent e) {}
-            @Override public void mouseReleased(MouseEvent e) {}
-            @Override public void mouseEntered(MouseEvent e) {}
-            @Override public void mouseExited(MouseEvent e) {}
-        });
-
-        //跳转页面
+        //跳转标签
         int size=18;//字体大小
         JLabel lbl1=new JLabel("跳转到 第");
         JP1.add(lbl1);
@@ -231,33 +189,6 @@ public class MyTablePanel extends JPanel{
     }
 
     /**
-     * 设置第二张卡片的界面
-     */
-    public void setJP2(Book book){
-        //返回按钮
-        JButton btnBack=new JButton("返回");
-        JP2.add(btnBack);
-        btnBack.setFont(new Font("黑体",Font.BOLD,22));
-        layS.putConstraint(layS.NORTH, btnBack, 0, layS.NORTH, JP2);
-        layS.putConstraint(layS.WEST, btnBack, 10, layS.WEST, JP2);
-        //详情面板
-        JPanel subJP2=new PanelBookInform(book,false);
-        JP2.add(subJP2);
-        layS.putConstraint(layS.NORTH, subJP2, 30, layS.NORTH, btnBack);
-        layS.putConstraint(layS.WEST, subJP2, 10, layS.WEST, JP2);
-        layS.putConstraint(layS.SOUTH, subJP2, -10, layS.SOUTH, JP2);
-        layS.putConstraint(layS.EAST, subJP2, -30, layS.EAST, JP2);
-
-        //返回按钮监听事件
-        btnBack.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                layC.first(PANEL);
-            }
-        });
-
-    }
-    /**
      * 设置下拉选项框
      */
     public void setcomboBox(){
@@ -272,7 +203,7 @@ public class MyTablePanel extends JPanel{
                 public void itemStateChanged(ItemEvent e) {
                     if (e.getStateChange() == ItemEvent.SELECTED) {
                         showTable((Integer) comboBox.getSelectedIndex() + 1);
-                     //   System.out.println("选中: " + comboBox.getSelectedIndex() + " = " + comboBox.getSelectedItem());
+                        //   System.out.println("选中: " + comboBox.getSelectedIndex() + " = " + comboBox.getSelectedItem());
                     }
                 }
             });
@@ -293,10 +224,10 @@ public class MyTablePanel extends JPanel{
     public void showTable(int currentPage) {
         dtm.setRowCount(0);// 清除原有行
         setCurrentPage(currentPage);//设置当前页
-       // System.out.println("showTable：当前页："+getCurrentPage());
+        // System.out.println("showTable：当前页："+getCurrentPage());
 
         int tempSize= Math.min(pageSize, dList.length);
-      //  System.out.println("showTable：tempSize="+tempSize);
+        //  System.out.println("showTable：tempSize="+tempSize);
         for (int row = 0; row < tempSize; row++)    //获得数据
         {
             if(row+(currentPage-1)*tempSize>=dList.length) break;
@@ -310,7 +241,7 @@ public class MyTablePanel extends JPanel{
         lbl.setText("当前是第"+getCurrentPage()+"页，共"+getLastPage()+"页");
         layS.putConstraint(layS.WEST, lbl, JP1.getWidth()/2-lbl.getWidth()/2, layS.WEST, JP1);
         //默认选中的条目更新
-       // System.out.println("showTable: 总页数为（if前）："+getLastPage());
+        // System.out.println("showTable: 总页数为（if前）："+getLastPage());
         if(getLastPage()>0&&comboBox!=null) {
             comboBox.setSelectedIndex(getCurrentPage() - 1);
         }
@@ -351,6 +282,23 @@ public class MyTablePanel extends JPanel{
                 showTable(getLastPage());
             }
         }
+    }
+
+    /**
+     * 调用此函数，可保持在本页
+     * @param rowData
+     */
+    public void keepTabelPage(Object[][] rowData){
+        //更新数据
+        setData(rowData);
+        //更新下拉框
+        setcomboBox();
+        //保持在现有页，同时更新表内数据
+        showTable(currentPage);
+    }
+
+    public JTable getTable(){
+        return table;
     }
 
 }

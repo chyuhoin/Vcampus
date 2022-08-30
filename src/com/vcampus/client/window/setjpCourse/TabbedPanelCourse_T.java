@@ -17,20 +17,38 @@ package com.vcampus.client.window.setjpCourse;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class TabbedPanelCourse_T extends JTabbedPane {
     public TabbedPanelCourse_T(int flag,String ID)
     {
         if(flag==2) {
             //JTabbedPane jtbp=new JTabbedPane();	//创建选项卡
-            this.setTabPlacement(2);
+            this.setTabPlacement(1);
             this.setBounds(0, 0, 1400, 650);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
 
             JPanel teacherInform = new PanelTeacherInform(ID);
             JPanel manageStudent = new PanelStudentManage_T(ID);
             JPanel enquireCourse = new PanelEnquireCourse();
-            JPanel teacherTimeTable=new PanelTimeTable_T(ID);
+            PanelTimeTable_T teacherTimeTable=new PanelTimeTable_T(ID);
+
+            //鼠标点击事件
+            this.addMouseListener(new MouseListener(){
+                @Override public void mouseClicked(MouseEvent e) {
+                }
+                @Override public void mousePressed(MouseEvent e) {
+                        teacherTimeTable.upDateTable();
+
+                }
+                @Override public void mouseReleased(MouseEvent e) {}
+                @Override public void mouseEntered(MouseEvent e) {
+
+                }
+                @Override public void mouseExited(MouseEvent e) {}
+            });
+
 
             this.addTab("个人信息", null, teacherInform, "个人信息");
             this.addTab("学生管理", null, manageStudent, "学生管理");

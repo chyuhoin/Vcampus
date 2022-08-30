@@ -57,7 +57,7 @@ public class ShopDao extends BaseDao{
     //修改
     public static Boolean revise(String studentID,String goodsID,String field,Object value) {
         try {
-            String sql = "update tb_GOODS set " + field+"  = ? where seller = ? and  = ?";
+            String sql = "update tb_GOODS set " + field+"  = ? where seller = ? and goodsID = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setObject(1,value);
             ps.setString(2,studentID);

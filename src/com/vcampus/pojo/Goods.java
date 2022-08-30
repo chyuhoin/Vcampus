@@ -72,9 +72,8 @@ public class Goods {
         this.state = state;
     }
 
-    public String getDealDate() {
-        return dealDate;
-    }
+    public String getDealDate() { return dealDate; }
+
 
     public void setDealDate(String dealDate) {
         this.dealDate = dealDate;

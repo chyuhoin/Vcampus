@@ -35,6 +35,7 @@ import java.util.stream.Collectors;
 
 public class PanelCourseSelection_S extends JPanel {
 
+    private JPanel PANEL;
     private String studentID;//登录学生ID
     private Student student = new Student();
     private List<Lesson> lessonList=null;
@@ -43,6 +44,8 @@ public class PanelCourseSelection_S extends JPanel {
     MessagePasser passer = ClientMessagePasser.getInstance();
 
     public PanelCourseSelection_S(String ID) {
+        PANEL=this;
+
         //设置学生个人信息
         studentID = ID;//设置学生ID
         student = setMajor();

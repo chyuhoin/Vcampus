@@ -18,7 +18,7 @@ public class PanelSendMassage extends JPanel {
     JButton btnInquire = new JButton("发送");
     JTextField txtEnquire = new JTextField();
     JTextArea area = new JTextArea();
-    JLabel label = new JLabel("收信人ID，或public");
+    JLabel label = new JLabel("收信人ID，不填则为公共消息");
     MessagePasser passer = ClientMessagePasser.getInstance();
     Gson gson = new Gson();
 
@@ -30,7 +30,7 @@ public class PanelSendMassage extends JPanel {
         label.setBounds(x, y, txtWidth * 3, txtHeight);
         label.setFont(new Font("楷体", Font.BOLD, 20));
 
-        txtEnquire.setBounds(x + 210,y,txtWidth*3,txtHeight);
+        txtEnquire.setBounds(x + 300,y,txtWidth*3,txtHeight);
         txtEnquire.setFont(new Font("楷体", Font.BOLD, 20));
 
         btnInquire.setFont(new Font("宋体",Font.BOLD, 20));
@@ -50,7 +50,7 @@ public class PanelSendMassage extends JPanel {
             public synchronized void actionPerformed(ActionEvent e) {
                 String target = txtEnquire.getText();
                 String content = area.getText();
-                if(target.equals("public")) {
+                if(target.equals("")) {
                     PublicMessage pMsg = new PublicMessage(ID, content);
                     passer.send(new Message("student", gson.toJson(pMsg), "chat", "postPub"));
                     Message message = passer.receive();
