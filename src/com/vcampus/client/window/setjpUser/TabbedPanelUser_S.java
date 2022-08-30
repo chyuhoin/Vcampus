@@ -24,14 +24,16 @@ public class TabbedPanelUser_S extends JTabbedPane {
     public TabbedPanelUser_S(String id) {
 
         JTabbedPane JTP=this;
-
+        this.setOpaque(false);
         this.setTabPlacement(1);
         this.setBounds(0,0,1400,650);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
         // 创建卡片布局，卡片间水平和竖直间隔为 10
         final CardLayout layout_Card = new CardLayout(10, 10);
         JPanel jp11 = new JPanel(layout_Card);
+        jp11.setOpaque(false);
         JPanel jp12 = new JPanel(layout_Card);
+        jp12.setOpaque(false);
         //选项卡1的内容
         new SetJPUser1(1,id,jp11,layout_Card);
         //选项卡2的内容

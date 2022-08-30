@@ -30,7 +30,9 @@ public class MyTable extends JTable {                       // 实现自己的�
     }
 
     // 重写JTable类的getTableHeader()方法
-    public JTableHeader getTableHeader() {                  // 定义表格头
+    public JTableHeader getTableHeader() {
+        this.setOpaque(false);
+        // 定义表格头
         JTableHeader tableHeader = super.getTableHeader();  // 获得表格头对象
         tableHeader.setReorderingAllowed(false);//不允许拖动列头，以重新排序各列
         tableHeader.setResizingAllowed(false);//不允许手动拖动来调整各列的大小
