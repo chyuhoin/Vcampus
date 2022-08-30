@@ -83,12 +83,8 @@ public class Goods {
         return picture;
     }
 
-    public void setPicture(String path) {
-        try {
-            this.picture = StringAndImage.ImageToString(path);
-        }catch (Exception e){
-            System.out.println("create image wrong");
-        }
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 
     public Integer getNum() {
