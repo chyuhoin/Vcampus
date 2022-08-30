@@ -203,38 +203,38 @@ public class myMainFrame extends JFrame {
         JTabbedPane[] userModule = {
                 new JTabbedPane(),
                 new TabbedPanelUser_S(ID),
-                new TabbedPanelUser_T(ID),
-                new TabbedPanelUser_A(ID)};
+                new TabbedPanelUser_T(flag,ID),
+                new TabbedPanelUser_A(flag,ID)};
         //学籍管理模块
         JTabbedPane[] schoolModule = {
                 new JTabbedPane(),
-                new TabbedPanelSchool_S(ID),
-                new TabbedPanelSchool_T(ID),
-                new TabbedPanelSchool_A(ID)};
+                new TabbedPanelSchool_S(flag,ID),
+                new TabbedPanelSchool_T(flag,ID),
+                new TabbedPanelSchool_A(flag,ID)};
         //教务系统
         JTabbedPane[] courseModule = {
                 new JTabbedPane(),
-                new TabbedPanelCourse_S(),
-                new TabbedPanelCourse_T(ID),
-                new TabbedPanelCourse_A()};
+                new TabbedPanelCourse_S(flag,ID),
+                new TabbedPanelCourse_T(flag,ID),
+                new TabbedPanelCourse_A(flag)};
         //图书馆
         JTabbedPane[] LibraryModule = {
                 new JTabbedPane(),
-                new TabbedPanelLibrary_S(ID),
-                new TabbedPanelLibrary_T(ID),
-                new TabbedPanelLibrary_A()};
+                new TabbedPanelLibrary_S(flag,ID),
+                new TabbedPanelLibrary_T(flag,ID),
+                new TabbedPanelLibrary_A(flag)};
         //商店
         JTabbedPane[] storeModule = {
                 new JTabbedPane(),
-                new TabbedPanelStore_S(),
-                new TabbedPanelStore_T(),
-                new TabbedPanelStore_A()};
+                new TabbedPanelStore_S(flag),
+                new TabbedPanelStore_T(flag),
+                new TabbedPanelStore_A(flag)};
         //站内消息
         JTabbedPane[] messageModule = {
                 new JTabbedPane(),
-                new TabbedPanelMessage_S(),
-                new TabbedPanelMessage_T(),
-                new TabbedPanelMessage_A(ID)};
+                new TabbedPanelMessage_S(flag),
+                new TabbedPanelMessage_T(flag),
+                new TabbedPanelMessage_A(flag,ID)};
        JTabbedPane [][] module ={userModule,schoolModule,courseModule,LibraryModule,storeModule,messageModule};
         //菜单按钮响应函数
 //        btnModule1.addActionListener(new ActionListener() {
