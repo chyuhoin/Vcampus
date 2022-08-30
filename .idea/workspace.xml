@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="新的界面">
-      <change afterPath="$PROJECT_DIR$/resource/User_background.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resource/User_passwordRevise.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resource/User_personalInfo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resource/exit.png" afterDir="false" />
+    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="优化界面">
+      <change afterPath="$PROJECT_DIR$/resource/btn_lesson.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resource/btn_lesson_selected.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resource/btn_library_selected.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resource/btn_message.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resource/btn_message_selected.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resource/btn_store.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resource/btn_store_selected.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resource/btn_student.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resource/btn_student_selected.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resource/btn_user.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resource/btn_user_selected.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resource/exit2.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resource/btn_library.png" beforeDir="false" afterPath="$PROJECT_DIR$/resource/btn_library.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource/lesson.png" beforeDir="false" afterPath="$PROJECT_DIR$/resource/lesson.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource/message.png" beforeDir="false" afterPath="$PROJECT_DIR$/resource/message.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource/store.png" beforeDir="false" afterPath="$PROJECT_DIR$/resource/store.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource/student.png" beforeDir="false" afterPath="$PROJECT_DIR$/resource/student.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource/top.png" beforeDir="false" afterPath="$PROJECT_DIR$/resource/top.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource/user.png" beforeDir="false" afterPath="$PROJECT_DIR$/resource/user.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/exit.png" beforeDir="false" afterPath="$PROJECT_DIR$/resource/exit.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/myLoginFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/myLoginFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/myMainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/myMainFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpCourse/TabbedPanelCourse_S.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpCourse/TabbedPanelCourse_S.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpLibrary/mytablepanel/MyTablePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpLibrary/mytablepanel/MyTablePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpSchool/TabbedPanelSchool_S.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpSchool/TabbedPanelSchool_S.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpUser/SetJPUser1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpUser/SetJPUser1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpUser/SetJPUser2_2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpUser/SetJPUser2_2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpUser/TabbedPanelUser_A.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpUser/TabbedPanelUser_A.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpUser/TabbedPanelUser_S.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpUser/TabbedPanelUser_S.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/ShopDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/ShopDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/pojo/Goods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/pojo/Goods.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/模拟QQ/MyQQ_Frame.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/模拟QQ/MyQQ_Frame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/模拟QQ/My_Frame.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/模拟QQ/My_Frame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,28 +58,29 @@
     <option name="foldersAlwaysOnTop" value="false" />
     <option name="showModules" value="false" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Code/JavaWebCode/Vcampus/lib&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/Code/JavaWebCode/Vcampus/src/com/vcampus/client/window/login",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;ChangesTree.GroupingKeys&quot;: [
-      &quot;directory&quot;,
-      &quot;module&quot;
+  "keyToStringList": {
+    "ChangesTree.GroupingKeys": [
+      "directory",
+      "module"
     ],
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql&quot;
+    "DatabaseDriversLRU": [
+      "mysql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Code\JavaWebCode\Vcampus\src\com\vcampus\client\window\login" />
       <recent name="D:\Code\JavaWebCode\Vcampus\lib" />
       <recent name="D:\Code\JavaWebCode\Vcampus\src" />
       <recent name="D:\Code\JavaWebCode\Vcampus" />
@@ -92,7 +93,7 @@
       <recent name="com.vcampus.client.login" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.myLoginTest">
+  <component name="RunManager" selected="Application.模拟QQ.Create_GUI">
     <configuration name="Create_GUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="模拟QQ.Create_GUI" />
       <module name="Vcampus" />
@@ -166,10 +167,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.模拟QQ.Create_GUI" />
         <item itemvalue="Application.myLoginTest" />
         <item itemvalue="JUnit.ShopDao.test" />
         <item itemvalue="Application.Server" />
-        <item itemvalue="Application.Create_GUI" />
         <item itemvalue="JUnit.LessonDao.test2" />
       </list>
     </recent_temporary>
