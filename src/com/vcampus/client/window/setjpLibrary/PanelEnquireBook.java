@@ -70,7 +70,7 @@ public class PanelEnquireBook extends JPanel{
         this.add(comboBox);
         this.add(txtEnquire);
         this.add(btnInquire);
-        this.add(backGround);
+        //this.add(backGround);
         //设置背景
         ImageIcon back = new ImageIcon("resource//library.png");
         backGround.setIcon(back);

@@ -1,26 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="优化界面">
-      <change afterPath="$PROJECT_DIR$/resource/btn_lesson.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resource/btn_lesson_selected.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resource/btn_library_selected.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resource/btn_message.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resource/btn_message_selected.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resource/btn_store.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resource/btn_store_selected.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resource/btn_student.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resource/btn_student_selected.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resource/btn_user.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resource/btn_user_selected.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resource/exit2.png" afterDir="false" />
+    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="修复Goods类的bug">
+      <change afterPath="$PROJECT_DIR$/img/QQ.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/关闭.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/学校1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/学校2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/学校3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/学生.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/密码.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/教师.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/最小化.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/用户.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/登录.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/管理员.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/背景.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/背景1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/背景2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/背景3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/qq/Create_GUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/qq/MyQQ_Frame.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/qq/My_Frame.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/qq/Users.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/qq/simple_Layout.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource/btn_library.png" beforeDir="false" afterPath="$PROJECT_DIR$/resource/btn_library.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource/exit.png" beforeDir="false" afterPath="$PROJECT_DIR$/resource/exit.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/myLoginFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/myLoginFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/myLoginTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/myLoginTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/myMainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/myMainFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpLibrary/PanelEnquireBook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpLibrary/PanelEnquireBook.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/ShopDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/ShopDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/pojo/Goods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/pojo/Goods.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/模拟QQ/Create_GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/模拟QQ/Create_GUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/模拟QQ/MyQQ_Frame.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/模拟QQ/MyQQ_Frame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/模拟QQ/My_Frame.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/模拟QQ/My_Frame.java" afterDir="false" />
     </list>
@@ -65,7 +75,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/Code/JavaWebCode/Vcampus/src/com/vcampus/client/window/login",
+    "last_opened_file_path": "D:/Code/JavaWebCode/Vcampus",
     "settings.editor.selected.configurable": "preferences.pluginManager"
   },
   "keyToStringList": {
@@ -80,12 +90,15 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Code\JavaWebCode\Vcampus" />
+      <recent name="D:\Code\JavaWebCode\Vcampus\src\com\vcampus\client\window" />
+      <recent name="D:\Code\JavaWebCode\Vcampus\resource" />
       <recent name="D:\Code\JavaWebCode\Vcampus\src\com\vcampus\client\window\login" />
       <recent name="D:\Code\JavaWebCode\Vcampus\lib" />
-      <recent name="D:\Code\JavaWebCode\Vcampus\src" />
-      <recent name="D:\Code\JavaWebCode\Vcampus" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Code\JavaWebCode\Vcampus" />
+      <recent name="D:\Code\JavaWebCode\Vcampus\src\com\vcampus\client\window" />
       <recent name="D:\Code\JavaWebCode\Vcampus\resource" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -93,7 +106,7 @@
       <recent name="com.vcampus.client.login" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.模拟QQ.Create_GUI">
+  <component name="RunManager" selected="Application.com.vcampus.client.window.login.login">
     <configuration name="Create_GUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="模拟QQ.Create_GUI" />
       <module name="Vcampus" />
@@ -120,6 +133,32 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="com.vcampus.client.window.login.login" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.vcampus.client.window.login.login" />
+      <module name="Vcampus" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.vcampus.client.window.login.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="login" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.vcampus.client.window.login.login" />
+      <module name="Vcampus" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.vcampus.client.window.login.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="myLoginTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.vcampus.client.window.myLoginTest" />
       <module name="Vcampus" />
@@ -133,45 +172,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LessonDao.test2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Vcampus" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.vcampus.dao.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.vcampus.dao" />
-      <option name="MAIN_CLASS_NAME" value="com.vcampus.dao.LessonDao" />
-      <option name="METHOD_NAME" value="test2" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ShopDao.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Vcampus" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.vcampus.dao.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.vcampus.dao" />
-      <option name="MAIN_CLASS_NAME" value="com.vcampus.dao.ShopDao" />
-      <option name="METHOD_NAME" value="test" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.模拟QQ.Create_GUI" />
-        <item itemvalue="Application.myLoginTest" />
-        <item itemvalue="JUnit.ShopDao.test" />
+        <item itemvalue="Application.com.vcampus.client.window.login.login" />
+        <item itemvalue="Application.com.vcampus.client.window.login.login" />
         <item itemvalue="Application.Server" />
-        <item itemvalue="JUnit.LessonDao.test2" />
+        <item itemvalue="Application.Create_GUI" />
+        <item itemvalue="Application.myLoginTest" />
       </list>
     </recent_temporary>
   </component>
@@ -239,6 +246,8 @@
       <workItem from="1661666663630" duration="13284000" />
       <workItem from="1661841604009" duration="2655000" />
       <workItem from="1661844610764" duration="4940000" />
+      <workItem from="1661871206426" duration="205000" />
+      <workItem from="1661871440135" duration="2001000" />
     </task>
     <task id="LOCAL-00001" summary="初步写了登录注册">
       <created>1660298515554</created>
@@ -527,7 +536,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661830923513</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="修复Goods类的bug">
+      <created>1661870477159</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1661870477159</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -576,7 +592,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="给Student添加了image对象" />
     <MESSAGE value="添加了exam类，初步写了examDao层" />
     <MESSAGE value="增强了student，加入了民族信息；同时推进了部分examDao层" />
     <MESSAGE value="baseDao增加了一些公共函数" />
@@ -601,7 +616,8 @@
     <MESSAGE value="界面改为了侧边栏" />
     <MESSAGE value="修bug" />
     <MESSAGE value="新的界面" />
-    <option name="LAST_COMMIT_MESSAGE" value="新的界面" />
+    <MESSAGE value="修复Goods类的bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="修复Goods类的bug" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

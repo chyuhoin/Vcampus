@@ -1,0 +1,37 @@
+package com.vcampus.client.window.login;
+
+import java.awt.*;
+
+public abstract class simple_Layout implements LayoutManager{
+
+    @Override
+    public void addLayoutComponent(String name, Component comp) {
+        // TODO 自动生成的方法存根
+
+    }
+
+    @Override
+    public void removeLayoutComponent(Component comp) {
+        // TODO 自动生成的方法存根
+
+    }
+
+    @Override
+    public Dimension preferredLayoutSize(Container parent) {
+        // TODO 自动生成的方法存根
+        return null;
+    }
+
+    @Override
+    public Dimension minimumLayoutSize(Container parent) {
+        // TODO 自动生成的方法存根
+        return null;
+    }
+
+//	@Override
+//	public void layoutContainer(Container parent) {
+//		// TODO 自动生成的方法存根
+//
+//	}
+}
+

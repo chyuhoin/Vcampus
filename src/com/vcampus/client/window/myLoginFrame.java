@@ -149,20 +149,6 @@ public class myLoginFrame extends JFrame  {
     public Boolean readTextContent()
     {
         //读取输入的用户名和密码
-        /*String userName = txtUserName.getText();
-        String passWord = new String(txtPassWord.getPassword());
-
-        if(userName.length()!=0 && passWord.length()!=0)//如果用户名和密码已输入
-        {
-            System.out.println(userName+'\n'+passWord);//输出登录名和密码
-            return true;
-        }
-        else
-            return false;
-
-         */
-
-        //读取输入的用户名和密码
         userName = txtUserName.getText().trim();
         String passWord = new String(txtPassWord.getPassword());
 
@@ -174,14 +160,6 @@ public class myLoginFrame extends JFrame  {
         Message msg = passer.receive();
         Map<String,Object> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String,Object>>(){}.getType());
         return map.get("res").equals("OK");
-
-//        if(userName.length()!=0 && passWord.length()!=0)//如果用户名和密码已输入
-//        {
-//            System.out.println(userName+'\n'+passWord);//输出登录名和密码
-//            return true;
-//        }
-//        else
-//            return false;
     }
 
     //选中学生/教师/管理员后的响应
