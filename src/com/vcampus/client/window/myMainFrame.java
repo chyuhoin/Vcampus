@@ -35,13 +35,15 @@ import com.vcampus.client.window.setjpSchool.TabbedPanelSchool_T;
 import com.vcampus.client.window.setjpUser.TabbedPanelUser_A;
 import com.vcampus.client.window.setjpUser.TabbedPanelUser_S;
 import com.vcampus.client.window.setjpUser.TabbedPanelUser_T;
+import org.junit.Test;
 
 import javax.swing.*;
 import javax.swing.plaf.metal.MetalTabbedPaneUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class myMainFrame extends JFrame {
     private JPanel panelMain = new JPanel();
@@ -55,6 +57,8 @@ public class myMainFrame extends JFrame {
         super(title);//调用父类构造函数，设置窗口名称
         //this.setDefaultLookAndFeelDecorated(true);
         // FlatDarkLaf.setup();
+        final int[] current = new int[1];//当前在哪个界面
+        current[0] =-1;
         this.setSize(1400, 850);// 设置窗口的其他参数，如窗口大小
         this.setResizable(false);//窗口大小不可改
 
@@ -196,128 +200,188 @@ public class myMainFrame extends JFrame {
         btnModule6.setHorizontalTextPosition(SwingConstants.RIGHT);
         //创建各模块各权限对应面板
         //用户管理模块
-
         JTabbedPane[] userModule = {
                 new JTabbedPane(),
-                new TabbedPanelUser_S(flag,ID),
-                new TabbedPanelUser_T(flag,ID),
-                new TabbedPanelUser_A(flag,ID)};
+                new TabbedPanelUser_S(ID),
+                new TabbedPanelUser_T(ID),
+                new TabbedPanelUser_A(ID)};
         //学籍管理模块
         JTabbedPane[] schoolModule = {
                 new JTabbedPane(),
-                new TabbedPanelSchool_S(flag,ID),
-                new TabbedPanelSchool_T(flag,ID),
-                new TabbedPanelSchool_A(flag,ID)};
+                new TabbedPanelSchool_S(ID),
+                new TabbedPanelSchool_T(ID),
+                new TabbedPanelSchool_A(ID)};
         //教务系统
         JTabbedPane[] courseModule = {
                 new JTabbedPane(),
-                new TabbedPanelCourse_S(flag,ID),
-                new TabbedPanelCourse_T(flag,ID),
-                new TabbedPanelCourse_A(flag)};
+                new TabbedPanelCourse_S(),
+                new TabbedPanelCourse_T(ID),
+                new TabbedPanelCourse_A()};
         //图书馆
         JTabbedPane[] LibraryModule = {
                 new JTabbedPane(),
-                new TabbedPanelLibrary_S(flag,ID),
-                new TabbedPanelLibrary_T(flag,ID),
-                new TabbedPanelLibrary_A(flag)};
+                new TabbedPanelLibrary_S(ID),
+                new TabbedPanelLibrary_T(ID),
+                new TabbedPanelLibrary_A()};
         //商店
         JTabbedPane[] storeModule = {
                 new JTabbedPane(),
-                new TabbedPanelStore_S(flag),
-                new TabbedPanelStore_T(flag),
-                new TabbedPanelStore_A(flag)};
+                new TabbedPanelStore_S(),
+                new TabbedPanelStore_T(),
+                new TabbedPanelStore_A()};
         //站内消息
         JTabbedPane[] messageModule = {
                 new JTabbedPane(),
-                new TabbedPanelMessage_S(flag),
-                new TabbedPanelMessage_T(flag),
-                new TabbedPanelMessage_A(flag,ID)};
-
+                new TabbedPanelMessage_S(),
+                new TabbedPanelMessage_T(),
+                new TabbedPanelMessage_A(ID)};
+       JTabbedPane [][] module ={userModule,schoolModule,courseModule,LibraryModule,storeModule,messageModule};
         //菜单按钮响应函数
-        btnModule1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+//        btnModule1.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                current[0] = 1;
+//
+//                for(int i=0;i<6;i++){
+//                    btn[i].setBackground(color);
+//                    btn[i].setForeground(Color.WHITE);
+//                }
+//                btnModule1.setBackground(Color.WHITE);
+//                btnModule1.setForeground(Color.BLACK);
+//                setPanelSwitch(userModule[flag]);
+//                System.out.println("用户管理系统");
+//            }
+//        });
 
-                for(int i=0;i<6;i++){
-                    btn[i].setBackground(color);
-                    btn[i].setForeground(Color.WHITE);
+        for(int i=0;i<6;i++)
+        {
+            int finalI = i;
+            int finalI1 = i;
+            btn[i].addActionListener(new ActionListener() {
+                int temp = finalI;
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    current[0] = finalI;
+
+                    for(int j=0;j<6;j++){
+                        btn[j].setBackground(color);
+                        btn[j].setForeground(Color.WHITE);
+                    }
+                    btn[finalI1].setBackground(Color.WHITE);
+                    btn[finalI1].setForeground(Color.BLACK);
+                    setPanelSwitch(module[finalI][flag]);
+                    System.out.println("用户管理系统");
                 }
-                btnModule1.setBackground(Color.WHITE);
-                btnModule1.setForeground(Color.BLACK);
-                setPanelSwitch(userModule[flag]);
-                System.out.println("用户管理系统");
-            }
-        });
+            });
+            int finalI2 = i;
+            btn[i].addMouseListener(new MouseListener() {
 
-        btnModule2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                for(int i=0;i<6;i++){
-                    btn[i].setBackground(color);
-                    btn[i].setForeground(Color.WHITE);
+                @Override
+                public void mouseClicked(MouseEvent e) {
+
                 }
-                btnModule2.setBackground(Color.WHITE);
-                btnModule2.setForeground(Color.BLACK);
-                setPanelSwitch(schoolModule[flag]);
-                System.out.println("学籍管理系统");
-            }
-        });
 
-        btnModule3.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                for(int i=0;i<6;i++){
-                    btn[i].setBackground(color);
-                    btn[i].setForeground(Color.WHITE);
+                @Override
+                public void mousePressed(MouseEvent e) {
+
                 }
-                btnModule3.setBackground(Color.WHITE);
-                btnModule3.setForeground(Color.BLACK);
-                setPanelSwitch(courseModule[flag]);
-                System.out.println("教务管理系统");
-            }
-        });
 
-        btnModule4.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                for(int i=0;i<6;i++){
-                btn[i].setBackground(color);
-                    btn[i].setForeground(Color.WHITE);
-            }
-                btnModule4.setBackground(Color.WHITE);
-                btnModule4.setForeground(Color.BLACK);
-                setPanelSwitch(LibraryModule[flag]);
-                System.out.println("图书馆管理系统");
-            }
-        });
+                @Override
+                public void mouseReleased(MouseEvent e) {
 
-        btnModule5.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                for(int i=0;i<6;i++){
-                    btn[i].setBackground(color);
-                    btn[i].setForeground(Color.WHITE);
                 }
-                btnModule5.setBackground(Color.WHITE);
-                btnModule5.setForeground(Color.BLACK);
-                setPanelSwitch(storeModule[flag]);
-                System.out.println("校园商城管理系统");
-            }
-        });
 
-        btnModule6.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                for(int i=0;i<6;i++){
-                    btn[i].setBackground(color);
-                    btn[i].setForeground(Color.WHITE);
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    btn[finalI2].setBackground(Color.WHITE);
+                    btn[finalI2].setForeground(Color.BLACK);
                 }
-                btnModule6.setBackground(Color.WHITE);
-                btnModule6.setForeground(Color.BLACK);
-                setPanelSwitch(messageModule[flag]);
-                System.out.println("站内消息管理系统");
-            }
-        });
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    if(current[0]!=finalI2){
+                        btn[finalI2].setBackground(color);
+                        btn[finalI2].setForeground(Color.WHITE);
+                    }
+                }
+            });
+        }
+
+//        btnModule2.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                current[0] = 2;
+//                for(int i=0;i<6;i++){
+//                    btn[i].setBackground(color);
+//                    btn[i].setForeground(Color.WHITE);
+//                }
+//                btnModule2.setBackground(Color.WHITE);
+//                btnModule2.setForeground(Color.BLACK);
+//                setPanelSwitch(schoolModule[flag]);
+//                System.out.println("学籍管理系统");
+//            }
+//        });
+
+//        btnModule3.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                current[0] = 3;
+//                for(int i=0;i<6;i++){
+//                    btn[i].setBackground(color);
+//                    btn[i].setForeground(Color.WHITE);
+//                }
+//                btnModule3.setBackground(Color.WHITE);
+//                btnModule3.setForeground(Color.BLACK);
+//                setPanelSwitch(courseModule[flag]);
+//                System.out.println("教务管理系统");
+//            }
+//        });
+
+//        btnModule4.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                current[0] = 4;
+//                for(int i=0;i<6;i++){
+//                btn[i].setBackground(color);
+//                    btn[i].setForeground(Color.WHITE);
+//            }
+//                btnModule4.setBackground(Color.WHITE);
+//                btnModule4.setForeground(Color.BLACK);
+//                setPanelSwitch(LibraryModule[flag]);
+//                System.out.println("图书馆管理系统");
+//            }
+//        });
+
+//        btnModule5.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                current[0] = 5;
+//                for(int i=0;i<6;i++){
+//                    btn[i].setBackground(color);
+//                    btn[i].setForeground(Color.WHITE);
+//                }
+//                btnModule5.setBackground(Color.WHITE);
+//                btnModule5.setForeground(Color.BLACK);
+//                setPanelSwitch(storeModule[flag]);
+//                System.out.println("校园商城管理系统");
+//            }
+//        });
+//
+//        btnModule6.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                current[0] =6;
+//                for(int i=0;i<6;i++){
+//                    btn[i].setBackground(color);
+//                    btn[i].setForeground(Color.WHITE);
+//                }
+//                btnModule6.setBackground(Color.WHITE);
+//                btnModule6.setForeground(Color.BLACK);
+//                setPanelSwitch(messageModule[flag]);
+//                System.out.println("站内消息管理系统");
+//                //current =6;
+//            }
+//        });
 
         btnExit.addActionListener(new ActionListener() {
             @Override
