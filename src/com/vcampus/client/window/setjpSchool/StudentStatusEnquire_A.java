@@ -126,7 +126,7 @@ public class StudentStatusEnquire_A extends JPanel {
             set(res.get(0));//如果查到这个人，set设置学生对象，传参数
         }
         else {
-            JOptionPane.showMessageDialog(this, "查无此人！", "警告", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "该生暂无学籍信息", "警告", JOptionPane.ERROR_MESSAGE);
             txtIdNumEnquire.setText("");
         }
     }
@@ -152,98 +152,106 @@ public class StudentStatusEnquire_A extends JPanel {
             lblImg.setIcon(img);
             lblImg.setBounds(30, 30, 120, 150);
         }
-        //第一行信息，姓名 学号 一卡通号
-        lblName.setBounds(x,y,lblWidth,lblHeight);
-        txtName.setBounds(x+ltDiffer1,y,txtWidth,txtHeight);
-        txtName.setText(student.getName());
-        setLabelFont(lblName,txtName);
 
-        lblStudentNum.setBounds(x+llDiffer,y,lblWidth,lblHeight);
-        txtStudentNum.setBounds(x+llDiffer+ltDiffer1,y,txtWidth,txtHeight);
-        txtStudentNum.setText(student.getStudentNumber());
-        setLabelFont(lblStudentNum,txtStudentNum);
+            //第一行信息，姓名 学号 一卡通号
+            lblName.setBounds(x, y, lblWidth, lblHeight);
+            txtName.setBounds(x + ltDiffer1, y, txtWidth, txtHeight);
+            txtName.setText(student.getName());
+            setLabelFont(lblName, txtName);
 
-        lblIdNum.setBounds(x+llDiffer*2,y,lblWidth,lblHeight);
-        txtIdNum.setBounds(x+llDiffer*2+ltDiffer1+ltDiffer2 ,y,txtWidth,txtHeight);
-        txtIdNum.setText(student.getStudentID());
-        setLabelFont(lblIdNum,txtIdNum);
+            lblStudentNum.setBounds(x + llDiffer, y, lblWidth, lblHeight);
+            txtStudentNum.setBounds(x + llDiffer + ltDiffer1, y, txtWidth, txtHeight);
+            txtStudentNum.setText(student.getStudentNumber());
+            setLabelFont(lblStudentNum, txtStudentNum);
 
-        //第二行信息 民族 性别 政治面貌
-        lblNation.setBounds(x,y+heightDiffer,lblWidth,lblHeight);
-        txtNation.setBounds(x+ltDiffer1,y+heightDiffer,txtWidth,txtHeight);
-        txtNation.setText(student.getNation());
-        setLabelFont(lblNation,txtNation);
+            lblIdNum.setBounds(x + llDiffer * 2, y, lblWidth, lblHeight);
+            txtIdNum.setBounds(x + llDiffer * 2 + ltDiffer1 + ltDiffer2, y, txtWidth, txtHeight);
+            txtIdNum.setText(student.getStudentID());
+            setLabelFont(lblIdNum, txtIdNum);
 
-        lblGender.setBounds(x+llDiffer,y+heightDiffer,lblWidth,lblHeight);
-        txtGender.setBounds(x+llDiffer+ltDiffer1,y+heightDiffer,txtWidth,txtHeight);
-        if(student.getSex()!=null) {
-            String gender = (student.getSex() == 0) ? "男" : "女";
-            txtGender.setText(gender);
+            //第二行信息 民族 性别 政治面貌
+            lblNation.setBounds(x, y + heightDiffer, lblWidth, lblHeight);
+            txtNation.setBounds(x + ltDiffer1, y + heightDiffer, txtWidth, txtHeight);
+            txtNation.setText(student.getNation());
+            setLabelFont(lblNation, txtNation);
+
+            lblGender.setBounds(x + llDiffer, y + heightDiffer, lblWidth, lblHeight);
+            txtGender.setBounds(x + llDiffer + ltDiffer1, y + heightDiffer, txtWidth, txtHeight);
+            if (student.getSex() != null) {
+                String gender = (student.getSex() == 0) ? "男" : "女";
+                txtGender.setText(gender);
+            }
+            setLabelFont(lblGender, txtGender);
+
+            lblPolitic.setBounds(x + llDiffer * 2, y + heightDiffer, lblWidth, lblHeight);
+            txtPolitic.setBounds(x + llDiffer * 2 + ltDiffer1 + ltDiffer2, y + heightDiffer, txtWidth, txtHeight);
+//            txtPolitic.setText(student.getPolitics());
+            setLabelFont(lblPolitic, txtPolitic);
+
+            //第三行信息  年级 学制 学籍状态
+            lblGrade.setBounds(x, y + heightDiffer * 2, lblWidth, lblHeight);
+            txtGrade.setBounds(x + ltDiffer1, y + heightDiffer * 2, txtWidth, txtHeight);
+//            txtGrade.setText(student.getGrade().toString());
+            setLabelFont(lblGrade, txtGrade);
+
+            lblLengthOfSchooling.setBounds(x + llDiffer, y + heightDiffer * 2, lblWidth, lblHeight);
+            txtLengthOfSchooling.setBounds(x + llDiffer + ltDiffer1, y + heightDiffer * 2, txtWidth, txtHeight);
+//            txtLengthOfSchooling.setText(student.getEducationalSystem().toString());
+            setLabelFont(lblLengthOfSchooling, txtLengthOfSchooling);
+
+            lblStatus.setBounds(x + llDiffer * 2, y + heightDiffer * 2, lblWidth, lblHeight);
+            txtStatus.setBounds(x + llDiffer * 2 + ltDiffer1 + ltDiffer2, y + heightDiffer * 2, txtWidth, txtHeight);
+//            txtStatus.setText(student.getStatus().toString());
+            setLabelFont(lblStatus, txtStatus);
+
+            //第4行信息 院系 专业
+            lblDep.setBounds(x, y + heightDiffer * 3, lblWidth, lblHeight);
+            txtDep.setBounds(x + ltDiffer1, y + heightDiffer * 3, txtWidth * 3 - 30, txtHeight);
+//            txtDep.setText(student.getSchool());
+            setLabelFont(lblDep, txtDep);
+
+            lblMajor.setBounds(x + llDiffer * 2 - 70, y + heightDiffer * 3, lblWidth, lblHeight);
+            txtMajor.setBounds(x + llDiffer * 2 + ltDiffer1 - 70, y + heightDiffer * 3, txtWidth * 2, txtHeight);
+            txtMajor.setText(student.getMajor());
+            setLabelFont(lblMajor, txtMajor);
+
+            //第5行信息 班级 预计毕业时间
+            lblClass.setBounds(x, y + heightDiffer * 4, lblWidth, lblHeight);
+            txtClass.setBounds(x + ltDiffer1, y + heightDiffer * 4, txtWidth, txtHeight);
+            txtClass.setText(student.getClasss());
+            setLabelFont(lblClass, txtClass);
+
+            lblGraduation.setBounds(x + llDiffer, y + heightDiffer * 4, lblWidth, lblHeight);
+            txtGraduation.setBounds(x + ltDiffer1 * 2 + llDiffer, y + heightDiffer * 4, txtWidth, txtHeight);
+            txtGraduation.setText(student.getGraduateTime());///????
+            setLabelFont(lblGraduation, txtGraduation);
+
+            //第6行信息，身份证号
+            lblIdNumber.setBounds(x, y + heightDiffer * 5, lblWidth, lblHeight);
+            txtIdNumber.setBounds(x + ltDiffer1 * 2 - 60, y + heightDiffer * 5, txtWidth * 2, txtHeight);
+            txtIdNumber.setText(student.getIDcard());
+            setLabelFont(lblIdNumber, txtIdNumber);
+
+            //第7行信息 联系电话
+            lblPhoneNum.setBounds(x, y + heightDiffer * 6, lblWidth, lblHeight);
+            txtPhoneNum.setBounds(x + ltDiffer1 * 2 - 60, y + heightDiffer * 6, txtWidth * 2, txtHeight);
+            txtPhoneNum.setText(student.getPhoneNumber());
+            setLabelFont(lblPhoneNum, txtPhoneNum);
+        if(student.getGrade()!=null && student.getSchool()!=null && student.getStatus()!=null) {
+            txtStudentNum.setText(student.getStudentNumber());
+            txtPolitic.setText(student.getPolitics());
+            txtGrade.setText(student.getGrade().toString());
+            txtLengthOfSchooling.setText(student.getEducationalSystem().toString());
+            txtStatus.setText(student.getStatus().toString());
+            txtDep.setText(student.getSchool());
+
         }
-        setLabelFont(lblGender,txtGender);
-
-        lblPolitic.setBounds(x+llDiffer*2,y+heightDiffer,lblWidth,lblHeight);
-        txtPolitic.setBounds(x+llDiffer*2+ltDiffer1+ltDiffer2,y+heightDiffer,txtWidth,txtHeight);
-        txtPolitic.setText(student.getPolitics());
-        setLabelFont(lblPolitic,txtPolitic);
-
-        //第三行信息  年级 学制 学籍状态
-        lblGrade.setBounds(x,y+heightDiffer*2,lblWidth,lblHeight);
-        txtGrade.setBounds(x+ltDiffer1,y+heightDiffer*2,txtWidth,txtHeight);
-        txtGrade.setText(student.getGrade().toString());
-        setLabelFont(lblGrade,txtGrade);
-
-        lblLengthOfSchooling.setBounds(x+llDiffer,y+heightDiffer*2,lblWidth,lblHeight);
-        txtLengthOfSchooling.setBounds(x+llDiffer+ltDiffer1,y+heightDiffer*2,txtWidth,txtHeight);
-        txtLengthOfSchooling.setText(student.getEducationalSystem().toString());
-        setLabelFont(lblLengthOfSchooling,txtLengthOfSchooling);
-
-        lblStatus.setBounds(x+llDiffer*2,y+heightDiffer*2,lblWidth,lblHeight);
-        txtStatus.setBounds(x+llDiffer*2+ltDiffer1+ltDiffer2,y+heightDiffer*2,txtWidth,txtHeight);
-        txtStatus.setText(student.getStatus().toString());
-        setLabelFont(lblStatus,txtStatus);
-
-        //第4行信息 院系 专业
-        lblDep.setBounds(x,y+heightDiffer*3,lblWidth,lblHeight);
-        txtDep.setBounds(x+ltDiffer1,y+heightDiffer*3,txtWidth*3-30,txtHeight);
-        txtDep.setText(student.getSchool());
-        setLabelFont(lblDep,txtDep);
-
-        lblMajor.setBounds(x+llDiffer*2-70,y+heightDiffer*3,lblWidth,lblHeight);
-        txtMajor.setBounds(x+llDiffer*2+ltDiffer1-70,y+heightDiffer*3,txtWidth*2,txtHeight);
-        txtMajor.setText(student.getMajor());
-        setLabelFont(lblMajor,txtMajor);
-
-        //第5行信息 班级 预计毕业时间
-        lblClass.setBounds(x,y+heightDiffer*4,lblWidth,lblHeight);
-        txtClass.setBounds(x+ltDiffer1,y+heightDiffer*4,txtWidth,txtHeight);
-        txtClass.setText(student.getClasss());
-        setLabelFont(lblClass,txtClass);
-
-        lblGraduation.setBounds(x+llDiffer,y+heightDiffer*4,lblWidth,lblHeight);
-        txtGraduation.setBounds(x+ltDiffer1*2+llDiffer,y+heightDiffer*4,txtWidth,txtHeight);
-        txtGraduation.setText(student.getGraduateTime());///????
-        setLabelFont(lblGraduation, txtGraduation);
-
-        //第6行信息，身份证号
-        lblIdNumber.setBounds(x,y+heightDiffer*5,lblWidth,lblHeight);
-        txtIdNumber.setBounds(x+ltDiffer1*2-60,y+heightDiffer*5,txtWidth*2,txtHeight);
-        txtIdNumber.setText(student.getIDcard());
-        setLabelFont(lblIdNumber,txtIdNumber);
-
-        //第7行信息 联系电话
-        lblPhoneNum.setBounds(x,y+heightDiffer*6,lblWidth,lblHeight);
-        txtPhoneNum.setBounds(x+ltDiffer1*2-60,y+heightDiffer*6,txtWidth*2,txtHeight);
-        txtPhoneNum.setText(student.getPhoneNumber());
-        setLabelFont(lblPhoneNum,txtPhoneNum);
-
         add(lblName); add(txtName); add(lblStudentNum); add(txtStudentNum); add(lblIdNum); add(txtIdNum);
         add(lblNation); add(txtNation); add(lblGender); add(txtGender); add(lblPolitic); add(txtPolitic);
         add(lblGrade); add(txtGrade); add(lblLengthOfSchooling);
         add(txtLengthOfSchooling); add(lblStatus); add(txtStatus);
         add(lblDep); add(txtDep); add(lblMajor); add(txtMajor); add(lblGraduation); add(txtGraduation);
         add(lblPhoneNum); add(txtPhoneNum);add(lblClass); add(txtClass);add(lblIdNumber); add(txtIdNumber);
-
 
         updateUI();
         repaint();
