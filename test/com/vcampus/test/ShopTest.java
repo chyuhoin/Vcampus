@@ -41,8 +41,8 @@ public class ShopTest {
         Gson gson = new Gson();
         MessagePasser passer = ClientMessagePasser.getInstance();
 
-        Goods goods = new Goods("155", "chocolate", "2",
-                "500", "state", "2022-8-2",
+        Goods goods = new Goods("037", "coffee", "1",
+                "350", "state", "2022-8-21",
                 null, 5, 1);
         passer.send(new Message("student", gson.toJson(goods), "shop", "post"));
         Message message = passer.receive();
@@ -118,8 +118,8 @@ public class ShopTest {
         MessagePasser passer = ClientMessagePasser.getInstance();
 
         HashMap<String, String> args = new HashMap<>();
-        args.put("studentID", "1");
-        args.put("goodsID", "155");
+        args.put("studentID", "test");
+        args.put("goodsID", "123");
         passer.send(new Message("student", gson.toJson(args), "shop", "return"));
         Message message = passer.receive();
         System.out.println(message);
@@ -137,8 +137,8 @@ public class ShopTest {
         MessagePasser passer = ClientMessagePasser.getInstance();
 
         HashMap<String, String> args = new HashMap<>();
-        args.put("studentID", "1");
-        args.put("goodsID", "155");
+        args.put("studentID", "test");
+        args.put("goodsID", "123");
         passer.send(new Message("student", gson.toJson(args), "shop", "confirm"));
         Message message = passer.receive();
         System.out.println(message);
@@ -149,6 +149,39 @@ public class ShopTest {
     }
 
     @Test
-    public void test() {
+    public void testDelete() throws Exception {
+        Socket socket = new Socket("localhost", 6666); // 连接指定服务器和端口
+        ClientMessagePasser.build(socket.getInputStream(), socket.getOutputStream());
+        Gson gson = new Gson();
+        MessagePasser passer = ClientMessagePasser.getInstance();
+
+        Goods goods = new Goods();
+        goods.setGoodsID("037");
+        passer.send(new Message("student", gson.toJson(goods), "shop", "delete"));
+        Message message = passer.receive();
+        System.out.println(message);
+
+        Map<String, String> map = gson.fromJson(message.getData(),
+                new TypeToken<Map<String, String>>(){}.getType());
+        System.out.println(map.get("res"));
+    }
+
+    @Test
+    public void testChange() throws Exception {
+        Socket socket = new Socket("localhost", 6666); // 连接指定服务器和端口
+        ClientMessagePasser.build(socket.getInputStream(), socket.getOutputStream());
+        Gson gson = new Gson();
+        MessagePasser passer = ClientMessagePasser.getInstance();
+
+        Goods goods = new Goods("037", "coffee", "1",
+                "350", "state", "2022-8-16",
+                null, 5, 1);
+        passer.send(new Message("student", gson.toJson(goods), "shop", "put"));
+        Message message = passer.receive();
+        System.out.println(message);
+
+        Map<String, String> map = gson.fromJson(message.getData(),
+                new TypeToken<Map<String, String>>(){}.getType());
+        System.out.println(map.get("res"));
     }
 }
