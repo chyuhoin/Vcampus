@@ -108,9 +108,11 @@ public class PanelViewCourse_S extends JPanel {
     private Map<String,LessonGrade> setMyGrade(String studentID){
         //获取成绩 "showgradestudent"
         String st = studentID;
-        passer.send(new Message("admin", st, "lesson", "showgradestudent"));
-
-        Message msg2 = passer.receive();
+        Message msg2 =null;
+        synchronized (passer) {
+            passer.send(new Message("admin", st, "lesson", "showgradestudent"));
+            msg2 = passer.receive();
+        }
         Map<String, java.util.List<LessonGrade>> map2 = new Gson().fromJson(msg2.getData(), new TypeToken<HashMap<String, java.util.List<LessonGrade>>>() {
         }.getType());
         List<LessonGrade> res2 = map2.get("res");
