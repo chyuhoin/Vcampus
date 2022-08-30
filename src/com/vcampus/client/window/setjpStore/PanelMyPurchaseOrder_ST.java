@@ -16,7 +16,10 @@ package com.vcampus.client.window.setjpStore;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.vcampus.net.ClientMessagePasser;
 import com.vcampus.net.Message;
+import com.vcampus.net.MessagePasser;
+import com.vcampus.pojo.Book;
 import com.vcampus.pojo.Record;
 import com.vcampus.pojo.User;
 
@@ -37,7 +40,7 @@ import java.util.Map;
 public class PanelMyPurchaseOrder_ST extends JPanel{
     JLabel lblHint = new JLabel("已购商品");
 
-    //MessagePasser passer = ClientMessagePasser.getInstance();
+    MessagePasser passer = ClientMessagePasser.getInstance();
     //MyTablePanel_Shop tableP=new MyTablePanel_Shop(tableData,columnNames);
     MyTable_Shop table=null;//老师
     JScrollPane scrollPane = null;
@@ -56,7 +59,6 @@ public class PanelMyPurchaseOrder_ST extends JPanel{
         this.setLayout(null);
 
         int x=120,y=20;//起始坐标
-
         userID=ID;
         if(flag==1){ status="student";}
         if(flag==2){ status="teacher";};
@@ -68,29 +70,6 @@ public class PanelMyPurchaseOrder_ST extends JPanel{
         tablePanel.setBounds(20,80,1150,500);
 
         this.add(lblHint);
-        //this.add(tablePanel);
-
-        //发消息 收消息 getBuy //写成选项卡更新！
-        //如果有
-
-        //if(true)
-        //{
-            //设置表格数据
-            //tableData= new
-            /*for(int i=0;i< ;i++)
-            {
-                tableData[i][0]=
-            }
-             */
-            //setTable();
-        //}
-        //else
-        //{
-            //informFrame("未查询到购买记录",true);
-            //tableData=null;
-            //setTable();
-       // }
-
     }
 
     public void informFrame(String title,Boolean flag)
@@ -137,12 +116,12 @@ public class PanelMyPurchaseOrder_ST extends JPanel{
             @Override
             public void actionPerformed(ActionEvent e) {
                 int rowName=btnE1.getThisRow();
-/*
-                User user = new User();
-                user.setStudentID(ID);
+                HashMap<String,String> hashMap = new HashMap<>();
+                hashMap.put("studentID",userID);
+                hashMap.put("goodsID",(String)model.getValueAt(rowName, 0));
                 Gson gson = new Gson();
-                String s = gson.toJson(user);
-                passer.send(new Message(status, s, "shop", "getBuy"));
+                String s = gson.toJson(hashMap);
+                passer.send(new Message(status, s, "shop", "confirm"));
 
                 try {
                     Thread.sleep(100);
@@ -151,42 +130,58 @@ public class PanelMyPurchaseOrder_ST extends JPanel{
                 }
 
                 Message msg = passer.receive();
-                Map<String, java.util.List<Record>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, java.util.List<Record>>>() {}.getType());
-                List<Record> res = map.get("res");
+                System.out.println(msg);
+                Map<String,Object> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String,Object>>(){}.getType());
 
- */
-
-                if (true)//操作成功
+                if(map.get("res").equals("OK"))
                 {
+                    btnE1.fireEditingStopped_1();
                     btnE1.getButton().setText("已收货");
                     informFrame("收货成功！", false);
+                    //model.getValueAt(rowName, 0).s
                     model.removeRow(rowName);//表格里删掉这一行
+
                 } else {
                     informFrame("收货失败！", true);
                 }
-                btnE1.fireEditingStopped_1();
+
             }
         });
 
-        btnE2.getButton().addActionListener(new ActionListener() {//申请退化
+        btnE2.getButton().addActionListener(new ActionListener() {//申请退货
             @Override
             public void actionPerformed(ActionEvent e) {
                 int rowName = btnE2.getThisRow();
-                //获取商品号，打包商品，退货
-                //发送消息，接收消息
-                if (true)//操作成功
+                HashMap<String,String> hashMap = new HashMap<>();
+                hashMap.put("studentID",userID);
+                hashMap.put("goodsID",(String)model.getValueAt(rowName, 0));
+                Gson gson = new Gson();
+                String s = gson.toJson(hashMap);
+                passer.send(new Message(status, s, "shop", "return"));
+
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException interruptedException) {
+                    interruptedException.printStackTrace();
+                }
+
+                Message msg = passer.receive();
+                System.out.println(msg);
+                Map<String,Object> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String,Object>>(){}.getType());
+
+                if(map.get("res").equals("OK"))
                 {
+                    btnE2.fireEditingStopped_1();
                     btnE2.getButton().setText("已退货");
                     informFrame("退货成功！", false);
                     model.removeRow(rowName);//表格里删掉这一行
+
                 } else {
                     informFrame("退货失败！", true);
                 }
-                btnE2.fireEditingStopped_1();
+
             }
         });
-
-        System.out.println("构件表格22222");
 
         this.add(tablePanel);
         updateUI();

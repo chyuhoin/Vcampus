@@ -38,11 +38,11 @@ public class TabbedPanelStore_S extends JTabbedPane {
     Object[] columnNames = new Object[]{"已购商品编号","购买日期","商品状态","收货","退货"};
     public TabbedPanelStore_S(int flag,String ID)
     {
-        this.setTabPlacement(2);
+        this.setTabPlacement(1);
         this.setBounds(0,0,1400,650);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
         PanelHomePage_ST homePage = new PanelHomePage_ST();
-        PanelMyStore_S myStore = new PanelMyStore_S();
+        PanelMyStore_S myStore = new PanelMyStore_S(ID);
         PanelMyPurchaseOrder_ST myPurchase = new PanelMyPurchaseOrder_ST(ID,flag);
 
 
@@ -84,8 +84,6 @@ public class TabbedPanelStore_S extends JTabbedPane {
 
     }
 
-
-
     public Object[][] getAllOrder(String ID){
         User user = new User();
         user.setStudentID(ID);
@@ -115,7 +113,7 @@ public class TabbedPanelStore_S extends JTabbedPane {
         }
         else
         {
-            JOptionPane.showMessageDialog(this, "未查询到购买界面", "警告", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(this, "未查询到购买记录", "警告", JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }

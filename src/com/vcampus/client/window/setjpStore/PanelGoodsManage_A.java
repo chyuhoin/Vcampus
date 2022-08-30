@@ -15,6 +15,8 @@
 
 package com.vcampus.client.window.setjpStore;
 
+import com.vcampus.pojo.Goods;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
@@ -29,7 +31,7 @@ import java.util.HashSet;
 public class PanelGoodsManage_A extends JPanel {
     //JLabel lblHint = new JLabel("在售商品");
     JPanel panelAll = new JPanel();
-    PanelGoodsInform panelInform = new PanelGoodsInform();
+    PanelGoodsInform panelInform = new PanelGoodsInform(new Goods("","","","","","","",0,0),true);
     JPanel panelAdd = new JPanel();
 
     JButton btnAdd = new JButton("上架商品");
@@ -40,7 +42,7 @@ public class PanelGoodsManage_A extends JPanel {
     JButton btnDelete = new JButton("删除");
 
     JButton btnInquire = new JButton("查询");
-    String[] listData = new String[]{"输入搜索条件","全部","商品名称", "商品编号", "商品类型", "商品价格"};
+    String[] listData = new String[]{"输入搜索条件","全部","商品名称", "商品编号", "商品价格"};
     // 创建一个下拉列表框
     JComboBox<String> comboBox = new JComboBox<String>(listData);
     JTextField txtEnquire = new JTextField();
@@ -149,9 +151,6 @@ public class PanelGoodsManage_A extends JPanel {
                         System.out.println("编号"+str);//book。set
                         break;
                     case 4:
-                        System.out.println("类型"+str);//book。set
-                        break;
-                    case 5:
                         System.out.println("价格"+str);//book。set
                         break;
                     default:
@@ -211,7 +210,6 @@ public class PanelGoodsManage_A extends JPanel {
                 String str1 = panelInform.txtGoodsName.getText();
                 String str2 = panelInform.txtGoodsID.getText();
                 String str3 = panelInform.txtSeller.getText();//////直接设查询者的一卡通，不允许输入，不可编辑
-                String str4 = panelInform.txtType.getText();
                 String str5 = panelInform.txtDealTime.getText();
                 String str6 = panelInform.txtPrice.getText();
                 String str7 = panelInform.txtNum.getText();
@@ -296,7 +294,7 @@ public class PanelGoodsManage_A extends JPanel {
         panelInform.add(btnEdit);
         panelInform.add(btnDelete);
 
-        panelInfo1 = new PanelGoodsInform();//传入商品对象为参数
+        //panelInfo1 = new PanelGoodsInform();//传入商品对象为参数
         panelInfo1.setBounds(150,50,800,500);
         panelInform.add(panelInfo1);
 
@@ -310,7 +308,7 @@ public class PanelGoodsManage_A extends JPanel {
         panelAdd.add(btnOk);
         panelAdd.add(btnCancel);
 
-        panelInfo2 = new PanelGoodsInform();//传入对象，文本框可编辑并且一卡通设置成自己且不可编辑！！
+        //panelInfo2 = new PanelGoodsInform();//传入对象，文本框可编辑并且一卡通设置成自己且不可编辑！！
         panelInfo2.setBounds(150,50,800,500);
         if(flag==0)
         {

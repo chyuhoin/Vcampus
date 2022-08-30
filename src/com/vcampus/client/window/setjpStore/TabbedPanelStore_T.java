@@ -37,7 +37,7 @@ public class TabbedPanelStore_T extends JTabbedPane {
     Object[] columnNames = new Object[]{"已购商品编号","购买日期","商品状态","收货","退货"};
     public TabbedPanelStore_T(int flag, String ID)
     {
-        this.setTabPlacement(2);
+        this.setTabPlacement(1);
         this.setBounds(0,0,1400,650);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
         PanelHomePage_ST homePage = new PanelHomePage_ST();
@@ -58,7 +58,6 @@ public class TabbedPanelStore_T extends JTabbedPane {
                     // purchaseOrder.repaint();
                 }
             }
-
             @Override
             public void mousePressed(MouseEvent e) {
             }
@@ -107,7 +106,7 @@ public class TabbedPanelStore_T extends JTabbedPane {
         }
         else
         {
-            JOptionPane.showMessageDialog(this, "未查询到购买界面", "警告", JOptionPane.ERROR_MESSAGE);
+           // JOptionPane.showMessageDialog(this, "未查询到购买界面", "警告", JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }

@@ -34,7 +34,7 @@ public class PanelHomePage_ST extends JPanel {
             new PanelGoodsSimpleInform(this), new PanelGoodsSimpleInform(this),
             new PanelGoodsSimpleInform(this),new PanelGoodsSimpleInform(this)};
     //根据接受的所有消息，一个一个传入，用一个共有的res接受结果？
-    PanelGoodsInform panelInform = new PanelGoodsInform();
+    PanelGoodsInform panelInform = null;
     //JButton btnReturn = new JButton("返回");
     CardLayout cardLayout=new CardLayout();
 
@@ -219,7 +219,7 @@ public class PanelHomePage_ST extends JPanel {
         panelBuy.add(btnCancel);
         panelBuy.add(btnOk);
 
-        panelInform = new PanelGoodsInform();//传入商品对象为参数
+        //panelInform = new PanelGoodsInform();//传入商品对象为参数
         panelInform.setBounds(150,50,800,500);
         panelBuy.add(panelInform);
 

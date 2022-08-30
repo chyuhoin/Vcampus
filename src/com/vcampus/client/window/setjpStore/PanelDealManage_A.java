@@ -133,16 +133,15 @@ public class PanelDealManage_A extends JPanel{
 
                 if(res.size()!=0)
                 {
-                    tableData=new Object[res.size()][6];
+                    tableData=new Object[res.size()][5];
                     for(int i=0;i<res.size();i++) {
                         tableData[i][0]=res.get(i).getGoodsID();
                         tableData[i][1]=res.get(i).getGoodsName();
-                        tableData[i][2]=res.get(i).getType();
-                        tableData[i][3]=res.get(i).getPrice();
-                        tableData[i][4]=res.get(i).getDealDate();
-                        tableData[i][5]=res.get(i).getNum();
+                        tableData[i][2]=res.get(i).getPrice();
+                        tableData[i][3]=res.get(i).getDealDate();
+                        tableData[i][4]=res.get(i).getNum();
                     }
-                    columnNames= new Object[]{"商品编号","商品名称","商品类型","商品价格","上架时间","剩余数量"};
+                    columnNames= new Object[]{"商品编号","商品名称","商品价格","上架时间","剩余数量"};
                     setPanel();
                 }
                 else
