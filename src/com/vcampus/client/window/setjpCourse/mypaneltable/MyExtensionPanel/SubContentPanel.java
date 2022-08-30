@@ -203,9 +203,14 @@ public class SubContentPanel extends JPanel{
                         JOptionPane.showMessageDialog(
                                 superPanel==null?thisPanel:superPanel,//避免superPanel为空
                                 "您已选择该课程", "提示", JOptionPane.INFORMATION_MESSAGE);
+                    else if (Objects.equals(statusLesson, "SameSelected"))
+                        JOptionPane.showMessageDialog(
+                                superPanel==null?thisPanel:superPanel,//避免superPanel为空
+                                "您已选择该课程", "提示", JOptionPane.INFORMATION_MESSAGE);
                     else JOptionPane.showMessageDialog(
                                 superPanel==null?thisPanel:superPanel,//避免superPanel为空
-                                "课程状态有错(超过了4种)", "警告", JOptionPane.WARNING_MESSAGE);
+                                "课程状态有错(超过了5种)", "警告", JOptionPane.WARNING_MESSAGE);
+
                 }
             }
         });
@@ -307,6 +312,9 @@ public class SubContentPanel extends JPanel{
             case "Selected":
                 lblFlag.setText(" 已选 ");
                 lblFlag.setBackground(new Color(76,153,0));break;
+            case "SameSelected":
+                lblFlag.setText(" 已选同类课程 ");
+                lblFlag.setBackground(new Color(0 ,205 ,205));break;
             case "full":
                 lblFlag.setText(" 已满 ");
                 lblFlag.setBackground(new Color(220,20,60));break;
@@ -394,7 +402,7 @@ public class SubContentPanel extends JPanel{
         }.getType());
         String res = map.get("res");
 
-        if(!Objects.equals(res, ""))
+        if(res!=null && !Objects.equals(res, ""))
             statusLesson=res;
         else System.out.println("String返回出错！！！！！！！");
 

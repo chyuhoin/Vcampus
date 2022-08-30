@@ -40,57 +40,59 @@ public class TabbedPanelMessage_A extends JTabbedPane{
     public MyTablePanel pubMessage;
     Thread thread;
 
-    public TabbedPanelMessage_A(String ID) {
-        this.setTabPlacement(1);
-        this.setBounds(0,0,1400,650);//注意！！！！！！！！！！！！！！！！！！！！！！！
+    public TabbedPanelMessage_A(int flag,String ID) {
+            this.setTabPlacement(1);
+            this.setBounds(0, 0, 1400, 650);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
-        JPanel jp11 = new JPanel();
-        JPanel jp12 = new JPanel();
-        JPanel jp13 = new JPanel();
-        //选项卡1的内容
-        //按钮
-        JButton btnRegister = new JButton("啦啦啦啦啦");
-        btnRegister.setFont(new Font("宋体", Font.BOLD, 50));
+            JPanel jp11 = new JPanel();
+            JPanel jp12 = new JPanel();
+            JPanel jp13 = new JPanel();
+            //选项卡1的内容
+            //按钮
+            JButton btnRegister = new JButton("啦啦啦啦啦");
+            btnRegister.setFont(new Font("宋体", Font.BOLD, 50));
 
-        jp12.add(btnRegister);
-        JPanel panel = new PanelSendMassage(ID);
+            jp12.add(btnRegister);
+            JPanel panel = new PanelSendMassage(ID);
 
-        priMessage = new MyTablePanel(getAllMessage(), new Object[]{"消息"});
-        pubMessage = new MyTablePanel(getPubMessage(), new Object[]{"消息"});
+            priMessage = new MyTablePanel(getAllMessage(), new Object[]{"消息"});
+            pubMessage = new MyTablePanel(getPubMessage(), new Object[]{"消息"});
 
-        priMessage.add(btn);
-        pubMessage.add(btn);
+            priMessage.add(btn);
+            pubMessage.add(btn);
 
-        jp11.setLayout(new CardLayout(10, 10));
-        jp11.add(priMessage);
-        jp13.setLayout(new CardLayout(10, 10));
-        jp13.add(pubMessage);
+            jp11.setLayout(new CardLayout(10, 10));
+            jp11.add(priMessage);
+            jp13.setLayout(new CardLayout(10, 10));
+            jp13.add(pubMessage);
 
-        this.addTab("查看私信", null, jp11,"查看私信");
-        this.addTab("公共频道", null, jp13,"查看公共频道消息");
-        this.addTab("发送消息", null, panel,"发送消息");
-        this.setFont(new Font("宋体", Font.BOLD, 24));
+            this.addTab("查看私信", null, jp11, "查看私信");
+            this.addTab("公共频道", null, jp13, "查看公共频道消息");
+            this.addTab("发送消息", null, panel, "发送消息");
+            this.setFont(new Font("宋体", Font.BOLD, 24));
 
-        thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while(true) {
-                    priMessage = new MyTablePanel(getAllMessage(), new Object[]{"消息"});
-                    pubMessage = new MyTablePanel(getPubMessage(), new Object[]{"消息"});
-                    jp11.removeAll(); jp13.removeAll();
-                    jp11.add(priMessage); jp13.add(pubMessage);
-                    try {
-                        Thread.sleep(5000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+
+            thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    while (true) {
+                        priMessage = new MyTablePanel(getAllMessage(), new Object[]{"消息"});
+                        pubMessage = new MyTablePanel(getPubMessage(), new Object[]{"消息"});
+                        jp11.removeAll();
+                        jp13.removeAll();
+                        jp11.add(priMessage);
+                        jp13.add(pubMessage);
+                        try {
+                            Thread.sleep(5000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        System.out.println("renew!");
                     }
-                    System.out.println("renew!");
+
                 }
-
-            }
-        });
-        thread.start();
-
+            });
+            thread.start();
         //jp.add(jtbp);
     }
 
