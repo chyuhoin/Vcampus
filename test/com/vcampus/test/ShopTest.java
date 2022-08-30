@@ -42,8 +42,8 @@ public class ShopTest {
         Gson gson = new Gson();
         MessagePasser passer = ClientMessagePasser.getInstance();
 
-        Goods goods = new Goods("009", "soda", "mytest",
-                "5", "state", "2022-8-29",
+        Goods goods = new Goods("037", "coffee", "1",
+                "350", "state", "2022-8-21",
                 null, 5, 1);
         passer.send(new Message("student", gson.toJson(goods), "shop", "post"));
         Message message = passer.receive();
@@ -175,7 +175,7 @@ public class ShopTest {
         MessagePasser passer = ClientMessagePasser.getInstance();
 
         Goods goods = new Goods("037", "coffee", "1",
-                "35000", "state", "2022-8-16",
+                "350", "state", "2022-8-16",
                 null, 5, 1);
         passer.send(new Message("student", gson.toJson(goods), "shop", "put"));
         Message message = passer.receive();

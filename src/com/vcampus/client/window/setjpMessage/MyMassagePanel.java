@@ -60,7 +60,6 @@ public class MyMassagePanel extends JPanel {
         //卡片
         PANEL=this;
         this.setOpaque(false);
-        this.setLayout(new CardLayout(0,0));
 
         //处理和计算数据
         setData(rowData);

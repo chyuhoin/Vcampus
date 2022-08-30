@@ -46,7 +46,7 @@ public class TabbedPanelLibrary_A extends JTabbedPane {
             JTabbedPane JTP = this;
             //JTabbedPane jtbp=new JTabbedPane();	//创建选项卡
             this.setTabPlacement(1);
-            this.setBounds(0, 0, 1200, 650);//注意！！！！！！！！！！！！！！！！！！！！！！！
+            this.setBounds(0, 0, 1400, 650);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
             JPanel jp11 = new JPanel();
             JPanel jp12 = new JPanel();
