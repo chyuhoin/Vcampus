@@ -28,12 +28,19 @@ import com.vcampus.pojo.User;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Map;
 
 public class TabbedPanelMessage_A extends JTabbedPane{
-    public TabbedPanelMessage_A(String ID)
-    {
+
+    JButton btn = new JButton("刷新");
+    public MyTablePanel priMessage;
+    public MyTablePanel pubMessage;
+    Thread thread;
+
+    public TabbedPanelMessage_A(String ID) {
         this.setTabPlacement(1);
         this.setBounds(0,0,1400,650);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
@@ -46,25 +53,48 @@ public class TabbedPanelMessage_A extends JTabbedPane{
         btnRegister.setFont(new Font("宋体", Font.BOLD, 50));
 
         jp12.add(btnRegister);
-        JPanel panel = new PanelSendMassage();
+        JPanel panel = new PanelSendMassage(ID);
+
+        priMessage = new MyTablePanel(getAllMessage(), new Object[]{"消息"});
+        pubMessage = new MyTablePanel(getPubMessage(), new Object[]{"消息"});
+
+        priMessage.add(btn);
+        pubMessage.add(btn);
 
         jp11.setLayout(new CardLayout(10, 10));
-        jp11.add(new MyTablePanel(getAllMessage(), new Object[]{"消息"}));
+        jp11.add(priMessage);
         jp13.setLayout(new CardLayout(10, 10));
-        jp13.add(new MyTablePanel(getPubMessage(), new Object[]{"消息"}));
-
+        jp13.add(pubMessage);
 
         this.addTab("查看私信", null, jp11,"查看私信");
         this.addTab("公共频道", null, jp13,"查看公共频道消息");
         this.addTab("发送消息", null, panel,"发送消息");
         this.setFont(new Font("宋体", Font.BOLD, 24));
 
+        thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while(true) {
+                    priMessage = new MyTablePanel(getAllMessage(), new Object[]{"消息"});
+                    pubMessage = new MyTablePanel(getPubMessage(), new Object[]{"消息"});
+                    jp11.removeAll(); jp13.removeAll();
+                    jp11.add(priMessage); jp13.add(pubMessage);
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println("renew!");
+                }
 
+            }
+        });
+        thread.start();
 
         //jp.add(jtbp);
     }
 
-    private Object[][] getAllMessage() {
+    public synchronized Object[][] getAllMessage() {
         Gson gson = new Gson();
         MessagePasser passer = ClientMessagePasser.getInstance();
 
@@ -86,7 +116,7 @@ public class TabbedPanelMessage_A extends JTabbedPane{
         return rowData;
     }
 
-    private Object[][] getPubMessage() {
+    public synchronized Object[][] getPubMessage() {
         Gson gson = new Gson();
         MessagePasser passer = ClientMessagePasser.getInstance();
 
