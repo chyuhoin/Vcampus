@@ -111,6 +111,8 @@ public class myMainFrame extends JFrame {
         ImageIcon exitIcon = new ImageIcon("resource//exit.png");
         btnExit.setIcon(exitIcon);
         btnExit.setOpaque(false);
+        btnExit.setContentAreaFilled(false);
+        btnExit.setBorderPainted(false);
         btnExit.setFont(new Font("宋体",Font.BOLD, 16));
         btnExit.setBounds(1200,40,120,50);
         panelTop.add(btnExit);
@@ -187,30 +189,38 @@ public class myMainFrame extends JFrame {
             btn[i].setBackground(color);
         }
        // 设置图标背景
-        ImageIcon btnicon1 = new ImageIcon("resource//user.png");
-        btnModule1.setIcon(btnicon1);
+        ImageIcon[]btnicon =new ImageIcon[6];
+        btnicon[0] = new ImageIcon("resource//btn_user.png");
+        btnModule1.setIcon(btnicon[0]);
         btnModule1.setHorizontalTextPosition(JButton.CENTER);
         btnModule1.setVerticalTextPosition(JButton.BOTTOM);
-        ImageIcon btnicon2 = new ImageIcon("resource//student.png");
-        btnModule2.setIcon(btnicon2);
+        btnicon[1] = new ImageIcon("resource//btn_student.png");
+        btnModule2.setIcon(btnicon[1]);
         btnModule2.setHorizontalTextPosition(JButton.CENTER);
         btnModule2.setVerticalTextPosition(JButton.BOTTOM);
-        ImageIcon btnicon3 = new ImageIcon("resource//lesson.png");
-        btnModule3.setIcon(btnicon3);
+        btnicon[2] = new ImageIcon("resource//btn_lesson.png");
+        btnModule3.setIcon(btnicon[2]);
         btnModule3.setHorizontalTextPosition(JButton.CENTER);
         btnModule3.setVerticalTextPosition(JButton.BOTTOM);
-        ImageIcon btnicon4 = new ImageIcon("resource//btn_library.png");
-        btnModule4.setIcon(btnicon4);
+        btnicon[3] = new ImageIcon("resource//btn_library.png");
+        btnModule4.setIcon(btnicon[3]);
         btnModule4.setHorizontalTextPosition(JButton.CENTER);
         btnModule4.setVerticalTextPosition(JButton.BOTTOM);
-        ImageIcon btnicon5 = new ImageIcon("resource//store.png");
-        btnModule5.setIcon(btnicon5);
+        btnicon[4] = new ImageIcon("resource//btn_store.png");
+        btnModule5.setIcon(btnicon[4]);
         btnModule5.setHorizontalTextPosition(JButton.CENTER);
         btnModule5.setVerticalTextPosition(JButton.BOTTOM);
-        ImageIcon btnicon6 = new ImageIcon("resource//message.png");
-        btnModule6.setIcon(btnicon6);
+        btnicon[5] = new ImageIcon("resource//btn_message.png");
+        btnModule6.setIcon(btnicon[5]);
         btnModule6.setHorizontalTextPosition(JButton.CENTER);
         btnModule6.setVerticalTextPosition(JButton.BOTTOM);
+        ImageIcon[]btnicon_selected = new ImageIcon[6];
+        btnicon_selected[0] = new ImageIcon("resource//btn_user_selected.png");
+        btnicon_selected[1] = new ImageIcon("resource//btn_student_selected.png");
+        btnicon_selected[2] = new ImageIcon("resource//btn_lesson_selected.png");
+        btnicon_selected[3] = new ImageIcon("resource//btn_library_selected.png");
+        btnicon_selected[4] = new ImageIcon("resource//btn_store_selected.png");
+        btnicon_selected[5] = new ImageIcon("resource//btn_message_selected.png");
         //添加按钮
         panelLeft.add(btnModule1);
         panelLeft.add(btnModule2);
@@ -256,22 +266,6 @@ public class myMainFrame extends JFrame {
                 new TabbedPanelMessage_T(flag),
                 new TabbedPanelMessage_A(flag,ID)};
        JTabbedPane [][] module ={userModule,schoolModule,courseModule,LibraryModule,storeModule,messageModule};
-        //菜单按钮响应函数
-//        btnModule1.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                current[0] = 1;
-//
-//                for(int i=0;i<6;i++){
-//                    btn[i].setBackground(color);
-//                    btn[i].setForeground(Color.WHITE);
-//                }
-//                btnModule1.setBackground(Color.WHITE);
-//                btnModule1.setForeground(Color.BLACK);
-//                setPanelSwitch(userModule[flag]);
-//                System.out.println("用户管理系统");
-//            }
-//        });
 
         for(int i=0;i<6;i++)
         {
@@ -286,9 +280,11 @@ public class myMainFrame extends JFrame {
                     for(int j=0;j<6;j++){
                         btn[j].setBackground(color);
                         btn[j].setForeground(Color.WHITE);
+                        btn[j].setIcon(btnicon[j]);
                     }
                     btn[finalI1].setBackground(Color.WHITE);
                     btn[finalI1].setForeground(Color.BLACK);
+                    btn[finalI1].setIcon(btnicon_selected[finalI]);
                     setPanelSwitch(module[finalI][flag]);
                     System.out.println("用户管理系统");
                 }
@@ -315,6 +311,7 @@ public class myMainFrame extends JFrame {
                 public void mouseEntered(MouseEvent e) {
                     btn[finalI2].setBackground(Color.WHITE);
                     btn[finalI2].setForeground(Color.BLACK);
+                    btn[finalI2].setIcon(btnicon_selected[finalI2]);
                 }
 
                 @Override
@@ -322,6 +319,7 @@ public class myMainFrame extends JFrame {
                     if(current[0]!=finalI2){
                         btn[finalI2].setBackground(color);
                         btn[finalI2].setForeground(Color.WHITE);
+                        btn[finalI2].setIcon(btnicon[finalI2]);
                     }
                 }
             });
@@ -331,6 +329,33 @@ public class myMainFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
+            }
+        });
+        ImageIcon exitIcon2 = new ImageIcon("resource//exit2.png");
+        btnExit.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+               btnExit.setIcon(exitIcon2);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                btnExit.setIcon(exitIcon);
             }
         });
     }

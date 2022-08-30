@@ -24,7 +24,6 @@ import com.vcampus.net.ClientMessagePasser;
 public class myLoginTest {
     public static void main(String[] args)
     {
-
         Socket socket = null; // 连接指定服务器和端口
         try {
             socket = new Socket("localhost", 6666);
@@ -32,21 +31,7 @@ public class myLoginTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        //皮肤包
-        //FlatLightLaf.setup();
-
         myLoginFrame frame = new myLoginFrame("登录");
-        // 当关闭窗口时，退出整个程序
-       /* frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // 设置窗口的其他参数，如窗口大小
-        frame.setSize(350, 270);
-        frame.setResizable(false);//窗口大小不可改
-
-        // 显示窗口
-        frame.setVisible(true);
-
-        */
     }
 }

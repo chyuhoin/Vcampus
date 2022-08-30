@@ -1,18 +1,13 @@
-package 模拟QQ;
+package com.vcampus.client.window.login;
 
-import com.formdev.flatlaf.FlatDarkLaf;
-import com.formdev.flatlaf.FlatLightLaf;
 import com.vcampus.net.ClientMessagePasser;
 
 import javax.swing.*;
 import java.io.IOException;
 import java.net.Socket;
 
-public class Create_GUI {
+public class login {
     public static void Create_GUI(){
-
-//        JFrame frame=new MyQQ_Frame();
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JFrame frame=new My_Frame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
@@ -25,7 +20,7 @@ public class Create_GUI {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        javax.swing.SwingUtilities.invokeLater(()->{
+        SwingUtilities.invokeLater(()->{
             Create_GUI();
         });
     }

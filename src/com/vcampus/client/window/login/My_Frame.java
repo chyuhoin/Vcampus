@@ -1,4 +1,4 @@
-package 模拟QQ;
+package com.vcampus.client.window.login;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -8,15 +8,14 @@ import com.vcampus.net.Message;
 import com.vcampus.net.MessagePasser;
 import com.vcampus.pojo.User;
 
+import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.MatteBorder;
 import java.awt.*;
 import java.awt.event.*;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.MatteBorder;
 
 public class My_Frame extends JFrame{
     int x,y;
@@ -50,21 +49,21 @@ public class My_Frame extends JFrame{
     JButton button=new Create_Login_Button("登录");
     String username = null;
     //资源文件路径
-    URL url0=getClass().getResource("/img/用户.png");
-    URL url1=getClass().getResource("/img/密码.png");
-    URL url2=getClass().getResource("/img/关闭.png");
-    URL url3=getClass().getResource("/img/背景.JPG");
-    URL url4=getClass().getResource("/img/QQ.png");
-    URL url5=getClass().getResource("/img/最小化.png");
-    URL url6=getClass().getResource("/img/学生.png");
-    URL url7=getClass().getResource("/img/教师.png");
-    URL url8=getClass().getResource("/img/管理员.png");
-    URL url9=getClass().getResource("/img/学校1.png");
-    URL url10=getClass().getResource("/img/学校2.png");
-    URL url11=getClass().getResource("/img/学校3.png");
-    URL url12=getClass().getResource("/img/背景1.png");
-    URL url13=getClass().getResource("/img/背景2.png");
-    URL url14=getClass().getResource("/img/背景3.png");
+    String url0="img//用户.png";
+    String url1="img//密码.png";
+    String url2="img//关闭.png";
+    String url3="img//背景.JPG";
+    String url4="img//QQ.png";
+    String url5="img//最小化.png";
+    String url6="img//学生.png";
+    String url7="img//教师.png";
+    String url8="img//管理员.png";
+    String url9="img//学校1.png";
+    String url10="img//学校2.png";
+    String url11="img//学校3.png";
+    String url12="img//背景1.png";
+    String url13="img//背景2.png";
+    String url14="img//背景3.png";
     //声明图标
     ImageIcon Users_icon=new ImageIcon(url0);
     ImageIcon codes_icon=new ImageIcon(url1);
