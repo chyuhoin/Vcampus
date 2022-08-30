@@ -60,6 +60,7 @@ public class MyMassagePanel extends JPanel {
         //卡片
         PANEL=this;
         this.setOpaque(false);
+        this.setLayout(new CardLayout(0,0));
 
         //处理和计算数据
         setData(rowData);
@@ -300,5 +301,34 @@ public class MyMassagePanel extends JPanel {
     public JTable getTable(){
         return table;
     }
+
+    public static void main(String[] arg){
+        JFrame jFrame = new JFrame("测试");
+        jFrame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        jFrame.setLocation(200, 200);
+        jFrame.setSize(1200, 720);
+
+        JPanel panel=new JPanel();
+        jFrame.add(panel);
+
+        panel.setLayout(new GridLayout(1,1));
+
+        Object[] str2={"1","2","3","4"};
+        Object[][] str3={
+                {"张三","1-01-02",50,"ID1"},
+                {"张三","1-01-02",50,"ID2"},
+                {"张三","1-01-02",50,"ID1"},
+                {"张三","1-01-02",50,"ID2"},
+                {"张三","1-01-02",50,"ID3"},
+                {"张三","1-01-02",50,"ID4"},
+                {"张三","1-01-02",50,"ID1"},
+        };
+
+        MyMassagePanel jp=new MyMassagePanel(str3,str2);
+        panel.add(jp);
+
+        jFrame.setVisible(true);
+    }
+
 
 }
