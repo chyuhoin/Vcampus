@@ -6,6 +6,7 @@ import com.vcampus.net.ClientMessagePasser;
 import com.vcampus.net.Message;
 import com.vcampus.net.MessagePasser;
 import com.vcampus.pojo.Goods;
+import com.vcampus.pojo.Record;
 import com.vcampus.pojo.User;
 import org.junit.Test;
 
@@ -60,7 +61,7 @@ public class ShopTest {
         MessagePasser passer = ClientMessagePasser.getInstance();
 
         User user = new User();
-        user.setStudentID("2");
+        user.setStudentID("5");
         passer.send(new Message("student", gson.toJson(user), "shop", "getSell"));
         Message message = passer.receive();
         System.out.println(message);
@@ -68,6 +69,25 @@ public class ShopTest {
         Map<String, List<Goods>> map = gson.fromJson(message.getData(),
                 new TypeToken<Map<String, List<Goods>>>(){}.getType());
         List<Goods> list = map.get("res");
+        list.forEach(System.out::println);
+    }
+
+    @Test
+    public void testGetBuy() throws Exception {
+        Socket socket = new Socket("localhost", 6666); // 连接指定服务器和端口
+        ClientMessagePasser.build(socket.getInputStream(), socket.getOutputStream());
+        Gson gson = new Gson();
+        MessagePasser passer = ClientMessagePasser.getInstance();
+
+        User user = new User();
+        user.setStudentID("22");
+        passer.send(new Message("student", gson.toJson(user), "shop", "getBuy"));
+        Message message = passer.receive();
+        System.out.println(message);
+
+        Map<String, List<Record>> map = gson.fromJson(message.getData(),
+                new TypeToken<Map<String, List<Record>>>(){}.getType());
+        List<Record> list = map.get("res");
         list.forEach(System.out::println);
     }
 
