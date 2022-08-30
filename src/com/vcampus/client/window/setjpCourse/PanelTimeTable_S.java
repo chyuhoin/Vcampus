@@ -34,7 +34,7 @@ public class PanelTimeTable_S extends JPanel {
 
     private boolean existTable=false;
     private String studentID;
-    private String[] columnName={"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
+    private String[] columnName={"节数","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
     private String[][] tableData=new String[13][8];//一周7天+纵向表头，一天13节课
     MessagePasser passer = ClientMessagePasser.getInstance();
 
@@ -45,16 +45,24 @@ public class PanelTimeTable_S extends JPanel {
         JPanel panel=new JPanel();
         this.add(panel);
 
+        //设置数据
         setTimeTable();
+
         if(existTable){//有课表，排课
             panel.setLayout(new CardLayout(10,10));
 
-            Integer[] temp={2,4};
-            JTable table=new MyTable(new DefaultTableModel(tableData,columnName),temp);
+            JTable table=new JTable(tableData,columnName){
+                @Override
+                public boolean isCellEditable(int row, int column)
+                {  // 表格不可编辑---
+                    return false;
+                }
+            };
+
             table.setRowHeight(30);
             table.setFont(new Font("黑体",Font.PLAIN,20));
 
-            table.getTableHeader().setVisible(true);
+            //table.getTableHeader().setVisible(true);
             table.getTableHeader().setFont(new Font("黑体",Font.PLAIN,20));
             //table.getColumn(0).setMaxWidth(60);
 

@@ -45,7 +45,7 @@ public class MyTable extends JTable {                       // 实现自己的�
         DefaultTableCellRenderer hr = (DefaultTableCellRenderer) tableHeader
                 .getDefaultRenderer();                      // 获得表格头的单元格对象
         //hr.setFont(new Font("黑体",Font.BOLD,30));//表头字体
-        hr.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);     // 设置列名居中显示
+        //hr.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);     // 设置列名居中显示
         return tableHeader;
     }
     // 重写JTable类的getDefaultRenderer(Class<?> columnClass)方法

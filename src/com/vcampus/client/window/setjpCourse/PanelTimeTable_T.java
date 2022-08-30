@@ -33,8 +33,14 @@ public class PanelTimeTable_T extends JPanel {
         if(existTable){//有课表，排课
             panel.setLayout(new CardLayout(10,10));
 
-            Integer[] temp={2,4};
-            JTable table=new MyTable(new DefaultTableModel(tableData,columnName),temp);
+            JTable table=new JTable(new DefaultTableModel(tableData,columnName)){
+                @Override
+                public boolean isCellEditable(int row, int column)
+                {  // 表格不可编辑---
+                    return false;
+                }
+            };
+
             table.setRowHeight(30);
             table.setFont(new Font("黑体",Font.PLAIN,20));
 
