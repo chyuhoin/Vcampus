@@ -6,13 +6,21 @@ import java.util.Date;
 public class Record {
     String studentID;
     String goodsID;
-    Date date;
+    String date;
     Integer status;//0表示尚未确认收货，1表示确认收货
     public Record(String studentID, String goodsID) {
         this.studentID = studentID;
         this.goodsID = goodsID;
-        this.date = new Date(System.currentTimeMillis());
+        this.date = String.format("%1$tY-%1$tm-%1$td", new Date(System.currentTimeMillis()));
         this.status = 0;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public Record() {
@@ -34,11 +42,21 @@ public class Record {
         this.goodsID = goodsID;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
     public void setDate(Date date) {
-        this.date = date;
+        this.date = String.format("%1$tY-%1$tm-%1$td", date);
+    }
+
+    @Override
+    public String toString() {
+        return "Record{" +
+                "studentID='" + studentID + '\'' +
+                ", goodsID='" + goodsID + '\'' +
+                ", date='" + date + '\'' +
+                ", status=" + status +
+                '}';
     }
 }
