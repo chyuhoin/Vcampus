@@ -20,12 +20,17 @@ import javax.swing.*;
 import java.awt.*;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.*;
 
 public class ContentPanel extends JPanel {
 
     // private static final long serialVersionUID = 1L;
+    private ContentPanel thisPanel;
     private Object[][] Info=new Object[0][];
+    int numPanel=0;
+    private SubContentPanel[] subjp =null;//子panel
     private Lesson lesson=null;//课程ID
     private String studentID=null;//学生ID
 
@@ -34,7 +39,10 @@ public class ContentPanel extends JPanel {
         lesson=l;
         studentID=sID;
         Info=info;
+        thisPanel=this;
         createContent();
+
+        upDateContent();//设置响应事件
     }
 
     public void createContent() {
@@ -42,7 +50,7 @@ public class ContentPanel extends JPanel {
         int h = this.getPreferredSize().height;
 
         int numTeacher=Info.length;
-        int numPanel=numTeacher;
+        numPanel=numTeacher;
 
         JPanel jp=new JPanel();//网格布局
         GridLayout layout = new GridLayout(3, 3);
@@ -64,10 +72,11 @@ public class ContentPanel extends JPanel {
 
 
         //小panel
-        SubContentPanel[] subjp = new SubContentPanel[numPanel];
+        subjp = new SubContentPanel[numPanel];
         for(int i=0;i<numPanel;i++){
             if(i<numTeacher) {
                 subjp[i] = new SubContentPanel(lesson, studentID, Info[i],this);
+                subjp[i].upDateSubPanel(this);
             }
             else subjp[i]=new SubContentPanel();//空panel
 
@@ -78,6 +87,42 @@ public class ContentPanel extends JPanel {
         this.setLayout(new CardLayout(20,20));
         this.add(jp);
 
+    }
+
+
+    public void upDateContent(){
+        this.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                for(int i=0;i<numPanel;i++){
+                    if(i<Info.length) {
+                        subjp[i] = new SubContentPanel(lesson, studentID, Info[i],thisPanel);
+                        subjp[i].upDateSubPanel(thisPanel);
+                    }
+                    else subjp[i]=new SubContentPanel();//空panel
+                }
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
     }
 
 }
