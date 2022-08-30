@@ -55,6 +55,8 @@ public class PanelHomePage_ST extends JPanel {
     JButton btnCancel = new JButton("返回主页");
     Goods goods = new Goods();
     String status;
+    JPanel p = new JPanel();
+    JScrollPane scrollPane;
 
 
     public PanelHomePage_ST(String ID,int flag)//需要实时更新
@@ -89,6 +91,8 @@ public class PanelHomePage_ST extends JPanel {
         this.add(panelAll,"panelAll");
         this.add(panelBuy,"panelBuy");
 
+        p.setLayout(null);
+        p.setPreferredSize(new Dimension(1100,900));
 
         setPanel1(goods);//一打开就显示第一页
 
@@ -211,7 +215,7 @@ public class PanelHomePage_ST extends JPanel {
         List<Goods> res = map.get("res");
         if(res.size()!=0)
         {
-            int x=80,y=120;
+            int x=50,y=0;
             int panelWidth=320,panelHeight=170;
             int heightDiffer=190,widthDiffer=350;
             for(int i=0;i<res.size();i++)
@@ -222,7 +226,7 @@ public class PanelHomePage_ST extends JPanel {
                     if(i%3==0)
                     {
                         y+=heightDiffer;
-                        x=80;
+                        x=50;
                     }
                     else
                     {
@@ -230,13 +234,25 @@ public class PanelHomePage_ST extends JPanel {
                     }
                 }
                 informPanels.get(i).setBounds(x,y,panelWidth,panelHeight);
-                panelAll.add(informPanels.get(i));
+                p.add(informPanels.get(i));
             }
         }
         else
             {
                 informFrame("暂无商品上架！",false);
             }
+
+        scrollPane= new JScrollPane(p);
+        scrollPane.setBounds(30,120,1150,400);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(10);
+
+        //总是出现垂直滚动条
+        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        //scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        panelAll.add(scrollPane);
+
+
+
         panelAll.updateUI();
         panelAll.repaint();
     }
