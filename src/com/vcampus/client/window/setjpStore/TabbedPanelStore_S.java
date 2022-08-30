@@ -20,25 +20,25 @@ import javax.swing.*;
 import java.awt.*;
 
 public class TabbedPanelStore_S extends JTabbedPane {
-    public TabbedPanelStore_S(int flag)
+    public TabbedPanelStore_S()
     {
-        if(flag==1) {
-            this.setTabPlacement(1);
-            this.setBounds(0, 0, 1400, 650);//注意！！！！！！！！！！！！！！！！！！！！！！！
+        this.setTabPlacement(2);
+        this.setBounds(0,0,1400,650);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
-            JPanel jp11 = new JPanel();
-            JPanel jp12 = new JPanel();
-            JPanel jp13 = new JPanel();
-            //选项卡1的内容
-            //设置标题
+        JPanel jp11 = new JPanel();
+        JPanel jp12 = new JPanel();
+        JPanel jp13 = new JPanel();
+        //选项卡1的内容
+        //设置标题
+        JLabel lblTitleLabel = new JLabel("学生校园商城");
+        lblTitleLabel.setFont(new Font("宋体", Font.BOLD, 50));
+        //按钮
+        JButton btnRegister = new JButton("SSSSS");
+        btnRegister.setFont(new Font("宋体", Font.BOLD, 50));
 
-            //按钮
-            JButton btnRegister = new JButton("卖出");
-            //    btnRegister.setFont(new Font("宋体", Font.BOLD, 25));
+        jp11.add(lblTitleLabel);
+        jp12.add(btnRegister);
 
-            jp12.add(btnRegister);
-            btnRegister.setLayout(null);
-            btnRegister.setBounds(0, 0, 50, 5);
         /*
         this.add("选项一",jp11);	//创建三个面板
         this.add("选项二",jp12);
@@ -46,14 +46,12 @@ public class TabbedPanelStore_S extends JTabbedPane {
 
          */
 
-            JPanel BuyPanel = new PanelBuyGoods();
-            JPanel SellPanel = new PanelSellGoods();
-            this.addTab("商店", null, BuyPanel, "点击查看学校商店");
-            this.addTab("卖二手", null, SellPanel, "点击查看二手商店");
-            this.addTab("我的购买记录", null, jp13, "点击查看我的记录");
-            this.setFont(new Font("宋体", Font.BOLD, 24));
 
-        }
+        this.addTab("商城首页", null, jp11,"商城首页");
+        this.addTab("我的店铺", null, jp12,"我的店铺");
+        this.addTab("我的订单", null, jp13,"我的订单");
+        //this.addTab("选项一", null, jp11,"点击查看选项一");
+        this.setFont(new Font("宋体", Font.BOLD, 24));
 
 
 

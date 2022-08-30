@@ -38,6 +38,8 @@ public class Record {
         return date;
     }
 
+    public Integer getStatus(){return status;};
+
     public void setDate(Date date) {
         this.date = date;
     }
