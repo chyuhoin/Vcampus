@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="修bug">
+    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="登录界面">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/LessonDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/LessonDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/img/关闭.png" beforeDir="false" afterPath="$PROJECT_DIR$/test/img/关闭.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/img/最小化.png" beforeDir="false" afterPath="$PROJECT_DIR$/test/img/最小化.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/模拟QQ/My_Frame.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/模拟QQ/My_Frame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,6 +68,7 @@
       <recent name="D:\Code\JavaWebCode\Vcampus" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Study\Git\Vcampus\Vcampus\test\img" />
       <recent name="D:\Code\JavaWebCode\Vcampus\resource" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -499,7 +502,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661829104066</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="登录界面">
+      <created>1661867504705</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1661867504705</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -548,7 +558,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="修改了UserDao层的错误，但service和controller仍存在错误" />
     <MESSAGE value="给Student添加了image对象" />
     <MESSAGE value="添加了exam类，初步写了examDao层" />
     <MESSAGE value="增强了student，加入了民族信息；同时推进了部分examDao层" />
@@ -573,7 +582,8 @@
     <MESSAGE value="写了点商店的界面" />
     <MESSAGE value="界面改为了侧边栏" />
     <MESSAGE value="修bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="修bug" />
+    <MESSAGE value="登录界面" />
+    <option name="LAST_COMMIT_MESSAGE" value="登录界面" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
