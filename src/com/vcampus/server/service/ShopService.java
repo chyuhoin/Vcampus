@@ -63,7 +63,7 @@ public class ShopService implements Service {
     }
 
     public boolean deleteOneKind(Goods goods) {
-        return ShopDao.deleteGoods("num", goods.getGoodsID());
+        return ShopDao.deleteGoods("goodsID", goods.getGoodsID());
     }
 
     public boolean changeOne(Goods goods) {

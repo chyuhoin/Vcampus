@@ -17,7 +17,6 @@ package com.vcampus.client.window.setjpMessage;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.vcampus.client.window.setjpLibrary.PanelEnquireBook;
 import com.vcampus.client.window.setjpLibrary.mytablepanel.MyTablePanel;
 import com.vcampus.net.ClientMessagePasser;
 import com.vcampus.net.Message;
@@ -40,8 +39,11 @@ public class TabbedPanelMessage_A extends JTabbedPane{
     public MyTablePanel pubMessage;
     final MessagePasser passer = ClientMessagePasser.getInstance();
     Thread thread;
+    String ID;
 
     public TabbedPanelMessage_A(int flag,String ID) {
+        this.ID = ID;
+
         this.setTabPlacement(1);
         this.setBounds(0, 0, 1400, 650);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
@@ -135,7 +137,7 @@ public class TabbedPanelMessage_A extends JTabbedPane{
         Gson gson = new Gson();
         Message message;
         User user = new User();
-        user.setStudentID("2");
+        user.setStudentID(ID);
         synchronized (passer) {
             passer.send(new Message("admin", gson.toJson(user), "chat", "get"));
             message = passer.receive();
