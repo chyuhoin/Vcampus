@@ -52,7 +52,7 @@ public class PanelBookManage extends JPanel {
     int txtWidth=110, txtHeight=32;
 
     Book book = new Book();//承接结果
-    String ImgPath="addFig.jpg";
+    String ImgPath="Vcampus/img/addFig.jpg";
 
     String operation = "";
     //PanelBookInform panelInform = new PanelBookInform();//传入书本的对象作为参数   最初传个空的
@@ -240,7 +240,7 @@ public class PanelBookManage extends JPanel {
 
         book=new Book("","","","",0,"");
         setPanel();
-        ImageIcon img2 = new ImageIcon("addFig.jpg");// 这是背景图片 .png .jpg .gif 等格式的图片都可以
+        ImageIcon img2 = new ImageIcon("Vcampus/img/addFig.jpg");// 这是背景图片 .png .jpg .gif 等格式的图片都可以
         img2.setImage(img2.getImage().getScaledInstance(180,220,Image.SCALE_DEFAULT));//这里设置图片大小，目前是20*20
         panelInform.lblImg.setIcon(img2);
         //panelInform.add(panelInform.lblImg);

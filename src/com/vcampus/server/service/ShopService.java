@@ -6,6 +6,7 @@ import com.vcampus.pojo.Record;
 import com.vcampus.pojo.User;
 
 import java.lang.reflect.Field;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -58,7 +59,7 @@ public class ShopService implements Service {
         return Boolean.TRUE.equals(ShopDao.buyGoods(studentID, goodsID));
     }
 
-    public boolean addOneKind(Goods goods) {
+    public boolean addOneKind(Goods goods)  {
         return ShopDao.addGoods(goods);
     }
 
@@ -77,6 +78,8 @@ public class ShopService implements Service {
                 "num", goods.getNum());
         res = res & ShopDao.revise(goods.getSeller(), goods.getGoodsID(),
                 "type", goods.getType());
+        res = res & ShopDao.revise(goods.getSeller(), goods.getGoodsID(),
+                "picture", goods.getPicture());
         return res;
     }
 

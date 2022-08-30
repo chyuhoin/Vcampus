@@ -57,7 +57,7 @@ public class PanelGoodsManage_A extends JPanel {
     JTextField txtEnquire = new JTextField();
 
     CardLayout cardLayout=new CardLayout();
-    String ImgPath="addFig.jpg";
+    String ImgPath="Vcampus/img/addFig.jpg";
 
     MyTable_Shop table=null;//老师
     JScrollPane scrollPane = null;
@@ -363,7 +363,7 @@ public class PanelGoodsManage_A extends JPanel {
 
         if(flag==0)
         {
-            ImageIcon img = new ImageIcon("Pictures//addFig.jpg");// 这是背景图片 .png .jpg .gif 等格式的图片都可以
+            ImageIcon img = new ImageIcon("Vcampus/img/addFig.jpg");// 这是背景图片 .png .jpg .gif 等格式的图片都可以
             img.setImage(img.getImage().getScaledInstance(180,220,Image.SCALE_DEFAULT));//这里设置图片大小，目前是20*20
             Inform.lblImg.setIcon(img);
             Inform.updateUI();

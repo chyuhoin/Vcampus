@@ -20,11 +20,7 @@ public class Goods {
         this.price = price;
         this.state = state;
         this.dealDate = dealDate;
-        try {
-            this.picture = StringAndImage.ImageToString(path);
-        }catch (Exception e){
-            System.out.println("create image error");
-        }
+        this.picture = path;
         this.num = num;
         this.type = type;
     }

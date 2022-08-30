@@ -59,7 +59,7 @@ public class PanelGoodsInform extends JPanel {
         if(goods.getPicture()==null)
         {
             System.out.println("没有图片"+goods.getPicture());
-            img = new ImageIcon("Pictures//noFig.png");
+            img = new ImageIcon("Vcampus/img/noFig.png");
         }
         else
         {
