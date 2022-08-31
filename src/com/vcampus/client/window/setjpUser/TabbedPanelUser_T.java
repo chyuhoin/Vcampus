@@ -77,8 +77,8 @@ public class TabbedPanelUser_T extends JTabbedPane{
                 }
             });
 
-            this.addTab("个人信息", null, jp11, "查看个人信息");
-            this.addTab("密码修改", null, jp12, "修改密码");
+            this.addTab("个人信息", new ImageIcon("resource//tab_personalInfo.png"), jp11, "查看个人信息");
+            this.addTab("密码修改", new ImageIcon("resource//tab_password.png"), jp12, "修改密码");
             this.setFont(new Font("宋体", Font.BOLD, 24));
         }
 

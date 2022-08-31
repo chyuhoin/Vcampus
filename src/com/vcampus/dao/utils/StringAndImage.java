@@ -24,11 +24,13 @@ public class StringAndImage {
 // 将数组转为字符串
         BASE64Encoder encoder = new BASE64Encoder();
         String str = encoder.encode(result).trim();
+       // String str = new String(result);
         return str;
     }
     public static byte[] StringToImage(String str) throws IOException {
         BASE64Decoder decoder = new BASE64Decoder();
         byte[] imgbyte = decoder.decodeBuffer(str);
+        //byte[]imgbyte = str.getBytes();
         return  imgbyte;
 //        OutputStream os = new FileOutputStream(path);
 //        os.write(imgbyte, 0, imgbyte.length);
