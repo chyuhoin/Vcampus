@@ -53,21 +53,21 @@ public class My_Frame extends JFrame{
     JButton button=new Create_Login_Button("登录");
     String username = null;
     //资源文件路径
-    String url0="img//用户.png";
-    String url1="img//密码.png";
-    String url2="img//关闭.png";
-    String url3="img//背景.JPG";
-    String url4="img//QQ.png";
-    String url5="img//最小化.png";
-    String url6="img//学生.png";
-    String url7="img//教师.png";
-    String url8="img//管理员.png";
-    String url9="img//学校1.png";
-    String url10="img//学校2.png";
-    String url11="img//学校3.png";
-    String url12="img//背景1.png";
-    String url13="img//背景2.png";
-    String url14="img//背景3.png";
+    String url0="Vcampus/img//用户.png";
+    String url1="Vcampus/img//密码.png";
+    String url2="Vcampus/img//关闭.png";
+    String url3="Vcampus/img//背景.JPG";
+    String url4="Vcampus/img//QQ.png";
+    String url5="Vcampus/img//最小化.png";
+    String url6="Vcampus/img//学生.png";
+    String url7="Vcampus/img//教师.png";
+    String url8="Vcampus/img//管理员.png";
+    String url9="Vcampus/img//学校1.png";
+    String url10="Vcampus/img//学校2.png";
+    String url11="Vcampus/img//学校3.png";
+    String url12="Vcampus/img//背景1.png";
+    String url13="Vcampus/img//背景2.png";
+    String url14="Vcampus/img//背景3.png";
     //声明图标
     ImageIcon Users_icon=new ImageIcon(url0);
     ImageIcon codes_icon=new ImageIcon(url1);

@@ -104,7 +104,7 @@ public class PanelDeleteCourse extends JPanel{
                 tableData[i][0] = res.get(i).getName();tableData[i][1] = res.get(i).getTeacherID();tableData[i][2] = res.get(i).getSchool();
                 tableData[i][3] = res.get(i).getMajor();tableData[i][4] = res.get(i).getTime();tableData[i][5] = res.get(i).getClassroom();
                 tableData[i][6] = res.get(i).getMaxSize(); }
-            tableModel =new DefaultTableModel(tableData,columnNames);table=new MyTable(tableModel);
+            tableModel =new DefaultTableModel(tableData,columnNames);Integer[] tempInt={7}; table=new MyTable(tableModel,tempInt);
             table.setRowSelectionAllowed(true);
             table.getColumnModel().getColumn(1).setPreferredWidth(120);table.setRowHeight(30);
             table.setFont(new Font("黑体",Font.PLAIN,18));table.getTableHeader().setFont(new Font("黑体",Font.BOLD,20));//表格字体 表头字体
