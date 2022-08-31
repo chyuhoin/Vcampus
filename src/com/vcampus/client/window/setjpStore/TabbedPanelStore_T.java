@@ -20,6 +20,7 @@ import com.google.gson.reflect.TypeToken;
 import com.vcampus.net.ClientMessagePasser;
 import com.vcampus.net.Message;
 import com.vcampus.net.MessagePasser;
+import com.vcampus.pojo.Goods;
 import com.vcampus.pojo.Record;
 import com.vcampus.pojo.User;
 
@@ -55,6 +56,7 @@ public class TabbedPanelStore_T extends JTabbedPane {
                     if (e.getClickCount() == 1) {
                         myPurchase.removeAll();
                         myPurchase.setTable(columnNames, getAllOrder(ID));
+                        homePage.setPanel1(new Goods());
                         // purchaseOrder.updateUI();
                         // purchaseOrder.repaint();
                     }
