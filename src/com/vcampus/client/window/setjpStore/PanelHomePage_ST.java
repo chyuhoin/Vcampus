@@ -146,6 +146,7 @@ public class PanelHomePage_ST extends JPanel {
         btnOk.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                System.out.println(panelInform.txtGoodsID.getText());
                 HashMap<String,String> hashMap = new HashMap<>();
                 hashMap.put("studentID",ID);
                 hashMap.put("goodsID",panelInform.txtGoodsID.getText());
@@ -166,6 +167,8 @@ public class PanelHomePage_ST extends JPanel {
                 if(map.get("res").equals("OK"))
                 {
                     informFrame("购买成功！",false);
+                    goods = new Goods();
+                    setPanel1(goods);
                     setCard("panelAll");
                 }
                 else
