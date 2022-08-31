@@ -146,7 +146,6 @@ public class PanelHomePage_ST extends JPanel {
         btnOk.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println(panelInform.txtGoodsID.getText());
                 HashMap<String,String> hashMap = new HashMap<>();
                 hashMap.put("studentID",ID);
                 hashMap.put("goodsID",panelInform.txtGoodsID.getText());
@@ -167,8 +166,6 @@ public class PanelHomePage_ST extends JPanel {
                 if(map.get("res").equals("OK"))
                 {
                     informFrame("购买成功！",false);
-                    goods = new Goods();
-                    setPanel1(goods);
                     setCard("panelAll");
                 }
                 else
@@ -203,6 +200,9 @@ public class PanelHomePage_ST extends JPanel {
     public void setPanel1(Goods g)
     {
         panelAll.removeAll();
+        p.removeAll();
+        informPanels = new ArrayList<>();
+        //scrollPane.removeAll();
         panelAll.add(comboBox);
         panelAll.add(txtEnquire);
         panelAll.add(btnInquire);
@@ -254,6 +254,11 @@ public class PanelHomePage_ST extends JPanel {
         //scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         panelAll.add(scrollPane);
 
+        p.updateUI();
+        p.repaint();
+
+        scrollPane.updateUI();;
+        scrollPane.repaint();
 
 
         panelAll.updateUI();
