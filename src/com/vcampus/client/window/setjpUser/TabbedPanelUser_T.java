@@ -45,6 +45,10 @@ public class TabbedPanelUser_T extends JTabbedPane{
             final CardLayout layout_Card = new CardLayout(10, 10);
             JPanel jp11 = new JPanel(layout_Card);
             JPanel jp12 = new JPanel(layout_Card);
+            //选项卡1的内容
+            SetJPUser1 setjp1 = new SetJPUser1(2, id, jp11, layout_Card);
+            //选项卡2的内容
+            SetJPUser2_2 setjp2_2 = new SetJPUser2_2(2, id, jp12, layout_Card);
 
             this.addMouseListener(new MouseListener() {
                 @Override
@@ -55,15 +59,19 @@ public class TabbedPanelUser_T extends JTabbedPane{
                         new SetJPUser1(1, id, jp11, layout_Card);
                     }
                 }
+
                 @Override
                 public void mousePressed(MouseEvent e) {
                 }
+
                 @Override
                 public void mouseReleased(MouseEvent e) {
                 }
+
                 @Override
                 public void mouseEntered(MouseEvent e) {
                 }
+
                 @Override
                 public void mouseExited(MouseEvent e) {
                 }
@@ -73,5 +81,8 @@ public class TabbedPanelUser_T extends JTabbedPane{
             this.addTab("密码修改", new ImageIcon("resource//tab_password.png"), jp12, "修改密码");
             this.setFont(new Font("宋体", Font.BOLD, 24));
         }
+
     }
+
+
 }
