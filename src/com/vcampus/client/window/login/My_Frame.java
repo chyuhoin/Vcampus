@@ -380,7 +380,7 @@ public class My_Frame extends JFrame{
                     else//未输入用户名或密码，无法登陆，弹出窗口提示
                     {
 //                        screenSize.width
-                        showMessageFrame test=new showMessageFrame("用户名或密码错误!",(int)(screenSize.width/2-0.19*width),(int)(screenSize.height/2-0.45*height),(int)(0.4*width),(int)(0.08*height));
+                        showMessageFrame test=new showMessageFrame("用户名或密码错误!",(int)(screenSize.width/2-0.19*width),(int)(screenSize.height/2-0.45*height),(int)(0.4*width),(int)(0.08*height),1);
 //                        JOptionPane.showMessageDialog(jPanel, "用户名或密码错误！", "警告", JOptionPane.ERROR_MESSAGE);
                         clearText();
                     }
