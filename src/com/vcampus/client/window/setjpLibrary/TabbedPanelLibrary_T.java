@@ -76,9 +76,9 @@ public class TabbedPanelLibrary_T extends JTabbedPane {
             jp13.setLayout(new CardLayout(10, 10));
             jp13.add(new PanelMyBook(myID));
 
-            this.addTab("书籍信息总览", null, jp11, "书籍信息总览");
-            this.addTab("查询书籍信息", null, enquireBook, "查询书籍信息");
-            this.addTab("我的借阅", null, jp13, "查询借阅情况");
+            this.addTab("书籍信息总览", new ImageIcon("resource//tab_library.png"), jp11, "书籍信息总览");
+            this.addTab("查询书籍信息", new ImageIcon("resource//search.png"), enquireBook, "查询书籍信息");
+            this.addTab("我的借阅", new ImageIcon("resource//search.png"), jp13, "查询借阅情况");
             this.setFont(new Font("宋体", Font.BOLD, 24));
 
         }
