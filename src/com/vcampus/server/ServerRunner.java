@@ -7,12 +7,22 @@ import com.vcampus.server.controller.*;
 import java.io.*;
 import java.net.Socket;
 
+/**
+ * The type Server runner.
+ *
+ * @author ZhongHaoyuan
+ */
 public class ServerRunner implements Runnable{
     private InputStream input;
     private OutputStream output;
     private final Controller loginController, libraryController, studentController,
             lessonController, testController, shopController, chatController;
 
+    /**
+     * Instantiates a new Server runner.
+     *
+     * @param sock the sock
+     */
     public ServerRunner(Socket sock) {
         try {
             input = sock.getInputStream();

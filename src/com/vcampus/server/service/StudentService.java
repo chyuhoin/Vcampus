@@ -6,7 +6,19 @@ import com.vcampus.dao.UserDao;
 
 import java.util.List;
 
+/**
+ * 学生服务
+ *
+ * @author ietot
+ * @date 2022/08/31
+ */
 public class StudentService implements Service{
+    /**
+     * 增加学生
+     *
+     * @param user 用户
+     * @return boolean
+     */
     public boolean addStudent(Student user) {
         boolean res;
         List<Student> students = null;
@@ -32,6 +44,12 @@ public class StudentService implements Service{
         }
         return res;
     }
+
+    /**
+     * 查看所有学生
+     *
+     * @return {@link List}<{@link Student}>
+     */
     public List<Student> viewAllStudents() {
         List<Student> res = null;
         try {
@@ -41,6 +59,14 @@ public class StudentService implements Service{
         }
         return res;
     }
+
+    /**
+     * 查看特定学生
+     *
+     * @param field 指标
+     * @param value 数据
+     * @return {@link List}<{@link Student}>
+     */
     public List<Student> viewSpecificStudents(String field,Object value) {
         List<Student> res = null;
         try {
@@ -50,6 +76,13 @@ public class StudentService implements Service{
         }
         return res;
     }
+
+    /**
+     * 删除学生
+     *
+     * @param studentID 学生ID
+     * @return boolean
+     */
     public boolean deleteStudent(String studentID) {
         boolean res;
         try {

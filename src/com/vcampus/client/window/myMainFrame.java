@@ -44,12 +44,11 @@ import org.junit.Test;
 import javax.swing.*;
 import javax.swing.plaf.metal.MetalTabbedPaneUI;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 
 public class myMainFrame extends JFrame {
+    int x,y;
+    int left,top;
     private JPanel panelMain = new JPanel();
     public JPanel panelTop = new JPanel();
     public  JPanel panelBottom = new JPanel();
@@ -74,6 +73,33 @@ public class myMainFrame extends JFrame {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation((screenSize.width - this.getWidth()) / 2, (screenSize.height - this.getHeight()) / 2);
 
+        //去除标题栏
+        setUndecorated(true);
+        //由于没有标题栏所以界面不能拖动改变位置
+        //采取以下方法可以解决
+        //静态鼠标触发器
+        addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent e){
+//				System.out.println("鼠标按下");
+                //当鼠标点击时获取距离屏幕的坐标
+                x=e.getX();
+                y=e.getY();
+            }
+        });
+        //动态鼠标触发器
+        addMouseMotionListener(new MouseMotionAdapter() {
+            public void mouseDragged(MouseEvent e){
+//				System.out.println("鼠标拖动");
+                //获取当前位置的横坐标和纵坐标 left and top
+
+                //横向移动距离=横向动态坐标-鼠标点击时的横向静态坐标
+                //纵向移动距离=纵向动态坐标-鼠标点击时的纵向静态坐标
+                //设置可变化的位置 加上原来的位置即可
+                left=getLocation().x;
+                top=getLocation().y;
+                setLocation(left+e.getX()-x, top+e.getY()-y);
+            }
+        });
         // 显示窗口
         this.setVisible(true);
 

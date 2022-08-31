@@ -12,7 +12,66 @@ import com.vcampus.server.service.StudentService;
 
 import java.util.*;
 
+/**
+ * 考务控制器
+ * * 用于考务管理的后端
+ * @author ietot
+ * @date 2022/08/31
+ */
 public class LessonController implements Controller{
+    /**
+     * 检查
+     *post:添加课程信息,输入：课程ID、课程名称、学院、专业、是否有考试,时创建一个其他数据为空的“空课程”,只有数据库中没有对应的课程ID才可以创建空课程
+     *postone":添加对应课程的老师,输入课程所需的所有数据，创建（内部编号为课程ID+教师ID）,如果没有对应课程ID，报错
+     *         如果有对应课程ID且为“空课程”,视为修改空课程,如果有对应课程ID且无空课程，则创建课程,如果有对应内部ID，则视为修改
+     *         在老师的课表里添加信息
+     *addlesson:添加课程,如果存在对应的内部ID则报错,如果有老师ID则在老师的课表里添加信息
+     *setlesson:修改课程,如果不存在对应内部ID则报错,如果老师ID修改了则进行相应处理
+     *showtable:输入学生ID，显示其课表
+     *showtablename:输入学生ID，显示其课表,此时把课程的内部ID改为课的名字
+     *showroom:输入时间，显示可用教室
+     *showallteacher:输入课程号，显示所有老师
+     *addroom:给课程添加教室,输入教室ID，内部ID，给课程添加教室,用","隔开
+     *showallteacher:输入课程号，显示所有老师
+     *addroom:给课程添加教室,输入教室ID，内部ID，给课程添加教室,用","隔开
+     *showteacher:添加对应课程的老师时显示所有可选的老师,只要专业满足即可选择
+     *showteachertime:显示所有可选的老师,输入时间，专业，用","隔开
+     *showtime:输入老师ID，返回所有不可选的时间,不可选的时间有：非偏好时间、上课时间
+     *delete:删除课程,输入课程ID,删除对应课程ID的所有课程,删除对应的考试信息,删除对应学生的课表信息，删除老师的课表信息
+     *       具体实现：利用课程ID查到内部ID
+     *       转到内部ID的处理
+     *deleteone":
+     *       删除对应老师教授的特定课程
+     *       删除对应老师的考试信息
+     *       输入内部ID
+     *       具体实现：利用内部ID查到老师ID与学生ID
+     *       执行老师退课函数（输入老师ID与内部ID，在老师课表中删除对应课的信息）
+     *       执行学生退课函数（输入学生ID与内部ID，在学生和课的表中删除信息，在学生课表中删除信息）
+     *       执行删除考试函数（输入内部ID，删除对应考试信息）
+     *       执行教室退课函数
+     *       执行删除课程函数（输入内部ID，在课的表里删除信息）
+     *get:显示所有课程
+     *getone:显示某一指标的课程 如“专业:计算机” “指标”+“:”+“数据”
+     *getstudent:显示对应学生选的课 输入学生ID
+     *getteacher:示选择对应课程的学生 输入课程ID
+     *getspecificteacher:显示选择对应课程的学生 输入内部ID
+     * showstatusstudent:输入ID，显示内容：*学生：姓名、身份（1--学生 2--老师）、ID、专业,老师：姓名、身份、ID、可选专业、偏好时间,返回一个学生的类的list
+     * showstatussteacher:输入ID，显示内容：学生：姓名、身份（1--学生 2--老师）、ID、专业,老师：姓名、身份、ID、可选专业、偏好时间,返回一个老师的类的list
+     *setteacher:修改老师的可选专业与偏好时间,输入一个老师的类,如果没有则视为添加,如果有则视为修改
+     *arrange:自动排课,只排未安排的课程
+     *arrangeall:自动排课所有课程
+     *addgrade:添加成绩,输入学生ID，内部ID，成绩，用“,”隔开
+     *addgradeall:添加成绩,输入一个String的数据,课程号/学生ID/成绩用”,“隔开
+     *showgradestudent:显示成绩,输入学生ID，显示其所有成绩
+     *getgrade:输入内部ID,返回一个String的成绩
+     *getgradeall:输入课程ID,返回一个String的成绩
+     *showlesson:显示课程的状态：可选、已选、已满、时间冲突,输入学生ID与内部ID
+     *selectlesson:学生选课,输入学生ID与内部ID 用","隔开
+     *returnlesson:学生退课,输入学生ID与课程号 用","隔开
+     *
+     * @param msg 信息
+     * @return {@link Message}
+     */
     @Override
     public Message check(Message msg){
         LessonService service = new LessonService();

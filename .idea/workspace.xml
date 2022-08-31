@@ -1,22 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="加了点图片，改了点bug">
-      <change afterPath="$PROJECT_DIR$/resource/tab_buy.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resource/tab_delete.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resource/tab_orders.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resource/tab_privatemessage.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resource/tab_publicmessage.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resource/tab_refresh.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resource/tab_send.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resource/tab_store.png" afterDir="false" />
+    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="修复Goods类的bug">
+      <change afterPath="$PROJECT_DIR$/resource/tab_bookreturn.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resource/tab_lesson.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resource/tab_library.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resource/tab_manage.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resource/tab_selectlesson.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resource/tab_table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-22_17_27___Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2022-08-22_17_27___Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-24_10_30___Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-24_10_31___Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-24_21_22___Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2022-08-24_21_22___Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-25_12_36___Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2022-08-25_12_36___Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-27_19_05___Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2022-08-27_19_05___Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-28_10_32___Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2022-08-28_10_32___Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-28_10_35___Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2022-08-28_10_35___Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-28_10_35___Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2022-08-28_10_35___Changes_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-28_10_42___Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2022-08-28_10_42___Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-28_19_24___Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2022-08-28_19_24___Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-29_17_12___Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2022-08-29_17_12___Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2022-08-24_10_30_取消提交了变更_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2022-08-24_10_31_取消提交了变更_[Changes]/shelved.patch" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpMessage/TabbedPanelMessage_A.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpMessage/TabbedPanelMessage_A.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/login/My_Frame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/login/My_Frame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpCourse/TabbedPanelCourse_S.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpCourse/TabbedPanelCourse_S.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpLibrary/TabbedPanelLibrary_A.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpLibrary/TabbedPanelLibrary_A.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpLibrary/TabbedPanelLibrary_S.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpLibrary/TabbedPanelLibrary_S.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpLibrary/TabbedPanelLibrary_T.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpLibrary/TabbedPanelLibrary_T.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpMessage/TabbedPanelMessage_S.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpMessage/TabbedPanelMessage_S.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpMessage/TabbedPanelMessage_T.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpMessage/TabbedPanelMessage_T.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpStore/TabbedPanelStore_A.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpStore/TabbedPanelStore_A.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpStore/TabbedPanelStore_S.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpStore/TabbedPanelStore_S.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpStore/TabbedPanelStore_T.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpStore/TabbedPanelStore_T.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/UserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/UserDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/utils/CRUD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/utils/CRUD.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +104,7 @@
       <recent name="com.vcampus.client.login" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.com.vcampus.client.window.login.login">
+  <component name="RunManager" selected="Application.login">
     <configuration name="Create_GUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="模拟QQ.Create_GUI" />
       <module name="Vcampus" />
@@ -158,9 +172,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.com.vcampus.client.window.login.login" />
-        <item itemvalue="Application.Server" />
         <item itemvalue="Application.login" />
+        <item itemvalue="Application.Server" />
+        <item itemvalue="Application.com.vcampus.client.window.login.login" />
         <item itemvalue="Application.com.vcampus.client.window.login.login" />
         <item itemvalue="Application.Create_GUI" />
       </list>
@@ -235,9 +249,7 @@
       <workItem from="1661908763852" duration="762000" />
       <workItem from="1661910241291" duration="2353000" />
       <workItem from="1661930988662" duration="226000" />
-      <workItem from="1661931264230" duration="4726000" />
-      <workItem from="1661936438849" duration="1459000" />
-      <workItem from="1661938643027" duration="805000" />
+      <workItem from="1661931264230" duration="2318000" />
     </task>
     <task id="LOCAL-00001" summary="初步写了登录注册">
       <created>1660298515554</created>
@@ -533,14 +545,7 @@
       <option name="project" value="LOCAL" />
       <updated>1661870477159</updated>
     </task>
-    <task id="LOCAL-00043" summary="加了点图片，改了点bug">
-      <created>1661933670083</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1661933670083</updated>
-    </task>
-    <option name="localTasksCounter" value="44" />
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -589,6 +594,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="添加了exam类，初步写了examDao层" />
     <MESSAGE value="增强了student，加入了民族信息；同时推进了部分examDao层" />
     <MESSAGE value="baseDao增加了一些公共函数" />
     <MESSAGE value="继续完善了一些类" />
@@ -613,8 +619,7 @@
     <MESSAGE value="修bug" />
     <MESSAGE value="新的界面" />
     <MESSAGE value="修复Goods类的bug" />
-    <MESSAGE value="加了点图片，改了点bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="加了点图片，改了点bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="修复Goods类的bug" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

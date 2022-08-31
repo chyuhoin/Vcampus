@@ -6,8 +6,20 @@ import com.vcampus.dao.StudentDao;
 
 import java.util.List;
 
+/**
+ * 用户服务
+ * * 用于用户管理的后端
+ * @author ietot
+ * @date 2022/08/31
+ */
 public class UserService implements Service {
 
+    /**
+     * 登录
+     *
+     * @param user 用户
+     * @return boolean
+     */
     public boolean login(User user) {
         String res;
         try {
@@ -19,6 +31,12 @@ public class UserService implements Service {
         return "succeeded".equals(res);
     }
 
+    /**
+     * 注册
+     *
+     * @param user 用户
+     * @return boolean
+     */
     public boolean register(User user) {
         boolean res;
         //String res;
@@ -35,6 +53,12 @@ public class UserService implements Service {
         return res;
     }
 
+    /**
+     * 得到用户id
+     *
+     * @param user 用户
+     * @return {@link User}
+     */
     public User getUserById(User user) {
         User res = null;
         try {
@@ -45,6 +69,11 @@ public class UserService implements Service {
         return res;
     }
 
+    /**
+     * 获取所有用户
+     *
+     * @return {@link List}<{@link User}>
+     */
     public List<User> getAllUsers() {
         List<User> users = null;
         try {
@@ -55,14 +84,32 @@ public class UserService implements Service {
         return users;
     }
 
+    /**
+     * 删除
+     *
+     * @param user 用户
+     * @return boolean
+     */
     public boolean delete(User user) {
         return UserDao.deleteUser(user.getStudentID());
     }
 
+    /**
+     * 更改密码
+     *
+     * @param user 用户
+     * @return boolean
+     */
     public boolean changePassword(User user) {
         return UserDao.revisePassword(user.getStudentID(), user.getPassword());
     }
 
+    /**
+     * 改变权限
+     *
+     * @param user 用户
+     * @return boolean
+     */
     public boolean changePermission(User user) {
         return UserDao.reviseType(user.getStudentID(), user.getType());
     }
