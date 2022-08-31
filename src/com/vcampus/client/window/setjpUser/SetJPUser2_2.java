@@ -58,9 +58,9 @@ public class SetJPUser2_2 {
         lbl.setIcon(lblIcon);
         lbl.setHorizontalTextPosition(SwingConstants.RIGHT);
         jp.add(lbl);
-        lbl.setFont(new Font("黑体", Font.BOLD, 30));
-        layout_Spring.putConstraint(layout_Spring.NORTH, lbl, 30, layout_Spring.NORTH, jp);
-        layout_Spring.putConstraint(layout_Spring.WEST, lbl, 30, layout_Spring.WEST, jp);
+        lbl.setFont(new Font("宋体", Font.BOLD, 30));
+        layout_Spring.putConstraint(layout_Spring.NORTH, lbl, 20+100+20, layout_Spring.NORTH, jp);
+        layout_Spring.putConstraint(layout_Spring.WEST, lbl, 20+100+150, layout_Spring.WEST, jp);
         //信息列表：
         //标签
         JLabel[] lblList={
@@ -71,9 +71,9 @@ public class SetJPUser2_2 {
         for(int i=0;i<lblList.length;i++){
             JLabel lbli=lblList[i];
             jp.add(lbli);
-            lbli.setFont(new Font("黑体", Font.BOLD, 20));
+            lbli.setFont(new Font("宋体", Font.BOLD, 20));
             layout_Spring.putConstraint(layout_Spring.NORTH, lbli, 60+50*i, layout_Spring.SOUTH, lbl);
-            layout_Spring.putConstraint(layout_Spring.EAST, lbli, 50, layout_Spring.EAST, lbl);
+            layout_Spring.putConstraint(layout_Spring.EAST, lbli, 10+20+20+20, layout_Spring.EAST, lbl);
         }
         //文本框
         JTextField[] textList={new JTextField(),new JTextField(), new JTextField()};
@@ -81,17 +81,17 @@ public class SetJPUser2_2 {
             JTextField texti=textList[i];
             jp.add(texti);
             texti.setEditable(true);
-            texti.setFont(new Font("黑体", Font.BOLD, 20));
+            texti.setFont(new Font("宋体", Font.BOLD, 20));
             layout_Spring.putConstraint(layout_Spring.NORTH, texti, 0, layout_Spring.NORTH, lblList[i]);
             layout_Spring.putConstraint(layout_Spring.WEST, texti, 20, layout_Spring.EAST, lblList[i]);
-            texti.setColumns(50);
+            texti.setColumns(30);
         }
 
         // 创建确认按钮
         JButton btn=new JButton("确认");
         jp.add(btn);
-        btn.setFont(new Font("黑体", Font.BOLD, 20));
-        btn.setPreferredSize(new Dimension(150, 40));
+        btn.setFont(new Font("宋体", Font.BOLD, 20));
+        //btn.setPreferredSize(new Dimension(150, 40));
         layout_Spring.putConstraint(layout_Spring.NORTH, btn, 50, layout_Spring.NORTH, textList[2]);
         layout_Spring.putConstraint(layout_Spring.EAST, btn, 0, layout_Spring.EAST, textList[2]);
 

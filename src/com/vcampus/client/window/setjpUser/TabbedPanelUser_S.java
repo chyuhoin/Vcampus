@@ -26,7 +26,7 @@ public class TabbedPanelUser_S extends JTabbedPane {
         JTabbedPane JTP=this;
         this.setOpaque(false);
         this.setTabPlacement(1);
-        this.setBounds(0,0,1200,650);//注意！！！！！！！！！！！！！！！！！！！！！！！
+        this.setBounds(0,0,1200,650);
         //背景图片
         JLabel background1 =new JLabel();
         ImageIcon back = new ImageIcon("resource//User_background.png");

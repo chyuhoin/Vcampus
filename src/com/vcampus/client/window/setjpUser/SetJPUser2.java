@@ -133,28 +133,28 @@ public class SetJPUser2 {
         //标题
         JLabel lbl = new JLabel("用户信息管理");
         jp1.add(lbl);
-        lbl.setFont(new Font("黑体", Font.BOLD, 50));
-        layout_Spring.putConstraint(layout_Spring.NORTH, lbl, 20, layout_Spring.NORTH, jp1);  //标签1北侧——>容器北侧
-        layout_Spring.putConstraint(layout_Spring.WEST, lbl, 20, layout_Spring.WEST, jp1);    //标签1西侧——>容器西侧
+        lbl.setFont(new Font("宋体", Font.BOLD, 33));
+        layout_Spring.putConstraint(layout_Spring.NORTH, lbl, 30, layout_Spring.NORTH, jp1);  //标签1北侧——>容器北侧
+        layout_Spring.putConstraint(layout_Spring.WEST, lbl, 20+20, layout_Spring.WEST, jp1);    //标签1西侧——>容器西侧
         // 创建注册按钮
         JButton btn1=new JButton("添加用户");
         jp1.add(btn1);
-        btn1.setFont(new Font("黑体", Font.BOLD, 20));
-        layout_Spring.putConstraint(layout_Spring.NORTH, btn1, 20, layout_Spring.NORTH, jp1);
-        layout_Spring.putConstraint(layout_Spring.EAST, btn1, -20, layout_Spring.EAST, jp1);
+        btn1.setFont(new Font("宋体", Font.BOLD, 20));
+        layout_Spring.putConstraint(layout_Spring.NORTH, btn1, 35, layout_Spring.NORTH, jp1);
+        layout_Spring.putConstraint(layout_Spring.EAST, btn1, -30, layout_Spring.EAST, jp1);
         //创建搜索按钮
         JButton btn2=new JButton("搜索");
         jp1.add(btn2);
-        btn2.setFont(new Font("黑体", Font.BOLD, 20));
-        layout_Spring.putConstraint(layout_Spring.NORTH, btn2, 20, layout_Spring.NORTH, jp1);
+        btn2.setFont(new Font("宋体", Font.BOLD, 20));
+        layout_Spring.putConstraint(layout_Spring.NORTH, btn2, 35, layout_Spring.NORTH, jp1);
         layout_Spring.putConstraint(layout_Spring.EAST, btn2, -10, layout_Spring.WEST, btn1);
         //创建文本框
         JTextField text=new JTextField();
         jp1.add(text);
         text.setEditable(true);//可以编辑
-        text.setFont(new Font("黑体", Font.PLAIN, 20));//文本框字体
-        text.setPreferredSize(new Dimension (300,36));
-        layout_Spring.putConstraint(layout_Spring.NORTH, text, 20, layout_Spring.NORTH, jp1);
+        text.setFont(new Font("宋体", Font.PLAIN, 20));//文本框字体
+        text.setPreferredSize(new Dimension (300,30));
+        layout_Spring.putConstraint(layout_Spring.NORTH, text, 35, layout_Spring.NORTH, jp1);
         layout_Spring.putConstraint(layout_Spring.EAST, text, -10, layout_Spring.WEST, btn2);
 
         //创建信息表格
@@ -176,18 +176,21 @@ public class SetJPUser2 {
         //表格样式设置
         table.setRowHeight(30);// 设置行高
         table.setFont(new Font("黑体",Font.PLAIN,18));//表格字体
-        table.getTableHeader().setFont(new Font("黑体",Font.BOLD,20));//表头字体
+        table.getTableHeader().setFont(new Font("宋体",Font.BOLD,20));//表头字体
         //table.getColumnModel().getColumn(3).setCellRenderer(new MyButtonRender(jp,table));//添加按钮
         table.getTableHeader().setReorderingAllowed(false);//不允许拖动列头，以重新排序各列
         table.getTableHeader().setResizingAllowed(false);//不允许手动拖动来调整各列的大小
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(JLabel.CENTER);
+        table.setDefaultRenderer(Object.class,tcr);
 
         // 创建显示表格的滚动面板
         JScrollPane scrollPane = new JScrollPane(table);
         jp1.add(scrollPane);
-        layout_Spring.putConstraint(layout_Spring.NORTH, scrollPane, 20, layout_Spring.SOUTH, lbl);
-        layout_Spring.putConstraint(layout_Spring.WEST, scrollPane, 20, layout_Spring.WEST, jp1);
-        layout_Spring.putConstraint(layout_Spring.SOUTH, scrollPane, -40, layout_Spring.SOUTH, jp1);
-        layout_Spring.putConstraint(layout_Spring.EAST, scrollPane, -20, layout_Spring.EAST, jp1);
+        layout_Spring.putConstraint(layout_Spring.NORTH, scrollPane, 30, layout_Spring.SOUTH, lbl);
+        layout_Spring.putConstraint(layout_Spring.WEST, scrollPane, 40, layout_Spring.WEST, jp1);
+        layout_Spring.putConstraint(layout_Spring.SOUTH, scrollPane, -20, layout_Spring.SOUTH, jp1);
+        layout_Spring.putConstraint(layout_Spring.EAST, scrollPane, -30, layout_Spring.EAST, jp1);
 
         //监听事件
         //搜索按钮
