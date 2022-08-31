@@ -254,6 +254,8 @@ public class PanelGoodsManage_A extends JPanel {
                     else
                     {
                         informFrame("修改成功！",false);
+                        Goods t = new Goods();
+                        setPanel1(t);
                         setPanel2(goods);
                         setCard("panelInform");
                     }

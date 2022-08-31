@@ -171,6 +171,7 @@ public class PanelMyStore_S  extends JPanel{
                     else
                     {
                         informFrame("修改成功！",false);
+                        setPanel1();
                         setPanel2(goods);
                         setCard("panelInform");
                     }
