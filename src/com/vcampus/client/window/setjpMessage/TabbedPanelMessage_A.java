@@ -29,12 +29,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.List;
 import java.util.Map;
 
 public class TabbedPanelMessage_A extends JTabbedPane{
 
-    JButton btn = new JButton("刷新");
     public MyMassagePanel priMessage;
     public MyMassagePanel pubMessage;
     final MessagePasser passer = ClientMessagePasser.getInstance();
@@ -64,23 +65,6 @@ public class TabbedPanelMessage_A extends JTabbedPane{
             JTextField txtEnquire = new JTextField();
             txtEnquire.setBounds(50, 150, 500, 50);
             txtEnquire.setFont(new Font("楷体", Font.BOLD, 20));
-            btn.setBounds(500, 300, 100, 100);
-            btn.setFont(new Font("黑体",Font.BOLD,40));
-            btn.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    synchronized (passer) {
-                        priMessage.keepTabelPage(getAllMessage());
-                        pubMessage.keepTabelPage(getPubMessage());
-                    }
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException ex) {
-                        ex.printStackTrace();
-                    }
-                    System.out.println("renew!");
-                }
-            });
 
             btnRegister.addActionListener(new ActionListener() {
                 @Override
@@ -104,10 +88,30 @@ public class TabbedPanelMessage_A extends JTabbedPane{
                 }
             });
 
+            this.addMouseListener(new MouseListener() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    priMessage.keepTabelPage(getAllMessage());
+                    pubMessage.keepTabelPage(getPubMessage());
+                    System.out.println("renew!");
+                }
+
+                @Override
+                public void mousePressed(MouseEvent e) {}
+
+                @Override
+                public void mouseReleased(MouseEvent e) {}
+
+                @Override
+                public void mouseEntered(MouseEvent e) {}
+
+                @Override
+                public void mouseExited(MouseEvent e) {}
+            });
+
             jp12.add(btnRegister);
             jp12.add(txtEnquire);
             jp12.add(label);
-            jp12.add(btn);
             JPanel panel = new PanelSendMassage(ID);
 
             priMessage = new MyMassagePanel(getAllMessage(), new Object[]{"id", "消息"});
@@ -121,7 +125,7 @@ public class TabbedPanelMessage_A extends JTabbedPane{
             this.addTab("查看私信", null, jp11, "查看私信");
             this.addTab("公共频道", null, jp13, "查看公共频道消息");
             this.addTab("发送消息", null, panel, "发送消息");
-            this.addTab("操作消息与刷新", null, jp12, "删除私有消息");
+            this.addTab("删除消息", null, jp12, "删除私有消息");
             this.setFont(new Font("宋体", Font.BOLD, 24));
         }
         //jp.add(jtbp);
