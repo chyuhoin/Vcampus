@@ -1,5 +1,7 @@
 package com.vcampus.dao.utils;
 
+import com.vcampus.pojo.Record;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;

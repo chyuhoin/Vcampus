@@ -6,9 +6,11 @@ import com.vcampus.dao.utils.mapToBean;
 import com.vcampus.pojo.User;
 import org.junit.Test;
 
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 
 public class UserDao extends BaseDao {
     public static String register(String username, String password, Integer type) throws Exception {

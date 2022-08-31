@@ -45,9 +45,9 @@ public class TabbedPanelCourse_S extends JTabbedPane {
             jp11.setOpaque(false);
             jp11.add(background1);
 
-            this.addTab("选课系统", null, jp11, "选课系统");
-            this.addTab("已选课程", null, jp12, "查看已选课程");
-            this.addTab("我的课表", null, jp13, "查看我的课表");
+            this.addTab("选课系统", new ImageIcon("resource//tab_selectlesson.png"), jp11, "选课系统");
+            this.addTab("已选课程", new ImageIcon("resource//tab_lesson.png"), jp12, "查看已选课程");
+            this.addTab("我的课表", new ImageIcon("resource//tab_table.png"), jp13, "查看我的课表");
             this.setFont(new Font("宋体", Font.BOLD, 24));
 
             //鼠标点击事件

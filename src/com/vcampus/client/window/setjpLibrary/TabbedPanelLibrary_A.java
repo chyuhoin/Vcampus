@@ -105,11 +105,11 @@ public class TabbedPanelLibrary_A extends JTabbedPane {
                 }
             });
             enquireBook.add(background);
-            this.addTab("书籍信息总览", null, jp11, "书籍信息总览");//
-            this.addTab("查询书籍信息", null, enquireBook, "查询书籍信息");//书籍号 书名 一个或多个
-            this.addTab("书籍信息管理", null, manageBook, "书籍信息管理");//增加 删除 修改
-            this.addTab("书籍借阅/退还", null, borrowReturnBook, "书籍借阅/退还");
-            this.addTab("查询借阅情况", null, jp15, "查询借阅情况");//某一个人的借阅
+            this.addTab("书籍信息总览", new ImageIcon("resource//tab_library.png"), jp11, "书籍信息总览");//
+            this.addTab("查询书籍信息", new ImageIcon("resource//search.png"), enquireBook, "查询书籍信息");//书籍号 书名 一个或多个
+            this.addTab("书籍信息管理", new ImageIcon("resource//tab_manager.png"), manageBook, "书籍信息管理");//增加 删除 修改
+            this.addTab("书籍借阅/退还", new ImageIcon("resource//tab_bookreturn.png"), borrowReturnBook, "书籍借阅/退还");
+            this.addTab("查询借阅情况", new ImageIcon("resource//search.png"), jp15, "查询借阅情况");//某一个人的借阅
             this.setFont(new Font("宋体", Font.BOLD, 24));
 
         }
