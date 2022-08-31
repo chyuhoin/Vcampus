@@ -11,8 +11,24 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * 学生控制器
+ *
+ * @author ietot
+ * @date 2022/08/31
+ */
 public class StudentController implements Controller {
 
+    /**
+     * 检查
+     *post:添加学生信息,只有在用户管理中存在对应ID在可以添加,如果学籍信息中已存在对应ID，则视为修改
+     * get":显示所有学生信息
+     * getone":显示某符合某些指标的学生，用或来连接 如：“name:于济源” “属性”+“:”+“数据”
+     *delete:输入学生ID，删除对应学生
+     *
+     * @param msg 信息
+     * @return {@link Message}
+     */
     @Override
     public Message check(Message msg){
         StudentService service = new StudentService();

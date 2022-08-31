@@ -13,7 +13,19 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
+/**
+ * 课服务
+ *
+ * @author ietot
+ * @date 2022/08/31
+ */
 public class LessonService implements Service{
+    /**
+     * 加课
+     *
+     * @param user 用户
+     * @return boolean
+     */
     public boolean addLesson(Lesson user) {
         boolean res;
         try {
@@ -26,6 +38,13 @@ public class LessonService implements Service{
         }
         return res;
     }
+
+    /**
+     * 添加一个课程
+     *
+     * @param user 用户
+     * @return boolean
+     */
     public boolean addOneLesson(Lesson user) {
         boolean res;
         List<Lesson> lessons = null;
@@ -89,6 +108,13 @@ public class LessonService implements Service{
         }
         return res;
     }
+
+    /**
+     * 新版添加课程
+     *
+     * @param user 用户
+     * @return boolean
+     */
     public boolean addLessonnew(Lesson user) {
         boolean res;
         try {
@@ -136,6 +162,14 @@ public class LessonService implements Service{
         System.out.println("添加成功");
         return res;
     }
+
+    /**
+     *删除部分课程的信息
+     *如果为有效课且有老师信息，删除老师课表
+     *如果为有效课且有教室信息，删除教室信息
+     * @param innerID 内部id
+     * @return boolean
+     */
     public boolean deleteTest(String innerID) {
         //删除课程
         //如果为有效课且有老师信息，删除老师课表
@@ -180,6 +214,13 @@ public class LessonService implements Service{
         }
         return res;
     }
+
+    /**
+     * 新版修改课程
+     *
+     * @param user 用户
+     * @return boolean
+     */
     public boolean setLessonnew(Lesson user) {
         boolean res=false;
         try {
@@ -204,6 +245,13 @@ public class LessonService implements Service{
         }
         return res;
     }
+
+    /**
+     * 显示教室
+     *
+     * @param time 时间
+     * @return {@link List}<{@link String}>
+     */
     public List<String> showRoom(String time) {
         List<String> room=null;
         try {
@@ -213,6 +261,13 @@ public class LessonService implements Service{
         }
         return room;
     }
+
+    /**
+     * 显示所有老师
+     *
+     * @param lessonID 课程id
+     * @return {@link List}<{@link Teacher}>
+     */
     public List<Teacher> showAllTeacher(String lessonID) {
         List<Teacher> teachers=new ArrayList<>();
         try {
@@ -228,6 +283,13 @@ public class LessonService implements Service{
         }
         return teachers;
     }
+
+    /**
+     * 查看所有老师
+     *
+     * @param abledMajor 可选的专业
+     * @return {@link List}<{@link Teacher}>
+     */
     public List<Teacher> viewTeachers(String abledMajor) {
         List<Teacher> res = null;
         try {
@@ -237,6 +299,14 @@ public class LessonService implements Service{
         }
         return res;
     }
+
+    /**
+     * 看来老师课表
+     *
+     * @param time       时间
+     * @param abledMajor 可选的专业
+     * @return {@link List}<{@link Teacher}>
+     */
     public List<Teacher> viewTeachersTime(String time,String abledMajor) {
         List<Teacher> res = new ArrayList<>();
         try {
@@ -269,6 +339,13 @@ public class LessonService implements Service{
         }
         return res;
     }
+
+    /**
+     * 显示学生课表
+     *
+     * @param studentID 学生ID
+     * @return {@link String}
+     */
     public String showTable(String studentID) {
         String time=null;
         try {
@@ -278,6 +355,13 @@ public class LessonService implements Service{
         }
         return time;
     }
+
+    /**
+     * 显示课表的名称
+     *
+     * @param time 时间
+     * @return {@link String}
+     */
     public String showTableName(String time) {
         String timename=null;
         try {
@@ -297,6 +381,13 @@ public class LessonService implements Service{
         }
         return timename;
     }
+
+    /**
+     * 显示老师课表
+     *
+     * @param teacherID 老师id
+     * @return {@link String}
+     */
     public String showTecherTime(String teacherID) {
         String time=null;
         try {
@@ -315,6 +406,12 @@ public class LessonService implements Service{
         }
         return time;
     }
+
+    /**
+     * 查看所有课程
+     *
+     * @return {@link List}<{@link Lesson}>
+     */
     public List<Lesson> viewAllLessons() {
         List<Lesson> res = null;
         try {
@@ -324,6 +421,14 @@ public class LessonService implements Service{
         }
         return res;
     }
+
+    /**
+     * 查看特定课程
+     *
+     * @param field 指标
+     * @param value 数据
+     * @return {@link List}<{@link Lesson}>
+     */
     public List<Lesson> viewSpecificLessons(String field,Object value) {
         List<Lesson> res = null;
         try {
@@ -333,6 +438,14 @@ public class LessonService implements Service{
         }
         return res;
     }
+
+    /**
+     * 添加教室
+     *
+     * @param roomID  教室id
+     * @param innerID 内部id
+     * @return boolean
+     */
     public boolean addRoom(String roomID, String innerID) {
         boolean res;
         try {
@@ -345,6 +458,15 @@ public class LessonService implements Service{
         }
         return res;
     }
+
+    /**
+     * 添加成绩
+     *
+     * @param studentID 学生ID
+     * @param innerID   内部ID
+     * @param grade     年级
+     * @return boolean
+     */
     public boolean addGrade(String studentID, String innerID, Integer grade) {
         boolean res;
         try {
@@ -355,6 +477,13 @@ public class LessonService implements Service{
         }
         return res;
     }
+
+    /**
+     * 添加所有选择学生的成绩
+     *以课程号/学生ID/成绩的形式传参数
+     * @param grade 成绩（课程号/学生ID/成绩，课程号/学生ID/成绩，……）
+     * @return boolean
+     */
     public boolean addGradeAll(String grade) {
         boolean res=false;
         try {//课程号/学生ID/成绩
@@ -376,6 +505,14 @@ public class LessonService implements Service{
         }
         return res;
     }
+
+    /**
+     * 添加成绩
+     *输入课程ID，返回此学生上的课的内部ID
+     * @param studentID 学生证
+     * @param lessonID  教训id
+     * @return {@link String}
+     */
     public String addGradeTest(String studentID, String lessonID) {
         //输入课程ID，返回此学生上的课的内部ID
         String res=null;
@@ -391,6 +528,13 @@ public class LessonService implements Service{
         }
         return res;
     }
+
+    /**
+     * 返回成绩
+     *
+     * @param studentID 学生ID
+     * @return {@link List}<{@link LessonGrade}>
+     */
     public List<LessonGrade> getGrade(String studentID) {
         List<LessonGrade> res = null;
         try {
@@ -400,6 +544,13 @@ public class LessonService implements Service{
         }
         return res;
     }
+
+    /**
+     * 返回学生的成绩
+     *
+     * @param innerID 内部id
+     * @return {@link List}<{@link String}>
+     */
     public List<String> getGradeStudent(String innerID) {
         List<String> res = null;
         try {
@@ -409,6 +560,13 @@ public class LessonService implements Service{
         }
         return res;
     }
+
+    /**
+     * 显示对应课程的所有学生成绩
+     *
+     * @param lessonID 课程id
+     * @return {@link List}<{@link String}>
+     */
     public List<String> getGradeStudentAll(String lessonID) {
         List<String> res = new ArrayList<>();
         List<String>tmps=null;
@@ -426,6 +584,13 @@ public class LessonService implements Service{
         }
         return res;
     }
+
+    /**
+     * 删除
+     *删除课程
+     * @param deleteID 课程ID
+     * @return boolean
+     */
     public boolean delete(String deleteID) {
         boolean res=false;
         List<Lesson> lessons=null;
@@ -443,6 +608,13 @@ public class LessonService implements Service{
         }
         return res;
     }
+
+    /**
+     * 删除一个课程
+     *
+     * @param deleteoneID 内部ID
+     * @return boolean
+     */
     public boolean deleteone(String deleteoneID) {
         boolean res;
         List<Lesson> lessons=null;
@@ -477,6 +649,13 @@ public class LessonService implements Service{
         }
         return res;
     }
+
+    /**
+     * 搜索我的课程
+     *
+     * @param studentID 学生ID
+     * @return {@link List}<{@link Lesson}>
+     */
     public List<Lesson> searchMine(String studentID) {
         List<Lesson> res = null;
         try {
@@ -486,6 +665,13 @@ public class LessonService implements Service{
         }
         return res;
     }
+
+    /**
+     * 返回特定老师教授的学生
+     *
+     * @param lessonID 课程id
+     * @return {@link List}<{@link Student}>
+     */
     public List<Student> getTeacher(String lessonID) {
         List<Student> res = new ArrayList<>();
         List<Lesson>data=null;
@@ -503,6 +689,13 @@ public class LessonService implements Service{
         }
         return res;
     }
+
+    /**
+     * 得到具体老师
+     *
+     * @param innerID 内部id
+     * @return {@link List}<{@link Student}>
+     */
     public List<Student> getSpecificTeacher(String innerID) {
         List<Student> res = new ArrayList<>();
         List<String>data=null;
@@ -518,6 +711,13 @@ public class LessonService implements Service{
         }
         return res;
     }
+
+    /**
+     * 搜索学生
+     *
+     * @param studentID 学生ID
+     * @return {@link List}<{@link Student}>
+     */
     public List<Student> searchStudent(String studentID) {
         List<Student> res = null;
         try {
@@ -527,6 +727,13 @@ public class LessonService implements Service{
         }
         return res;
     }
+
+    /**
+     * 搜索老师
+     *
+     * @param teacherID 老师ID
+     * @return {@link List}<{@link Teacher}>
+     */
     public List<Teacher> searchTeacher(String teacherID) {
         List<Teacher> res = null;
         try {
@@ -536,6 +743,14 @@ public class LessonService implements Service{
         }
         return res;
     }
+
+    /**
+     * 判断课程是否可选
+     *
+     * @param studentID 学生ID
+     * @param innerID   内部ID
+     * @return {@link String}
+     */
     public String judgeLesson(String studentID,String innerID) {
         String res;
         try {
@@ -565,6 +780,14 @@ public class LessonService implements Service{
         }
         return res;
     }
+
+    /**
+     * 返回课程
+     *
+     * @param studentID 学生ID
+     * @param innerID   内部ID
+     * @return boolean
+     */
     public boolean returnLesson(String studentID,String innerID) {
         boolean res;
         try {
@@ -575,6 +798,14 @@ public class LessonService implements Service{
         }
         return res;
     }
+
+    /**
+     * 选择课程
+     *
+     * @param studentID 学生ID
+     * @param innerID   内部ID
+     * @return boolean
+     */
     public boolean selectLesson(String studentID,String innerID) {
         boolean res;
         try {
@@ -585,6 +816,13 @@ public class LessonService implements Service{
         }
         return res;
     }
+
+    /**
+     * 添加老师
+     *
+     * @param user 用户
+     * @return boolean
+     */
     public boolean addTeacher(Teacher user) {
         boolean res;
         List<Teacher> teachers = null;
@@ -615,6 +853,12 @@ public class LessonService implements Service{
         }
         return res;
     }
+
+    /**
+     * 排课
+     *
+     * @return boolean
+     */
     public boolean Arrange() {
         boolean res=false;
         try {
@@ -647,6 +891,12 @@ public class LessonService implements Service{
         }
         return res;
     }
+
+    /**
+     * 排所有的课程
+     *
+     * @return boolean
+     */
     public boolean ArrangeAll() {
         boolean res=false;
         try {
@@ -680,6 +930,13 @@ public class LessonService implements Service{
         }
         return res;
     }
+
+    /**
+     * 把对应课程的状态从0变为1
+     *
+     * @param innerID 内部id
+     * @return boolean
+     */
     public boolean valueLesson(String innerID) {
         //把对应课程的状态从0变为1
         boolean res=false;
@@ -694,6 +951,13 @@ public class LessonService implements Service{
         }
         return res;
     }
+
+    /**
+     * 把对应课程的状态从1变为0
+     *
+     * @param innerID 内部id
+     * @return boolean
+     */
     public boolean unvalueLesson(String innerID) {
         //把对应课程的状态从1变为0
         boolean res=false;
@@ -707,6 +971,16 @@ public class LessonService implements Service{
         }
         return res;
     }
+
+    /**
+     * 实现逻辑：采用近似算法
+     *         lessons为要进行排课的课程集合，先从中取出一个进行处理，其余继续采用这个函数计算总分
+     *         先用findTime函数给出所有可能的时间排列，再利用scoreTime给出这个时间的分数
+     *         在此课程视为这个时间的基础上进行其他课程的计算，最后取最高分情况
+     *
+     * @param lessons 教训
+     * @return {@link Integer}
+     */
     public Integer doArrange(List<Lesson>lessons) {
         //实现逻辑：采用近似算法
         //lessons为要进行排课的课程集合，先从中取出一个进行处理，其余继续采用这个函数计算总分
@@ -746,6 +1020,13 @@ public class LessonService implements Service{
         }
         return max;
     }
+
+    /**
+     * 找一个合适时间
+     *
+     * @param innerID 内部id
+     * @return {@link List}<{@link List}<{@link Integer}>>
+     */
     public List<List<Integer>> findTime(String innerID) {
         //要求:选择一个合适的时间
         List<List<Integer>> res=new ArrayList<List<Integer>>();
@@ -954,6 +1235,14 @@ public class LessonService implements Service{
         }
         return res;
     }
+
+    /**
+     * 时间是否合适
+     *
+     * @param times   次
+     * @param innerID 内部id
+     * @return boolean
+     */
     public boolean isTimeOK(List<Integer>times,String innerID) {
         //判断对于这个老师来说，这个时间是否可以
         //判断对于教室资源来说，这个时间是否可以
@@ -993,6 +1282,14 @@ public class LessonService implements Service{
 //        System.out.println("这个时间可以");
         return true;
     }
+
+    /**
+     * 判断时间的得分
+     *
+     * @param time    时间
+     * @param innerID 内部id
+     * @return {@link Integer}
+     */
     public Integer scoreTime(List<Integer> time,String innerID) {
         //要求:给出一个时间，判断其可得几分
         Integer res=0;//得分
@@ -1050,6 +1347,13 @@ public class LessonService implements Service{
         }
         return res;
     }
+
+    /**
+     * 返回时间
+     *
+     * @param times 时间
+     * @return {@link String}
+     */
     public String returnTime(List<Integer>times) {
         StringBuilder res= new StringBuilder();
         try {
@@ -1069,6 +1373,13 @@ public class LessonService implements Service{
         }
         return res.toString();
     }
+
+    /**
+     * 计算课程时长
+     *
+     * @param time 时间
+     * @return {@link Integer}
+     */
     public Integer setLength(String time) {
         //给出时间，计算其时长
         Integer length=0;
