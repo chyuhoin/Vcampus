@@ -53,8 +53,8 @@ public class TabbedPanelStore_A extends JTabbedPane {
             JPanel dealManage = new PanelDealManage_A();
 
 
-            this.addTab("商品管理", null, goodsManage, "商品管理");
-            this.addTab("交易记录", null, dealManage, "交易信息");
+            this.addTab("商品管理", new ImageIcon("resource//tab_store.png"), goodsManage, "商品管理");
+            this.addTab("交易记录", new ImageIcon("resource//tab_orders.png"), dealManage, "交易信息");
             this.setFont(new Font("宋体", Font.BOLD, 24));
         }
 

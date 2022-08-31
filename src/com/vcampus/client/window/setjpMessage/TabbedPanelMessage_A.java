@@ -122,10 +122,10 @@ public class TabbedPanelMessage_A extends JTabbedPane{
             jp13.setLayout(new CardLayout(10, 10));
             jp13.add(pubMessage);
 
-            this.addTab("查看私信", null, jp11, "查看私信");
-            this.addTab("公共频道", null, jp13, "查看公共频道消息");
-            this.addTab("发送消息", null, panel, "发送消息");
-            this.addTab("删除消息", null, jp12, "删除私有消息");
+            this.addTab("查看私信",  new ImageIcon("resource//tab_privatemessage.png"), jp11, "查看私信");
+            this.addTab("公共频道", new ImageIcon("resource//tab_publicmessage.png"), jp13, "查看公共频道消息");
+            this.addTab("发送消息", new ImageIcon("resource//tab_send.png"), panel, "发送消息");
+            this.addTab("删除消息",  new ImageIcon("resource//tab_delete.png"), jp12, "删除私有消息");
             this.setFont(new Font("宋体", Font.BOLD, 24));
         }
         //jp.add(jtbp);

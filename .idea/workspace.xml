@@ -2,37 +2,35 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="修复Goods类的bug">
-      <change afterPath="$PROJECT_DIR$/img/QQ.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img/关闭.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img/学校1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img/学校2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img/学校3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img/学生.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img/密码.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img/教师.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img/最小化.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img/用户.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img/登录.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img/管理员.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img/背景.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img/背景1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img/背景2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img/背景3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/qq/Create_GUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/qq/MyQQ_Frame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/qq/My_Frame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/qq/Users.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/qq/simple_Layout.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resource/tab_bookreturn.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resource/tab_lesson.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resource/tab_library.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resource/tab_manage.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resource/tab_selectlesson.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resource/tab_table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-22_17_27___Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2022-08-22_17_27___Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-24_10_30___Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-24_10_31___Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-24_21_22___Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2022-08-24_21_22___Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-25_12_36___Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2022-08-25_12_36___Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-27_19_05___Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2022-08-27_19_05___Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-28_10_32___Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2022-08-28_10_32___Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-28_10_35___Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2022-08-28_10_35___Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-28_10_35___Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2022-08-28_10_35___Changes_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-28_10_42___Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2022-08-28_10_42___Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-28_19_24___Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2022-08-28_19_24___Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-29_17_12___Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2022-08-29_17_12___Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2022-08-24_10_30_取消提交了变更_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2022-08-24_10_31_取消提交了变更_[Changes]/shelved.patch" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/myLoginFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/myLoginFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/myLoginTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/myLoginTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/myMainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/myMainFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpLibrary/PanelEnquireBook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpLibrary/PanelEnquireBook.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/ShopDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/ShopDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/模拟QQ/Create_GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/模拟QQ/Create_GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/模拟QQ/MyQQ_Frame.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/模拟QQ/MyQQ_Frame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/模拟QQ/My_Frame.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/模拟QQ/My_Frame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/login/My_Frame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/login/My_Frame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpCourse/TabbedPanelCourse_S.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpCourse/TabbedPanelCourse_S.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpLibrary/TabbedPanelLibrary_A.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpLibrary/TabbedPanelLibrary_A.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpLibrary/TabbedPanelLibrary_S.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpLibrary/TabbedPanelLibrary_S.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpLibrary/TabbedPanelLibrary_T.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpLibrary/TabbedPanelLibrary_T.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpMessage/TabbedPanelMessage_S.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpMessage/TabbedPanelMessage_S.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/UserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/UserDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/dao/utils/CRUD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/dao/utils/CRUD.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +104,7 @@
       <recent name="com.vcampus.client.login" />
     </key>
   </component>
-  <component name="RunManager" selected="应用程序.login">
+  <component name="RunManager" selected="Application.login">
     <configuration name="Create_GUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="模拟QQ.Create_GUI" />
       <module name="Vcampus" />
@@ -174,8 +172,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="应用程序.login" />
-        <item itemvalue="应用程序.Server" />
+        <item itemvalue="Application.login" />
+        <item itemvalue="Application.Server" />
+        <item itemvalue="Application.com.vcampus.client.window.login.login" />
+        <item itemvalue="Application.com.vcampus.client.window.login.login" />
+        <item itemvalue="Application.Create_GUI" />
       </list>
     </recent_temporary>
   </component>
@@ -245,6 +246,10 @@
       <workItem from="1661844610764" duration="4940000" />
       <workItem from="1661871206426" duration="205000" />
       <workItem from="1661871440135" duration="2001000" />
+      <workItem from="1661908763852" duration="762000" />
+      <workItem from="1661910241291" duration="2353000" />
+      <workItem from="1661930988662" duration="226000" />
+      <workItem from="1661931264230" duration="2318000" />
     </task>
     <task id="LOCAL-00001" summary="初步写了登录注册">
       <created>1660298515554</created>
