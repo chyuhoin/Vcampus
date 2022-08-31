@@ -33,10 +33,11 @@ public class LessonDao extends BaseDao{
 
     //学生查询自己选的课信息,这是个联表查询，父类方法可能没法用
     public static List<Lesson> searchMine(String studentID) throws Exception {
-        String sql = "SELECT tb_STUDENTWITHLESSON.* from tb_LESSON ,tb_STUDENTWITHLESSON " +
+        String sql = "SELECT tb_LESSON.* from tb_LESSON ,tb_STUDENTWITHLESSON " +
                 "WHERE tb_LESSON.innerID = tb_STUDENTWITHLESSON.innerID " +
                 "and tb_STUDENTWITHLESSON.studentID = '" + studentID + "'";
         List<Map<String, Object>> resultList = CRUD.Query(sql,conn);
+       // System.out.println(resultList);
         List<Lesson> result = new ArrayList<>();
         for (Map<String, Object> map : resultList) {
             Lesson lesson = mapToBean.map2Bean(map, Lesson.class);
@@ -316,9 +317,10 @@ public class LessonDao extends BaseDao{
         System.out.println(res);
     }
     @Test
-    public void test2(){
-        String sql3="select * from (select tb_STUDENTWITHLESSON.innerID,tb_LESSON.lessonID from tb_LESSON,tb_STUDENTWITHLESSON where tb_LESSON.innerID = tb_STUDENTWITHLESSON.innerID and tb_STUDENTWITHLESSON.studentID  = '123333' )as tb_a, (select lessonID from tb_LESSON where innerID ='123456' ) as tb_b where tb_b.lessonID = tb_a.lessonID";
-        System.out.println(sql3);
+    public void test2() throws Exception {
+//        String sql3="select * from (select tb_STUDENTWITHLESSON.innerID,tb_LESSON.lessonID from tb_LESSON,tb_STUDENTWITHLESSON where tb_LESSON.innerID = tb_STUDENTWITHLESSON.innerID and tb_STUDENTWITHLESSON.studentID  = '123333' )as tb_a, (select lessonID from tb_LESSON where innerID ='123456' ) as tb_b where tb_b.lessonID = tb_a.lessonID";
+//        System.out.println(sql3);
+        System.out.println(searchMine("test"));
     }
 }
 

@@ -89,7 +89,7 @@ public class My_Frame extends JFrame{
     public My_Frame() {
 
         //设置窗体大小
-        setSize(1400, 850);
+        setSize(1300, 800);
         //去除标题栏
         setUndecorated(true);
         //设置可见性
@@ -252,7 +252,7 @@ public class My_Frame extends JFrame{
                     Status.setIcon(administrator);
                     Status.setHorizontalTextPosition(SwingConstants.LEFT);
                     Status.setText("管理员");
-                    Status.setFont(new Font("黑体", 1, 20));
+                    Status.setFont(new Font("黑体", 1, 18));
 //                    seu3.setImage(seu3.getImage().getScaledInstance((int)(1*width),(int)(0.4*height),Image.SCALE_DEFAULT));
 //                    bg.setIcon(seu3);
 //                    bg.setBounds((int)(0*width),(int)(0*height),(int)(1*width),(int)(0.4*height));

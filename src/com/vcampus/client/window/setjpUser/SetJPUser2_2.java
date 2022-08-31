@@ -53,14 +53,14 @@ public class SetJPUser2_2 {
         SpringLayout layout_Spring=new SpringLayout();
         jp.setLayout(layout_Spring);
         //标题
-        JLabel lbl = new JLabel("密码修改");
-        ImageIcon lblIcon = new ImageIcon("resource//User_passwordRevise.png");
+        JLabel lbl = new JLabel(" 密码修改");
+        ImageIcon lblIcon = new ImageIcon("Vcampus//resource//User_passwordRevise.png");
         lbl.setIcon(lblIcon);
         lbl.setHorizontalTextPosition(SwingConstants.RIGHT);
         jp.add(lbl);
         lbl.setFont(new Font("黑体", Font.BOLD, 30));
-        layout_Spring.putConstraint(layout_Spring.NORTH, lbl, 20, layout_Spring.NORTH, jp);
-        layout_Spring.putConstraint(layout_Spring.WEST, lbl, 20, layout_Spring.WEST, jp);
+        layout_Spring.putConstraint(layout_Spring.NORTH, lbl, 30, layout_Spring.NORTH, jp);
+        layout_Spring.putConstraint(layout_Spring.WEST, lbl, 30, layout_Spring.WEST, jp);
         //信息列表：
         //标签
         JLabel[] lblList={
@@ -93,7 +93,7 @@ public class SetJPUser2_2 {
         btn.setFont(new Font("黑体", Font.BOLD, 20));
         btn.setPreferredSize(new Dimension(150, 40));
         layout_Spring.putConstraint(layout_Spring.NORTH, btn, 50, layout_Spring.NORTH, textList[2]);
-        layout_Spring.putConstraint(layout_Spring.EAST, btn, -500, layout_Spring.EAST, jp);
+        layout_Spring.putConstraint(layout_Spring.EAST, btn, 0, layout_Spring.EAST, textList[2]);
 
         //确定按钮监听
         btn.addActionListener(new ActionListener() {

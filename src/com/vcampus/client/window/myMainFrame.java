@@ -1,6 +1,6 @@
 /** ===================================================
  * Title: myMainFrame.java
- * Created: [2022-8-15 20:42:30] by  韩宇
+ * Created: [2022-8-15 20:42:30] by  韩宇 刘骐
  *=====================================================
  * Copyright:  Copyright (c)　东南大学计算机学院, 2021-2022
  * =====================================================
@@ -11,11 +11,13 @@
  *2. 2022-8-16,重新构建主界面布局,使用卡片布局，修改人：韩宇
  *3. 2022-8-17，由panel切换改为使用选项卡，修改人：韩宇 张星喆
  *4. 2022-8-17，根据不同身份显示不同界面，根据功能实现界面切换，修改人：韩宇
- *    修改的内容描述，修改的原因
+ *5. 2022-8-31，美化修改
  */
+
 package com.vcampus.client.window;
 
-import com.formdev.flatlaf.FlatDarculaLaf;
+//import com.formdev.flatlaf.FlatDarculaLaf;
+//import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.vcampus.client.window.Button.RoundRectButton;
 import com.vcampus.client.window.Panel.ImagePanel;
@@ -56,11 +58,10 @@ public class myMainFrame extends JFrame {
     public JLabel seuBack = new JLabel();
     public myMainFrame(String title, int flag, String ID)
     {
-
         super(title);//调用父类构造函数，设置窗口名称
         //this.setDefaultLookAndFeelDecorated(true);
 //        FlatDarculaLaf FlatLightLafLaf;
-//        FlatLightLaf.setup();
+        FlatLightLaf.setup();//设置皮肤
         final int[] current = new int[1];//当前在哪个界面
         current[0] =-1;
         this.setSize(1400, 850);// 设置窗口的其他参数，如窗口大小
@@ -82,8 +83,8 @@ public class myMainFrame extends JFrame {
         panelMain.setOpaque(false);
         panelTop.setOpaque(false);
         panelBottom.setOpaque(false);
-      //  panelBottom,setContentPane();
-     //   panelLeft.setOpaque(false);
+        //  panelBottom,setContentPane();
+        //   panelLeft.setOpaque(false);
 
         panelMain.setLayout(null);
         panelTop.setLayout(null);
@@ -108,7 +109,7 @@ public class myMainFrame extends JFrame {
         lblLogoLabel.setForeground(Color.white);
         panelTop.add(lblLogoLabel);
         JButton btnExit = new JButton();
-        ImageIcon exitIcon = new ImageIcon("resource//exit.png");
+        ImageIcon exitIcon = new ImageIcon("VCampus//resource//exit.png");
         btnExit.setIcon(exitIcon);
         btnExit.setOpaque(false);
         btnExit.setContentAreaFilled(false);
@@ -118,7 +119,7 @@ public class myMainFrame extends JFrame {
         panelTop.add(btnExit);
         //加背景图片
         JLabel topBack = new JLabel();
-        ImageIcon topImg = new ImageIcon("resource\\top.png");
+        ImageIcon topImg = new ImageIcon("VCampus//resource//top.png");
         topBack.setIcon(topImg);
         topBack.setBounds(0,0,1400,120);
         panelTop.add(topBack);
@@ -127,13 +128,13 @@ public class myMainFrame extends JFrame {
         //底边栏设置
         JLabel bottomBar = new JLabel();
         bottomBar.setBounds(180,730,1200,120);
-        bottomBar.setIcon(new ImageIcon("resource//bottom.png"));
+        bottomBar.setIcon(new ImageIcon("VCampus//resource//bottom.png"));
         panelMain.add(bottomBar);
         //panelLeft按钮设置
         //设置背景
         Color color = new Color(252,199,64);
         panelLeft.setBackground(color);
-       // panelLeft.setOpaque(false);
+        // panelLeft.setOpaque(false);
         //菜单按钮设置
         JButton btnModule1 = new RoundRectButton("用户管理");
         JButton btnModule2 = new RoundRectButton("学籍管理");
@@ -147,7 +148,7 @@ public class myMainFrame extends JFrame {
 
         btnModule1.setFont(new Font("正楷",Font.BOLD, 20));
         btnModule1.setForeground(Color.WHITE);
-       // btnModule1.setOpaque(false);
+        // btnModule1.setOpaque(false);
         btnModule2.setFont(new Font("正楷",Font.BOLD, 20));
         btnModule2.setForeground(Color.WHITE);
         btnModule3.setFont(new Font("正楷",Font.BOLD, 20));
@@ -188,39 +189,39 @@ public class myMainFrame extends JFrame {
             btn[i].setOpaque(false);
             btn[i].setBackground(color);
         }
-       // 设置图标背景
+        // 设置图标背景
         ImageIcon[]btnicon =new ImageIcon[6];
-        btnicon[0] = new ImageIcon("Vcampus/resource//btn_user.png");
+        btnicon[0] = new ImageIcon("VCampus//resource//btn_user.png");
         btnModule1.setIcon(btnicon[0]);
         btnModule1.setHorizontalTextPosition(JButton.CENTER);
         btnModule1.setVerticalTextPosition(JButton.BOTTOM);
-        btnicon[1] = new ImageIcon("Vcampus/resource//btn_student.png");
+        btnicon[1] = new ImageIcon("VCampus//resource//btn_student.png");
         btnModule2.setIcon(btnicon[1]);
         btnModule2.setHorizontalTextPosition(JButton.CENTER);
         btnModule2.setVerticalTextPosition(JButton.BOTTOM);
-        btnicon[2] = new ImageIcon("Vcampus/resource//btn_lesson.png");
+        btnicon[2] = new ImageIcon("VCampus//resource//btn_lesson.png");
         btnModule3.setIcon(btnicon[2]);
         btnModule3.setHorizontalTextPosition(JButton.CENTER);
         btnModule3.setVerticalTextPosition(JButton.BOTTOM);
-        btnicon[3] = new ImageIcon("Vcampus/resource//btn_library.png");
+        btnicon[3] = new ImageIcon("VCampus//resource//btn_library.png");
         btnModule4.setIcon(btnicon[3]);
         btnModule4.setHorizontalTextPosition(JButton.CENTER);
         btnModule4.setVerticalTextPosition(JButton.BOTTOM);
-        btnicon[4] = new ImageIcon("Vcampus/resource//btn_store.png");
+        btnicon[4] = new ImageIcon("VCampus//resource//btn_store.png");
         btnModule5.setIcon(btnicon[4]);
         btnModule5.setHorizontalTextPosition(JButton.CENTER);
         btnModule5.setVerticalTextPosition(JButton.BOTTOM);
-        btnicon[5] = new ImageIcon("Vcampus/resource//btn_message.png");
+        btnicon[5] = new ImageIcon("VCampus//resource//btn_message.png");
         btnModule6.setIcon(btnicon[5]);
         btnModule6.setHorizontalTextPosition(JButton.CENTER);
         btnModule6.setVerticalTextPosition(JButton.BOTTOM);
         ImageIcon[]btnicon_selected = new ImageIcon[6];
-        btnicon_selected[0] = new ImageIcon("Vcampus/resource//btn_user_selected.png");
-        btnicon_selected[1] = new ImageIcon("Vcampus/resource//btn_student_selected.png");
-        btnicon_selected[2] = new ImageIcon("Vcampus/resource//btn_lesson_selected.png");
-        btnicon_selected[3] = new ImageIcon("Vcampus/resource//btn_library_selected.png");
-        btnicon_selected[4] = new ImageIcon("Vcampus/resource//btn_store_selected.png");
-        btnicon_selected[5] = new ImageIcon("Vcampus/resource//btn_message_selected.png");
+        btnicon_selected[0] = new ImageIcon("VCampus//resource//btn_user_selected.png");
+        btnicon_selected[1] = new ImageIcon("VCampus//resource//btn_student_selected.png");
+        btnicon_selected[2] = new ImageIcon("VCampus//resource//btn_lesson_selected.png");
+        btnicon_selected[3] = new ImageIcon("VCampus//resource//btn_library_selected.png");
+        btnicon_selected[4] = new ImageIcon("VCampus//resource//btn_store_selected.png");
+        btnicon_selected[5] = new ImageIcon("VCampus//resource//btn_message_selected.png");
         //添加按钮
         panelLeft.add(btnModule1);
         panelLeft.add(btnModule2);
@@ -229,7 +230,6 @@ public class myMainFrame extends JFrame {
         panelLeft.add(btnModule5);
         panelLeft.add(btnModule6);
         //创建各模块各权限对应面板
-
         //用户管理模块
         JTabbedPane[] userModule = {
                 new JTabbedPane(),
@@ -263,10 +263,10 @@ public class myMainFrame extends JFrame {
         //站内消息
         JTabbedPane[] messageModule = {
                 new JTabbedPane(),
-                new TabbedPanelMessage_S(flag),
-                new TabbedPanelMessage_T(flag),
+                new TabbedPanelMessage_S(flag,ID),
+                new TabbedPanelMessage_T(flag,ID),
                 new TabbedPanelMessage_A(flag,ID)};
-       JTabbedPane [][] module ={userModule,schoolModule,courseModule,LibraryModule,storeModule,messageModule};
+        JTabbedPane [][] module ={userModule,schoolModule,courseModule,LibraryModule,storeModule,messageModule};
 
         for(int i=0;i<6;i++)
         {
@@ -332,7 +332,7 @@ public class myMainFrame extends JFrame {
                 System.exit(0);
             }
         });
-        ImageIcon exitIcon2 = new ImageIcon("Vcampus/resource//exit2.png");
+        ImageIcon exitIcon2 = new ImageIcon("VCampus//resource//exit2.png");
         btnExit.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -351,7 +351,7 @@ public class myMainFrame extends JFrame {
 
             @Override
             public void mouseEntered(MouseEvent e) {
-               btnExit.setIcon(exitIcon2);
+                btnExit.setIcon(exitIcon2);
             }
 
             @Override
@@ -359,8 +359,6 @@ public class myMainFrame extends JFrame {
                 btnExit.setIcon(exitIcon);
             }
         });
-
-
     }
 
     //实现下方面板切换

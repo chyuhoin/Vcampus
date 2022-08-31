@@ -56,12 +56,16 @@ public class PanelViewCourse_S extends JPanel {
         student.setStudentID(studentID);//设置学生ID
         Gson gson=new Gson();
         String s = gson.toJson(student);
-        passer.send(new Message("admin", s, "lesson", "getstudent"));
-
-        Message msg = passer.receive();
+        Message msg =null;
+        synchronized (passer) {
+            passer.send(new Message("admin", s, "lesson", "getstudent"));
+            msg = passer.receive();
+        }
         Map<String, java.util.List<Lesson>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, java.util.List<Lesson>>>() {
         }.getType());
         java.util.List<Lesson> res = map.get("res");
+
+//        System.out.println("res:"+res);
 
         if(res.size()>0){
             //"课程编号","课程名称","授课教师","开课院系","上课时间","上课教室","是否考试","成绩"
@@ -78,13 +82,18 @@ public class PanelViewCourse_S extends JPanel {
                     rowData[i][6]=res.get(i).getIsExam()==1?"考试":"其他";
                 else rowData[i][6]="暂未安排";
                 rowData[i][7]="暂无成绩";// 成绩
+
+//                System.out.println(rowData);
+
                 //获取教师姓名
                 Teacher teacher=new Teacher();
                 teacher.setTeacherID(res.get(i).getTeacherID());
                 String st = gson.toJson(teacher);
-                passer.send(new Message("admin", st, "lesson", "showstatussteacher"));
-
-                Message msg2 = passer.receive();
+                Message msg2 =null;
+                synchronized (passer) {
+                    passer.send(new Message("admin", st, "lesson", "showstatussteacher"));
+                    msg2 = passer.receive();
+                }
                 Map<String, java.util.List<Teacher>> map2 = new Gson().fromJson(msg2.getData(), new TypeToken<HashMap<String, java.util.List<Teacher>>>() {
                 }.getType());
                 List<Teacher> res2 = map2.get("res");

@@ -157,7 +157,7 @@ public class PanelEnquireCourse extends JPanel {
         tableP=new MyTablePanel_Course(tableData,columnNames);
         this.add(tableP);
         tableP.getTable().getColumnModel().getColumn(1).setPreferredWidth(120);
-        tableP.setBounds(20,110,1210,510);//设置位置和大小
+        tableP.setBounds(20,110,1150,510);//设置位置和大小
 
         updateUI();
         repaint();

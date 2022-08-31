@@ -280,6 +280,8 @@ public class StudentStatusEnquire_S extends JPanel {
         txtPhoneNum.setBounds(x + ltDiffer1 * 2 - 60, y + heightDiffer * 6, txtWidth * 2, txtHeight);
         txtPhoneNum.setText(student.getPhoneNumber());
         setLabelFont(lblPhoneNum, txtPhoneNum);
+        txtPhoneNum.setEditable(true);
+
         if(student.getGrade()!=null && student.getSchool()!=null && student.getStatus()!=null) {
             txtStudentNum.setText(student.getStudentNumber());
             txtPolitic.setText(student.getPolitics());

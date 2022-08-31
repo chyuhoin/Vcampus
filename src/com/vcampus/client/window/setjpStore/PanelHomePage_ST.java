@@ -160,7 +160,7 @@ public class PanelHomePage_ST extends JPanel {
                 }
 
                 Message msg = passer.receive();
-                System.out.println(msg);
+//                System.out.println(msg);
                 Map<String,Object> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String,Object>>(){}.getType());
 
                 if(map.get("res").equals("OK"))
@@ -246,7 +246,7 @@ public class PanelHomePage_ST extends JPanel {
             }
 
         scrollPane= new JScrollPane(p);
-        scrollPane.setBounds(30,120,1150,400);
+        scrollPane.setBounds(30,120,1150,500);
         scrollPane.getVerticalScrollBar().setUnitIncrement(10);
 
         //总是出现垂直滚动条

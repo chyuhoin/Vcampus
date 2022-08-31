@@ -58,7 +58,9 @@ public class MyTable extends JTable {                       // 实现自己的�
     // 重写JTable类的isCellEditable(int row, int column)方法
     public boolean isCellEditable(int row, int column)
     {  // 表格不可编辑---
-        return columnEditable.contains(column);
+        if(columnEditable!=null) {
+            return columnEditable.contains(column);
+        }else return false;
     }
 
     //设置列宽随表格内容自动调整

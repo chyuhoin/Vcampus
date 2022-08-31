@@ -23,13 +23,13 @@ public class TabbedPanelSchool_T extends JTabbedPane {
     {
         if(flag==2) {
             this.setTabPlacement(1);
-            this.setBounds(0, 0, 1400, 650);//注意！！！！！！！！！！！！！！！！！！！！！！！
+            this.setBounds(0, 0, 1200, 650);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
-            JPanel panel = new JPanel();
-            JLabel lblHint = new JLabel("未查询到学籍信息！");
+            JPanel panel = new JPanel(new BorderLayout());
+            JLabel lblHint = new JLabel("教师未开放此功能");
             lblHint.setFont(new Font("宋体", Font.BOLD, 28));
-            lblHint.setBounds(40, 70, 200, 70);
-            panel.add(lblHint);
+            //lblHint.setBounds(40, 70, 200, 70);
+            panel.add(lblHint,BorderLayout.CENTER);
 
             this.addTab("查看个人学籍信息", null, panel, "查看个人学籍信息");
 

@@ -35,6 +35,7 @@ public class HeaderPanel extends JPanel {
         //标签
         JLabel lblImg=new JLabel();
         lblImg.setPreferredSize(new Dimension(30,30));
+
         layS.putConstraint(layS.NORTH,lblImg,10,layS.NORTH,this);
         layS.putConstraint(layS.EAST,lblImg,-10,layS.EAST,this);
         layS.putConstraint(layS.SOUTH,lblImg,-10,layS.SOUTH,this);

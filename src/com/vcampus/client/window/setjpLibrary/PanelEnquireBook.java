@@ -170,7 +170,7 @@ public class PanelEnquireBook extends JPanel{
                         rowData[i][4]=res.get(i).getLeftSize();
                     }
                     JPanel panelInform = new MyTablePanel(rowData,columnNames);
-                    panelInform.setBounds(0,150,1200,350);
+                    panelInform.setBounds(0,120,1200,500);
                     this.add(panelInform);
 
                 } catch (Exception e) {
