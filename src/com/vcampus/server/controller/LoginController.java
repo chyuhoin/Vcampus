@@ -9,6 +9,20 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * 登录模块的Controller
+ * get                  登录
+ * getone               通过id获取全部信息
+ * getAll               获取全部用户
+ * register             注册
+ *                      注册时会同时创建一个只有ID的学籍信息
+ *                      如果注册时ID已存在(学籍管理或用户管理系统)，则注册失败
+ * delete               删除用户，输入ID
+ * Change Password      修改密码
+ * Change Permissions   输入ID，修改其权限 如：“123:1” “ID”+“:”+“1/2/3” 1--学生 2--老师 3--管理员
+ *
+ * @author ZhongHaoyuan
+ */
 public class LoginController implements Controller {
 
     @Override
@@ -63,20 +77,5 @@ public class LoginController implements Controller {
             default:
                 return new Message("404", "{res: 'Wrong Request!'}");
         }
-//        if(msg.getOperation().equals("get")) {
-//            UserService service = new UserService();
-//            Gson gson = new Gson();
-//            User user = gson.fromJson(msg.getData(), User.class);
-//            if(service.login(user)) return new Message("200", "{res: 'OK'}");
-//            else return new Message("200", "{res: 'NO'}");
-//        }
-//        else if(msg.getOperation().equals("register")) {
-//            UserService service = new UserService();
-//            Gson gson = new Gson();
-//            User user = gson.fromJson(msg.getData(), User.class);
-//            if(service.register(user)) return new Message("200", "{res: 'OK'}");
-//            else return new Message("200", "{res: 'NO'}");
-//        }
-//        else return new Message("404", "{res: 'Wrong Request!'}");
     }
 }

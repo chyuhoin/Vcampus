@@ -11,37 +11,74 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * The type Chat controller.
+ *
+ * @author ZhongHaoyuan
+ */
 public class ChatController implements Controller {
 
     private final ChatService service;
     private final Gson gson;
     private final Map<String, Object> map;
 
+    /**
+     * Instantiates a new Chat controller.
+     */
     public ChatController() {
         service = new ChatService();
         gson = new Gson();
         map = new HashMap<>();
     }
 
+    /**
+     * Gets msg.
+     *
+     * @param msg the msg
+     * @return the msg
+     */
     private List<InnerMessage> getMsg(Message msg) {
         User user = gson.fromJson(msg.getData(), User.class);
         return service.getMessage(user);
     }
 
+    /**
+     * Send msg string.
+     *
+     * @param msg the msg
+     * @return the string
+     */
     private String sendMsg(Message msg) {
         InnerMessage iMsg = gson.fromJson(msg.getData(), InnerMessage.class);
         return service.sendMessage(iMsg) ? "OK": "Error";
     }
 
+    /**
+     * Gets pub msg.
+     *
+     * @return the pub msg
+     */
     private List<PublicMessage> getPubMsg() {
         return service.getPublic();
     }
 
+    /**
+     * Send pub msg string.
+     *
+     * @param msg the msg
+     * @return the string
+     */
     private String sendPubMsg(Message msg) {
         PublicMessage pMsg = gson.fromJson(msg.getData(), PublicMessage.class);
         return service.sendPublic(pMsg) ? "OK": "Error";
     }
 
+    /**
+     * Delete msg string.
+     *
+     * @param msg the msg
+     * @return the string
+     */
     private String deleteMsg(Message msg) {
         InnerMessage iMsg = gson.fromJson(msg.getData(), InnerMessage.class);
         return service.deleteMessage(iMsg) ? "OK": "Error";
