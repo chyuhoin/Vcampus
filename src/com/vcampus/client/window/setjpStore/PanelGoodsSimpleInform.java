@@ -13,7 +13,6 @@
  *    修改的内容描述，修改的原因
  */
 package com.vcampus.client.window.setjpStore;
-
 import com.vcampus.dao.utils.StringAndImage;
 import com.vcampus.pojo.Goods;
 
@@ -23,6 +22,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.print.Book;
 import java.io.IOException;
+
+
 
 public class PanelGoodsSimpleInform extends JPanel {
     JLabel lblImg = new JLabel();//商品照片
