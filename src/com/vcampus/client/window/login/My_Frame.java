@@ -16,6 +16,10 @@ import java.awt.event.*;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.awt.Robot;
+
+import java.util.Date;
+import com.vcampus.client.window.showMessageFrame;
 
 public class My_Frame extends JFrame{
     int x,y;
@@ -38,7 +42,7 @@ public class My_Frame extends JFrame{
     //承接头像图片
     JLabel tx=new JLabel();
     //写文字QQ
-    JLabel qq=new Create_label("Welcom for Vcampus!",Color.black);
+    JLabel qq=new Create_label("Welcome for Vcampus!",Color.black);
     JLabel qq1=new Create_label("用户名",Color.GRAY);
     JLabel qq2=new Create_label("密码",Color.GRAY);
     //用户名输入框
@@ -375,7 +379,9 @@ public class My_Frame extends JFrame{
                     }
                     else//未输入用户名或密码，无法登陆，弹出窗口提示
                     {
-                        JOptionPane.showMessageDialog(jPanel, "用户名或密码错误！", "警告", JOptionPane.ERROR_MESSAGE);
+//                        screenSize.width
+                        showMessageFrame test=new showMessageFrame("用户名或密码错误!",(int)(screenSize.width/2-0.19*width),(int)(screenSize.height/2-0.45*height),(int)(0.4*width),(int)(0.08*height));
+//                        JOptionPane.showMessageDialog(jPanel, "用户名或密码错误！", "警告", JOptionPane.ERROR_MESSAGE);
                         clearText();
                     }
             }
