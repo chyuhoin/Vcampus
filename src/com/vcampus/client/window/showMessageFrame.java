@@ -21,12 +21,17 @@ public class showMessageFrame extends javax.swing.JFrame {
     int my;
     int left;
     int top;
+    int shape;
 
     String url0="test/img/错误.png";
     String url1="test/img/关闭1.png";
+    String url2="test/img/成功.png";
     ImageIcon Error_icon=new ImageIcon(url0);
     ImageIcon Close_icon=new ImageIcon(url1);
-    public showMessageFrame(String str,int x,int y,int width,int height) {
+    ImageIcon Right_icon=new ImageIcon(url2);
+    public showMessageFrame(String str,int x,int y,int width,int height,int shape) {
+        //形状：1--红色 2--绿色
+        this.shape=shape;
         this.str = str;
         this.x=x;
         this.y=y;
@@ -77,9 +82,20 @@ public class showMessageFrame extends javax.swing.JFrame {
                     setLocation(left+e.getX()-mx, top+e.getY()-my);
                 }
             });
-            Error_icon.setImage(Error_icon.getImage().getScaledInstance((int)(0.05*width),(int)(0.4*height),Image.SCALE_DEFAULT));
-            text.setIcon(Error_icon);
-            text.setHorizontalTextPosition(SwingConstants.RIGHT);
+            switch(shape){
+                case 1:{
+                    Error_icon.setImage(Error_icon.getImage().getScaledInstance((int)(0.05*width),(int)(0.4*height),Image.SCALE_DEFAULT));
+                    text.setIcon(Error_icon);
+                    text.setHorizontalTextPosition(SwingConstants.RIGHT);
+                    break;
+                }
+                case 2:{
+                    Right_icon.setImage(Right_icon.getImage().getScaledInstance((int)(0.05*width),(int)(0.4*height),Image.SCALE_DEFAULT));
+                    text.setIcon(Right_icon);
+                    text.setHorizontalTextPosition(SwingConstants.RIGHT);
+                    break;
+                }
+            }
             Close_icon.setImage(Close_icon.getImage().getScaledInstance((int)(0.04*width),(int)(0.32*height),Image.SCALE_DEFAULT));
             close.setIcon(Close_icon);
 
@@ -91,13 +107,27 @@ public class showMessageFrame extends javax.swing.JFrame {
             setContentPane(jPanel);
             jPanel.setLayout(null);
             //设置背景
-            jPanel.setBackground(new Color(0xDAFCEEEF, true));
+            Color colorbg=null;//背景色
+            Color colorword=null;//字体颜色
+            switch(shape){
+                case 1:{
+                    colorbg=new Color(0xDAFCEEEF, true);
+                    colorword=(new Color(0xF56B6C));
+                    break;
+                }
+                case 2:{
+                    colorbg=new Color(0xDAA5E4BA, true);
+                    colorword=(new Color(0xF3FFBE));
+                    break;
+                }
+            }
+            jPanel.setBackground(colorbg);
             jPanel.setOpaque(true);
             setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
             {
                 text.setText(str);
                 text.setHorizontalAlignment(SwingConstants.LEFT);
-                text.setForeground(new Color(0xF56B6C));
+                text.setForeground(colorword);
                 text.setBounds((int)(0.1*width),(int)(0.3*height),(int)(0.75*width),(int)(0.4*height));
                 text.setFont(new Font("宋体", 1, 20));
                 jPanel.add(text);
@@ -105,7 +135,7 @@ public class showMessageFrame extends javax.swing.JFrame {
             {
                 Border border=BorderFactory.createEmptyBorder(1, 1, 1, 1);
                 close.setFocusPainted(false);
-                close.setBackground(new Color(0xFFFFF0F0, true));//加了才能不显示
+                close.setBackground(colorbg);//加了才能不显示
                 close.setOpaque(false);
                 close.setBorder(border);
                 close.setBounds((int)(0.91*width),(int)(0.25*height),(int)(0.07*width),(int)(0.5*height));
@@ -115,9 +145,7 @@ public class showMessageFrame extends javax.swing.JFrame {
                         close.setBackground(new Color(0xFFEE1B1B, true));
                     }
                     public void mouseExited(MouseEvent e) {
-//                        close.setOpaque(false);
-                        close.setBackground(new Color(0xFFFAF3F3, true));
-
+                        close.setBackground(new Color(0xFFC0C0E1, true));
                     }
                 });
                 close.addActionListener((e)->{
@@ -127,7 +155,7 @@ public class showMessageFrame extends javax.swing.JFrame {
             }
             setBounds(x, y, width, height);
             try {
-                Thread.sleep(50000);
+                Thread.sleep(2000);
             } catch (InterruptedException e1) {
                 e1.printStackTrace();
             }
