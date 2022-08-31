@@ -158,20 +158,28 @@ public class SetJPUser2 {
         layout_Spring.putConstraint(layout_Spring.EAST, text, -10, layout_Spring.WEST, btn2);
 
         //创建信息表格
-        String[] columnNames = {"一卡通号", "密码","权限","操作"}; // 定义表格列名数组
+//        String[] columnNames = {"一卡通号", "密码","权限","操作"}; // 定义表格列名数组
+        String[] columnNames = {"一卡通号", "密码","权限"}; // 定义表格列名数组
         // 定义表格数据数组
         String[][] tableValues = new String[STRList.length][4];
         for(int i=0;i<STRList.length;i++){
             System.arraycopy(STRList[i], 0, tableValues[i], 0, 3);
-            tableValues[i][3]=i+"";
+            //tableValues[i][3]=i+"";
         }
         // 创建指定列名和数据的表格
-        JTable table = new MyTable(tableValues, columnNames);
+        JTable table = new JTable(tableValues, columnNames){
+            @Override
+            public boolean isCellEditable(int row, int column) {  // 表格不可编辑---
+                return false;
+            }
+        };
         //表格样式设置
         table.setRowHeight(30);// 设置行高
         table.setFont(new Font("黑体",Font.PLAIN,18));//表格字体
         table.getTableHeader().setFont(new Font("黑体",Font.BOLD,20));//表头字体
-        table.getColumnModel().getColumn(3).setCellRenderer(new MyButtonRender(jp,table));//添加按钮
+        //table.getColumnModel().getColumn(3).setCellRenderer(new MyButtonRender(jp,table));//添加按钮
+        table.getTableHeader().setReorderingAllowed(false);//不允许拖动列头，以重新排序各列
+        table.getTableHeader().setResizingAllowed(false);//不允许手动拖动来调整各列的大小
 
         // 创建显示表格的滚动面板
         JScrollPane scrollPane = new JScrollPane(table);
@@ -610,36 +618,7 @@ public class SetJPUser2 {
         }
     }
 
-    /**
-     * 创建表格类，该类继承自JTable类成为表格
-     */
-    public static class MyTable extends JTable {                       // 实现自己的表格类
-        // 重写JTable类的构造方法
-        public MyTable(Object[][] rowData, Object[] columnNames) {//Vector rowData, Vector columnNames
-            super(rowData, columnNames);  // 调用父类的构造方法
-        }
-        // 重写JTable类的getTableHeader()方法
-        public JTableHeader getTableHeader() {                  // 定义表格头
-            JTableHeader tableHeader = super.getTableHeader();  // 获得表格头对象
-            tableHeader.setReorderingAllowed(false);//不允许拖动列头，以重新排序各列
-            tableHeader.setResizingAllowed(false);//不允许手动拖动来调整各列的大小
-            DefaultTableCellRenderer hr = (DefaultTableCellRenderer) tableHeader
-                    .getDefaultRenderer();                      // 获得表格头的单元格对象
-            //hr.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);     // 设置列名居中显示
-            return tableHeader;
-        }
-        // 重写JTable类的getDefaultRenderer(Class<?> columnClass)方法
-        public TableCellRenderer getDefaultRenderer(Class<?> columnClass) { // 定义单元格
-            DefaultTableCellRenderer cr = (DefaultTableCellRenderer) super
-                    .getDefaultRenderer(columnClass);                       // 获得表格的单元格对象
-            //cr.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);     // 设置单元格内容居中显示
-            return cr;
-        }
-        // 重写JTable类的isCellEditable(int row, int column)方法
-        public boolean isCellEditable(int row, int column) {  // 表格不可编辑---
-            return false;
-        }
-    }
+
     public class MyButtonRender implements TableCellRenderer {
         public JPanel jp;
         public JTable table;

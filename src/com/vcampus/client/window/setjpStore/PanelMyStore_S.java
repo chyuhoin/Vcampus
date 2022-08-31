@@ -138,7 +138,7 @@ public class PanelMyStore_S  extends JPanel{
                 goods.setPrice(Inform.txtPrice.getText());
                 goods.setNum(Integer.valueOf(Inform.txtNum.getText()));
 
-                System.out.println(goods);
+//                System.out.println(goods);
                 try {
                     goods.setPicture(StringAndImage.ImageToString(ImgPath));
                 } catch (IOException ioException) {

@@ -160,9 +160,11 @@ public class PanelCourseSelection_S extends JPanel {
                 tempTea.setTeacherID(lessonG.get(i).getTeacherID());
                 Gson gson = new Gson();
                 String s = gson.toJson(tempTea);
-                passer.send(new Message("admin", s, "lesson", "showstatussteacher"));
-
-                Message msg = passer.receive();
+                Message msg =null;
+                synchronized (passer) {
+                    passer.send(new Message("admin", s, "lesson", "showstatussteacher"));
+                    msg = passer.receive();
+                }
                 Map<String, java.util.List<Teacher>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, java.util.List<Teacher>>>() {
                 }.getType());
                 List<Teacher> res = map.get("res");
@@ -188,15 +190,11 @@ public class PanelCourseSelection_S extends JPanel {
         student.setStudentID(studentID);
         Gson gson = new Gson();
         String s = gson.toJson(student);
-        passer.send(new Message("admin", s, "lesson", "showstatusstudent"));
-
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException interruptedException) {
-            interruptedException.printStackTrace();
-        }
-
-        Message msg = passer.receive();
+        Message msg =null;
+        synchronized (passer) {
+           passer.send(new Message("admin", s, "lesson", "showstatusstudent"));
+           msg = passer.receive();
+       }
         Map<String, java.util.List<Student>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, java.util.List<Student>>>() {
         }.getType());
         List<Student> res = map.get("res");

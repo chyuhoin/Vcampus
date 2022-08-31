@@ -32,6 +32,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -325,7 +326,7 @@ public class PanelCreateCourse extends JPanel{
         panelTeacher.add(lblHint1);panelTeacher.add(lblHint2);
         panelTeacher.add(btnNext2);
         panelTeacher.add(btnReturn1);
-        setTable(columnNames1,tableData1,tablePanel1,table1,scrollPane1,1200,400,1);
+        setTable(columnNames1,tableData1,tablePanel1,table1,scrollPane1,1100,400,1);
         panelTeacher.add(tablePanel1);
         panelTeacher.updateUI();
         panelTeacher.repaint();
@@ -359,7 +360,11 @@ public class PanelCreateCourse extends JPanel{
     {
         System.out.println("构件表格");
         DefaultTableModel model= new DefaultTableModel(data,title);
-        table=new MyTable(model);
+        Integer[] tempInt=null;
+        if(title.length==2)
+            tempInt= new Integer[]{1};//教室
+        else tempInt= new Integer[]{4};//老师
+        table=new MyTable(model, tempInt);
         table.setRowSelectionAllowed(true);
         // 行高
         table.setRowHeight(30);// 设置行高

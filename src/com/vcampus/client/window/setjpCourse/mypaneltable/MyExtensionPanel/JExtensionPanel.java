@@ -206,6 +206,8 @@ public class JExtensionPanel extends JPanel implements MouseListener {
             }
         }
         label.setBorder(new RoundBorder(Color.GRAY));
+        label.setOpaque(true);
+        label.setBackground(new Color(245 ,245 ,245));
         label.setFont(new Font("黑体",Font.BOLD,25));
         label.setPreferredSize(new Dimension(this.getPreferredSize().width,80));
         this.add(this.label, BorderLayout.NORTH);
@@ -224,12 +226,14 @@ public class JExtensionPanel extends JPanel implements MouseListener {
                 this.label.setBorder(new RoundBorder());
                 if (null != this.panel) {
                     panel.setVisible(true);
+                    label.setBackground(new Color(232 ,232 ,232));
                 }
             } else {
                 this.label.setIcon(up_icon);
                 this.label.setBorder(new RoundBorder(Color.GRAY));
                 if (null != this.panel) {
                     panel.setVisible(false);
+                    label.setBackground(new Color(245 ,245 ,245));
                 }
             }
             this.updateUI();
@@ -238,10 +242,12 @@ public class JExtensionPanel extends JPanel implements MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
+        label.setBackground(new Color(211 ,211 ,211));
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
+        label.setBackground(new Color(245 ,245 ,245));
     }
 
     @Override

@@ -131,7 +131,7 @@ public class PanelMyPurchaseOrder_ST extends JPanel{
                 }
 
                 Message msg = passer.receive();
-                System.out.println(msg);
+//                System.out.println(msg);
                 Map<String,Object> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String,Object>>(){}.getType());
 
                 if(map.get("res").equals("OK"))
@@ -167,7 +167,7 @@ public class PanelMyPurchaseOrder_ST extends JPanel{
                 }
 
                 Message msg = passer.receive();
-                System.out.println(msg);
+//                System.out.println(msg);
                 Map<String,Object> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String,Object>>(){}.getType());
 
                 if(map.get("res").equals("OK"))

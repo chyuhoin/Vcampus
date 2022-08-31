@@ -220,35 +220,37 @@ public class StudentStatusEnquire_S extends JPanel {
 
         lblGender.setBounds(x + llDiffer, y + heightDiffer, lblWidth, lblHeight);
         txtGender.setBounds(x + llDiffer + ltDiffer1, y + heightDiffer, txtWidth, txtHeight);
-        String gender = (student.getSex() == 0) ? "男" : "女";
-        txtGender.setText(gender);
+        if (student.getSex() != null) {
+            String gender = (student.getSex() == 0) ? "男" : "女";
+            txtGender.setText(gender);
+        }
         setLabelFont(lblGender, txtGender);
 
         lblPolitic.setBounds(x + llDiffer * 2, y + heightDiffer, lblWidth, lblHeight);
         txtPolitic.setBounds(x + llDiffer * 2 + ltDiffer1 + ltDiffer2, y + heightDiffer, txtWidth, txtHeight);
-        txtPolitic.setText(student.getPolitics());
+//            txtPolitic.setText(student.getPolitics());
         setLabelFont(lblPolitic, txtPolitic);
 
         //第三行信息  年级 学制 学籍状态
         lblGrade.setBounds(x, y + heightDiffer * 2, lblWidth, lblHeight);
         txtGrade.setBounds(x + ltDiffer1, y + heightDiffer * 2, txtWidth, txtHeight);
-        txtGrade.setText(student.getGrade().toString());
+//            txtGrade.setText(student.getGrade().toString());
         setLabelFont(lblGrade, txtGrade);
 
         lblLengthOfSchooling.setBounds(x + llDiffer, y + heightDiffer * 2, lblWidth, lblHeight);
         txtLengthOfSchooling.setBounds(x + llDiffer + ltDiffer1, y + heightDiffer * 2, txtWidth, txtHeight);
-        txtLengthOfSchooling.setText(student.getEducationalSystem().toString());
+//            txtLengthOfSchooling.setText(student.getEducationalSystem().toString());
         setLabelFont(lblLengthOfSchooling, txtLengthOfSchooling);
 
         lblStatus.setBounds(x + llDiffer * 2, y + heightDiffer * 2, lblWidth, lblHeight);
         txtStatus.setBounds(x + llDiffer * 2 + ltDiffer1 + ltDiffer2, y + heightDiffer * 2, txtWidth, txtHeight);
-        txtStatus.setText(student.getStatus().toString());
+//            txtStatus.setText(student.getStatus().toString());
         setLabelFont(lblStatus, txtStatus);
 
         //第4行信息 院系 专业
         lblDep.setBounds(x, y + heightDiffer * 3, lblWidth, lblHeight);
         txtDep.setBounds(x + ltDiffer1, y + heightDiffer * 3, txtWidth * 3 - 30, txtHeight);
-        txtDep.setText(student.getSchool());
+//            txtDep.setText(student.getSchool());
         setLabelFont(lblDep, txtDep);
 
         lblMajor.setBounds(x + llDiffer * 2 - 70, y + heightDiffer * 3, lblWidth, lblHeight);
@@ -280,42 +282,21 @@ public class StudentStatusEnquire_S extends JPanel {
         setLabelFont(lblPhoneNum, txtPhoneNum);
         txtPhoneNum.setEditable(true);
 
-        add(lblName);
-        add(txtName);
-        add(lblStudentNum);
-        add(txtStudentNum);
-        add(lblIdNum);
-        add(txtIdNum);
-        add(lblNation);
-        add(txtNation);
-        add(lblGender);
-        add(txtGender);
-        add(lblPolitic);
-        add(txtPolitic);
-        add(lblGrade);
-        add(txtGrade);
-        add(lblLengthOfSchooling);
-        add(txtLengthOfSchooling);
-        add(lblStatus);
-        add(txtStatus);
-        add(lblDep);
-        add(txtDep);
-        add(lblMajor);
-        add(txtMajor);
-        add(lblGraduation);
-        add(txtGraduation);
-        add(lblPhoneNum);
-        add(txtPhoneNum);
-        add(lblClass);
-        add(txtClass);
-        add(lblIdNumber);
-        add(txtIdNumber);
-        add(lblImg);
+        if(student.getGrade()!=null && student.getSchool()!=null && student.getStatus()!=null) {
+            txtStudentNum.setText(student.getStudentNumber());
+            txtPolitic.setText(student.getPolitics());
+            txtGrade.setText(student.getGrade().toString());
+            txtLengthOfSchooling.setText(student.getEducationalSystem().toString());
+            txtStatus.setText(student.getStatus().toString());
+            txtDep.setText(student.getSchool());
 
-
-
-
-
+        }
+        add(lblName); add(txtName); add(lblStudentNum); add(txtStudentNum); add(lblIdNum); add(txtIdNum);
+        add(lblNation); add(txtNation); add(lblGender); add(txtGender); add(lblPolitic); add(txtPolitic);
+        add(lblGrade); add(txtGrade); add(lblLengthOfSchooling);
+        add(txtLengthOfSchooling); add(lblStatus); add(txtStatus);
+        add(lblDep); add(txtDep); add(lblMajor); add(txtMajor); add(lblGraduation); add(txtGraduation);
+        add(lblPhoneNum); add(txtPhoneNum);add(lblClass); add(txtClass);add(lblIdNumber); add(txtIdNumber);
     }
 
     public void setLabelFont(JLabel label,JTextField text)

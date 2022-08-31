@@ -55,7 +55,7 @@ public class SubContentPanel extends JPanel{
     private JLabel lblFlag=new JLabel();//状态标签1：已选、可选、已满
     private JLabel lblFlag2=new JLabel();//状态标签2：是否冲突
 
-    MessagePasser passer = ClientMessagePasser.getInstance();
+    final MessagePasser passer = ClientMessagePasser.getInstance();
 
     /**
      * 构造函数
@@ -174,9 +174,11 @@ public class SubContentPanel extends JPanel{
                     lesson.setInnerID(lessonID+tID);//设置内部ID
                     Gson gson = new Gson();
                     String s = gson.toJson(lesson);
-                    passer.send(new Message("admin", s, "lesson", "selectlesson"));
-
-                    Message msg = passer.receive();
+                    Message msg=null;
+                    synchronized (passer) {
+                        passer.send(new Message("admin", s, "lesson", "selectlesson"));
+                        msg = passer.receive();
+                    }
                     Map<String, String> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, String>>() {
                     }.getType());
                     String res = map.get("res");
@@ -240,9 +242,11 @@ public class SubContentPanel extends JPanel{
                     lesson.setInnerID(lessonID+tID);//设置内部ID
                     Gson gson = new Gson();
                     String s = gson.toJson(lesson);
-                    passer.send(new Message("admin", s, "lesson", "returnlesson"));
-
-                    Message msg = passer.receive();
+                    Message msg=null;
+                    synchronized (passer) {
+                        passer.send(new Message("admin", s, "lesson", "returnlesson"));
+                        msg = passer.receive();
+                    }
                     Map<String, String> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, String>>() {
                     }.getType());
                     String res = map.get("res");
@@ -282,11 +286,12 @@ public class SubContentPanel extends JPanel{
         temp.setInnerID(lessonID+Info[3].toString());//内部编号InnerID=lessonID+teacherID
         Gson gson=new Gson();
         String ss = gson.toJson(temp);
-        passer.send(new Message("admin", ss, "lesson", "getone"));
-
-
-
-        Message msg2 = passer.receive();
+        Message msg2=null;
+        //进程同步
+        synchronized (passer) {
+            passer.send(new Message("admin", ss, "lesson", "getone"));
+            msg2 = passer.receive();
+        }
         Map<String, java.util.List<Lesson>> map2 = new Gson().fromJson(msg2.getData(), new TypeToken<HashMap<String, java.util.List<Lesson>>>() {
         }.getType());
         List<Lesson> res2 = map2.get("res");
@@ -399,9 +404,11 @@ public class SubContentPanel extends JPanel{
         lesson.setInnerID(lessonID+teacherID);//设置内部ID
         Gson gson = new Gson();
         String s = gson.toJson(lesson);
-        passer.send(new Message("admin", s, "lesson", "showlesson"));
-
-        Message msg = passer.receive();
+        Message msg = null;
+        synchronized (passer) {
+            passer.send(new Message("admin", s, "lesson", "showlesson"));
+            msg = passer.receive();
+        }
         Map<String, String> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, String>>() {
         }.getType());
         String res = map.get("res");
