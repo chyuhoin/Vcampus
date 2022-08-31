@@ -38,13 +38,13 @@ public class SetJPUser3 {
         //标题
         JLabel lbl = new JLabel("权限更改");
         jp1.add(lbl);
-        lbl.setFont(new Font("黑体", Font.BOLD, 50));
+        lbl.setFont(new Font("宋体", Font.BOLD, 50));
         layout_Spring.putConstraint(layout_Spring.NORTH, lbl, 20, layout_Spring.NORTH, jp1);  //标签1北侧——>容器北侧
         layout_Spring.putConstraint(layout_Spring.WEST, lbl, 20, layout_Spring.WEST, jp1);
         //文本
         JLabel textlbl = new JLabel("查询要变更权限的用户：");
         jp1.add(textlbl);
-        textlbl.setFont(new Font("黑体", Font.BOLD, 20));
+        textlbl.setFont(new Font("宋体", Font.BOLD, 20));
         layout_Spring.putConstraint(layout_Spring.NORTH, textlbl, 20, layout_Spring.SOUTH, lbl);  //标签1北侧——>容器北侧
         layout_Spring.putConstraint(layout_Spring.WEST, textlbl, 60, layout_Spring.WEST, jp1);
     }

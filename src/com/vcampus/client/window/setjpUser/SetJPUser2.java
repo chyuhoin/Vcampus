@@ -240,20 +240,20 @@ public class SetJPUser2 {
         //标题
         JLabel lbl2 = new JLabel("信息查询");
         jp2.add(lbl2);
-        lbl2.setFont(new Font("黑体", Font.BOLD, 50));
-        layout_Spring.putConstraint(layout_Spring.NORTH, lbl2, 20, layout_Spring.NORTH, jp2);  //标签1北侧——>容器北侧
-        layout_Spring.putConstraint(layout_Spring.WEST, lbl2, 20, layout_Spring.WEST, jp2);    //标签1西侧——>容器西侧
+        lbl2.setFont(new Font("宋体", Font.BOLD, 30));
+        layout_Spring.putConstraint(layout_Spring.NORTH, lbl2, 20+100+20, layout_Spring.NORTH, jp2);  //标签1北侧——>容器北侧
+        layout_Spring.putConstraint(layout_Spring.WEST, lbl2, 20+100+160, layout_Spring.WEST, jp2);    //标签1西侧——>容器西侧
         //按钮
         JButton btn1=new JButton("编辑");
         JButton btn2=new JButton("返回");
         if(!strList[2].equals("管理员"))
             jp2.add(btn1);//管理员没有编辑按钮
         jp2.add(btn2);
-        btn1.setFont(new Font("黑体", Font.BOLD, 20));
-        btn2.setFont(new Font("黑体", Font.BOLD, 20));
-        layout_Spring.putConstraint(layout_Spring.NORTH, btn2, 20, layout_Spring.NORTH, jp2);//返回按钮
-        layout_Spring.putConstraint(layout_Spring.EAST, btn2, -20, layout_Spring.EAST, jp2);
-        layout_Spring.putConstraint(layout_Spring.NORTH, btn1, 20, layout_Spring.NORTH, jp2);//编辑按钮
+        btn1.setFont(new Font("宋体", Font.BOLD, 20));
+        btn2.setFont(new Font("宋体", Font.BOLD, 20));
+        layout_Spring.putConstraint(layout_Spring.NORTH, btn2, 400, layout_Spring.NORTH, jp2);//返回按钮
+        layout_Spring.putConstraint(layout_Spring.EAST, btn2, -357, layout_Spring.EAST, jp2);
+        layout_Spring.putConstraint(layout_Spring.NORTH, btn1, 400, layout_Spring.NORTH, jp2);//编辑按钮
         layout_Spring.putConstraint(layout_Spring.EAST, btn1, -30, layout_Spring.WEST, btn2);
         //信息列表：
         //标签
@@ -265,7 +265,7 @@ public class SetJPUser2 {
         for(int i=0;i<lblList.length;i++){
             JLabel lbli=lblList[i];
             jp2.add(lbli);
-            lbli.setFont(new Font("黑体", Font.BOLD, 20));
+            lbli.setFont(new Font("宋体", Font.BOLD, 20));
             layout_Spring.putConstraint(layout_Spring.NORTH, lbli, 60+50*i, layout_Spring.SOUTH, lbl2);  //标签1北侧——>容器北侧
             layout_Spring.putConstraint(layout_Spring.EAST, lbli, 50, layout_Spring.EAST, lbl2);    //标签1西侧——>容器西侧
         }
@@ -281,10 +281,10 @@ public class SetJPUser2 {
             JTextField texti=textList[i];
             jp2.add(texti);
             texti.setEditable(false);
-            texti.setFont(new Font("黑体", Font.BOLD, 20));
+            texti.setFont(new Font("宋体", Font.BOLD, 20));
             layout_Spring.putConstraint(layout_Spring.NORTH, texti, 0, layout_Spring.NORTH, lblList[i]);
             layout_Spring.putConstraint(layout_Spring.WEST, texti, 20, layout_Spring.EAST, lblList[i]);
-            texti.setColumns(60);
+            texti.setColumns(30);
         }
 
         //编辑按钮监听
@@ -313,22 +313,22 @@ public class SetJPUser2 {
         //标题
         JLabel lbl3 = new JLabel("信息编辑");
         jp3.add(lbl3);
-        lbl3.setFont(new Font("黑体", Font.BOLD, 50));
-        layout_Spring.putConstraint(layout_Spring.NORTH, lbl3, 20, layout_Spring.NORTH, jp3);  //标签1北侧——>容器北侧
-        layout_Spring.putConstraint(layout_Spring.WEST, lbl3, 20, layout_Spring.WEST, jp3);    //标签1西侧——>容器西侧
+        lbl3.setFont(new Font("宋体", Font.BOLD, 30));
+        layout_Spring.putConstraint(layout_Spring.NORTH, lbl3, 20+100+20, layout_Spring.NORTH, jp3);  //标签1北侧——>容器北侧
+        layout_Spring.putConstraint(layout_Spring.WEST, lbl3, 20+100+160, layout_Spring.WEST, jp3);    //标签1西侧——>容器西侧
         //按钮
         JButton btn3=new JButton("确认");
         JButton btn4=new JButton("取消");
         JButton btn5=new JButton("注销该用户");
         jp3.add(btn3);jp3.add(btn4);jp3.add(btn5);
-        btn3.setFont(new Font("黑体", Font.BOLD, 20));
-        btn4.setFont(new Font("黑体", Font.BOLD, 20));
-        btn5.setFont(new Font("黑体", Font.BOLD, 20));
-        layout_Spring.putConstraint(layout_Spring.NORTH, btn4, 20, layout_Spring.NORTH, jp3);//取消按钮
-        layout_Spring.putConstraint(layout_Spring.EAST, btn4, -20, layout_Spring.EAST, jp3);
-        layout_Spring.putConstraint(layout_Spring.NORTH, btn3, 20, layout_Spring.NORTH, jp3);//确认按钮
+        btn3.setFont(new Font("宋体", Font.BOLD, 20));
+        btn4.setFont(new Font("宋体", Font.BOLD, 20));
+        btn5.setFont(new Font("宋体", Font.BOLD, 20));
+        layout_Spring.putConstraint(layout_Spring.NORTH, btn4, 400, layout_Spring.NORTH, jp3);//取消按钮
+        layout_Spring.putConstraint(layout_Spring.EAST, btn4, -355, layout_Spring.EAST, jp3);
+        layout_Spring.putConstraint(layout_Spring.NORTH, btn3, 400, layout_Spring.NORTH, jp3);//确认按钮
         layout_Spring.putConstraint(layout_Spring.EAST, btn3, -30, layout_Spring.WEST, btn4);
-        layout_Spring.putConstraint(layout_Spring.SOUTH, btn5, -60, layout_Spring.SOUTH, jp3);//注销
+        layout_Spring.putConstraint(layout_Spring.SOUTH, btn5, 400, layout_Spring.SOUTH, jp3);//注销
         layout_Spring.putConstraint(layout_Spring.EAST, btn5, -20, layout_Spring.EAST, jp3);
 
         //信息列表：
@@ -341,7 +341,7 @@ public class SetJPUser2 {
         for(int i=0;i<lblList.length;i++){
             JLabel lbli=lblList[i];
             jp3.add(lbli);
-            lbli.setFont(new Font("黑体", Font.BOLD, 20));
+            lbli.setFont(new Font("宋体", Font.BOLD, 20));
             layout_Spring.putConstraint(layout_Spring.NORTH, lbli, 60+50*i, layout_Spring.SOUTH, lbl3);  //标签1北侧——>容器北侧
             layout_Spring.putConstraint(layout_Spring.EAST, lbli, 50, layout_Spring.EAST, lbl3);    //标签1西侧——>容器西侧
         }
@@ -357,10 +357,10 @@ public class SetJPUser2 {
             JTextField texti=textList[i];
             jp3.add(texti);
             texti.setEditable(true);
-            texti.setFont(new Font("黑体", Font.BOLD, 20));
+            texti.setFont(new Font("宋体", Font.BOLD, 20));
             layout_Spring.putConstraint(layout_Spring.NORTH, texti, 0, layout_Spring.NORTH, lblList[i]);
             layout_Spring.putConstraint(layout_Spring.WEST, texti, 20, layout_Spring.EAST, lblList[i]);
-            texti.setColumns(60);
+            texti.setColumns(30);
             strList[i]=texti.getText().trim();//获取文本框内信息
         }
         textList[1].setEditable(true);
@@ -439,24 +439,24 @@ public class SetJPUser2 {
         //标题
         JLabel lbl4 = new JLabel("注册新用户");
         jp4.add(lbl4);
-        lbl4.setFont(new Font("黑体", Font.BOLD, 50));
-        layout_Spring.putConstraint(layout_Spring.NORTH, lbl4, 20, layout_Spring.NORTH, jp4);  //标签1北侧——>容器北侧
-        layout_Spring.putConstraint(layout_Spring.WEST, lbl4, 20, layout_Spring.WEST, jp4);    //标签1西侧——>容器西侧
+        lbl4.setFont(new Font("宋体", Font.BOLD, 30));
+        layout_Spring.putConstraint(layout_Spring.NORTH, lbl4, 20+100, layout_Spring.NORTH, jp4);  //标签1北侧——>容器北侧
+        layout_Spring.putConstraint(layout_Spring.WEST, lbl4, 20+100+180, layout_Spring.WEST, jp4);    //标签1西侧——>容器西侧
         //语句
         JLabel lbltext = new JLabel("·请输入新用户的信息：");
         jp4.add(lbltext);
-        lbltext.setFont(new Font("黑体", Font.BOLD, 30));
-        layout_Spring.putConstraint(layout_Spring.NORTH, lbltext, 20, layout_Spring.SOUTH, lbl4);  //标签1北侧——>容器北侧
+        lbltext.setFont(new Font("宋体", Font.BOLD, 25));
+        layout_Spring.putConstraint(layout_Spring.NORTH, lbltext, 30, layout_Spring.SOUTH, lbl4);  //标签1北侧——>容器北侧
         layout_Spring.putConstraint(layout_Spring.WEST, lbltext, 60, layout_Spring.WEST, lbl4);
         //按钮
         JButton btn1=new JButton("确认");
         JButton btn2=new JButton("取消");
         jp4.add(btn1);jp4.add(btn2);
-        btn1.setFont(new Font("黑体", Font.BOLD, 20));
-        btn2.setFont(new Font("黑体", Font.BOLD, 20));
-        layout_Spring.putConstraint(layout_Spring.NORTH, btn2, 20, layout_Spring.NORTH, jp4);//取消按钮
-        layout_Spring.putConstraint(layout_Spring.EAST, btn2, -20, layout_Spring.EAST, jp4);
-        layout_Spring.putConstraint(layout_Spring.NORTH, btn1, 20, layout_Spring.NORTH, jp4);//确认按钮
+        btn1.setFont(new Font("宋体", Font.BOLD, 20));
+        btn2.setFont(new Font("宋体", Font.BOLD, 20));
+        layout_Spring.putConstraint(layout_Spring.NORTH, btn2, 430, layout_Spring.NORTH, jp4);//取消按钮
+        layout_Spring.putConstraint(layout_Spring.EAST, btn2, -450, layout_Spring.EAST, jp4);
+        layout_Spring.putConstraint(layout_Spring.NORTH, btn1, 430, layout_Spring.NORTH, jp4);//确认按钮
         layout_Spring.putConstraint(layout_Spring.EAST, btn1, -30, layout_Spring.WEST, btn2);
         //信息列表：
         //标签
@@ -468,8 +468,8 @@ public class SetJPUser2 {
         for(int i=0;i<lblList.length;i++){
             JLabel lbli=lblList[i];
             jp4.add(lbli);
-            lbli.setFont(new Font("黑体", Font.BOLD, 20));
-            layout_Spring.putConstraint(layout_Spring.NORTH, lbli, 60+50*i, layout_Spring.SOUTH, lbltext);  //标签1北侧——>容器北侧
+            lbli.setFont(new Font("宋体", Font.BOLD, 20));
+            layout_Spring.putConstraint(layout_Spring.NORTH, lbli, 40+50*i, layout_Spring.SOUTH, lbltext);  //标签1北侧——>容器北侧
             layout_Spring.putConstraint(layout_Spring.EAST, lbli, 50, layout_Spring.EAST, lbl4);
         }
         //文本框
@@ -482,13 +482,13 @@ public class SetJPUser2 {
             texti.setFont(new Font("黑体", Font.BOLD, 20));
             layout_Spring.putConstraint(layout_Spring.NORTH, texti, 0, layout_Spring.NORTH, lblList[i]);
             layout_Spring.putConstraint(layout_Spring.WEST, texti, 20, layout_Spring.EAST, lblList[i]);
-            texti.setColumns(60);
+            texti.setColumns(20);
         }
         textList[1].setText("123456");//默认密码
         textList[1].setEditable(false);
         JLabel lbl_pass=new JLabel("*默认密码");//默认密码标签
         jp4.add(lbl_pass);
-        lbl_pass.setFont(new Font("黑体", Font.BOLD, 20));
+        lbl_pass.setFont(new Font("宋体", Font.BOLD, 20));
         layout_Spring.putConstraint(layout_Spring.NORTH, lbl_pass, 0, layout_Spring.NORTH, textList[1]);  //标签1北侧——>容器北侧
         layout_Spring.putConstraint(layout_Spring.WEST, lbl_pass, 20, layout_Spring.EAST, textList[1]);
 
