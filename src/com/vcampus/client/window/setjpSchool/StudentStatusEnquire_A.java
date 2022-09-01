@@ -152,7 +152,7 @@ public class StudentStatusEnquire_A extends JPanel {
         Message msg = passer.receive();
         Map<String,List<Student>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String,List<Student>>>(){}.getType());
         List<Student> res = map.get("res");
-        System.out.println(res.get(0));
+        //System.out.println(res.get(0));
 
         if(res.size()!=0) {
             t= res.get(0);

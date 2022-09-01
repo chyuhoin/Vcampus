@@ -15,6 +15,7 @@
 package com.vcampus.client.window.setjpCourse;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.vcampus.dao.utils.StringAndImage;
 import com.vcampus.net.ClientMessagePasser;
 import com.vcampus.net.Message;
 import com.vcampus.net.MessagePasser;
@@ -30,6 +31,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -44,8 +46,16 @@ public class PanelCreateCourse extends JPanel{
     int x=300,y=120;//起始坐标
     int lblWidth=300,lblHeight=40,txtWidth=500, txtHeight=40,btnWidth = 80, btnHeight = 30;
     int heightDiffer=60, llDiffer1=330,ltDiffer1=180;;//0-上下两行高度差 1-左起两列标签文本框间隔 2-第三列标签文本框间隔
-    JLabel lblHint1 = new JLabel("填写课程信息");JLabel lblHint2 = new JLabel("选择任课老师");//设置标签及文本框
-    JLabel lblHint3 = new JLabel("选择上课教室");
+    JLabel lblHint1 = new JLabel();//填写课程信息-绿
+    JLabel lblHint2 = new JLabel();//选择任课老师-绿
+    JLabel lblHint3 = new JLabel();//选择上课教室-绿
+    //JLabel lblHint1 = new JLabel("填写课程信息");//填写课程信息-蓝
+    //JLabel lblHint2 = new JLabel("选择任课老师");//选择任课老师-蓝
+    //JLabel lblHint3 = new JLabel("选择上课教室");//选择上课教室-蓝
+    ImageIcon img1 = new ImageIcon("Vcampus/img//1.png");// 这是背景图片 .png .jpg .gif 等格式的图片都可以
+    ImageIcon img2 = new ImageIcon("Vcampus/img//2.png");
+    ImageIcon img3 = new ImageIcon("Vcampus/img//3.png");
+
     JLabel lblName = new JLabel("课程名称");JTextField txtName = new JTextField();
     JLabel lblIdNum = new JLabel("课程编号");JTextField txtIdNum = new JTextField();
     JLabel lblDep = new JLabel("开课学院");JTextField txtDep = new JTextField();
@@ -76,18 +86,26 @@ public class PanelCreateCourse extends JPanel{
     {
         this.setLayout(cardLayout);
         panelCourse.setLayout(null);panelTeacher.setLayout(null);panelRoom.setLayout(null);
-        lblHint1.setBounds(220,40,lblWidth,lblHeight);lblHint1.setFont(new Font("宋体",Font.BOLD, 28));
-        lblHint2.setBounds(220+llDiffer1,40,lblWidth,lblHeight);lblHint2.setFont(new Font("宋体",Font.BOLD, 28));
-        lblHint3.setBounds(220+llDiffer1*2,40,lblWidth,lblHeight);lblHint3.setFont(new Font("宋体",Font.BOLD, 28));
+
+        img1.setImage(img1.getImage().getScaledInstance(250,40,Image.SCALE_DEFAULT));//这里设置图片大小，目前是20*20
+        lblHint1.setIcon(img1);
+        img2.setImage(img2.getImage().getScaledInstance(250,40,Image.SCALE_DEFAULT));//这里设置图片大小，目前是20*20
+        lblHint2.setIcon(img2);
+        img3.setImage(img3.getImage().getScaledInstance(250,40,Image.SCALE_DEFAULT));//这里设置图片大小，目前是20*20
+        lblHint3.setIcon(img3);
+
+        lblHint1.setBounds(180,40,250,40);//lblHint1.setFont(new Font("宋体",Font.BOLD, 28));
+        lblHint2.setBounds(180+llDiffer1,40,250,40);//lblHint2.setFont(new Font("宋体",Font.BOLD, 28));
+        lblHint3.setBounds(180+llDiffer1*2,40,250,40);//lblHint3.setFont(new Font("宋体",Font.BOLD, 28));
         setButtonFont(btnNext1);btnNext1.setBounds(760,520,btnWidth*2,btnHeight);
-        setButtonFont(btnNext2);btnNext2.setBounds(760,520,btnWidth*2,btnHeight);
+        setButtonFont(btnNext2);btnNext2.setBounds(760+40,520,btnWidth*2,btnHeight);
         setButtonFont(btnFinish);btnFinish.setBounds(760,520,btnWidth*2,btnHeight);
-        setButtonFont(btnReturn1);btnReturn1.setBounds(1000,520,btnWidth,btnHeight);
+        setButtonFont(btnReturn1);btnReturn1.setBounds(1000+40,520,btnWidth,btnHeight);
         setButtonFont(btnReturn2);btnReturn2.setBounds(1000,520,btnWidth,btnHeight);
         radioBtn01.setBounds(500,487,80,25);radioBtn01.setFont(new Font("宋体",Font.BOLD, 18));
         radioBtn02.setBounds(600,487,80,25);radioBtn02.setFont(new Font("宋体",Font.BOLD, 18));
         btnGroup.add(radioBtn01);btnGroup.add(radioBtn02);
-        tablePanel1.setLayout(null);tablePanel1.setBounds(10,100,1200,400);
+        tablePanel1.setLayout(null);tablePanel1.setBounds(50,100,1200,400);
         tablePanel2.setLayout(null);tablePanel2.setBounds(330,100,600,400);
         for(int i=0;i<6;i++)//设置其余坐标和字体
         {   labels[i].setBounds(x,y+heightDiffer*i,lblWidth,lblHeight);
