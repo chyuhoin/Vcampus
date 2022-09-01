@@ -73,10 +73,10 @@ public class TabbedPanelLibrary_A extends JTabbedPane {
 
 
             //选项卡3的内容
-            JPanel manageBook = new PanelBookManage();
+            JPanel manageBook = new PanelBookManage_A();
 
             //选项卡4的内容
-            JPanel borrowReturnBook = new PanelBorrowAndReturn();
+            JPanel borrowReturnBook = new PanelBorrowAndReturn_A();
 
             //选项卡5的内容
             jp15.setLayout(new CardLayout(10, 10));
