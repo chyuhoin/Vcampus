@@ -56,12 +56,12 @@ public class PanelGoodsSimpleInform extends JPanel {
         ImageIcon img = null;// 这是背景图片 .png .jpg .gif 等格式的图片都可以
         if(goods.getPicture()==null)
         {
-            System.out.println("没有图片"+goods.getPicture());
+//            System.out.println("没有图片"+goods.getPicture());
             img = new ImageIcon("Pictures//noFig.png");
         }
         else
         {
-            System.out.println("有图片"+goods.getPicture());
+//            System.out.println("有图片"+goods.getPicture());
             try {
                 Image Img = Toolkit.getDefaultToolkit().createImage(StringAndImage.StringToImage(goods.getPicture()));
                 img = new ImageIcon(Img);
