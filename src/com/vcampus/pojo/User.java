@@ -2,11 +2,24 @@ package com.vcampus.pojo;
 
 import java.io.Serializable;
 
+/**
+ * 用户
+ *
+ * @author 刘骐
+ * @date 2022/09/01
+ */
 public class User implements Serializable {
     String studentID;
     String password;
     Integer type;
 
+    /**
+     * 用户
+     *
+     * @param studentID 学生一卡通
+     * @param password  密码
+     * @param type      类型
+     */
     public User(String studentID, String password, Integer type) {
         this.studentID = studentID;
         this.password = password;

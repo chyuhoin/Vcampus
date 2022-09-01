@@ -1,5 +1,11 @@
 package com.vcampus.pojo;
 
+/**
+ * 老师
+ *
+ * @author 刘骐
+ * @date 2022/09/01
+ */
 public class Teacher {
     String teacherID;//实际上就是教师的一卡通号
     String teacherName;
@@ -7,6 +13,17 @@ public class Teacher {
     String abledMajor;
     String time;
     Integer status;
+
+    /**
+     * 老师
+     *
+     * @param teacherID   老师id
+     * @param teacherName 老师名字
+     * @param school      学院
+     * @param abledMajor  专业
+     * @param time        时间
+     * @param status      状态
+     */
     public Teacher(String teacherID, String teacherName, String school, String abledMajor, String time,Integer status) {
         this.teacherID = teacherID;
         this.teacherName = teacherName;

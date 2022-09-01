@@ -4,6 +4,12 @@ import com.vcampus.dao.utils.StringAndImage;
 
 import java.io.Serializable;
 
+/**
+ * 学生
+ *
+ * @author 刘骐
+ * @date 2022/09/01
+ */
 public class Student implements Serializable {
     String studentID;
     String name;
@@ -24,7 +30,28 @@ public class Student implements Serializable {
     String graduateTime;//毕业时间
 
     Integer status2;
-    //path为图片所在路径
+
+    /**
+     * 学生
+     *
+     * @param studentID         学生一卡通
+     * @param name              名字
+     * @param studentNumber     学号
+     * @param IDcard            身份证
+     * @param school            学院
+     * @param major             专业
+     * @param sex               性别
+     * @param classs            班级
+     * @param educationalSystem 学制
+     * @param politics          政治面貌
+     * @param grade             年级
+     * @param phoneNumber       电话号码
+     * @param status            状态
+     * @param path              图片路径
+     * @param nation            民族
+     * @param graduateTime      毕业时间
+     * @param status2           status2
+     *///path为图片所在路径
     public Student(String studentID, String name, String studentNumber, String IDcard, String school, String major, Integer sex, String classs, Integer educationalSystem, String politics, Integer grade, String phoneNumber, Integer status, String path,String nation,String graduateTime,Integer status2) {
         this.studentID = studentID;
         this.name = name;

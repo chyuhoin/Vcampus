@@ -2,6 +2,12 @@ package com.vcampus.pojo;
 
 import java.io.Serializable;
 
+/**
+ * 课程
+ *
+ * @author 刘骐
+ * @date 2022/09/01
+ */
 public class Lesson implements Serializable {
     String innerID;
     String lessonID;
@@ -17,7 +23,22 @@ public class Lesson implements Serializable {
     Integer length;
     Integer status;
 
-    //lesson的innerID为lessonID+teacherID，不需要手动输入
+    /**
+     * 课程
+     *
+     * @param lessonID  教训id
+     * @param name      名字
+     * @param teacherID 老师id
+     * @param maxSize   最大尺寸
+     * @param leftSize  离开了大小
+     * @param time      时间
+     * @param school    学校
+     * @param major     专业
+     * @param isExam    是否考试
+     * @param classroom 教室
+     * @param length    长度
+     * @param status    状态
+     *///lesson的innerID为lessonID+teacherID，不需要手动输入
     public Lesson(String lessonID, String name, String teacherID, Integer maxSize, Integer leftSize, String time, String school, String major, Integer isExam,String classroom,Integer length,Integer status) {
         if(teacherID == null)this.innerID =lessonID;
         else this.innerID = lessonID+teacherID;

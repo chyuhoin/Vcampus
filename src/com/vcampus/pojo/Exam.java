@@ -11,6 +11,13 @@ public class Exam {
     String teacherID;
     String time;
 
+    /**
+     * 考试
+     *
+     * @param innerID   内部id
+     * @param teacherID 老师id
+     * @param time      时间
+     */
     public Exam(String innerID, String teacherID, String time) {
         this.innerID = innerID;
         this.teacherID = teacherID;

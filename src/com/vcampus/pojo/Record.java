@@ -2,12 +2,24 @@ package com.vcampus.pojo;
 
 import java.util.Date;
 
-//商品交易记录类
+/**
+ * 交易记录
+ *
+ * @author 刘骐
+ * @date 2022/09/01
+ *///商品交易记录类
 public class Record {
     String studentID;
     String goodsID;
     String date;
     Integer status;//0表示尚未确认收货，1表示确认收货
+
+    /**
+     * 记录
+     *
+     * @param studentID 学生一卡通
+     * @param goodsID   商品id
+     */
     public Record(String studentID, String goodsID) {
         this.studentID = studentID;
         this.goodsID = goodsID;

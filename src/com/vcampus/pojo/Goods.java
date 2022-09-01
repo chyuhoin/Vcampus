@@ -2,6 +2,12 @@ package com.vcampus.pojo;
 
 import com.vcampus.dao.utils.StringAndImage;
 
+/**
+ * 货物
+ *
+ * @author 刘骐
+ * @date 2022/09/01
+ */
 public class Goods {
     String goodsID;
     String goodsName;
@@ -13,6 +19,19 @@ public class Goods {
     Integer num;
     Integer type;
 
+    /**
+     * 货物
+     *
+     * @param goodsID   商品id
+     * @param goodsName 商品名称
+     * @param seller    卖方
+     * @param price     价格
+     * @param state     状态
+     * @param dealDate  交易日期
+     * @param path      图片
+     * @param num       数量
+     * @param type      类型
+     */
     public Goods(String goodsID, String goodsName, String seller, String price, String state, String dealDate, String path, Integer num, Integer type) {
         this.goodsID = goodsID;
         this.goodsName = goodsName;

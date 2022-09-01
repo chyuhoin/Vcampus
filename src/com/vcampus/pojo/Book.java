@@ -5,6 +5,12 @@ import com.vcampus.dao.utils.StringAndImage;
 import java.io.IOException;
 import java.io.Serializable;
 
+/**
+ * 书
+ *
+ * @author 12107
+ * @date 2022/09/01
+ */
 public class Book implements Serializable {
     private String bookID;
     private String bookName;
@@ -13,6 +19,16 @@ public class Book implements Serializable {
     private Integer leftSize;
     private String image;
 
+    /**
+     * 书
+     *
+     * @param bookID   书id
+     * @param bookName 书名字
+     * @param author   作者
+     * @param type     类型
+     * @param leftSize 剩余数量
+     * @param path     图片路径
+     */
     public Book(String bookID, String bookName, String author, String type, Integer leftSize, String path){
         //最后一个path是本地图片的路径
         this.bookID = bookID;
