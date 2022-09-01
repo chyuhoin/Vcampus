@@ -28,10 +28,8 @@ public class TabbedPanelCourse_T extends JTabbedPane {
     public TabbedPanelCourse_T(int flag,String ID)
     {
         if(flag==2) {
-            //JTabbedPane jtbp=new JTabbedPane();	//创建选项卡
             this.setTabPlacement(1);
             this.setBounds(0, 0, 1200, 650);//注意！！！！！！！！！！！！！！！！！！！！！！！
-
 
             JPanel teacherInform = new PanelTeacherInform(ID);
             JPanel manageStudent = new PanelStudentManage_T(ID);
@@ -53,14 +51,11 @@ public class TabbedPanelCourse_T extends JTabbedPane {
                 @Override public void mouseExited(MouseEvent e) {}
             });
 
-
             this.addTab("个人信息", null, teacherInform, "个人信息");
             this.addTab("学生管理", null, manageStudent, "学生管理");
             this.addTab("课程查询", null, enquireCourse, "课程查询");
             this.addTab("我的课表", null, teacherTimeTable, "我的课表");
             this.setFont(new Font("宋体", Font.BOLD, 24));
         }
-
-        //jp.add(jtbp);
     }
 }

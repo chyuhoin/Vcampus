@@ -30,13 +30,15 @@ import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+/**
+ * 学生管理-教师界面 输入课程编号可以查看自己所教课程的全部学生名单，可以对学生成绩进行修改，但只能查看自己所教授的课程
+ * @author 韩宇
+ * @date 2022/08/28
+ */
 public class PanelStudentManage_T extends JPanel {
     JButton btnInquire = new JButton("查询");
     JLabel lblHintLesson = new JLabel("课程编号 ：");
-    //JLabel lblHintTeacher = new JLabel("教师一卡通号 ：");
     JTextField txtLessonID = new JTextField();
-    //JTextField txtTeacherID = new JTextField();
     JButton btnMark = new JButton("添加成绩");
 
     MyTable table=null;
@@ -48,7 +50,9 @@ public class PanelStudentManage_T extends JPanel {
     Object[][] tableData=new Object[][]{};//保存所有用户信息
     MessagePasser passer = ClientMessagePasser.getInstance();
 
-
+    /**
+     * 构造函数，设置页面各控件以及按钮响应函数和信息传递
+     */
     public PanelStudentManage_T(String ID)
     {
         this.setLayout(null);
@@ -59,27 +63,15 @@ public class PanelStudentManage_T extends JPanel {
         lblHintLesson.setBounds(x+460,y,200,40);
         txtLessonID.setBounds(x+600,y+5,txtWidth*2,txtHeight);
         txtLessonID.setFont(new Font("楷体", Font.BOLD, 20));
-        /*
-        lblHintTeacher.setFont(new Font("宋体", Font.BOLD, 24));
-        lblHintTeacher.setBounds(x+420,y,200,40);
-        txtTeacherID.setFont(new Font("楷体", Font.BOLD, 20));
-        txtTeacherID.setBounds(x+610,y+5,txtWidth*2,txtHeight);
-
-         */
 
         btnInquire.setFont(new Font("宋体",Font.BOLD, 20));
         btnInquire.setBounds(x+865,y+4,80,30);
         btnMark.setFont(new Font("宋体",Font.BOLD, 20));
         btnMark.setBounds(x+785,520,80*2,30);
         panel.setLayout(null);
-        panel.setBounds(130,100,1000,400);
+        panel.setBounds(100,100,1000,400);
 
-        this.add(btnInquire);
-        this.add(txtLessonID);
-        //this.add(txtTeacherID);
-        this.add(lblHintLesson);
-        //this.add(lblHintTeacher);
-        this.add(panel);
+        this.add(btnInquire);this.add(txtLessonID);this.add(lblHintLesson);this.add(panel);
 
         btnInquire.addActionListener(new ActionListener() {
             @Override
@@ -88,17 +80,14 @@ public class PanelStudentManage_T extends JPanel {
                 {
                     Lesson lesson=new Lesson();
                     Gson gson = new Gson();
-                    //String s = gson.toJson(lesson);
                     lesson.setInnerID(txtLessonID.getText()+ID);
                     String s = gson.toJson(lesson);
                     passer.send(new Message("teacher", s, "lesson", "getspecificteacher"));
-
                     try {
                         Thread.sleep(100);
                     } catch (InterruptedException interruptedException) {
                         interruptedException.printStackTrace();
                     }
-
                     Message msg1 = passer.receive();
                     Map<String, java.util.List<Student>> map = new Gson().fromJson(msg1.getData(), new TypeToken<HashMap<String, java.util.List<Student>>>(){}.getType());
                     java.util.List<Student> res1 = map.get("res");
@@ -125,8 +114,7 @@ public class PanelStudentManage_T extends JPanel {
                     else
                     { informFrame("未查询到学生名单！",true);}
                 }
-                else
-                {informFrame("请输入课程号！",true); }
+                else {informFrame("请输入课程号！",true); }
             }
         });
 
@@ -168,7 +156,9 @@ public class PanelStudentManage_T extends JPanel {
         });
     }
 
-
+    /**
+     * 设置表格
+     */
     public void setTable()
     {
         panel.removeAll();
@@ -187,7 +177,11 @@ public class PanelStudentManage_T extends JPanel {
         updateUI();
         repaint();
     }
-
+    /**
+     *提示窗口
+     * @param title 标题
+     * @param flag  true-警告窗口 false-提示窗口
+     */
     public void informFrame(String title,Boolean flag)
     {
         if(flag) { JOptionPane.showMessageDialog(this, title, "警告", JOptionPane.ERROR_MESSAGE);}

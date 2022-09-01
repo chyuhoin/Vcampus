@@ -35,7 +35,7 @@ public class TabbedPanelCourse_S extends JTabbedPane {
         JTabbedPane JTP=this;
         if(flag==1) {
             this.setTabPlacement(1);
-            this.setBounds(0, 0, 1200, 650);//注意！！！！！！！！！！！！！！！！！！！！！！！
+            this.setBounds(0, 0, 1200, 650);
 
             JPanel jp11 = new PanelCourseSelection_S(ID);
             PanelViewCourse_S jp12 = new PanelViewCourse_S(ID);
@@ -74,6 +74,5 @@ public class TabbedPanelCourse_S extends JTabbedPane {
             });
         }
 
-        //jp.add(jtbp);
     }
 }

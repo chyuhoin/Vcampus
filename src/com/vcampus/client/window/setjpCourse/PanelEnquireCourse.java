@@ -31,6 +31,11 @@ import java.util.Map;
 
 import java.util.List;
 
+/**
+ * 课程查询界面，教师学生管理员通用
+ * @author 韩宇
+ * @date 2022/08/27
+ */
 public class PanelEnquireCourse extends JPanel {
     JButton btnInquire = new JButton("查询");
     String[] listData = new String[]{"选择搜索条件","课程名称", "课程编号", "授课教师", "开课学院","所属专业"};
@@ -43,6 +48,9 @@ public class PanelEnquireCourse extends JPanel {
     MessagePasser passer = ClientMessagePasser.getInstance();
     MyTablePanel_Course tableP=new MyTablePanel_Course(tableData,columnNames);
 
+    /**
+     * 构造函数，设置各控件位置，及按钮响应
+     */
     public PanelEnquireCourse ()
     {
         this.setLayout(null);
@@ -53,10 +61,8 @@ public class PanelEnquireCourse extends JPanel {
         comboBox.setBounds(x-110,y,220,40);
         comboBox.setFont(new Font("楷体", Font.BOLD, 24));
         comboBox.setOpaque(true);
-
         txtEnquire.setBounds(x+130,y,txtWidth*3,txtHeight);
         txtEnquire.setFont(new Font("楷体", Font.BOLD, 20));
-
         btnInquire.setFont(new Font("宋体",Font.BOLD, 20));
         btnInquire.setBounds(x+480,y,80,40);
 
@@ -64,7 +70,6 @@ public class PanelEnquireCourse extends JPanel {
         this.add(comboBox);
         this.add(txtEnquire);
         this.add(btnInquire);
-
 
         btnInquire.addActionListener(new ActionListener() {
             @Override
@@ -106,13 +111,7 @@ public class PanelEnquireCourse extends JPanel {
                 Gson gson = new Gson();
                 String s = gson.toJson(lesson);
                 passer.send(new Message("admin", s, "lesson", "getone"));
-/*
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException interruptedException) {
-                    interruptedException.printStackTrace();
-                }
-*/
+
                 Message msg = passer.receive();
                 Map<String, java.util.List<Lesson>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, List<Lesson>>>(){}.getType());
                 List<Lesson> res = map.get("res");
@@ -144,6 +143,11 @@ public class PanelEnquireCourse extends JPanel {
 
     }
 
+    /**
+     *提示窗口
+     * @param title 标题
+     * @param flag  true-警告窗口 false-提示窗口
+     */
     public void informFrame(String title,Boolean flag)
     {
         if(flag)
@@ -152,12 +156,16 @@ public class PanelEnquireCourse extends JPanel {
         { JOptionPane.showMessageDialog(this, title, "提示", JOptionPane.INFORMATION_MESSAGE);}
     }
 
+    /**
+     * 设置表格
+     * @author 张星喆
+     */
     public void setPanel()
     {
         tableP=new MyTablePanel_Course(tableData,columnNames);
         this.add(tableP);
         tableP.getTable().getColumnModel().getColumn(1).setPreferredWidth(120);
-        tableP.setBounds(20,110,1150,510);//设置位置和大小
+        tableP.setBounds(25,110,1150,510);//设置位置和大小
 
         updateUI();
         repaint();

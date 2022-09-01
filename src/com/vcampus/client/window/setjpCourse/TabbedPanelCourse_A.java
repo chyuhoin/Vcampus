@@ -28,9 +28,7 @@ public class TabbedPanelCourse_A extends JTabbedPane {
     {
         if(flag==3) {
             this.setTabPlacement(1);
-            this.setBounds(0, 0, 1200, 650);//注意！！！！！！！！！！！！！！！！！！！！！！！
-
-            JPanel jp15 = new JPanel();
+            this.setBounds(0, 0, 1200, 650);
 
             JPanel deleteCourse = new PanelDeleteCourse();
             JPanel createCourse = new PanelCreateCourse();
@@ -42,13 +40,9 @@ public class TabbedPanelCourse_A extends JTabbedPane {
             this.addTab("删除课程", null, deleteCourse, "删除课程");
             this.addTab("课程查询", null, enquireCourse, "课程查询");
             this.addTab("学生管理", null, manageStudent, "学生管理");
-            //this.addTab("课表查询", null, jp15, "课表查询");
-
             this.setFont(new Font("宋体", Font.BOLD, 24));
-
         }
 
-        //jp.add(jtbp);
     }
 
 }

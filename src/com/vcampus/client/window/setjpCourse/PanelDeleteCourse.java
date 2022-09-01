@@ -57,7 +57,7 @@ public class PanelDeleteCourse extends JPanel{
         setButtonFont(btnDeleteAll);btnDeleteAll.setBounds(850,550,btnWidth*2,btnHeight);
         lblHint.setFont(new Font("宋体", Font.BOLD, 24));lblHint.setBounds(535,y-5,200,40);
         txtEnquire.setBounds(730,y,txtWidth*2,txtHeight);txtEnquire.setFont(new Font("楷体", Font.BOLD, 20));
-        panel.setLayout(null);panel.setBounds(10,120,1200,400);
+        panel.setLayout(null);panel.setBounds(15,120,1170,430);
         this.add(btnInquire);this.add(lblHint);this.add(txtEnquire);this.add(panel);
         btnInquire.addActionListener(new ActionListener() {
             @Override
@@ -110,7 +110,7 @@ public class PanelDeleteCourse extends JPanel{
             table.setFont(new Font("黑体",Font.PLAIN,18));table.getTableHeader().setFont(new Font("黑体",Font.BOLD,20));//表格字体 表头字体
             ButtonRenderer btnR=new ButtonRenderer("删除");table.getColumn("操作").setCellRenderer(btnR);
             ButtonEditor btnE=new ButtonEditor(new JCheckBox());table.getColumn("操作").setCellEditor(btnE);//添加编辑器
-            scrollPane = new JScrollPane(table);scrollPane.setBounds(0,0,1200,400);panel.add(scrollPane);
+            scrollPane = new JScrollPane(table);scrollPane.setBounds(0,0,1170,400);panel.add(scrollPane);
             btnE.getButton().addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {

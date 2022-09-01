@@ -33,6 +33,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 学生管理-管理员界面 输入课程编号可以查看选择某一类课程的全部学生名单，输入课程号及教师ID可以精确查询某一门课的学生名单，可以对学生成绩进行修改
+ * @author 韩宇
+ * @date 2022/08/27
+ */
 public class PanelStudentManage_A extends JPanel {
     JButton btnInquire = new JButton("查询");
     JLabel lblHintLesson = new JLabel("课程编号 ：");
@@ -50,11 +55,13 @@ public class PanelStudentManage_A extends JPanel {
     Object[][] tableData=new Object[][]{};//保存所有用户信息
     MessagePasser passer = ClientMessagePasser.getInstance();
 
-
+    /**
+     * 构造函数，设置页面各控件以及按钮响应函数和信息传递
+     */
     public PanelStudentManage_A()
     {
         this.setLayout(null);
-        int x=160,y=30;//起始坐标
+        int x=130,y=30;//起始坐标
         int txtWidth=110, txtHeight=30;
 
         lblHintLesson.setFont(new Font("宋体", Font.BOLD, 24));
@@ -71,7 +78,7 @@ public class PanelStudentManage_A extends JPanel {
         btnMark.setFont(new Font("宋体",Font.BOLD, 20));
         btnMark.setBounds(x+785,520,80*2,30);
         panel.setLayout(null);
-        panel.setBounds(130,100,1000,400);
+        panel.setBounds(100,100,1000,400);
 
         this.add(btnInquire);
         this.add(txtLessonID);this.add(txtTeacherID);
@@ -85,14 +92,12 @@ public class PanelStudentManage_A extends JPanel {
                 {
                     Lesson lesson=new Lesson();
                     Gson gson = new Gson();
-                    //String s = gson.toJson(lesson);
                     if(txtTeacherID.getText().equals(""))
                     {
                         lesson.setLessonID(txtLessonID.getText());
                         String s = gson.toJson(lesson);
                         passer.send(new Message("admin", s, "lesson", "getteacher"));
                         receiveMessage(s,"getgradeall");
-
                     }
                     else
                     {
@@ -110,10 +115,8 @@ public class PanelStudentManage_A extends JPanel {
         btnMark.addActionListener(new ActionListener() {//添加成绩
             @Override
             public void actionPerformed(ActionEvent e) {
-                //List<String> grades = new LinkedList<>();
                 StringBuilder grades= new StringBuilder("");
                 int rowNum=tableModel.getRowCount();
-                //System.out.println(rowNum);
                 for(int i=0;i<rowNum;i++)
                 {
                     if(i!=rowNum-1)
@@ -122,19 +125,14 @@ public class PanelStudentManage_A extends JPanel {
                     { grades.append(txtLessonID.getText()).append("/").append((String) tableModel.getValueAt(i, 1)).append("/").append((String) tableModel.getValueAt(i, 5)); }
                 }
 
-                System.out.println(grades);
-
-                //MessagePasser passer = ClientMessagePasser.getInstance();
                 Gson gson = new Gson();
                 String s = gson.toJson(grades.toString());
                 passer.send(new Message("admin", s, "lesson", "addgradeall"));
-
                 try {
                     Thread.sleep(100);
                 } catch (InterruptedException interruptedException) {
                     interruptedException.printStackTrace();
                 }
-
                 Message msg = passer.receive();
                 System.out.println(msg);
                 Map<String,Object> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String,Object>>(){}.getType());
@@ -146,6 +144,11 @@ public class PanelStudentManage_A extends JPanel {
         });
     }
 
+    /**
+     * 接收消息，对表格数据进行设置
+     * @param s         用于消息传递
+     * @param operation 操作 获得某一类课的所有学生成绩或某一门课的学生成绩
+     */
     public void receiveMessage(String s,String operation)
     {
         try {
@@ -179,6 +182,9 @@ public class PanelStudentManage_A extends JPanel {
         { informFrame("未查询到学生名单！",true);}
     }
 
+    /**
+     * 设置表格
+     */
     public void setTable()
     {
         panel.removeAll();
@@ -199,6 +205,11 @@ public class PanelStudentManage_A extends JPanel {
         repaint();
     }
 
+    /**
+     *提示窗口
+     * @param title 标题
+     * @param flag  true-警告窗口 false-提示窗口
+     */
     public void informFrame(String title,Boolean flag)
     {
         if(flag) { JOptionPane.showMessageDialog(this, title, "警告", JOptionPane.ERROR_MESSAGE);}
