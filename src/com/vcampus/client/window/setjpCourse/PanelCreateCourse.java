@@ -52,9 +52,10 @@ public class PanelCreateCourse extends JPanel{
     //JLabel lblHint1 = new JLabel("填写课程信息");//填写课程信息-蓝
     //JLabel lblHint2 = new JLabel("选择任课老师");//选择任课老师-蓝
     //JLabel lblHint3 = new JLabel("选择上课教室");//选择上课教室-蓝
-    ImageIcon img1 = new ImageIcon("Vcampus/img//1.png");// 这是背景图片 .png .jpg .gif 等格式的图片都可以
-    ImageIcon img2 = new ImageIcon("Vcampus/img//2.png");
-    ImageIcon img3 = new ImageIcon("Vcampus/img//3.png");
+    ImageIcon img1 = new ImageIcon("img//1.png");// 这是背景图片 .png .jpg .gif 等格式的图片都可以
+    ImageIcon img2 = new ImageIcon("img//2.png");
+//    Vcampus/
+    ImageIcon img3 = new ImageIcon("img//3.png");
 
     JLabel lblName = new JLabel("课程名称");JTextField txtName = new JTextField();
     JLabel lblIdNum = new JLabel("课程编号");JTextField txtIdNum = new JTextField();

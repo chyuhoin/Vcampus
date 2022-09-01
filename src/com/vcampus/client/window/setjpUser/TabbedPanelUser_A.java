@@ -35,7 +35,7 @@ public class TabbedPanelUser_A extends JTabbedPane{
             // 创建卡片布局，卡片间水平和竖直间隔为 10
             final CardLayout layout_Card = new CardLayout(10, 10);
             JPanel jp11 = new JPanel(layout_Card);
-            jp11.setBackground(new Color(0xE5FDFDFD, true));
+//            jp11.setBackground(new Color(0xE5FDFDFD, true));
 //            jp11.setOpaque(false);
             JPanel jp12 = new JPanel(layout_Card);
             //JPanel jp13 = new JPanel(layout_Card);
