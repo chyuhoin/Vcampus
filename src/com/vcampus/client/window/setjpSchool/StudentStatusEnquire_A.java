@@ -157,7 +157,7 @@ public class StudentStatusEnquire_A extends JPanel {
         if(res.size()!=0) {
             t= res.get(0);
             setPanel1(t);//如果查到这个人，set设置学生对象，传参数
-            setPanel2(t);//同时构建修改页
+//            setPanel2(t);//同时构建修改页
             setCard("panelEnquire");
         }
         else {
@@ -183,6 +183,7 @@ public class StudentStatusEnquire_A extends JPanel {
         String tmpStr=txtGender.getText();
         student.setSex(tmpStr=="男"?0:1);//
         student.setStatus(Integer.valueOf(txtStatus.getText()));//数字
+        student.setGraduateTime(txtGraduation.getText());
 
         Gson gson = new Gson();
         String s = gson.toJson(student);

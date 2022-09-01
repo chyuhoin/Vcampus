@@ -44,11 +44,13 @@ public class TabbedPanelMessage_T extends JTabbedPane {
     String ID;
     public TabbedPanelMessage_T(int flag,String ID)
     {
+        this.setBackground(new Color(0x0000001, true));
+        this.setOpaque(false);
         if(flag==2) {
             this.ID = ID;
 
             this.setTabPlacement(1);
-            this.setBounds(0, 0, 1200, 650);//注意！！！！！！！！！！！！！！！！！！！！！！！
+            this.setBounds(0, 0, 1200, 700);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
             JPanel jp11 = new JPanel();
             JPanel jp12 = new JPanel();

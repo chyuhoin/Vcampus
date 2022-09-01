@@ -14,8 +14,9 @@
 
 package com.vcampus.client.window;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.Socket;
+import java.util.Properties;
 
 import com.formdev.flatlaf.*;
 import com.formdev.flatlaf.FlatLightLaf;
@@ -24,9 +25,14 @@ import com.vcampus.net.ClientMessagePasser;
 public class myLoginTest {
     public static void main(String[] args)
     {
-        Socket socket = null; // 连接指定服务器和端口
         try {
-            socket = new Socket("localhost", 6666);
+            InputStream in= new BufferedInputStream(new FileInputStream(
+                    new File("address.properties")));
+            Properties prop = new Properties();
+            prop.load(in);
+            String host = prop.getProperty("host");
+            Socket socket = null; // 连接指定服务器和端口
+            socket = new Socket(host, 6666);
             ClientMessagePasser.build(socket.getInputStream(), socket.getOutputStream());
         } catch (IOException e) {
             e.printStackTrace();

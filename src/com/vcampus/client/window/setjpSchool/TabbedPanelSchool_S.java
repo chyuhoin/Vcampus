@@ -27,11 +27,13 @@ import java.awt.*;
 public class TabbedPanelSchool_S extends JTabbedPane {
     public TabbedPanelSchool_S(int flag,String ID)
     {
+        this.setBackground(new Color(0x0000001, true));
+        this.setOpaque(false);
         if(flag==1) {
             JLabel background1 =new JLabel();
             ImageIcon back = new ImageIcon("resource//User_background.png");
             background1.setIcon(back);
-            background1.setBounds(0,0,1200,650);
+            background1.setBounds(0,0,1200,700);
             background1.setOpaque(false);
 
             this.setTabPlacement(1);

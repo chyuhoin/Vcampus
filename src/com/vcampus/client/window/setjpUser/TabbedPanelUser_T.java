@@ -39,11 +39,13 @@ import java.util.Map;
 public class TabbedPanelUser_T extends JTabbedPane{
 
     public TabbedPanelUser_T(int flag,String id) {
+        this.setBackground(new Color(0x0000001, true));
+        this.setOpaque(false);
         if(flag==2) {
             JTabbedPane JTP = this;
 
             this.setTabPlacement(1);
-            this.setBounds(0, 0, 1200, 650);
+            this.setBounds(0, 0, 1200, 700);
 
             // 创建卡片布局，卡片间水平和竖直间隔为 10
             final CardLayout layout_Card = new CardLayout(10, 10);

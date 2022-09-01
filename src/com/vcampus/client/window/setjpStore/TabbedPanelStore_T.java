@@ -42,9 +42,11 @@ public class TabbedPanelStore_T extends JTabbedPane {
     Object[] columnNames = new Object[]{"已购商品编号","购买日期","商品状态","收货","退货"};
     public TabbedPanelStore_T(int flag, String ID)
     {
+        this.setBackground(new Color(0x0000001, true));
+        this.setOpaque(false);
         if(flag==2) {
             this.setTabPlacement(1);
-            this.setBounds(0, 0, 1400, 650);//注意！！！！！！！！！！！！！！！！！！！！！！！
+            this.setBounds(0, 0, 1400, 700);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
             PanelHomePage_ST homePage = new PanelHomePage_ST(ID, flag);
             PanelMyPurchaseOrder_ST myPurchase = new PanelMyPurchaseOrder_ST(ID, flag);

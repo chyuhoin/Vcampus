@@ -37,12 +37,16 @@ public class TabbedPanelLibrary_T extends JTabbedPane {
     MessagePasser passer = ClientMessagePasser.getInstance();
     public TabbedPanelLibrary_T(int flag,String myID)
     {
+        this.setBackground(new Color(0x0000001, true));
+        this.setOpaque(false);
         if(flag==2) {
             //JTabbedPane jtbp=new JTabbedPane();	//创建选项卡
             this.setTabPlacement(1);
-            this.setBounds(0, 0, 1200, 650);//注意！！！！！！！！！！！！！！！！！！！！！！！
+            this.setBounds(0, 0, 1200, 700);//注意！！！！！！！！！！！！！！！！！！！！！！！
+
+
             JPanel jp11 = new JPanel();
-            //JPanel jp12 = new JPanel();
+            JPanel jp12 = new JPanel();
             JPanel jp13 = new JPanel();
             //选项卡1的内容
             //查询数据库
@@ -67,11 +71,13 @@ public class TabbedPanelLibrary_T extends JTabbedPane {
                 }
                 jp11.setLayout(new CardLayout(10, 10));
                 jp11.add(new MyTablePanel(rowData, columnNames));
+
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
             //选项卡2的内容
             JPanel enquireBook = new PanelEnquireBook("teacher");
+
             //选项卡3的内容
             jp13.setLayout(new CardLayout(10, 10));
             jp13.add(new PanelMyBook(myID));
@@ -80,6 +86,9 @@ public class TabbedPanelLibrary_T extends JTabbedPane {
             this.addTab("查询书籍信息", new ImageIcon("resource//search.png"), enquireBook, "查询书籍信息");
             this.addTab("我的借阅", new ImageIcon("resource//search.png"), jp13, "查询借阅情况");
             this.setFont(new Font("宋体", Font.BOLD, 24));
+
         }
+
+        //jp.add(jtbp);
     }
 }

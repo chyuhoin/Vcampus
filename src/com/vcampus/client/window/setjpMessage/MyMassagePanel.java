@@ -72,7 +72,7 @@ public class MyMassagePanel extends JPanel {
         setJP1(rowData, columnNames);
 
         layS.putConstraint(layS.SOUTH, lbl, -35, layS.SOUTH, JP1);
-        layS.putConstraint(layS.WEST, lbl, 516, layS.WEST, JP1);
+        layS.putConstraint(layS.WEST, lbl, 357, layS.WEST, JP1);
     }
 
     public void setData(Object[][] rowData){
@@ -243,7 +243,7 @@ public class MyMassagePanel extends JPanel {
         layS.putConstraint(layS.WEST, lbl, JP1.getWidth()/2-lbl.getWidth()/2, layS.WEST, JP1);
         //默认选中的条目更新
         // System.out.println("showTable: 总页数为（if前）："+getLastPage());
-        if(getLastPage()>0&&comboBox!=null) {
+        if(getLastPage()>0 && comboBox!=null) {
             comboBox.setSelectedIndex(getCurrentPage() - 1);
         }
         //System.out.println(JP1.getWidth()/2-lbl.getWidth()/2);
@@ -298,8 +298,9 @@ public class MyMassagePanel extends JPanel {
         showTable(currentPage);
     }
 
-    public JTable getTable(){
-        return table;
+    public void setTableColumWidth(int columnIndex,int width){
+        if(table.getColumnCount()>0)
+            table.getColumn(columnIndex).setPreferredWidth(width);
     }
 
 }

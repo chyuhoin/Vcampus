@@ -30,9 +30,11 @@ import java.util.Map;
 public class TabbedPanelStore_A extends JTabbedPane {
     public TabbedPanelStore_A(int flag)
     {
+        this.setBackground(new Color(0x0000001, true));
+        this.setOpaque(false);
         if(flag==3) {
             this.setTabPlacement(1);
-            this.setBounds(0, 0, 1400, 650);//注意！！！！！！！！！！！！！！！！！！！！！！！
+            this.setBounds(0, 0, 1400, 700);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
 
             PanelGoodsManage_A goodsManage = new PanelGoodsManage_A();

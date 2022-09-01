@@ -17,7 +17,8 @@ import java.util.List;
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
                                                    int row, int col) {
         this.setBackground(myColor[row][col]);
-        this.setText(value.toString());
+        if(value!=null)
+            this.setText(value.toString());
         return this;
     }
 }
