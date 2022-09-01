@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="添加了Dao层的注释">
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/pojo/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/pojo/Book.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/pojo/Exam.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/pojo/Exam.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/pojo/Goods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/pojo/Goods.java" afterDir="false" />
+    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="添加了pojo层的注释">
+      <change afterPath="$PROJECT_DIR$/resource/tab_add.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resource/tab_edit.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/tab_privatemessage.png" beforeDir="false" afterPath="$PROJECT_DIR$/resource/tab_privatemessage.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpCourse/TabbedPanelCourse_A.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpCourse/TabbedPanelCourse_A.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpCourse/TabbedPanelCourse_T.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpCourse/TabbedPanelCourse_T.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpLibrary/TabbedPanelLibrary_A.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpLibrary/TabbedPanelLibrary_A.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -145,6 +149,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.com.vcampus.client.window.login.login" />
+        <item itemvalue="Application.Server" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -524,7 +534,14 @@
       <option name="project" value="LOCAL" />
       <updated>1662046850807</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="添加了pojo层的注释">
+      <created>1662047381922</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1662047381922</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -573,7 +590,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="增强了student，加入了民族信息；同时推进了部分examDao层" />
     <MESSAGE value="baseDao增加了一些公共函数" />
     <MESSAGE value="继续完善了一些类" />
     <MESSAGE value="增加了选课判断函数" />
@@ -598,7 +614,8 @@
     <MESSAGE value="新的界面" />
     <MESSAGE value="修复Goods类的bug" />
     <MESSAGE value="登录界面" />
-    <option name="LAST_COMMIT_MESSAGE" value="登录界面" />
+    <MESSAGE value="添加了pojo层的注释" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加了pojo层的注释" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
