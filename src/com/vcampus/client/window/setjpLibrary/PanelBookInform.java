@@ -56,7 +56,7 @@ public class PanelBookInform extends JPanel {
         //设置照片
         //照片
         ImageIcon img = null;// 这是背景图片 .png .jpg .gif 等格式的图片都可以
-        System.out.println("book.getImage()="+book.getImage());
+//        System.out.println("book.getImage()="+book.getImage());
         if(book.getImage()==null)
         {
             System.out.println("没有图片");
