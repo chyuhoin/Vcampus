@@ -114,7 +114,7 @@ public class MyTablePanel extends JPanel{
         //标签设置
         lbl=new JLabel("当前是第"+getCurrentPage()+"页，共"+getLastPage()+"页");
         JP1.add(lbl);
-        lbl.setFont(new Font("黑体",Font.PLAIN,15));
+        lbl.setFont(new Font("宋体",Font.PLAIN,15));
         //顶端标签位置
         layS.putConstraint(layS.SOUTH, lbl, -35, layS.SOUTH, JP1);
         layS.putConstraint(layS.WEST, lbl, 516, layS.WEST, JP1);
@@ -134,10 +134,10 @@ public class MyTablePanel extends JPanel{
         JP1.add(btn3);
         JP1.add(btn4);
 
-        btn1.setFont(new Font("黑体",Font.PLAIN,18));
-        btn2.setFont(new Font("黑体",Font.PLAIN,18));
-        btn3.setFont(new Font("黑体",Font.PLAIN,18));
-        btn4.setFont(new Font("黑体",Font.PLAIN,18));
+        btn1.setFont(new Font("宋体",Font.PLAIN,18));
+        btn2.setFont(new Font("宋体",Font.PLAIN,18));
+        btn3.setFont(new Font("宋体",Font.PLAIN,18));
+        btn4.setFont(new Font("宋体",Font.PLAIN,18));
 
         layS.putConstraint(layS.SOUTH, btn4, -30, layS.SOUTH, JP1);
         layS.putConstraint(layS.EAST, btn4, -10, layS.EAST, JP1);
@@ -194,7 +194,6 @@ public class MyTablePanel extends JPanel{
                         layC.next(PANEL);//切换到第二张卡
                         PANEL.updateUI();
                         PANEL.repaint();
-                        System.out.println("查看书号为<" + bookID + ">的书的详情");
                     }else {
                         JOptionPane.showMessageDialog(null, "数据查询出错", "提示",
                                 JOptionPane.ERROR_MESSAGE);
@@ -237,14 +236,14 @@ public class MyTablePanel extends JPanel{
         //返回按钮
         JButton btnBack=new JButton("返回");
         JP2.add(btnBack);
-        btnBack.setFont(new Font("黑体",Font.BOLD,22));
-        layS.putConstraint(layS.NORTH, btnBack, 0, layS.NORTH, JP2);
-        layS.putConstraint(layS.WEST, btnBack, 10, layS.WEST, JP2);
+        btnBack.setFont(new Font("宋体",Font.BOLD,20));
+        layS.putConstraint(layS.NORTH, btnBack, 400, layS.NORTH, JP2);
+        layS.putConstraint(layS.WEST, btnBack, 837, layS.WEST, JP2);
         //详情面板
         JPanel subJP2=new PanelBookInform(book,false);
         JP2.add(subJP2);
-        layS.putConstraint(layS.NORTH, subJP2, 30, layS.NORTH, btnBack);
-        layS.putConstraint(layS.WEST, subJP2, 10, layS.WEST, JP2);
+        layS.putConstraint(layS.NORTH, subJP2, 70, layS.NORTH, JP2);
+        layS.putConstraint(layS.WEST, subJP2, 80, layS.WEST, JP2);
         layS.putConstraint(layS.SOUTH, subJP2, -10, layS.SOUTH, JP2);
         layS.putConstraint(layS.EAST, subJP2, -30, layS.EAST, JP2);
 

@@ -76,17 +76,12 @@ public class PanelHomePage_ST extends JPanel {
         comboBox.setBounds(x-110,y,220,40);
         comboBox.setFont(new Font("楷体", Font.BOLD, 24));
         comboBox.setOpaque(true);
-
         txtEnquire.setBounds(x+130,y,txtWidth*3,txtHeight);
         txtEnquire.setFont(new Font("楷体", Font.BOLD, 20));
-
         btnInquire.setFont(new Font("宋体",Font.BOLD, 20));
         btnInquire.setBounds(x+480,y,80,40);
-
-        btnOk.setBounds(400,500,btnWidth,btnHeight);
-        setButtonFont(btnOk);
-        btnCancel.setBounds(640,500,btnWidth,btnHeight);
-        setButtonFont(btnCancel);
+        btnOk.setBounds(400,500,btnWidth,btnHeight);setButtonFont(btnOk);
+        btnCancel.setBounds(640,500,btnWidth,btnHeight);setButtonFont(btnCancel);
 
         this.add(panelAll,"panelAll");
         this.add(panelBuy,"panelBuy");
@@ -99,7 +94,6 @@ public class PanelHomePage_ST extends JPanel {
         btnInquire.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 int temp = comboBox.getSelectedIndex();
                 switch(temp)//发出消息
                 {
@@ -128,13 +122,10 @@ public class PanelHomePage_ST extends JPanel {
                     default:
                         break;
                 }
-                setPanel1(goods);
-                setCard("panelAll");
-                repaint();
-                updateUI();
+                setPanel1(goods);setCard("panelAll");
+                repaint();updateUI();
             }
         });
-
 
         btnCancel.addActionListener(new ActionListener() {
             @Override
@@ -149,68 +140,58 @@ public class PanelHomePage_ST extends JPanel {
                 HashMap<String,String> hashMap = new HashMap<>();
                 hashMap.put("studentID",ID);
                 hashMap.put("goodsID",panelInform.txtGoodsID.getText());
-                Gson gson = new Gson();
-                String s = gson.toJson(hashMap);
+                Gson gson = new Gson();String s = gson.toJson(hashMap);
                 passer.send(new Message(status, s, "shop", "buy"));
-
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException interruptedException) {
-                    interruptedException.printStackTrace();
-                }
+                try { Thread.sleep(100); } catch (InterruptedException interruptedException) { interruptedException.printStackTrace(); }
 
                 Message msg = passer.receive();
-//                System.out.println(msg);
                 Map<String,Object> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String,Object>>(){}.getType());
-
                 if(map.get("res").equals("OK"))
-                {
-                    informFrame("购买成功！",false);
-                    setCard("panelAll");
-                }
-                else
-                {
-                    informFrame("购买失败！",true);
-                }
+                { informFrame("购买成功！",false);
+                  setCard("panelAll"); }
+                else {informFrame("购买失败！",true); }
             }
         });
-
-
     }
-
+    /**
+     * 设置卡片翻页
+     * @param card 卡片对应名称
+     */
     public void setCard(String card)
     {
         cardLayout.show(this,card);
     }
-
+    /**
+     * 设置按钮字体
+     * @param button 按钮
+     */
     public void setButtonFont(JButton button)
     {
         button.setFont(new Font("宋体",Font.BOLD, 18));
         button.setContentAreaFilled(false);
     }
-
+    /**
+     * 提示窗口
+     * @param title 标题
+     * @param flag  true-警告 false-提示
+     */
     public void informFrame(String title,Boolean flag)
     {
-        if(flag)
-        { JOptionPane.showMessageDialog(this, title, "警告", JOptionPane.ERROR_MESSAGE);}
-        else
-        { JOptionPane.showMessageDialog(this, title, "提示", JOptionPane.INFORMATION_MESSAGE);}
+        if(flag) { JOptionPane.showMessageDialog(this, title, "警告", JOptionPane.ERROR_MESSAGE);}
+        else { JOptionPane.showMessageDialog(this, title, "提示", JOptionPane.INFORMATION_MESSAGE);}
     }
 
+    /**
+     * 设置第一章卡片，显示商城全部商品，使用滚动面板
+     * @param g g 用于获取全部商品信息
+     */
     public void setPanel1(Goods g)
     {
-        panelAll.removeAll();
-        p.removeAll();
+        panelAll.removeAll(); p.removeAll();
         informPanels = new ArrayList<>();
-        //scrollPane.removeAll();
-        panelAll.add(comboBox);
-        panelAll.add(txtEnquire);
-        panelAll.add(btnInquire);
-        //panelAll.add(lblHint);
-        //接收消息，根据返回res的大小，设置数组长度，输入每一个商品为参数，并设置位置
-        //如果不空，显示详情，空，提示
-        Gson gson = new Gson();
-        String s = gson.toJson(g);
+        panelAll.add(comboBox);panelAll.add(txtEnquire);panelAll.add(btnInquire);
+
+        Gson gson = new Gson();String s = gson.toJson(g);
         passer.send(new Message(status, s, "shop", "get"));
 
         Message msg = passer.receive();
@@ -226,58 +207,35 @@ public class PanelHomePage_ST extends JPanel {
                 informPanels.add(new PanelGoodsSimpleInform(this,res.get(i)));
                 if(i>0)
                 {
-                    if(i%3==0)
-                    {
-                        y+=heightDiffer;
-                        x=50;
-                    }
-                    else
-                    {
-                        x+=widthDiffer;
-                    }
+                    if(i%3==0) {   y+=heightDiffer;  x=50; }
+                    else {   x+=widthDiffer; }
                 }
                 informPanels.get(i).setBounds(x,y,panelWidth,panelHeight);
-                p.add(informPanels.get(i));
-            }
-        }
-        else
-            {
-                informFrame("暂无商品上架！",false);
-            }
 
+                informPanels.get(i).setBorder(BorderFactory.createTitledBorder("分组框")); //设置面板边框，实现分组框的效果，此句代码为关键代码
+                informPanels.get(i).setBorder(BorderFactory.createLineBorder(Color.black));//设置面板边框颜色
+
+                p.add(informPanels.get(i)); } }
+        else {informFrame("暂无商品上架！",false); }
         scrollPane= new JScrollPane(p);
         scrollPane.setBounds(30,120,1150,500);
         scrollPane.getVerticalScrollBar().setUnitIncrement(10);
-
-        //总是出现垂直滚动条
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        //scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         panelAll.add(scrollPane);
-
-        p.updateUI();
-        p.repaint();
-
-        scrollPane.updateUI();;
-        scrollPane.repaint();
-
-
-        panelAll.updateUI();
-        panelAll.repaint();
+        p.updateUI();p.repaint();
+        scrollPane.updateUI();;scrollPane.repaint();
+        panelAll.updateUI();panelAll.repaint();
     }
-
-    public void setPanel2(Goods g)//显示商品详情，要传入一个商品//从小panel的详情按钮调用这个函数
+    /**
+     * 设置第二张卡片，显示商品详情及购买界面
+     * @param g g 要显示的商品
+     */
+    public void setPanel2(Goods g)
     {
-        panelBuy.removeAll();
-        panelBuy.add(btnCancel);
-        panelBuy.add(btnOk);
-
+        panelBuy.removeAll();panelBuy.add(btnCancel);panelBuy.add(btnOk);
         panelInform = new PanelGoodsInform(g,false);//传入商品对象为参数
-        panelInform.setBounds(150,50,800,500);
+        panelInform.setBounds(200,50,800,500);
         panelBuy.add(panelInform);
-
-        panelBuy.updateUI();
-        panelBuy.repaint();
+        panelBuy.updateUI();panelBuy.repaint();
     }
-
-
 }

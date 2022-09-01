@@ -13,7 +13,6 @@
  *    修改的内容描述，修改的原因
  */
 package com.vcampus.client.window.setjpStore;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.vcampus.net.ClientMessagePasser;
@@ -31,58 +30,55 @@ import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+/**
+ * 管理员交易记录管理
+ * @author 韩宇
+ * @date 2022/08/29
+ */
 public class PanelDealManage_A extends JPanel{
     JLabel lblHint = new JLabel("输入买方/卖方一卡通号：");
     JButton btnBuyInquire = new JButton("买方交易查询");
     JButton btnSellInquire = new JButton("卖方交易查询");
     JTextField txtEnquire = new JTextField();
-    //表格数据
+
     Object[] columnNames={};
-    Object[][] tableData=new Object[][]{};//保存所有用户信息
+    Object[][] tableData=new Object[][]{};//表格数据
     MessagePasser passer = ClientMessagePasser.getInstance();
     MyTablePanel_Shop tableP=new MyTablePanel_Shop(tableData,columnNames);
-
     public PanelDealManage_A ()
     {
         this.setLayout(null);
-        int x=120,y=35;//起始坐标
+        int x=120+20,y=40;//起始坐标
         int txtWidth=220, txtHeight=30;
 
         lblHint.setBounds(x,y-5,300,40);
-        lblHint.setFont(new Font("楷体", Font.BOLD, 24));
-
+        lblHint.setFont(new Font("宋体", Font.BOLD, 22));
         txtEnquire.setBounds(x+300,y,txtWidth,txtHeight);
         txtEnquire.setFont(new Font("楷体", Font.BOLD, 20));
-
         btnBuyInquire.setFont(new Font("宋体",Font.BOLD, 20));
         btnBuyInquire.setBounds(x+550,y,160,30);
-
         btnSellInquire.setFont(new Font("宋体",Font.BOLD, 20));
         btnSellInquire.setBounds(x+760,y,160,30);
-
         // 添加到内容面板
         this.add(lblHint);
         this.add(txtEnquire);
         this.add(btnBuyInquire);
         this.add(btnSellInquire);
+        setPanel();
 
         btnBuyInquire.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               //传消息，输入买方ID
                 User user = new User();
                 user.setStudentID(txtEnquire.getText());
                 Gson gson = new Gson();
                 String s = gson.toJson(user);
                 passer.send(new Message("admin", s, "shop", "getBuy"));
-
                 try {
                     Thread.sleep(100);
                 } catch (InterruptedException interruptedException) {
                     interruptedException.printStackTrace();
                 }
-
                 Message msg = passer.receive();
                 Map<String, java.util.List<Record>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, List<Record>>>() {}.getType());
                 List<Record> res = map.get("res");
@@ -105,12 +101,9 @@ public class PanelDealManage_A extends JPanel{
                     updateUI();
                     repaint();
                     informFrame("未查询到购买记录！",true);
-
                 }
             }
         });
-
-
         btnSellInquire.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -119,7 +112,6 @@ public class PanelDealManage_A extends JPanel{
                 Gson gson = new Gson();
                 String s = gson.toJson(user);
                 passer.send(new Message("admin", s, "shop", "getSell"));
-
                 try {
                     Thread.sleep(100);
                 } catch (InterruptedException interruptedException) {
@@ -150,29 +142,27 @@ public class PanelDealManage_A extends JPanel{
                     updateUI();
                     repaint();
                     informFrame("未查询到售货记录！",true);
-
                 }
             }
         });
-
-
     }
-
+    /**
+     * 提示窗口
+     * @param title 标题
+     * @param flag  true-警告 false-提示
+     */
     public void informFrame(String title,Boolean flag)
-    {
-        if(flag)
-        { JOptionPane.showMessageDialog(this, title, "警告", JOptionPane.ERROR_MESSAGE);}
-        else
-        { JOptionPane.showMessageDialog(this, title, "提示", JOptionPane.INFORMATION_MESSAGE);}
-    }
-
+    {   if(flag) { JOptionPane.showMessageDialog(this, title, "警告", JOptionPane.ERROR_MESSAGE);}
+        else { JOptionPane.showMessageDialog(this, title, "提示", JOptionPane.INFORMATION_MESSAGE);} }
+    /**
+     * 设置表格
+     */
     public void setPanel()
     {
         tableP=new MyTablePanel_Shop(tableData,columnNames);
         this.add(tableP);
-        tableP.getTable().getColumnModel().getColumn(1).setPreferredWidth(120);
-        tableP.setBounds(20,110,1150,510);//设置位置和大小
-
+        //tableP.getTable().getColumnModel().getColumn(1).setPreferredWidth(120);
+        tableP.setBounds(25,100,1150,520);//设置位置和大小
         updateUI();
         repaint();
     }

@@ -27,7 +27,11 @@ import com.vcampus.net.ClientMessagePasser;
 import com.vcampus.net.Message;
 import com.vcampus.net.MessagePasser;
 import com.vcampus.pojo.Book;
-
+/**
+ * 书籍信息详情页
+ * @author 韩宇
+ * @date 2022/08/22
+ */
 public class PanelBookInform extends JPanel {
     JLabel lblImg = new JLabel();//图书照片
     JLabel lblBookID = new JLabel("书籍号   : ");//书籍号
@@ -44,37 +48,32 @@ public class PanelBookInform extends JPanel {
     JLabel labels[] = {lblBookID,lblBookName,lblAuthor,lblType,lblLeftSize};
     JTextField texts[] = {txtBookID,txtBookName,txtAuthor,txtType,txtLeftSize};
 
+    /**
+     * 构造函数，
+     * @param book 需要展示详情的书籍
+     * @param flag true-文本框可编辑 false-不可编辑
+     */
     public PanelBookInform(Book book,Boolean flag)
     {
         this.setLayout(null);
-        //setPanel(book,false);
         int x=380,y=30;//起始坐标
         int lblWidth=200,lblHeight=40,txtWidth=300, txtHeight=40;
         int heightDiffer=60;//上下两行高度差
         int ltDiffer1=150;//1-左起两列标签文本框间隔 2-第三列标签文本框间隔
         removeAll();
         //设置照片
-        //照片
         ImageIcon img = null;// 这是背景图片 .png .jpg .gif 等格式的图片都可以
-        System.out.println("book.getImage()="+book.getImage());
         if(book.getImage()==null)
         {
-            System.out.println("没有图片");
-            img = new ImageIcon("D:\\123\\GitProject\\Vcampus\\Pictures\\noFig.png");
-            //img.setImage(img.getImage().getScaledInstance(180,220,Image.SCALE_DEFAULT));
+            img = new ImageIcon("Vcampus/img//noFig.png");
         }
         else
         {
             try {
                 Image Img = Toolkit.getDefaultToolkit().createImage(StringAndImage.StringToImage(book.getImage()));
                 img = new ImageIcon(Img);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            } catch (IOException e) { e.printStackTrace(); }
         }
-
-        //System.out.println("img==null:"+(img==null)+img);
-
         img.setImage(img.getImage().getScaledInstance(180,220,Image.SCALE_DEFAULT));//这里设置图片大小，目前是20*20
         lblImg.setIcon(img);
         lblImg.setBounds(150,60,180,220);
@@ -101,56 +100,16 @@ public class PanelBookInform extends JPanel {
         repaint();
     }
 
-    ////需要增加上传图片的操作
-   /* public void setPanel(Book b, Boolean flag)//布置界面  参数：书本 bool型0-显示传入书本信息，1-空白文本框
-    {
-        int x=380,y=30;//起始坐标
-        int lblWidth=300,lblHeight=40,txtWidth=500, txtHeight=40;
-        int heightDiffer=60;//上下两行高度差
-        int ltDiffer1=150;//1-左起两列标签文本框间隔 2-第三列标签文本框间隔
-        //int llDiffer=270;//两个标签之间的差距
-        removeAll();
-        //设置照片
-        ImageIcon img = new ImageIcon("E:\\358-441.jpg");// 这是背景图片 .png .jpg .gif 等格式的图片都可以
-        img.setImage(img.getImage().getScaledInstance(180,220,Image.SCALE_DEFAULT));//这里设置图片大小，目前是20*20
-        lblImg.setIcon(img);
-        lblImg.setBounds(150,60,180,220);
-
-        txtBookID.setText("00001");//书籍号
-        txtBookName.setText("计算机组成原理");//书名
-        txtAuthor.setText("任国林");//作者
-        txtType.setText("教科书");//类型
-        txtLeftSize.setText("20");//剩余册数
-
-        //设置其余坐标和字体
-        for(int i=0;i<5;i++)
-        {
-            labels[i].setBounds(x,y+heightDiffer*i,lblWidth,lblHeight);
-            texts[i].setBounds(x+ltDiffer1,y+heightDiffer*i,txtWidth,txtHeight);
-            setLabelFont(labels[i],texts[i],false);
-            add(labels[i]); add(texts[i]);
-        }
-        add(lblImg);
-
-        updateUI();
-        repaint();
-    }
-
-    */
-
-    public void removeInform()
-    {
-        for(int i=0;i<5;i++)
-        {
-            remove(labels[i]);
-            remove(texts[i]);
-        }
-    }
-
+    /**
+     * 设置标签 文本框字体及文本框可编辑
+     * @param label 标签
+     * @param text  文本
+     * @param f     true 可编辑，false 不可编辑
+     */
     public void setLabelFont(JLabel label,JTextField text,Boolean f)
     {
         label.setFont(new Font("楷体", Font.BOLD, 24));
         text.setFont(new Font("楷体", Font.BOLD, 20));
-        text.setEditable(f);//true 可编辑，false 不可编辑
+        text.setEditable(f);
     }
 }

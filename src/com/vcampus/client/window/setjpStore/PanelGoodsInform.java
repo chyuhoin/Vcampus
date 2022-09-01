@@ -13,7 +13,6 @@
  *    修改的内容描述，修改的原因
  */
 package com.vcampus.client.window.setjpStore;
-
 import com.vcampus.dao.utils.StringAndImage;
 import com.vcampus.pojo.Goods;
 
@@ -21,7 +20,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.print.Book;
 import java.io.IOException;
-
+/**
+ * 商品详情界面
+ * @author Meg
+ * @date 2022/08/29
+ */
 public class PanelGoodsInform extends JPanel {
     JLabel lblImg = new JLabel();//商品照片
     JLabel lblGoodsID = new JLabel("商品编号  : ");//商品编号
@@ -38,12 +41,14 @@ public class PanelGoodsInform extends JPanel {
     JTextField txtDealTime = new JTextField();
     JLabel lblNum = new JLabel ("剩余数量  : ");
     JTextField txtNum = new JTextField();
-
     JLabel labels[] = {lblGoodsID, lblGoodsName, lblSeller, lblPrice, lblDealTime, lblNum};
     JTextField texts[] = {txtGoodsID, txtGoodsName, txtSeller, txtPrice, txtDealTime, txtNum};
 
-    //Goods goods = new Goods();
-
+    /**
+     * 商品详情界面面板
+     * @param goods 要显示的商品
+     * @param flag  文本框是否可编辑
+     */
     public PanelGoodsInform(Goods goods,Boolean flag)//传入商品的对象，flag 是否可编辑
     {
         this.setLayout(null);
@@ -51,19 +56,13 @@ public class PanelGoodsInform extends JPanel {
         int lblWidth=300,lblHeight=40,txtWidth=350, txtHeight=40;
         int heightDiffer=60;//上下两行高度差
         int ltDiffer1=150;//1-左起两列标签文本框间隔 2-第三列标签文本框间隔
-        //int llDiffer=270;//两个标签之间的差距
         removeAll();
-        //设置照片
 
         ImageIcon img = null;// 这是背景图片 .png .jpg .gif 等格式的图片都可以
         if(goods.getPicture()==null)
-        {
-            //System.out.println("没有图片"+goods.getPicture());
-            img = new ImageIcon("Vcampus/img/noFig.png");
-        }
+        { img = new ImageIcon("Vcampus/img/noFig.png"); }
         else
         {
-            //System.out.println("有图片"+goods.getPicture());
             try {
                 Image Img = Toolkit.getDefaultToolkit().createImage(StringAndImage.StringToImage(goods.getPicture()));
                 img = new ImageIcon(Img);
@@ -79,7 +78,6 @@ public class PanelGoodsInform extends JPanel {
 
         txtGoodsID.setText(goods.getGoodsID());//商品编号
         txtGoodsName.setText(goods.getGoodsName());//商品名称
-        //txtType.setText(goods.);//商品类型
         txtSeller.setText(goods.getSeller());//卖家
         txtPrice.setText(goods.getPrice());//商品价格
         txtDealTime.setText(goods.getDealDate());//上架时间
@@ -100,13 +98,18 @@ public class PanelGoodsInform extends JPanel {
         repaint();
     }
 
+    /**
+     * 设置标签和文本框字体
+     * @param label 标签
+     * @param text  文本框
+     * @param flag  文本框是否可以编辑
+     */
     public void setLabelFont(JLabel label,JTextField text,Boolean flag)
     {
         label.setFont(new Font("楷体", Font.BOLD, 24));
         text.setFont(new Font("楷体", Font.BOLD, 20));
         text.setEditable(flag);
     }
-
 }
 
 
