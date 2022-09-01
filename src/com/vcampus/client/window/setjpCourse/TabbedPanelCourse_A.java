@@ -26,9 +26,11 @@ public class TabbedPanelCourse_A extends JTabbedPane {
 
     public TabbedPanelCourse_A(int flag)
     {
+        this.setBackground(new Color(0x0000001, true));
+        this.setOpaque(false);
         if(flag==3) {
             this.setTabPlacement(1);
-            this.setBounds(0, 0, 1200, 650);
+            this.setBounds(0, 0, 1200, 700);
 
             JPanel deleteCourse = new PanelDeleteCourse();
             JPanel createCourse = new PanelCreateCourse();

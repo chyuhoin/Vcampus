@@ -46,7 +46,7 @@ public class TabbedPanelCourse_S extends JTabbedPane {
             JLabel background1 =new JLabel();
             ImageIcon back = new ImageIcon("resource//User_background.png");
             background1.setIcon(back);
-            background1.setBounds(0,0,1200,650);
+            background1.setBounds(0,0,1200,700);
             background1.setOpaque(false);
             jp11.setOpaque(false);
             jp11.add(background1);

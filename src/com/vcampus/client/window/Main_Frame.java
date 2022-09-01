@@ -26,6 +26,8 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.*;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Main_Frame extends JFrame {
 
@@ -50,6 +52,8 @@ public class Main_Frame extends JFrame {
     JButton back=new JButton();
     String url3="img//返回.png";
     ImageIcon back_icon=new ImageIcon(url3);
+    //时间
+    JLabel time = new JLabel();
     public Main_Frame(String title, int flag, String ID)
     {
         super(title);//调用父类构造函数，设置窗口名称
@@ -192,6 +196,14 @@ public class Main_Frame extends JFrame {
             });
             back.setBounds((int)(0.85*width),(int)(0*height),(int)(0.05*width),(int)(0.05*height));
             panelMain.add(back);
+        }
+        //时间
+        {
+            time.setForeground(new Color(0x98000000, true));
+            time.setBounds(1000,30,1200,150);
+            time.setFont(new Font("微软雅黑",Font.BOLD,28));
+            this.add(time);
+            this.setTimer(time);
         }
         //校徽背景图
 //        ImageIcon seuIcon = new ImageIcon("resource//seu.jpg");
@@ -468,6 +480,20 @@ public class Main_Frame extends JFrame {
         panelBottom.add(jtp);
         panelBottom.updateUI();
         panelBottom.repaint();
+    }
+    private void setTimer(JLabel time)
+    {
+        final JLabel varTime=time;
+        Timer timeAction = new Timer(100, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                long timemillis = System.currentTimeMillis();
+                //转换日期显示格式
+                SimpleDateFormat df= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                varTime.setText(df.format(new Date(timemillis)));
+            }
+        });
+        timeAction.start();
     }
 
 }
