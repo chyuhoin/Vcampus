@@ -32,10 +32,12 @@ public class TabbedPanelCourse_S extends JTabbedPane {
     MessagePasser passer = ClientMessagePasser.getInstance();
 
     public TabbedPanelCourse_S(int flag,String ID) {
+        this.setBackground(new Color(0x0000001, true));
+        this.setOpaque(false);
         JTabbedPane JTP=this;
         if(flag==1) {
             this.setTabPlacement(1);
-            this.setBounds(0, 0, 1200, 650);//注意！！！！！！！！！！！！！！！！！！！！！！！
+            this.setBounds(0, 0, 1200, 700);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
             JPanel jp11 = new PanelCourseSelection_S(ID);
             PanelViewCourse_S jp12 = new PanelViewCourse_S(ID);

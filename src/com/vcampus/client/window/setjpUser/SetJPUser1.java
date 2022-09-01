@@ -16,6 +16,7 @@ package com.vcampus.client.window.setjpUser;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.vcampus.client.window.showMessageFrame;
 import com.vcampus.net.ClientMessagePasser;
 import com.vcampus.net.Message;
 import com.vcampus.net.MessagePasser;
@@ -33,16 +34,24 @@ public class SetJPUser1 extends JPanel {
     public String[] strList=new String[3];//暂存当前User的信息
     public JPanel jp1=new JPanel();
     public JPanel jp2=new JPanel();
+    public JPanel jp=null;
     public String ID;
     public int type;
+    public CardLayout layout_Card=null;
     MessagePasser passer = ClientMessagePasser.getInstance();
     public SetJPUser1(int t,String id,JPanel jp, CardLayout layout_Card){
+        this.jp=jp;
+        this.layout_Card=layout_Card;
         SpringLayout layout_Spring = new SpringLayout();
         jp1.setLayout(layout_Spring);
         jp2.setLayout(layout_Spring);
         jp.add(jp1);
         jp.add(jp2);
         layout_Card.show(jp, "jp1");//先显示jp1
+        jp1.setBackground(new Color(0xA1000001, true));
+        jp1.setOpaque(false);
+        jp2.setBackground(new Color(0xBD000001, true));
+        jp2.setOpaque(false);
 
         ID=id;
         type=t;//身份
@@ -73,6 +82,7 @@ public class SetJPUser1 extends JPanel {
             }
         }
         else{
+//            showMessageFrame test=new showMessageFrame("查无此人!",600,400,360, 100,1);
             JOptionPane.showMessageDialog(
                     jp1,
                     "查无此人！",
@@ -211,22 +221,26 @@ public class SetJPUser1 extends JPanel {
                 String newP2=textList[2].getText();
                 System.out.println("新密码："+newP1+" & "+newP2+" 是否相等："+(newP1.equals(newP2)));
                 if(!newP1.equals(newP2)){
-                    JOptionPane.showMessageDialog(
-                            jp2,
-                            "两次输入的新密码不相同",
-                            " ",
-                            JOptionPane.WARNING_MESSAGE
-                    );
+                    showMessageFrame test=new showMessageFrame("两次输入的新密码不相同!",900,320,460, 80,1);
+
+//                    JOptionPane.showMessageDialog(
+//                            jp2,
+//                            "两次输入的新密码不相同",
+//                            " ",
+//                            JOptionPane.WARNING_MESSAGE
+//                    );
                 }
                 else{
                     String truePass=strList[1];
                     if(!textList[0].getText().equals(truePass)){
-                        JOptionPane.showMessageDialog(
-                                jp2,
-                                "输入原密码错误",
-                                " ",
-                                JOptionPane.WARNING_MESSAGE
-                        );
+                        showMessageFrame test=new showMessageFrame("输入原密码错误!",900,320,460, 80,1);
+
+//                        JOptionPane.showMessageDialog(
+//                                jp2,
+//                                "输入原密码错误",
+//                                " ",
+//                                JOptionPane.WARNING_MESSAGE
+//                        );
                     }
                     else{
                         if(SendTnfo_A(newP1)) {//修改密码成功 newP1==newP2
@@ -268,21 +282,25 @@ public class SetJPUser1 extends JPanel {
         Message msg = passer.receive();
         Map<String, Object> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, Object>>(){}.getType());
         if(map.get("res").equals("OK")) {
-            JOptionPane.showMessageDialog(
-                jp2,
-                "密码修改成功",
-                " ",
-                JOptionPane.INFORMATION_MESSAGE
-            );
+            showMessageFrame test=new showMessageFrame("密码修改成功!",900,320,460, 80,2);
+
+//            JOptionPane.showMessageDialog(
+//                jp2,
+//                "密码修改成功",
+//                " ",
+//                JOptionPane.INFORMATION_MESSAGE
+//            );
             return true;
         }
         else{
-            JOptionPane.showMessageDialog(
-                    jp2,
-                    "密码修改失败",
-                    "ERROR",
-                    JOptionPane.WARNING_MESSAGE
-            );
+            showMessageFrame test=new showMessageFrame("密码修改失败!",900,320,460, 80,1);
+
+//            JOptionPane.showMessageDialog(
+//                    jp2,
+//                    "密码修改失败",
+//                    "ERROR",
+//                    JOptionPane.WARNING_MESSAGE
+//            );
             return false;
         }
     }

@@ -37,10 +37,12 @@ public class TabbedPanelLibrary_T extends JTabbedPane {
     MessagePasser passer = ClientMessagePasser.getInstance();
     public TabbedPanelLibrary_T(int flag,String myID)
     {
+        this.setBackground(new Color(0x0000001, true));
+        this.setOpaque(false);
         if(flag==2) {
             //JTabbedPane jtbp=new JTabbedPane();	//创建选项卡
             this.setTabPlacement(1);
-            this.setBounds(0, 0, 1200, 650);//注意！！！！！！！！！！！！！！！！！！！！！！！
+            this.setBounds(0, 0, 1200, 700);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
 
             JPanel jp11 = new JPanel();

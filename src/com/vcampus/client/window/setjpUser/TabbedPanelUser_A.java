@@ -26,17 +26,23 @@ import java.awt.*;
 public class TabbedPanelUser_A extends JTabbedPane{
     public TabbedPanelUser_A(int flag,String id)
     {
+        this.setBackground(new Color(0x0000001, true));
+        this.setOpaque(false);
         if(flag==3) {
             this.setTabPlacement(1);
-            this.setBounds(0, 0, 1200, 650);//注意！！！！！！！！！！！！！！！！！！！！！！！
+            this.setBounds(0, 0, 1200, 700);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
             // 创建卡片布局，卡片间水平和竖直间隔为 10
             final CardLayout layout_Card = new CardLayout(10, 10);
             JPanel jp11 = new JPanel(layout_Card);
+            jp11.setBackground(new Color(0xE5FDFDFD, true));
+//            jp11.setOpaque(false);
             JPanel jp12 = new JPanel(layout_Card);
             //JPanel jp13 = new JPanel(layout_Card);
             //选项卡1的内容
-            SetJPUser1 setjp1 = new SetJPUser1(3, id, jp11, layout_Card);
+            JPanel setjp1 = new SetJPUser1(3, id, jp11, layout_Card);
+//            setjp1.setBackground(new Color(0xFF0F0FE4, true));
+//            setjp1.setOpaque(false);
             //选项卡2的内容
             SetJPUser2 setjp2 = new SetJPUser2(3, id, jp12, layout_Card);
             //选项卡3的内容

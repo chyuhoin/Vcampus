@@ -43,14 +43,16 @@ public class TabbedPanelLibrary_A extends JTabbedPane {
 
     public TabbedPanelLibrary_A(int flag) {
         if(flag==3) {
+            this.setBackground(new Color(0x0000001, true));
+            this.setOpaque(false);
 
-            ImageIcon icon = new ImageIcon("D:\\Code\\JavaWebCode\\Vcampus\\resource\\library.jpg"); // 创建背景图片对象
+            ImageIcon icon = new ImageIcon("Vcampus\\resource\\library.jpg"); // 创建背景图片对象
             background.setIcon(icon);
-            background.setBounds(0, 0, 1200, 650);
+            background.setBounds(0, 0, 1200, 700);
             JTabbedPane JTP = this;
             //JTabbedPane jtbp=new JTabbedPane();	//创建选项卡
             this.setTabPlacement(1);
-            this.setBounds(0, 0, 1200, 650);//注意！！！！！！！！！！！！！！！！！！！！！！！
+            this.setBounds(0, 0, 1200, 700);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
             JPanel jp11 = new JPanel();
             JPanel jp12 = new JPanel();

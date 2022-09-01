@@ -27,10 +27,12 @@ import java.awt.event.MouseListener;
 public class TabbedPanelCourse_T extends JTabbedPane {
     public TabbedPanelCourse_T(int flag,String ID)
     {
+        this.setBackground(new Color(0x0000001, true));
+        this.setOpaque(false);
         if(flag==2) {
             //JTabbedPane jtbp=new JTabbedPane();	//创建选项卡
             this.setTabPlacement(1);
-            this.setBounds(0, 0, 1200, 650);//注意！！！！！！！！！！！！！！！！！！！！！！！
+            this.setBounds(0, 0, 1200, 700);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
 
             JPanel teacherInform = new PanelTeacherInform(ID);

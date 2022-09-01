@@ -29,9 +29,11 @@ public class TabbedPanelSchool_A extends JTabbedPane {
 
     public TabbedPanelSchool_A(int flag,String ID)
     {
+        this.setBackground(new Color(0x0000001, true));
+        this.setOpaque(false);
         if(flag==3) {
             this.setTabPlacement(1);
-            this.setBounds(0, 0, 1200, 650);
+            this.setBounds(0, 0, 1200, 700);
 
             JPanel panelEnquire = new StudentStatusEnquire_A(ID);
             //JPanel panelChange = new StudentStatusChange_A(ID);
