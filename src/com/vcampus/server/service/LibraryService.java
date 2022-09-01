@@ -11,14 +11,14 @@ import java.util.List;
 import static com.vcampus.dao.LibraryDao.revise;
 
 /**
- * The type Library service.
+ * 图书馆模块的服务层
  */
 public class LibraryService implements Service {
 
     /**
-     * View all books list.
+     * 获得所有图书的列表
      *
-     * @return the list
+     * @return 所有书的列表
      */
     public List<Book> viewAllBooks() {
         List<Book> res = null;
@@ -31,10 +31,10 @@ public class LibraryService implements Service {
     }
 
     /**
-     * Search books list.
+     * 指定条件搜索书籍
      *
-     * @param book the book
-     * @return the list
+     * @param book 封装了搜索条件的Book
+     * @return 符合条件的书的列表
      */
     public List<Book> searchBooks(Book book) {
         List<Book> res = null, ans = new ArrayList<>();
@@ -65,10 +65,10 @@ public class LibraryService implements Service {
     }
 
     /**
-     * Search borrowed books list.
+     * 获得这个用户所有借了的书
      *
-     * @param user the user
-     * @return the list
+     * @param user 用户
+     * @return 该用户借的书的列表
      */
     public List<Book> searchBorrowedBooks(User user) {
         List<Book> res = null;
@@ -81,20 +81,20 @@ public class LibraryService implements Service {
     }
 
     /**
-     * Add new book boolean.
+     * 添加一本新书
      *
-     * @param book the book
-     * @return the boolean
+     * @param book 要被加进去的书
+     * @return 操作成功与否
      */
     public boolean addNewBook(Book book) {
         return LibraryDao.addBook(book);
     }
 
     /**
-     * Change book boolean.
+     * 改变一本书的属性（书名、作者、类型、剩余数量、图片）
      *
      * @param book the book
-     * @return the boolean
+     * @return 操作成功与否
      */
     public boolean changeBook(Book book) {
         boolean result = true;
@@ -111,21 +111,21 @@ public class LibraryService implements Service {
     }
 
     /**
-     * Delete book boolean.
+     * 删除一种书
      *
-     * @param book the book
-     * @return the boolean
+     * @param book 要被删的书
+     * @return 操作成功与否
      */
     public boolean deleteBook(Book book) {
         return LibraryDao.deleteBook(book.getBookID());
     }
 
     /**
-     * Borrow book book.
+     * 借一本书
      *
-     * @param bookID    the book id
-     * @param studentID the student id
-     * @return the book
+     * @param bookID    被借的书的ID
+     * @param studentID 借书人的ID
+     * @return 被借的书
      */
     public Book borrowBook(String bookID, String studentID) {
         boolean res = LibraryDao.borrowBook(bookID, studentID);
@@ -139,11 +139,11 @@ public class LibraryService implements Service {
     }
 
     /**
-     * Return book book.
+     * 归还一本书
      *
-     * @param bookID    the book id
-     * @param studentID the student id
-     * @return the book
+     * @param bookID    书的ID
+     * @param studentID 还书人的ID
+     * @return 就是这本书
      */
     public Book returnBook(String bookID, String studentID) {
         try {

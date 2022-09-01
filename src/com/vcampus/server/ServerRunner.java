@@ -8,7 +8,8 @@ import java.io.*;
 import java.net.Socket;
 
 /**
- * The type Server runner.
+ * 服务器具体运行的一个线程，每个线程对一个客户端服务
+ * 本ServerRunner做的是初步分发的服务
  *
  * @author ZhongHaoyuan
  */
@@ -19,7 +20,8 @@ public class ServerRunner implements Runnable{
             lessonController, testController, shopController, chatController;
 
     /**
-     * Instantiates a new Server runner.
+     * 使用和指定客户端通信的信道实例化一个ServerRunner
+     * 该ServerRunner之后会专门和指定的客户端通信
      *
      * @param sock the sock
      */

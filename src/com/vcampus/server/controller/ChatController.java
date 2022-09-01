@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * The type Chat controller.
+ * 聊天模块的Controller
  *
  * @author ZhongHaoyuan
  */
@@ -23,7 +23,7 @@ public class ChatController implements Controller {
     private final Map<String, Object> map;
 
     /**
-     * Instantiates a new Chat controller.
+     * 初始化一个ChatController.
      */
     public ChatController() {
         service = new ChatService();
@@ -32,10 +32,10 @@ public class ChatController implements Controller {
     }
 
     /**
-     * Gets msg.
+     * 获得该用户所有接收到的私信
      *
-     * @param msg the msg
-     * @return the msg
+     * @param msg 消息，包含一个User
+     * @return 该User所接收到的所有私信的列表
      */
     private List<InnerMessage> getMsg(Message msg) {
         User user = gson.fromJson(msg.getData(), User.class);
@@ -43,10 +43,10 @@ public class ChatController implements Controller {
     }
 
     /**
-     * Send msg string.
+     * 向指定人发送一个私信
      *
-     * @param msg the msg
-     * @return the string
+     * @param msg 消息，包含一个私信的具体内容
+     * @return 表示操作是否正常完成的字符串
      */
     private String sendMsg(Message msg) {
         InnerMessage iMsg = gson.fromJson(msg.getData(), InnerMessage.class);
@@ -54,19 +54,19 @@ public class ChatController implements Controller {
     }
 
     /**
-     * Gets pub msg.
+     * 获得全部的公共消息
      *
-     * @return the pub msg
+     * @return 公共消息，按照时间排序
      */
     private List<PublicMessage> getPubMsg() {
         return service.getPublic();
     }
 
     /**
-     * Send pub msg string.
+     * 发送一条公共消息
      *
-     * @param msg the msg
-     * @return the string
+     * @param msg 消息，包含他要发的那个公共消息
+     * @return 表示操作是否正常完成的字符串
      */
     private String sendPubMsg(Message msg) {
         PublicMessage pMsg = gson.fromJson(msg.getData(), PublicMessage.class);
@@ -74,10 +74,10 @@ public class ChatController implements Controller {
     }
 
     /**
-     * Delete msg string.
+     * 删除一条私信
      *
-     * @param msg the msg
-     * @return the string
+     * @param msg 消息，包含要被删的那个私信
+     * @return 表示操作是否正常完成的字符串
      */
     private String deleteMsg(Message msg) {
         InnerMessage iMsg = gson.fromJson(msg.getData(), InnerMessage.class);
