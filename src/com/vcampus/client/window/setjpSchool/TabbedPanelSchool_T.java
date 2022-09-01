@@ -17,7 +17,11 @@ package com.vcampus.client.window.setjpSchool;
 
 import javax.swing.*;
 import java.awt.*;
-
+/**
+ * 教师身份学籍管理界面
+ * @author 韩宇 张星喆
+ * @date 2022/08/17
+ */
 public class TabbedPanelSchool_T extends JTabbedPane {
     public TabbedPanelSchool_T(int flag,String ID)
     {

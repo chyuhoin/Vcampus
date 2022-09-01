@@ -30,7 +30,11 @@ import java.awt.event.MouseListener;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+/**
+ * 管理员身份图书馆管理界面
+ * @author 韩宇 张星喆
+ * @date 2022/08/17
+ */
 public class TabbedPanelLibrary_A extends JTabbedPane {
 
     MessagePasser passer = ClientMessagePasser.getInstance();

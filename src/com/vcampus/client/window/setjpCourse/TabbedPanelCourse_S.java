@@ -23,7 +23,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
+/**
+ * 管理员身份教务管理界面
+ * @author 韩宇 张星喆
+ * @date 2022/08/17
+ */
 public class TabbedPanelCourse_S extends JTabbedPane {
     MessagePasser passer = ClientMessagePasser.getInstance();
 

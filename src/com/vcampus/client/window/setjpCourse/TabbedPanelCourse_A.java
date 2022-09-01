@@ -17,7 +17,11 @@ package com.vcampus.client.window.setjpCourse;
 
 import javax.swing.*;
 import java.awt.*;
-
+/**
+ * 管理员身份教务管理界面
+ * @author 韩宇 张星喆
+ * @date 2022/08/17
+ */
 public class TabbedPanelCourse_A extends JTabbedPane {
 
     public TabbedPanelCourse_A(int flag)

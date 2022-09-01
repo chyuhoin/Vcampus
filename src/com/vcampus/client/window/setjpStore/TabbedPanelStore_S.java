@@ -32,7 +32,11 @@ import java.awt.event.MouseListener;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+/**
+ * 学生身份校园商店管理界面
+ * @author 韩宇 张星喆
+ * @date 2022/08/17
+ */
 public class TabbedPanelStore_S extends JTabbedPane {
 
     MessagePasser passer = ClientMessagePasser.getInstance();
@@ -53,7 +57,6 @@ public class TabbedPanelStore_S extends JTabbedPane {
             this.addTab("我的订单", new ImageIcon("resource//tab_orders.png"), myPurchase, "我的订单");
             this.setFont(new Font("宋体", Font.BOLD, 24));
 
-            //选项卡刷新??????????好像不更新
 
             this.addMouseListener(new MouseListener() {
                 @Override

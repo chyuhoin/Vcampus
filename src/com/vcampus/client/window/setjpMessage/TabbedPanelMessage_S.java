@@ -31,7 +31,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Map;
-
+/**
+ * 学生身份站内消息管理界面
+ * @author 韩宇 张星喆 钟昊原
+ * @date 2022/08/17
+ */
 public class TabbedPanelMessage_S extends JTabbedPane {
     JButton btn = new JButton("刷新");
     public MyMassagePanel priMessage;

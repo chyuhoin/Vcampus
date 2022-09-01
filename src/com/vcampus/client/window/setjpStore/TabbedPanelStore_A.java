@@ -22,33 +22,19 @@ import java.awt.event.MouseListener;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+/**
+ * 管理员身份校园商店管理界面
+ * @author 韩宇 张星喆
+ * @date 2022/08/17
+ */
 public class TabbedPanelStore_A extends JTabbedPane {
-
-    //回头改到教师和学生那里
-
-    //////////////
-
-
-
     public TabbedPanelStore_A(int flag)
     {
         if(flag==3) {
             this.setTabPlacement(1);
             this.setBounds(0, 0, 1400, 650);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
-            //JPanel goodsSimpleInform = new PanelGoodsSimpleInform();
-            //goodsSimpleInform.setBounds(50,80,320,170);
-            //goodsSimpleInform.setBorder(BorderFactory.createTitledBorder("分组框")); //设置面板边框，实现分组框的效果，此句代码为关键代码
-            //goodsSimpleInform.setBorder(BorderFactory.createLineBorder(Color.red));//设置面板边框颜色
-            //panelTest.add(goodsSimpleInform);
 
-        /*
-        JPanel myStore = new PanelMyStore_S();
-        PanelHomePage_ST homePage = new PanelHomePage_ST();
-        PanelMyPurchaseOrder_ST purchaseOrder = new PanelMyPurchaseOrder_ST();
-        purchaseOrder.setTable(columnNames,getAllOrder());
- */
             PanelGoodsManage_A goodsManage = new PanelGoodsManage_A();
             JPanel dealManage = new PanelDealManage_A();
 

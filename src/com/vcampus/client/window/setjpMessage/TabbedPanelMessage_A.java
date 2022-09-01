@@ -34,6 +34,11 @@ import java.awt.event.MouseListener;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 管理员身份站内消息管理界面
+ * @author 韩宇 张星喆 钟昊原
+ * @date 2022/08/17
+ */
 public class TabbedPanelMessage_A extends JTabbedPane{
 
     public MyMassagePanel priMessage;

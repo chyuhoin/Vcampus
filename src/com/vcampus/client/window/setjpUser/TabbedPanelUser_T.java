@@ -31,7 +31,11 @@ import java.awt.event.MouseListener;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+/**
+ * 教师身份用户管理界面
+ * @author 韩宇 张星喆
+ * @date 2022/08/17
+ */
 public class TabbedPanelUser_T extends JTabbedPane{
 
     public TabbedPanelUser_T(int flag,String id) {

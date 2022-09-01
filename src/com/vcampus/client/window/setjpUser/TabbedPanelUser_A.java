@@ -18,6 +18,11 @@ package com.vcampus.client.window.setjpUser;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * 管理员身份用户管理界面
+ * @author 韩宇 张星喆
+ * @date 2022/08/17
+ */
 public class TabbedPanelUser_A extends JTabbedPane{
     public TabbedPanelUser_A(int flag,String id)
     {

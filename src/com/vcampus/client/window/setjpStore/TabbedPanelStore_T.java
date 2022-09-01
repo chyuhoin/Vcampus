@@ -31,7 +31,11 @@ import java.awt.event.MouseListener;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+/**
+ * 教师身份校园商店管理界面
+ * @author 韩宇 张星喆
+ * @date 2022/08/17
+ */
 public class TabbedPanelStore_T extends JTabbedPane {
 
     MessagePasser passer = ClientMessagePasser.getInstance();
@@ -111,7 +115,6 @@ public class TabbedPanelStore_T extends JTabbedPane {
         }
         else
         {
-           // JOptionPane.showMessageDialog(this, "未查询到购买界面", "警告", JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }

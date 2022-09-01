@@ -20,6 +20,11 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+/**
+ * 学生身份用户管理界面
+ * @author 韩宇 张星喆
+ * @date 2022/08/17
+ */
 public class TabbedPanelUser_S extends JTabbedPane {
     public TabbedPanelUser_S(String id) {
 

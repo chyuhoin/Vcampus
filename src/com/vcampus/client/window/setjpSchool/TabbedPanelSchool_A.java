@@ -20,7 +20,11 @@ import com.vcampus.client.window.setjpSchool.StudentStatusEnquire_A;
 
 import javax.swing.*;
 import java.awt.*;
-
+/**
+ * 管理员身份学籍管理界面
+ * @author 韩宇 张星喆
+ * @date 2022/08/17
+ */
 public class TabbedPanelSchool_A extends JTabbedPane {
 
     public TabbedPanelSchool_A(int flag,String ID)
@@ -30,10 +34,10 @@ public class TabbedPanelSchool_A extends JTabbedPane {
             this.setBounds(0, 0, 1200, 650);
 
             JPanel panelEnquire = new StudentStatusEnquire_A(ID);
-            JPanel panelChange = new StudentStatusChange_A(ID);
+            //JPanel panelChange = new StudentStatusChange_A(ID);
 
-            this.addTab("查看学籍信息", new ImageIcon("resource//tab_student.png"), panelEnquire, "查看学籍信息");
-            this.addTab("修改学籍信息", new ImageIcon("resource//tab_student.png"), panelChange, "修改学籍信息");
+            this.addTab("学生学籍信息管理", new ImageIcon("resource//tab_student.png"), panelEnquire, "查看学籍信息");
+            //this.addTab("修改学籍信息", new ImageIcon("resource//tab_student.png"), panelChange, "修改学籍信息");
             //this.addTab("选项三", null, jp13,"点击查看选项三");
             this.setFont(new Font("宋体", Font.BOLD, 24));
         }

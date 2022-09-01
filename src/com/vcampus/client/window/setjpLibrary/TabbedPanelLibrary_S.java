@@ -28,7 +28,11 @@ import java.awt.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+/**
+ * 学生身份图书馆管理界面
+ * @author 韩宇 张星喆
+ * @date 2022/08/17
+ */
 public class TabbedPanelLibrary_S extends JTabbedPane {
     MessagePasser passer = ClientMessagePasser.getInstance();
     public TabbedPanelLibrary_S(int flag,String myID)

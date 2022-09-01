@@ -72,7 +72,7 @@ public class StudentStatusChange_A extends JPanel{
     MessagePasser passer = ClientMessagePasser.getInstance();
     Student t = new Student();//接收结果
 
-    public StudentStatusChange_A(String ID)
+    public StudentStatusChange_A()
     {
         this.setLayout(null);
 

@@ -19,7 +19,11 @@ import com.vcampus.client.window.setjpSchool.StudentStatusEnquire_S;
 
 import javax.swing.*;
 import java.awt.*;
-
+/**
+ * 学生身份学籍管理界面
+ * @author 韩宇 张星喆
+ * @date 2022/08/17
+ */
 public class TabbedPanelSchool_S extends JTabbedPane {
     public TabbedPanelSchool_S(int flag,String ID)
     {
