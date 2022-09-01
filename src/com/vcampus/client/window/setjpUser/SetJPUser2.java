@@ -336,8 +336,9 @@ public class SetJPUser2 {
         layout_Spring.putConstraint(layout_Spring.EAST, btn4, -355, layout_Spring.EAST, jp3);
         layout_Spring.putConstraint(layout_Spring.NORTH, btn3, 400, layout_Spring.NORTH, jp3);//确认按钮
         layout_Spring.putConstraint(layout_Spring.EAST, btn3, -30, layout_Spring.WEST, btn4);
-        layout_Spring.putConstraint(layout_Spring.SOUTH, btn5, 400, layout_Spring.SOUTH, jp3);//注销
-        layout_Spring.putConstraint(layout_Spring.EAST, btn5, -20, layout_Spring.EAST, jp3);
+        layout_Spring.putConstraint(layout_Spring.NORTH, btn5, 0, layout_Spring.NORTH, btn4);//注销
+        layout_Spring.putConstraint(layout_Spring.WEST, btn5, 30, layout_Spring.EAST,btn4);
+
 
         //信息列表：
         //标签
