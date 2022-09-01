@@ -13,7 +13,19 @@ import java.util.Map;
 
 import static com.vcampus.dao.utils.ClassTable.getTimeIndex;
 
+/**
+ * 老师信息相关操作的Dao层
+ *
+ * @author 刘骐
+ * @date 2022/09/01
+ */
 public class TeacherDao extends UserDao {
+    /**
+     * 添加老师
+     *
+     * @param teacher 老师
+     * @return {@link Boolean}
+     */
     public static Boolean addTeacher(Teacher teacher){
        try {
            addClass(teacher,"tb_TEACHER");
@@ -23,7 +35,13 @@ public class TeacherDao extends UserDao {
            return false;
        }
     }
-    //删除一个老师
+
+    /**
+     * 删除老师
+     *
+     * @param teacherID 老师id
+     * @return {@link Boolean}
+     *///删除一个老师
     public static Boolean deleteTeacher(String teacherID){
         try {
             delete("teacherID",teacherID,"tb_TEACHER");
@@ -33,7 +51,15 @@ public class TeacherDao extends UserDao {
             return false;
         }
     }
-    //查找一个老师
+
+    /**
+     * 搜索老师
+     *
+     * @param field 字段
+     * @param value 值
+     * @return {@link List}<{@link Teacher}>
+     * @throws Exception 异常
+     */
     public static List<Teacher> searchTeacher(String field,String value) throws Exception {
         String sql = "select * from tb_TEACHER where "+field+" ='"+value+"'";
 
@@ -46,7 +72,14 @@ public class TeacherDao extends UserDao {
         }
         return result;
     }
-    //老师课表的选课与退课
+
+    /**
+     * 选择课
+     *
+     * @param teacherID 老师id
+     * @param innerID   内部id
+     * @return {@link Boolean}
+     */
     public static Boolean selectLesson(String teacherID,String innerID){
         try {
             String sql = "select timeTable from tb_LESSONTABLEFORTEACHER where teacherID = '" + teacherID + "'";
@@ -73,7 +106,14 @@ public class TeacherDao extends UserDao {
             return false;
         }
     }
-    //老师退课
+
+    /**
+     * 退课
+     *
+     * @param teacherID 老师id
+     * @param innerID   内部id
+     * @return {@link Boolean}
+     */
     public static Boolean returnLesson(String teacherID,String innerID){
         try {
             String sql = "update tb_LESSONTABLEFORTEACHER set timeTable = REPLACE(timeTable,'"+innerID+"','0') where teacherID ='"+teacherID+"'";
@@ -84,7 +124,14 @@ public class TeacherDao extends UserDao {
             return false;
         }
     }
-    //获得老师课表
+
+    /**
+     * 得到课表
+     *
+     * @param teacherID 老师id
+     * @return {@link String}
+     * @throws Exception 异常
+     */
     public static String getLessonTable(String teacherID) throws Exception {
         String sql = "select timeTable from tb_LESSONTABLEFORTEACHER where teacherID ='"+teacherID+"'";
         List<Map<String,Object>> resultList = CRUD.Query(sql,conn);

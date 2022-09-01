@@ -14,18 +14,43 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * 和商店有关操作
+ *
+ * @author 刘骐
+ * @date 2022/09/01
+ */
 public class ShopDao extends BaseDao{
-    //查询全部
+    /**
+     * 搜索
+     * 查询全部商品
+     *
+     * @return {@link List}<{@link Goods}>
+     * @throws Exception 异常
+     */
     public static List<Goods> search() throws Exception {
         return searchAll(Goods.class,"tb_GOODS");
     }
-    //按字段查询
+
+    /**
+     * 按字段查询
+     *
+     * @param field 字段
+     * @param value 值
+     * @return {@link List}<{@link Goods}>
+     * @throws Exception 异常
+     */
     public static List<Goods> search(String field,Object value) throws Exception {
         return searchBy(Goods.class,"tb_GOODS",field,value);
     }
     //查看我在卖的商品
 
-    //添加商品
+    /**
+     * 添加商品
+     *
+     * @param goods 货物
+     * @return {@link Boolean}
+     */
     public static Boolean addGoods(Goods goods) {
         try {
             addClass(goods,"tb_GOODS");
@@ -35,7 +60,14 @@ public class ShopDao extends BaseDao{
             return false;
         }
     }
-    //删除商品
+
+    /**
+     * 删除商品
+     *
+     * @param field 字段
+     * @param value 值
+     * @return {@link Boolean}
+     */
     public static Boolean deleteGoods(String field,Object value){
         try {
             delete(field,value,"tb_GOODS");
@@ -45,7 +77,14 @@ public class ShopDao extends BaseDao{
             return false;
         }
     }
-    //买入
+
+    /**
+     * 购买商品
+     *
+     * @param studentID 学生一卡通
+     * @param goodsID   商品id
+     * @return {@link Boolean}
+     */
     public static Boolean buyGoods(String studentID,String goodsID){
         try {
             conn.setAutoCommit(false);
@@ -58,7 +97,16 @@ public class ShopDao extends BaseDao{
             return false;
         }
     }
-    //修改
+
+    /**
+     * 修改
+     *
+     * @param studentID 学生一卡通
+     * @param goodsID   商品id
+     * @param field     字段
+     * @param value     值
+     * @return {@link Boolean}
+     */
     public static Boolean revise(String studentID,String goodsID,String field, String  value) {
         try {
            // String sql = "update tb_GOODS set " + field +"  = ? where seller = ? and goodsID = ?";

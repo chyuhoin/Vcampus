@@ -12,6 +12,14 @@ import java.util.Map;
 提供统一的增删改查接口
  */
 public class CRUD {
+    /**
+     * 查询
+     *
+     * @param sql  sql语句
+     * @param conn 连接
+     * @return {@link List}<{@link Map}<{@link String}, {@link Object}>>
+     * @throws Exception 异常
+     */
     public static List<Map<String,Object>> Query(String sql,Connection conn) throws Exception {
        // Connection conn = databaseConn.getConn();
         Statement stm   = conn.createStatement();
@@ -30,6 +38,14 @@ public class CRUD {
        // conn.close();
         return result;
     }
+
+    /**
+     * 更新
+     *
+     * @param sql  sql语句
+     * @param conn 连接
+     * @throws Exception 异常
+     */
     public static void update(String sql,Connection conn) throws Exception {
 
          //   Connection conn = databaseConn.getConn();

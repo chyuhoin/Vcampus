@@ -12,12 +12,30 @@ import java.util.Map;
 import com.vcampus.dao.utils.mapToBean;
 import org.junit.Test;
 
+/**
+ * 和图书馆相关操作
+ *
+ * @author 刘骐
+ * @date 2022/09/01
+ */
 public class LibraryDao extends BaseDao{
-    //查询函数，无参的情况下查看所有值
+    /**
+     * 搜索所有图书
+     *
+     * @return {@link List}<{@link Book}>
+     * @throws Exception 异常
+     */
     public static List<Book> search() throws Exception {
         return searchAll(Book.class,"tb_BOOK");
     }
-    //重载的查询函数，按条件查询,str的顺序为 字段+值，两个一组重复,
+
+    /**
+     * 按条件查询图书
+     *
+     * @param str 查询条件
+     * @return {@link List}<{@link Book}>
+     * @throws Exception 异常
+     *///重载的查询函数，按条件查询,str的顺序为 字段+值，两个一组重复,
     public static List<Book> search(String...str) throws Exception {
         String sql = "select * from tb_BOOK  where {0} = {1} and {2}={3} and {4}={5}" ;
         for(int i=0;i<str.length;i+=2){
@@ -36,7 +54,14 @@ public class LibraryDao extends BaseDao{
         }
         return result;
     }
-    //查看自己借了哪些书
+
+    /**
+     * 查询借书情况
+     *
+     * @param studentID 学生证
+     * @return {@link List}<{@link Book}>
+     * @throws Exception 异常
+     */
     public static List<Book> searchMine(String studentID) throws Exception {
         String sql = "SELECT tb_BOOK.* from tb_BOOK ,tb_BOOKWITHSTUDENT "+
         "WHERE tb_BOOK.bookID = tb_BOOKWITHSTUDENT.bookID "+
@@ -50,7 +75,13 @@ public class LibraryDao extends BaseDao{
         }
         return result;
     }
-    //添加一本图书，仅管理员可操作
+
+    /**
+     * 管理员添加书
+     *
+     * @param book 书
+     * @return {@link Boolean}
+     *///添加一本图书，仅管理员可操作
     public static Boolean addBook(Book book) {
         try {
             addClass(book, "tb_BOOK");
@@ -60,7 +91,13 @@ public class LibraryDao extends BaseDao{
             return false;
         }
     }
-    //删除一本图书，仅管理员可操作
+
+    /**
+     * 管理员删除书
+     *
+     * @param bookID 书id
+     * @return {@link Boolean}
+     */
     public static Boolean deleteBook(String bookID) {
         try {
             delete("bookID", bookID, "tb_BOOK");
@@ -70,7 +107,14 @@ public class LibraryDao extends BaseDao{
             return false;
         }
     }
-    //借一本书，用于管理员处理借书的情况
+
+    /**
+     * 借书
+     *
+     * @param bookID    书id
+     * @param studentID 学生一卡通号
+     * @return {@link Boolean}
+     */
     public static Boolean borrowBook(String bookID,String studentID)  {
         try {
             Date date = new Date(System.currentTimeMillis());
@@ -94,7 +138,15 @@ public class LibraryDao extends BaseDao{
             return false;
         }
     }
-    //还书，用于管理员处理还书的情况
+
+    /**
+     * 还书
+     *
+     * @param bookID    书id
+     * @param studentID 学生一卡通号
+     * @return {@link Boolean}
+     * @throws Exception 异常
+     *///还书，用于管理员处理还书的情况
     public static Boolean returnBook(String bookID,String studentID) throws Exception {
         try {
             String sql1 = "update tb_BOOK set leftSize = leftSize+1 where bookID = " + "'" + bookID + "'";
@@ -117,7 +169,15 @@ public class LibraryDao extends BaseDao{
             return false;
         }
     }
-    //修改图书的信息，由管理员操作
+
+    /**
+     * 修改图书信息
+     *
+     * @param bookID 书id
+     * @param field  字段
+     * @param value  值
+     * @return {@link Boolean}
+     */
    public static Boolean revise(String bookID, String field, Object value) {
         try {
             String sql = "update tb_BOOK set "+field+"  = ? where bookID = '"+bookID+"'";

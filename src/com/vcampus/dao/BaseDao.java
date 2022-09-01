@@ -16,6 +16,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ *所有Dao的父类，提供增删改查泛型方法
+ * @author 刘骐
+ * @date 2022/09/01
+ */
 public class BaseDao {
     static Connection conn;
 
@@ -26,7 +31,15 @@ public class BaseDao {
             e.printStackTrace();
         }
     }
-    //查询全部的公共方法
+
+    /**
+     * 搜索所有内容
+     *
+     * @param clz   用于接受的JavaBean对象的class
+     * @param table 表格
+     * @return 返回结果列表
+     * @throws Exception 查询失败的异常
+     *///查询全部的公共方法
     public static <T> List<T> searchAll(Class<T>clz,String table) throws Exception {
         String sql = "select * from "+table;
         List<Map<String,Object>> resultList = CRUD.Query(sql,conn);
@@ -37,7 +50,17 @@ public class BaseDao {
         }
         return result;
     }
-    //按字段查询的公共方法
+
+    /**
+     * 按字段查询
+     *
+     * @param clz   用于接受的JavaBean对象的class
+     * @param table 表格
+     * @param field 字段
+     * @param value 值
+     * @return 返回结果列表
+     * @throws Exception 查询失败的异常
+     *///按字段查询的公共方法
     public static <T> List<T> searchBy(Class<T>clz,String table,String field,Object value) throws Exception {
         String sql = "select * from "+table +" where FIND_IN_SET(";
         if(value.getClass()==String.class)
@@ -53,7 +76,15 @@ public class BaseDao {
         }
         return result;
     }
-    //删除的公共方法
+
+    /**
+     * 删除某一值
+     *
+     * @param field 字段
+     * @param value 值
+     * @param table 表格
+     * @throws Exception 异常
+     *///删除的公共方法
     public static void delete(String field,Object value,String table) throws Exception {
             String sql = "delete from "+table+" "+"where "+field+" = ";
             if(value.getClass()==String.class)
@@ -62,7 +93,15 @@ public class BaseDao {
                 sql +=String.valueOf(value);
             CRUD.update(sql,conn);
     }
-    //添加的公共方法
+
+    /**
+     * 添加值
+     *
+     * @param temp  传入的javabean对象
+     * @param table 表格
+     * @throws SQLException           sqlexception异常
+     * @throws IllegalAccessException 非法访问异常
+     *///添加的公共方法
     public static<T>  void addClass(T temp,String table) throws SQLException, IllegalAccessException {
         Class clazz = temp.getClass();
         Field[] fields = clazz.getDeclaredFields();

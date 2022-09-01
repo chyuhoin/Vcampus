@@ -5,11 +5,25 @@ import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
 import java.util.Map;
-/*
+
+/**
+ * map类型转bean对象
+ *
+ * @author 刘骐
+ * @date 2022/09/01
+ *//*
 此类的作用是将map转为JavaBean类型的数据
  */
 public class mapToBean {
-public static  <T>T map2Bean(Map<String,Object> map , Class<T> clz) throws Exception{
+    /**
+     * map转bean
+     *
+     * @param map map对象
+     * @param clz 类
+     * @return {@link T}
+     * @throws Exception 异常
+     */
+    public static  <T>T map2Bean(Map<String,Object> map , Class<T> clz) throws Exception{
     //new 出一个对象
     T obj=clz.newInstance();
     // 获取person类的BeanInfo对象

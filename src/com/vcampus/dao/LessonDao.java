@@ -20,18 +20,42 @@ import static com.sun.org.apache.bcel.internal.generic.Type.STRING;
 import static com.vcampus.dao.utils.ClassTable.addToTable;
 import static com.vcampus.dao.utils.ClassTable.compare;
 
+/**
+ * 和学生课程有关的课
+ *
+ * @author 刘骐
+ * @date 2022/09/01
+ */
 public class LessonDao extends BaseDao{
-    //无参时查询所有课程
+    /**
+     * 查询所有课程信息
+     *
+     * @return {@link List}<{@link Lesson}>
+     * @throws Exception 异常
+     *///无参时查询所有课程
     public static List<Lesson> search() throws Exception {
         return searchAll(Lesson.class,"tb_LESSON");
     }
 
-    //有参按条件查询
+    /**
+     * 按条件查询课程
+     *
+     * @param field 字段
+     * @param value 值
+     * @return {@link List}<{@link Lesson}>
+     * @throws Exception 异常
+     *///有参按条件查询
     public static List<Lesson> search(String field, Object value) throws Exception {
         return searchBy(Lesson.class,"tb_LESSON",field,value);
     }
 
-    //学生查询自己选的课信息,这是个联表查询，父类方法可能没法用
+    /**
+     * 查询学生自己的选课信息
+     *
+     * @param studentID 学生一卡通号
+     * @return {@link List}<{@link Lesson}>
+     * @throws Exception 异常
+     *///学生查询自己选的课信息,这是个联表查询，父类方法可能没法用
     public static List<Lesson> searchMine(String studentID) throws Exception {
         String sql = "SELECT tb_LESSON.* from tb_LESSON ,tb_STUDENTWITHLESSON " +
                 "WHERE tb_LESSON.innerID = tb_STUDENTWITHLESSON.innerID " +
@@ -45,7 +69,14 @@ public class LessonDao extends BaseDao{
         }
         return result;
     }
-    //老师查看自己教的课
+
+    /**
+     * 老师搜索自己教的课
+     *
+     * @param teacherID 老师id
+     * @return {@link List}<{@link Lesson}>
+     * @throws Exception 异常
+     */
     public static List<Lesson> searchMyLesson(String teacherID) throws Exception {
         String sql = "select * from tb_LESSON where teacherID = '"+teacherID+"'";
         List<Map<String, Object>> resultList = CRUD.Query(sql,conn);
@@ -56,7 +87,14 @@ public class LessonDao extends BaseDao{
         }
         return result;
     }
-    //查看选一门课的所有学生,返回一卡通号
+
+    /**
+     * 查看选一门课的所有学生,返回一卡通号
+     *
+     * @param innerID 内部id
+     * @return {@link List}<{@link String}>
+     * @throws Exception 异常
+     */
     public static List<String> searchStudent(String innerID) throws Exception {
         String sql = "select studentID from tb_STUDENTWITHLESSON where innerID = '"+innerID+"'";
         List<Map<String, Object>> resultList = CRUD.Query(sql,conn);
@@ -67,7 +105,15 @@ public class LessonDao extends BaseDao{
         }
         return result;
     }
-    //判断函数
+
+    /**
+     * 判断学生能否选课即原因
+     *
+     * @param studentID 学生证
+     * @param innerID   内部id
+     * @return int
+     * @throws Exception 异常
+     */
     public static int judgeLesson(String studentID,String innerID) throws Exception {
         String judgeSql1 = "select * from tb_STUDENTWITHLESSON where studentID = '" + studentID + "' and innerID = '" + innerID + "'";
 
@@ -111,6 +157,14 @@ public class LessonDao extends BaseDao{
     }
     //学生选课
 
+    /**
+     * 选课
+     *
+     * @param studentID 学生一卡通号
+     * @param innerID   内部id
+     * @return {@link Boolean}
+     * @throws Exception 异常
+     */
     public static Boolean selectLesson(String studentID, String innerID) throws Exception {
 //        String judgeSql = "select * from tb_STUDENTWITHLESSON where studentID = '" + studentID + "' and innerID = '" + innerID + "'";
 //        List<Map<String, Object>> judge = CRUD.Query(judgeSql,conn);
@@ -135,7 +189,15 @@ public class LessonDao extends BaseDao{
 //            return false;
 //        }
     }
-    //学生退课
+
+    /**
+     * 学生退课
+     *
+     * @param studentID 学生一卡通号
+     * @param innerID   内部id
+     * @return {@link Boolean}
+     * @throws Exception 异常
+     */
     public static Boolean returnLesson(String studentID,String innerID) throws Exception {
             try {
                 String sql1 = "update tb_LESSON set leftSize=leftSize+1 where innerID = '" + innerID + "'";
@@ -156,7 +218,13 @@ public class LessonDao extends BaseDao{
             }
         }
 
-    //管理员添加课程
+    /**
+     * 管理员添加一门课程
+     *
+     * @param lesson 教训
+     * @return {@link Boolean}
+     * @throws Exception 异常
+     */
     public static Boolean addLesson(Lesson lesson) throws Exception {
 //        try {
 //            String sql = "insert into tb_LESSON (innerID,lessonID,name,teacherID,maxSize,leftSize,time,school,major,isExam) values(?,?,?,?,?,?,?,?,?,?)";
@@ -185,7 +253,13 @@ public class LessonDao extends BaseDao{
         }
 
     }
-    //管理员删除一个课程
+
+    /**
+     * 管理员删除课程
+     *
+     * @param innerID 内部id
+     * @return {@link Boolean}
+     */
     public static Boolean deleteLesson(String innerID){
         try {
             delete("innerID",innerID,"tb_LESSON");
@@ -196,7 +270,13 @@ public class LessonDao extends BaseDao{
         }
 
     }
-    //管理员删除同一个编号的课程
+
+    /**
+     * 管理员删除同一个编号的所有课程
+     *
+     * @param lessonID 教训id
+     * @return {@link Boolean}
+     */
     public static Boolean deleteSpecificLesson(String lessonID){
         try {
             delete("lessonID",lessonID,"tb_LESSON");
@@ -207,7 +287,16 @@ public class LessonDao extends BaseDao{
         }
 
     }
-    //管理员给学生添加成绩
+
+    /**
+     * 给学生添加成绩
+     *
+     * @param studentID 学生证
+     * @param innerID   内部id
+     * @param grade     年级
+     * @return {@link Boolean}
+     * @throws Exception 异常
+     */
     public static Boolean addGrade(String studentID, String innerID, Integer grade) throws Exception {
         String sql = "update tb_STUDENTWITHLESSON set grade = " + String.valueOf(grade) + " where studentID = '" + studentID + "' and innerID = '" + innerID + "'";
         try {
@@ -217,17 +306,38 @@ public class LessonDao extends BaseDao{
             return false;
         }
     }
-    //查询成绩
+
+    /**
+     * 查询学生成绩
+     *
+     * @param studentID 学生证
+     * @return {@link List}<{@link LessonGrade}>
+     * @throws Exception 异常
+     */
     public static List<LessonGrade> getGrade(String studentID) throws Exception {
         return searchBy(LessonGrade.class,"tb_STUDENTWITHLESSON","studentID",studentID);
     }
-    //学生获取自己的课表
+
+    /**
+     * 学生查询课表
+     *
+     * @param studentID 学生一卡通号
+     * @return {@link String}
+     * @throws Exception 异常
+     */
     public static String getLessonTable(String studentID) throws Exception {
         String sql = "select timeTable from tb_LESSONTABLE where studentID = '"+studentID+"'";
         String result = (String) CRUD.Query(sql,conn).get(0).get("timeTable");
         return result;
     }
-    //输入时间返回可用教室
+
+    /**
+     * 查询可用教室
+     *
+     * @param time 时间
+     * @return {@link List}<{@link String}>
+     * @throws Exception 异常
+     */
     public static List<String> abledRoom(String time) throws Exception {
         List<String>result = new ArrayList<>();
         List<Integer>index = ClassTable.getTimeIndex(time);
@@ -240,7 +350,15 @@ public class LessonDao extends BaseDao{
         }
         return result;
     }
-    //教室选课
+
+    /**
+     * 给教室添加一门课
+     *
+     * @param time     时间
+     * @param lessonID 教训id
+     * @param roomID   房间id
+     * @return {@link Boolean}
+     */
     public static Boolean selectLessonForClassroom(String time,String lessonID,String roomID){
         try {
             String sql = "select timeTable from tb_CLASSROOM where roomID = '"+roomID+"'";
@@ -265,7 +383,14 @@ public class LessonDao extends BaseDao{
             return false;
         }
     }
-    //教室退课
+
+    /**
+     * 从教室课表删去一门课
+     *
+     * @param lessonID 教训id
+     * @param roomID   房间id
+     * @return {@link Boolean}
+     */
     public static Boolean returnLessonForClassroom(String lessonID,String roomID){
         try {
             String sql = "update tb_CLASSROOM set timeTable = REPLACE(timeTable,'"+lessonID+"','0') where roomID ='"+roomID+"'";
@@ -276,7 +401,13 @@ public class LessonDao extends BaseDao{
             return false;
         }
     }
-    //所有教室都退课
+
+    /**
+     * 所有教室都删除一门课
+     *
+     * @param innerID 内部id
+     * @return {@link Boolean}
+     */
     public static Boolean deleteAllFromClassroom(String innerID){
         try {
             String sql = "update tb_CLASSROOM set timeTable = REPLACE(timeTable,'"+innerID+"','0')";
@@ -287,6 +418,14 @@ public class LessonDao extends BaseDao{
             return false;
         }
     }
+
+    /**
+     * 搜索内部id搜索学生的成绩
+     *
+     * @param innerID 内部id
+     * @return {@link List}<{@link String}>
+     * @throws Exception 异常
+     */
     public static List<String> searchByInnerID(String innerID) throws Exception {
         String sql = "select studentID,grade from tb_STUDENTWITHLESSON where innerID = '"+innerID+"'";
         List<Map<String,Object>> resultList = CRUD.Query(sql,conn);
@@ -296,31 +435,6 @@ public class LessonDao extends BaseDao{
             result.add(res);
         }
         return result;
-    }
-    @Test
-    public void test() throws Exception {
-        List<List<Integer>> res=new ArrayList<List<Integer>>();
-        List<Integer>tmp=new ArrayList<>();
-        tmp.add(3);
-        res.add(tmp);
-        tmp.remove(tmp.size() - 1);//删除最后一个元素
-        System.out.println(tmp);
-        tmp.add(1);
-        tmp.add(2);
-        res.add(tmp);
-        tmp.remove(tmp.size() - 1);//删除最后一个元素
-        tmp.remove(tmp.size() - 1);//删除最后一个元素
-        tmp.add(5);
-        tmp.add(6);
-        tmp.add(5);
-        tmp.add(6);
-        System.out.println(res);
-    }
-    @Test
-    public void test2() throws Exception {
-//        String sql3="select * from (select tb_STUDENTWITHLESSON.innerID,tb_LESSON.lessonID from tb_LESSON,tb_STUDENTWITHLESSON where tb_LESSON.innerID = tb_STUDENTWITHLESSON.innerID and tb_STUDENTWITHLESSON.studentID  = '123333' )as tb_a, (select lessonID from tb_LESSON where innerID ='123456' ) as tb_b where tb_b.lessonID = tb_a.lessonID";
-//        System.out.println(sql3);
-        System.out.println(searchMine("test"));
     }
 }
 

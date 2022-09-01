@@ -1,5 +1,11 @@
 package com.vcampus.pojo;
 
+/**
+ * 考试
+ *
+ * @author 12107
+ * @date 2022/09/01
+ */
 public class Exam {
     String innerID;
     String teacherID;

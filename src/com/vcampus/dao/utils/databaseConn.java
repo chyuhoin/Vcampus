@@ -12,7 +12,19 @@ import java.util.Properties;
 
 import static java.sql.Connection.TRANSACTION_REPEATABLE_READ;
 
+/**
+ * 获取数据库连接的类
+ *
+ * @author 刘骐
+ * @date 2022/09/01
+ */
 public class databaseConn {
+    /**
+     * 获取连接
+     *
+     * @return {@link Connection}
+     * @throws Exception 异常
+     */
     public static Connection getConn() throws Exception {
         //1.定义了4个字符串用来保存连接信息
         String driverClass ;
