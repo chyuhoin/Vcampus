@@ -43,7 +43,7 @@ public class My_Frame extends JFrame{
     //承接头像图片
     JLabel tx=new JLabel();
     //写文字QQ
-    JLabel qq=new Create_label("Welcome for Vcampus!",Color.black);
+    JLabel qq=new Create_label("Welcome to Vcampus!",Color.black);
     JLabel qq1=new Create_label("用户名",Color.GRAY);
     JLabel qq2=new Create_label("密码",Color.GRAY);
     //用户名输入框

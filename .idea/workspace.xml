@@ -2,25 +2,34 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="登录界面">
-      <change afterPath="$PROJECT_DIR$/resource/default.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resource/teacher_default.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/Main_Frame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-22_17_27___Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2022-08-22_17_27___Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-27_19_05___Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2022-08-27_19_05___Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-28_10_32___Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2022-08-28_10_32___Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-28_10_35___Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2022-08-28_10_35___Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-28_10_35___Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2022-08-28_10_35___Changes_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-28_10_42___Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2022-08-28_10_42___Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-28_19_24___Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2022-08-28_19_24___Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-29_17_12___Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2022-08-29_17_12___Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/img/主界面背景.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/img/返回.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/模拟QQ/Main_Frame_Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-24_21_22___Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2022-08-25_12_36___Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2022-08-24_21_22_取消提交了变更_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2022-08-25_12_36_取消提交了变更_[Changes]/shelved.patch" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jdbc.properties" beforeDir="false" afterPath="$PROJECT_DIR$/jdbc.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource/btn_message.png" beforeDir="false" afterPath="$PROJECT_DIR$/resource/btn_message.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource/btn_store.png" beforeDir="false" afterPath="$PROJECT_DIR$/resource/btn_store.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/login/My_Frame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/login/My_Frame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpCourse/TabbedPanelCourse_A.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpCourse/TabbedPanelCourse_A.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpCourse/TabbedPanelCourse_S.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpCourse/TabbedPanelCourse_S.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpCourse/TabbedPanelCourse_T.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpCourse/TabbedPanelCourse_T.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpLibrary/TabbedPanelLibrary_A.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpLibrary/TabbedPanelLibrary_A.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpLibrary/TabbedPanelLibrary_S.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpLibrary/TabbedPanelLibrary_S.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpLibrary/TabbedPanelLibrary_T.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpLibrary/TabbedPanelLibrary_T.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpMessage/TabbedPanelMessage_A.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpMessage/TabbedPanelMessage_A.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpMessage/TabbedPanelMessage_S.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpMessage/TabbedPanelMessage_S.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpMessage/TabbedPanelMessage_T.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpMessage/TabbedPanelMessage_T.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpSchool/TabbedPanelSchool_A.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpSchool/TabbedPanelSchool_A.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpSchool/TabbedPanelSchool_S.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpSchool/TabbedPanelSchool_S.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpSchool/TabbedPanelSchool_T.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpSchool/TabbedPanelSchool_T.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpStore/TabbedPanelStore_A.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpStore/TabbedPanelStore_A.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpStore/TabbedPanelStore_S.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpStore/TabbedPanelStore_S.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpStore/TabbedPanelStore_T.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpStore/TabbedPanelStore_T.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpUser/SetJPUser1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpUser/SetJPUser1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpUser/TabbedPanelUser_A.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpUser/TabbedPanelUser_A.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpUser/TabbedPanelUser_S.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpUser/TabbedPanelUser_S.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpUser/TabbedPanelUser_T.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpUser/TabbedPanelUser_T.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/模拟QQ/test.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/模拟QQ/test.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +104,7 @@
       <recent name="com.vcampus.client.login" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.com.vcampus.client.window.login.login">
+  <component name="RunManager">
     <configuration name="Create_GUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="模拟QQ.Create_GUI" />
       <module name="Vcampus" />
@@ -163,8 +172,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.com.vcampus.client.window.login.login" />
-        <item itemvalue="Application.Server" />
+        <item itemvalue="应用程序.Server" />
+        <item itemvalue="应用程序.login" />
       </list>
     </recent_temporary>
   </component>
@@ -237,9 +246,6 @@
       <workItem from="1661951025368" duration="1856000" />
       <workItem from="1662001383339" duration="4773000" />
       <workItem from="1662014570401" duration="8846000" />
-      <workItem from="1662037515248" duration="3263000" />
-      <workItem from="1662041101630" duration="1287000" />
-      <workItem from="1662043639608" duration="299000" />
     </task>
     <task id="LOCAL-00001" summary="初步写了登录注册">
       <created>1660298515554</created>
