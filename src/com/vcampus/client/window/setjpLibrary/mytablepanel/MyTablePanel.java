@@ -353,4 +353,8 @@ public class MyTablePanel extends JPanel{
         }
     }
 
+    public JTable getTable(){
+        return table;
+    }
+
 }

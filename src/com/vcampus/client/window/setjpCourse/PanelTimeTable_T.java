@@ -20,7 +20,7 @@ import java.util.Map;
 public class PanelTimeTable_T extends JPanel {
     private boolean existTable=false;
     private String teacherID;
-    private String[] columnName={"节数","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
+    private String[] columnName={"节数","星期一","星期二","星期三","星期四","星期五","星期六","星期天"};
     private String[][] tableData=new String[13][8];//一周7天+纵向表头，一天13节课
     private Color[][] tableColor=new Color[13][8];//课表颜色
     private JTable table=null;

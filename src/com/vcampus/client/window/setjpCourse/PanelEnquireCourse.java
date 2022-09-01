@@ -33,7 +33,7 @@ import java.util.List;
 
 public class PanelEnquireCourse extends JPanel {
     JButton btnInquire = new JButton("查询");
-    String[] listData = new String[]{"选择搜索条件","课程名称", "课程编号", "授课教师", "开课学院","所属专业"};
+    String[] listData = new String[]{"选择搜索条件","课程名称", "课程编号", "授课教师", "开课学院","所属专业","显示全部"};
     //表格数据
     Object[] columnNames={"课程名称", "授课教师一卡通号","开课学院","所属专业","上课时间","授课教室","课容量"};
     Object[][] tableData=new Object[][]{};//保存所有用户信息
@@ -65,6 +65,25 @@ public class PanelEnquireCourse extends JPanel {
         this.add(txtEnquire);
         this.add(btnInquire);
 
+        //初始进入时，显示全部课程
+        Lesson lesson=new Lesson();
+        Gson gson = new Gson();
+        String s = gson.toJson(lesson);
+        Message msg =null;
+        synchronized (passer) {
+            passer.send(new Message("admin", s, "lesson", "get"));
+            msg = passer.receive();
+        }
+        Map<String, java.util.List<Lesson>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, List<Lesson>>>(){}.getType());
+        List<Lesson> res = map.get("res");
+        //如果不空，构建表格
+        if(res.size()!=0) {
+            setData(res);
+            setPanel();
+        }else {
+            System.out.println("教务-课程查询界面-初始-返回全部课程ERROR");
+        }
+
 
         btnInquire.addActionListener(new ActionListener() {
             @Override
@@ -73,77 +92,63 @@ public class PanelEnquireCourse extends JPanel {
                 System.out.println(str);//传送，接收结果bool型
                 Lesson lesson=new Lesson();
                 int temp = comboBox.getSelectedIndex();
+                System.out.println("combobox当前选中"+temp);
                 switch(temp)//发出消息
                 {//"课程名称", "课程编号", "授课教师", "开课学院","所属专业","上课时间"
                     case 1:
                         System.out.println("课程名称"+str);
-                        lesson.setName(str);
-                        break;
+                        lesson.setName(str);break;
                     case 2:
                         System.out.println("课程编号"+str);//book。set
-                        lesson.setLessonID(str);
-                        break;
+                        lesson.setLessonID(str);break;
                     case 3:
                         System.out.println("授课教师"+str);//book。set
-                        lesson.setTeacherID(str);
-                        break;
+                        lesson.setTeacherID(str);break;
                     case 4:
                         System.out.println("开课学院"+str);//book。set
-                        lesson.setSchool(str);
-                        break;
+                        lesson.setSchool(str);break;
                     case 5:
                         System.out.println("所属专业"+str);//book。set
-                        lesson.setMajor(str);
+                        //lesson为空
+                        lesson.setMajor(str);break;
+                    case 6:
+                        System.out.println("显示全部"+str);//book。set
                         break;
                     case 0:
-                        informFrame("请选择搜索条件类型！",true);
-                        break;
-                    default:
-                        break;
+                        informFrame("请选择搜索条件类型！",true);break;
+                    default: break;
                 }
                 //传消息出去
                 System.out.println();
                 Gson gson = new Gson();
                 String s = gson.toJson(lesson);
-                passer.send(new Message("admin", s, "lesson", "getone"));
-/*
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException interruptedException) {
-                    interruptedException.printStackTrace();
+                Message msg =null;
+                synchronized (passer) {
+                    if(temp==6) //显示全部
+                        passer.send(new Message("admin", s, "lesson", "get"));
+                    else //显示部分
+                        passer.send(new Message("admin", s, "lesson", "getone"));
+                    msg = passer.receive();
                 }
-*/
-                Message msg = passer.receive();
                 Map<String, java.util.List<Lesson>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, List<Lesson>>>(){}.getType());
                 List<Lesson> res = map.get("res");
 
                 remove(tableP);
                 //如果不空，构建表格
-                if(res.size()!=0)
-                {
-                    tableData=new Object[res.size()][];
-                    //"课程名称", "授课教师一卡通号","开课学院","所属专业","上课时间","授课教室","课容量"
-                    for(int i=0;i<res.size();i++) {
-                        tableData[i]=new Object[columnNames.length];
-                        tableData[i][0]=res.get(i).getName();
-                        tableData[i][1]=res.get(i).getTeacherID();
-                        tableData[i][2]=res.get(i).getSchool();
-                        tableData[i][3]=res.get(i).getMajor();
-                        tableData[i][4]=res.get(i).getTime();
-                        tableData[i][5]=res.get(i).getClassroom();
-                        tableData[i][6]=res.get(i).getMaxSize();
-                    }
+                if(res.size()!=0) {
+                    setData(res);
                     setPanel();
-                }
-                else
-                {
-                    informFrame("未查询寻到相关课程！",true);
-                }
+                } else informFrame("未查询寻到相关课程！",true);
             }
         });
 
     }
 
+    /**
+     *
+     * @param title
+     * @param flag
+     */
     public void informFrame(String title,Boolean flag)
     {
         if(flag)
@@ -152,6 +157,24 @@ public class PanelEnquireCourse extends JPanel {
         { JOptionPane.showMessageDialog(this, title, "提示", JOptionPane.INFORMATION_MESSAGE);}
     }
 
+
+    public void setData(List<Lesson> res){
+        tableData=new Object[res.size()][];
+        //"课程名称", "授课教师一卡通号","开课学院","所属专业","上课时间","授课教室","课容量"
+        for(int i=0;i<res.size();i++) {
+            tableData[i]=new Object[columnNames.length];
+            tableData[i][0]=res.get(i).getName();
+            tableData[i][1]=res.get(i).getTeacherID();
+            tableData[i][2]=res.get(i).getSchool();
+            tableData[i][3]=res.get(i).getMajor();
+            tableData[i][4]=res.get(i).getTime();
+            tableData[i][5]=res.get(i).getClassroom();
+            tableData[i][6]=res.get(i).getMaxSize();
+        }
+    }
+    /**
+     * 设置下方表格
+     */
     public void setPanel()
     {
         tableP=new MyTablePanel_Course(tableData,columnNames);
@@ -162,6 +185,4 @@ public class PanelEnquireCourse extends JPanel {
         updateUI();
         repaint();
     }
-
-
 }

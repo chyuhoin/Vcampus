@@ -92,7 +92,7 @@ public class PanelHomePage_ST extends JPanel {
         this.add(panelBuy,"panelBuy");
 
         p.setLayout(null);
-        p.setPreferredSize(new Dimension(1100,900));
+        p.setPreferredSize(new Dimension(1100,2000));
 
         setPanel1(goods);//一打开就显示第一页
 

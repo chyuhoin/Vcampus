@@ -289,8 +289,8 @@ public class myMainFrame extends JFrame {
         //站内消息
         JTabbedPane[] messageModule = {
                 new JTabbedPane(),
-                new TabbedPanelMessage_S(flag,ID),
-                new TabbedPanelMessage_T(flag,ID),
+                new TabbedPanelMessage_A(flag,ID),
+                new TabbedPanelMessage_A(flag,ID),
                 new TabbedPanelMessage_A(flag,ID)};
         JTabbedPane [][] module ={userModule,schoolModule,courseModule,LibraryModule,storeModule,messageModule};
 

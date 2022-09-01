@@ -34,6 +34,7 @@ import java.util.Map;
 public class SetJPUser2 {
     public String[][] STRList;//保存所有用户信息
     public String[] strList=new String[3];//暂存当前某个用户信息（User）
+    public JPanel SuperPanel=new JPanel();
     public JPanel jp1=new JPanel();//信息展示页面
     public JPanel jp2=new JPanel();//个人信息
     public JPanel jp3=new JPanel();//个人信息编辑
@@ -42,6 +43,7 @@ public class SetJPUser2 {
     public int type;
     MessagePasser passer = ClientMessagePasser.getInstance();
     public SetJPUser2(int t,String id,JPanel jp, CardLayout layout_Card){
+        SuperPanel=jp;
         SpringLayout layout_Spring = new SpringLayout();
         jp.add("jp1",jp1);
         jp.add("jp2",jp2);
@@ -104,8 +106,9 @@ public class SetJPUser2 {
         Map<String, java.util.List<User>> map = new Gson().fromJson(msg.getData(),
                 new TypeToken<HashMap<String, java.util.List<User>>>(){}.getType());
         List<User> res = map.get("res");
-        User tempU=res.get(0);
+
         if(res.size()!=0){
+            User tempU=res.get(0);
             strList[0]=tempU.getStudentID();
             strList[1]=tempU.getPassword();
             switch (tempU.getType()) {
@@ -116,6 +119,11 @@ public class SetJPUser2 {
             return true;
         }
         else{
+            JOptionPane.showMessageDialog(
+                    SuperPanel,
+                    "查无此人",
+                    "提示",
+                    JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
 

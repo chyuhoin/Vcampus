@@ -71,7 +71,7 @@ public class MyTablePanel_Course extends JPanel{
         PANEL=this;
 
         //数据获取
-        if(rowData.length>0) {
+        if(rowData!=null && rowData.length>0) {
             dList = new Object[rowData.length][rowData[0].length];
             for (int i = 0; i < rowData.length; i++)
                 System.arraycopy(rowData[i], 0, dList[i], 0, rowData[i].length);

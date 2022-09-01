@@ -36,7 +36,7 @@ public class PanelTimeTable_S extends JPanel {
 
     private boolean existTable=false;
     private String studentID;
-    private String[] columnName={"节数","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
+    private String[] columnName={"节数","星期一","星期二","星期三","星期四","星期五","星期六","星期天"};
     private String[][] tableData=new String[13][8];//一周7天+纵向表头，一天13节课
     private Color[][] tableColor=new Color[13][8];//课表颜色
     private  JTable table=null;
@@ -49,8 +49,7 @@ public class PanelTimeTable_S extends JPanel {
         JPanel panel=new JPanel();
         this.add(panel);
 
-        //设置数据
-        setTimeTableData();
+
 
         if(existTable){//有课表，排课
             panel.setLayout(new CardLayout(10,10));
@@ -66,10 +65,10 @@ public class PanelTimeTable_S extends JPanel {
             table.setRowHeight(44);
             table.setFont(new Font("黑体",Font.PLAIN,20));
 
-            table.setShowGrid(false);
+            table.setShowGrid(false);//不显示网格
 
             EvenOddRenderer tablecellRender = new EvenOddRenderer(tableColor);
-            table.setDefaultRenderer(Object.class,tablecellRender);
+            table.setDefaultRenderer(Object.class,tablecellRender);//设置单元格颜色
 
             //table.getTableHeader().setVisible(true);
             table.getTableHeader().setFont(new Font("黑体",Font.PLAIN,20));
