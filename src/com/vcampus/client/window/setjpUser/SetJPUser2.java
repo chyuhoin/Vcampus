@@ -107,11 +107,10 @@ public class SetJPUser2 {
                 new TypeToken<HashMap<String, java.util.List<User>>>(){}.getType());
         List<User> res = map.get("res");
 
-        if(res.size()!=0){
-            User tempU=res.get(0);
-            strList[0]=tempU.getStudentID();
-            strList[1]=tempU.getPassword();
-            switch (tempU.getType()) {
+        if(res!=null && res.size()>0 && res.get(0)!=null){
+            strList[0]= res.get(0).getStudentID();
+            strList[1]=res.get(0).getPassword();
+            switch (res.get(0).getType()) {
                 case (1): strList[2] = "学生";break;
                 case (2): strList[2] = "教师";break;
                 case (3): strList[2] = "管理员";break;
@@ -119,11 +118,6 @@ public class SetJPUser2 {
             return true;
         }
         else{
-            JOptionPane.showMessageDialog(
-                    SuperPanel,
-                    "查无此人",
-                    "提示",
-                    JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
 
