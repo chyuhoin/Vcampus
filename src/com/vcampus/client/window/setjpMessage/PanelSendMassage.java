@@ -14,6 +14,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
 
+/**
+ * 发送消息的界面
+ *
+ * @author ZhongHaoyuan
+ */
 public class PanelSendMassage extends JPanel {
     JButton btnInquire = new JButton("发送");
     JTextField txtEnquire = new JTextField();
@@ -26,6 +31,11 @@ public class PanelSendMassage extends JPanel {
     MessagePasser passer = ClientMessagePasser.getInstance();
     Gson gson = new Gson();
 
+    /**
+     * 初始化一个消息发送界面
+     *
+     * @param ID the id
+     */
     public PanelSendMassage(String ID) {
         SpringLayout layS=new SpringLayout();
         this.setLayout(layS);
@@ -110,10 +120,20 @@ public class PanelSendMassage extends JPanel {
         });
     }
 
+    /**
+     * 弹出一个警告
+     *
+     * @param tips the tips
+     */
     public void warningFrame(String tips) {
         JOptionPane.showMessageDialog(this, tips, "警告", JOptionPane.ERROR_MESSAGE);
     }
 
+    /**
+     * 弹出一条消息
+     *
+     * @param title the title
+     */
     public void informFrame(String title) {
         JOptionPane.showMessageDialog(this, title, "提示", JOptionPane.INFORMATION_MESSAGE);
     }
