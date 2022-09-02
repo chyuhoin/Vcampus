@@ -82,13 +82,13 @@ public class SetJPUser1 extends JPanel {
             }
         }
         else{
-//            showMessageFrame test=new showMessageFrame("查无此人!",600,400,360, 100,1);
-            JOptionPane.showMessageDialog(
-                    jp1,
-                    "查无此人！",
-                    "警告",
-                    JOptionPane.ERROR_MESSAGE
-            );
+            showMessageFrame test=new showMessageFrame("查无此人!",600,400,360, 100,1);
+//            JOptionPane.showMessageDialog(
+//                    jp1,
+//                    "查无此人！",
+//                    "警告",
+//                    JOptionPane.ERROR_MESSAGE
+//            );
         }
     }
 

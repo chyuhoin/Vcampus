@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="添加了部分图标">
+    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="welcome to vcampus">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpCourse/PanelTeacherInform.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpCourse/PanelTeacherInform.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpSchool/StudentStatusEnquire_A.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpSchool/StudentStatusEnquire_A.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpUser/SetJPUser1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpUser/SetJPUser1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpUser/SetJPUser2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpUser/SetJPUser2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpUser/SetJPUser2_2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpUser/SetJPUser2_2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/vcampus/server/service/LessonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/server/service/LessonService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,7 +83,7 @@
       <recent name="com.vcampus.client.login" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.com.vcampus.client.window.login.login">
+  <component name="RunManager" selected="应用程序.login">
     <configuration name="Create_GUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="模拟QQ.Create_GUI" />
       <module name="Vcampus" />
@@ -145,8 +151,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.com.vcampus.client.window.login.login" />
-        <item itemvalue="Application.Server" />
+        <item itemvalue="应用程序.login" />
+        <item itemvalue="应用程序.Server" />
       </list>
     </recent_temporary>
   </component>
@@ -529,21 +535,7 @@
       <option name="project" value="LOCAL" />
       <updated>1662046850807</updated>
     </task>
-    <task id="LOCAL-00045" summary="添加了pojo层的注释">
-      <created>1662047381922</created>
-      <option name="number" value="00045" />
-      <option name="presentableId" value="LOCAL-00045" />
-      <option name="project" value="LOCAL" />
-      <updated>1662047381922</updated>
-    </task>
-    <task id="LOCAL-00046" summary="添加了部分图标">
-      <created>1662048440105</created>
-      <option name="number" value="00046" />
-      <option name="presentableId" value="LOCAL-00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1662048440105</updated>
-    </task>
-    <option name="localTasksCounter" value="47" />
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -592,6 +584,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="增强了student，加入了民族信息；同时推进了部分examDao层" />
+    <MESSAGE value="baseDao增加了一些公共函数" />
     <MESSAGE value="继续完善了一些类" />
     <MESSAGE value="增加了选课判断函数" />
     <MESSAGE value="出bug了，测试下" />
@@ -615,9 +609,7 @@
     <MESSAGE value="新的界面" />
     <MESSAGE value="修复Goods类的bug" />
     <MESSAGE value="登录界面" />
-    <MESSAGE value="添加了pojo层的注释" />
-    <MESSAGE value="添加了部分图标" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加了部分图标" />
+    <option name="LAST_COMMIT_MESSAGE" value="登录界面" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
