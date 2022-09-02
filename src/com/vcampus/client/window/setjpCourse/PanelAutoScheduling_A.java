@@ -3,6 +3,7 @@ package com.vcampus.client.window.setjpCourse;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.vcampus.client.window.setjpCourse.mytabelrenderer.EvenOddRenderer;
+import com.vcampus.client.window.showMessageFrame;
 import com.vcampus.net.ClientMessagePasser;
 import com.vcampus.net.Message;
 import com.vcampus.net.MessagePasser;
@@ -62,15 +63,28 @@ public class PanelAutoScheduling_A extends JPanel{
                 String s = gson.toJson(lesson);
                 Message msg =null;
                 synchronized (passer) {
-                    passer.send(new Message("admin", s, "lesson", "get"));
+                    passer.send(new Message("admin", s, "lesson", "arrangeall"));
                     msg = passer.receive();
                 }
-                Map<String, java.util.List<Lesson>> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String, List<Lesson>>>(){}.getType());
-                List<Lesson> res = map.get("res");
+                Map<String, String> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String,String>>(){}.getType());
+                String res = map.get("res");
 
                 if(res!=null && res.equals("OK")) {
+                    //选课成功对话框
+                    showMessageFrame test= new showMessageFrame(
+                            "用户名或密码错误!",
+                            900,320,460, 80, 2);
                     remove(tableP);
-                    setData(res);
+                    //返回所有课
+                    String ss = gson.toJson(lesson);
+                    Message msg2 =null;
+                    synchronized (passer) {
+                        passer.send(new Message("admin", ss, "lesson", "get"));
+                        msg2 = passer.receive();
+                    }
+                    Map<String, java.util.List<Lesson>> map2 = new Gson().fromJson(msg2.getData(), new TypeToken<HashMap<String, List<Lesson>>>(){}.getType());
+                    List<Lesson> res2 = map2.get("res");
+                    setData(res2);
                     setPanel();
                 }else{
                     System.out.println("自动排课失败");

@@ -51,13 +51,12 @@ public class TabbedPanelMessage_A extends JTabbedPane{
     String ID;
 
     public TabbedPanelMessage_A(int flag,String ID) {
-        if(flag==3) {
-            this.setBackground(new Color(0x0000001, true));
-            this.setOpaque(false);
-            this.ID = ID;
+        this.setBackground(new Color(0x0000001, true));
+        this.setOpaque(false);
+        this.ID = ID;
 
-            this.setTabPlacement(1);
-            this.setBounds(0, 0, 1200, 700);//注意！！！！！！！！！！！！！！！！！！！！！！！
+        this.setTabPlacement(1);
+        this.setBounds(0, 0, 1200, 700);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
         JPanel jp11 = new JPanel();
         JPanel jp12 = new JPanel();
@@ -179,7 +178,7 @@ public class TabbedPanelMessage_A extends JTabbedPane{
 //        this.addTab("删除消息",  new ImageIcon("resource//tab_delete.png"), jp12, "删除私有消息");
         this.setFont(new Font("宋体", Font.BOLD, 24));
         //jp.add(jtbp);
-    }}
+    }
 
     public Object[][] getAllMessage() {
         Gson gson = new Gson();
