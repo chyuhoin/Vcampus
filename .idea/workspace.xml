@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="添加了pojo层的注释">
-      <change afterPath="$PROJECT_DIR$/resource/tab_add.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resource/tab_edit.png" afterDir="false" />
+    <list default="true" id="15435ea3-daf0-45be-876d-97d3668b8c59" name="Changes" comment="添加了部分图标">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource/tab_privatemessage.png" beforeDir="false" afterPath="$PROJECT_DIR$/resource/tab_privatemessage.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpCourse/TabbedPanelCourse_A.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpCourse/TabbedPanelCourse_A.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpCourse/TabbedPanelCourse_T.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpCourse/TabbedPanelCourse_T.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpLibrary/TabbedPanelLibrary_A.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/vcampus/client/window/setjpLibrary/TabbedPanelLibrary_A.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -225,6 +219,7 @@
       <workItem from="1661951025368" duration="1856000" />
       <workItem from="1662001383339" duration="4773000" />
       <workItem from="1662014570401" duration="8846000" />
+      <workItem from="1662080941233" duration="300000" />
     </task>
     <task id="LOCAL-00001" summary="初步写了登录注册">
       <created>1660298515554</created>
@@ -541,7 +536,14 @@
       <option name="project" value="LOCAL" />
       <updated>1662047381922</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="添加了部分图标">
+      <created>1662048440105</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1662048440105</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -590,7 +592,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="baseDao增加了一些公共函数" />
     <MESSAGE value="继续完善了一些类" />
     <MESSAGE value="增加了选课判断函数" />
     <MESSAGE value="出bug了，测试下" />
@@ -615,7 +616,8 @@
     <MESSAGE value="修复Goods类的bug" />
     <MESSAGE value="登录界面" />
     <MESSAGE value="添加了pojo层的注释" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加了pojo层的注释" />
+    <MESSAGE value="添加了部分图标" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加了部分图标" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
