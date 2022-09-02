@@ -29,8 +29,6 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static com.vcampus.client.window.login.login.Create_GUI;
-
 public class Main_Frame extends JFrame {
 
     int x,y;
@@ -157,10 +155,7 @@ public class Main_Frame extends JFrame {
             });
             close.addActionListener((e)->{
                 this.dispose();
-                SwingUtilities.invokeLater(()->{
-                    Create_GUI();
-                });
-
+                System.exit(0);
             });
             close.setBounds((int)(0.95*width),(int)(0*height),(int)(0.05*width),(int)(0.05*height));
             panelMain.add(close);
