@@ -39,11 +39,11 @@ public class TabbedPanelCourse_A extends JTabbedPane {
             JPanel jp5=new PanelAutoScheduling_A();
 
 
-            this.addTab("创建课程", null, createCourse, "创建课程");
-            this.addTab("删除课程", null, deleteCourse, "删除课程");
-            this.addTab("课程查询", null, enquireCourse, "课程查询");
-            this.addTab("学生管理", null, manageStudent, "学生管理");
-            this.addTab("自动排课", null,jp5, "自动排课");
+            this.addTab("创建课程", new ImageIcon("resource//tab_add.png"), createCourse, "创建课程");
+            this.addTab("删除课程", new ImageIcon("resource//tab_delete.png"), deleteCourse, "删除课程");
+            this.addTab("课程查询", new ImageIcon("resource//search.png"), enquireCourse, "课程查询");
+            this.addTab("学生管理", new ImageIcon("resource//tab_manage.png"), manageStudent, "学生管理");
+            this.addTab("自动排课", new ImageIcon("resource//btn_lesson.png"),jp5, "自动排课");
             this.setFont(new Font("宋体", Font.BOLD, 24));
         }
 
