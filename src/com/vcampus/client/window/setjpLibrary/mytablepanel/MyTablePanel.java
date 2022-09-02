@@ -17,6 +17,7 @@ package com.vcampus.client.window.setjpLibrary.mytablepanel;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.vcampus.client.window.setjpLibrary.PanelBookInform;
+import com.vcampus.client.window.showMessageFrame;
 import com.vcampus.net.ClientMessagePasser;
 import com.vcampus.net.Message;
 import com.vcampus.net.MessagePasser;
@@ -195,8 +196,10 @@ public class MyTablePanel extends JPanel{
                         PANEL.updateUI();
                         PANEL.repaint();
                     }else {
-                        JOptionPane.showMessageDialog(null, "数据查询出错", "提示",
-                                JOptionPane.ERROR_MESSAGE);
+                        new showMessageFrame("数据查询出错!",900,320,460, 80,1);
+
+//                        JOptionPane.showMessageDialog(null, "数据查询出错", "提示",
+//                                JOptionPane.ERROR_MESSAGE);
                         System.out.println("ERROR:查看书号为<" + bookID + ">的书的详情：数据查询出错");
                     }
                 }

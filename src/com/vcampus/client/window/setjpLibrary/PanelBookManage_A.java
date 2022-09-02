@@ -26,6 +26,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
+import com.vcampus.client.window.showMessageFrame;
 import com.vcampus.dao.utils.StringAndImage;
 import com.vcampus.pojo.Book;
 import com.google.gson.Gson;
@@ -280,8 +281,16 @@ public class PanelBookManage_A extends JPanel {
      * @param flag  true-警告 false-提示
      */
     public void informFrame(String title,Boolean flag)
-    {   if(flag) { JOptionPane.showMessageDialog(this, title, "警告", JOptionPane.ERROR_MESSAGE); }
-        else { JOptionPane.showMessageDialog(this, title, "提示", JOptionPane.INFORMATION_MESSAGE); } }
+    {   if(flag) {
+        new showMessageFrame(title,900,320,460, 80,1);
+
+//        JOptionPane.showMessageDialog(this, title, "警告", JOptionPane.ERROR_MESSAGE);
+    }
+        else {
+        new showMessageFrame(title,900,320,460, 80,2);
+
+//        JOptionPane.showMessageDialog(this, title, "提示", JOptionPane.INFORMATION_MESSAGE);
+        } }
     /**
      * 从本地上传图片到界面并存入数据库
      * @param lbl 承载图片的JLabel

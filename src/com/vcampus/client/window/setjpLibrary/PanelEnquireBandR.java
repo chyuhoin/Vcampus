@@ -3,6 +3,7 @@ package com.vcampus.client.window.setjpLibrary;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.vcampus.client.window.setjpLibrary.mytablepanel.MyTablePanel;
+import com.vcampus.client.window.showMessageFrame;
 import com.vcampus.net.ClientMessagePasser;
 import com.vcampus.net.Message;
 import com.vcampus.net.MessagePasser;
@@ -106,7 +107,10 @@ public class PanelEnquireBandR extends JPanel {
                     lbl2.setText("当前查询用户< " + studentID + " >");
                     setPanel2_ID(studentID);
                 }
-                else{ JOptionPane.showMessageDialog(PANEL, "请输入用户一卡通号", "提示", JOptionPane.INFORMATION_MESSAGE); }
+                else{
+                    new showMessageFrame("请输入用户一卡通号",900,240,460, 80,1);
+//                    JOptionPane.showMessageDialog(PANEL, "请输入用户一卡通号", "提示", JOptionPane.INFORMATION_MESSAGE);
+                }
             }
         });
         //完成按钮监听
@@ -142,7 +146,9 @@ public class PanelEnquireBandR extends JPanel {
                 rowData1[i][4] = res.get(i).getLeftSize(); }
             setPanel2(rowData1, columnNames);
             if (res.size() == 0)
-                JOptionPane.showMessageDialog(PANEL, "该用户暂未有借阅记录", " ", JOptionPane.INFORMATION_MESSAGE);
+                new showMessageFrame("该用户暂未有借阅记录",900,240,460, 80,1);
+
+//            JOptionPane.showMessageDialog(PANEL, "该用户暂未有借阅记录", " ", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) { throw new RuntimeException(e); }
     }
     public void setPanel2(Object[][] rowData, Object[] columnNames) {

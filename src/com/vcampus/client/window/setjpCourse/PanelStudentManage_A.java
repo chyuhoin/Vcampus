@@ -17,6 +17,7 @@ package com.vcampus.client.window.setjpCourse;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.vcampus.client.window.showMessageFrame;
 import com.vcampus.net.ClientMessagePasser;
 import com.vcampus.net.Message;
 import com.vcampus.net.MessagePasser;
@@ -212,7 +213,14 @@ public class PanelStudentManage_A extends JPanel {
      */
     public void informFrame(String title,Boolean flag)
     {
-        if(flag) { JOptionPane.showMessageDialog(this, title, "警告", JOptionPane.ERROR_MESSAGE);}
-        else { JOptionPane.showMessageDialog(this, title, "提示", JOptionPane.INFORMATION_MESSAGE);}
-    }
+        if(flag) {
+            new showMessageFrame(title,900,240,460, 80,1);
+
+//            JOptionPane.showMessageDialog(this, title, "警告", JOptionPane.ERROR_MESSAGE);
+        }
+        else {
+            new showMessageFrame(title,900,240,460, 80,1);
+
+//            JOptionPane.showMessageDialog(this, title, "提示", JOptionPane.INFORMATION_MESSAGE);
+        } }
 }

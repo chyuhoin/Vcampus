@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.vcampus.client.window.setjpLibrary.mytablepanel.MyTablePanel;
+import com.vcampus.client.window.showMessageFrame;
 import com.vcampus.pojo.Book;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -108,7 +109,11 @@ public class PanelEnquireBook extends JPanel{
      * @param tips 提示内容
      */
     public void warningFrame(String tips)
-    { JOptionPane.showMessageDialog(this, tips, "警告", JOptionPane.ERROR_MESSAGE); }
+    {
+        new showMessageFrame(tips,900,240,460, 80,1);
+
+//        JOptionPane.showMessageDialog(this, tips, "警告", JOptionPane.ERROR_MESSAGE);
+    }
 
     /**
      * 设置书籍详情页

@@ -15,6 +15,7 @@
 package com.vcampus.client.window.setjpCourse;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.vcampus.client.window.showMessageFrame;
 import com.vcampus.net.ClientMessagePasser;
 import com.vcampus.net.Message;
 import com.vcampus.net.MessagePasser;
@@ -51,10 +52,12 @@ public class PanelDeleteCourse extends JPanel{
     {
         this.setLayout(null);
         int x=60,y=50,differ=160;
-        setButtonFont(btnInquire);btnInquire.setBounds(970,y,btnWidth,btnHeight);
+//        setButtonFont(btnInquire);
+        btnInquire.setBounds(970,y,btnWidth,btnHeight);
         setButtonFont(btnOk);btnOk.setBounds(420,500,btnWidth,btnHeight);
         setButtonFont(btnCancel);btnCancel.setBounds(660,500,btnWidth,btnHeight);
-        setButtonFont(btnDeleteAll);btnDeleteAll.setBounds(850,550,btnWidth*2,btnHeight);
+//        setButtonFont(btnDeleteAll);
+        btnDeleteAll.setBounds(850,550,btnWidth*2,btnHeight);
         lblHint.setFont(new Font("宋体", Font.BOLD, 24));lblHint.setBounds(535,y-5,200,40);
         txtEnquire.setBounds(730,y,txtWidth*2,txtHeight);txtEnquire.setFont(new Font("楷体", Font.BOLD, 20));
         panel.setLayout(null);panel.setBounds(15,120,1170,430);
@@ -87,7 +90,17 @@ public class PanelDeleteCourse extends JPanel{
      * @param flag  true-警告窗口，false-提示窗口
      */
     public void informFrame(String title,Boolean flag)
-    { if(flag) { JOptionPane.showMessageDialog(this, title, "警告", JOptionPane.ERROR_MESSAGE);} else { JOptionPane.showMessageDialog(this, title, "提示", JOptionPane.INFORMATION_MESSAGE);} }
+    {
+        if(flag) {
+            new showMessageFrame(title,900,240,460, 80,1);
+
+//            JOptionPane.showMessageDialog(this, title, "警告", JOptionPane.ERROR_MESSAGE);
+        }
+        else {
+            new showMessageFrame(title,900,240,460, 80,1);
+
+//            JOptionPane.showMessageDialog(this, title, "提示", JOptionPane.INFORMATION_MESSAGE);
+        } }
     /**
      * 设置显示所有课程的表格
      */

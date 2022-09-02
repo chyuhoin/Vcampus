@@ -15,6 +15,7 @@
 package com.vcampus.client.window.setjpStore;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.vcampus.client.window.showMessageFrame;
 import com.vcampus.net.ClientMessagePasser;
 import com.vcampus.net.Message;
 import com.vcampus.net.MessagePasser;
@@ -70,9 +71,16 @@ public class PanelMyPurchaseOrder_ST extends JPanel{
      */
     public void informFrame(String title,Boolean flag)
     {
-        if(flag) { JOptionPane.showMessageDialog(this, title, "警告", JOptionPane.ERROR_MESSAGE);}
-        else { JOptionPane.showMessageDialog(this, title, "提示", JOptionPane.INFORMATION_MESSAGE);}
-    }
+        if(flag) {
+            new showMessageFrame(title,900,240,460, 80,1);
+
+//            JOptionPane.showMessageDialog(this, title, "警告", JOptionPane.ERROR_MESSAGE);
+        }
+        else {
+            new showMessageFrame(title,900,240,460, 80,1);
+
+//            JOptionPane.showMessageDialog(this, title, "提示", JOptionPane.INFORMATION_MESSAGE);
+        } }
     /**
      * 设置表格及表格内按钮响应函数，可以进行确认收货及申请退货操作
      * @param columnNames 表头

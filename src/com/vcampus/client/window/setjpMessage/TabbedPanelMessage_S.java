@@ -18,6 +18,7 @@ package com.vcampus.client.window.setjpMessage;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.vcampus.client.window.showMessageFrame;
 import com.vcampus.net.ClientMessagePasser;
 import com.vcampus.net.Message;
 import com.vcampus.net.MessagePasser;
@@ -161,11 +162,15 @@ public class TabbedPanelMessage_S extends JTabbedPane {
     }
 
     public void warningFrame(String tips) {
-        JOptionPane.showMessageDialog(this, tips, "警告", JOptionPane.ERROR_MESSAGE);
+        new showMessageFrame(tips,900,240,460, 80,1);
+
+//        JOptionPane.showMessageDialog(this, tips, "警告", JOptionPane.ERROR_MESSAGE);
     }
 
     public void informFrame(String title) {
-        JOptionPane.showMessageDialog(this, title, "提示", JOptionPane.INFORMATION_MESSAGE);
+        new showMessageFrame(title,900,240,460, 80,2);
+
+//        JOptionPane.showMessageDialog(this, title, "提示", JOptionPane.INFORMATION_MESSAGE);
     }
 
     public Object[][] getPubMessage() {

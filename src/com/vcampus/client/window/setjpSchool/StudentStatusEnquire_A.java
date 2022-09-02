@@ -77,7 +77,7 @@ public class StudentStatusEnquire_A extends JPanel {
         txtIdNumEnquire.setBounds(200+300,20,300,30);
 
         btnInquire.setFont(new Font("宋体",Font.BOLD, 16));
-        btnInquire.setBounds(520+300,20,70,30);
+        btnInquire.setBounds(520+300,20,80,30);
         btnEdit.setFont(new Font("宋体",Font.BOLD, 16));
         btnEdit.setBounds(520+300,520,70,30);
         btnReturn.setFont(new Font("宋体",Font.BOLD, 16));

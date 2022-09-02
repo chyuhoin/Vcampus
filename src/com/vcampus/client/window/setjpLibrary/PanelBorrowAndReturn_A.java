@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.vcampus.client.window.showMessageFrame;
 import com.vcampus.pojo.Book;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -146,10 +147,16 @@ public class PanelBorrowAndReturn_A extends JPanel {
      * @param flag  true-警告 false-提示
      */
     public void informFrame(String title,Boolean flag)
-    {
-        if(flag) { JOptionPane.showMessageDialog(this, title, "警告", JOptionPane.ERROR_MESSAGE); }
-        else { JOptionPane.showMessageDialog(this, title, "提示", JOptionPane.INFORMATION_MESSAGE); }
+    {   if(flag) {
+        new showMessageFrame(title,900,240,460, 80,1);
+
+//        JOptionPane.showMessageDialog(this, title, "警告", JOptionPane.ERROR_MESSAGE);
     }
+    else {
+        new showMessageFrame(title,900,240,460, 80,2);
+
+//        JOptionPane.showMessageDialog(this, title, "提示", JOptionPane.INFORMATION_MESSAGE);
+    } }
     /**
      * 借阅、归还图书后更新册数
      * @param flag true-归还 false-借阅
