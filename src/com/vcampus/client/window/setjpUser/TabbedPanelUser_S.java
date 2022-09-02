@@ -29,6 +29,7 @@ public class TabbedPanelUser_S extends JTabbedPane {
     public TabbedPanelUser_S(String id) {
 
         JTabbedPane JTP=this;
+        this.setBackground(new Color(0x0000001, true));
       //  this.setBackground(new Color(0x0000001, true));
      //   this.setOpaque(false);
         this.setTabPlacement(1);

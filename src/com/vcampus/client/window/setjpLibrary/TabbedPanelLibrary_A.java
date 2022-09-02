@@ -80,7 +80,7 @@ public class TabbedPanelLibrary_A extends JTabbedPane {
 
             //选项卡5的内容
             jp15.setLayout(new CardLayout(10, 10));
-            jp15.setBackground(Color.ORANGE);
+            //jp15.setBackground(Color.ORANGE);
             jp15.add(new PanelEnquireBandR());
 
             //选项卡刷新

@@ -201,7 +201,7 @@ public class TabbedPanelMessage_A extends JTabbedPane{
             String from = iMsg.getSender();
             String content = iMsg.getContent();
 //            rowData[i][1] = "来自" + from + "的消息：" + content;
-            rowData[i][1] = "来自" + ID + "的消息：" + content;
+            rowData[i][1] = "来自" + from + "的消息：" + content;
 
             rowData[i][0] = iMsg.getInnerID();
 
