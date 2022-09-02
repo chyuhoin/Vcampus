@@ -29,8 +29,8 @@ public class TabbedPanelUser_S extends JTabbedPane {
     public TabbedPanelUser_S(String id) {
 
         JTabbedPane JTP=this;
-        this.setBackground(new Color(0x0000001, true));
-        this.setOpaque(false);
+      //  this.setBackground(new Color(0x0000001, true));
+     //   this.setOpaque(false);
         this.setTabPlacement(1);
         this.setBounds(0,0,1200,700);
         //背景图片
@@ -49,16 +49,16 @@ public class TabbedPanelUser_S extends JTabbedPane {
         final CardLayout layout_Card = new CardLayout(10, 10);
         JPanel jp11 = new JPanel(layout_Card);
        // jp11.add(background1);
-        jp11.setOpaque(false);
+     //   jp11.setOpaque(false);
         JPanel jp12 = new JPanel(layout_Card);
        // jp12.add(background2);
-        jp12.setOpaque(false);
+      //  jp12.setOpaque(false);
         //选项卡1的内容
         new SetJPUser1(1,id,jp11,layout_Card);
         //选项卡2的内容
         new SetJPUser2_2(1,id,jp12,layout_Card);
-        jp11.add(background1);
-        jp12.add(background2);
+       // jp11.add(background1);
+       // jp12.add(background2);
         this.addMouseListener(new MouseListener(){
             @Override public void mouseClicked(MouseEvent e) {
                 // TODO Auto-generated method stub

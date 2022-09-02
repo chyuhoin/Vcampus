@@ -40,7 +40,7 @@ public class TabbedPanelSchool_S extends JTabbedPane {
             this.setBounds(0, 0, 1400, 650);//注意！！！！！！！！！！！！！！！！！！！！！！！
 
             JPanel panelEnquire = new StudentStatusEnquire_S(ID);
-            panelEnquire.add(background1);
+          //  panelEnquire.add(background1);
             this.addTab("查看学籍信息", new ImageIcon("resource//tab_student.png"), panelEnquire, "查看个人学籍信息");
             this.setFont(new Font("宋体", Font.BOLD, 24));
         }
