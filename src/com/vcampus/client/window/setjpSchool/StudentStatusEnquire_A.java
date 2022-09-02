@@ -14,6 +14,7 @@
  */
 package com.vcampus.client.window.setjpSchool;
 
+import com.vcampus.client.window.showMessageFrame;
 import com.vcampus.dao.utils.StringAndImage;
 import com.vcampus.pojo.Student;
 import com.google.gson.Gson;
@@ -161,7 +162,8 @@ public class StudentStatusEnquire_A extends JPanel {
             setCard("panelEnquire");
         }
         else {
-            JOptionPane.showMessageDialog(this, "该生暂无学籍信息", "警告", JOptionPane.ERROR_MESSAGE);
+            showMessageFrame test=new showMessageFrame("该生暂无学籍信息!",900,320,460, 80,1);
+//            JOptionPane.showMessageDialog(this, "该生暂无学籍信息", "警告", JOptionPane.ERROR_MESSAGE);
             txtIdNumEnquire.setText("");
         }
     }
@@ -197,14 +199,17 @@ public class StudentStatusEnquire_A extends JPanel {
 
         if(map.get("res").equals("OK"))//成功写入
         {
-            JOptionPane.showMessageDialog(this, "修改成功", "提示", JOptionPane.INFORMATION_MESSAGE);
+            showMessageFrame test=new showMessageFrame("修改成功!",900,320,460, 80,2);
+//            JOptionPane.showMessageDialog(this, "修改成功", "提示", JOptionPane.INFORMATION_MESSAGE);
             t=student;
             setPanel1(student);
             setCard("panelEnquire");
         }
         else
         {
-            JOptionPane.showMessageDialog(this, "修改失败", "警告", JOptionPane.ERROR_MESSAGE);
+            showMessageFrame test=new showMessageFrame("修改失败!",900,320,460, 80,1);
+
+//            JOptionPane.showMessageDialog(this, "修改失败", "警告", JOptionPane.ERROR_MESSAGE);
         }
     }
 

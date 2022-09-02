@@ -16,6 +16,7 @@ package com.vcampus.client.window.setjpUser;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.vcampus.client.window.showMessageFrame;
 import com.vcampus.net.ClientMessagePasser;
 import com.vcampus.net.Message;
 import com.vcampus.net.MessagePasser;
@@ -118,6 +119,13 @@ public class SetJPUser2 {
             return true;
         }
         else{
+            showMessageFrame test=new showMessageFrame("查无此人!",900,320,460, 80,1);
+
+//            JOptionPane.showMessageDialog(
+//                    SuperPanel,
+//                    "查无此人",
+//                    "提示",
+//                    JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
 
@@ -207,21 +215,25 @@ public class SetJPUser2 {
                         setjp2(jp, layout_Spring, layout_Card);//加载jp2
                     }
                     else
-                        JOptionPane.showMessageDialog(
-                                jp1,
-                                "查无此人！",
-                                "警告",
-                                JOptionPane.ERROR_MESSAGE
-                        );
+                        new showMessageFrame("查无此人!",900,320,460, 80,1);
+
+//                        JOptionPane.showMessageDialog(
+//                                jp1,
+//                                "查无此人！",
+//                                "警告",
+//                                JOptionPane.ERROR_MESSAGE
+//                        );
                     System.out.println("用户管理系统-用户管理-个人信息搜索");
                 }
                 else{
-                    JOptionPane.showMessageDialog(
-                            jp1,
-                            "输入框不能为空",
-                            "警告",
-                            JOptionPane.ERROR_MESSAGE
-                    );
+                    new showMessageFrame("输入框不能为空!",900,320,460, 80,1);
+
+//                    JOptionPane.showMessageDialog(
+//                            jp1,
+//                            "输入框不能为空",
+//                            "警告",
+//                            JOptionPane.ERROR_MESSAGE
+//                    );
                     text.setText("");
                 }
             }
@@ -391,12 +403,14 @@ public class SetJPUser2 {
                     System.out.println("用户管理系统-用户管理-修改编辑确认");
                 }
                 else {
-                    JOptionPane.showConfirmDialog(
-                            jp3,
-                            "密码中不能包含空格",
-                            "提示",
-                            JOptionPane.YES_NO_CANCEL_OPTION
-                    );
+                    new showMessageFrame("密码中不能包含空格!",900,320,460, 80,1);
+
+//                    JOptionPane.showConfirmDialog(
+//                            jp3,
+//                            "密码中不能包含空格",
+//                            "提示",
+//                            JOptionPane.YES_NO_CANCEL_OPTION
+//                    );
                 }
             }
         });
@@ -572,22 +586,26 @@ public class SetJPUser2 {
         JPanel temjp=(operation.equals("Change Password"))?jp2:jp3;
         if(map.get("res").equals("OK")) {
             String strText=(operation.equals("Change Password"))?"编辑成功":"注销成功";
-            JOptionPane.showMessageDialog(
-                    temjp,
-                    strText,
-                    " ",
-                    JOptionPane.INFORMATION_MESSAGE
-            );
+            new showMessageFrame(strText,900,320,460, 80,2);
+
+//            JOptionPane.showMessageDialog(
+//                    temjp,
+//                    strText,
+//                    " ",
+//                    JOptionPane.INFORMATION_MESSAGE
+//            );
             return true;
         }
         else{
             String strText=operation.equals("Change Password")?"编辑失败":"注销失败";
-            JOptionPane.showMessageDialog(
-                    temjp,
-                    strText,
-                    "ERROR",
-                    JOptionPane.WARNING_MESSAGE
-            );
+            new showMessageFrame(strText,900,320,460, 80,1);
+
+//            JOptionPane.showMessageDialog(
+//                    temjp,
+//                    strText,
+//                    "ERROR",
+//                    JOptionPane.WARNING_MESSAGE
+//            );
             return false;
         }
     }
@@ -605,21 +623,25 @@ public class SetJPUser2 {
         Map<String, Object> map = new Gson().fromJson(msg.getData(),
                 new TypeToken<HashMap<String, Object>>(){}.getType());
         if(map.get("res").equals("OK")) {
-            JOptionPane.showMessageDialog(
-                    jp4,
-                    "注册成功",
-                    " ",
-                    JOptionPane.INFORMATION_MESSAGE
-            );
+            new showMessageFrame("注册成功",900,320,460, 80,2);
+
+//            JOptionPane.showMessageDialog(
+//                    jp4,
+//                    "注册成功",
+//                    " ",
+//                    JOptionPane.INFORMATION_MESSAGE
+//            );
             return true;
         }
         else{
-            JOptionPane.showMessageDialog(
-                    jp4,
-                    "注册失败：该用户已存在",
-                    "ERROR",
-                    JOptionPane.WARNING_MESSAGE
-            );
+            new showMessageFrame("注册失败：该用户已存在",900,320,460, 80,1);
+
+//            JOptionPane.showMessageDialog(
+//                    jp4,
+//                    "注册失败：该用户已存在",
+//                    "ERROR",
+//                    JOptionPane.WARNING_MESSAGE
+//            );
             return false;
         }
     }

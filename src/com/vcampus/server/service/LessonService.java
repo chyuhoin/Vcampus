@@ -391,11 +391,22 @@ public class LessonService implements Service{
     public String showTecherTime(String teacherID) {
         String time=null;
         try {
+            List<Lesson>lesson=null;
             String res = TeacherDao.getLessonTable(teacherID);
             String[] tmp = res.split(",");//根据，切分字符串
             List<Teacher>teacher=TeacherDao.searchTeacher("teacherID",teacherID);
             if(teacher.isEmpty())return null;
             List<Integer>Liketime= ClassTable.getTimeIndex(teacher.get(0).getTime());
+            for(int i=0;i<65;i++){
+                if(!tmp[i].equals("0")){
+                    //此时有课程，将内部ID变为课程名字
+                    lesson=LessonDao.search("innerID",tmp[i]);
+                    tmp[i]=lesson.get(0).getName();
+                    tmp[i]=lesson.get(0).getName();
+                }
+            }
+
+
             for(Integer liketime:Liketime){
                 if(tmp[liketime].equals("0"))//如果非偏好时间没有选课，则将其变为1
                     tmp[liketime]="1";

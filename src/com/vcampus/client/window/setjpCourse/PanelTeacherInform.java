@@ -16,6 +16,7 @@ package com.vcampus.client.window.setjpCourse;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.vcampus.client.window.showMessageFrame;
 import com.vcampus.net.ClientMessagePasser;
 import com.vcampus.net.Message;
 import com.vcampus.net.MessagePasser;
@@ -108,7 +109,11 @@ public class PanelTeacherInform extends JPanel{
             setCard("P1");
             setPanel(P1,false);
         }
-        else { JOptionPane.showMessageDialog(this, "未查询到身份信息", "警告", JOptionPane.ERROR_MESSAGE); }
+        else {
+            showMessageFrame test=new showMessageFrame("未查询到身份信息!",900,320,460, 80,1);
+
+//            JOptionPane.showMessageDialog(this, "未查询到身份信息", "警告", JOptionPane.ERROR_MESSAGE);
+            }
 
         btnEdit.addActionListener(new ActionListener() {
             @Override
@@ -131,10 +136,17 @@ public class PanelTeacherInform extends JPanel{
                 System.out.println(msg);
                 Map<String,Object> map = new Gson().fromJson(msg.getData(), new TypeToken<HashMap<String,Object>>(){}.getType());
                 if(map.get("res").equals("OK"))
-                {   informFrame("修改成功",false);
+                {
+//                    informFrame("修改成功",false);
+                    new showMessageFrame("修改成功!",900,320,460, 80,2);
+
                     setCard("P1");
                     setPanel(P1,false);
-                } else { informFrame("修改失败",true); } }});
+                } else {
+                    new showMessageFrame("修改失败!",900,320,460, 80,1);
+
+//                    informFrame("修改失败",true);
+                } }});
         btnCancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -156,8 +168,12 @@ public class PanelTeacherInform extends JPanel{
      */
     public void informFrame(String title,Boolean flag)
     {
-        if(flag) { JOptionPane.showMessageDialog(this, title, "警告", JOptionPane.ERROR_MESSAGE);}
-        else { JOptionPane.showMessageDialog(this, title, "提示", JOptionPane.INFORMATION_MESSAGE);}
+        if(flag) {
+            JOptionPane.showMessageDialog(this, title, "警告", JOptionPane.ERROR_MESSAGE);
+        }
+        else {
+            JOptionPane.showMessageDialog(this, title, "提示", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
     /**
      * 设置标签和文本框字体

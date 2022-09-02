@@ -16,6 +16,7 @@ package com.vcampus.client.window.setjpUser;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.vcampus.client.window.showMessageFrame;
 import com.vcampus.net.ClientMessagePasser;
 import com.vcampus.net.Message;
 import com.vcampus.net.MessagePasser;
@@ -103,12 +104,13 @@ public class SetJPUser2_2 {
                 String newP2=textList[2].getText().trim();
                 System.out.println("新密码："+newP1+" & "+newP2+" 是否相等："+(newP1.equals(newP2)));
                 if(!newP1.equals(newP2)){
-                    JOptionPane.showMessageDialog(
-                            jp,
-                            "两次输入的新密码不相同",
-                            " ",
-                            JOptionPane.WARNING_MESSAGE
-                    );
+                    showMessageFrame test=new showMessageFrame("两次输入的新密码不相同!",900,320,460, 80,1);
+//                    JOptionPane.showMessageDialog(
+//                            jp,
+//                            "两次输入的新密码不相同",
+//                            " ",
+//                            JOptionPane.WARNING_MESSAGE
+//                    );
                 }
                 else{
                     setStrList(ID);
