@@ -54,9 +54,9 @@ public class TabbedPanelStore_S extends JTabbedPane {
             PanelMyPurchaseOrder_ST myPurchase = new PanelMyPurchaseOrder_ST(ID, flag);
 
 
-            this.addTab("商城首页", new ImageIcon("resource//tab_store.png"), homePage, "商城首页");
-            this.addTab("我的店铺", new ImageIcon("resource//tab_buy.png"), myStore, "我的店铺");
-            this.addTab("我的订单", new ImageIcon("resource//tab_orders.png"), myPurchase, "我的订单");
+            this.addTab("商城首页", new ImageIcon("Vcampus//resource//tab_store.png"), homePage, "商城首页");
+            this.addTab("我的店铺", new ImageIcon("Vcampus//resource//tab_buy.png"), myStore, "我的店铺");
+            this.addTab("我的订单", new ImageIcon("Vcampus//resource//tab_orders.png"), myPurchase, "我的订单");
             this.setFont(new Font("宋体", Font.BOLD, 24));
 
 

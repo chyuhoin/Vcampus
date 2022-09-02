@@ -35,14 +35,14 @@ public class TabbedPanelUser_S extends JTabbedPane {
         this.setBounds(0,0,1200,700);
         //背景图片
         JLabel background1 =new JLabel();
-        ImageIcon back = new ImageIcon("resource//User_background.png");
+        ImageIcon back = new ImageIcon("Vcampus//resource//User_background.png");
         background1.setIcon(back);
-        background1.setBounds(0,0,1200,650);
+        background1.setBounds(0,0,1200,700);
         background1.setOpaque(false);
         JLabel background2 =new JLabel();
-        ImageIcon back2= new ImageIcon("resource//User_background.png");
+        ImageIcon back2= new ImageIcon("Vcampus//resource//User_background.png");
         background2.setIcon(back2);
-        background2.setBounds(0,0,1200,650);
+        background2.setBounds(0,0,1200,700);
         background2.setOpaque(false);
       //  JLabel background2 = background;
         // 创建卡片布局，卡片间水平和竖直间隔为 10
@@ -73,8 +73,8 @@ public class TabbedPanelUser_S extends JTabbedPane {
             @Override public void mouseExited(MouseEvent e) {}
         });
 
-        this.addTab("个人信息",new ImageIcon("resource//tab_personalInfo.png"),jp11,"查看个人信息");
-        this.addTab("密码修改",new ImageIcon("resource//tab_password.png"),jp12,"修改密码");
+        this.addTab("个人信息",new ImageIcon("Vcampus//resource//tab_personalInfo.png"),jp11,"查看个人信息");
+        this.addTab("密码修改",new ImageIcon("Vcampus//resource//tab_password.png"),jp12,"修改密码");
         this.setFont(new Font("宋体",Font.BOLD,24));
 
     }

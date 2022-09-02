@@ -41,16 +41,16 @@ public class Main_Frame extends JFrame {
     public JLabel seuBack = new JLabel();
     //背景
     public JLabel bg = new JLabel();
-    String url0="img//主界面背景.png";
+    String url0="Vcampus//img//主界面背景.png";
     ImageIcon bg_icon=new ImageIcon(url0);
     public JButton close = new JButton();
-    String url1="img//关闭.png";
+    String url1="Vcampus//img//关闭.png";
     ImageIcon close_icon=new ImageIcon(url1);
     JButton min=new JButton();
-    String url2="img//最小化.png";
+    String url2="Vcampus//img//最小化.png";
     ImageIcon min_icon=new ImageIcon(url2);
     JButton back=new JButton();
-    String url3="img//返回.png";
+    String url3="Vcampus//img//返回.png";
     ImageIcon back_icon=new ImageIcon(url3);
     //时间
     JLabel time = new JLabel();
@@ -217,7 +217,7 @@ public class Main_Frame extends JFrame {
         lblLogoLabel.setForeground(Color.white);
         panelTop.add(lblLogoLabel);
         JButton btnExit = new JButton();
-        ImageIcon exitIcon = new ImageIcon("resource//exit.png");
+        ImageIcon exitIcon = new ImageIcon("Vcampus//resource//exit.png");
         btnExit.setIcon(exitIcon);
         btnExit.setOpaque(false);
         btnExit.setContentAreaFilled(false);
@@ -227,7 +227,7 @@ public class Main_Frame extends JFrame {
         panelTop.add(btnExit);
         //加背景图片
         JLabel topBack = new JLabel();
-        ImageIcon topImg = new ImageIcon("resource//top.png");
+        ImageIcon topImg = new ImageIcon("Vcampus//resource//top.png");
         topBack.setIcon(topImg);
         topBack.setBounds(0,0,1400,120);
         panelTop.add(topBack);
@@ -300,37 +300,37 @@ public class Main_Frame extends JFrame {
         }
         // 设置图标背景
         ImageIcon[]btnicon =new ImageIcon[6];
-        btnicon[0] = new ImageIcon("resource//btn_user.png");
+        btnicon[0] = new ImageIcon("Vcampus//resource//btn_user.png");
         btnModule1.setIcon(btnicon[0]);
         btnModule1.setHorizontalTextPosition(JButton.CENTER);
         btnModule1.setVerticalTextPosition(JButton.BOTTOM);
-        btnicon[1] = new ImageIcon("resource//btn_student.png");
+        btnicon[1] = new ImageIcon("Vcampus//resource//btn_student.png");
         btnModule2.setIcon(btnicon[1]);
         btnModule2.setHorizontalTextPosition(JButton.CENTER);
         btnModule2.setVerticalTextPosition(JButton.BOTTOM);
-        btnicon[2] = new ImageIcon("resource//btn_lesson.png");
+        btnicon[2] = new ImageIcon("Vcampus//resource//btn_lesson.png");
         btnModule3.setIcon(btnicon[2]);
         btnModule3.setHorizontalTextPosition(JButton.CENTER);
         btnModule3.setVerticalTextPosition(JButton.BOTTOM);
-        btnicon[3] = new ImageIcon("resource//btn_library.png");
+        btnicon[3] = new ImageIcon("Vcampus//resource//btn_library.png");
         btnModule4.setIcon(btnicon[3]);
         btnModule4.setHorizontalTextPosition(JButton.CENTER);
         btnModule4.setVerticalTextPosition(JButton.BOTTOM);
-        btnicon[4] = new ImageIcon("resource//btn_store.png");
+        btnicon[4] = new ImageIcon("Vcampus//resource//btn_store.png");
         btnModule5.setIcon(btnicon[4]);
         btnModule5.setHorizontalTextPosition(JButton.CENTER);
         btnModule5.setVerticalTextPosition(JButton.BOTTOM);
-        btnicon[5] = new ImageIcon("resource//btn_message.png");
+        btnicon[5] = new ImageIcon("Vcampus//resource//btn_message.png");
         btnModule6.setIcon(btnicon[5]);
         btnModule6.setHorizontalTextPosition(JButton.CENTER);
         btnModule6.setVerticalTextPosition(JButton.BOTTOM);
         ImageIcon[]btnicon_selected = new ImageIcon[6];
-        btnicon_selected[0] = new ImageIcon("resource//btn_user_selected.png");
-        btnicon_selected[1] = new ImageIcon("resource//btn_student_selected.png");
-        btnicon_selected[2] = new ImageIcon("resource//btn_lesson_selected.png");
-        btnicon_selected[3] = new ImageIcon("resource//btn_library_selected.png");
-        btnicon_selected[4] = new ImageIcon("resource//btn_store_selected.png");
-        btnicon_selected[5] = new ImageIcon("resource//btn_message_selected.png");
+        btnicon_selected[0] = new ImageIcon("Vcampus//resource//btn_user_selected.png");
+        btnicon_selected[1] = new ImageIcon("Vcampus//resource//btn_student_selected.png");
+        btnicon_selected[2] = new ImageIcon("Vcampus//resource//btn_lesson_selected.png");
+        btnicon_selected[3] = new ImageIcon("Vcampus//resource//btn_library_selected.png");
+        btnicon_selected[4] = new ImageIcon("Vcampus//resource//btn_store_selected.png");
+        btnicon_selected[5] = new ImageIcon("Vcampus//resource//btn_message_selected.png");
         //添加按钮
         panelLeft.add(btnModule1);
         panelLeft.add(btnModule2);
@@ -373,8 +373,8 @@ public class Main_Frame extends JFrame {
         //站内消息
         JTabbedPane[] messageModule = {
                 new JTabbedPane(),
-                new TabbedPanelMessage_S(flag,ID),
-                new TabbedPanelMessage_T(flag,ID),
+                new TabbedPanelMessage_A(flag,ID),
+                new TabbedPanelMessage_A(flag,ID),
                 new TabbedPanelMessage_A(flag,ID)};
         JTabbedPane [][] module ={userModule,schoolModule,courseModule,LibraryModule,storeModule,messageModule};
         for(int i=0;i<6;i++)
@@ -443,7 +443,7 @@ public class Main_Frame extends JFrame {
                 System.exit(0);
             }
         });
-        ImageIcon exitIcon2 = new ImageIcon("resource//exit2.png");
+        ImageIcon exitIcon2 = new ImageIcon("Vcampus//resource//exit2.png");
         btnExit.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {

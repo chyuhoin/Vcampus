@@ -38,7 +38,7 @@ public class TabbedPanelSchool_A extends JTabbedPane {
             JPanel panelEnquire = new StudentStatusEnquire_A(ID);
             //JPanel panelChange = new StudentStatusChange_A(ID);
 
-            this.addTab("学生学籍信息管理", new ImageIcon("resource//tab_student.png"), panelEnquire, "查看学籍信息");
+            this.addTab("学生学籍信息管理", new ImageIcon("Vcampus//resource//tab_student.png"), panelEnquire, "查看学籍信息");
             //this.addTab("修改学籍信息", new ImageIcon("resource//tab_student.png"), panelChange, "修改学籍信息");
             //this.addTab("选项三", null, jp13,"点击查看选项三");
             this.setFont(new Font("宋体", Font.BOLD, 24));

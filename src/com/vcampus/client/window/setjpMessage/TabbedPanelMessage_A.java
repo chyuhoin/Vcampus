@@ -172,9 +172,9 @@ public class TabbedPanelMessage_A extends JTabbedPane{
         laySSS.putConstraint(layS.WEST, pubMessage, 30, layS.WEST, jp13);
         laySSS.putConstraint(layS.EAST, pubMessage, -30, layS.EAST, jp13);
 
-        this.addTab("查看私信",  new ImageIcon("resource//tab_privatemessage.png"), jp11, "查看私信");
-        this.addTab("公共频道", new ImageIcon("resource//tab_publicmessage.png"), jp13, "查看公共频道消息");
-        this.addTab("发送消息", new ImageIcon("resource//tab_send.png"), panel, "发送消息");
+        this.addTab("查看私信",  new ImageIcon("Vcampus//resource//tab_privatemessage.png"), jp11, "查看私信");
+        this.addTab("公共频道", new ImageIcon("Vcampus//resource//tab_publicmessage.png"), jp13, "查看公共频道消息");
+        this.addTab("发送消息", new ImageIcon("Vcampus//resource//tab_send.png"), panel, "发送消息");
 //        this.addTab("删除消息",  new ImageIcon("resource//tab_delete.png"), jp12, "删除私有消息");
         this.setFont(new Font("宋体", Font.BOLD, 24));
         //jp.add(jtbp);

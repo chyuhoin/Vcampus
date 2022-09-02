@@ -163,7 +163,8 @@ public class PanelStudentManage_T extends JPanel {
     {
         panel.removeAll();
         tableModel =new DefaultTableModel(tableData,columnNames);
-        table=new MyTable(tableModel);
+        Integer[] tempInt={5};
+        table=new MyTable(tableModel,tempInt);
         table.setRowSelectionAllowed(true);
         table.setRowHeight(30);// 设置行高
         table.setFont(new Font("黑体",Font.PLAIN,18));//表格字体

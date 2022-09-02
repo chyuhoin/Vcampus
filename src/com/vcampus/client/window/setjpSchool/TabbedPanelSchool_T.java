@@ -25,7 +25,7 @@ import java.awt.*;
 public class TabbedPanelSchool_T extends JTabbedPane {
     public TabbedPanelSchool_T(int flag,String ID)
     {
-        ImageIcon img=new ImageIcon("resource//default.png");
+        ImageIcon img=new ImageIcon("Vcampus//resource//default.png");
         //img.setImage(img.getImage().getScaledInstance(1000,1000,Image.SCALE_DEFAULT));
         JLabel back = new JLabel(img);
         back.setText("教师无此功能");

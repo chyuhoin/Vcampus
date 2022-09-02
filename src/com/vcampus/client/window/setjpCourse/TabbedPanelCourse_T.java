@@ -53,10 +53,10 @@ public class TabbedPanelCourse_T extends JTabbedPane {
                 @Override public void mouseExited(MouseEvent e) {}
             });
 
-            this.addTab("个人信息", new ImageIcon("resource//btn_user.png"), teacherInform, "个人信息");
-            this.addTab("学生管理", new ImageIcon("resource//tab_manage.png"), manageStudent, "学生管理");
-            this.addTab("课程查询", new ImageIcon("resource//search.png"), enquireCourse, "课程查询");
-            this.addTab("我的课表", new ImageIcon("resource//btn_lesson.png"), teacherTimeTable, "我的课表");
+            this.addTab("个人信息", new ImageIcon("Vcampus//resource//btn_user.png"), teacherInform, "个人信息");
+            this.addTab("学生管理", new ImageIcon("Vcampus//resource//tab_manage.png"), manageStudent, "学生管理");
+            this.addTab("课程查询", new ImageIcon("Vcampus//resource//search.png"), enquireCourse, "课程查询");
+            this.addTab("我的课表", new ImageIcon("Vcampus//resource//btn_lesson.png"), teacherTimeTable, "我的课表");
             this.setFont(new Font("宋体", Font.BOLD, 24));
         }
     }

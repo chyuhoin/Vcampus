@@ -44,16 +44,16 @@ public class TabbedPanelCourse_S extends JTabbedPane {
             PanelTimeTable_S jp13 = new PanelTimeTable_S(ID);
 
             JLabel background1 =new JLabel();
-            ImageIcon back = new ImageIcon("resource//User_background.png");
+            ImageIcon back = new ImageIcon("Vcampus//resource//User_background.png");
             background1.setIcon(back);
             background1.setBounds(0,0,1200,700);
             background1.setOpaque(false);
             jp11.setOpaque(false);
             jp11.add(background1);
 
-            this.addTab("选课系统", new ImageIcon("resource//tab_selectlesson.png"), jp11, "选课系统");
-            this.addTab("已选课程", new ImageIcon("resource//tab_lesson.png"), jp12, "查看已选课程");
-            this.addTab("我的课表", new ImageIcon("resource//tab_table.png"), jp13, "查看我的课表");
+            this.addTab("选课系统", new ImageIcon("Vcampus//resource//tab_selectlesson.png"), jp11, "选课系统");
+            this.addTab("已选课程", new ImageIcon("Vcampus//resource//tab_lesson.png"), jp12, "查看已选课程");
+            this.addTab("我的课表", new ImageIcon("Vcampus//resource//tab_table.png"), jp13, "查看我的课表");
             this.setFont(new Font("宋体", Font.BOLD, 24));
 
             //鼠标点击事件
